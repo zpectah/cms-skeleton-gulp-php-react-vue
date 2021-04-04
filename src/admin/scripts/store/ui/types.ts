@@ -1,0 +1,3 @@
+export const LANGUAGE_TOGGLE = 'LANGUAGE_TOGGLE';
+export const THEME_TOGGLE = 'THEME_TOGGLE';
+export const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE';

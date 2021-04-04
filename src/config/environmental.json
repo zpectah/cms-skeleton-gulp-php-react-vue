@@ -1,0 +1,24 @@
+{
+	"development": {
+		"ROOT_PATH": "http://skeleton-php-cms/",
+		"ADMIN": {
+			"STYLES": "/admin/styles/css/index.css",
+			"SCRIPTS": "/admin/scripts/index.js"
+		},
+		"WEB": {
+			"STYLES": "/web/styles/css/index.css",
+			"SCRIPTS": "/web/scripts/index.js"
+		}
+	},
+	"production": {
+		"ROOT_PATH": "http://prod.skeleton-php-cms/",
+		"ADMIN": {
+			"STYLES": "/admin/styles/css/index.min.css",
+			"SCRIPTS": "/admin/scripts/index.min.js"
+		},
+		"WEB": {
+			"STYLES": "/web/styles/css/index.min.css",
+			"SCRIPTS": "/web/scripts/index.min.js"
+		}
+	}
+}

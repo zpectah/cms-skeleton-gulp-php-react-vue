@@ -1,0 +1,38 @@
+{
+	"language": {
+		"default": "en",
+		"available": [
+			"en",
+			"cs",
+			"sk",
+			"be",
+			"zh",
+			"hr",
+			"da",
+			"nl",
+			"eo",
+			"et",
+			"fi",
+			"fr",
+			"de",
+			"el",
+			"hu",
+			"it",
+			"lt",
+			"lv",
+			"no",
+			"pt",
+			"ru",
+			"sr",
+			"sl",
+			"es",
+			"sv",
+			"uk",
+			"vi",
+			"cy"
+		]
+	},
+	"form": {},
+	"uploads": {},
+	"model": {}
+}

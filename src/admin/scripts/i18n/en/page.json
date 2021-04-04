@@ -1,0 +1,26 @@
+{
+	"Error404_meta_title": "Error 404",
+	"Error404_page_title": "Error 404 page",
+
+	"Login_meta_title": "Login",
+	"Login_page_title": "Login page",
+
+	"LostPassword_meta_title": "Lost Password",
+	"LostPassword_page_title": "Lost Password page",
+
+	"Dashboard_meta_title": "Dashboard",
+	"Dashboard_page_title": "Dashboard page",
+	"Dashboard_label": "Dashboard",
+
+	"Posts_meta_title": "Posts",
+	"Posts_page_title": "Posts page",
+	"Posts_label": "Posts",
+
+	"Settings_meta_title": "Settings",
+	"Settings_page_title": "Settings page",
+	"Settings_label": "Settings",
+
+	"Users_meta_title": "Users",
+	"Users_page_title": "Users page",
+	"Users_label": "Users"
+}

@@ -1,0 +1,51 @@
+{
+	"error-404": {
+		"path": null,
+		"pathDetail": null,
+		"name": "error-404",
+		"label": null,
+		"auth": 0
+	},
+	"login": {
+		"path": "/admin/login",
+		"pathDetail": null,
+		"name": "login",
+		"label": null,
+		"auth": 0
+	},
+	"lost-password": {
+		"path": "/admin/lost-password",
+		"pathDetail": null,
+		"name": "lost-password",
+		"label": null,
+		"auth": 0
+	},
+	"dashboard": {
+		"path": "/admin/",
+		"pathDetail": null,
+		"name": "dashboard",
+		"label": "Dashboard_label",
+		"auth": 2
+	},
+	"settings": {
+		"path": "/admin/settings",
+		"pathDetail": null,
+		"name": "settings",
+		"label": "Settings_label",
+		"auth": 7
+	},
+	"posts": {
+		"path": "/admin/posts",
+		"pathDetail": "/admin/posts/detail",
+		"name": "posts",
+		"label": "Posts_label",
+		"auth": 2
+	},
+	"users": {
+		"path": "/admin/users",
+		"pathDetail": "/admin/users/detail",
+		"name": "users",
+		"label": "Users_label",
+		"auth": 7
+	}
+}

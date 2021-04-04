@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react",
+		"resolveJsonModule": true,
+		"experimentalDecorators": true
+	},
+	"declaration": true,
+	"exclude": ["node_modules/", "dist/", "prod/"]
+}

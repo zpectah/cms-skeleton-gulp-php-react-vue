@@ -1,0 +1,96 @@
+<?php
+
+require_once PATH_PFX . 'config/database.php';
+require_once PATH_PFX . 'config/env.php';
+
+$JSON_GLOBAL = json_decode(file_get_contents(PATH_PFX . 'config/global.json'), true);
+$JSON_ENV = json_decode(file_get_contents(PATH_PFX . 'config/environmental.json'), true);
+$JSON_OPTIONS = json_decode(file_get_contents(PATH_PFX . 'config/options.json'), true);
+// $JSON_NUMS = json_decode(file_get_contents(PATH_PFX . 'config/nums.json'), true);
+
+
+
+/*
+ * Common system definitions
+ */
+define( "PASS_CRYPT",                                     PASSWORD_ARGON2I );
+
+
+
+/*
+ * Environmental constants
+ */
+define( "ENV",                                            BUILD['env'] );
+define( "TIMESTAMP",                                      BUILD['timestamp'] );
+
+
+
+/*
+ * Config objects
+ */
+define( "CFG_ENV",                                        $JSON_ENV[ ENV ] );
+define( "CFG_DB",                                         DB[ ENV ]['SQL'] );
+
+
+
+/*
+ * Path
+ */
+define( "PATH_BASE",                                      '../' );
+define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBAL['PATH']['uploads'] );
+define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
+define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );
+define( "PATH_CACHE",                                     PATH_PFX . $JSON_GLOBAL['PATH']['cache'] );
+
+
+
+/*
+ * LOCATION
+ */
+define( "LOC_ADMIN_LOGIN",                                $JSON_GLOBAL['LOCATION']['admin_login'] );
+define( "LOC_ADMIN_LOST_PASSWORD",                        $JSON_GLOBAL['LOCATION']['admin_lostPassword'] );
+
+
+
+/*
+ * Uploads
+ */
+define( "OPTIONS_UPLOADS",                                $JSON_OPTIONS['uploads'] );
+
+
+
+/*
+ * Index endpoints defaults
+ */
+define( "VIEW", [
+	'ADMIN' => [
+		'url' =>                                              CFG_ENV['ROOT_PATH'] . $JSON_GLOBAL['path']['admin'],
+		'styles' =>                                           CFG_ENV['ADMIN']['STYLES'],
+		'scripts' =>                                          CFG_ENV['ADMIN']['SCRIPTS'],
+		'meta' => [
+			'title' =>                                          $JSON_GLOBAL['CMS']['META']['name'],
+			'description' =>                                    $JSON_GLOBAL['CMS']['META']['description'],
+			'keywords' =>                                       $JSON_GLOBAL['CMS']['META']['keywords'],
+			'robots' =>                                         $JSON_GLOBAL['CMS']['META']['robots'],
+			'lang' =>                                           $JSON_GLOBAL['CMS']['META']['lang'],
+			'author' =>                                         $JSON_GLOBAL['CMS']['META']['author'],
+		],
+		"using_external_css" =>                               $JSON_GLOBAL['CMS']['USING_EXTERNAL_CSS'],
+	],
+	'WEB' => [
+		'url' =>                                              CFG_ENV['ROOT_PATH'] . $JSON_GLOBAL['path']['web'],
+		'styles' =>                                           CFG_ENV['WEB']['STYLES'],
+		'scripts' =>                                          CFG_ENV['WEB']['SCRIPTS'],
+		'meta' => [
+			'title' =>                                          $JSON_GLOBAL['PROJECT']['META']['name'],
+			'description' =>                                    $JSON_GLOBAL['PROJECT']['META']['description'],
+			'keywords' =>                                       $JSON_GLOBAL['PROJECT']['META']['keywords'],
+			'robots' =>                                         $JSON_GLOBAL['PROJECT']['META']['robots'],
+			'lang' =>                                           $JSON_GLOBAL['PROJECT']['META']['lang'],
+			'author' =>                                         $JSON_GLOBAL['PROJECT']['META']['author'],
+		],
+	],
+	'Api' => [
+		'url' =>                                              CFG_ENV['ROOT_PATH'] . $JSON_GLOBAL['path']['api'],
+	]
+] );

@@ -1,0 +1,44 @@
+{
+	"CMS": {
+		"META": {
+			"name": "WarpCMS",
+			"description": "Content Managing System for easy building websites with custom models and api",
+			"keywords": "CMS,JavaScript,React,TypeScript,API",
+			"lang": "en",
+			"author": "Tomas Sychra | zpecter.com",
+			"robots": "noindex,nofollow",
+			"version": "0.1.0"
+		},
+		"LANG_DEFAULT": "en",
+		"LANG_LIST": ["en", "cs"],
+		"UNAUTHORIZED_REDIRECT_TARGET": "/admin/login",
+		"RESTRICTED_REDIRECT_TARGET": "/admin/",
+		"STORAGE_KEY_LANG": "app-lang",
+		"STORAGE_KEY_THEME": "app-theme",
+		"STORAGE_KEY_UI_SIDEBAR": "ui-sidebar",
+		"USING_EXTERNAL_CSS": true
+	},
+	"PROJECT": {
+		"META": {
+			"name": "PROJECT NAME",
+			"description": "PROJECT DESCRIPTION",
+			"keywords": "",
+			"lang": "en",
+			"author": "Tomas Sychra | zpecter.com",
+			"robots": "noindex,nofollow"
+		}
+	},
+	"LOCATION": {
+		"admin_login": "admin/login/",
+		"admin_lostPassword": "admin/lost-password/"
+	},
+	"PATH": {
+		"admin": "admin/",
+		"web": "web/",
+		"api": "api/",
+		"uploads": "uploads/",
+		"logs": "logs/",
+		"tmp": "tmp/",
+		"cache": "cache/"
+	}
+}
