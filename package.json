@@ -11,6 +11,8 @@
 		"start:admin": "gulp start_admin",
 		"start:web": "gulp start_web",
 		"build": "composer install && gulp build",
+		"build:dev": "composer install && gulp build_dev",
+		"build:prod": "composer install && gulp build_prod",
 		"prettier": "npx prettier --write . && npx prettier --check ."
 	},
 	"dependencies": {

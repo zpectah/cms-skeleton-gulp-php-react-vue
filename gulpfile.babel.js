@@ -595,5 +595,7 @@ export const start = series(TaskDev, TaskWatch.all);
 export const start_admin = series(TaskDev, TaskWatch.admin);
 export const start_web = series(TaskDev, TaskWatch.web);
 export const build = series(TaskDev, TaskBuild);
+export const build_dev = series(TaskDev);
+export const build_prod = series(TaskBuild);
 
 export default dev;

@@ -22,27 +22,35 @@ const Settings: React.FC<SettingsProps> = (props) => {
 		>
 			<TabPane tab="Global" key="global">
 				<div>
-					<Tabs defaultActiveKey="1">
-						<TabPane tab="Company" key="1">
-							Content of Tab Pane 1
-						</TabPane>
-						<TabPane tab="Tab 2" key="2">
-							Content of Tab Pane 2
-						</TabPane>
-						<TabPane tab="Tab 3" key="3">
-							Content of Tab Pane 3
-						</TabPane>
-					</Tabs>
+					Project & paths
+					<br />
+					Company
+					<br />
+					Contacts ...
 				</div>
 			</TabPane>
 			<TabPane tab="Web" key="web">
-				<div>Content of Tab Web</div>
+				<div>
+					Members login
+					<br />
+					Paths to pages (override system default pages...)
+					<br />
+					Other settings...
+				</div>
 			</TabPane>
 			<TabPane tab="Admin" key="admin">
-				<div>Content of Tab Admin</div>
+				<div>
+					User options settings
+					<br />
+					Administrator contact...
+				</div>
 			</TabPane>
 			<TabPane tab="Module" key="module">
-				<div>Content of Tab Module</div>
+				<div>
+					Crm module settings
+					<br />
+					Market module settings
+				</div>
 			</TabPane>
 		</Tabs>
 	);
