@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { PlusOutlined } from '@ant-design/icons';
 
 import routes from '../routes.json';
 import Api from '../../utils/Api';
 import { setPosts } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import ListItems from '../../component/ListItems';
+import { Button } from '../../component/ui';
 
 interface PostsPageProps {}
+
 interface PostsPageState {
 	items: any[];
 	loading: boolean;
 }
 
 class PostsPage extends Component<
-	PostsPageProps & { t: any; _Posts: any[]; dispatch: Function; match: any },
+	PostsPageProps & {
+		t: any;
+		_Posts: any[];
+		dispatch: Function;
+		match: any;
+		history: any;
+	},
 	PostsPageState
 > {
 	static props: PostsPageProps = {};
@@ -48,6 +57,18 @@ class PostsPage extends Component<
 				withFooter
 				metaTitle={this.props.t('page:Posts_meta_title')}
 				headerTitle={this.props.t('page:Posts_page_title')}
+				headerChildren={[
+					<Button.Base
+						key={1}
+						type={'primary'}
+						onClick={() => {
+							this.props.history.push(routes.posts.pathDetail + '/new');
+						}}
+						icon={<PlusOutlined />}
+					>
+						Create new
+					</Button.Base>,
+				]}
 			>
 				<ListItems
 					route={routes.posts}

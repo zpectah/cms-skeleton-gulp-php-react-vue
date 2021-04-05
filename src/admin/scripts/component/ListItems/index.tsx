@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { array } from 'javascript-es6-helpers';
 import { useForm, Controller } from 'react-hook-form';
@@ -60,6 +60,7 @@ interface ListItemsProps {
 
 const ListItems: React.FC<ListItemsProps> = (props) => {
 	const history = useHistory();
+	const location = useLocation();
 	const {
 		model,
 		items,
@@ -114,6 +115,17 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 			});
 		}
 	}, [items, detailId]);
+
+	useEffect(() => {
+		if (location.pathname.includes('/new')) {
+			editOpen({
+				is_new: true,
+				id: 'new',
+				neco: 'dkfjghkdsjfhgk',
+				another: 'h6d5fg46h8df7gh8979d',
+			});
+		}
+	}, [location.pathname]);
 
 	const toggleDetail = () => setDetailOpen(!detailOpen);
 	const toggleConfirm = () => setConfirmOpen(!confirmOpen);

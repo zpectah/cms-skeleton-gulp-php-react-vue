@@ -47,14 +47,16 @@ const DetailItemDialog: React.FC<DetailItemDialogProps> = (props) => {
 				>
 					Submit
 				</Button.Base>,
-				<Button.Base
-					key="link"
-					type="primary"
-					onClick={() => onDelete(detailData)}
-					danger
-				>
-					Delete
-				</Button.Base>,
+				!detailData?.is_new && (
+					<Button.Base
+						key="link"
+						type="primary"
+						onClick={() => onDelete(detailData)}
+						danger
+					>
+						Delete
+					</Button.Base>
+				),
 			]}
 		>
 			<Content>

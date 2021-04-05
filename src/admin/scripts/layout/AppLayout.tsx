@@ -69,8 +69,8 @@ interface AppLayoutProps {
 	withFooter?: boolean;
 	isCentered?: boolean;
 	headerTitle?: string;
-	headerChildren?: React.ReactElement;
-	footerChildren?: React.ReactElement;
+	headerChildren?: React.ReactElement | React.ReactElement[];
+	footerChildren?: React.ReactElement | React.ReactElement[];
 }
 
 const AppLayout: React.FC<AppLayoutProps> = (props) => {
