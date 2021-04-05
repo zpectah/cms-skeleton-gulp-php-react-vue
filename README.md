@@ -16,6 +16,7 @@ Content Managing System based on Apache server, PHP core and React components.
 * JavaScript/TypeScript:
 	- Gulp and @babel
 	- React
+	- Sass/SCSS
 	- styled-components
 	- Redux
 	- i18n
@@ -25,17 +26,31 @@ Content Managing System based on Apache server, PHP core and React components.
 	- BladeOne (eftec/bladeone)
 
 ## Development
+### Virtual Host
+```
+<VirtualHost *:80>
+    DocumentRoot "/path-to-project-root/dev/"
+    ServerName cms-skeleton
+    ServerAlias cms-skeleton
+</VirtualHost>
+```
+```
+127.0.0.1		cms-skeleton
+```
+
 ### Install
-- Install node packages ``yarn install``
-- Prepare vendors ``yarn prepare``
+- ``% yarn install`` - Install node packages
+- ``% yarn prepare`` - Prepare vendors
 
 ### Watch
-- Watching changes for whole project ``yarn start``
-- Watching changes for **admin/** and backend files ``yarn start:admin``
-- Watching changes for **web/** ``yarn start:web``
+- ``% yarn start`` - Watching changes for whole project
+- ``% yarn start:admin`` - Watching changes for **admin/** and backend files
+- ``% yarn start:web`` - Watching changes for **web/**
 
 ### Build
-- Create production bundle ``yarn build``
+- ``% yarn build`` - Create both bundles
+- ``% yarn build:dev`` - Create development bundle
+- ``% yarn build:prod`` - Create production bundle
 
 ## File structure
 - Main root directory:
@@ -50,11 +65,11 @@ Content Managing System based on Apache server, PHP core and React components.
 	- ``core/`` - PHP Core files
 	- ``libs/`` - Extended libraries (exist only for src/)
 	- ``static/`` - Static files (images or whatever)
-	- ``uploads/``* - Uploaded files from system
-	- ``logs/``* - Log files
-	- ``vendor/``* - Vendor directory (Composer)
+	- ``uploads/``(*) - Uploaded files from system
+	- ``logs/``(*) - Log files
+	- ``vendor/``(*) - Vendor directory (Composer)
 
 (*) File or directory created and managed dynamically
 
 ## Configuration and Options
-
+...

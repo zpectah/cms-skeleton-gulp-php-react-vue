@@ -8,21 +8,25 @@ import routes from '../../App/routes.json';
 
 const links = [
 	{
+		key: 1,
 		label: routes.dashboard.label,
 		path: routes.dashboard.path,
 		active: true,
 	},
 	{
+		key: 2,
 		label: routes.settings.label,
 		path: routes.settings.path,
 		active: true,
 	},
 	{
+		key: 3,
 		label: routes.users.label,
 		path: routes.users.path,
 		active: true,
 	},
 	{
+		key: 4,
 		label: routes.posts.label,
 		path: routes.posts.path,
 		active: true,
@@ -93,7 +97,7 @@ const Navigation: React.FC<NavigationProps> = (props) => {
 			{links.map((item) => {
 				if (item.active)
 					return (
-						<Item key={item.label}>
+						<Item key={item.key}>
 							<Link
 								to={item.path}
 								className={[isLinkActive(item.path) ? 'is-active' : ''].join(

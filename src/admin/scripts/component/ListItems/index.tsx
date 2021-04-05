@@ -115,12 +115,6 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		}
 	}, [items, detailId]);
 
-	// Check order and orderBy changes
-	// useEffect(() => {
-	// 	// console.log('formChanges', formChanges);
-	// 	updateListItems();
-	// }, [formChanges]);
-
 	const toggleDetail = () => setDetailOpen(!detailOpen);
 	const toggleConfirm = () => setConfirmOpen(!confirmOpen);
 	const getColumns = () => {
@@ -229,12 +223,10 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		setSelectedKeys(na);
 	};
 	const deleteConfirm = (record: any) => {
-		// console.log('deleteOpen', record);
 		setConfirmData(record);
 		setConfirmOpen(true);
 	};
 	const editOpen = (record: any) => {
-		// console.log('editOpen', record);
 		history.push(`${route.pathDetail}/${record.id}`);
 		setDetailData(record);
 		setDetailOpen(true);
@@ -253,8 +245,6 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		history.push(route.path);
 	};
 	const updateListItems = (data) => {
-		console.log('updateListItems', data);
-
 		let tmp;
 
 		if (data.search.length >= 4) {

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Modal } from 'antd'; // https://ant.design/components/modal/
+import { Modal } from 'antd';
 import styled from 'styled-components';
+
+import LanguageToggle from '../LanguageToggle';
 
 const Content = styled.div``;
 
@@ -21,7 +23,9 @@ const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 			footer={null}
 			centered
 		>
-			<Content>Modal 'ProfileDialog' content</Content>
+			<Content>
+				Modal 'ProfileDialog' content <br /> <LanguageToggle />{' '}
+			</Content>
 		</Modal>
 	);
 };
