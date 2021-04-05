@@ -5,20 +5,19 @@ import { Tabs } from 'antd';
 interface SettingsProps {
 	route: any; // TODO
 	panelKey?: string;
+	loading?: boolean;
+	model: any; // TODO
 }
 
 const Settings: React.FC<SettingsProps> = (props) => {
 	const history = useHistory();
-	const { route, panelKey } = props;
+	const { route, panelKey, loading, model } = props;
 	const { TabPane } = Tabs;
 
 	return (
 		<Tabs
 			defaultActiveKey={panelKey ? panelKey : 'global'}
-			onChange={(activeKey) => {
-				// console.log('onChange panel...', activeKey);
-				history.push(`${route.path}/${activeKey}`);
-			}}
+			onChange={(activeKey) => history.push(`${route.path}/${activeKey}`)}
 		>
 			<TabPane tab="Global" key="global">
 				<div>

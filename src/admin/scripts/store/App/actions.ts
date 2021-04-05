@@ -1,4 +1,8 @@
-import { SET_POSTS, SET_USERS } from './types';
+import { SET_POSTS, SET_USERS, SET_SETTINGS } from './types';
+
+export function setSettings(payload) {
+	return { type: SET_SETTINGS, payload };
+}
 
 export function setPosts(payload) {
 	return { type: SET_POSTS, payload };

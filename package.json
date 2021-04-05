@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"prepare": "composer install && gulp",
+		"initial": "composer install && gulp",
 		"start": "gulp start",
 		"start:admin": "gulp start_admin",
 		"start:web": "gulp start_web",
@@ -23,6 +23,7 @@
 		"lodash": "^4.17.20",
 		"moment": "^2.29.1",
 		"react": "^17.0.1",
+		"react-device-detect": "^1.17.0",
 		"react-dom": "^17.0.1",
 		"react-easy-crop": "^3.3.1",
 		"react-helmet": "^6.1.0",

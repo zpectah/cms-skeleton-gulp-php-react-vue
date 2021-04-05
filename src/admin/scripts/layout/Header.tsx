@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Breadcrumb } from 'antd';
 import styled from 'styled-components';
@@ -37,13 +38,13 @@ interface HeaderProps {
 		auth: number;
 	};
 	app: 'App' | 'Crm' | 'Market';
-	detailId?: string;
 	headerTitle?: string;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
 	const { t, i18n } = useTranslation();
-	const { children, headerTitle, route, app, detailId } = props;
+	const params: any = useParams();
+	const { children, headerTitle, route, app } = props;
 
 	return (
 		<Wrapper>
@@ -53,7 +54,9 @@ const Header: React.FC<HeaderProps> = (props) => {
 					<Breadcrumb.Item>{CFG.CMS.META.name}</Breadcrumb.Item>
 					<Breadcrumb.Item>{app}</Breadcrumb.Item>
 					<Breadcrumb.Item>{t(`page:${route.label}`)}</Breadcrumb.Item>
-					{detailId && <Breadcrumb.Item>#{detailId}</Breadcrumb.Item>}
+					{(params.id || params.panel) && (
+						<Breadcrumb.Item>{params.id || params.panel}</Breadcrumb.Item>
+					)}
 				</Breadcrumb>
 			</PrimaryBlock>
 			<SecondaryBlock>

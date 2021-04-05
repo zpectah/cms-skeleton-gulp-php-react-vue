@@ -91,6 +91,12 @@ const source = {
 	},
 };
 
+// const _Message = {
+// 	afterInstall: function (cb) {
+// 		cb(console.log(` NPM packages was created/updated `.bgYellow.black));
+// 	},
+// };
+
 const _Clean = {
 	clean_dev: function (cb) {
 		del.sync(
@@ -589,6 +595,8 @@ const TaskBuild = series(
 	),
 	_Environment.environment_prod,
 );
+
+// export const after_install = series(_Message.afterInstall);
 
 export const dev = series(TaskDev);
 export const start = series(TaskDev, TaskWatch.all);

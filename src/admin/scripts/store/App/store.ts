@@ -1,9 +1,11 @@
 interface AppStoreProps {
-	Posts: any[];
-	Users: any[];
+	Settings: any[]; // TODO
+	Posts: any[]; // TODO
+	Users: any[]; // TODO
 }
 
 const AppStoreState: AppStoreProps = {
+	Settings: [],
 	Posts: [],
 	Users: [],
 };

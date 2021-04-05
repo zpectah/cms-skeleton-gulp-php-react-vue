@@ -7,6 +7,8 @@ namespace core\model;
 class Users {
 
 	public function get ($params = []) {
+
+		// demo data
 		return [
 			[
 				'id' => 1,

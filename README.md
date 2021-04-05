@@ -40,7 +40,7 @@ Content Managing System based on Apache server, PHP core and React components.
 
 ### Install
 - ``% yarn install`` - Install node packages
-- ``% yarn prepare`` - Prepare vendors
+- ``% yarn initial`` - Prepare vendors
 
 ### Watch
 - ``% yarn start`` - Watching changes for whole project

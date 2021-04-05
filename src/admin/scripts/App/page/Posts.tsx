@@ -10,7 +10,6 @@ import ListItems from '../../component/ListItems';
 import { Button } from '../../component/ui';
 
 interface PostsPageProps {}
-
 interface PostsPageState {
 	loading: boolean;
 }
@@ -91,6 +90,6 @@ function mapStateToProps(state) {
 	};
 }
 
-const PageWIthTranslations = withTranslation()(PostsPage);
+const PageWithTranslations = withTranslation()(PostsPage);
 
-export default connect(mapStateToProps)(PageWIthTranslations);
+export default connect(mapStateToProps)(PageWithTranslations);

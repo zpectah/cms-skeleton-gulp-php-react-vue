@@ -89,6 +89,6 @@ function mapStateToProps(state) {
 	};
 }
 
-const PageWIthTranslations = withTranslation()(UsersPage);
+const PageWithTranslations = withTranslation()(UsersPage);
 
-export default connect(mapStateToProps)(PageWIthTranslations);
+export default connect(mapStateToProps)(PageWithTranslations);

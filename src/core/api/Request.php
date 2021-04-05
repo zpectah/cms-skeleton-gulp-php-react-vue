@@ -38,6 +38,12 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			case 'get_settings':
+				$response['data'] = $DataService -> get('Settings', []);
+				$response['status'] = 'ok';
+				break;
+
+			//
 			default:
 				$response['message'] = 'Wrong response';
 				break;
