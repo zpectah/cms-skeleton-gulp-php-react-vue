@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { PlusOutlined } from '@ant-design/icons';
 
 import routes from '../routes.json';
 import Api from '../../utils/Api';
@@ -12,7 +11,6 @@ import { Button } from '../../component/ui';
 
 interface UsersPageProps {}
 interface UsersPageState {
-	items: any[];
 	loading: boolean;
 }
 
@@ -22,13 +20,11 @@ class UsersPage extends Component<
 		_Users: any[];
 		dispatch: Function;
 		match: any;
-		history: any;
 	},
 	UsersPageState
 > {
 	static props: UsersPageProps = {};
 	state: UsersPageState = {
-		items: [],
 		loading: false,
 	};
 
@@ -57,16 +53,10 @@ class UsersPage extends Component<
 				metaTitle={this.props.t('page:Users_meta_title')}
 				headerTitle={this.props.t('page:Users_page_title')}
 				headerChildren={[
-					<Button.Base
+					<Button.CreateNew
 						key={1}
-						type={'primary'}
-						onClick={() => {
-							this.props.history.push(routes.users.pathDetail + '/new');
-						}}
-						icon={<PlusOutlined />}
-					>
-						Create new
-					</Button.Base>,
+						routePathPrefix={routes.users.pathDetail}
+					/>,
 				]}
 			>
 				<ListItems
