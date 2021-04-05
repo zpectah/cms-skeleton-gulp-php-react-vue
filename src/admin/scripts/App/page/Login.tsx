@@ -18,6 +18,9 @@ class LoginPage extends Component<LoginPageProps & { t: any }, LoginPageState> {
 				route={routes.login}
 				app={'App'}
 				metaTitle={this.props.t('page:Login_meta_title')}
+				footerWithBorder={false}
+				withFooter
+				footerCentered
 				isCentered
 			>
 				<Login />

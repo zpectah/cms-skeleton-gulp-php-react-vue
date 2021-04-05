@@ -71,6 +71,8 @@ interface AppLayoutProps {
 	headerTitle?: string;
 	headerChildren?: React.ReactElement | React.ReactElement[];
 	footerChildren?: React.ReactElement | React.ReactElement[];
+	footerWithBorder?: boolean;
+	footerCentered?: boolean;
 }
 
 const AppLayout: React.FC<AppLayoutProps> = (props) => {
@@ -86,6 +88,8 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 		headerTitle,
 		headerChildren,
 		footerChildren,
+		footerWithBorder,
+		footerCentered,
 	} = props;
 	const store = useSelector((store: any) => store);
 	const dispatch = useDispatch();
@@ -145,7 +149,14 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 						/>
 					)}
 					<Main isCentered={isCentered}>{children}</Main>
-					{withFooter && <Footer route={route} children={footerChildren} />}
+					{withFooter && (
+						<Footer
+							route={route}
+							children={footerChildren}
+							withBorder={footerWithBorder}
+							isCentered={footerCentered}
+						/>
+					)}
 				</MainWrapper>
 				<AddDialog isOpen={addDialogOpen} onCancel={toggleAddDialog} />
 				<HelpDialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />

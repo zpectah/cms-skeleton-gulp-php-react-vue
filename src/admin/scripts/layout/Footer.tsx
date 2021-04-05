@@ -9,10 +9,14 @@ const Wrapper = styled.footer`
 	height: auto;
 	padding: 1rem 1rem;
 	display: flex;
-	align-content: space-between;
+	justify-content: ${(props) =>
+		props.isCentered ? 'center' : 'space-between'};
 	color: ${getStyles().layout.footer_text};
 	background-color: ${getStyles().layout.footer_bg};
-	border-top: 1px solid ${getStyles().layout.footer_border_color};
+
+	&.with-border {
+		border-top: 1px solid ${getStyles().layout.footer_border_color};
+	}
 `;
 const Text = styled.p`
 	margin: 0;
@@ -36,13 +40,18 @@ interface FooterProps {
 		name: string;
 		auth: number;
 	};
+	withBorder?: boolean;
+	isCentered?: boolean;
 }
 
 const Footer: React.FC<FooterProps> = (props) => {
-	const { children, route } = props;
+	const { children, route, withBorder = true, isCentered = false } = props;
 
 	return (
-		<Wrapper>
+		<Wrapper
+			className={[withBorder ? 'with-border' : ''].join(' ')}
+			isCentered={isCentered}
+		>
 			<div>
 				<Text>
 					&copy; {new Date().getFullYear()} {CFG.CMS.META.name} | Developed
