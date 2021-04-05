@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -65,7 +65,7 @@ const Link = styled(NavLink)`
 		text-decoration: none;
 	}
 
-	&.active {
+	&.is-active {
 		color: ${getStyles().layout.active_text};
 		background-color: ${getStyles().layout.active_bg};
 	}
@@ -81,7 +81,12 @@ interface NavigationProps {}
 
 const Navigation: React.FC<NavigationProps> = (props) => {
 	const { t } = useTranslation();
+	const location = useLocation();
 	const {} = props;
+
+	const isLinkActive = (path) => {
+		if (path !== routes.dashboard.path) return location.pathname.includes(path);
+	};
 
 	return (
 		<List>
@@ -89,7 +94,14 @@ const Navigation: React.FC<NavigationProps> = (props) => {
 				if (item.active)
 					return (
 						<Item key={item.label}>
-							<Link to={item.path} activeClassName={'active'} exact>
+							<Link
+								to={item.path}
+								className={[isLinkActive(item.path) ? 'is-active' : ''].join(
+									' ',
+								)}
+								activeClassName={'is-active'}
+								exact
+							>
 								<LinkText>{t(`page:${item.label}`)}</LinkText>
 							</Link>
 						</Item>

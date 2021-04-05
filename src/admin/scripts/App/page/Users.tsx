@@ -55,12 +55,18 @@ class UsersPage extends Component<
 					items={this.props._Users}
 					loading={loading}
 					columnsLayout={{
+						email: true,
+						nickname: true,
+					}}
+					orderByColumns={{
 						name: true,
-						tags: true,
-						category: true,
+						email: true,
 					}}
 					detailId={this.props.match.params.id}
 					onReload={() => this.loadData()}
+					searchAttrs={['name', 'nickname', 'email']}
+					selectable
+					allowDelete
 				/>
 			</AppLayout>
 		);
@@ -70,7 +76,6 @@ class UsersPage extends Component<
 function mapStateToProps(state) {
 	return {
 		_Users: state.$App.Users,
-		dispatch: state.dispatch,
 	};
 }
 

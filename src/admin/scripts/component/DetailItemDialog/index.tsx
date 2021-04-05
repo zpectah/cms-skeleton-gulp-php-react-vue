@@ -7,6 +7,7 @@ import { Button } from '../ui';
 const Content = styled.div``;
 
 interface DetailItemDialogProps {
+	model: 'Posts' | 'Users'; // TODO
 	isOpen: boolean;
 	onCancel: (event) => void;
 	detailData: any;
@@ -17,6 +18,7 @@ interface DetailItemDialogProps {
 
 const DetailItemDialog: React.FC<DetailItemDialogProps> = (props) => {
 	const {
+		model,
 		isOpen,
 		onCancel,
 		detailData,
@@ -56,7 +58,7 @@ const DetailItemDialog: React.FC<DetailItemDialogProps> = (props) => {
 			]}
 		>
 			<Content>
-				Detail item <br /> {JSON.stringify(detailData)}
+				Detail item <br /> model: {model} <br /> {JSON.stringify(detailData)}
 			</Content>
 		</Modal>
 	);

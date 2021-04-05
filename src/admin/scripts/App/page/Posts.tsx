@@ -55,12 +55,19 @@ class PostsPage extends Component<
 					items={this.props._Posts}
 					loading={loading}
 					columnsLayout={{
-						name: true,
+						// name: true,
+						title: true,
 						tags: true,
 						category: true,
 					}}
+					orderByColumns={{
+						name: true,
+					}}
 					detailId={this.props.match.params.id}
 					onReload={() => this.loadData()}
+					searchAttrs={['name', 'lang.en.title']}
+					selectable
+					allowDelete
 				/>
 			</AppLayout>
 		);
@@ -70,7 +77,6 @@ class PostsPage extends Component<
 function mapStateToProps(state) {
 	return {
 		_Posts: state.$App.Posts,
-		dispatch: state.dispatch,
 	};
 }
 

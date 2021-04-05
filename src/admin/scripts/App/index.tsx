@@ -41,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
 	// Modal dialog blur background
 	.DialogCover {
 		&:last-of-type {
-			backdrop-filter: blur(4px);
+			backdrop-filter: blur(3px);
 		}
 	}
 
