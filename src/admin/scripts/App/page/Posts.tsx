@@ -69,6 +69,7 @@ class PostsPage extends Component<
 						title: true,
 						tags: true,
 						category: true,
+						active: true,
 					}}
 					orderByColumns={{
 						name: true,

@@ -25,6 +25,7 @@ export interface storeProps {
 
 export interface appProps {
 	app: 'App' | 'Crm' | 'Market';
+	model: 'Posts' | 'Users'; // TODO
 }
 
 export interface routeProps {

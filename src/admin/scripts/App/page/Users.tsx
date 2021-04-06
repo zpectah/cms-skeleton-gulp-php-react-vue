@@ -67,6 +67,7 @@ class UsersPage extends Component<
 					columnsLayout={{
 						email: true,
 						nickname: true,
+						active: true,
 					}}
 					orderByColumns={{
 						name: true,

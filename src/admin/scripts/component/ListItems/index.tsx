@@ -10,6 +10,7 @@ import { MdSearch } from 'react-icons/md';
 import { Button } from '../ui';
 import DetailItemDialog from '../DetailItemDialog';
 import ConfirmDialog from '../ConfirmDialog';
+import { appProps, routeProps } from '../../types';
 
 const Heading = styled.div`
 	width: 100%;
@@ -35,17 +36,18 @@ const remodelItems = (input: any[]) => {
 };
 
 interface ListItemsProps {
-	model: 'Posts' | 'Users'; // TODO
+	model: appProps['model'];
 	items: any[];
-	route: any; // TODO
+	route: routeProps;
 	onReload: () => void;
 	columnsLayout?: {
 		name?: boolean;
 		email?: boolean;
 		nickname?: boolean;
-		title?: boolean; // Must be 'lang[*].title'
+		title?: boolean;
 		tags?: boolean;
 		category?: boolean;
+		active?: boolean;
 	};
 	orderByColumns?: {
 		name?: boolean;
@@ -70,6 +72,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 			nickname: false,
 			tags: false,
 			category: false,
+			active: false,
 		},
 		orderByColumns = {
 			name: false,
@@ -191,6 +194,14 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 						))}
 					</>
 				),
+			});
+		if (columnsLayout.active)
+			d.push({
+				title: 'Active',
+				dataIndex: 'active',
+				key: 'active',
+				align: 'end',
+				width: '50px',
 			});
 
 		d.push({
