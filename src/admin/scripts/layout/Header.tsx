@@ -5,8 +5,9 @@ import { Breadcrumb } from 'antd';
 import styled from 'styled-components';
 
 import CFG from '../../../config/global.json';
-import { getStyles } from '../utils/styles.theme';
+import { getStyles } from '../styles/theme';
 import { Typography } from '../component/ui';
+import { routeProps, appProps } from '../types';
 
 const Wrapper = styled.header`
 	width: 100%;
@@ -30,14 +31,8 @@ const SecondarySubBlock = styled.div`
 `;
 
 interface HeaderProps {
-	route: {
-		path: string | null;
-		pathDetail: string | null;
-		name: string;
-		label: string | null;
-		auth: number;
-	};
-	app: 'App' | 'Crm' | 'Market';
+	route: routeProps;
+	app: appProps['app'];
 	headerTitle?: string;
 }
 

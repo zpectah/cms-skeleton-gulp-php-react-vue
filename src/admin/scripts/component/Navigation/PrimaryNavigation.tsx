@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
-import { getStyles } from '../../utils/styles.theme';
+import { getStyles } from '../../styles/theme';
 import routes from '../../App/routes.json';
 
 const links = [

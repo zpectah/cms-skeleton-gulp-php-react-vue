@@ -22,7 +22,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 2,
@@ -36,7 +36,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 3,
@@ -50,7 +50,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 4,
@@ -64,7 +64,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 0
 			],
 			[
 				'id' => 5,
@@ -78,7 +78,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 6,
@@ -92,7 +92,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 0
 			],
 			[
 				'id' => 7,
@@ -106,7 +106,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 8,
@@ -120,7 +120,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 9,
@@ -134,7 +134,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 0
 			],
 			[
 				'id' => 10,
@@ -148,7 +148,7 @@ class Posts {
 						'content' => "Dignissim non ultrices baktag amet eros sed felis ac dictum sed tortor adipiscing cubilia faucibus. Orci eu eu lacinia augue lacinia venenatis velit d'blok a at he' HImaH ac cubilia augue. Adipiscing nisi pulvinar pellentesque a dignissim cras amet lacinia ipsum dignissim ante primis pellentesque consectetur. Jak'tahla morbi baH proin lacinia eros morbi in velit bat'leth morbi eros tristique morbi lorem.",
 					]
 				],
-				'active' => true
+				'active' => 1
 			]
 		];
 	}

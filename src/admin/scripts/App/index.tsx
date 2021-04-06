@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
-import { getStyles } from '../utils/styles.theme';
+import { getStyles } from '../styles/theme';
 
 import AuthRoute from '../utils/AuthRoute';
 import Error404Page from './page/Error404';

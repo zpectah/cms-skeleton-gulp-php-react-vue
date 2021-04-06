@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import routes from '../routes.json';
-import Api from '../../utils/Api';
+import Api from '../../utils/api';
 import { setSettings } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';

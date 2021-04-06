@@ -13,10 +13,11 @@ import {
 import Media from 'react-media';
 
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../constants';
-import { getStyles } from '../utils/styles.theme';
-import { minWidth } from '../utils/styles.responsive';
+import { getStyles } from '../styles/theme';
+import { minWidth } from '../styles/responsive';
 import { Scrollable } from '../component/ui';
 import Navigation from '../component/Navigation';
+import { appProps } from '../types';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -107,6 +108,7 @@ const Trigger = styled.button`
 `;
 
 interface SidebarProps {
+	app: appProps['app'];
 	sidebarOpen: boolean;
 	toggleSidebar: () => void;
 	toggleAddDialog: () => void;

@@ -18,7 +18,7 @@ class Users {
 				'name_surname' => 'Surname',
 				'email' => 'email1@email.zap',
 				'password' => '4fg6h5d4f6gh54df65g4h6df5g4h6d5f4gh65dfg4h654dfg654dh',
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 2,
@@ -28,7 +28,7 @@ class Users {
 				'name_surname' => 'Surname',
 				'email' => 'email2@email.zap',
 				'password' => '4fg6h5d4f6gh54df65g4h6df5g4h6d5f4gh65dfg4h654dfg654dh',
-				'active' => true
+				'active' => 0
 			],
 			[
 				'id' => 3,
@@ -38,7 +38,7 @@ class Users {
 				'name_surname' => 'Surname',
 				'email' => 'email3@email.zap',
 				'password' => '4fg6h5d4f6gh54df65g4h6df5g4h6d5f4gh65dfg4h654dfg654dh',
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 4,
@@ -48,7 +48,7 @@ class Users {
 				'name_surname' => 'Surname',
 				'email' => 'email4@email.zap',
 				'password' => '4fg6h5d4f6gh54df65g4h6df5g4h6d5f4gh65dfg4h654dfg654dh',
-				'active' => true
+				'active' => 1
 			],
 			[
 				'id' => 5,
@@ -58,7 +58,7 @@ class Users {
 				'name_surname' => 'Surname',
 				'email' => 'email5@email.zap',
 				'password' => '4fg6h5d4f6gh54df65g4h6df5g4h6d5f4gh65dfg4h654dfg654dh',
-				'active' => true
+				'active' => 1
 			]
 		];
 	}

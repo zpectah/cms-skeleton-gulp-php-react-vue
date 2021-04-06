@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import CFG from '../../../config/global.json';
-import { getStyles } from '../utils/styles.theme';
-import { minWidth } from '../utils/styles.responsive';
+import { getStyles } from '../styles/theme';
+import { minWidth } from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
 
 import Sidebar from './Sidebar';
@@ -16,6 +16,7 @@ import HelpDialog from '../component/HelpDialog';
 import ProfileDialog from '../component/ProfileDialog';
 import Spotlight from '../component/Spotlight';
 import ConfirmDialog from '../component/ConfirmDialog';
+import { routeProps, appProps } from '../types';
 
 const Wrapper = styled.div`
 	width: ${(props) => (props.withSidebar ? 'calc(100vw - 50px)' : '100vw')};
@@ -55,14 +56,8 @@ const Main = styled.main`
 `;
 
 interface AppLayoutProps {
-	route: {
-		path: string | null;
-		pathDetail: string | null;
-		name: string;
-		label: string | null;
-		auth: number;
-	};
-	app: 'App' | 'Crm' | 'Market';
+	route: routeProps;
+	app: appProps['app'];
 	metaTitle?: string;
 	withSidebar?: boolean;
 	widthHeader?: boolean;
@@ -100,7 +95,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
 	const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
 	const [spotlightOpen, setSpotlightOpen] = useState<boolean>(false);
-	const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
+	const [logoutConfirmOpen, setLogoutConfirmOpen] = useState<boolean>(false);
 
 	const toggleSidebar = () => {
 		let ns = !sidebarOpen;
@@ -130,6 +125,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 			<Wrapper withSidebar={withSidebar} sidebarOpen={sidebarOpen}>
 				{withSidebar && (
 					<Sidebar
+						app={app}
 						sidebarOpen={sidebarOpen}
 						toggleSidebar={toggleSidebar}
 						toggleAddDialog={toggleAddDialog}

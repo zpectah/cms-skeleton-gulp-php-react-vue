@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CFG from '../../../config/global.json';
-import { getStyles } from '../utils/styles.theme';
+import { getStyles } from '../styles/theme';
+import { routeProps } from '../types';
 
 const Wrapper = styled.footer`
 	width: 100%;
@@ -34,12 +35,7 @@ const Text = styled.p`
 `;
 
 interface FooterProps {
-	route: {
-		path: string | null;
-		pathDetail: string | null;
-		name: string;
-		auth: number;
-	};
+	route: routeProps;
 	withBorder?: boolean;
 	isCentered?: boolean;
 }

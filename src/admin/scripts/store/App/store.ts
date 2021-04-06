@@ -1,10 +1,6 @@
-interface AppStoreProps {
-	Settings: any[]; // TODO
-	Posts: any[]; // TODO
-	Users: any[]; // TODO
-}
+import { storeProps } from '../../types';
 
-const AppStoreState: AppStoreProps = {
+const AppStoreState: storeProps['App'] = {
 	Settings: [],
 	Posts: [],
 	Users: [],

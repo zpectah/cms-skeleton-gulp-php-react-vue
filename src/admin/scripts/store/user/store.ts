@@ -1,15 +1,6 @@
-interface UserStoreProps {
-	user?: {
-		id: string;
-		email: string;
-		nickname: string;
-		name_first: string;
-		name_middle: string;
-		name_last: string;
-	};
-}
+import { storeProps } from '../../types';
 
-const UserStoreState: UserStoreProps = {
+const UserStoreState: storeProps['user'] = {
 	user: null,
 };
 

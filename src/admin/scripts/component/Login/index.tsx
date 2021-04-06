@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { minWidth } from '../../utils/styles.responsive';
+import { minWidth } from '../../styles/responsive';
 
 const Wrapper = styled.div`
 	width: 100%;
