@@ -23,7 +23,9 @@ class LoginPage extends Component<LoginPageProps & { t: any }, LoginPageState> {
 				footerCentered
 				isCentered
 			>
-				<Login />
+				<Login>
+					<p>Logo & Description</p>
+				</Login>
 			</AppLayout>
 		);
 	}

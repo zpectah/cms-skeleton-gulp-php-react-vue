@@ -23,7 +23,9 @@ class LostPasswordPage extends Component<
 				metaTitle={this.props.t('page:LostPassword_meta_title')}
 				isCentered
 			>
-				<LostPassword />
+				<LostPassword>
+					<p>Logo & Description</p>
+				</LostPassword>
 			</AppLayout>
 		);
 	}

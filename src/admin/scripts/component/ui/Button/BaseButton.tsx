@@ -20,6 +20,7 @@ interface ButtonProps {
 	onClick?: (event) => void;
 	style?: any; // TODO
 	title?: string;
+	className?: string;
 }
 
 const BaseButton: React.FC<ButtonProps> = (props) => {
