@@ -95,69 +95,94 @@ const source = {
 	},
 };
 
+const progress = new cliProgress.SingleBar({
+	format:
+		'# ' +
+		colors.grey('Building') +
+		' ' +
+		colors.yellow('{env}') +
+		' | ' +
+		colors.grey('Tasks') +
+		' ' +
+		colors.yellow('{value}/{total}') +
+		' |' +
+		colors.bgBlack.white('{bar}') +
+		'| ' +
+		colors.yellow('{percentage}%'),
+	barCompleteChar: '\u2588',
+	barIncompleteChar: '—',
+	hideCursor: true,
+});
+
 const _Clean = {
 	clean_dev: function (cb) {
-		return del.sync(
-			PATH_DEV + utils.getPathSuffix(),
-			// cb(console.log(` Folder 'dev/' was cleared `.bgYellow.black)),
-			cb(),
-		);
+		progress.start(12, 1, { env: 'DEV' });
+		return del.sync(PATH_DEV + utils.getPathSuffix(), cb());
 	},
 	clean_prod: function (cb) {
-		return del.sync(
-			PATH_PROD + utils.getPathSuffix(),
-			// cb(console.log(` Folder 'prod/' was cleared `.bgYellow.black)),
-			cb(),
-		);
+		progress.start(12, 1, { env: 'PROD' });
+		return del.sync(PATH_PROD + utils.getPathSuffix(), cb());
 	},
 };
 
 const _Environment = {
 	environment_dev: function (cb) {
-		return src(ROOT + CFG.ENV_INPUT_FILE)
+		progress.increment();
+		src(ROOT + CFG.ENV_INPUT_FILE)
 			.pipe(gulpReplace(CFG.KEY_ENV_ENV, CFG.ENV_NAME_DEV))
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_DEV + CFG.FOLDER_CONFIG));
+		// progress.stop();
+		cb(progress.stop());
 	},
 	environment_prod: function (cb) {
-		return src(ROOT + CFG.ENV_INPUT_FILE)
+		progress.increment();
+		src(ROOT + CFG.ENV_INPUT_FILE)
 			.pipe(gulpReplace(CFG.KEY_ENV_ENV, CFG.ENV_NAME_PROD))
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_CONFIG));
+		// progress.stop();
+		cb(progress.stop());
 	},
 };
 
 const _Common = {
 	// PHP files
-	php_dev: function (cb) {
+	php_dev: function () {
+		progress.increment();
 		return src([...source.Common.php, ...source.Common.etc]).pipe(
 			dest(PATH_DEV),
 		);
 	},
-	php_prod: function (cb) {
+	php_prod: function () {
+		progress.increment();
 		return src(source.Common.php).pipe(dest(PATH_PROD));
 	},
 
 	// HTML files
-	html_dev: function (cb) {
+	html_dev: function () {
+		progress.increment();
 		return src([PATH_SRC + '**/*.html']).pipe(dest(PATH_DEV));
 	},
-	html_prod: function (cb) {
+	html_prod: function () {
+		progress.increment();
 		return src([PATH_SRC + '**/*.html'])
 			.pipe(gulpHtmlMin(options.Html.htmlMin))
 			.pipe(dest(PATH_PROD));
 	},
 
 	// JSON files
-	json_dev: function (cb) {
+	json_dev: function () {
+		progress.increment();
 		return src([
 			`${PATH_SRC}**/*.json`,
 			`!${PATH_SRC}**/scripts/**/*.json`,
 		]).pipe(dest(PATH_DEV));
 	},
-	json_prod: function (cb) {
+	json_prod: function () {
+		progress.increment();
 		return src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`])
 			.pipe(gulpJsonMinify({}))
 			.pipe(dest(PATH_PROD));
@@ -166,6 +191,7 @@ const _Common = {
 	// TODO
 	// IMAGE files
 	images_dev: function (cb) {
+		progress.increment();
 		src(PATH_SRC + CFG.FOLDER_STYLES_IMAGES + '**/*').pipe(
 			dest(PATH_DEV + CFG.FOLDER_STYLES_IMAGES),
 		);
@@ -175,6 +201,7 @@ const _Common = {
 		cb();
 	},
 	images_prod: function (cb) {
+		progress.increment();
 		src(PATH_SRC + CFG.FOLDER_STYLES_IMAGES + '**/*')
 			.pipe(gulpImageMin({}))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_STYLES_IMAGES));
@@ -185,24 +212,28 @@ const _Common = {
 	},
 
 	// static/ folder
-	static_dev: function (cb) {
+	static_dev: function () {
+		progress.increment();
 		return src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
 			dest(PATH_DEV + CFG.FOLDER_STATIC),
 		);
 	},
-	static_prod: function (cb) {
+	static_prod: function () {
+		progress.increment();
 		return src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
 			dest(PATH_PROD + CFG.FOLDER_STATIC),
 		);
 	},
 
 	// **/styles/fonts/ folder
-	fonts_dev: function (cb) {
+	fonts_dev: function () {
+		progress.increment();
 		return src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
 			dest(PATH_DEV + '**/' + CFG.FOLDER_FONTS),
 		);
 	},
-	fonts_prod: function (cb) {
+	fonts_prod: function () {
+		progress.increment();
 		return src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
 			dest(PATH_PROD + '**/' + CFG.FOLDER_FONTS),
 		);
@@ -212,6 +243,7 @@ const _Common = {
 const _Scripts = {
 	scriptsAdmin_dev: function () {
 		// process.env.NODE_ENV = 'development';
+		progress.increment();
 		return browserify({
 			entries: [
 				PATH_SRC +
@@ -229,6 +261,7 @@ const _Scripts = {
 	},
 	scriptsWeb_dev: function () {
 		// process.env.NODE_ENV = 'development';
+		progress.increment();
 		return browserify({
 			entries: [
 				PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
@@ -243,6 +276,7 @@ const _Scripts = {
 	},
 	scriptsAdmin_prod: function () {
 		process.env.NODE_ENV = 'production';
+		progress.increment();
 		return browserify({
 			entries: [
 				PATH_SRC +
@@ -266,6 +300,7 @@ const _Scripts = {
 	},
 	scriptsWeb_prod: function () {
 		process.env.NODE_ENV = 'production';
+		progress.increment();
 		return browserify({
 			entries: [
 				PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
@@ -287,8 +322,9 @@ const _Scripts = {
 };
 
 const _Styles = {
-	stylesAdmin_dev: function (cb) {
+	stylesAdmin_dev: function () {
 		if (CFG.ADMIN_EXTERNAL_CSS) {
+			progress.increment();
 			return src(
 				PATH_SRC +
 					CFG.FOLDER_ADMIN +
@@ -300,8 +336,9 @@ const _Styles = {
 				.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
 		}
 	},
-	stylesWeb_dev: function (cb) {
+	stylesWeb_dev: function () {
 		if (CFG.WEB_EXTERNAL_CSS) {
+			progress.increment();
 			return src(
 				PATH_SRC +
 					CFG.FOLDER_WEB +
@@ -313,8 +350,9 @@ const _Styles = {
 				.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
 		}
 	},
-	stylesAdmin_prod: function (cb) {
+	stylesAdmin_prod: function () {
 		if (CFG.ADMIN_EXTERNAL_CSS) {
+			progress.increment();
 			return src(
 				PATH_SRC +
 					CFG.FOLDER_ADMIN +
@@ -331,8 +369,9 @@ const _Styles = {
 				.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
 		}
 	},
-	stylesWeb_prod: function (cb) {
+	stylesWeb_prod: function () {
 		if (CFG.WEB_EXTERNAL_CSS) {
+			progress.increment();
 			return src(
 				PATH_SRC +
 					CFG.FOLDER_WEB +
@@ -413,8 +452,9 @@ const TaskWatch = {
 
 		cb(
 			console.log(
-				` Watching changes in 'admin/' and backend files. You should reload browser manually. `
-					.bgYellow.black,
+				'#' +
+					` Watching changes in 'admin/' and backend files. You should reload browser manually. `
+						.yellow,
 			),
 		);
 	},
@@ -460,8 +500,9 @@ const TaskWatch = {
 
 		cb(
 			console.log(
-				` Watching changes in 'web/' files. You should reload browser manually. `
-					.bgYellow.black,
+				'#' +
+					` Watching changes in 'web/' files. You should reload browser manually. `
+						.yellow,
 			),
 		);
 	},
@@ -537,8 +578,9 @@ const TaskWatch = {
 		);
 		cb(
 			console.log(
-				` Watching changes in whole project structure. You should reload browser manually. `
-					.bgYellow.black,
+				'#' +
+					` Watching changes in whole project structure. You should reload browser manually. `
+						.yellow,
 			),
 		);
 	},
