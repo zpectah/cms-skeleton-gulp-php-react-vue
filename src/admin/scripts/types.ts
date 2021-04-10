@@ -3,6 +3,7 @@ export interface storeProps {
 		language: string;
 		theme: string;
 		sideBarOpen: boolean;
+		loadingData: boolean;
 	};
 	user: {
 		user?: {

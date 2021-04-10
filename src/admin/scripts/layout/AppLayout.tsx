@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
@@ -53,6 +53,41 @@ const Main = styled.main`
 	flex: ${(props) => (props.isCentered ? '0' : '1')};
 	color: ${getStyles().layout.body_text};
 	background-color: ${getStyles().layout.body_bg};
+`;
+
+const PreloaderAnimation = keyframes`
+  0% { width: 0%; left: 0%; }
+  10% { width: 5%; left: 0%; }
+  20% { width: 25%; left: 0%; }
+  30% { width: 50%; left: 0%; }
+  40% { width: 75%; left: 0%; }
+  50% { width: 100%; left: 0%; }
+  60% { width: 75%; left: 25%; }
+  70% { width: 50%; left: 50%; }
+  80% { width: 25%; left: 75%; }
+  90% { width: 5%; left: 95%; }
+  100% { width: 0%; left: 100%; }
+`;
+
+const PreloaderLayer = styled.div`
+	width: 100%;
+	height: 2px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	overflow: hidden;
+	background-color: ${getStyles().palette.primary};
+
+	& .preloader-element {
+		height: 100%;
+		position: relative;
+		background-color: blue;
+		animation-name: ${PreloaderAnimation};
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease-in-out;
+	}
 `;
 
 interface AppLayoutProps {
@@ -122,6 +157,11 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					{metaTitle && ` | ${metaTitle}`}
 				</title>
 			</Helmet>
+			{store.$Ui.loadingData && (
+				<PreloaderLayer>
+					<div className="preloader-element"></div>
+				</PreloaderLayer>
+			)}
 			<Wrapper withSidebar={withSidebar} sidebarOpen={sidebarOpen}>
 				{withSidebar && (
 					<Sidebar

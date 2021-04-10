@@ -3,7 +3,12 @@ import CFG from '../../../../config/global.json';
 import LangService from '../../service/LanguageService';
 import ThemeService from '../../service/ThemeService';
 import UiStoreState from './store';
-import { LANGUAGE_TOGGLE, SIDEBAR_TOGGLE, THEME_TOGGLE } from './types';
+import {
+	LANGUAGE_TOGGLE,
+	SIDEBAR_TOGGLE,
+	THEME_TOGGLE,
+	SET_DATA_LOADING,
+} from './types';
 
 function UiReducer(state = UiStoreState, action) {
 	switch (action.type) {
@@ -23,6 +28,11 @@ function UiReducer(state = UiStoreState, action) {
 			storage.set(CFG.CMS.STORAGE_KEY_UI_SIDEBAR, action.payload);
 			return Object.assign({}, state, {
 				sideBarOpen: action.payload,
+			});
+
+		case SET_DATA_LOADING:
+			return Object.assign({}, state, {
+				loadingData: action.payload,
 			});
 	}
 

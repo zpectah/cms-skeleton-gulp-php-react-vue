@@ -8,6 +8,7 @@ const UiStoreState: storeProps['ui'] = {
 	language: LangService.get(),
 	theme: ThemeService.get(),
 	sideBarOpen: storage.get(CFG.CMS.STORAGE_KEY_UI_SIDEBAR) === 'true',
+	loadingData: false,
 };
 
 export default UiStoreState;
