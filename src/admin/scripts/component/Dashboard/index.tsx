@@ -6,22 +6,35 @@ interface DashboardProps {}
 const Dashboard: React.FC<DashboardProps> = (props) => {
 	return (
 		<div>
+			<Row>
+				<Col>
+					<Card title="Main dashboard card" extra={<a href="#">More</a>}>
+						<p>Card content</p>
+						<p>Card content</p>
+						<p>Card content</p>
+					</Card>
+				</Col>
+			</Row>
 			<Row gutter={16}>
 				<Col span={8}>
-					<Card title="Default size card" extra={<a href="#">More</a>}>
+					<Card title="App Card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="Card title" bordered={false}>
-						Card content
+					<Card title="CRM Card" bordered={false}>
+						<p>Card content</p>
+						<p>Card content</p>
+						<p>Card content</p>
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="Card title" bordered={false}>
-						Card content
+					<Card title="Market Card" bordered={false}>
+						<p>Card content</p>
+						<p>Card content</p>
+						<p>Card content</p>
 					</Card>
 				</Col>
 			</Row>

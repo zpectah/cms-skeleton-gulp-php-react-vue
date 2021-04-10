@@ -13,10 +13,10 @@ Content Managing System based on Apache server, PHP core and React components.
 	- PHP and Composer
 
 ## Dependencies
-* JavaScript/TypeScript:
-	- Gulp and @babel
+* JavaScript:
+	- TypeScript
+	- Babel
 	- React
-	- Sass/SCSS
 	- styled-components
 	- Redux
 	- i18n
@@ -24,6 +24,8 @@ Content Managing System based on Apache server, PHP core and React components.
 	- moment.js
 * PHP 7+:
 	- BladeOne (eftec/bladeone)
+* Styles:
+	- Sass/SCSS
 
 ## Development
 ### Virtual Host
@@ -48,9 +50,8 @@ Content Managing System based on Apache server, PHP core and React components.
 - ``% yarn start:web`` - Watching changes for **web/**
 
 ### Build
-- ``% yarn build`` - Create both bundles
-- ``% yarn build:dev`` - Create development bundle
-- ``% yarn build:prod`` - Create production bundle
+- ``% yarn dev`` - Create development bundle
+- ``% yarn build`` - Create production bundle
 
 ## File structure
 - Main root directory:
@@ -65,11 +66,10 @@ Content Managing System based on Apache server, PHP core and React components.
 	- ``core/`` - PHP Core files
 	- ``libs/`` - Extended libraries (exist only for src/)
 	- ``static/`` - Static files (images or whatever)
-	- ``uploads/``(*) - Uploaded files from system
-	- ``logs/``(*) - Log files
-	- ``vendor/``(*) - Vendor directory (Composer)
+	- ``uploads/`` - Uploaded files from system
+	- ``logs/`` - Log files
+	- ``vendor/`` - Vendor directory (Composer)
 
-(*) File or directory created and managed dynamically
 
 ## Configuration and Options
 ...

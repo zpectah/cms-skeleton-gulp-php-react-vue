@@ -1,16 +1,18 @@
 import { src, dest, series, parallel, watch } from 'gulp';
 import colors from 'colors';
 import del from 'del';
+import browserify from 'browserify';
+import tsify from 'tsify';
+import vinylSource from 'vinyl-source-stream';
+import vinylBuffer from 'vinyl-buffer';
 import gulpReplace from 'gulp-replace';
 import gulpRename from 'gulp-rename';
 import gulpHtmlMin from 'gulp-htmlmin';
 import gulpJsonMinify from 'gulp-jsonminify';
 import gulpImageMin from 'gulp-imagemin';
 import babelify from 'babelify';
-import gulpBro from 'gulp-bro';
-import gulpMinify from 'gulp-minify';
+import gulpUglify from 'gulp-uglify';
 import gulpSourceMaps from 'gulp-sourcemaps';
-import tsify from 'tsify';
 import gulpSass from 'gulp-sass';
 import gulpCleanCss from 'gulp-clean-css';
 import gulpCssImport from 'gulp-cssimport';
@@ -48,13 +50,13 @@ const options = {
 		Admin: {
 			babelify: {
 				presets: ['@babel/preset-env', '@babel/preset-react'],
-				plugins: [],
+				plugins: ['@babel/plugin-transform-runtime'],
 			},
 		},
 		Web: {
 			babelify: {
 				presets: ['@babel/preset-env', '@babel/preset-react'],
-				plugins: [],
+				plugins: ['@babel/plugin-transform-runtime'],
 			},
 		},
 		extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -80,7 +82,8 @@ const options = {
 	},
 	Watch: {
 		watch: {
-			events: 'all',
+			events: ['add', 'change', 'unlink'],
+			delay: 250,
 		},
 	},
 };
@@ -220,69 +223,79 @@ const _Common = {
 };
 
 const _Scripts = {
-	scriptsAdmin_dev: function (cb) {
-		src(
-			PATH_SRC + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
-		)
-			.pipe(
-				gulpBro({
-					plugin: [tsify],
-					transform: [babelify.configure(options.Scripts.Admin.babelify)],
-					extensions: options.Scripts.extensions,
-					debug: options.Scripts.debug_dev,
-				}),
-			)
+	scriptsAdmin_dev: function () {
+		// process.env.NODE_ENV = 'development';
+		return browserify({
+			entries: [
+				PATH_SRC +
+					CFG.FOLDER_ADMIN +
+					CFG.FOLDER_SCRIPTS +
+					CFG.SCRIPTS_INPUT_FILE,
+			],
+			extensions: options.Scripts.extensions,
+		})
+			.plugin(tsify)
+			.transform(babelify.configure(options.Scripts.Admin.babelify))
+			.bundle()
+			.pipe(vinylSource('index.js'))
 			.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
-		cb();
 	},
-	scriptsWeb_dev: function (cb) {
-		src(PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE)
-			.pipe(
-				gulpBro({
-					plugin: [tsify],
-					transform: [babelify.configure(options.Scripts.Admin.babelify)],
-					extensions: options.Scripts.extensions,
-					debug: options.Scripts.debug_dev,
-				}),
-			)
+	scriptsWeb_dev: function () {
+		// process.env.NODE_ENV = 'development';
+		return browserify({
+			entries: [
+				PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
+			],
+			extensions: options.Scripts.extensions,
+		})
+			.plugin(tsify)
+			.transform(babelify.configure(options.Scripts.Admin.babelify))
+			.bundle()
+			.pipe(vinylSource('index.js'))
 			.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
-		cb();
 	},
-	scriptsAdmin_prod: function (cb) {
-		src(
-			PATH_SRC + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
-		)
-			.pipe(gulpSourceMaps.init(options.Scripts.sourcemaps))
-			.pipe(
-				gulpBro({
-					plugin: [tsify],
-					transform: [babelify.configure(options.Scripts.Admin.babelify)],
-					extensions: options.Scripts.extensions,
-					debug: options.Scripts.debug_prod,
-				}),
-			)
+	scriptsAdmin_prod: function () {
+		process.env.NODE_ENV = 'production';
+		return browserify({
+			entries: [
+				PATH_SRC +
+					CFG.FOLDER_ADMIN +
+					CFG.FOLDER_SCRIPTS +
+					CFG.SCRIPTS_INPUT_FILE,
+			],
+			extensions: options.Scripts.extensions,
+		})
+			.plugin(tsify)
+			.transform(babelify.configure(options.Scripts.Admin.babelify))
+			.bundle()
+			.pipe(vinylSource('index.js'))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS))
-			.pipe(gulpMinify(options.Scripts.minify))
+			.pipe(vinylBuffer())
+			.pipe(gulpSourceMaps.init(options.Scripts.sourcemaps))
+			.pipe(gulpRename({ extname: '.min.js' }))
+			.pipe(gulpUglify())
 			.pipe(gulpSourceMaps.write())
 			.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
-		cb();
 	},
-	scriptsWeb_prod: function (cb) {
-		src(PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE)
-			.pipe(gulpSourceMaps.init(options.Scripts.sourcemaps))
-			.pipe(
-				gulpBro({
-					plugin: [tsify],
-					transform: [babelify.configure(options.Scripts.Admin.babelify)],
-					extensions: options.Scripts.extensions,
-					debug: options.Scripts.debug_prod,
-				}),
-			)
+	scriptsWeb_prod: function () {
+		process.env.NODE_ENV = 'production';
+		return browserify({
+			entries: [
+				PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS + CFG.SCRIPTS_INPUT_FILE,
+			],
+			extensions: options.Scripts.extensions,
+		})
+			.plugin(tsify)
+			.transform(babelify.configure(options.Scripts.Admin.babelify))
+			.bundle()
+			.pipe(vinylSource('index.js'))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS))
-			.pipe(gulpMinify(options.Scripts.minify))
+			.pipe(vinylBuffer())
+			.pipe(gulpSourceMaps.init(options.Scripts.sourcemaps))
+			.pipe(gulpRename({ extname: '.min.js' }))
+			.pipe(gulpUglify())
 			.pipe(gulpSourceMaps.write())
 			.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
-		cb();
 	},
 };
 
@@ -594,8 +607,6 @@ export const dev = series(TaskDev);
 export const start = series(TaskDev, TaskWatch.all);
 export const start_admin = series(TaskDev, TaskWatch.admin);
 export const start_web = series(TaskDev, TaskWatch.web);
-export const build = series(TaskDev, TaskBuild);
-export const build_dev = series(TaskDev);
-export const build_prod = series(TaskBuild);
+export const build = series(TaskBuild);
 
 export default dev;
