@@ -201,7 +201,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'active',
 				key: 'active',
 				align: 'end',
-				width: '50px',
+				width: '100px',
 			});
 
 		d.push({

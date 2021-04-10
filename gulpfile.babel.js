@@ -1,5 +1,6 @@
 import { src, dest, series, parallel, watch } from 'gulp';
 import colors from 'colors';
+import cliProgress from 'cli-progress';
 import del from 'del';
 import browserify from 'browserify';
 import tsify from 'tsify';
@@ -96,83 +97,73 @@ const source = {
 
 const _Clean = {
 	clean_dev: function (cb) {
-		del.sync(
+		return del.sync(
 			PATH_DEV + utils.getPathSuffix(),
-			cb(console.log(` Folder 'dev/' was cleared `.bgYellow.black)),
+			// cb(console.log(` Folder 'dev/' was cleared `.bgYellow.black)),
+			cb(),
 		);
 	},
 	clean_prod: function (cb) {
-		del.sync(
+		return del.sync(
 			PATH_PROD + utils.getPathSuffix(),
-			cb(console.log(` Folder 'prod/' was cleared `.bgYellow.black)),
+			// cb(console.log(` Folder 'prod/' was cleared `.bgYellow.black)),
+			cb(),
 		);
 	},
 };
 
 const _Environment = {
 	environment_dev: function (cb) {
-		src(ROOT + CFG.ENV_INPUT_FILE)
+		return src(ROOT + CFG.ENV_INPUT_FILE)
 			.pipe(gulpReplace(CFG.KEY_ENV_ENV, CFG.ENV_NAME_DEV))
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_DEV + CFG.FOLDER_CONFIG));
-		cb(
-			console.log(
-				` New environmental file for 'dev' was created `.bgYellow.black,
-			),
-		);
 	},
 	environment_prod: function (cb) {
-		src(ROOT + CFG.ENV_INPUT_FILE)
+		return src(ROOT + CFG.ENV_INPUT_FILE)
 			.pipe(gulpReplace(CFG.KEY_ENV_ENV, CFG.ENV_NAME_PROD))
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_CONFIG));
-		cb(
-			console.log(
-				` New environmental file for 'prod' was created `.bgYellow.black,
-			),
-		);
 	},
 };
 
 const _Common = {
 	// PHP files
 	php_dev: function (cb) {
-		src([...source.Common.php, ...source.Common.etc]).pipe(dest(PATH_DEV));
-		cb();
+		return src([...source.Common.php, ...source.Common.etc]).pipe(
+			dest(PATH_DEV),
+		);
 	},
 	php_prod: function (cb) {
-		src(source.Common.php).pipe(dest(PATH_PROD));
-		cb();
+		return src(source.Common.php).pipe(dest(PATH_PROD));
 	},
 
 	// HTML files
 	html_dev: function (cb) {
-		src([PATH_SRC + '**/*.html']).pipe(dest(PATH_DEV));
-		cb();
+		return src([PATH_SRC + '**/*.html']).pipe(dest(PATH_DEV));
 	},
 	html_prod: function (cb) {
-		src([PATH_SRC + '**/*.html'])
+		return src([PATH_SRC + '**/*.html'])
 			.pipe(gulpHtmlMin(options.Html.htmlMin))
 			.pipe(dest(PATH_PROD));
-		cb();
 	},
 
 	// JSON files
 	json_dev: function (cb) {
-		src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`]).pipe(
-			dest(PATH_DEV),
-		);
-		cb();
+		return src([
+			`${PATH_SRC}**/*.json`,
+			`!${PATH_SRC}**/scripts/**/*.json`,
+		]).pipe(dest(PATH_DEV));
 	},
 	json_prod: function (cb) {
-		src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`])
+		return src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`])
 			.pipe(gulpJsonMinify({}))
 			.pipe(dest(PATH_PROD));
-		cb();
 	},
 
+	// TODO
 	// IMAGE files
 	images_dev: function (cb) {
 		src(PATH_SRC + CFG.FOLDER_STYLES_IMAGES + '**/*').pipe(
@@ -195,30 +186,26 @@ const _Common = {
 
 	// static/ folder
 	static_dev: function (cb) {
-		src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
+		return src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
 			dest(PATH_DEV + CFG.FOLDER_STATIC),
 		);
-		cb();
 	},
 	static_prod: function (cb) {
-		src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
+		return src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(
 			dest(PATH_PROD + CFG.FOLDER_STATIC),
 		);
-		cb();
 	},
 
 	// **/styles/fonts/ folder
 	fonts_dev: function (cb) {
-		src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
+		return src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
 			dest(PATH_DEV + '**/' + CFG.FOLDER_FONTS),
 		);
-		cb();
 	},
 	fonts_prod: function (cb) {
-		src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
+		return src(PATH_SRC + '**/' + CFG.FOLDER_FONTS + '**/*').pipe(
 			dest(PATH_PROD + '**/' + CFG.FOLDER_FONTS),
 		);
-		cb();
 	},
 };
 
@@ -302,7 +289,7 @@ const _Scripts = {
 const _Styles = {
 	stylesAdmin_dev: function (cb) {
 		if (CFG.ADMIN_EXTERNAL_CSS) {
-			src(
+			return src(
 				PATH_SRC +
 					CFG.FOLDER_ADMIN +
 					CFG.FOLDER_STYLES_INPUT +
@@ -311,14 +298,11 @@ const _Styles = {
 				.pipe(gulpSass({}).on('error', gulpSass.logError))
 				.pipe(gulpCssImport({}))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
-			cb();
-		} else {
-			cb();
 		}
 	},
 	stylesWeb_dev: function (cb) {
 		if (CFG.WEB_EXTERNAL_CSS) {
-			src(
+			return src(
 				PATH_SRC +
 					CFG.FOLDER_WEB +
 					CFG.FOLDER_STYLES_INPUT +
@@ -327,14 +311,11 @@ const _Styles = {
 				.pipe(gulpSass({}).on('error', gulpSass.logError))
 				.pipe(gulpCssImport({}))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
-			cb();
-		} else {
-			cb();
 		}
 	},
 	stylesAdmin_prod: function (cb) {
 		if (CFG.ADMIN_EXTERNAL_CSS) {
-			src(
+			return src(
 				PATH_SRC +
 					CFG.FOLDER_ADMIN +
 					CFG.FOLDER_STYLES_INPUT +
@@ -348,14 +329,11 @@ const _Styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
-			cb();
-		} else {
-			cb();
 		}
 	},
 	stylesWeb_prod: function (cb) {
 		if (CFG.WEB_EXTERNAL_CSS) {
-			src(
+			return src(
 				PATH_SRC +
 					CFG.FOLDER_WEB +
 					CFG.FOLDER_STYLES_INPUT +
@@ -369,9 +347,6 @@ const _Styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
-			cb();
-		} else {
-			cb();
 		}
 	},
 };
