@@ -3,8 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import routes from '../routes.json';
-import Api from '../../utils/api';
-import { setSettings } from '../../store/App/actions';
+import { loadSettings } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';
 
@@ -28,11 +27,7 @@ class SettingsPage extends Component<
 	};
 
 	loadData() {
-		this.setState({ loading: true });
-		Api.GET('http://skeleton-php-cms/api/get_settings').then((data) => {
-			this.props.dispatch(setSettings(data.data));
-			this.setState({ loading: false });
-		});
+		this.props.dispatch(loadSettings());
 	}
 
 	componentDidMount() {

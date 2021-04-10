@@ -23,7 +23,7 @@ Content Managing System based on Apache server, PHP core and React components.
 	- lodash
 	- moment.js
 * PHP 7+:
-	- BladeOne (eftec/bladeone)
+	- BladeOne
 * Styles:
 	- Sass/SCSS
 
@@ -64,7 +64,7 @@ Content Managing System based on Apache server, PHP core and React components.
 	- ``web/`` - Root Web directory
 	- ``config/`` - Config files
 	- ``core/`` - PHP Core files
-	- ``libs/`` - Extended libraries (exist only for src/)
+	- ``libs/`` - Extended libraries (Only for imports)
 	- ``static/`` - Static files (images or whatever)
 	- ``uploads/`` - Uploaded files from system
 	- ``logs/`` - Log files

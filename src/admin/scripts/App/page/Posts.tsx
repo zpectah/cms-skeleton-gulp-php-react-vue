@@ -3,8 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import routes from '../routes.json';
-import Api from '../../utils/api';
-import { setPosts } from '../../store/App/actions';
+import { loadPosts } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import ListItems from '../../component/ListItems';
 import { Button } from '../../component/ui';
@@ -29,11 +28,7 @@ class PostsPage extends Component<
 	};
 
 	loadData() {
-		this.setState({ loading: true });
-		Api.GET('http://skeleton-php-cms/api/get_posts').then((data) => {
-			this.props.dispatch(setPosts(data.data));
-			this.setState({ loading: false });
-		});
+		this.props.dispatch(loadPosts());
 	}
 
 	componentDidMount() {

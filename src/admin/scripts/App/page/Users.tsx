@@ -3,8 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import routes from '../routes.json';
-import Api from '../../utils/api';
-import { setUsers } from '../../store/App/actions';
+import { loadUsers } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import ListItems from '../../component/ListItems';
 import { Button } from '../../component/ui';
@@ -29,11 +28,7 @@ class UsersPage extends Component<
 	};
 
 	loadData() {
-		this.setState({ loading: true });
-		Api.GET('http://skeleton-php-cms/api/get_users').then((data) => {
-			this.props.dispatch(setUsers(data.data));
-			this.setState({ loading: false });
-		});
+		this.props.dispatch(loadUsers());
 	}
 
 	componentDidMount() {

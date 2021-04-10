@@ -5,13 +5,18 @@
 	"author": "Tomas Sychra | zpecter.com",
 	"license": "MIT",
 	"private": true,
+	"engines": {
+		"node": "^15.6.0",
+		"npm": "^7.4.0",
+		"yarn": "^1.22.10"
+	},
 	"scripts": {
 		"initial": "composer install",
-		"dev": "gulp dev --silent",
-		"start": "gulp start --silent",
-		"start:admin": "gulp start_admin --silent",
-		"start:web": "gulp start_web --silent",
-		"build": "composer install && gulp build --silent"
+		"dev": "gulp dev --silent --max-old-space-size=1024",
+		"start": "gulp start --silent --max-old-space-size=1024",
+		"start:admin": "gulp start_admin --silent --max-old-space-size=1024",
+		"start:web": "gulp start_web --silent --max-old-space-size=1024",
+		"build": "composer install && gulp build --silent --max-old-space-size=1024"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.6.2",

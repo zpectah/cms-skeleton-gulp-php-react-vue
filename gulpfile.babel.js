@@ -82,10 +82,7 @@ const options = {
 		},
 	},
 	Watch: {
-		watch: {
-			events: ['add', 'change', 'unlink'],
-			delay: 250,
-		},
+		watch: {},
 	},
 };
 const source = {
@@ -242,7 +239,7 @@ const _Common = {
 
 const _Scripts = {
 	scriptsAdmin_dev: function () {
-		// process.env.NODE_ENV = 'development';
+		process.env.NODE_ENV = CFG.ENV_NAME_DEV;
 		progress.increment();
 		return browserify({
 			entries: [
@@ -260,7 +257,7 @@ const _Scripts = {
 			.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
 	},
 	scriptsWeb_dev: function () {
-		// process.env.NODE_ENV = 'development';
+		process.env.NODE_ENV = CFG.ENV_NAME_DEV;
 		progress.increment();
 		return browserify({
 			entries: [
@@ -275,7 +272,7 @@ const _Scripts = {
 			.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
 	},
 	scriptsAdmin_prod: function () {
-		process.env.NODE_ENV = 'production';
+		process.env.NODE_ENV = CFG.ENV_NAME_PROD;
 		progress.increment();
 		return browserify({
 			entries: [
@@ -299,7 +296,7 @@ const _Scripts = {
 			.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
 	},
 	scriptsWeb_prod: function () {
-		process.env.NODE_ENV = 'production';
+		process.env.NODE_ENV = CFG.ENV_NAME_PROD;
 		progress.increment();
 		return browserify({
 			entries: [

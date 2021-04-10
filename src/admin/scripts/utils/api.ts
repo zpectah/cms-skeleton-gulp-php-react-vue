@@ -30,8 +30,8 @@ const _post = async (url: string, data: any) => {
 };
 
 const Api = {
-	GET: _get,
-	POST: _post,
+	get: _get,
+	post: _post,
 };
 
 export default Api;
