@@ -32,6 +32,12 @@ const links = [
 		path: routes.posts.path,
 		active: true,
 	},
+	{
+		key: 5,
+		label: routes.tags.label,
+		path: routes.tags.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`

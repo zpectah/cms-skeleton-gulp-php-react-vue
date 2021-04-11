@@ -8,6 +8,7 @@ import {
 	SIDEBAR_TOGGLE,
 	THEME_TOGGLE,
 	SET_DATA_LOADING,
+	SET_DATA_ERROR,
 } from './types';
 
 function UiReducer(state = UiStoreState, action) {
@@ -33,6 +34,11 @@ function UiReducer(state = UiStoreState, action) {
 		case SET_DATA_LOADING:
 			return Object.assign({}, state, {
 				loadingData: action.payload,
+			});
+
+		case SET_DATA_ERROR:
+			return Object.assign({}, state, {
+				dataError: action.payload,
 			});
 	}
 

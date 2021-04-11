@@ -2,12 +2,13 @@ import React from 'react';
 import { Modal } from 'antd'; // https://ant.design/components/modal/
 import styled from 'styled-components';
 
+import { appProps } from '../../types';
 import { Button } from '../ui';
 
 const Content = styled.div``;
 
 interface DetailItemDialogProps {
-	model: 'Posts' | 'Users'; // TODO
+	model: appProps['model'];
 	isOpen: boolean;
 	onCancel: (event) => void;
 	detailData: any;

@@ -4,9 +4,11 @@ export interface storeProps {
 		theme: string;
 		sideBarOpen: boolean;
 		loadingData: boolean;
+		dataError: boolean;
 	};
 	user: {
 		user?: {
+			// TODO
 			id: string;
 			email: string;
 			nickname: string;
@@ -19,6 +21,7 @@ export interface storeProps {
 		Settings: any[]; // TODO
 		Posts: any[]; // TODO
 		Users: any[]; // TODO
+		Tags: any[]; // TODO
 	};
 	Crm: {};
 	Market: {};
@@ -26,7 +29,7 @@ export interface storeProps {
 
 export interface appProps {
 	app: 'App' | 'Crm' | 'Market';
-	model: 'Posts' | 'Users'; // TODO
+	model: 'Posts' | 'Users' | 'Tags'; // TODO
 }
 
 export interface routeProps {

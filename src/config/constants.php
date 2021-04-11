@@ -13,15 +13,15 @@ $JSON_OPTIONS = json_decode(file_get_contents(PATH_PFX . 'config/options.json'),
 /*
  * Common system definitions
  */
-define( "PASS_CRYPT",                                     PASSWORD_ARGON2I );
+const PASS_CRYPT =                                        PASSWORD_ARGON2I;
 
 
 
 /*
  * Environmental constants
  */
-define( "ENV",                                            BUILD['env'] );
-define( "TIMESTAMP",                                      BUILD['timestamp'] );
+const ENV =                                               BUILD['env'];
+const TIMESTAMP =                                         BUILD['timestamp'];
 
 
 
@@ -29,14 +29,15 @@ define( "TIMESTAMP",                                      BUILD['timestamp'] );
  * Config objects
  */
 define( "CFG_ENV",                                        $JSON_ENV[ ENV ] );
-define( "CFG_DB",                                         DB[ ENV ]['SQL'] );
+define( "CFG_DB",                                         $DB[ ENV ]['SQL'] );
+const CFG_DB_CONN =                                       [CFG_DB['server'], CFG_DB['user'], CFG_DB['password'], CFG_DB['name'], CFG_DB['port']];
 
 
 
 /*
  * Path
  */
-define( "PATH_BASE",                                      '../' );
+const PATH_BASE =                                         '../';
 define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBAL['PATH']['uploads'] );
 define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
 define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );

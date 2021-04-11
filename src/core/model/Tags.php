@@ -1,0 +1,34 @@
+<?php
+
+
+namespace core\model;
+
+
+use mysqli;
+
+
+class Tags {
+
+	public function get ($params = []) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
+		$sql = 'SELECT * FROM tags';
+		$result = $conn -> query($sql);
+
+		if ($result -> num_rows > 0) {
+			while($row = $result -> fetch_assoc()) {
+				$response[] = $row;
+			}
+		}
+
+		return $response;
+	}
+
+	public function create () {}
+
+	public function update () {}
+
+	public function delete () {}
+
+}

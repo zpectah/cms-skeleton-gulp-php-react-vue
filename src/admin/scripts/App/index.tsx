@@ -14,6 +14,7 @@ import LostPasswordPage from './page/LostPassword';
 import PostsPage from './page/Posts';
 import UsersPage from './page/Users';
 import SettingsPage from './page/Settings';
+import TagsPage from './page/Tags';
 
 const GlobalStyle = createGlobalStyle`
 	html {
@@ -99,6 +100,13 @@ class App extends Component<AppProps, AppState> {
 							path={[routes.users.path, routes.users.pathDetail + '/:id']}
 							component={UsersPage}
 							auth={routes.users.auth}
+							exact
+						/>
+
+						<AuthRoute
+							path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
+							component={TagsPage}
+							auth={routes.tags.auth}
 							exact
 						/>
 

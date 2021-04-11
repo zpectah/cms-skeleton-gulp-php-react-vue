@@ -22,5 +22,9 @@
 
 	"Users_meta_title": "Users",
 	"Users_page_title": "Users page",
-	"Users_label": "Users"
+	"Users_label": "Users",
+
+	"Tags_meta_title": "Tags",
+	"Tags_page_title": "Tags page",
+	"Tags_label": "Tags"
 }

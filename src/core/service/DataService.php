@@ -7,6 +7,7 @@ namespace core\service;
 use core\model\Settings;
 use core\model\Users;
 use core\model\Posts;
+use core\model\Tags;
 
 
 class DataService {
@@ -16,6 +17,7 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Settings = new Settings;
+		$Tags = new Tags;
 
 		switch ($model) {
 
@@ -28,6 +30,9 @@ class DataService {
 			case 'Settings':
 				return $Settings -> get($params);
 
+			case 'Tags':
+				return $Tags -> get($params);
+
 
 
 			default:
@@ -36,6 +41,12 @@ class DataService {
 		}
 
 	}
+
+	public function create () {}
+
+	public function update () {}
+
+	public function delete () {}
 
 
 }

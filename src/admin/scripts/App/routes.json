@@ -47,5 +47,12 @@
 		"name": "users",
 		"label": "Users_label",
 		"auth": 7
+	},
+	"tags": {
+		"path": "/admin/tags",
+		"pathDetail": "/admin/tags/detail",
+		"name": "tags",
+		"label": "Tags_label",
+		"auth": 2
 	}
 }

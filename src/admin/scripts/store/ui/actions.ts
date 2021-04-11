@@ -3,6 +3,7 @@ import {
 	SIDEBAR_TOGGLE,
 	THEME_TOGGLE,
 	SET_DATA_LOADING,
+	SET_DATA_ERROR,
 } from './types';
 
 export function languageToggle(payload) {
@@ -19,4 +20,8 @@ export function themeToggle(payload) {
 
 export function setDataLoading(payload) {
 	return { type: SET_DATA_LOADING, payload };
+}
+
+export function setDataError(payload) {
+	return { type: SET_DATA_ERROR, payload };
 }

@@ -1,6 +1,6 @@
 import Api from '../../utils/api';
-import { SET_POSTS, SET_USERS, SET_SETTINGS } from './types';
-import { setDataLoading } from '../ui/actions';
+import { SET_POSTS, SET_USERS, SET_SETTINGS, SET_TAGS } from './types';
+import { setDataLoading, setDataError } from '../ui/actions';
 
 // Settings
 export function loadSettings() {
@@ -12,6 +12,7 @@ export function loadSettings() {
 			dispatch(setDataLoading(false));
 		} catch (error) {
 			console.warn(error);
+			dispatch(setDataError(true));
 			dispatch(setDataLoading(false));
 		}
 	};
@@ -31,6 +32,7 @@ export function loadPosts() {
 			dispatch(setDataLoading(false));
 		} catch (error) {
 			console.warn(error);
+			dispatch(setDataError(true));
 			dispatch(setDataLoading(false));
 		}
 	};
@@ -50,6 +52,7 @@ export function loadUsers() {
 			dispatch(setDataLoading(false));
 		} catch (error) {
 			console.warn(error);
+			dispatch(setDataError(true));
 			dispatch(setDataLoading(false));
 		}
 	};
@@ -57,4 +60,24 @@ export function loadUsers() {
 
 export function setUsers(payload) {
 	return { type: SET_USERS, payload };
+}
+
+// Tags
+export function loadTags() {
+	return async (dispatch) => {
+		dispatch(setDataLoading(true));
+		try {
+			let data = await Api.get('/api/get_tags');
+			dispatch(setTags(data.data));
+			dispatch(setDataLoading(false));
+		} catch (error) {
+			console.warn(error);
+			dispatch(setDataError(true));
+			dispatch(setDataLoading(false));
+		}
+	};
+}
+
+export function setTags(payload) {
+	return { type: SET_TAGS, payload };
 }

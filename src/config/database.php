@@ -1,21 +1,21 @@
 <?php
-define( "DB", [
+$DB = [
 	'development' => [
 		'SQL' => [
 			'server' =>       'localhost',
-			'name' =>         'warp-cms',
+			'name' =>         'skeleton-cms',
 			'user' =>         'root',
 			'password' =>     'root',
-			'port' =>         80
+			'port' =>         3306
 		]
 	],
 	'production' => [
 		'SQL' => [
 			'server' =>       'localhost',
-			'name' =>         'warp-cms',
+			'name' =>         'skeleton-cms',
 			'user' =>         'root',
 			'password' =>     'root',
-			'port' =>         80
+			'port' =>         3306
 		]
 	]
-] );
+];

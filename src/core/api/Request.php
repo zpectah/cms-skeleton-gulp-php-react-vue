@@ -43,6 +43,11 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			case 'get_tags':
+				$response['data'] = $DataService -> get('Tags', []);
+				$response['status'] = 'ok';
+				break;
+
 			//
 			default:
 				$response['message'] = 'Wrong response';

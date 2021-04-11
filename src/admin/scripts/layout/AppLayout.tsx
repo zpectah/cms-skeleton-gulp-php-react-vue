@@ -149,6 +149,15 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 		setLogoutConfirmOpen(false);
 	};
 
+	useEffect(() => {
+		if (store.$Ui.dataError) {
+			console.log('!! ERROR !!');
+			// TODO
+			// Display error message
+			// Toggle error false
+		}
+	}, [store.$Ui.dataError]);
+
 	return (
 		<>
 			<Helmet>

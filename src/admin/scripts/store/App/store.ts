@@ -4,6 +4,7 @@ const AppStoreState: storeProps['App'] = {
 	Settings: [],
 	Posts: [],
 	Users: [],
+	Tags: [],
 };
 
 export default AppStoreState;
