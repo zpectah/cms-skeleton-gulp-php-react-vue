@@ -149,6 +149,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 		setLogoutConfirmOpen(false);
 	};
 
+	// Check error data from store
 	useEffect(() => {
 		if (store.$Ui.dataError) {
 			console.log('!! ERROR !!');

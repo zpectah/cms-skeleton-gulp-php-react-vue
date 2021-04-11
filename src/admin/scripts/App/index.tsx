@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
+import { loadSettings } from '../store/App/actions';
 import { getStyles } from '../styles/theme';
 
 import AuthRoute from '../utils/AuthRoute';
@@ -15,6 +17,7 @@ import PostsPage from './page/Posts';
 import UsersPage from './page/Users';
 import SettingsPage from './page/Settings';
 import TagsPage from './page/Tags';
+import { withTranslation } from 'react-i18next';
 
 const GlobalStyle = createGlobalStyle`
 	html {
@@ -54,7 +57,7 @@ interface AppState {
 	auth: boolean;
 }
 
-class App extends Component<AppProps, AppState> {
+class App extends Component<AppProps & { dispatch: Function }, AppState> {
 	static props: AppProps;
 
 	state: AppState = {
@@ -63,6 +66,7 @@ class App extends Component<AppProps, AppState> {
 
 	componentDidMount() {
 		ThemeService.init();
+		this.props.dispatch(loadSettings());
 	}
 
 	render() {
@@ -125,4 +129,8 @@ class App extends Component<AppProps, AppState> {
 	}
 }
 
-export default App;
+function mapStateToProps(state) {
+	return state;
+}
+
+export default connect(mapStateToProps)(App);

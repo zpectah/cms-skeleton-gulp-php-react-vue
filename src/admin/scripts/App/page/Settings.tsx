@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import routes from '../routes.json';
-import { loadSettings } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';
 
@@ -25,14 +24,6 @@ class SettingsPage extends Component<
 	state: SettingsPageState = {
 		loading: false,
 	};
-
-	loadData() {
-		this.props.dispatch(loadSettings());
-	}
-
-	componentDidMount() {
-		this.loadData();
-	}
 
 	render() {
 		const { loading } = this.state;

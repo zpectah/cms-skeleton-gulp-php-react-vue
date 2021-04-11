@@ -12,11 +12,11 @@
 	},
 	"scripts": {
 		"initial": "composer install",
-		"dev": "gulp dev --silent --max-old-space-size=2048",
-		"start": "gulp start --silent --max-old-space-size=2048",
-		"start:admin": "gulp start_admin --silent --max-old-space-size=2048",
-		"start:web": "gulp start_web --silent --max-old-space-size=2048",
-		"build": "composer install && gulp build --silent --max-old-space-size=2048"
+		"dev": "gulp dev --silent --max-old-space-size=4096",
+		"start": "gulp start --silent --max-old-space-size=4096",
+		"start:admin": "gulp start_admin --silent --max-old-space-size=4096",
+		"start:web": "gulp start_web --silent --max-old-space-size=4096",
+		"build": "composer install && gulp build --silent --max-old-space-size=4096"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.6.2",
