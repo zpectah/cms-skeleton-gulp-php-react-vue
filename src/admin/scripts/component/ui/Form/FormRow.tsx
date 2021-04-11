@@ -2,11 +2,28 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import { string } from 'javascript-es6-helpers';
 
-const Context = React.createContext({
+interface ContextProps {
+	id: string | null;
+	name: string | null;
+	value: any;
+	onChange: Function;
+	onBlur: Function;
+	ref: any; // TODO
+	invalid: boolean | null;
+	isTouched: boolean | null;
+	isDirty: boolean | null;
+}
+
+const Context = React.createContext<ContextProps>({
 	id: null,
 	name: null,
 	value: null,
 	onChange: null,
+	onBlur: null,
+	ref: null,
+	invalid: null,
+	isTouched: null,
+	isDirty: null,
 });
 
 interface FormRowProps {
@@ -32,9 +49,22 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 			name={name}
 			control={control}
 			rules={rules}
-			render={({ name, value, onChange }) => (
+			render={(
+				{ onChange, onBlur, value, name, ref },
+				{ invalid, isTouched, isDirty },
+			) => (
 				<Context.Provider
-					value={{ id: id, name: name, value: value, onChange: onChange }}
+					value={{
+						id: id,
+						name: name,
+						value: value,
+						onChange: onChange,
+						onBlur: onBlur,
+						ref: ref,
+						invalid: invalid,
+						isTouched: isTouched,
+						isDirty: isDirty,
+					}}
 				>
 					<div>
 						{label && (

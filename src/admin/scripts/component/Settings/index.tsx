@@ -18,25 +18,17 @@ interface SettingsProps {
 const Settings: React.FC<SettingsProps> = (props) => {
 	const history = useHistory();
 	const { route, panelKey, model, loading } = props;
-	const { TabPane } = Tabs;
-	const { control, handleSubmit, formState, setValue } = useForm({
+	const { control, handleSubmit, formState } = useForm({
 		mode: 'onChange',
 		defaultValues: { ...model },
 	});
+	const { TabPane } = Tabs;
 
 	const submitHandler = (data) => {
 		//
 		console.log('Submit handler', data);
 		//
 	};
-
-	// useEffect(() => {
-	// 	if (model)
-	// 		Object.keys(model).forEach((key, index) => {
-	// 			// @ts-ignore
-	// 			setValue(key, model[key]);
-	// 		});
-	// }, [model]);
 
 	return (
 		<AntdForm onFinish={handleSubmit(submitHandler)}>
