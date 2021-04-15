@@ -273,7 +273,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 
 		if (data.search.length >= 4) {
 			tmp = array.search(listItems, [...searchAttrs], data.search);
-		} else if (data.search.length === 0) {
+		} else {
 			tmp = items;
 		}
 

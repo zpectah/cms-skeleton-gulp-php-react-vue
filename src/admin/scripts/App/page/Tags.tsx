@@ -65,7 +65,7 @@ class TagsPage extends Component<
 					}}
 					detailId={this.props.match.params.id}
 					onReload={() => this.loadData()}
-					searchAttrs={['key']}
+					searchAttrs={['name']}
 					selectable
 					allowDelete
 				/>

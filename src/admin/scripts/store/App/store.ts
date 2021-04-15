@@ -1,7 +1,7 @@
 import { storeProps } from '../../types';
 
 const AppStoreState: storeProps['App'] = {
-	Settings: [],
+	Settings: null,
 	Posts: [],
 	Users: [],
 	Tags: [],

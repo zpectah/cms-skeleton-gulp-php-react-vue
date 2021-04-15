@@ -1,6 +1,7 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { string } from 'javascript-es6-helpers';
+import styled from 'styled-components';
 
 interface ContextProps {
 	id: string | null;
@@ -28,10 +29,12 @@ const Context = React.createContext<ContextProps>({
 
 interface FormRowProps {
 	name: string;
-	control: any; // TODO
-	rules?: any; // TODO
+	control: any;
+	rules?: any;
 	label?: string;
 	id?: string;
+	defaultValue?: any;
+	helpText?: string;
 }
 
 const FormRow: React.FC<FormRowProps> = (props) => {
@@ -39,9 +42,11 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 		children,
 		name,
 		control,
-		rules = {},
+		rules,
 		label,
 		id = string.getToken(2, ''),
+		defaultValue,
+		helpText,
 	} = props;
 
 	return (
@@ -49,6 +54,7 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 			name={name}
 			control={control}
 			rules={rules}
+			defaultValue={defaultValue}
 			render={(
 				{ onChange, onBlur, value, name, ref },
 				{ invalid, isTouched, isDirty },
@@ -73,9 +79,10 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 							</div>
 						)}
 						<div>
+							{/* TODO: resolve children function with props */}
 							{/* @ts-ignore */}
 							<Context.Consumer children={children} />
-							{/* TODO: resolve children props */}
+							{helpText && <>{helpText}</>}
 						</div>
 					</div>
 				</Context.Provider>
