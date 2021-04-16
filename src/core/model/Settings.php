@@ -20,7 +20,7 @@ class Settings {
 				switch ($row['format']) {
 
 					case 'boolean':
-						$nv = settype($row['value'], "boolean");
+						$nv = $row['value'] == 'true';
 						break;
 
 					case 'array':

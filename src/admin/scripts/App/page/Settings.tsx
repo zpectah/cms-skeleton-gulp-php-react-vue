@@ -49,6 +49,7 @@ class SettingsPage extends Component<
 						onClick={() => this.loadData()}
 						type={'primary'}
 						loading={this.props._loading}
+						ghost
 					>
 						Reload
 					</Button.Base>,

@@ -17,7 +17,6 @@ import PostsPage from './page/Posts';
 import UsersPage from './page/Users';
 import SettingsPage from './page/Settings';
 import TagsPage from './page/Tags';
-import { withTranslation } from 'react-i18next';
 
 const GlobalStyle = createGlobalStyle`
 	html {
@@ -33,13 +32,8 @@ const GlobalStyle = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		font-size: 1rem;
-
-		& > .app {
-			width: 100%;
-			height: 100%;
-			color: ${getStyles().layout.body_text};
-			background-color: ${getStyles().layout.body_bg};
-		}
+		color: ${getStyles().layout.body_text};
+		background-color: ${getStyles().layout.body_bg};
 	}
 
 	// Modal dialog blur background

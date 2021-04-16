@@ -20,6 +20,13 @@ const RowLabel = styled.label`
 	}
 `;
 const InputWrapper = styled.div``;
+const HelpText = styled.div`
+	width: 100%;
+	height: auto;
+	margin-top: 0.75rem;
+	font-size: 0.85rem;
+	color: rgba(90, 90, 90, 0.5);
+`;
 
 interface ContextProps {
 	id: string | null;
@@ -54,6 +61,7 @@ interface FormRowProps {
 	defaultValue?: any;
 	helpText?: string;
 	long?: boolean;
+	required?: boolean;
 }
 
 const FormRow: React.FC<FormRowProps> = (props) => {
@@ -67,6 +75,7 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 		defaultValue,
 		helpText,
 		long = false,
+		required = false,
 	} = props;
 
 	const grid = {
@@ -101,15 +110,17 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 						<Row>
 							{label && (
 								<Col span={24} md={grid.label}>
-									<RowLabel htmlFor={id}>{label}</RowLabel>
+									<RowLabel htmlFor={id}>
+										{label} {required && '*'}
+									</RowLabel>
 								</Col>
 							)}
-							<Col span={24} md={grid.input}>
+							<Col span={24} md={grid.input + 2} lg={grid.input}>
 								<InputWrapper>
 									{/* TODO: resolve children function with props */}
 									{/* @ts-ignore */}
 									<Context.Consumer children={children} />
-									{helpText && <>{helpText}</>}
+									{helpText && <HelpText>{helpText}</HelpText>}
 								</InputWrapper>
 							</Col>
 						</Row>
