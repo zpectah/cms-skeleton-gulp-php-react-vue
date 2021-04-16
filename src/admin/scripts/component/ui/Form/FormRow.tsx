@@ -1,7 +1,25 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { string } from 'javascript-es6-helpers';
+import { Row, Col } from 'antd';
 import styled from 'styled-components';
+
+import media from '../../../styles/responsive';
+
+const RowWrapper = styled.div`
+	width: 100%;
+	margin: 0;
+	padding: 0.75rem 0;
+`;
+const RowLabel = styled.label`
+	padding-bottom: 0.5rem;
+	font-weight: 600;
+
+	${media.min.md} {
+		padding-bottom: 0;
+	}
+`;
+const InputWrapper = styled.div``;
 
 interface ContextProps {
 	id: string | null;
@@ -35,6 +53,7 @@ interface FormRowProps {
 	id?: string;
 	defaultValue?: any;
 	helpText?: string;
+	long?: boolean;
 }
 
 const FormRow: React.FC<FormRowProps> = (props) => {
@@ -47,7 +66,13 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 		id = string.getToken(2, ''),
 		defaultValue,
 		helpText,
+		long = false,
 	} = props;
+
+	const grid = {
+		label: label ? 6 : 0,
+		input: label ? (long ? 18 : 10) : 24,
+	};
 
 	return (
 		<Controller
@@ -72,19 +97,23 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 						isDirty: isDirty,
 					}}
 				>
-					<div>
-						{label && (
-							<div>
-								<label htmlFor={id}>{label}</label>
-							</div>
-						)}
-						<div>
-							{/* TODO: resolve children function with props */}
-							{/* @ts-ignore */}
-							<Context.Consumer children={children} />
-							{helpText && <>{helpText}</>}
-						</div>
-					</div>
+					<RowWrapper>
+						<Row>
+							{label && (
+								<Col span={24} md={grid.label}>
+									<RowLabel htmlFor={id}>{label}</RowLabel>
+								</Col>
+							)}
+							<Col span={24} md={grid.input}>
+								<InputWrapper>
+									{/* TODO: resolve children function with props */}
+									{/* @ts-ignore */}
+									<Context.Consumer children={children} />
+									{helpText && <>{helpText}</>}
+								</InputWrapper>
+							</Col>
+						</Row>
+					</RowWrapper>
 				</Context.Provider>
 			)}
 		/>

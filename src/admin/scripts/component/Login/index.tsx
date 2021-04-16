@@ -7,7 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { EMAIL_REGEX } from '../../constants';
 import routes from '../../App/routes.json';
-import { minWidth } from '../../styles/responsive';
+import media from '../../styles/responsive';
 import { Button } from '../ui';
 
 const Wrapper = styled.div`
@@ -20,12 +20,12 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	background-color: rgb(250, 250, 250);
 
-	${minWidth.md} {
+	${media.min.md} {
 		width: 70vw;
 		min-height: 300px;
 		flex-direction: row;
 	}
-	${minWidth.lg} {
+	${media.min.lg} {
 		width: 900px;
 	}
 `;

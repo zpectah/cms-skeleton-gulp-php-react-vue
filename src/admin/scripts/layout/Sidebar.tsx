@@ -14,7 +14,7 @@ import Media from 'react-media';
 
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../constants';
 import { getStyles } from '../styles/theme';
-import { minWidth } from '../styles/responsive';
+import media from '../styles/responsive';
 import { Scrollable } from '../component/ui';
 import Navigation from '../component/Navigation';
 import { appProps } from '../types';
@@ -29,7 +29,7 @@ const Wrapper = styled.aside`
 	color: ${getStyles().layout.sidebar_text};
 	background-color: transparent;
 
-	${minWidth.md} {
+	${media.min.md} {
 		width: ${(props) => (props.open ? '250px' : '50px')};
 	}
 `;
@@ -82,7 +82,7 @@ const PanelWrapper = styled.div`
 		padding: 1rem;
 	}
 
-	${minWidth.md} {
+	${media.min.md} {
 		width: 200px;
 		left: ${(props) => (props.open ? '50px' : '-200px')};
 	}

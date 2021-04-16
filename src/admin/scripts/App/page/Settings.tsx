@@ -10,28 +10,20 @@ import { Button } from '../../component/ui';
 
 interface SettingsPageProps {}
 
-interface SettingsPageState {
-	loading: boolean;
-}
+interface SettingsPageState {}
 
 class SettingsPage extends Component<
 	SettingsPageProps & {
 		t: any;
 		_Settings: any;
+		_loading: boolean;
 		dispatch: Function;
 		match: any;
 	},
 	SettingsPageState
 > {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.loadData.bind(this);
-	// }
-
 	static props: SettingsPageProps = {};
-	state: SettingsPageState = {
-		loading: false,
-	};
+	state: SettingsPageState = {};
 
 	loadData() {
 		this.props.dispatch(loadSettings());
@@ -42,8 +34,6 @@ class SettingsPage extends Component<
 	}
 
 	render() {
-		const { loading } = this.state;
-
 		return (
 			<AppLayout
 				route={routes.settings}
@@ -56,8 +46,9 @@ class SettingsPage extends Component<
 				headerChildren={[
 					<Button.Base
 						key={1}
-						onClick={() => this.loadData.bind(this)}
+						onClick={() => this.loadData()}
 						type={'primary'}
+						loading={this.props._loading}
 					>
 						Reload
 					</Button.Base>,
@@ -68,10 +59,10 @@ class SettingsPage extends Component<
 						route={routes.settings}
 						panelKey={this.props.match.params.panel}
 						model={this.props._Settings}
-						loading={loading}
+						loading={this.props._loading}
 					/>
 				) : (
-					<>...loading data...</>
+					<>...loading form...</>
 				)}
 			</AppLayout>
 		);
@@ -81,6 +72,7 @@ class SettingsPage extends Component<
 function mapStateToProps(state) {
 	return {
 		_Settings: state.$App.Settings,
+		_loading: state.$Ui.loadingData,
 	};
 }
 

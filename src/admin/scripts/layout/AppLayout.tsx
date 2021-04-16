@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 
 import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
-import { minWidth } from '../styles/responsive';
+import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
 
 import Sidebar from './Sidebar';
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 	position: relative;
 	left: ${(props) => (props.withSidebar ? '50px' : '0')};
 
-	${minWidth.md} {
+	${media.min.md} {
 		width: ${(props) =>
 			props.withSidebar
 				? props.sidebarOpen

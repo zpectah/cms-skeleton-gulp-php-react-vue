@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useForm, Controller } from 'react-hook-form';
 import { Form as AntdForm, Input, Select, Switch } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
 
+import { routeProps } from '../../types';
 import { EMAIL_REGEX } from '../../constants';
-import { Button, Form } from '../ui';
+import { Button, Form, Card } from '../ui';
+
+const ActionRow = styled.div`
+	padding-top: 1rem;
+`;
 
 interface SettingsProps {
-	route: any; // TODO
+	route: routeProps;
 	panelKey?: string;
 	loading?: boolean;
-	model: any; // TODO
+	model: any; // TODO ...
 }
 
 const Settings: React.FC<SettingsProps> = (props) => {
@@ -23,11 +29,16 @@ const Settings: React.FC<SettingsProps> = (props) => {
 		defaultValues: model,
 	});
 	const { TabPane } = Tabs;
-	const { Option } = Select;
+	const [updating, setUpdating] = useState<boolean>(false);
 
-	const submitHandler = (data) => {
+	const submitHandler = (data, event) => {
 		//
+		console.log(event);
 		console.log('Submit handler', data);
+		setUpdating(true);
+		setTimeout(() => {
+			setUpdating(false);
+		}, 1000);
 		//
 	};
 
@@ -38,7 +49,7 @@ const Settings: React.FC<SettingsProps> = (props) => {
 				onChange={(activeKey) => history.push(`${route.path}/${activeKey}`)}
 			>
 				<TabPane tab="Global" key="global">
-					<div>
+					<Card>
 						<Form.Row
 							label={'Project name'}
 							name={'project_name'}
@@ -177,8 +188,8 @@ const Settings: React.FC<SettingsProps> = (props) => {
 							)}
 						</Form.Row>
 						<Form.Row
-							label={'Company location lat'}
-							name={'company_location_lat'}
+							label={'Company location'}
+							name={'company_location'}
 							control={control}
 							rules={{ required: true }}
 						>
@@ -189,24 +200,7 @@ const Settings: React.FC<SettingsProps> = (props) => {
 									name={row.name}
 									value={row.value}
 									onChange={row.onChange}
-									placeholder={'Company location latitude'}
-								/>
-							)}
-						</Form.Row>
-						<Form.Row
-							label={'Company location lng'}
-							name={'company_location_lng'}
-							control={control}
-							rules={{ required: true }}
-						>
-							{(row) => (
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={row.onChange}
-									placeholder={'Company location longitude'}
+									placeholder={'Company location object'}
 								/>
 							)}
 						</Form.Row>
@@ -261,10 +255,10 @@ const Settings: React.FC<SettingsProps> = (props) => {
 								/>
 							)}
 						</Form.Row>
-					</div>
+					</Card>
 				</TabPane>
 				<TabPane tab="Web" key="web">
-					<div>
+					<Card>
 						<Form.Row
 							label={'Form sender email'}
 							name={'form_sender_email'}
@@ -495,10 +489,10 @@ const Settings: React.FC<SettingsProps> = (props) => {
 						>
 							{(row) => <Switch checked={row.value} onChange={row.onChange} />}
 						</Form.Row>
-					</div>
+					</Card>
 				</TabPane>
 				<TabPane tab="Admin" key="admin">
-					<div>
+					<Card>
 						<Form.Row
 							label={'Admin content approval'}
 							name={'admin_content_approval'}
@@ -529,10 +523,10 @@ const Settings: React.FC<SettingsProps> = (props) => {
 						>
 							{(row) => <Switch checked={row.value} onChange={row.onChange} />}
 						</Form.Row>
-					</div>
+					</Card>
 				</TabPane>
 				<TabPane tab="Module" key="module">
-					<div>
+					<Card>
 						{/* TODO: Installer for CRM / Market Module */}
 						<Form.Row
 							label={'Module CRM active'}
@@ -563,18 +557,19 @@ const Settings: React.FC<SettingsProps> = (props) => {
 						>
 							{(row) => <Switch checked={row.value} onChange={row.onChange} />}
 						</Form.Row>
-					</div>
+					</Card>
 				</TabPane>
 			</Tabs>
-			<div>
+			<ActionRow>
 				<Button.Base
 					type={'primary'}
 					htmlType={'submit'}
-					disabled={!formState.isValid}
+					disabled={!formState.isValid || !formState.isDirty}
+					loading={updating}
 				>
 					Update
 				</Button.Base>
-			</div>
+			</ActionRow>
 		</AntdForm>
 	);
 };

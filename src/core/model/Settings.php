@@ -17,9 +17,23 @@ class Settings {
 
 		if ($result -> num_rows > 0) {
 			while($row = $result -> fetch_assoc()) {
-				$nv = $row['value'];
-				if ($row['format'] == 'boolean') $nv = settype($row['value'], "boolean");
-				if ($row['format'] == 'array') $nv = explode(",", $row['value']);
+				switch ($row['format']) {
+
+					case 'boolean':
+						$nv = settype($row['value'], "boolean");
+						break;
+
+					case 'array':
+						$nv = explode(",", $row['value']);
+						break;
+
+					case 'json':
+					default:
+						$nv = $row['value'];
+						break;
+
+				}
+
 				$response[$row['key']] = $nv;
 			}
 		}
