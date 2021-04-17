@@ -53,7 +53,7 @@ const Context = React.createContext<ContextProps>({
 });
 
 interface FormRowProps {
-	name: string;
+	name?: string;
 	control: any;
 	rules?: any;
 	label?: string;
@@ -67,7 +67,7 @@ interface FormRowProps {
 const FormRow: React.FC<FormRowProps> = (props) => {
 	const {
 		children,
-		name,
+		name = null,
 		control,
 		rules,
 		label,

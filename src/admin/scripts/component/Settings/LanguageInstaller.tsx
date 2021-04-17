@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Select } from 'antd';
 import styled from 'styled-components';
 
@@ -9,29 +9,19 @@ const Wrapper = styled.div``;
 
 interface LanguageInstallerProps {
 	installed: string[];
+	afterInstall?: Function;
 }
 
 const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
-	const { installed } = props;
+	const { installed, afterInstall } = props;
 	const { Option } = Select;
-
-	const getAvailableList = () => {
-		let list = [];
-
-		OPTIONS.language.available.map((item) => {
-			installed.map((sub) => {
-				if (item !== sub) list.push(item);
-			});
-		});
-
-		return list;
-	};
+	const [langToInstall, setLangToInstall] = useState<any>([]);
 
 	const renderOptions = () => {
 		return OPTIONS.language.available.map((item) => {
 			let disabled = false;
 			installed.map((sub) => {
-				if (item == sub) disabled = true;
+				if (item === sub) disabled = true;
 			});
 			return (
 				<Option key={item} value={item} disabled={disabled}>
@@ -39,6 +29,15 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 				</Option>
 			);
 		});
+	};
+
+	const installHandler = () => {
+		console.log('installed', installed);
+		console.log('langToInstall', langToInstall);
+		let na = [...installed, ...langToInstall];
+		console.log('na', na);
+		if (afterInstall) afterInstall(na);
+		setLangToInstall([]);
 	};
 
 	return (
@@ -50,14 +49,15 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 				allowClear
 				style={{ width: '100%' }}
 				placeholder="Please select"
-				onChange={(value) => {
-					console.log('value', value);
-				}}
+				value={langToInstall}
+				onChange={(value) => setLangToInstall(value)}
 			>
 				{renderOptions()}
 			</Select>
 			<br />
-			button to install...
+			<button type="button" onClick={installHandler}>
+				Install
+			</button>
 		</Wrapper>
 	);
 };

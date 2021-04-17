@@ -26,7 +26,7 @@ interface SettingsFormProps {
 const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
 	const { route, panelKey, model, loading } = props;
-	const { control, handleSubmit, formState, setValue } = useForm({
+	const { control, handleSubmit, formState, setValue, getValues } = useForm({
 		mode: 'onChange',
 		defaultValues: model,
 	});
@@ -304,8 +304,20 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							</Form.Row>
 						</Section>
 						<Section title={'Language'} withBorder>
-							{/* TODO: Installer for languages ... should be with form model ... */}
-							<LanguageInstaller installed={model.language_installed} />
+							<Form.Row
+								label={'Language to install'}
+								name={'language_installed'}
+								control={control}
+							>
+								{(row) => (
+									<LanguageInstaller
+										installed={row.value}
+										afterInstall={(value) => {
+											row.onChange(value);
+										}}
+									/>
+								)}
+							</Form.Row>
 							<Form.Row
 								label={'Language default'}
 								name={'language_default'}
@@ -316,7 +328,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									<Checkbox.Group
 										name={row.name}
 										value={row.value}
-										options={model.language_active}
+										options={getValues('language_active') || []}
 										defaultValue={row.value}
 										onChange={row.onChange}
 									/>
@@ -332,7 +344,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									<Checkbox.Group
 										name={row.name}
 										value={row.value}
-										options={model.language_installed}
+										options={getValues('language_installed') || []}
 										defaultValue={row.value}
 										onChange={row.onChange}
 									/>
