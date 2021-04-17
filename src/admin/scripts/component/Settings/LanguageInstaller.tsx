@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 import OPTIONS from '../../../../config/options.json';
 import NUMS from '../../../../config/nums.json';
+import { Button } from '../ui';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	width: 100%;
+	display: flex;
+`;
 
 interface LanguageInstallerProps {
 	installed: string[];
@@ -15,7 +19,8 @@ interface LanguageInstallerProps {
 const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	const { installed, afterInstall } = props;
 	const { Option } = Select;
-	const [langToInstall, setLangToInstall] = useState<any>([]);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [langToInstall, setLangToInstall] = useState<string[]>([]);
 
 	const renderOptions = () => {
 		return OPTIONS.language.available.map((item) => {
@@ -32,32 +37,37 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	};
 
 	const installHandler = () => {
-		console.log('installed', installed);
-		console.log('langToInstall', langToInstall);
+		setLoading(true);
 		let na = [...installed, ...langToInstall];
-		console.log('na', na);
-		if (afterInstall) afterInstall(na);
-		setLangToInstall([]);
+		console.log(na);
+
+		setTimeout(() => {
+			if (afterInstall) afterInstall(na);
+			setLangToInstall([]);
+			setLoading(false);
+		}, 1000);
 	};
 
 	return (
 		<Wrapper>
-			<div>Select and install new language ... </div>
-			<br />
 			<Select
 				mode="multiple"
 				allowClear
 				style={{ width: '100%' }}
-				placeholder="Please select"
+				placeholder="Select new languages to install"
 				value={langToInstall}
 				onChange={(value) => setLangToInstall(value)}
 			>
 				{renderOptions()}
 			</Select>
-			<br />
-			<button type="button" onClick={installHandler}>
+			<Button.Base
+				type="primary"
+				onClick={installHandler}
+				disabled={langToInstall.length === 0}
+				loading={loading}
+			>
 				Install
-			</button>
+			</Button.Base>
 		</Wrapper>
 	);
 };

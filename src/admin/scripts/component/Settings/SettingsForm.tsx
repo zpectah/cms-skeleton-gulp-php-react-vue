@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useForm, Controller } from 'react-hook-form';
-import { Form as AntdForm, Input, Select, Switch, Checkbox } from 'antd';
+import { Form as AntdForm, Input, Select, Switch, Checkbox, Radio } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
+import NUMS from '../../../../config/nums.json';
 import { routeProps } from '../../types';
 import { EMAIL_REGEX } from '../../constants';
 import { Button, Form, Card, Section, Hr } from '../ui';
@@ -31,7 +32,21 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 		defaultValues: model,
 	});
 	const { TabPane } = Tabs;
-	const [updating, setUpdating] = useState<boolean>(false);
+	const [updating, setUpdating] = useState<boolean>(loading);
+	const [tmpState, setTmpState] = useState<{
+		language_installed: string[];
+		language_active: any;
+		language_default: string;
+	}>({ language_installed: [], language_active: [], language_default: null });
+
+	useEffect(() => {
+		if (model)
+			setTmpState({
+				language_installed: model.language_installed,
+				language_active: model.language_active,
+				language_default: model.language_default,
+			});
+	}, [model]);
 
 	const submitHandler = (data, event) => {
 		//
@@ -43,6 +58,34 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 			setUpdating(false);
 		}, 1000);
 		//
+	};
+
+	const getLanguageDefaultOptions = () => {
+		let na = [];
+
+		tmpState.language_active.map((lang) => {
+			na.push({
+				label: NUMS.languageTitle[lang],
+				value: lang,
+				disabled: false,
+			});
+		});
+
+		return na;
+	};
+
+	const getActiveLanguagesOptions = () => {
+		let na = [];
+
+		tmpState.language_installed.map((lang) => {
+			na.push({
+				label: NUMS.languageTitle[lang],
+				value: lang,
+				disabled: tmpState.language_default == lang,
+			});
+		});
+
+		return na;
 	};
 
 	return (
@@ -311,9 +354,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							>
 								{(row) => (
 									<LanguageInstaller
-										installed={row.value}
+										installed={tmpState.language_installed}
 										afterInstall={(value) => {
 											row.onChange(value);
+											setTmpState({ ...tmpState, language_installed: value });
 										}}
 									/>
 								)}
@@ -325,12 +369,17 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								rules={{ required: true }}
 							>
 								{(row) => (
-									<Checkbox.Group
-										name={row.name}
+									<Radio.Group
 										value={row.value}
-										options={getValues('language_active') || []}
-										defaultValue={row.value}
-										onChange={row.onChange}
+										options={getLanguageDefaultOptions()}
+										onChange={(e) => {
+											row.onChange(e.target.value);
+											setTmpState({
+												...tmpState,
+												language_default: e.target.value,
+											});
+										}}
+										optionType="button"
 									/>
 								)}
 							</Form.Row>
@@ -342,11 +391,12 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							>
 								{(row) => (
 									<Checkbox.Group
-										name={row.name}
 										value={row.value}
-										options={getValues('language_installed') || []}
-										defaultValue={row.value}
-										onChange={row.onChange}
+										options={getActiveLanguagesOptions()}
+										onChange={(value) => {
+											row.onChange(value);
+											setTmpState({ ...tmpState, language_active: value });
+										}}
 									/>
 								)}
 							</Form.Row>
