@@ -82,7 +82,7 @@ class PostsPage extends Component<
 
 function mapStateToProps(state) {
 	return {
-		_Posts: state.$App.Posts,
+		_Posts: state.app.Posts,
 	};
 }
 

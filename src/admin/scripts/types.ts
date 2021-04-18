@@ -17,15 +17,15 @@ export interface storeProps {
 			name_last: string;
 		};
 	};
-	App: {
+	app: {
 		Settings: any[]; // TODO
 		Posts: any[]; // TODO
 		Users: any[]; // TODO
 		Tags: any[]; // TODO
 	};
-	Members: {};
-	Crm: {};
-	Market: {};
+	members: {};
+	crm: {};
+	market: {};
 }
 
 export interface appProps {

@@ -123,9 +123,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	} = props;
 	const store = useSelector((store: any) => store);
 	const dispatch = useDispatch();
-	const [sidebarOpen, setSidebarOpen] = useState<boolean>(
-		store.$Ui.sideBarOpen,
-	);
+	const [sidebarOpen, setSidebarOpen] = useState<boolean>(store.ui.sideBarOpen);
 	const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
 	const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
 	const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
@@ -151,13 +149,13 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 
 	// Check error data from store
 	useEffect(() => {
-		if (store.$Ui.dataError) {
+		if (store.ui.dataError) {
 			console.log('!! ERROR !!');
 			// TODO
 			// Display error message
 			// Toggle error false
 		}
-	}, [store.$Ui.dataError]);
+	}, [store.ui.dataError]);
 
 	return (
 		<>
@@ -167,7 +165,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					{metaTitle && ` | ${metaTitle}`}
 				</title>
 			</Helmet>
-			{store.$Ui.loadingData && (
+			{store.ui.loadingData && (
 				<PreloaderLayer>
 					<div className="preloader-element"></div>
 				</PreloaderLayer>

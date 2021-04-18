@@ -1,6 +1,6 @@
 import { storeProps } from '../../types';
 
-const AppStoreState: storeProps['App'] = {
+const AppStoreState: storeProps['app'] = {
 	Settings: null,
 	Posts: [],
 	Users: [],

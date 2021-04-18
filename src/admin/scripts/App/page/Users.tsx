@@ -81,7 +81,7 @@ class UsersPage extends Component<
 
 function mapStateToProps(state) {
 	return {
-		_Users: state.$App.Users,
+		_Users: state.app.Users,
 	};
 }
 

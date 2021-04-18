@@ -76,7 +76,7 @@ class TagsPage extends Component<
 
 function mapStateToProps(state) {
 	return {
-		_Tags: state.$App.Tags,
+		_Tags: state.app.Tags,
 	};
 }
 

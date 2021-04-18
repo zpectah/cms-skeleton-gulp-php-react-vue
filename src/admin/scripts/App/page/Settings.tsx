@@ -38,7 +38,7 @@ class SettingsPage extends Component<
 	updateData(data) {
 		this.setState({ loading: true });
 		return api.post('/api/update_settings', data).then(() => {
-			message.success('Data was updated', 2500);
+			message.success('Data was updated', 2.5);
 			this.loadData();
 			this.setState({ loading: false });
 		});
@@ -92,8 +92,8 @@ class SettingsPage extends Component<
 
 function mapStateToProps(state) {
 	return {
-		_Settings: state.$App.Settings,
-		_loading: state.$Ui.loadingData,
+		_Settings: state.app.Settings,
+		_loading: state.ui.loadingData,
 	};
 }
 

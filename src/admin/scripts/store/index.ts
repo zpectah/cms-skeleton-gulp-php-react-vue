@@ -6,9 +6,9 @@ import UserReducer from './user/reducer';
 import AppReducer from './App/reducer';
 
 const rootReducer = combineReducers({
-	$Ui: UiReducer,
-	$User: UserReducer,
-	$App: AppReducer,
+	ui: UiReducer,
+	user: UserReducer,
+	app: AppReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

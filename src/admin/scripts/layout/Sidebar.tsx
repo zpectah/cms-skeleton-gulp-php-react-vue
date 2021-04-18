@@ -129,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		toggleSpotlight,
 		logoutHandler,
 	} = props;
-	const store = useSelector((state: any) => state);
+	const s = useSelector((state: storeProps) => state);
 
 	return (
 		<>
@@ -172,9 +172,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 					</div>
 				</BarWrapper>
 				<PanelWrapper open={sidebarOpen}>
-					{console.log(store.$App.Settings)}
 					<div className="primary">
-						logo {/* store.$App.Settings['project_name'] */}{' '}
+						<div>logo</div>
+						<div>{s.app.Settings && s.app.Settings['project_name']}</div>
 					</div>
 					<div className="secondary">
 						<Scrollable.Base>
