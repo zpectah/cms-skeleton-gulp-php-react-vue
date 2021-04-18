@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {
 	Form as AntdForm,
 	Input,
@@ -11,13 +11,12 @@ import {
 	Radio,
 	Alert,
 } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 import NUMS from '../../../../config/nums.json';
 import OPTIONS from '../../../../config/options.json';
 import { routeProps } from '../../types';
-import { EMAIL_REGEX } from '../../constants';
+// import { EMAIL_REGEX } from '../../constants';
 import { Button, Form, Card, Section, Hr } from '../ui';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';

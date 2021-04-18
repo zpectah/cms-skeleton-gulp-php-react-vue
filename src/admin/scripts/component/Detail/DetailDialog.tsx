@@ -2,9 +2,9 @@ import React from 'react';
 
 import { appProps } from '../../types';
 import { Modal } from '../ui';
-import TagsDetail from './model/Tags';
-import UsersDetail from './model/Users';
-import PostsDetail from './model/Posts';
+import TagsDetailForm from './model/TagsForm';
+import UsersDetailForm from './model/UsersForm';
+import PostsDetailForm from './model/PostsForm';
 
 interface DetailItemDialogProps {
 	model: appProps['model'];
@@ -38,7 +38,7 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 				{
 					{
 						Tags: (
-							<TagsDetail
+							<TagsDetailForm
 								detailData={detailData}
 								onCancel={onCancel}
 								onSave={onSave}
@@ -46,7 +46,7 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 							/>
 						),
 						Users: (
-							<UsersDetail
+							<UsersDetailForm
 								detailData={detailData}
 								onCancel={onCancel}
 								onSave={onSave}
@@ -54,7 +54,7 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 							/>
 						),
 						Posts: (
-							<PostsDetail
+							<PostsDetailForm
 								detailData={detailData}
 								onCancel={onCancel}
 								onSave={onSave}
