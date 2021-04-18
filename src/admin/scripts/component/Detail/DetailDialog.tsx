@@ -1,14 +1,10 @@
 import React from 'react';
-import { Modal } from 'antd'; // https://ant.design/components/modal/
-import styled from 'styled-components';
 
 import { appProps } from '../../types';
-import { Button } from '../ui';
+import { Modal } from '../ui';
 import TagsDetail from './model/Tags';
 import UsersDetail from './model/Users';
 import PostsDetail from './model/Posts';
-
-const Content = styled.div``;
 
 interface DetailItemDialogProps {
 	model: appProps['model'];
@@ -28,43 +24,17 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 		detailData,
 		onSave,
 		onDelete,
-		afterClose = () => null,
+		afterClose,
 	} = props;
 
 	return (
-		<Modal
+		<Modal.Base
 			visible={isOpen}
 			onCancel={onCancel}
-			wrapClassName="DialogCover"
 			afterClose={afterClose}
-			width={1000}
-			centered
-			destroyOnClose
-			footer={null}
-			// footer={[
-			// 	<Button.Base key="back" onClick={onCancel}>
-			// 		Cancel
-			// 	</Button.Base>,
-			// 	<Button.Base
-			// 		key="submit"
-			// 		type="primary"
-			// 		onClick={() => onSave(detailData)}
-			// 	>
-			// 		Submit
-			// 	</Button.Base>,
-			// 	!detailData?.is_new && (
-			// 		<Button.Base
-			// 			key="link"
-			// 			type="primary"
-			// 			onClick={() => onDelete(detailData)}
-			// 			danger
-			// 		>
-			// 			Delete
-			// 		</Button.Base>
-			// 	),
-			// ]}
+			size={'lg'}
 		>
-			<Content>
+			<>
 				{
 					{
 						Tags: (
@@ -93,8 +63,8 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 						),
 					}[model]
 				}
-			</Content>
-		</Modal>
+			</>
+		</Modal.Base>
 	);
 };
 

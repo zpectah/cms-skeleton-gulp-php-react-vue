@@ -1,10 +1,6 @@
 import React from 'react';
-import { Modal } from 'antd'; // https://ant.design/components/modal/
-import styled from 'styled-components';
 
-import { Button } from '../ui';
-
-const Content = styled.div``;
+import { Button, Modal } from '../ui';
 
 interface ConfirmDialogProps {
 	isOpen: boolean;
@@ -26,32 +22,21 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
 	} = props;
 
 	return (
-		<Modal
-			visible={isOpen}
-			onCancel={onCancel}
-			wrapClassName="DialogCover"
-			okText={confirmText}
-			zIndex={1005}
-			centered
-			destroyOnClose
-			footer={[
-				<Button.Base key="back" onClick={onCancel}>
-					Cancel
-				</Button.Base>,
+		<Modal.Base visible={isOpen} onCancel={onCancel}>
+			<Modal.Content>
+				Modal 'ConfirmDialog' content: {JSON.stringify(confirmData)} ...{' '}
+			</Modal.Content>
+			<Modal.Footer>
+				<Button.Base onClick={onCancel}>Cancel</Button.Base>
 				<Button.Base
-					key="submit"
 					type="primary"
 					onClick={() => onConfirm(confirmData)}
 					danger={method === 'delete'}
 				>
 					{method === 'delete' ? 'Delete' : confirmText}
-				</Button.Base>,
-			]}
-		>
-			<Content>
-				Modal 'ConfirmDialog' content: {JSON.stringify(confirmData)} ...{' '}
-			</Content>
-		</Modal>
+				</Button.Base>
+			</Modal.Footer>
+		</Modal.Base>
 	);
 };
 

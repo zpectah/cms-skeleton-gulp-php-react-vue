@@ -43,6 +43,24 @@ const GlobalStyle = createGlobalStyle`
 		}
 	}
 
+	.DialogWrapper {}
+
+	.ant-modal {
+		&-close {
+			&-x {
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.75rem;
+			}
+		}
+		&-content {
+			background: transparent;
+		}
+	}
+
 `;
 
 interface AppProps {}
