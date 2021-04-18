@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 import { Button } from '../ui';
-import DetailItemDialog from '../DetailItemDialog';
-import ConfirmDialog from '../ConfirmDialog';
+import DetailItem from '../DetailItemDialog';
+import Confirm from '../ConfirmDialog';
 import { appProps, routeProps } from '../../types';
 
 const Heading = styled.div`
@@ -368,7 +368,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 				loading={loading}
 				sticky
 			/>
-			<DetailItemDialog
+			<DetailItem.Dialog
 				model={model}
 				isOpen={detailOpen}
 				onCancel={toggleDetail}
@@ -377,7 +377,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 				onDelete={(data) => deleteConfirm(data)}
 				afterClose={onDetailClose}
 			/>
-			<ConfirmDialog
+			<Confirm.Dialog
 				isOpen={confirmOpen}
 				onCancel={toggleConfirm}
 				confirmData={confirmData}

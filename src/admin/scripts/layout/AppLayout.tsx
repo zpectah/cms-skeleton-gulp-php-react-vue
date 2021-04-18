@@ -8,15 +8,15 @@ import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
 
+import { routeProps, appProps } from '../types';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
-import AddDialog from '../component/AddDialog';
-import HelpDialog from '../component/HelpDialog';
-import ProfileDialog from '../component/ProfileDialog';
+import Add from '../component/Add';
+import Help from '../component/Help';
+import Profile from '../component/Profile';
 import Spotlight from '../component/Spotlight';
-import ConfirmDialog from '../component/ConfirmDialog';
-import { routeProps, appProps } from '../types';
+import Confirm from '../component/ConfirmDialog';
 
 const Wrapper = styled.div`
 	width: ${(props) => (props.withSidebar ? 'calc(100vw - 50px)' : '100vw')};
@@ -204,14 +204,14 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 						/>
 					)}
 				</MainWrapper>
-				<AddDialog isOpen={addDialogOpen} onCancel={toggleAddDialog} />
-				<HelpDialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
-				<ProfileDialog
+				<Add.Dialog isOpen={addDialogOpen} onCancel={toggleAddDialog} />
+				<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
+				<Profile.Dialog
 					isOpen={profileDialogOpen}
 					onCancel={toggleProfileDialog}
 				/>
-				<Spotlight isOpen={spotlightOpen} onCancel={toggleSpotlight} />
-				<ConfirmDialog
+				<Spotlight.Dialog isOpen={spotlightOpen} onCancel={toggleSpotlight} />
+				<Confirm.Dialog
 					isOpen={logoutConfirmOpen}
 					onCancel={toggleLogoutConfirm}
 					confirmData={{}}
