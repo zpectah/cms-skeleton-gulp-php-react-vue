@@ -23,17 +23,20 @@ const Content = styled.div``;
 
 interface SectionProps {
 	title?: string;
+	titleAnchor?: string;
 	withBorder?: boolean;
 }
 
 const Section: React.FC<SectionProps> = (props) => {
-	const { children, title, withBorder = false } = props;
+	const { children, title, titleAnchor, withBorder = false } = props;
 
 	return (
 		<Wrapper withBorder={withBorder}>
 			{title && (
 				<Heading>
-					<Title level={'h3'}>{title}</Title>
+					<Title level={'h3'} id={titleAnchor}>
+						{title}
+					</Title>
 				</Heading>
 			)}
 			<Content>{children}</Content>

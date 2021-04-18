@@ -27,12 +27,20 @@ interface SettingsFormProps {
 const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
 	const { route, panelKey, model, loading } = props;
-	const { control, handleSubmit, formState, setValue, getValues } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState,
+		setValue,
+		getValues,
+		reset,
+	} = useForm({
 		mode: 'onChange',
 		defaultValues: model,
 	});
 	const { TabPane } = Tabs;
-	const [updating, setUpdating] = useState<boolean>(loading);
+	const { TextArea } = Input;
+	const [updating, setUpdating] = useState<boolean>(false);
 	const [tmpState, setTmpState] = useState<{
 		language_installed: string[];
 		language_active: any;
@@ -56,6 +64,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 		setTimeout(() => {
 			console.log(formState);
 			setUpdating(false);
+			reset(model);
 		}, 1000);
 		//
 	};
@@ -102,6 +111,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								name={'project_name'}
 								control={control}
 								rules={{ required: true }}
+								helpText={'This is name only for internal purpose'}
 							>
 								{(row) => (
 									<Input
@@ -115,41 +125,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Company'}>
-							<Form.Row
-								label={'Company name'}
-								name={'company_name'}
-								control={control}
-								rules={{ required: true }}
-							>
-								{(row) => (
-									<Input
-										id={row.id}
-										type={'text'}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Company name'}
-									/>
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Company description'}
-								name={'company_description'}
-								control={control}
-								rules={{ required: true }}
-							>
-								{(row) => (
-									<Input
-										id={row.id}
-										type={'text'}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Company description'}
-									/>
-								)}
-							</Form.Row>
+						<Section title={'Company'} titleAnchor={'company'}>
 							<Form.Row
 								label={'Company ID'}
 								name={'company_id'}
@@ -167,8 +143,44 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
+							<Hr.Base />
 							<Form.Row
-								label={'Company address'}
+								label={'Name'}
+								name={'company_name'}
+								control={control}
+								rules={{ required: true }}
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Company name'}
+									/>
+								)}
+							</Form.Row>
+							<Form.Row
+								label={'Description'}
+								name={'company_description'}
+								control={control}
+								rules={{ required: true }}
+							>
+								{(row) => (
+									<TextArea
+										id={row.id}
+										rows={5}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Company description'}
+									/>
+								)}
+							</Form.Row>
+							<Hr.Base />
+							<Form.Row
+								label={'Address'}
 								name={'company_address'}
 								control={control}
 								rules={{ required: true }}
@@ -185,7 +197,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Company city'}
+								label={'City'}
 								name={'company_city'}
 								control={control}
 								rules={{ required: true }}
@@ -202,7 +214,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Company country'}
+								label={'Country'}
 								name={'company_country'}
 								control={control}
 								rules={{ required: true }}
@@ -219,7 +231,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Company zip'}
+								label={'Zip code'}
 								name={'company_zip'}
 								control={control}
 								rules={{ required: true }}
@@ -235,8 +247,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
+							<Hr.Base />
 							<Form.Row
-								label={'Company email'}
+								label={'E-mail'}
 								name={'company_email'}
 								control={control}
 								rules={{ required: true }}
@@ -253,7 +266,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Company phone'}
+								label={'Phone'}
 								name={'company_phone'}
 								control={control}
 								rules={{ required: true }}
@@ -271,33 +284,35 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							</Form.Row>
 							<Hr.Base />
 							<Form.Row
-								label={'Company bank'}
+								label={'Bank'}
 								name={'company_bank'}
 								control={control}
 								rules={{ required: true }}
+								helpText={'This information are optional'}
 							>
 								{(row) => (
-									<Input
+									<TextArea
 										id={row.id}
-										type={'text'}
+										rows={3}
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company bank'}
+										placeholder={'Company bank object'}
 									/>
 								)}
 							</Form.Row>
 							<Hr.Base />
 							<Form.Row
-								label={'Company location'}
+								label={'Location'}
 								name={'company_location'}
 								control={control}
 								rules={{ required: true }}
+								helpText={'This information are optional'}
 							>
 								{(row) => (
-									<Input
+									<TextArea
 										id={row.id}
-										type={'text'}
+										rows={3}
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
@@ -312,10 +327,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 					<Card withNegativeOffsetTop>
 						<Section title={'Forms'} withBorder>
 							<Form.Row
-								label={'Form sender email'}
+								label={'Sender email'}
 								name={'form_sender_email'}
 								control={control}
 								rules={{ required: true }}
+								helpText={
+									'This email will be displayed in the header of the email message as the sender'
+								}
 							>
 								{(row) => (
 									<Input
@@ -329,10 +347,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Form recipients email'}
+								label={'Recipients email'}
 								name={'form_recipients_email'}
 								control={control}
 								rules={{ required: true }}
+								helpText={'Forms messages will be sent to these emails'}
 							>
 								{(row) => (
 									<Select
@@ -346,7 +365,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Language'} withBorder>
+						<Section title={'Language'} titleAnchor={'language'} withBorder>
 							<Form.Row
 								label={'Language to install'}
 								name={'language_installed'}
@@ -401,7 +420,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Page meta'} withBorder>
+						<Section title={'Page meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
 								label={'Page meta title'}
 								name={'meta_title'}
@@ -471,11 +490,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Page mode'} withBorder>
+						<Section title={'Page mode'} titleAnchor={'mode'} withBorder>
 							<Form.Row
 								label={'Page in maintenance'}
 								name={'mode_maintenance'}
 								control={control}
+								helpText={
+									'If page is in maintenance mode and some features should be disabled'
+								}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -485,6 +507,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Page in debug'}
 								name={'mode_debug'}
 								control={control}
+								helpText={
+									'If page is in debug mode and some features should be disabled'
+								}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -494,71 +519,18 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Page in development'}
 								name={'mode_development'}
 								control={control}
+								helpText={'If page is in development mode'}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Default pages'} withBorder>
-							<Form.Row
-								label={'Page home'}
-								name={'page_default_home'}
-								control={control}
-								rules={{ required: true }}
-								// TODO: select from page list ...
-							>
-								{(row) => (
-									<Input
-										id={row.id}
-										type={'text'}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Page home'}
-									/>
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Page error404'}
-								name={'page_default_error404'}
-								control={control}
-								rules={{ required: true }}
-								// TODO: select from page list ...
-							>
-								{(row) => (
-									<Input
-										id={row.id}
-										type={'text'}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Page error404'}
-									/>
-								)}
-							</Form.Row>
-						</Section>
-						<Section title={'Comments'} withBorder>
-							<Form.Row
-								label={'Comments active'}
-								name={'comments_global_active'}
-								control={control}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Anonymous comments'}
-								name={'comments_anonymous_active'}
-								control={control}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-						</Section>
-						<Section title={'Redactor approval'} withBorder>
+						<Section
+							title={'Redactor approval'}
+							titleAnchor={'approval'}
+							withBorder
+						>
 							<Form.Row
 								label={'Admin content approval'}
 								name={'admin_content_approval'}
@@ -572,12 +544,35 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Members'}>
+						<Section title={'Comments'} titleAnchor={'comments'} withBorder>
+							<Form.Row
+								label={'Comments active'}
+								name={'comments_global_active'}
+								control={control}
+								helpText={'If comments are active in global'}
+							>
+								{(row) => (
+									<Switch checked={row.value} onChange={row.onChange} />
+								)}
+							</Form.Row>
+							<Form.Row
+								label={'Anonymous comments'}
+								name={'comments_anonymous_active'}
+								control={control}
+								helpText={'Anonymous members should comment content'}
+							>
+								{(row) => (
+									<Switch checked={row.value} onChange={row.onChange} />
+								)}
+							</Form.Row>
+						</Section>
+						<Section title={'Members'} titleAnchor={'members'}>
 							{/* TODO: If Module CRM installed */}
 							<Form.Row
 								label={'Members register active'}
 								name={'members_register_active'}
 								control={control}
+								helpText={'Page and form with registration for members'}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -587,6 +582,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Members login active'}
 								name={'members_login_active'}
 								control={control}
+								helpText={'Page and form with member login'}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -596,6 +592,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Members lost password active'}
 								name={'members_lostPassword_active'}
 								control={control}
+								helpText={'Page and form with lost password'}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -607,7 +604,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				<TabPane tab="Module" key="module">
 					<Card withNegativeOffsetTop>
 						{/* TODO: Installer for CRM / Market Module ... should be with form model ... */}
-						<Section title={'Crm'} withBorder>
+						<Section title={'Crm'} titleAnchor={'crm'} withBorder>
 							<ModuleInstaller module={'Crm'} />
 							<Form.Row
 								label={'Module CRM active'}
@@ -628,7 +625,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Market'}>
+						<Section title={'Market'} titleAnchor={'market'}>
 							<ModuleInstaller module={'Market'} />
 							<Form.Row
 								label={'Module Market active'}
@@ -657,7 +654,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 					type={'primary'}
 					htmlType={'submit'}
 					disabled={!formState.isValid || !formState.isDirty}
-					loading={updating}
+					loading={updating || loading}
 				>
 					Update
 				</Button.Base>

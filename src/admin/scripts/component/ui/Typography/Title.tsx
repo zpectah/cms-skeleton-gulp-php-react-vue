@@ -31,13 +31,14 @@ const Heading = styled.span`
 
 interface TitleProps {
 	level: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+	id?: string;
 }
 
 const Title: React.FC<TitleProps> = (props) => {
-	const { children, level } = props;
+	const { children, level, id } = props;
 
 	return (
-		<Heading as={level} className={[`as-${level}`].join(' ')}>
+		<Heading as={level} className={[`as-${level}`].join(' ')} id={id}>
 			{children}
 		</Heading>
 	);
