@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 import { Button } from '../ui';
-import DetailItem from '../DetailItemDialog';
-import Confirm from '../ConfirmDialog';
+import DetailItem from '../Detail';
+import Confirm from '../Confirm';
 import { appProps, routeProps } from '../../types';
 
 const Heading = styled.div`

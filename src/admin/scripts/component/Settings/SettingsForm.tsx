@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useForm, Controller } from 'react-hook-form';
-import { Form as AntdForm, Input, Select, Switch, Checkbox, Radio } from 'antd';
+import {
+	Form as AntdForm,
+	Input,
+	Select,
+	Switch,
+	Checkbox,
+	Radio,
+	Alert,
+} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
@@ -51,6 +59,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 		module_crm_active: boolean;
 		module_market_installed: boolean;
 		module_market_active: boolean;
+		module_members_active: boolean;
+		module_members_installed: boolean;
 	}>({
 		language_installed: [],
 		language_active: [],
@@ -59,6 +69,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 		module_crm_active: false,
 		module_market_installed: false,
 		module_market_active: false,
+		module_members_active: false,
+		module_members_installed: false,
 	});
 
 	useEffect(() => {
@@ -75,6 +87,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				module_crm_active: model.module_crm_active,
 				module_market_installed: model.module_market_installed,
 				module_market_active: model.module_market_active,
+				module_members_active: model.module_members_active,
+				module_members_installed: model.module_members_installed,
 			});
 		}
 	}, [model]);
@@ -551,39 +565,64 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						{tmpState.module_crm_installed && (
-							<>
-								<Section title={'Comments'} titleAnchor={'comments'} withBorder>
+						{tmpState.module_members_installed && (
+							<Section title={'Comments'} titleAnchor={'comments'}>
+								<Form.Row
+									label={'Active'}
+									name={'comments_global_active'}
+									control={control}
+									helpText={'If comments are active in global'}
+								>
+									{(row) => (
+										<Switch
+											checked={row.value}
+											onChange={row.onChange}
+											disabled={!tmpState.module_members_active}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'Anonymous'}
+									name={'comments_anonymous_active'}
+									control={control}
+									helpText={'Anonymous members should comment content'}
+								>
+									{(row) => (
+										<Switch
+											checked={row.value}
+											onChange={row.onChange}
+											disabled={!tmpState.module_members_active}
+										/>
+									)}
+								</Form.Row>
+							</Section>
+						)}
+					</Card>
+				</TabPane>
+				<TabPane tab="Module" key="module">
+					<Card withNegativeOffsetTop>
+						<Section title={'Members'} titleAnchor={'members'} withBorder>
+							{tmpState.module_members_installed ? (
+								<>
 									<Form.Row
-										label={'Active'}
-										name={'comments_global_active'}
+										label={'Members active'}
+										name={'module_members_active'}
 										control={control}
-										helpText={'If comments are active in global'}
 									>
 										{(row) => (
 											<Switch
 												checked={row.value}
-												onChange={row.onChange}
-												disabled={!tmpState.module_crm_active}
+												onChange={(checked) => {
+													row.onChange(checked);
+													setTmpState({
+														...tmpState,
+														module_members_active: checked,
+													});
+												}}
 											/>
 										)}
 									</Form.Row>
-									<Form.Row
-										label={'Anonymous'}
-										name={'comments_anonymous_active'}
-										control={control}
-										helpText={'Anonymous members should comment content'}
-									>
-										{(row) => (
-											<Switch
-												checked={row.value}
-												onChange={row.onChange}
-												disabled={!tmpState.module_crm_active}
-											/>
-										)}
-									</Form.Row>
-								</Section>
-								<Section title={'Members'} titleAnchor={'members'}>
+									<Hr.Base />
 									<Form.Row
 										label={'Register active'}
 										name={'members_register_active'}
@@ -594,7 +633,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											<Switch
 												checked={row.value}
 												onChange={row.onChange}
-												disabled={!tmpState.module_crm_active}
+												disabled={!tmpState.module_members_active}
 											/>
 										)}
 									</Form.Row>
@@ -608,7 +647,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											<Switch
 												checked={row.value}
 												onChange={row.onChange}
-												disabled={!tmpState.module_crm_active}
+												disabled={!tmpState.module_members_active}
 											/>
 										)}
 									</Form.Row>
@@ -622,75 +661,93 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											<Switch
 												checked={row.value}
 												onChange={row.onChange}
-												disabled={!tmpState.module_crm_active}
+												disabled={!tmpState.module_members_active}
 											/>
 										)}
 									</Form.Row>
-								</Section>
-							</>
-						)}
-					</Card>
-				</TabPane>
-				<TabPane tab="Module" key="module">
-					<Card withNegativeOffsetTop>
+								</>
+							) : (
+								<ModuleInstaller
+									module={'Members'}
+									afterInstall={() => {
+										console.log('Members is Members installed');
+										setTmpState({
+											...tmpState,
+											module_members_installed: true, // TODO
+										});
+									}}
+								/>
+							)}
+						</Section>
 						<Section title={'Crm'} titleAnchor={'crm'} withBorder>
-							<ModuleInstaller
-								module={'Crm'}
-								disabled={tmpState.module_crm_installed}
-								afterInstall={() => {
-									console.log('Module CRM installed');
-									setTmpState({
-										...tmpState,
-										module_crm_installed: true, // TODO
-									});
-								}}
-							/>
-							<Form.Row
-								label={'Module CRM active'}
-								name={'module_crm_active'}
-								control={control}
-							>
-								{(row) => (
-									<Switch
-										checked={row.value}
-										onChange={(checked) => {
-											row.onChange(checked);
-											setTmpState({ ...tmpState, module_crm_active: checked });
-										}}
-									/>
-								)}
-							</Form.Row>
+							{tmpState.module_crm_installed ? (
+								<>
+									<Form.Row
+										label={'CRM active'}
+										name={'module_crm_active'}
+										control={control}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={(checked) => {
+													row.onChange(checked);
+													setTmpState({
+														...tmpState,
+														module_crm_active: checked,
+													});
+												}}
+											/>
+										)}
+									</Form.Row>
+								</>
+							) : (
+								<ModuleInstaller
+									module={'Crm'}
+									afterInstall={() => {
+										console.log('Module is CRM installed');
+										setTmpState({
+											...tmpState,
+											module_crm_installed: true, // TODO
+										});
+									}}
+								/>
+							)}
 						</Section>
 						<Section title={'Market'} titleAnchor={'market'}>
-							<ModuleInstaller
-								module={'Market'}
-								disabled={tmpState.module_market_installed}
-								afterInstall={() => {
-									console.log('Module CRM installed');
-									setTmpState({
-										...tmpState,
-										module_market_installed: true, // TODO
-									});
-								}}
-							/>
-							<Form.Row
-								label={'Module Market active'}
-								name={'module_market_active'}
-								control={control}
-							>
-								{(row) => (
-									<Switch
-										checked={row.value}
-										onChange={(checked) => {
-											row.onChange(checked);
-											setTmpState({
-												...tmpState,
-												module_market_active: checked,
-											});
-										}}
-									/>
-								)}
-							</Form.Row>
+							{tmpState.module_market_installed ? (
+								<>
+									<Form.Row
+										label={'Market active'}
+										name={'module_market_active'}
+										control={control}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={(checked) => {
+													row.onChange(checked);
+													setTmpState({
+														...tmpState,
+														module_market_active: checked,
+													});
+												}}
+											/>
+										)}
+									</Form.Row>
+								</>
+							) : (
+								<ModuleInstaller
+									module={'Market'}
+									afterInstall={() => {
+										console.log('Module CRM installed');
+										setTmpState({
+											...tmpState,
+											module_market_installed: true, // TODO
+										});
+									}}
+								/>
+							)}
 						</Section>
 					</Card>
 				</TabPane>

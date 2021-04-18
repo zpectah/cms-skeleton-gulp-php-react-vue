@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import routes from '../routes.json';
 import { loadTags } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
-import ListItems from '../../component/ListItems';
+import List from '../../component/List';
 import { Button } from '../../component/ui';
 
 interface TagsPageProps {}
@@ -51,7 +51,7 @@ class TagsPage extends Component<
 					<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
 				]}
 			>
-				<ListItems
+				<List.Items
 					route={routes.tags}
 					model={'Tags'}
 					items={this.props._Tags}

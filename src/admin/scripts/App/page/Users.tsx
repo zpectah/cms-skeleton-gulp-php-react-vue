@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import routes from '../routes.json';
 import { loadUsers } from '../../store/App/actions';
 import AppLayout from '../../layout/AppLayout';
-import ListItems from '../../component/ListItems';
+import List from '../../component/List';
 import { Button } from '../../component/ui';
 
 interface UsersPageProps {}
@@ -54,7 +54,7 @@ class UsersPage extends Component<
 					/>,
 				]}
 			>
-				<ListItems
+				<List.Items
 					route={routes.users}
 					model={'Users'}
 					items={this.props._Users}

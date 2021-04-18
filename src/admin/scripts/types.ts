@@ -28,7 +28,7 @@ export interface storeProps {
 }
 
 export interface appProps {
-	app: 'App' | 'Crm' | 'Market';
+	app: 'App' | 'Members' | 'Crm' | 'Market';
 	model: 'Posts' | 'Users' | 'Tags'; // TODO
 }
 

@@ -12,12 +12,11 @@ const Wrapper = styled.div`
 
 interface ModuleInstallerProps {
 	module: appProps['app'];
-	disabled: boolean;
 	afterInstall: Function;
 }
 
 const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
-	const { module, disabled, afterInstall } = props;
+	const { module, afterInstall } = props;
 	const [progress, setProgress] = useState<boolean>(false);
 	const installHandler = () => {
 		setProgress(true);
@@ -33,12 +32,7 @@ const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
 
 	return (
 		<Wrapper>
-			<Button.Base
-				type="primary"
-				onClick={installHandler}
-				loading={progress}
-				disabled={disabled}
-			>
+			<Button.Base type="primary" onClick={installHandler} loading={progress}>
 				Install {module} module
 			</Button.Base>
 		</Wrapper>

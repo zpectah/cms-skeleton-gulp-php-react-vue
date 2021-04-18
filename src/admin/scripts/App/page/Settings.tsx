@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { message } from 'antd';
+import { message, Spin } from 'antd';
 
 import api from '../../utils/api';
 import routes from '../routes.json';
@@ -77,11 +77,13 @@ class SettingsPage extends Component<
 						route={routes.settings}
 						panelKey={this.props.match.params.panel}
 						model={this.props._Settings}
-						loading={this.props._loading || loading}
+						loading={loading}
 						onUpdate={this.updateData.bind(this)}
 					/>
 				) : (
-					<>...loading form...</>
+					<div>
+						<Spin />
+					</div>
 				)}
 			</AppLayout>
 		);

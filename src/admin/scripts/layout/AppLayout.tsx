@@ -16,7 +16,7 @@ import Add from '../component/Add';
 import Help from '../component/Help';
 import Profile from '../component/Profile';
 import Spotlight from '../component/Spotlight';
-import Confirm from '../component/ConfirmDialog';
+import Confirm from '../component/Confirm';
 
 const Wrapper = styled.div`
 	width: ${(props) => (props.withSidebar ? 'calc(100vw - 50px)' : '100vw')};

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'antd';
 import styled from 'styled-components';
 
-import LanguageToggle from '../LanguageToggle';
+import Language from '../Language';
 
 const Content = styled.div``;
 
@@ -24,7 +24,7 @@ const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 			centered
 		>
 			<Content>
-				Modal 'ProfileDialog' content <br /> <LanguageToggle />{' '}
+				Modal 'ProfileDialog' content <br /> <Language.Toggle />{' '}
 			</Content>
 		</Modal>
 	);
