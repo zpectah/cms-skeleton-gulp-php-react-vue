@@ -32,6 +32,26 @@
 			"cy"
 		]
 	},
+	"meta": {
+		"robots": [
+			{
+				"label": "index,follow",
+				"value": "index,follow"
+			},
+			{
+				"label": "noindex,nofollow",
+				"value": "noindex,nofollow"
+			},
+			{
+				"label": "index,nofollow",
+				"value": "index,nofollow"
+			},
+			{
+				"label": "noindex,follow",
+				"value": "noindex,follow"
+			}
+		]
+	},
 	"form": {},
 	"uploads": {},
 	"model": {}

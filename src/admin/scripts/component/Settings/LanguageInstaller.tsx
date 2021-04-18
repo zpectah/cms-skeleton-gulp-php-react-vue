@@ -10,6 +10,10 @@ const Wrapper = styled.div`
 	width: 100%;
 	display: flex;
 `;
+const StyledSelect = styled(Select)`
+	width: calc(100% - 1rem);
+	margin-right: 1rem;
+`;
 
 interface LanguageInstallerProps {
 	installed: string[];
@@ -39,7 +43,10 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	const installHandler = () => {
 		setLoading(true);
 		let na = [...installed, ...langToInstall];
+
+		// TODO
 		console.log(na);
+		// request API
 
 		setTimeout(() => {
 			if (afterInstall) afterInstall(na);
@@ -50,16 +57,15 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 
 	return (
 		<Wrapper>
-			<Select
+			<StyledSelect
 				mode="multiple"
 				allowClear
-				style={{ width: '100%' }}
 				placeholder="Select new languages to install"
 				value={langToInstall}
 				onChange={(value) => setLangToInstall(value)}
 			>
 				{renderOptions()}
-			</Select>
+			</StyledSelect>
 			<Button.Base
 				type="primary"
 				onClick={installHandler}

@@ -7,6 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 import NUMS from '../../../../config/nums.json';
+import OPTIONS from '../../../../config/options.json';
 import { routeProps } from '../../types';
 import { EMAIL_REGEX } from '../../constants';
 import { Button, Form, Card, Section, Hr } from '../ui';
@@ -45,7 +46,19 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 		language_installed: string[];
 		language_active: any;
 		language_default: string;
-	}>({ language_installed: [], language_active: [], language_default: null });
+		module_crm_installed: boolean;
+		module_crm_active: boolean;
+		module_market_installed: boolean;
+		module_market_active: boolean;
+	}>({
+		language_installed: [],
+		language_active: [],
+		language_default: null,
+		module_crm_installed: false,
+		module_crm_active: false,
+		module_market_installed: false,
+		module_market_active: false,
+	});
 
 	useEffect(() => {
 		if (model)
@@ -53,18 +66,25 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				language_installed: model.language_installed,
 				language_active: model.language_active,
 				language_default: model.language_default,
+				module_crm_installed: model.module_crm_installed,
+				module_crm_active: model.module_crm_active,
+				module_market_installed: model.module_market_installed,
+				module_market_active: model.module_market_active,
 			});
 	}, [model]);
 
 	const submitHandler = (data, event) => {
-		//
-		console.log(event);
-		console.log('Submit handler', data);
 		setUpdating(true);
+
+		// TODO
+		console.log('Submit handler', data);
+		// request API
+
 		setTimeout(() => {
+			// TODO: call to load settings after update
 			console.log(formState);
+
 			setUpdating(false);
-			reset(model);
 		}, 1000);
 		//
 	};
@@ -382,6 +402,23 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
+								label={'Active languages'}
+								name={'language_active'}
+								control={control}
+								rules={{ required: true }}
+							>
+								{(row) => (
+									<Checkbox.Group
+										value={row.value}
+										options={getActiveLanguagesOptions()}
+										onChange={(value) => {
+											row.onChange(value);
+											setTmpState({ ...tmpState, language_active: value });
+										}}
+									/>
+								)}
+							</Form.Row>
+							<Form.Row
 								label={'Language default'}
 								name={'language_default'}
 								control={control}
@@ -402,25 +439,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-							<Form.Row
-								label={'Active languages'}
-								name={'language_active'}
-								control={control}
-								rules={{ required: true }}
-							>
-								{(row) => (
-									<Checkbox.Group
-										value={row.value}
-										options={getActiveLanguagesOptions()}
-										onChange={(value) => {
-											row.onChange(value);
-											setTmpState({ ...tmpState, language_active: value });
-										}}
-									/>
-								)}
-							</Form.Row>
 						</Section>
-						<Section title={'Page meta'} titleAnchor={'meta'} withBorder>
+						<Section title={'Page header meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
 								label={'Page meta title'}
 								name={'meta_title'}
@@ -445,9 +465,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								rules={{ required: true }}
 							>
 								{(row) => (
-									<Input
+									<TextArea
 										id={row.id}
-										type={'text'}
+										rows={3}
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
@@ -462,10 +482,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								rules={{ required: true }}
 							>
 								{(row) => (
-									<Input
+									<Select
 										id={row.id}
-										type={'text'}
-										name={row.name}
+										style={{ width: '100%' }}
+										options={OPTIONS.meta.robots}
 										value={row.value}
 										onChange={row.onChange}
 										placeholder={'Page meta robots'}
@@ -476,16 +496,15 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Page meta keywords'}
 								name={'meta_keywords'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
-									<Input
+									<Select
+										mode="tags"
 										id={row.id}
-										type={'text'}
-										name={row.name}
+										style={{ width: '100%' }}
+										placeholder={'Page meta keywords'}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Page meta keywords'}
 									/>
 								)}
 							</Form.Row>
@@ -544,105 +563,144 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Comments'} titleAnchor={'comments'} withBorder>
-							<Form.Row
-								label={'Comments active'}
-								name={'comments_global_active'}
-								control={control}
-								helpText={'If comments are active in global'}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Anonymous comments'}
-								name={'comments_anonymous_active'}
-								control={control}
-								helpText={'Anonymous members should comment content'}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-						</Section>
-						<Section title={'Members'} titleAnchor={'members'}>
-							{/* TODO: If Module CRM installed */}
-							<Form.Row
-								label={'Members register active'}
-								name={'members_register_active'}
-								control={control}
-								helpText={'Page and form with registration for members'}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Members login active'}
-								name={'members_login_active'}
-								control={control}
-								helpText={'Page and form with member login'}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Members lost password active'}
-								name={'members_lostPassword_active'}
-								control={control}
-								helpText={'Page and form with lost password'}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-						</Section>
+						{tmpState.module_crm_installed && (
+							<>
+								<Section title={'Comments'} titleAnchor={'comments'} withBorder>
+									<Form.Row
+										label={'Comments active'}
+										name={'comments_global_active'}
+										control={control}
+										helpText={'If comments are active in global'}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={row.onChange}
+												disabled={!tmpState.module_crm_active}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'Anonymous comments'}
+										name={'comments_anonymous_active'}
+										control={control}
+										helpText={'Anonymous members should comment content'}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={row.onChange}
+												disabled={!tmpState.module_crm_active}
+											/>
+										)}
+									</Form.Row>
+								</Section>
+								<Section title={'Members'} titleAnchor={'members'}>
+									<Form.Row
+										label={'Members register active'}
+										name={'members_register_active'}
+										control={control}
+										helpText={'Page and form with registration for members'}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={row.onChange}
+												disabled={!tmpState.module_crm_active}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'Members login active'}
+										name={'members_login_active'}
+										control={control}
+										helpText={'Page and form with member login'}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={row.onChange}
+												disabled={!tmpState.module_crm_active}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'Members lost password active'}
+										name={'members_lostPassword_active'}
+										control={control}
+										helpText={'Page and form with lost password'}
+									>
+										{(row) => (
+											<Switch
+												checked={row.value}
+												onChange={row.onChange}
+												disabled={!tmpState.module_crm_active}
+											/>
+										)}
+									</Form.Row>
+								</Section>
+							</>
+						)}
 					</Card>
 				</TabPane>
 				<TabPane tab="Module" key="module">
 					<Card withNegativeOffsetTop>
-						{/* TODO: Installer for CRM / Market Module ... should be with form model ... */}
 						<Section title={'Crm'} titleAnchor={'crm'} withBorder>
-							<ModuleInstaller module={'Crm'} />
+							<ModuleInstaller
+								module={'Crm'}
+								disabled={tmpState.module_crm_installed}
+								afterInstall={() => {
+									console.log('Module CRM installed');
+									setTmpState({
+										...tmpState,
+										module_crm_installed: true, // TODO
+									});
+								}}
+							/>
 							<Form.Row
 								label={'Module CRM active'}
 								name={'module_crm_active'}
 								control={control}
 							>
 								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Module CRM installed'}
-								name={'module_crm_installed'}
-								control={control}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
+									<Switch
+										checked={row.value}
+										onChange={(checked) => {
+											row.onChange(checked);
+											setTmpState({ ...tmpState, module_crm_active: checked });
+										}}
+									/>
 								)}
 							</Form.Row>
 						</Section>
 						<Section title={'Market'} titleAnchor={'market'}>
-							<ModuleInstaller module={'Market'} />
+							<ModuleInstaller
+								module={'Market'}
+								disabled={tmpState.module_market_installed}
+								afterInstall={() => {
+									console.log('Module CRM installed');
+									setTmpState({
+										...tmpState,
+										module_market_installed: true, // TODO
+									});
+								}}
+							/>
 							<Form.Row
 								label={'Module Market active'}
 								name={'module_market_active'}
 								control={control}
 							>
 								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Module Market installed'}
-								name={'module_market_installed'}
-								control={control}
-							>
-								{(row) => (
-									<Switch checked={row.value} onChange={row.onChange} />
+									<Switch
+										checked={row.value}
+										onChange={(checked) => {
+											row.onChange(checked);
+											setTmpState({
+												...tmpState,
+												module_market_active: checked,
+											});
+										}}
+									/>
 								)}
 							</Form.Row>
 						</Section>
@@ -650,13 +708,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				</TabPane>
 			</Tabs>
 			<ActionRow>
-				<Button.Base
-					type={'primary'}
-					htmlType={'submit'}
-					disabled={!formState.isValid || !formState.isDirty}
-					loading={updating || loading}
-				>
-					Update
+				<Button.Base type={'primary'} htmlType={'submit'} loading={updating}>
+					Update changes
 				</Button.Base>
 			</ActionRow>
 		</AntdForm>
