@@ -1,11 +1,9 @@
 import React from 'react';
-import { Modal } from 'antd'; // https://ant.design/components/modal/
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Card } from 'antd';
 
 import routes from '../../App/routes.json';
-import { Button } from '../../component/ui';
-
-const Content = styled.div``;
+import { Modal } from '../../component/ui';
 
 interface AddDialogProps {
 	isOpen: boolean;
@@ -15,29 +13,45 @@ interface AddDialogProps {
 const AddDialog: React.FC<AddDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 
+	const modelList = [
+		{
+			key: 0,
+			label: 'Create new post',
+			path: routes.posts.pathDetail,
+			active: true,
+		},
+		{
+			key: 1,
+			label: 'Create new user',
+			path: routes.users.pathDetail,
+			active: true,
+		},
+		{
+			key: 2,
+			label: 'Create new tag',
+			path: routes.tags.pathDetail,
+			active: true,
+		},
+	];
+
+	const gridStyle: any = {
+		width: '25%',
+		textAlign: 'center',
+	};
+
 	return (
-		<Modal
-			visible={isOpen}
-			onCancel={onCancel}
-			wrapClassName="DialogCover"
-			footer={null}
-			centered
-		>
-			<Content>
-				Modal 'AddDialog' content
-				<br />
-				<Button.CreateNew
-					routePathPrefix={routes.posts.pathDetail}
-					buttonText={'Create new post'}
-				/>
-				<br />
-				<Button.CreateNew
-					routePathPrefix={routes.users.pathDetail}
-					buttonText={'Create new user'}
-				/>
-				<br />
-			</Content>
-		</Modal>
+		<Modal.Base visible={isOpen} onCancel={onCancel}>
+			<Modal.Header>... create new ...</Modal.Header>
+			<Modal.Content>
+				<Card>
+					{modelList.map((item) => (
+						<Card.Grid style={gridStyle} key={item.key}>
+							<Link to={item.path + '/new'}>{item.label}</Link>
+						</Card.Grid>
+					))}
+				</Card>
+			</Modal.Content>
+		</Modal.Base>
 	);
 };
 

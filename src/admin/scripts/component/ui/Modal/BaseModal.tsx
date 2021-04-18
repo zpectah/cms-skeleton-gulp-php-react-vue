@@ -22,13 +22,13 @@ interface BaseModalProps {
 	visible: boolean;
 	onCancel: (data) => void;
 	afterClose?: () => void;
-	modal?: ModalProps; // Antd Modal overrides
+	modal?: ModalProps; // Antd BaseModal overrides
 	size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 	title?: string;
 	context?: 'default' | 'error' | 'success' | 'info';
 }
 
-const Modal: React.FC<BaseModalProps> = (props) => {
+const BaseModal: React.FC<BaseModalProps> = (props) => {
 	const {
 		children,
 		visible,
@@ -87,4 +87,4 @@ const Modal: React.FC<BaseModalProps> = (props) => {
 		</AntdModal>
 	);
 };
-export default Modal;
+export default BaseModal;

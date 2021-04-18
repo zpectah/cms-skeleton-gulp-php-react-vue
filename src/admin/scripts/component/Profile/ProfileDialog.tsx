@@ -1,10 +1,7 @@
 import React from 'react';
-import { Modal } from 'antd';
-import styled from 'styled-components';
 
 import Language from '../Language';
-
-const Content = styled.div``;
+import { Modal } from '../../component/ui';
 
 interface ProfileDialogProps {
 	isOpen: boolean;
@@ -15,18 +12,11 @@ const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 
 	return (
-		<Modal
-			visible={isOpen}
-			onCancel={onCancel}
-			wrapClassName="DialogCover"
-			width={1000}
-			footer={null}
-			centered
-		>
-			<Content>
+		<Modal.Base visible={isOpen} onCancel={onCancel}>
+			<Modal.Content>
 				Modal 'ProfileDialog' content <br /> <Language.Toggle />{' '}
-			</Content>
-		</Modal>
+			</Modal.Content>
+		</Modal.Base>
 	);
 };
 

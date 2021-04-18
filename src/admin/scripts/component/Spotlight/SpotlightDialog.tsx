@@ -1,6 +1,7 @@
 import React from 'react';
-import { Modal } from 'antd'; // https://ant.design/components/modal/
 import styled from 'styled-components';
+
+import { Modal } from '../../component/ui';
 
 const Content = styled.div``;
 
@@ -13,16 +14,9 @@ const SpotlightDialog: React.FC<SpotlightDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 
 	return (
-		<Modal
-			visible={isOpen}
-			onCancel={onCancel}
-			wrapClassName="DialogCover"
-			width={1000}
-			footer={null}
-			centered
-		>
-			<Content>Modal 'Spotlight' content</Content>
-		</Modal>
+		<Modal.Base visible={isOpen} onCancel={onCancel}>
+			<Modal.Content>Modal 'Spotlight' content</Modal.Content>
+		</Modal.Base>
 	);
 };
 

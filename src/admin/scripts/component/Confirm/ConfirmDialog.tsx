@@ -22,7 +22,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
 	} = props;
 
 	return (
-		<Modal.Base visible={isOpen} onCancel={onCancel}>
+		<Modal.Base visible={isOpen} onCancel={onCancel} size={'sm'}>
 			<Modal.Content>
 				Modal 'ConfirmDialog' content: {JSON.stringify(confirmData)} ...{' '}
 			</Modal.Content>

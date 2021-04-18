@@ -29,11 +29,15 @@ const UsersDetail: React.FC<UsersDetailProps> = (props) => {
 				<button type="button" onClick={() => onCancel()}>
 					close
 				</button>
+				{detailData && detailData.id !== 'new' && (
+					<>
+						<button type="button" onClick={() => onDelete(model)}>
+							delete
+						</button>
+					</>
+				)}
 				<button type="button" onClick={() => onSave(model)}>
 					save
-				</button>
-				<button type="button" onClick={() => onDelete(model)}>
-					delete
 				</button>
 			</Modal.Footer>
 		</>
