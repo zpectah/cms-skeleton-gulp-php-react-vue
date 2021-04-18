@@ -15,15 +15,10 @@ class Request {
 		$urlTrimmed = ltrim( $_SERVER['REDIRECT_URL'], "/" );
 		$url = explode( "/", $urlTrimmed );
 
+		$requestData = json_decode(file_get_contents('php://input'));
 		$response = [
 			'status' =>         'error',
 			'data' =>           null,
-		];
-
-		$data = [
-			'get' =>            $_GET,
-			'post' =>           $_POST,
-			'request' =>        $_REQUEST,
 		];
 
 		if ( $url[1] ) switch ($url[1]) {
@@ -47,6 +42,18 @@ class Request {
 				$response['data'] = $DataService -> get('Tags', []);
 				$response['status'] = 'ok';
 				break;
+
+
+
+
+
+			case 'update_settings':
+				$response['data'] = $DataService -> update('Settings', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+
 
 			//
 			default:

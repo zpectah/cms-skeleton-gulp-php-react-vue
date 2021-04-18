@@ -28,7 +28,7 @@ class DataService {
 				return $Posts -> get($params);
 
 			case 'Settings':
-				return $Settings -> get($params);
+				return $Settings -> get();
 
 			case 'Tags':
 				return $Tags -> get($params);
@@ -42,11 +42,21 @@ class DataService {
 
 	}
 
-	public function create () {}
+	public function create ($model, $requestData) {}
 
-	public function update () {}
+	public function update ($model, $requestData) {
+		$Settings = new Settings;
 
-	public function delete () {}
+		switch ($model) {
+
+			case 'Settings':
+				return $Settings -> update($requestData);
+
+		}
+
+	}
+
+	public function delete ($model, $requestData) {}
 
 
 }

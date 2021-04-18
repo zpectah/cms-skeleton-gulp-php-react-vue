@@ -1,6 +1,9 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+// header("Content-Type: multipart/form-data");
+// header("Content-Type: application/json");
 
-define( "PATH_PFX", '../' );
+const PATH_PFX = '../';
 require '../core/index.php';
 
 $request = new core\api\Request;

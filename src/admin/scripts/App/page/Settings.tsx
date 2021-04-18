@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { message } from 'antd';
 
+import api from '../../utils/api';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';
@@ -10,7 +12,9 @@ import { Button } from '../../component/ui';
 
 interface SettingsPageProps {}
 
-interface SettingsPageState {}
+interface SettingsPageState {
+	loading: boolean;
+}
 
 class SettingsPage extends Component<
 	SettingsPageProps & {
@@ -23,10 +27,21 @@ class SettingsPage extends Component<
 	SettingsPageState
 > {
 	static props: SettingsPageProps = {};
-	state: SettingsPageState = {};
+	state: SettingsPageState = {
+		loading: false,
+	};
 
 	loadData() {
 		this.props.dispatch(loadSettings());
+	}
+
+	updateData(data) {
+		this.setState({ loading: true });
+		return api.post('/api/update_settings', data).then(() => {
+			message.success('Data was updated', 2500);
+			this.loadData();
+			this.setState({ loading: false });
+		});
 	}
 
 	componentDidMount() {
@@ -34,6 +49,8 @@ class SettingsPage extends Component<
 	}
 
 	render() {
+		const { loading } = this.state;
+
 		return (
 			<AppLayout
 				route={routes.settings}
@@ -60,7 +77,8 @@ class SettingsPage extends Component<
 						route={routes.settings}
 						panelKey={this.props.match.params.panel}
 						model={this.props._Settings}
-						loading={this.props._loading}
+						loading={this.props._loading || loading}
+						onUpdate={this.updateData.bind(this)}
 					/>
 				) : (
 					<>...loading form...</>

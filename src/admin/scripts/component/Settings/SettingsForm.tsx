@@ -23,11 +23,12 @@ interface SettingsFormProps {
 	panelKey?: string;
 	loading?: boolean;
 	model: any; // TODO ...
+	onUpdate: Function;
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
-	const { route, panelKey, model, loading } = props;
+	const { route, panelKey, model, loading, onUpdate } = props;
 	const {
 		control,
 		handleSubmit,
@@ -61,7 +62,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	});
 
 	useEffect(() => {
-		if (model)
+		if (model) {
+			Object.entries(model).forEach(([key, value]) => {
+				setValue(key, value);
+			});
+
 			setTmpState({
 				language_installed: model.language_installed,
 				language_active: model.language_active,
@@ -71,23 +76,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				module_market_installed: model.module_market_installed,
 				module_market_active: model.module_market_active,
 			});
+		}
 	}, [model]);
 
-	const submitHandler = (data, event) => {
-		setUpdating(true);
-
-		// TODO
-		console.log('Submit handler', data);
-		// request API
-
-		setTimeout(() => {
-			// TODO: call to load settings after update
-			console.log(formState);
-
-			setUpdating(false);
-		}, 1000);
-		//
-	};
+	const submitHandler = (data) => onUpdate(data);
 
 	const getLanguageDefaultOptions = () => {
 		let na = [];
@@ -442,7 +434,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 						</Section>
 						<Section title={'Page header meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
-								label={'Page meta title'}
+								label={'Title'}
 								name={'meta_title'}
 								control={control}
 								rules={{ required: true }}
@@ -459,7 +451,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Page meta description'}
+								label={'Description'}
 								name={'meta_description'}
 								control={control}
 								rules={{ required: true }}
@@ -476,7 +468,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Page meta robots'}
+								label={'Robots'}
 								name={'meta_robots'}
 								control={control}
 								rules={{ required: true }}
@@ -493,7 +485,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Page meta keywords'}
+								label={'Keywords'}
 								name={'meta_keywords'}
 								control={control}
 							>
@@ -511,7 +503,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 						</Section>
 						<Section title={'Page mode'} titleAnchor={'mode'} withBorder>
 							<Form.Row
-								label={'Page in maintenance'}
+								label={'In maintenance'}
 								name={'mode_maintenance'}
 								control={control}
 								helpText={
@@ -523,7 +515,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Page in debug'}
+								label={'In debug'}
 								name={'mode_debug'}
 								control={control}
 								helpText={
@@ -535,7 +527,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Page in development'}
+								label={'In development'}
 								name={'mode_development'}
 								control={control}
 								helpText={'If page is in development mode'}
@@ -545,13 +537,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section
-							title={'Redactor approval'}
-							titleAnchor={'approval'}
-							withBorder
-						>
+						<Section title={'Approval'} titleAnchor={'approval'} withBorder>
 							<Form.Row
-								label={'Admin content approval'}
+								label={'Admin approval'}
 								name={'admin_content_approval'}
 								control={control}
 								helpText={
@@ -567,7 +555,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							<>
 								<Section title={'Comments'} titleAnchor={'comments'} withBorder>
 									<Form.Row
-										label={'Comments active'}
+										label={'Active'}
 										name={'comments_global_active'}
 										control={control}
 										helpText={'If comments are active in global'}
@@ -581,7 +569,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										)}
 									</Form.Row>
 									<Form.Row
-										label={'Anonymous comments'}
+										label={'Anonymous'}
 										name={'comments_anonymous_active'}
 										control={control}
 										helpText={'Anonymous members should comment content'}
@@ -597,7 +585,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								</Section>
 								<Section title={'Members'} titleAnchor={'members'}>
 									<Form.Row
-										label={'Members register active'}
+										label={'Register active'}
 										name={'members_register_active'}
 										control={control}
 										helpText={'Page and form with registration for members'}
@@ -611,7 +599,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										)}
 									</Form.Row>
 									<Form.Row
-										label={'Members login active'}
+										label={'Login active'}
 										name={'members_login_active'}
 										control={control}
 										helpText={'Page and form with member login'}
@@ -625,7 +613,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										)}
 									</Form.Row>
 									<Form.Row
-										label={'Members lost password active'}
+										label={'Lost password active'}
 										name={'members_lostPassword_active'}
 										control={control}
 										helpText={'Page and form with lost password'}

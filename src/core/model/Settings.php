@@ -9,7 +9,7 @@ use mysqli;
 
 class Settings {
 
-	public function get ($params = []) {
+	public function get () {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$sql = 'SELECT * FROM settings_cms';
 		$result = $conn -> query($sql);
@@ -24,7 +24,7 @@ class Settings {
 						break;
 
 					case 'array':
-						$nv = explode(",", $row['value']);
+						$nv = $row['value'] ? explode(",", $row['value']) : [];
 						break;
 
 					case 'json':
@@ -34,22 +34,54 @@ class Settings {
 
 				}
 
-				$response[$row['key']] = $nv;
+				$response[$row['name']] = $nv;
 			}
 		}
+
+		$conn -> close();
 
 		return $response;
 	}
 
-	public function update ($fields = []) {
+	public function update ($fields) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = [];
 
-		foreach ($fields as $item) {
+		foreach ($fields as $k => $value) {
+			$query = "SELECT * FROM settings_cms WHERE name = '$k'";
+			$result = $conn -> query($query);
+			while ($row = $result -> fetch_assoc() ) {
+				switch ($row['format']) {
 
-			// Update in cycle ...
-			// values back to string ???
+					case 'array':
+						$new_value = $value ? implode(",", $value) : '';
+						break;
 
+					case 'boolean':
+						$new_value = $value ? 'true' : 'false';
+						break;
+
+					case 'json':
+					default:
+						$new_value = $value;
+						break;
+
+				}
+
+				$sql = "UPDATE settings_cms SET value='$new_value' WHERE name='$k'";
+
+				if ($conn -> query($sql)) {
+					$response[$k] = 'OK';
+				} else {
+					$response[$k] = $conn -> error;
+				}
+
+			}
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 }

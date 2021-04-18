@@ -1,5 +1,5 @@
 <?php
-define( "PATH_PFX", '../../' );
+const PATH_PFX = '../../';
 require '../../core/index.php';
 ?>
 <!doctype html>
