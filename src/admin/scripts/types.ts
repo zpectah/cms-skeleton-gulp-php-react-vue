@@ -23,6 +23,7 @@ export interface storeProps {
 		Users: any[]; // TODO
 		Tags: any[]; // TODO
 	};
+	Members: {};
 	Crm: {};
 	Market: {};
 }
