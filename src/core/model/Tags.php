@@ -11,7 +11,7 @@ class Tags {
 
 	public function get ($params = []) {
 		$conn = new mysqli(...CFG_DB_CONN);
-		$response = null;
+		$response = [];
 
 		$sql = 'SELECT * FROM tags';
 		$result = $conn -> query($sql);

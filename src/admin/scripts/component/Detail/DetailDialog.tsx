@@ -4,6 +4,9 @@ import styled from 'styled-components';
 
 import { appProps } from '../../types';
 import { Button } from '../ui';
+import TagsDetail from './model/Tags';
+import UsersDetail from './model/Users';
+import PostsDetail from './model/Posts';
 
 const Content = styled.div``;
 
@@ -37,31 +40,59 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 			width={1000}
 			centered
 			destroyOnClose
-			footer={[
-				<Button.Base key="back" onClick={onCancel}>
-					Cancel
-				</Button.Base>,
-				<Button.Base
-					key="submit"
-					type="primary"
-					onClick={() => onSave(detailData)}
-				>
-					Submit
-				</Button.Base>,
-				!detailData?.is_new && (
-					<Button.Base
-						key="link"
-						type="primary"
-						onClick={() => onDelete(detailData)}
-						danger
-					>
-						Delete
-					</Button.Base>
-				),
-			]}
+			footer={null}
+			// footer={[
+			// 	<Button.Base key="back" onClick={onCancel}>
+			// 		Cancel
+			// 	</Button.Base>,
+			// 	<Button.Base
+			// 		key="submit"
+			// 		type="primary"
+			// 		onClick={() => onSave(detailData)}
+			// 	>
+			// 		Submit
+			// 	</Button.Base>,
+			// 	!detailData?.is_new && (
+			// 		<Button.Base
+			// 			key="link"
+			// 			type="primary"
+			// 			onClick={() => onDelete(detailData)}
+			// 			danger
+			// 		>
+			// 			Delete
+			// 		</Button.Base>
+			// 	),
+			// ]}
 		>
 			<Content>
-				Detail item <br /> model: {model} <br /> {JSON.stringify(detailData)}
+				{
+					{
+						Tags: (
+							<TagsDetail
+								detailData={detailData}
+								onCancel={onCancel}
+								onSave={onSave}
+								onDelete={onDelete}
+							/>
+						),
+						Users: (
+							<UsersDetail
+								detailData={detailData}
+								onCancel={onCancel}
+								onSave={onSave}
+								onDelete={onDelete}
+							/>
+						),
+						Posts: (
+							<PostsDetail
+								detailData={detailData}
+								onCancel={onCancel}
+								onSave={onSave}
+								onDelete={onDelete}
+							/>
+						),
+					}[model]
+				}
 			</Content>
 		</Modal>
 	);

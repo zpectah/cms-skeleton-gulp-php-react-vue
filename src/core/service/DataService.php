@@ -50,6 +50,11 @@ class DataService {
 			case 'Tags':
 				return $Tags -> create($requestData);
 
+
+
+			default:
+				return null;
+
 		}
 
 	}
@@ -66,6 +71,11 @@ class DataService {
 			case 'Tags':
 				return $Tags -> update($requestData);
 
+
+
+			default:
+				return null;
+
 		}
 
 	}
@@ -77,6 +87,11 @@ class DataService {
 
 			case 'Tags':
 				return $Tags -> delete($requestData);
+
+
+
+			default:
+				return null;
 
 		}
 
