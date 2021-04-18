@@ -38,11 +38,27 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			// Tags
 			case 'get_tags':
 				$response['data'] = $DataService -> get('Tags', []);
 				$response['status'] = 'ok';
 				break;
 
+			case 'create_tags':
+				$response['data'] = $DataService -> create('Tags', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_tags':
+				$response['data'] = $DataService -> update('Tags', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_tags':
+				$response['data'] = $DataService -> delete('Tags', $requestData);
+				$response['status'] = 'ok';
+				break;
+			//
 
 
 

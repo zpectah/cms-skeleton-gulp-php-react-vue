@@ -42,21 +42,45 @@ class DataService {
 
 	}
 
-	public function create ($model, $requestData) {}
+	public function create ($model, $requestData) {
+		$Tags = new Tags;
+
+		switch ($model) {
+
+			case 'Tags':
+				return $Tags -> create($requestData);
+
+		}
+
+	}
 
 	public function update ($model, $requestData) {
 		$Settings = new Settings;
+		$Tags = new Tags;
 
 		switch ($model) {
 
 			case 'Settings':
 				return $Settings -> update($requestData);
 
+			case 'Tags':
+				return $Tags -> update($requestData);
+
 		}
 
 	}
 
-	public function delete ($model, $requestData) {}
+	public function delete ($model, $requestData) {
+		$Tags = new Tags;
+
+		switch ($model) {
+
+			case 'Tags':
+				return $Tags -> delete($requestData);
+
+		}
+
+	}
 
 
 }

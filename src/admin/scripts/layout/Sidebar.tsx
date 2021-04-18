@@ -11,13 +11,14 @@ import {
 	MdAccountCircle,
 } from 'react-icons/md';
 import Media from 'react-media';
+import { useSelector } from 'react-redux';
 
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../constants';
 import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { Scrollable } from '../component/ui';
 import Navigation from '../component/Navigation';
-import { appProps } from '../types';
+import { appProps, storeProps } from '../types';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -128,6 +129,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		toggleSpotlight,
 		logoutHandler,
 	} = props;
+	const store = useSelector((state: any) => state);
 
 	return (
 		<>
@@ -170,7 +172,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 					</div>
 				</BarWrapper>
 				<PanelWrapper open={sidebarOpen}>
-					<div className="primary">logo</div>
+					{console.log(store.$App.Settings)}
+					<div className="primary">
+						logo {/* store.$App.Settings['project_name'] */}{' '}
+					</div>
 					<div className="secondary">
 						<Scrollable.Base>
 							<div className="content">

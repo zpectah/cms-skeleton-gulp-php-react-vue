@@ -25,10 +25,19 @@ class Tags {
 		return $response;
 	}
 
-	public function create () {}
+	public function create ($requestData) {
 
-	public function update () {}
+		return [];
+	}
 
-	public function delete () {}
+	public function update ($requestData) {
+
+		return [];
+	}
+
+	public function delete ($requestData) {
+
+		return [];
+	}
 
 }
