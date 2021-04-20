@@ -27,7 +27,9 @@ class Tags {
 
 	public function create ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 	public function update ($requestData) {
@@ -39,12 +41,16 @@ class Tags {
 
 	public function toggle ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 	public function delete ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 }

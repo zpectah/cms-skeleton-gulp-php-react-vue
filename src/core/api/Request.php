@@ -41,10 +41,50 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			case 'create_users':
+				$response['data'] = $DataService -> create('Users', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_users':
+				$response['data'] = $DataService -> toggle('Users', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_users':
+				$response['data'] = $DataService -> update('Users', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_users':
+				$response['data'] = $DataService -> delete('Users', $requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 			// Posts
 			case 'get_posts':
 				$response['data'] = $DataService -> get('Posts', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_posts':
+				$response['data'] = $DataService -> create('Posts', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_posts':
+				$response['data'] = $DataService -> toggle('Posts', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_posts':
+				$response['data'] = $DataService -> update('Posts', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_posts':
+				$response['data'] = $DataService -> delete('Posts', $requestData);
 				$response['status'] = 'ok';
 				break;
 

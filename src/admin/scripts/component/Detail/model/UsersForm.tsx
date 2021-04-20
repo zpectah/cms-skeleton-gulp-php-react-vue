@@ -5,6 +5,7 @@ import { Input, Switch } from 'antd';
 
 import { UsersItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
+import api from '../../../utils/api';
 
 interface UsersDetailFormProps {
 	detailData: UsersItemProps;
@@ -26,7 +27,15 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 
 	const submitHandler = (data) => {
 		console.log('On Detail Submit', data);
-		onSave(data);
+
+		const path = detailData.is_new ? '/api/create_users' : '/api/update_users';
+
+		api.post(path, data).then((res: any) => {
+			console.log('After ... submitHandler');
+			console.log('res', res);
+
+			onSave(data);
+		});
 	};
 
 	return (

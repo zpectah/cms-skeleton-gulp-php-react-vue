@@ -12,11 +12,10 @@ use core\model\Tags;
 
 class DataService {
 
-
-	public function get ($model, $params) {
+	public function get ($model, $data) {
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
-		$Settings = new Settings;
 		$Tags = new Tags;
 
 		switch ($model) {
@@ -25,13 +24,13 @@ class DataService {
 				return $Settings -> get();
 
 			case 'Users':
-				return $Users -> get($params);
+				return $Users -> get($data);
 
 			case 'Posts':
-				return $Posts -> get($params);
+				return $Posts -> get($data);
 
 			case 'Tags':
-				return $Tags -> get($params);
+				return $Tags -> get($data);
 
 
 
@@ -43,9 +42,17 @@ class DataService {
 	}
 
 	public function create ($model, $data) {
+		$Users = new Users;
+		$Posts = new Posts;
 		$Tags = new Tags;
 
 		switch ($model) {
+
+			case 'Users':
+				return $Users -> create($data);
+
+			case 'Posts':
+				return $Posts -> create($data);
 
 			case 'Tags':
 				return $Tags -> create($data);
@@ -61,12 +68,20 @@ class DataService {
 
 	public function update ($model, $data) {
 		$Settings = new Settings;
+		$Users = new Users;
+		$Posts = new Posts;
 		$Tags = new Tags;
 
 		switch ($model) {
 
 			case 'Settings':
 				return $Settings -> update($data);
+
+			case 'Users':
+				return $Users -> update($data);
+
+			case 'Posts':
+				return $Posts -> update($data);
 
 			case 'Tags':
 				return $Tags -> update($data);
@@ -81,9 +96,17 @@ class DataService {
 	}
 
 	public function toggle ($model, $data) {
+		$Users = new Users;
+		$Posts = new Posts;
 		$Tags = new Tags;
 
 		switch ($model) {
+
+			case 'Users':
+				return $Users -> toggle($data);
+
+			case 'Posts':
+				return $Posts -> toggle($data);
 
 			case 'Tags':
 				return $Tags -> toggle($data);
@@ -98,9 +121,17 @@ class DataService {
 	}
 
 	public function delete ($model, $data) {
+		$Users = new Users;
+		$Posts = new Posts;
 		$Tags = new Tags;
 
 		switch ($model) {
+
+			case 'Users':
+				return $Users -> delete($data);
+
+			case 'Posts':
+				return $Posts -> delete($data);
 
 			case 'Tags':
 				return $Tags -> delete($data);

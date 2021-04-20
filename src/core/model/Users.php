@@ -65,22 +65,30 @@ class Users {
 
 	public function create ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 	public function update ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 	public function toggle ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 	public function delete ($requestData) {
 
-		return [];
+		return [
+			'r' => $requestData
+		];
 	}
 
 }

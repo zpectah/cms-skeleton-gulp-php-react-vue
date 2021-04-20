@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
 import { TagsItemProps } from '../../../App/types';
+import api from '../../../utils/api';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 
 interface TagsDetailFormProps {
@@ -27,9 +28,14 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		console.log('On Detail Submit', data);
 
-		// if create or update
+		const path = detailData.is_new ? '/api/create_tags' : '/api/update_tags';
 
-		onSave(data);
+		api.post(path, data).then((res: any) => {
+			console.log('After ... submitHandler');
+			console.log('res', res);
+
+			onSave(data);
+		});
 	};
 
 	return (
