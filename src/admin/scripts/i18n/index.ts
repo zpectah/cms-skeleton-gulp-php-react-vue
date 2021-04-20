@@ -15,10 +15,6 @@ i18n.use(initReactI18next).init({
 	defaultNS: 'common',
 	lng: LanguageService.get(),
 	fallbackLng: CFG.CMS.LANG_LIST,
-	keySeparator: false,
-	interpolation: {
-		escapeValue: false,
-	},
 	react: {
 		bindI18n: 'languageChanged',
 		useSuspense: true,

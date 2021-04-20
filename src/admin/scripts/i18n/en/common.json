@@ -1,11 +1,28 @@
 {
-	"btn_ok": "OK",
-	"btn_cancel": "Cancel",
-	"btn_dismiss": "Dismiss",
-	"btn_submit": "Submit",
-	"btn_save": "Save",
-	"btn_delete": "Delete",
-	"btn_close": "Close",
-	"btn_agree": "Agree",
-	"btn_reset": "Reset"
+	"btn": {
+		"ok": "OK",
+		"cancel": "Cancel",
+		"dismiss": "Dismiss",
+		"submit": "Submit",
+		"save": "Save",
+		"create": "Create",
+		"delete": "Delete",
+		"close": "Close",
+		"agree": "Agree",
+		"reset": "Reset"
+	},
+	"title": {
+		"create_new": "Create new"
+	},
+	"model": {
+		"Settings": "Settings",
+		"Users": "Users",
+		"Posts": "Posts",
+		"Tags": "Tags"
+	},
+	"model_item": {
+		"Users": "User",
+		"Posts": "Post",
+		"Tags": "Tag"
+	}
 }

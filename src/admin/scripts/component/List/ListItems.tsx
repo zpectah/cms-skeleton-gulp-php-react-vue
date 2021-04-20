@@ -122,11 +122,8 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 	useEffect(() => {
 		if (location.pathname.includes('/new')) {
 			editOpen({
-				is_new: true,
-				// TODO
-				id: 'new',
-				neco: 'dkfjghkdsjfhgk',
-				another: 'h6d5fg46h8df7gh8979d',
+				is_new: true, // IMPORTANT
+				id: 'new', // IMPORTANT
 			});
 		}
 	}, [location.pathname]);

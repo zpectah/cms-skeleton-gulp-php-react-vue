@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useForm } from 'react-hook-form';
-import {
-	Form as AntdForm,
-	Input,
-	Select,
-	Switch,
-	Checkbox,
-	Radio,
-	Alert,
-} from 'antd';
+import { Form as AntdForm, Input, Select, Switch, Checkbox, Radio } from 'antd';
 import styled from 'styled-components';
 
 import NUMS from '../../../../config/nums.json';
