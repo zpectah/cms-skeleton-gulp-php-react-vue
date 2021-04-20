@@ -9,7 +9,7 @@ use mysqli;
 
 class Tags {
 
-	public function get ($params = []) {
+	public function get ($requestData) {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = [];
 
@@ -31,6 +31,13 @@ class Tags {
 	}
 
 	public function update ($requestData) {
+
+		return [
+			'r' => $requestData
+		];
+	}
+
+	public function toggle ($requestData) {
 
 		return [];
 	}

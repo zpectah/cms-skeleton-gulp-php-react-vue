@@ -17,35 +17,51 @@ class Request {
 
 		$requestData = json_decode(file_get_contents('php://input'));
 		$response = [
-			'status' =>         'error',
-			'data' =>           null,
+			'status' => 'error',
+			'data' => null,
 		];
 
 		if ( $url[1] ) switch ($url[1]) {
 
-			case 'get_users':
-				$response['data'] = $DataService -> get('Users', []);
-				$response['status'] = 'ok';
-				break;
-
-			case 'get_posts':
-				$response['data'] = $DataService -> get('Posts', []);
-				$response['status'] = 'ok';
-				break;
-
+			// Settings
 			case 'get_settings':
-				$response['data'] = $DataService -> get('Settings', []);
+				$response['data'] = $DataService -> get('Settings', $requestData);
 				$response['status'] = 'ok';
 				break;
+
+			case 'update_settings':
+				$response['data'] = $DataService -> update('Settings', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Users
+			case 'get_users':
+				$response['data'] = $DataService -> get('Users', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Posts
+			case 'get_posts':
+				$response['data'] = $DataService -> get('Posts', $requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 			// Tags
 			case 'get_tags':
-				$response['data'] = $DataService -> get('Tags', []);
+				$response['data'] = $DataService -> get('Tags', $requestData);
 				$response['status'] = 'ok';
 				break;
 
 			case 'create_tags':
 				$response['data'] = $DataService -> create('Tags', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_tags':
+				$response['data'] = $DataService -> toggle('Tags', $requestData);
 				$response['status'] = 'ok';
 				break;
 
@@ -58,20 +74,11 @@ class Request {
 				$response['data'] = $DataService -> delete('Tags', $requestData);
 				$response['status'] = 'ok';
 				break;
-			//
 
 
 
 
-			case 'update_settings':
-				$response['data'] = $DataService -> update('Settings', $requestData);
-				$response['status'] = 'ok';
-				break;
-
-
-
-
-			//
+			// ...
 			default:
 				$response['message'] = 'Wrong response';
 				break;

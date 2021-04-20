@@ -21,14 +21,14 @@ class DataService {
 
 		switch ($model) {
 
+			case 'Settings':
+				return $Settings -> get();
+
 			case 'Users':
 				return $Users -> get($params);
 
 			case 'Posts':
 				return $Posts -> get($params);
-
-			case 'Settings':
-				return $Settings -> get();
 
 			case 'Tags':
 				return $Tags -> get($params);
@@ -42,13 +42,13 @@ class DataService {
 
 	}
 
-	public function create ($model, $requestData) {
+	public function create ($model, $data) {
 		$Tags = new Tags;
 
 		switch ($model) {
 
 			case 'Tags':
-				return $Tags -> create($requestData);
+				return $Tags -> create($data);
 
 
 
@@ -59,17 +59,17 @@ class DataService {
 
 	}
 
-	public function update ($model, $requestData) {
+	public function update ($model, $data) {
 		$Settings = new Settings;
 		$Tags = new Tags;
 
 		switch ($model) {
 
 			case 'Settings':
-				return $Settings -> update($requestData);
+				return $Settings -> update($data);
 
 			case 'Tags':
-				return $Tags -> update($requestData);
+				return $Tags -> update($data);
 
 
 
@@ -80,13 +80,30 @@ class DataService {
 
 	}
 
-	public function delete ($model, $requestData) {
+	public function toggle ($model, $data) {
 		$Tags = new Tags;
 
 		switch ($model) {
 
 			case 'Tags':
-				return $Tags -> delete($requestData);
+				return $Tags -> toggle($data);
+
+
+
+			default:
+				return null;
+
+		}
+
+	}
+
+	public function delete ($model, $data) {
+		$Tags = new Tags;
+
+		switch ($model) {
+
+			case 'Tags':
+				return $Tags -> delete($data);
 
 
 

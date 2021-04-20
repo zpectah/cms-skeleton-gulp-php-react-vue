@@ -1,7 +1,7 @@
 <?php
 
 require_once PATH_PFX . 'config/database.php';
-require_once PATH_PFX . 'config/env.php';
+require_once PATH_PFX . 'config/env.php'; // (!) Created after build (dev/prod)
 
 $JSON_GLOBAL = json_decode(file_get_contents(PATH_PFX . 'config/global.json'), true);
 $JSON_ENV = json_decode(file_get_contents(PATH_PFX . 'config/environmental.json'), true);

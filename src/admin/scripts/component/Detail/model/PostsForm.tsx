@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
+import { PostsItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 
 interface PostsDetailFormProps {
-	detailData: any;
+	detailData: PostsItemProps;
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
@@ -22,15 +23,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 
 	// TODO
 	const model = detailData;
-
-	useEffect(() => {
-		if (detailData) {
-			Object.entries(detailData).forEach(([key, value]) => {
-				setValue(key, value);
-				console.log(key, value);
-			});
-		}
-	}, [detailData]);
 
 	const submitHandler = (data) => {
 		console.log('On Detail Submit', data);

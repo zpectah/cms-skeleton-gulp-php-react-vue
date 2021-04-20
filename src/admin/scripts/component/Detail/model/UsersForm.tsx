@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
+import { UsersItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 
 interface UsersDetailFormProps {
-	detailData: any;
+	detailData: UsersItemProps;
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
@@ -23,15 +24,6 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	// TODO
 	const model = detailData;
 
-	useEffect(() => {
-		if (detailData) {
-			Object.entries(detailData).forEach(([key, value]) => {
-				setValue(key, value);
-				console.log(key, value);
-			});
-		}
-	}, [detailData]);
-
 	const submitHandler = (data) => {
 		console.log('On Detail Submit', data);
 		onSave(data);
@@ -43,7 +35,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
 						? t('title.create_new') + ' ' + t('model_item.Users').toLowerCase()
-						: detailData.name}
+						: detailData.email}
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>

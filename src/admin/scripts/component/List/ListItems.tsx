@@ -119,6 +119,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		}
 	}, [items, detailId]);
 
+	// Create default object for new item (whatever)
 	useEffect(() => {
 		if (location.pathname.includes('/new')) {
 			editOpen({
@@ -214,6 +215,13 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 					>
 						Edit
 					</Button.Base>
+					<Button.Base
+						type="link"
+						onClick={() => toggleHandler(record)}
+						title={'Toggle'}
+					>
+						Toggle
+					</Button.Base>
 					{allowDelete && (
 						<Button.Base
 							type="link"
@@ -251,6 +259,10 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		history.push(`${route.pathDetail}/${record.id}`);
 		setDetailData(record);
 		setDetailOpen(true);
+	};
+	const toggleHandler = (data: any) => {
+		console.log('toggleHandler', data);
+		// TODO: toggle API ...
 	};
 	const deleteHandler = (data: any) => {
 		console.log('deleteHandler', data);
@@ -371,7 +383,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 				onCancel={toggleDetail}
 				detailData={detailData}
 				onSave={editHandler}
-				onDelete={(data) => deleteConfirm(data)}
+				onDelete={deleteConfirm}
 				afterClose={onDetailClose}
 			/>
 			<Confirm.Dialog
