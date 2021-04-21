@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
 import { useForm } from 'react-hook-form';
-import { Form as AntdForm, Input, Select, Switch, Checkbox, Radio } from 'antd';
+import {
+	Form as AntdForm,
+	Input,
+	Select,
+	Switch,
+	Checkbox,
+	Radio,
+	Alert,
+} from 'antd';
 import styled from 'styled-components';
 
 import NUMS from '../../../../config/nums.json';
@@ -27,15 +36,9 @@ interface SettingsFormProps {
 
 const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
+	const { t } = useTranslation(['common', 'component']);
 	const { route, panelKey, model, loading, onUpdate } = props;
-	const {
-		control,
-		handleSubmit,
-		formState,
-		setValue,
-		getValues,
-		reset,
-	} = useForm({
+	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: 'onChange',
 		defaultValues: model,
 	});
@@ -93,7 +96,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 			na.push({
 				label: NUMS.languageTitle[lang],
 				value: lang,
-				disabled: false,
 			});
 		});
 
@@ -129,6 +131,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								control={control}
 								rules={{ required: true }}
 								helpText={'This is name only for internal purpose'}
+								required
 							>
 								{(row) => (
 									<Input
@@ -142,12 +145,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Company'} titleAnchor={'company'}>
+						<Section title={'Company (owner)'} titleAnchor={'company'}>
 							<Form.Row
 								label={'Company ID'}
 								name={'company_id'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Input
@@ -166,6 +168,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								name={'company_name'}
 								control={control}
 								rules={{ required: true }}
+								required
 							>
 								{(row) => (
 									<Input
@@ -182,7 +185,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Description'}
 								name={'company_description'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<TextArea
@@ -200,7 +202,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Address'}
 								name={'company_address'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Input
@@ -213,12 +214,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-							<Form.Row
-								label={'City'}
-								name={'company_city'}
-								control={control}
-								rules={{ required: true }}
-							>
+							<Form.Row label={'City'} name={'company_city'} control={control}>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -234,7 +230,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Country'}
 								name={'company_country'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Input
@@ -251,7 +246,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Zip code'}
 								name={'company_zip'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Input
@@ -269,7 +263,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'E-mail'}
 								name={'company_email'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Select
@@ -286,7 +279,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Phone'}
 								name={'company_phone'}
 								control={control}
-								rules={{ required: true }}
 							>
 								{(row) => (
 									<Select
@@ -304,7 +296,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Bank'}
 								name={'company_bank'}
 								control={control}
-								rules={{ required: true }}
 								helpText={'This information are optional'}
 							>
 								{(row) => (
@@ -323,7 +314,6 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								label={'Location'}
 								name={'company_location'}
 								control={control}
-								rules={{ required: true }}
 								helpText={'This information are optional'}
 							>
 								{(row) => (
@@ -342,107 +332,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				</TabPane>
 				<TabPane tab="Web" key="web">
 					<Card withNegativeOffsetTop>
-						<Section title={'Forms'} withBorder>
-							<Form.Row
-								label={'Sender email'}
-								name={'form_sender_email'}
-								control={control}
-								rules={{ required: true }}
-								helpText={
-									'This email will be displayed in the header of the email message as the sender'
-								}
-							>
-								{(row) => (
-									<Input
-										id={row.id}
-										type={'text'}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Form sender email'}
-									/>
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Recipients email'}
-								name={'form_recipients_email'}
-								control={control}
-								rules={{ required: true }}
-								helpText={'Forms messages will be sent to these emails'}
-							>
-								{(row) => (
-									<Select
-										mode="tags"
-										style={{ width: '100%' }}
-										id={row.id}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Form recipients emails'}
-									/>
-								)}
-							</Form.Row>
-						</Section>
-						<Section title={'Language'} titleAnchor={'language'} withBorder>
-							<Form.Row
-								label={'Language to install'}
-								name={'language_installed'}
-								control={control}
-							>
-								{(row) => (
-									<LanguageInstaller
-										installed={tmpState.language_installed}
-										afterInstall={(value) => {
-											row.onChange(value);
-											setTmpState({ ...tmpState, language_installed: value });
-										}}
-									/>
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Active languages'}
-								name={'language_active'}
-								control={control}
-								rules={{ required: true }}
-							>
-								{(row) => (
-									<Checkbox.Group
-										value={row.value}
-										options={getActiveLanguagesOptions()}
-										onChange={(value) => {
-											row.onChange(value);
-											setTmpState({ ...tmpState, language_active: value });
-										}}
-									/>
-								)}
-							</Form.Row>
-							<Form.Row
-								label={'Language default'}
-								name={'language_default'}
-								control={control}
-								rules={{ required: true }}
-							>
-								{(row) => (
-									<Radio.Group
-										value={row.value}
-										options={getLanguageDefaultOptions()}
-										onChange={(e) => {
-											row.onChange(e.target.value);
-											setTmpState({
-												...tmpState,
-												language_default: e.target.value,
-											});
-										}}
-										optionType="button"
-									/>
-								)}
-							</Form.Row>
-						</Section>
 						<Section title={'Page header meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
 								label={'Title'}
 								name={'meta_title'}
 								control={control}
 								rules={{ required: true }}
+								required
 							>
 								{(row) => (
 									<Input
@@ -460,6 +356,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								name={'meta_description'}
 								control={control}
 								rules={{ required: true }}
+								required
 							>
 								{(row) => (
 									<TextArea
@@ -477,6 +374,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								name={'meta_robots'}
 								control={control}
 								rules={{ required: true }}
+								required
 							>
 								{(row) => (
 									<Select
@@ -539,6 +437,107 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
+								)}
+							</Form.Row>
+						</Section>
+						<Section title={'Language'} titleAnchor={'language'} withBorder>
+							<Form.Row
+								label={'Language to install'}
+								name={'language_installed'}
+								control={control}
+							>
+								{(row) => (
+									<LanguageInstaller
+										installed={tmpState.language_installed}
+										afterInstall={(value) => {
+											row.onChange(value);
+											setTmpState({ ...tmpState, language_installed: value });
+										}}
+									/>
+								)}
+							</Form.Row>
+							<Form.Row
+								label={'Active languages'}
+								name={'language_active'}
+								control={control}
+								rules={{ required: true }}
+								required
+							>
+								{(row) => (
+									<Checkbox.Group
+										value={row.value}
+										options={getActiveLanguagesOptions()}
+										onChange={(value) => {
+											row.onChange(value);
+											setTmpState({ ...tmpState, language_active: value });
+										}}
+									/>
+								)}
+							</Form.Row>
+							<Form.Row
+								label={'Language default'}
+								name={'language_default'}
+								control={control}
+								rules={{ required: true }}
+								required
+							>
+								{(row) => (
+									<Select
+										style={{ width: '100%' }}
+										id={row.id}
+										value={row.value}
+										onChange={(value) => {
+											row.onChange(value);
+											setTmpState({
+												...tmpState,
+												language_default: value,
+											});
+										}}
+										options={getLanguageDefaultOptions()}
+										placeholder={'Select default language'}
+									/>
+								)}
+							</Form.Row>
+						</Section>
+						<Section title={'Forms'} withBorder>
+							<Form.Row
+								label={'Sender email'}
+								name={'form_sender_email'}
+								control={control}
+								rules={{ required: true }}
+								helpText={
+									'This email will be displayed in the header of the email message as the sender'
+								}
+								required
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Form sender email'}
+									/>
+								)}
+							</Form.Row>
+							<Form.Row
+								label={'Recipients email'}
+								name={'form_recipients_email'}
+								control={control}
+								rules={{ required: true }}
+								helpText={'Forms messages will be sent to these emails'}
+								required
+							>
+								{(row) => (
+									<Select
+										mode="tags"
+										style={{ width: '100%' }}
+										id={row.id}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Form recipients emails'}
+									/>
 								)}
 							</Form.Row>
 						</Section>
@@ -613,49 +612,53 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											/>
 										)}
 									</Form.Row>
-									<Hr.Base />
-									<Form.Row
-										label={'Register active'}
-										name={'members_register_active'}
-										control={control}
-										helpText={'Page and form with registration for members'}
-									>
-										{(row) => (
-											<Switch
-												checked={row.value}
-												onChange={row.onChange}
-												disabled={!tmpState.module_members_active}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'Login active'}
-										name={'members_login_active'}
-										control={control}
-										helpText={'Page and form with member login'}
-									>
-										{(row) => (
-											<Switch
-												checked={row.value}
-												onChange={row.onChange}
-												disabled={!tmpState.module_members_active}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'Lost password active'}
-										name={'members_lostPassword_active'}
-										control={control}
-										helpText={'Page and form with lost password'}
-									>
-										{(row) => (
-											<Switch
-												checked={row.value}
-												onChange={row.onChange}
-												disabled={!tmpState.module_members_active}
-											/>
-										)}
-									</Form.Row>
+									{tmpState.module_members_active && (
+										<>
+											<Hr.Base />
+											<Form.Row
+												label={'Register active'}
+												name={'members_register_active'}
+												control={control}
+												helpText={'Page and form with registration for members'}
+											>
+												{(row) => (
+													<Switch
+														checked={row.value}
+														onChange={row.onChange}
+														disabled={!tmpState.module_members_active}
+													/>
+												)}
+											</Form.Row>
+											<Form.Row
+												label={'Login active'}
+												name={'members_login_active'}
+												control={control}
+												helpText={'Page and form with member login'}
+											>
+												{(row) => (
+													<Switch
+														checked={row.value}
+														onChange={row.onChange}
+														disabled={!tmpState.module_members_active}
+													/>
+												)}
+											</Form.Row>
+											<Form.Row
+												label={'Lost password active'}
+												name={'members_lostPassword_active'}
+												control={control}
+												helpText={'Page and form with lost password'}
+											>
+												{(row) => (
+													<Switch
+														checked={row.value}
+														onChange={row.onChange}
+														disabled={!tmpState.module_members_active}
+													/>
+												)}
+											</Form.Row>
+										</>
+									)}
 								</>
 							) : (
 								<ModuleInstaller
@@ -691,18 +694,33 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											/>
 										)}
 									</Form.Row>
+									{tmpState.module_crm_active && (
+										<>
+											<Hr.Base />
+											... form part available only when module is active ...
+										</>
+									)}
 								</>
 							) : (
-								<ModuleInstaller
-									module={'Crm'}
-									afterInstall={() => {
-										console.log('Module is CRM installed');
-										setTmpState({
-											...tmpState,
-											module_crm_installed: true, // TODO
-										});
-									}}
-								/>
+								<>
+									<ModuleInstaller
+										module={'Crm'}
+										afterInstall={() => {
+											console.log('Module is CRM installed');
+											setTmpState({
+												...tmpState,
+												module_crm_installed: true, // TODO
+											});
+										}}
+										disabled={!tmpState.module_members_installed}
+									/>
+									{!tmpState.module_members_installed && (
+										<Alert
+											message="You need to have the Members module installed"
+											type="info"
+										/>
+									)}
+								</>
 							)}
 						</Section>
 						<Section title={'Market'} titleAnchor={'market'}>
@@ -726,26 +744,46 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											/>
 										)}
 									</Form.Row>
+									{tmpState.module_market_active && (
+										<>
+											<Hr.Base />
+											... form part available only when module is active ...
+										</>
+									)}
 								</>
 							) : (
-								<ModuleInstaller
-									module={'Market'}
-									afterInstall={() => {
-										console.log('Module CRM installed');
-										setTmpState({
-											...tmpState,
-											module_market_installed: true, // TODO
-										});
-									}}
-								/>
+								<>
+									<ModuleInstaller
+										module={'Market'}
+										afterInstall={() => {
+											console.log('Module CRM installed');
+											setTmpState({
+												...tmpState,
+												module_market_installed: true, // TODO
+											});
+										}}
+										disabled={!tmpState.module_members_installed}
+									/>
+									{!tmpState.module_members_installed && (
+										<Alert
+											message="You need to have the Members module installed"
+											type="info"
+										/>
+									)}
+								</>
 							)}
 						</Section>
 					</Card>
 				</TabPane>
 			</Tabs>
 			<ActionRow>
-				<Button.Base type={'primary'} htmlType={'submit'} loading={updating}>
-					Update changes
+				<Button.Base
+					type={'primary'}
+					htmlType={'submit'}
+					loading={updating}
+					disabled={!formState.isValid}
+				>
+					{t('component:form.btn.update_changes')}
 				</Button.Base>
 			</ActionRow>
 		</AntdForm>
