@@ -1,1 +1,7 @@
-{}
+{
+	"form": {
+		"btn": {
+			"update_changes": "Update changes"
+		}
+	}
+}

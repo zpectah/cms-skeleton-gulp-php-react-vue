@@ -30,12 +30,12 @@ class Error404Page extends Component<
 			<AppLayout
 				route={routes['error-404']}
 				app={'App'}
-				metaTitle={this.props.t('page:Error404_meta_title')}
+				metaTitle={this.props.t('page:Error404.meta.title')}
 				isCentered
 			>
 				<Wrapper>
 					<Typography.Title level={'h1'}>
-						{this.props.t('page:Error404_page_title')}
+						{this.props.t('page:Error404.page.title')}
 					</Typography.Title>
 					<div>Error404Page</div>
 				</Wrapper>

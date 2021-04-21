@@ -20,7 +20,7 @@ class LostPasswordPage extends Component<
 			<AppLayout
 				route={routes['lost-password']}
 				app={'App'}
-				metaTitle={this.props.t('page:LostPassword_meta_title')}
+				metaTitle={this.props.t('page:LostPassword.meta.title')}
 				isCentered
 			>
 				<LostPassword>

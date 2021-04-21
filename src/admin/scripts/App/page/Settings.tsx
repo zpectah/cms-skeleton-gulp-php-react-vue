@@ -58,8 +58,8 @@ class SettingsPage extends Component<
 				withSidebar
 				widthHeader
 				withFooter
-				metaTitle={this.props.t('page:Settings_meta_title')}
-				headerTitle={this.props.t('page:Settings_page_title')}
+				metaTitle={this.props.t('page:Settings.meta.title')}
+				headerTitle={this.props.t('page:Settings.page.title')}
 				headerChildren={[
 					<Button.Base
 						key={1}

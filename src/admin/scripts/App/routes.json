@@ -24,35 +24,35 @@
 		"path": "/admin/",
 		"pathDetail": null,
 		"name": "dashboard",
-		"label": "Dashboard_label",
+		"label": "Dashboard.label",
 		"auth": 2
 	},
 	"settings": {
 		"path": "/admin/settings",
 		"pathDetail": null,
 		"name": "settings",
-		"label": "Settings_label",
+		"label": "Settings.label",
 		"auth": 7
 	},
 	"posts": {
 		"path": "/admin/posts",
 		"pathDetail": "/admin/posts/detail",
 		"name": "posts",
-		"label": "Posts_label",
+		"label": "Posts.label",
 		"auth": 2
 	},
 	"users": {
 		"path": "/admin/users",
 		"pathDetail": "/admin/users/detail",
 		"name": "users",
-		"label": "Users_label",
+		"label": "Users.label",
 		"auth": 7
 	},
 	"tags": {
 		"path": "/admin/tags",
 		"pathDetail": "/admin/tags/detail",
 		"name": "tags",
-		"label": "Tags_label",
+		"label": "Tags.label",
 		"auth": 2
 	}
 }

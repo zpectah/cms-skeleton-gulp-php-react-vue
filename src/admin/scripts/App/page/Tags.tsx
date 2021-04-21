@@ -45,8 +45,8 @@ class TagsPage extends Component<
 				withSidebar
 				widthHeader
 				withFooter
-				metaTitle={this.props.t('page:Tags_meta_title')}
-				headerTitle={this.props.t('page:Tags_page_title')}
+				metaTitle={this.props.t('page:Tags.meta.title')}
+				headerTitle={this.props.t('page:Tags.page.title')}
 				headerChildren={[
 					<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
 				]}
@@ -64,7 +64,7 @@ class TagsPage extends Component<
 						name: true,
 					}}
 					detailId={this.props.match.params.id}
-					onReload={() => this.loadData()}
+					onReload={this.loadData.bind(this)}
 					searchAttrs={['name']}
 					selectable
 					allowDelete

@@ -1,30 +1,79 @@
 {
-	"Error404_meta_title": "Error 404",
-	"Error404_page_title": "Error 404 page",
 
-	"Login_meta_title": "Login",
-	"Login_page_title": "Login page",
+	"Error404": {
+		"meta": {
+			"title": "Error 404"
+		},
+		"page": {
+			"title": "Error 404 page"
+		}
+	},
 
-	"LostPassword_meta_title": "Lost Password",
-	"LostPassword_page_title": "Lost Password page",
+	"Login": {
+		"meta": {
+			"title": "Login"
+		},
+		"page": {
+			"title": "Login page"
+		}
+	},
 
-	"Dashboard_meta_title": "Dashboard",
-	"Dashboard_page_title": "Dashboard page",
-	"Dashboard_label": "Dashboard",
+	"LostPassword": {
+		"meta": {
+			"title": "Lost Password"
+		},
+		"page": {
+			"title": "Lost Password page"
+		}
+	},
 
-	"Posts_meta_title": "Posts",
-	"Posts_page_title": "Posts page",
-	"Posts_label": "Posts",
+	"Dashboard": {
+		"meta": {
+			"title": "Dashboard"
+		},
+		"page": {
+			"title": "Dashboard page"
+		},
+		"label": "Dashboard"
+	},
 
-	"Settings_meta_title": "Settings",
-	"Settings_page_title": "Settings page",
-	"Settings_label": "Settings",
+	"Posts": {
+		"meta": {
+			"title": "Posts"
+		},
+		"page": {
+			"title": "Posts page"
+		},
+		"label": "Posts"
+	},
 
-	"Users_meta_title": "Users",
-	"Users_page_title": "Users page",
-	"Users_label": "Users",
+	"Settings": {
+		"meta": {
+			"title": "Settings"
+		},
+		"page": {
+			"title": "Settings page"
+		},
+		"label": "Settings"
+	},
 
-	"Tags_meta_title": "Tags",
-	"Tags_page_title": "Tags page",
-	"Tags_label": "Tags"
+	"Users": {
+		"meta": {
+			"title": "Users"
+		},
+		"page": {
+			"title": "Users page"
+		},
+		"label": "Users"
+	},
+
+	"Tags": {
+		"meta": {
+			"title": "Tags"
+		},
+		"page": {
+			"title": "Tags page"
+		},
+		"label": "Tags"
+	}
 }

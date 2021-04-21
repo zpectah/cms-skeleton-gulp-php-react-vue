@@ -45,8 +45,8 @@ class PostsPage extends Component<
 				withSidebar
 				widthHeader
 				withFooter
-				metaTitle={this.props.t('page:Posts_meta_title')}
-				headerTitle={this.props.t('page:Posts_page_title')}
+				metaTitle={this.props.t('page:Posts.meta.title')}
+				headerTitle={this.props.t('page:Posts.page.title')}
 				headerChildren={[
 					<Button.CreateNew
 						key={1}
@@ -70,7 +70,7 @@ class PostsPage extends Component<
 						name: true,
 					}}
 					detailId={this.props.match.params.id}
-					onReload={() => this.loadData()}
+					onReload={this.loadData.bind(this)}
 					searchAttrs={['name', 'lang.en.title']}
 					selectable
 					allowDelete

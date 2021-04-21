@@ -23,7 +23,7 @@ class DashboardPage extends Component<
 				withSidebar
 				widthHeader
 				withFooter
-				headerTitle={this.props.t('page:Dashboard_page_title')}
+				headerTitle={this.props.t('page:Dashboard.page.title')}
 			>
 				<Dashboard />
 			</AppLayout>

@@ -45,8 +45,8 @@ class UsersPage extends Component<
 				withSidebar
 				widthHeader
 				withFooter
-				metaTitle={this.props.t('page:Users_meta_title')}
-				headerTitle={this.props.t('page:Users_page_title')}
+				metaTitle={this.props.t('page:Users.meta.title')}
+				headerTitle={this.props.t('page:Users.page.title')}
 				headerChildren={[
 					<Button.CreateNew
 						key={1}
@@ -69,7 +69,7 @@ class UsersPage extends Component<
 						email: true,
 					}}
 					detailId={this.props.match.params.id}
-					onReload={() => this.loadData()}
+					onReload={this.loadData.bind(this)}
 					searchAttrs={['name', 'nickname', 'email']}
 					selectable
 					allowDelete
