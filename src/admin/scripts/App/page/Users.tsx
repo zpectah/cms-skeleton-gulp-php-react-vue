@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 
 import routes from '../routes.json';
 import { loadUsers } from '../../store/App/actions';
@@ -8,83 +9,57 @@ import AppLayout from '../../layout/AppLayout';
 import List from '../../component/List';
 import { Button } from '../../component/ui';
 
-interface UsersPageProps {}
-interface UsersPageState {
-	loading: boolean;
-}
+const UsersPage: React.FC<{}> = (props) => {
+	const {} = props;
+	const { t } = useTranslation('page');
+	const state: any = useSelector((state) => state);
+	const dispatch = useDispatch();
+	const params: any = useParams();
+	const [loading, setLoading] = useState<boolean>(false);
 
-class UsersPage extends Component<
-	UsersPageProps & {
-		t: any;
-		_Users: any[];
-		dispatch: Function;
-		match: any;
-	},
-	UsersPageState
-> {
-	static props: UsersPageProps = {};
-	state: UsersPageState = {
-		loading: false,
-	};
+	useEffect(() => {
+		loadData();
 
-	loadData() {
-		this.props.dispatch(loadUsers());
-	}
+		return () => null;
+	}, []);
 
-	componentDidMount() {
-		this.loadData();
-	}
+	const loadData = () => dispatch(loadUsers());
 
-	render() {
-		const { loading } = this.state;
-
-		return (
-			<AppLayout
+	return (
+		<AppLayout
+			route={routes.users}
+			app={'App'}
+			withSidebar
+			widthHeader
+			withFooter
+			metaTitle={t('page:Users.meta.title')}
+			headerTitle={t('page:Users.page.title')}
+			headerChildren={[
+				<Button.CreateNew key={1} routePathPrefix={routes.users.pathDetail} />,
+			]}
+		>
+			<List.Items
 				route={routes.users}
-				app={'App'}
-				withSidebar
-				widthHeader
-				withFooter
-				metaTitle={this.props.t('page:Users.meta.title')}
-				headerTitle={this.props.t('page:Users.page.title')}
-				headerChildren={[
-					<Button.CreateNew
-						key={1}
-						routePathPrefix={routes.users.pathDetail}
-					/>,
-				]}
-			>
-				<List.Items
-					route={routes.users}
-					model={'Users'}
-					items={this.props._Users}
-					loading={loading}
-					columnsLayout={{
-						email: true,
-						nickname: true,
-						active: true,
-					}}
-					orderByColumns={{
-						name: true,
-						email: true,
-					}}
-					detailId={this.props.match.params.id}
-					onReload={this.loadData.bind(this)}
-					searchAttrs={['name', 'nickname', 'email']}
-					selectable
-					allowDelete
-				/>
-			</AppLayout>
-		);
-	}
-}
+				model={'Users'}
+				items={state.app.Users}
+				loading={loading}
+				columnsLayout={{
+					email: true,
+					nickname: true,
+					active: true,
+				}}
+				orderByColumns={{
+					name: true,
+					email: true,
+				}}
+				detailId={params.id}
+				onReload={loadData}
+				searchAttrs={['name', 'nickname', 'email']}
+				selectable
+				allowDelete
+			/>
+		</AppLayout>
+	);
+};
 
-function mapStateToProps(state) {
-	return {
-		_Users: state.app.Users,
-	};
-}
-
-const PageWithTranslations = withTranslation()(UsersPage);
-
-export default connect(mapStateToProps)(PageWithTranslations);
+export default UsersPage;

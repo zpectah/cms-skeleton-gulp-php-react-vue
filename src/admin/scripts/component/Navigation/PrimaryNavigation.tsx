@@ -17,7 +17,7 @@ const links = [
 	{
 		key: 2,
 		label: routes.settings.label,
-		path: routes.settings.path + '/global',
+		path: routes.settings.path,
 		active: true,
 	},
 	{

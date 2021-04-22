@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 
 import routes from './routes.json';
@@ -63,86 +63,77 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-interface AppProps {}
+const App = () => {
+	const dispatch = useDispatch();
+	const [auth, setAuth] = useState<boolean>(false);
 
-interface AppState {
-	auth: boolean;
-}
+	useEffect(() => {
+		onInit();
 
-class App extends Component<AppProps & { dispatch: Function }, AppState> {
-	static props: AppProps;
+		return () => null;
+	}, []);
 
-	state: AppState = {
-		auth: false,
+	const onInit = () => {
+		ThemeService.init();
+		dispatch(loadSettings());
 	};
 
-	componentDidMount() {
-		ThemeService.init();
-		this.props.dispatch(loadSettings());
-	}
+	return (
+		<>
+			<GlobalStyle />
+			<Router>
+				<Switch>
+					<Route
+						path={[
+							routes['lost-password'].path,
+							routes['lost-password'].path + '/token/:token',
+						]}
+						component={LostPasswordPage}
+						exact
+					/>
 
-	render() {
-		return (
-			<>
-				<GlobalStyle />
-				<Router>
-					<Switch>
-						<Route
-							path={[
-								routes['lost-password'].path,
-								routes['lost-password'].path + '/token/:token',
-							]}
-							component={LostPasswordPage}
-							exact
-						/>
+					<Route path={routes.login.path} component={LoginPage} />
 
-						<Route path={routes.login.path} component={LoginPage} />
+					<AuthRoute
+						path={[routes.settings.path, routes.settings.path + '/:panel']}
+						component={SettingsPage}
+						auth={routes.settings.auth}
+						exact
+					/>
 
-						<AuthRoute
-							path={[routes.settings.path, routes.settings.path + '/:panel']}
-							component={SettingsPage}
-							auth={routes.settings.auth}
-							exact
-						/>
+					<AuthRoute
+						path={[routes.posts.path, routes.posts.pathDetail + '/:id']}
+						component={PostsPage}
+						auth={routes.posts.auth}
+						exact
+					/>
 
-						<AuthRoute
-							path={[routes.posts.path, routes.posts.pathDetail + '/:id']}
-							component={PostsPage}
-							auth={routes.posts.auth}
-							exact
-						/>
+					<AuthRoute
+						path={[routes.users.path, routes.users.pathDetail + '/:id']}
+						component={UsersPage}
+						auth={routes.users.auth}
+						exact
+					/>
 
-						<AuthRoute
-							path={[routes.users.path, routes.users.pathDetail + '/:id']}
-							component={UsersPage}
-							auth={routes.users.auth}
-							exact
-						/>
+					<AuthRoute
+						path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
+						component={TagsPage}
+						auth={routes.tags.auth}
+						exact
+					/>
 
-						<AuthRoute
-							path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
-							component={TagsPage}
-							auth={routes.tags.auth}
-							exact
-						/>
+					<AuthRoute
+						path={routes.dashboard.path}
+						component={DashboardPage}
+						auth={routes.dashboard.auth}
+						exact
+					/>
 
-						<AuthRoute
-							path={routes.dashboard.path}
-							component={DashboardPage}
-							auth={routes.dashboard.auth}
-							exact
-						/>
+					<Route component={Error404Page} />
+				</Switch>
+			</Router>
+		</>
+	);
+};
 
-						<Route component={Error404Page} />
-					</Switch>
-				</Router>
-			</>
-		);
-	}
-}
-
-function mapStateToProps(state) {
-	return state;
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

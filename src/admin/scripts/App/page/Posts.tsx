@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 
 import routes from '../routes.json';
 import { loadPosts } from '../../store/App/actions';
@@ -8,84 +9,58 @@ import AppLayout from '../../layout/AppLayout';
 import List from '../../component/List';
 import { Button } from '../../component/ui';
 
-interface PostsPageProps {}
-interface PostsPageState {
-	loading: boolean;
-}
+const PostsPage: React.FC<{}> = (props) => {
+	const {} = props;
+	const { t } = useTranslation('page');
+	const state: any = useSelector((state) => state);
+	const dispatch = useDispatch();
+	const params: any = useParams();
+	const [loading, setLoading] = useState<boolean>(false);
 
-class PostsPage extends Component<
-	PostsPageProps & {
-		t: any;
-		_Posts: any[];
-		dispatch: Function;
-		match: any;
-	},
-	PostsPageState
-> {
-	static props: PostsPageProps = {};
-	state: PostsPageState = {
-		loading: false,
-	};
+	useEffect(() => {
+		loadData();
 
-	loadData() {
-		this.props.dispatch(loadPosts());
-	}
+		return () => null;
+	}, []);
 
-	componentDidMount() {
-		this.loadData();
-	}
+	const loadData = () => dispatch(loadPosts());
 
-	render() {
-		const { loading } = this.state;
-
-		return (
-			<AppLayout
+	return (
+		<AppLayout
+			route={routes.posts}
+			app={'App'}
+			withSidebar
+			widthHeader
+			withFooter
+			metaTitle={t('page:Posts.meta.title')}
+			headerTitle={t('page:Posts.page.title')}
+			headerChildren={[
+				<Button.CreateNew key={1} routePathPrefix={routes.posts.pathDetail} />,
+			]}
+		>
+			<List.Items
 				route={routes.posts}
-				app={'App'}
-				withSidebar
-				widthHeader
-				withFooter
-				metaTitle={this.props.t('page:Posts.meta.title')}
-				headerTitle={this.props.t('page:Posts.page.title')}
-				headerChildren={[
-					<Button.CreateNew
-						key={1}
-						routePathPrefix={routes.posts.pathDetail}
-					/>,
-				]}
-			>
-				<List.Items
-					route={routes.posts}
-					model={'Posts'}
-					items={this.props._Posts}
-					loading={loading}
-					columnsLayout={{
-						// name: true,
-						title: true,
-						tags: true,
-						category: true,
-						active: true,
-					}}
-					orderByColumns={{
-						name: true,
-					}}
-					detailId={this.props.match.params.id}
-					onReload={this.loadData.bind(this)}
-					searchAttrs={['name', 'lang.en.title']}
-					selectable
-					allowDelete
-				/>
-			</AppLayout>
-		);
-	}
-}
+				model={'Posts'}
+				items={state.app.Posts}
+				loading={loading}
+				columnsLayout={{
+					// name: true,
+					title: true,
+					tags: true,
+					category: true,
+					active: true,
+				}}
+				orderByColumns={{
+					name: true,
+				}}
+				detailId={params.id}
+				onReload={loadData}
+				searchAttrs={['name', 'lang.en.title']}
+				selectable
+				allowDelete
+			/>
+		</AppLayout>
+	);
+};
 
-function mapStateToProps(state) {
-	return {
-		_Posts: state.app.Posts,
-	};
-}
-
-const PageWithTranslations = withTranslation()(PostsPage);
-
-export default connect(mapStateToProps)(PageWithTranslations);
+export default PostsPage;

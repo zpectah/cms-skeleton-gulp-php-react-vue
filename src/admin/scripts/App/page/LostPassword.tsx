@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import LostPassword from '../../component/LostPassword';
 
-interface LostPasswordPageProps {}
-interface LostPasswordPageState {}
+const LostPasswordPage: React.FC<{}> = (props) => {
+	const {} = props;
+	const { t } = useTranslation('page');
 
-class LostPasswordPage extends Component<
-	LostPasswordPageProps & { t: any },
-	LostPasswordPageState
-> {
-	static props: LostPasswordPageProps = {};
-	state: LostPasswordPageState = {};
+	return (
+		<AppLayout
+			route={routes['lost-password']}
+			app={'App'}
+			metaTitle={t('page:LostPassword.meta.title')}
+			isCentered
+		>
+			<LostPassword>
+				<p>Logo & Description</p>
+			</LostPassword>
+		</AppLayout>
+	);
+};
 
-	render() {
-		return (
-			<AppLayout
-				route={routes['lost-password']}
-				app={'App'}
-				metaTitle={this.props.t('page:LostPassword.meta.title')}
-				isCentered
-			>
-				<LostPassword>
-					<p>Logo & Description</p>
-				</LostPassword>
-			</AppLayout>
-		);
-	}
-}
-
-export default withTranslation()(LostPasswordPage);
+export default LostPasswordPage;

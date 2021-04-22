@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import routes from '../routes.json';
@@ -15,33 +15,25 @@ const Wrapper = styled.div`
 	justify-content: center;
 `;
 
-interface Error404PageProps {}
-interface Error404PageState {}
+const Error404Page: React.FC<{}> = (props) => {
+	const {} = props;
+	const { t } = useTranslation('page');
 
-class Error404Page extends Component<
-	Error404PageProps & { t: any },
-	Error404PageState
-> {
-	static props: Error404PageProps = {};
-	state: Error404PageState = {};
+	return (
+		<AppLayout
+			route={routes['error-404']}
+			app={'App'}
+			metaTitle={t('page:Error404.meta.title')}
+			isCentered
+		>
+			<Wrapper>
+				<Typography.Title level={'h1'}>
+					{t('page:Error404.page.title')}
+				</Typography.Title>
+				<div>Error404Page</div>
+			</Wrapper>
+		</AppLayout>
+	);
+};
 
-	render() {
-		return (
-			<AppLayout
-				route={routes['error-404']}
-				app={'App'}
-				metaTitle={this.props.t('page:Error404.meta.title')}
-				isCentered
-			>
-				<Wrapper>
-					<Typography.Title level={'h1'}>
-						{this.props.t('page:Error404.page.title')}
-					</Typography.Title>
-					<div>Error404Page</div>
-				</Wrapper>
-			</AppLayout>
-		);
-	}
-}
-
-export default withTranslation()(Error404Page);
+export default Error404Page;

@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 
 import routes from '../routes.json';
 import { loadTags } from '../../store/App/actions';
@@ -8,78 +9,55 @@ import AppLayout from '../../layout/AppLayout';
 import List from '../../component/List';
 import { Button } from '../../component/ui';
 
-interface TagsPageProps {}
-interface TagsPageState {
-	loading: boolean;
-}
+const TagsPage: React.FC<{}> = (props) => {
+	const {} = props;
+	const { t } = useTranslation('page');
+	const state: any = useSelector((state) => state);
+	const dispatch = useDispatch();
+	const params: any = useParams();
+	const [loading, setLoading] = useState<boolean>(false);
 
-class TagsPage extends Component<
-	TagsPageProps & {
-		t: any;
-		_Tags: any[];
-		dispatch: Function;
-		match: any;
-	},
-	TagsPageState
-> {
-	static props: TagsPageProps = {};
-	state: TagsPageState = {
-		loading: false,
-	};
+	useEffect(() => {
+		loadData();
 
-	loadData() {
-		this.props.dispatch(loadTags());
-	}
+		return () => null;
+	}, []);
 
-	componentDidMount() {
-		this.loadData();
-	}
+	const loadData = () => dispatch(loadTags());
 
-	render() {
-		const { loading } = this.state;
-
-		return (
-			<AppLayout
+	return (
+		<AppLayout
+			route={routes.tags}
+			app={'App'}
+			withSidebar
+			widthHeader
+			withFooter
+			metaTitle={t('page:Tags.meta.title')}
+			headerTitle={t('page:Tags.page.title')}
+			headerChildren={[
+				<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
+			]}
+		>
+			<List.Items
 				route={routes.tags}
-				app={'App'}
-				withSidebar
-				widthHeader
-				withFooter
-				metaTitle={this.props.t('page:Tags.meta.title')}
-				headerTitle={this.props.t('page:Tags.page.title')}
-				headerChildren={[
-					<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
-				]}
-			>
-				<List.Items
-					route={routes.tags}
-					model={'Tags'}
-					items={this.props._Tags}
-					loading={loading}
-					columnsLayout={{
-						name: true,
-						active: true,
-					}}
-					orderByColumns={{
-						name: true,
-					}}
-					detailId={this.props.match.params.id}
-					onReload={this.loadData.bind(this)}
-					searchAttrs={['name']}
-					selectable
-					allowDelete
-				/>
-			</AppLayout>
-		);
-	}
-}
+				model={'Tags'}
+				items={state.app.Tags}
+				loading={loading}
+				columnsLayout={{
+					name: true,
+					active: true,
+				}}
+				orderByColumns={{
+					name: true,
+				}}
+				detailId={params.id}
+				onReload={loadData}
+				searchAttrs={['name']}
+				selectable
+				allowDelete
+			/>
+		</AppLayout>
+	);
+};
 
-function mapStateToProps(state) {
-	return {
-		_Tags: state.app.Tags,
-	};
-}
-
-const PageWithTranslations = withTranslation()(TagsPage);
-
-export default connect(mapStateToProps)(PageWithTranslations);
+export default TagsPage;
