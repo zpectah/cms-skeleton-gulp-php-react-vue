@@ -38,7 +38,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
 	const { t } = useTranslation(['common', 'component']);
 	const { route, panelKey, model, loading, onUpdate } = props;
-	const { control, handleSubmit, setValue, formState } = useForm({
+	const { control, handleSubmit, setValue, formState, reset } = useForm({
 		mode: 'onChange',
 		defaultValues: model,
 	});
@@ -69,10 +69,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 
 	useEffect(() => {
 		if (model) {
+			reset();
 			Object.entries(model).forEach(([key, value]) => {
 				setValue(key, value);
 			});
-
 			setTmpState({
 				language_installed: model.language_installed,
 				language_active: model.language_active,
@@ -124,13 +124,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 			>
 				<TabPane tab="Global" key="global">
 					<Card withNegativeOffsetTop>
-						<Section withBorder>
+						<Section title={'Project'} withBorder>
 							<Form.Row
-								label={'Project name'}
+								label={'Name'}
 								name={'project_name'}
 								control={control}
 								rules={{ required: true }}
-								helpText={'This is name only for internal purpose'}
+								helpText={'This is for internal purpose only'}
 								required
 							>
 								{(row) => (
@@ -146,11 +146,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 							</Form.Row>
 						</Section>
 						<Section title={'Company (owner)'} titleAnchor={'company'}>
-							<Form.Row
-								label={'Company ID'}
-								name={'company_id'}
-								control={control}
-							>
+							<Form.Row label={'ID'} name={'company_id'} control={control}>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -163,13 +159,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Hr.Base />
-							<Form.Row
-								label={'Name'}
-								name={'company_name'}
-								control={control}
-								rules={{ required: true }}
-								required
-							>
+							<Form.Row label={'Name'} name={'company_name'} control={control}>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -332,7 +322,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				</TabPane>
 				<TabPane tab="Web" key="web">
 					<Card withNegativeOffsetTop>
-						<Section title={'Page header meta'} titleAnchor={'meta'} withBorder>
+						<Section title={'Page meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
 								label={'Title'}
 								name={'meta_title'}
@@ -475,7 +465,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 							<Form.Row
-								label={'Language default'}
+								label={'Default language'}
 								name={'language_default'}
 								control={control}
 								rules={{ required: true }}
@@ -541,10 +531,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</Form.Row>
 						</Section>
-						<Section title={'Approval'} titleAnchor={'approval'} withBorder>
+						<Section
+							title={'Approval'}
+							titleAnchor={'approval'}
+							withBorder={tmpState.module_members_installed}
+						>
 							<Form.Row
-								label={'Admin approval'}
-								name={'admin_content_approval'}
+								label={'Redactor approval'}
+								name={'redactor_content_approval'}
 								control={control}
 								helpText={
 									'This allows chief-redactors approving content created by redactors, otherwise redactors can publish any content.'
