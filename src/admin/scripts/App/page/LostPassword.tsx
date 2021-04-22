@@ -5,8 +5,7 @@ import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import LostPassword from '../../component/LostPassword';
 
-const LostPasswordPage: React.FC<{}> = (props) => {
-	const {} = props;
+const LostPasswordPage = () => {
 	const { t } = useTranslation('page');
 
 	return (

@@ -11,10 +11,7 @@ import Settings from '../../component/Settings';
 import { loadSettings } from '../../store/App/actions';
 import { Button } from '../../component/ui';
 
-interface SettingsPageProps {}
-
-const SettingsPage: React.FC<SettingsPageProps> = (props) => {
-	const {} = props;
+const SettingsPage = () => {
 	const { t } = useTranslation('page');
 	const state: any = useSelector((state) => state);
 	const dispatch = useDispatch();

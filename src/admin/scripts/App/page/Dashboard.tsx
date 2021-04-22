@@ -5,8 +5,7 @@ import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import Dashboard from '../../component/Dashboard';
 
-const DashboardPage: React.FC<{}> = (props) => {
-	const {} = props;
+const DashboardPage = () => {
 	const { t } = useTranslation('page');
 
 	return (

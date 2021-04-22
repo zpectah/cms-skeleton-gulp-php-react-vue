@@ -15,8 +15,7 @@ const Wrapper = styled.div`
 	justify-content: center;
 `;
 
-const Error404Page: React.FC<{}> = (props) => {
-	const {} = props;
+const Error404Page = () => {
 	const { t } = useTranslation('page');
 
 	return (

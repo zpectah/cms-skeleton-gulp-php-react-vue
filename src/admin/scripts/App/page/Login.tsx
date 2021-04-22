@@ -5,8 +5,7 @@ import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import Login from '../../component/Login';
 
-const LoginPage: React.FC<{}> = (props) => {
-	const {} = props;
+const LoginPage = () => {
 	const { t } = useTranslation('page');
 
 	return (

@@ -9,8 +9,7 @@ import AppLayout from '../../layout/AppLayout';
 import List from '../../component/List';
 import { Button } from '../../component/ui';
 
-const UsersPage: React.FC<{}> = (props) => {
-	const {} = props;
+const UsersPage = () => {
 	const { t } = useTranslation('page');
 	const state: any = useSelector((state) => state);
 	const dispatch = useDispatch();
