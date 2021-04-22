@@ -1,4 +1,4 @@
-import Api from '../../utils/api';
+import api from '../../utils/api';
 import { SET_POSTS, SET_USERS, SET_SETTINGS, SET_TAGS } from './types';
 import { setDataLoading, setDataError } from '../ui/actions';
 
@@ -7,7 +7,7 @@ export function loadSettings() {
 	return async (dispatch) => {
 		dispatch(setDataLoading(true));
 		try {
-			let data = await Api.get('/api/get_settings');
+			let data = await api.get('/api/get_settings');
 			dispatch(setSettings(data.data));
 			dispatch(setDataLoading(false));
 		} catch (error) {
@@ -27,7 +27,7 @@ export function loadPosts() {
 	return async (dispatch) => {
 		dispatch(setDataLoading(true));
 		try {
-			let data = await Api.get('/api/get_posts');
+			let data = await api.get('/api/get_posts');
 			dispatch(setPosts(data.data));
 			dispatch(setDataLoading(false));
 		} catch (error) {
@@ -47,7 +47,7 @@ export function loadUsers() {
 	return async (dispatch) => {
 		dispatch(setDataLoading(true));
 		try {
-			let data = await Api.get('/api/get_users');
+			let data = await api.get('/api/get_users');
 			dispatch(setUsers(data.data));
 			dispatch(setDataLoading(false));
 		} catch (error) {
@@ -67,7 +67,7 @@ export function loadTags() {
 	return async (dispatch) => {
 		dispatch(setDataLoading(true));
 		try {
-			let data = await Api.get('/api/get_tags');
+			let data = await api.get('/api/get_tags');
 			dispatch(setTags(data.data));
 			dispatch(setDataLoading(false));
 		} catch (error) {

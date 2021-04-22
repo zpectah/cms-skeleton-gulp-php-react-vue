@@ -6,5 +6,16 @@ import Card from './Card';
 import Section from './Section';
 import Hr from './Hr';
 import Modal from './Modal';
+import Preloader from './Preloader';
 
-export { Button, Typography, Scrollable, Form, Card, Section, Hr, Modal };
+export {
+	Button,
+	Typography,
+	Scrollable,
+	Form,
+	Card,
+	Section,
+	Hr,
+	Modal,
+	Preloader,
+};
