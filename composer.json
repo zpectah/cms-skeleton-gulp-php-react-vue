@@ -5,7 +5,8 @@
 	"require": {
 		"eftec/bladeone": "^3.51",
 		"ext-json": "*",
-      "ext-mysqli": "*"
+      "ext-mysqli": "*",
+      "ext-http": "*"
     },
 	"config": {
 		"vendor-dir": "src/vendor"
