@@ -3,21 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
 import { useForm } from 'react-hook-form';
-import {
-	Form as AntdForm,
-	Input,
-	Select,
-	Switch,
-	Checkbox,
-	Radio,
-	Alert,
-} from 'antd';
+import { Form as AntdForm, Input, Select, Switch, Checkbox, Alert } from 'antd';
 import styled from 'styled-components';
 
 import NUMS from '../../../../config/nums.json';
 import OPTIONS from '../../../../config/options.json';
 import { routeProps } from '../../types';
-// import { EMAIL_REGEX } from '../../constants';
+// import { EMAIL_REGEX } from '../../constants'; // TODO
 import { Button, Form, Card, Section, Hr } from '../ui';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
@@ -123,8 +115,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				onChange={(activeKey) => history.push(`${route.path}/${activeKey}`)}
 			>
 				<TabPane tab="Global" key="global">
-					<Card withNegativeOffsetTop>
-						<Section title={'Project'} withBorder>
+					<Card.Base withNegativeOffsetTop>
+						<Section.Base title={'Project'} withBorder>
 							<Form.Row
 								label={'Name'}
 								name={'project_name'}
@@ -144,8 +136,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-						</Section>
-						<Section title={'Company (owner)'} titleAnchor={'company'}>
+						</Section.Base>
+						<Section.Base title={'Company (owner)'} titleAnchor={'company'}>
 							<Form.Row label={'ID'} name={'company_id'} control={control}>
 								{(row) => (
 									<Input
@@ -317,12 +309,12 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-						</Section>
-					</Card>
+						</Section.Base>
+					</Card.Base>
 				</TabPane>
 				<TabPane tab="Web" key="web">
-					<Card withNegativeOffsetTop>
-						<Section title={'Page meta'} titleAnchor={'meta'} withBorder>
+					<Card.Base withNegativeOffsetTop>
+						<Section.Base title={'Page meta'} titleAnchor={'meta'} withBorder>
 							<Form.Row
 								label={'Title'}
 								name={'meta_title'}
@@ -393,8 +385,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-						</Section>
-						<Section title={'Page mode'} titleAnchor={'mode'} withBorder>
+						</Section.Base>
+						<Section.Base title={'Page mode'} titleAnchor={'mode'} withBorder>
 							<Form.Row
 								label={'In maintenance'}
 								name={'mode_maintenance'}
@@ -429,8 +421,12 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
 							</Form.Row>
-						</Section>
-						<Section title={'Language'} titleAnchor={'language'} withBorder>
+						</Section.Base>
+						<Section.Base
+							title={'Language'}
+							titleAnchor={'language'}
+							withBorder
+						>
 							<Form.Row
 								label={'Language to install'}
 								name={'language_installed'}
@@ -488,8 +484,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-						</Section>
-						<Section title={'Forms'} withBorder>
+						</Section.Base>
+						<Section.Base title={'Forms'} withBorder>
 							<Form.Row
 								label={'Sender email'}
 								name={'form_sender_email'}
@@ -530,8 +526,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									/>
 								)}
 							</Form.Row>
-						</Section>
-						<Section
+						</Section.Base>
+						<Section.Base
 							title={'Approval'}
 							titleAnchor={'approval'}
 							withBorder={tmpState.module_members_installed}
@@ -548,9 +544,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
 							</Form.Row>
-						</Section>
+						</Section.Base>
 						{tmpState.module_members_installed && (
-							<Section title={'Comments'} titleAnchor={'comments'}>
+							<Section.Base title={'Comments'} titleAnchor={'comments'}>
 								<Form.Row
 									label={'Active'}
 									name={'comments_global_active'}
@@ -579,13 +575,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										/>
 									)}
 								</Form.Row>
-							</Section>
+							</Section.Base>
 						)}
-					</Card>
+					</Card.Base>
 				</TabPane>
 				<TabPane tab="Module" key="module">
-					<Card withNegativeOffsetTop>
-						<Section title={'Members'} titleAnchor={'members'} withBorder>
+					<Card.Base withNegativeOffsetTop>
+						<Section.Base title={'Members'} titleAnchor={'members'} withBorder>
 							{tmpState.module_members_installed ? (
 								<>
 									<Form.Row
@@ -666,8 +662,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									}}
 								/>
 							)}
-						</Section>
-						<Section title={'Crm'} titleAnchor={'crm'} withBorder>
+						</Section.Base>
+						<Section.Base title={'Crm'} titleAnchor={'crm'} withBorder>
 							{tmpState.module_crm_installed ? (
 								<>
 									<Form.Row
@@ -711,13 +707,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									{!tmpState.module_members_installed && (
 										<Alert
 											message="You need to have the Members module installed"
-											type="info"
+											type="warning"
 										/>
 									)}
 								</>
 							)}
-						</Section>
-						<Section title={'Market'} titleAnchor={'market'}>
+						</Section.Base>
+						<Section.Base title={'Market'} titleAnchor={'market'}>
 							{tmpState.module_market_installed ? (
 								<>
 									<Form.Row
@@ -761,13 +757,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 									{!tmpState.module_members_installed && (
 										<Alert
 											message="You need to have the Members module installed"
-											type="info"
+											type="warning"
 										/>
 									)}
 								</>
 							)}
-						</Section>
-					</Card>
+						</Section.Base>
+					</Card.Base>
 				</TabPane>
 			</Tabs>
 			<ActionRow>

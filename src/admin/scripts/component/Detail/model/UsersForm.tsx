@@ -48,7 +48,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>
-				<Section>
+				<Section.Base>
 					<Form.Row
 						label={'Name'}
 						name={'name'}
@@ -71,7 +71,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						{(row) => <Switch checked={row.value} onChange={row.onChange} />}
 					</Form.Row>
 					{/* TODO: ... */}
-				</Section>
+				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>
 				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>

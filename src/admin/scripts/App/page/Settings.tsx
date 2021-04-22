@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { message, Spin } from 'antd';
+import { message } from 'antd';
 
 import api from '../../utils/api';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';
 import { loadSettings } from '../../store/App/actions';
-import { Button } from '../../component/ui';
+import { Button, Preloader } from '../../component/ui';
 
 const SettingsPage = () => {
 	const { t } = useTranslation('page');
@@ -32,7 +32,7 @@ const SettingsPage = () => {
 
 		return api.post('/api/update_settings', data).then(() => {
 			message.success('Data was updated', 2.5);
-			loadData();
+			// loadData();
 			setLoading(false);
 		});
 	};
@@ -67,9 +67,7 @@ const SettingsPage = () => {
 					onUpdate={updateData}
 				/>
 			) : (
-				<div>
-					<Spin />
-				</div>
+				<Preloader.Block />
 			)}
 		</AppLayout>
 	);

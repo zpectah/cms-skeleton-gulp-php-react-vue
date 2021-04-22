@@ -1,3 +1,3 @@
-import Card from './Card';
+import CardBase from './CardBase';
 
-export default Card;
+export default { Base: CardBase };

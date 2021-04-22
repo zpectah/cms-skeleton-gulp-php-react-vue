@@ -4,8 +4,8 @@ import { Spin } from 'antd';
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 10vh;
-	min-height: 200px;
+	height: 50vh;
+	min-height: 250px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

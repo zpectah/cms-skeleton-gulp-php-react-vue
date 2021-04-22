@@ -17,7 +17,7 @@ interface CardProps {
 	withNegativeOffsetTop?: boolean;
 }
 
-const Card: React.FC<CardProps> = (props) => {
+const CardBase: React.FC<CardProps> = (props) => {
 	const { children, radiusTop, withNegativeOffsetTop } = props;
 
 	return (
@@ -30,4 +30,4 @@ const Card: React.FC<CardProps> = (props) => {
 	);
 };
 
-export default Card;
+export default CardBase;

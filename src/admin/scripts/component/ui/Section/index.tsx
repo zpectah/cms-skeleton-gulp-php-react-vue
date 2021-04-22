@@ -1,3 +1,3 @@
-import Section from './Section';
+import SectionBase from './SectionBase';
 
-export default Section;
+export default { Base: SectionBase };

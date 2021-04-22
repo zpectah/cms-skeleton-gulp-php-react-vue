@@ -48,7 +48,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>
-				<Section>
+				<Section.Base>
 					<Form.Row
 						label={'Name'}
 						name={'name'}
@@ -70,7 +70,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 					<Form.Row label={'Active'} name={'active'} control={control}>
 						{(row) => <Switch checked={row.value} onChange={row.onChange} />}
 					</Form.Row>
-				</Section>
+				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>
 				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>

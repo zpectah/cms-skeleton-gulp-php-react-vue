@@ -28,7 +28,7 @@ interface SectionProps {
 	withBorder?: boolean;
 }
 
-const Section: React.FC<SectionProps> = (props) => {
+const SectionBase: React.FC<SectionProps> = (props) => {
 	const { children, title, subtitle, titleAnchor, withBorder = false } = props;
 
 	return (
@@ -48,4 +48,4 @@ const Section: React.FC<SectionProps> = (props) => {
 	);
 };
 
-export default Section;
+export default SectionBase;
