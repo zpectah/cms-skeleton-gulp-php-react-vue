@@ -4,6 +4,7 @@ import api from '../utils/api';
 import { UsersItemProps } from './types';
 
 function useProfile() {
+	// const { data, error } = useSWR(`/api/get_profile`);
 	const Profile: UsersItemProps = {
 		id: 1,
 		email: 'default@user.cms',
@@ -12,11 +13,7 @@ function useProfile() {
 
 	return {
 		Profile: Profile,
-		updateProfile: (data?: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: updateProfile', data);
-		},
+		updateProfile: (data: any) => api.post('/api/update_profile', data),
 	};
 }
 
@@ -38,26 +35,10 @@ function useUsers() {
 		Users: data?.data,
 		isLoading: !error && !data,
 		isError: error,
-		updateUsers: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: updateUsers', data);
-		},
-		createUsers: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: createUsers', data);
-		},
-		deleteUsers: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: deleteUsers', data);
-		},
-		toggleUsers: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: toggleUsers', data);
-		},
+		updateUsers: (data: any) => api.post('/api/update_users', data),
+		createUsers: (data: any) => api.post('/api/create_users', data),
+		deleteUsers: (data: any) => api.post('/api/delete_users', data),
+		toggleUsers: (data: any) => api.post('/api/toggle_users', data),
 	};
 }
 
@@ -68,26 +49,10 @@ function usePosts() {
 		Posts: data?.data,
 		isLoading: !error && !data,
 		isError: error,
-		updatePosts: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: updatePosts', data);
-		},
-		createPosts: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: createPosts', data);
-		},
-		deletePosts: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: deletePosts', data);
-		},
-		togglePosts: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: togglePosts', data);
-		},
+		updatePosts: (data: any) => api.post('/api/update_posts', data),
+		createPosts: (data: any) => api.post('/api/create_posts', data),
+		deletePosts: (data: any) => api.post('/api/delete_posts', data),
+		togglePosts: (data: any) => api.post('/api/toggle_posts', data),
 	};
 }
 
@@ -98,26 +63,10 @@ function useTags() {
 		Tags: data?.data,
 		isLoading: !error && !data,
 		isError: error,
-		updateTags: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: updateTags', data);
-		},
-		createTags: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: createTags', data);
-		},
-		deleteTags: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: deleteTags', data);
-		},
-		toggleTags: (data: any) => {
-			// TODO
-			// create 'fake handler' for posting in hook
-			console.log('fake handler: toggleTags', data);
-		},
+		updateTags: (data: any) => api.post('/api/update_tags', data),
+		createTags: (data: any) => api.post('/api/create_tags', data),
+		deleteTags: (data: any) => api.post('/api/delete_tags', data),
+		toggleTags: (data: any) => api.post('/api/toggle_tags', data),
 	};
 }
 
