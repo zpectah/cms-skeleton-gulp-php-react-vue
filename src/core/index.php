@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Composer
+ */
+require PATH_PFX . 'vendor/autoload.php';
+
+
+/*
  * Configs and Constants
  */
 require PATH_PFX . 'config/constants.php';
