@@ -20,3 +20,9 @@ export interface routeProps {
 	label: string | null;
 	auth: number;
 }
+
+export interface commonModelProps {
+	is_new?: boolean;
+	id: string | number;
+	active: boolean;
+}

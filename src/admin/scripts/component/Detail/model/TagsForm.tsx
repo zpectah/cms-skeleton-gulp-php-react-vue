@@ -1,45 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
+import { useTags } from '../../../App/hooks';
 import { TagsItemProps } from '../../../App/types';
-import api from '../../../utils/api';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 
 interface TagsDetailFormProps {
 	detailData: TagsItemProps;
 	onCancel: Function;
-	onSave: Function;
+	onSave: (data, response) => void;
 	onDelete: Function;
 }
 
 const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { t } = useTranslation(['common']);
-	const { control, handleSubmit, setValue, formState } = useForm({
+	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: detailData,
 	});
-
-	// TODO
-	const model = detailData;
+	const { updateTags, createTags } = useTags();
 
 	const submitHandler = (data) => {
-		console.log('On Detail Submit', data);
-
-		const path = detailData.is_new ? '/api/create_tags' : '/api/update_tags';
-
-		api.post(path, data).then((res: any) => {
-			console.log('After ... submitHandler');
-			console.log('res', res);
-
-			onSave(data);
-		});
+		if (detailData.is_new) {
+			createTags(data).then((response) => onSave(data, response));
+		} else {
+			updateTags(data).then((response) => {
+				onCancel();
+				onSave(data, response);
+			});
+		}
 	};
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
+			<input type="hidden" name="id" ref={register({ required: true })} />
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -76,7 +73,11 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
 				{!detailData.is_new && (
 					<>
-						<Button.Base type="primary" onClick={() => onDelete(model)} danger>
+						<Button.Base
+							type="primary"
+							onClick={() => onDelete(detailData)}
+							danger
+						>
 							{t('btn.delete')}
 						</Button.Base>
 					</>

@@ -1,3 +1,3 @@
-import { commonModelProps } from '../App/types';
+import { commonModelProps } from '../types';
 
 export interface Members extends commonModelProps {}

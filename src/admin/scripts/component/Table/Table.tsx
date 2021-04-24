@@ -3,13 +3,22 @@ import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { array } from 'javascript-es6-helpers';
 import { useForm, Controller } from 'react-hook-form';
-import { Table as AntdTable, Tag, Input, Radio, Form, Space } from 'antd';
+import {
+	Table as AntdTable,
+	Tag,
+	Input,
+	Radio,
+	Form,
+	Space,
+	message,
+} from 'antd';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 import { Button } from '../ui';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
+import { commonModelProps } from '../../types';
 import { appProps, routeProps } from '../../types';
 
 const Heading = styled.div`
@@ -35,9 +44,14 @@ const remodelItems = (input: any[]) => {
 	return na;
 };
 
+interface ListItemProps extends commonModelProps {
+	name?: string;
+	title?: string;
+}
+
 interface ListItemsProps {
 	model: appProps['model'];
-	items: any[];
+	items: ListItemProps[];
 	route: routeProps;
 	columnsLayout?: {
 		name?: boolean;
@@ -268,11 +282,21 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		// TODO
 		// setSelectedKeys([]);
 	};
-	const editHandler = (data: any) => {
-		console.log('editHandler', data);
-		// TODO
+	const detailHandler = (data: any, response?: any) => {
+		if (data.is_new) {
+			let newId = response?.data?.id;
+			if (newId) {
+				message.success(`#${newId} was created successfully`, 2.5);
+			} else {
+				message.success('Created successfully', 2.5);
+			}
+		} else {
+			let affected = response?.data?.rows;
+			if (affected)
+				message.success(`Updated successfully ${affected} items`, 2.5);
+		}
 	};
-	const onDetailClose = () => {
+	const closeDetail = () => {
 		history.push(route.path);
 	};
 	const updateListItems = (data) => {
@@ -377,9 +401,9 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				isOpen={detailOpen}
 				onCancel={toggleDetail}
 				detailData={detailData}
-				onSave={editHandler}
+				onSave={detailHandler}
 				onDelete={deleteConfirm}
-				afterClose={onDetailClose}
+				afterClose={closeDetail}
 			/>
 			<Confirm.Dialog
 				isOpen={confirmOpen}

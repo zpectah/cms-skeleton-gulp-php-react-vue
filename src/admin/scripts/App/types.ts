@@ -1,8 +1,4 @@
-export interface commonModelProps {
-	is_new?: boolean;
-	id: string | number;
-	active: boolean;
-}
+import { commonModelProps } from '../types';
 
 export interface UsersItemProps extends commonModelProps {
 	email: string;
