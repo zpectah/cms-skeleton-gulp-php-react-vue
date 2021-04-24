@@ -43,6 +43,12 @@ const UsersPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'nickname', 'email']}
+				onToggle={(data) => {
+					console.log('onToggle', data);
+				}}
+				onDelete={(data) => {
+					console.log('onDelete', data);
+				}}
 				selectable
 				allowDelete
 			/>

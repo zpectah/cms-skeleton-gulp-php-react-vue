@@ -71,6 +71,8 @@ interface ListItemsProps {
 	allowDelete?: boolean;
 	loading?: boolean;
 	detailId?: string;
+	onToggle: (data: any) => void;
+	onDelete: (data: any) => void;
 }
 
 const Table: React.FC<ListItemsProps> = (props) => {
@@ -94,6 +96,8 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		route,
 		selectable,
 		searchAttrs = [],
+		onToggle,
+		onDelete,
 		allowDelete,
 		detailId,
 	} = props;
@@ -272,15 +276,14 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		setDetailData(record);
 		setDetailOpen(true);
 	};
-	const toggleHandler = (data: any) => {
-		console.log('toggleHandler', data);
-		// TODO: toggle API ...
+	const toggleSelected = (keys: any) => {
+		onToggle(keys);
+		setSelectedKeys([]); // TODO: reset selected for antd table !!!
 	};
+	const toggleHandler = (data: any) => onToggle(data);
 	const deleteHandler = (data: any) => {
-		console.log('deleteHandler', data);
-		// TODO: deselect items in list ...
-		// TODO
-		// setSelectedKeys([]);
+		onDelete(data);
+		setSelectedKeys([]); // TODO: reset selected for antd table !!!
 	};
 	const detailHandler = (data: any, response?: any) => {
 		if (data.is_new) {
@@ -291,9 +294,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				message.success('Created successfully', 2.5);
 			}
 		} else {
-			let affected = response?.data?.rows;
-			if (affected)
-				message.success(`Updated successfully ${affected} items`, 2.5);
+			message.success(`Updated successfully`, 2.5);
 		}
 	};
 	const closeDetail = () => {
@@ -374,12 +375,20 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				<div>
 					<Space>
 						{selectable && allowDelete && (
-							<Button.Base
-								disabled={selectedKeys.length === 0}
-								onClick={() => deleteConfirm(selectedKeys)}
-							>
-								Delete selected ({selectedKeys.length})
-							</Button.Base>
+							<>
+								<Button.Base
+									disabled={selectedKeys.length === 0}
+									onClick={() => toggleSelected(selectedKeys)}
+								>
+									Toggle ({selectedKeys.length})
+								</Button.Base>
+								<Button.Base
+									disabled={selectedKeys.length === 0}
+									onClick={() => deleteConfirm(selectedKeys)}
+								>
+									Delete ({selectedKeys.length})
+								</Button.Base>
+							</>
 						)}
 					</Space>
 				</div>
@@ -392,7 +401,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onChange: selectChangeHandler,
 					}
 				}
-				onChange={selectChangeHandler}
+				// onChange={selectChangeHandler}
 				loading={loading}
 				sticky
 			/>

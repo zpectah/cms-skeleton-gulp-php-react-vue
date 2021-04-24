@@ -44,6 +44,12 @@ const PostsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'lang.en.title']}
+				onToggle={(data) => {
+					console.log('onToggle', data);
+				}}
+				onDelete={(data) => {
+					console.log('onDelete', data);
+				}}
 				selectable
 				allowDelete
 			/>

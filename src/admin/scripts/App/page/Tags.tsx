@@ -11,8 +11,7 @@ import { Button } from '../../component/ui';
 const TagsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const [updating, setUpdating] = useState<boolean>(false);
-	const { Tags } = useTags();
+	const { Tags, toggleTags, deleteTags, isLoading } = useTags();
 
 	return (
 		<AppLayout
@@ -31,7 +30,7 @@ const TagsPage = () => {
 				route={routes.tags}
 				model={'Tags'}
 				items={Tags}
-				loading={updating}
+				loading={!isLoading}
 				columnsLayout={{
 					name: true,
 					active: true,
@@ -41,6 +40,8 @@ const TagsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name']}
+				onToggle={(data) => toggleTags(data)}
+				onDelete={(data) => deleteTags(data)}
 				selectable
 				allowDelete
 			/>
