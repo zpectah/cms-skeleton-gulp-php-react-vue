@@ -11,7 +11,7 @@ const Wrapper = styled.div``;
 
 interface LanguageToggleProps {}
 
-const LanguageToggle: React.FC<LanguageToggleProps> = (props) => {
+const Toggle: React.FC<LanguageToggleProps> = (props) => {
 	const { i18n } = useTranslation();
 	const { control, handleSubmit } = useForm({
 		mode: 'onChange',
@@ -46,4 +46,4 @@ const LanguageToggle: React.FC<LanguageToggleProps> = (props) => {
 	);
 };
 
-export default LanguageToggle;
+export default Toggle;

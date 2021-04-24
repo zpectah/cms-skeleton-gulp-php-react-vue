@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Input } from 'antd';
+import { Form as AntdForm, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { EMAIL_REGEX } from '../../constants';
@@ -80,11 +80,11 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 				</BlockBrand>
 				<BlockForm>
 					<BlockInner>
-						<Form
+						<AntdForm
 							onFinish={handleSubmit(submitHandler)}
 							style={{ width: '80%' }}
 						>
-							<Form.Item>
+							<AntdForm.Item>
 								<Controller
 									name="email"
 									control={control}
@@ -101,8 +101,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 										/>
 									)}
 								/>
-							</Form.Item>
-							<Form.Item>
+							</AntdForm.Item>
+							<AntdForm.Item>
 								<Controller
 									name="password"
 									control={control}
@@ -119,8 +119,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 										/>
 									)}
 								/>
-							</Form.Item>
-							<Form.Item>
+							</AntdForm.Item>
+							<AntdForm.Item>
 								<Button.Base
 									type={'primary'}
 									htmlType={'submit'}
@@ -129,11 +129,11 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 								>
 									Log in
 								</Button.Base>
-							</Form.Item>
-							<Form.Item style={{ textAlign: 'center', marginBottom: 0 }}>
+							</AntdForm.Item>
+							<AntdForm.Item style={{ textAlign: 'center', marginBottom: 0 }}>
 								<Link to={routes['lost-password'].path}>Lost password</Link>
-							</Form.Item>
-						</Form>
+							</AntdForm.Item>
+						</AntdForm>
 					</BlockInner>
 				</BlockForm>
 			</Wrapper>

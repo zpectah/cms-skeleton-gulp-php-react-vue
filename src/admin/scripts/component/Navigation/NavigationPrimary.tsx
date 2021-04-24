@@ -92,7 +92,7 @@ interface PrimaryNavigationProps {
 	sidebarToggle: Function;
 }
 
-const PrimaryNavigation: React.FC<PrimaryNavigationProps> = (props) => {
+const NavigationPrimary: React.FC<PrimaryNavigationProps> = (props) => {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const { sidebarToggle } = props;
@@ -128,4 +128,4 @@ const PrimaryNavigation: React.FC<PrimaryNavigationProps> = (props) => {
 	);
 };
 
-export default PrimaryNavigation;
+export default NavigationPrimary;

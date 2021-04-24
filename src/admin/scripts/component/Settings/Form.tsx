@@ -10,7 +10,7 @@ import NUMS from '../../../../config/nums.json';
 import OPTIONS from '../../../../config/options.json';
 import { routeProps } from '../../types';
 // import { EMAIL_REGEX } from '../../constants'; // TODO
-import { Button, Form, Card, Section, Hr } from '../ui';
+import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
 
@@ -26,7 +26,7 @@ interface SettingsFormProps {
 	onUpdate: Function;
 }
 
-const SettingsForm: React.FC<SettingsFormProps> = (props) => {
+const Form: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
 	const { t } = useTranslation(['common', 'component']);
 	const { route, panelKey, model, loading, onUpdate } = props;
@@ -117,7 +117,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 				<TabPane tab="Global" key="global">
 					<Card.Base withNegativeOffsetTop>
 						<Section.Base title={'Project'} withBorder>
-							<Form.Row
+							<UiForm.Row
 								label={'Name'}
 								name={'project_name'}
 								control={control}
@@ -135,10 +135,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Project name'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						<Section.Base title={'Company (owner)'} titleAnchor={'company'}>
-							<Form.Row label={'ID'} name={'company_id'} control={control}>
+							<UiForm.Row label={'ID'} name={'company_id'} control={control}>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -149,9 +149,13 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company ID'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 							<Hr.Base />
-							<Form.Row label={'Name'} name={'company_name'} control={control}>
+							<UiForm.Row
+								label={'Name'}
+								name={'company_name'}
+								control={control}
+							>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -162,8 +166,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company name'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Description'}
 								name={'company_description'}
 								control={control}
@@ -178,9 +182,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company description'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 							<Hr.Base />
-							<Form.Row
+							<UiForm.Row
 								label={'Address'}
 								name={'company_address'}
 								control={control}
@@ -195,8 +199,12 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company address'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row label={'City'} name={'company_city'} control={control}>
+							</UiForm.Row>
+							<UiForm.Row
+								label={'City'}
+								name={'company_city'}
+								control={control}
+							>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -207,8 +215,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company city'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Country'}
 								name={'company_country'}
 								control={control}
@@ -223,8 +231,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company country'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Zip code'}
 								name={'company_zip'}
 								control={control}
@@ -239,9 +247,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company zip'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 							<Hr.Base />
-							<Form.Row
+							<UiForm.Row
 								label={'E-mail'}
 								name={'company_email'}
 								control={control}
@@ -256,8 +264,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company emails'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Phone'}
 								name={'company_phone'}
 								control={control}
@@ -272,9 +280,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company phone'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 							<Hr.Base />
-							<Form.Row
+							<UiForm.Row
 								label={'Bank'}
 								name={'company_bank'}
 								control={control}
@@ -290,9 +298,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company bank object'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 							<Hr.Base />
-							<Form.Row
+							<UiForm.Row
 								label={'Location'}
 								name={'company_location'}
 								control={control}
@@ -308,14 +316,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Company location object'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 					</Card.Base>
 				</TabPane>
 				<TabPane tab="Web" key="web">
 					<Card.Base withNegativeOffsetTop>
 						<Section.Base title={'Page meta'} titleAnchor={'meta'} withBorder>
-							<Form.Row
+							<UiForm.Row
 								label={'Title'}
 								name={'meta_title'}
 								control={control}
@@ -332,8 +340,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Page meta title'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Description'}
 								name={'meta_description'}
 								control={control}
@@ -350,8 +358,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Page meta description'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Robots'}
 								name={'meta_robots'}
 								control={control}
@@ -368,8 +376,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Page meta robots'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Keywords'}
 								name={'meta_keywords'}
 								control={control}
@@ -384,10 +392,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										onChange={row.onChange}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						<Section.Base title={'Page mode'} titleAnchor={'mode'} withBorder>
-							<Form.Row
+							<UiForm.Row
 								label={'In maintenance'}
 								name={'mode_maintenance'}
 								control={control}
@@ -398,8 +406,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'In debug'}
 								name={'mode_debug'}
 								control={control}
@@ -410,8 +418,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'In development'}
 								name={'mode_development'}
 								control={control}
@@ -420,14 +428,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						<Section.Base
 							title={'Language'}
 							titleAnchor={'language'}
 							withBorder
 						>
-							<Form.Row
+							<UiForm.Row
 								label={'Language to install'}
 								name={'language_installed'}
 								control={control}
@@ -441,8 +449,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										}}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Active languages'}
 								name={'language_active'}
 								control={control}
@@ -459,8 +467,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										}}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Default language'}
 								name={'language_default'}
 								control={control}
@@ -483,10 +491,10 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Select default language'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						<Section.Base title={'Forms'} withBorder>
-							<Form.Row
+							<UiForm.Row
 								label={'Sender email'}
 								name={'form_sender_email'}
 								control={control}
@@ -506,8 +514,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Form sender email'}
 									/>
 								)}
-							</Form.Row>
-							<Form.Row
+							</UiForm.Row>
+							<UiForm.Row
 								label={'Recipients email'}
 								name={'form_recipients_email'}
 								control={control}
@@ -525,14 +533,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 										placeholder={'Form recipients emails'}
 									/>
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						<Section.Base
 							title={'Approval'}
 							titleAnchor={'approval'}
 							withBorder={tmpState.module_members_installed}
 						>
-							<Form.Row
+							<UiForm.Row
 								label={'Redactor approval'}
 								name={'redactor_content_approval'}
 								control={control}
@@ -543,11 +551,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
 								)}
-							</Form.Row>
+							</UiForm.Row>
 						</Section.Base>
 						{tmpState.module_members_installed && (
 							<Section.Base title={'Comments'} titleAnchor={'comments'}>
-								<Form.Row
+								<UiForm.Row
 									label={'Active'}
 									name={'comments_global_active'}
 									control={control}
@@ -560,8 +568,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											disabled={!tmpState.module_members_active}
 										/>
 									)}
-								</Form.Row>
-								<Form.Row
+								</UiForm.Row>
+								<UiForm.Row
 									label={'Anonymous'}
 									name={'comments_anonymous_active'}
 									control={control}
@@ -574,7 +582,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 											disabled={!tmpState.module_members_active}
 										/>
 									)}
-								</Form.Row>
+								</UiForm.Row>
 							</Section.Base>
 						)}
 					</Card.Base>
@@ -584,7 +592,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 						<Section.Base title={'Members'} titleAnchor={'members'} withBorder>
 							{tmpState.module_members_installed ? (
 								<>
-									<Form.Row
+									<UiForm.Row
 										label={'Members active'}
 										name={'module_members_active'}
 										control={control}
@@ -601,11 +609,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 												}}
 											/>
 										)}
-									</Form.Row>
+									</UiForm.Row>
 									{tmpState.module_members_active && (
 										<>
 											<Hr.Base />
-											<Form.Row
+											<UiForm.Row
 												label={'Register active'}
 												name={'members_register_active'}
 												control={control}
@@ -618,8 +626,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 														disabled={!tmpState.module_members_active}
 													/>
 												)}
-											</Form.Row>
-											<Form.Row
+											</UiForm.Row>
+											<UiForm.Row
 												label={'Login active'}
 												name={'members_login_active'}
 												control={control}
@@ -632,8 +640,8 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 														disabled={!tmpState.module_members_active}
 													/>
 												)}
-											</Form.Row>
-											<Form.Row
+											</UiForm.Row>
+											<UiForm.Row
 												label={'Lost password active'}
 												name={'members_lostPassword_active'}
 												control={control}
@@ -646,7 +654,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 														disabled={!tmpState.module_members_active}
 													/>
 												)}
-											</Form.Row>
+											</UiForm.Row>
 										</>
 									)}
 								</>
@@ -666,7 +674,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 						<Section.Base title={'Crm'} titleAnchor={'crm'} withBorder>
 							{tmpState.module_crm_installed ? (
 								<>
-									<Form.Row
+									<UiForm.Row
 										label={'CRM active'}
 										name={'module_crm_active'}
 										control={control}
@@ -683,7 +691,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 												}}
 											/>
 										)}
-									</Form.Row>
+									</UiForm.Row>
 									{tmpState.module_crm_active && (
 										<>
 											<Hr.Base />
@@ -716,7 +724,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 						<Section.Base title={'Market'} titleAnchor={'market'}>
 							{tmpState.module_market_installed ? (
 								<>
-									<Form.Row
+									<UiForm.Row
 										label={'Market active'}
 										name={'module_market_active'}
 										control={control}
@@ -733,7 +741,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 												}}
 											/>
 										)}
-									</Form.Row>
+									</UiForm.Row>
 									{tmpState.module_market_active && (
 										<>
 											<Hr.Base />
@@ -780,4 +788,4 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
 	);
 };
 
-export default SettingsForm;
+export default Form;

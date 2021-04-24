@@ -5,19 +5,19 @@ import { Modal } from '../../component/ui';
 
 const Content = styled.div``;
 
-interface HelpDialogProps {
+interface SpotlightDialogProps {
 	isOpen: boolean;
 	onCancel: (event) => void;
 }
 
-const HelpDialog: React.FC<HelpDialogProps> = (props) => {
+const Dialog: React.FC<SpotlightDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 
 	return (
 		<Modal.Base visible={isOpen} onCancel={onCancel}>
-			<Modal.Content>Modal 'HelpDialog' content</Modal.Content>
+			<Modal.Content>Modal 'Spotlight' content</Modal.Content>
 		</Modal.Base>
 	);
 };
 
-export default HelpDialog;
+export default Dialog;

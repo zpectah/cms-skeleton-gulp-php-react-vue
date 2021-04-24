@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { array } from 'javascript-es6-helpers';
 import { useForm, Controller } from 'react-hook-form';
-import { Table, Tag, Input, Radio, Form, Space } from 'antd';
+import { Table as AntdTable, Tag, Input, Radio, Form, Space } from 'antd';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
@@ -59,7 +59,7 @@ interface ListItemsProps {
 	detailId?: string;
 }
 
-const ListItems: React.FC<ListItemsProps> = (props) => {
+const Table: React.FC<ListItemsProps> = (props) => {
 	const history = useHistory();
 	const location = useLocation();
 	const {
@@ -360,7 +360,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 					</Space>
 				</div>
 			</Heading>
-			<Table
+			<AntdTable
 				columns={getColumns()}
 				dataSource={listItems}
 				rowSelection={
@@ -391,4 +391,4 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 	);
 };
 
-export default ListItems;
+export default Table;

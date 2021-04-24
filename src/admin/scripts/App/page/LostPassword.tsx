@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
-import LostPassword from '../../component/LostPassword';
+import LostPasswordForm from '../../component/LostPasswordForm';
 
 const LostPasswordPage = () => {
 	const { t } = useTranslation('page');
@@ -15,9 +15,9 @@ const LostPasswordPage = () => {
 			metaTitle={t('page:LostPassword.meta.title')}
 			isCentered
 		>
-			<LostPassword>
+			<LostPasswordForm>
 				<p>Logo & Description</p>
-			</LostPassword>
+			</LostPasswordForm>
 		</AppLayout>
 	);
 };

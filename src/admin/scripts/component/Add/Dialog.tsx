@@ -10,7 +10,7 @@ interface AddDialogProps {
 	onCancel: (event) => void;
 }
 
-const AddDialog: React.FC<AddDialogProps> = (props) => {
+const Dialog: React.FC<AddDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 
 	const modelList = [
@@ -55,4 +55,4 @@ const AddDialog: React.FC<AddDialogProps> = (props) => {
 	);
 };
 
-export default AddDialog;
+export default Dialog;

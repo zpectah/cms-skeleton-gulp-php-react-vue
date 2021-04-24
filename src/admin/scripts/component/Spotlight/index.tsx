@@ -1,3 +1,3 @@
-import SpotlightDialog from './SpotlightDialog';
+import Dialog from './Dialog';
 
-export default { Dialog: SpotlightDialog };
+export default { Dialog: Dialog };

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
-import Login from '../../component/Login';
+import LoginForm from '../../component/LoginForm';
 
 const LoginPage = () => {
 	const { t } = useTranslation('page');
@@ -18,9 +18,9 @@ const LoginPage = () => {
 			footerCentered
 			isCentered
 		>
-			<Login>
+			<LoginForm>
 				<p>Logo & Description</p>
-			</Login>
+			</LoginForm>
 		</AppLayout>
 	);
 };

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import routes from '../routes.json';
 import { useTags } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
-import List from '../../component/List';
+import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
 
 const TagsPage = () => {
@@ -27,7 +27,7 @@ const TagsPage = () => {
 				<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
 			]}
 		>
-			<List.Items
+			<Table
 				route={routes.tags}
 				model={'Tags'}
 				items={Tags}

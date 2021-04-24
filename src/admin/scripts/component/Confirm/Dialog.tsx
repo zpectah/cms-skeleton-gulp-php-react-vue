@@ -11,7 +11,7 @@ interface ConfirmDialogProps {
 	method?: 'delete' | 'confirm';
 }
 
-const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
+const Dialog: React.FC<ConfirmDialogProps> = (props) => {
 	const {
 		isOpen,
 		onCancel,
@@ -40,4 +40,4 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
 	);
 };
 
-export default ConfirmDialog;
+export default Dialog;

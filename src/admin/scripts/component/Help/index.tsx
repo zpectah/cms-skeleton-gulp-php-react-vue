@@ -1,3 +1,3 @@
-import HelpDialog from './HelpDialog';
+import Dialog from './Dialog';
 
-export default { Dialog: HelpDialog };
+export default { Dialog: Dialog };

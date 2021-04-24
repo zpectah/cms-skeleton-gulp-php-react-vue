@@ -1,3 +1,3 @@
-import LanguageToggle from './LanguageToggle';
+import Toggle from './Toggle';
 
-export default { Toggle: LanguageToggle };
+export default { Toggle: Toggle };

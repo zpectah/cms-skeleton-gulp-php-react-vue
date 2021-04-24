@@ -9,7 +9,7 @@ interface ProfileDialogProps {
 	onCancel: (event) => void;
 }
 
-const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
+const Dialog: React.FC<ProfileDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
 	const { Profile } = useProfile();
 
@@ -23,4 +23,4 @@ const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 	);
 };
 
-export default ProfileDialog;
+export default Dialog;

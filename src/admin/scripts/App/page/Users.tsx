@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import routes from '../routes.json';
 import { useUsers } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
-import List from '../../component/List';
+import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
 
 const UsersPage = () => {
@@ -27,7 +27,7 @@ const UsersPage = () => {
 				<Button.CreateNew key={1} routePathPrefix={routes.users.pathDetail} />,
 			]}
 		>
-			<List.Items
+			<Table
 				route={routes.users}
 				model={'Users'}
 				items={Users}

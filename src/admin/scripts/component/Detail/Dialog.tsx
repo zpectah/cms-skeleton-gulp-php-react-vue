@@ -16,7 +16,7 @@ interface DetailItemDialogProps {
 	afterClose?: () => void;
 }
 
-const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
+const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 	const {
 		model,
 		isOpen,
@@ -68,4 +68,4 @@ const DetailDialog: React.FC<DetailItemDialogProps> = (props) => {
 	);
 };
 
-export default DetailDialog;
+export default Dialog;

@@ -1,3 +1,3 @@
-import PrimaryNavigation from './PrimaryNavigation';
+import NavigationPrimary from './NavigationPrimary';
 
-export default { Primary: PrimaryNavigation };
+export default { Primary: NavigationPrimary };

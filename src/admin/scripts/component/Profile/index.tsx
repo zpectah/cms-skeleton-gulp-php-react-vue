@@ -1,3 +1,3 @@
-import ProfileDialog from './ProfileDialog';
+import Dialog from './Dialog';
 
-export default { Dialog: ProfileDialog };
+export default { Dialog: Dialog };

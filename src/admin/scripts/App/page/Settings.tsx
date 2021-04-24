@@ -6,7 +6,7 @@ import { message } from 'antd';
 import { useSettings } from '../hooks';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
-import SettingsForm from '../../component/Settings';
+import { Form } from '../../component/Settings';
 import { Preloader } from '../../component/ui';
 
 const SettingsPage = () => {
@@ -34,7 +34,7 @@ const SettingsPage = () => {
 			headerTitle={t('page:Settings.page.title')}
 		>
 			{Settings ? (
-				<SettingsForm
+				<Form
 					route={routes.settings}
 					panelKey={params.panel}
 					model={Settings}

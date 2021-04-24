@@ -1,3 +1,3 @@
-import DetailDialog from './DetailDialog';
+import Dialog from './Dialog';
 
-export default { Dialog: DetailDialog };
+export default { Dialog: Dialog };
