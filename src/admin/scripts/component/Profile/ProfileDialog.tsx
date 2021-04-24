@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useUser } from '../../App/hooks';
+import { useProfile } from '../../App/hooks';
 import Language from '../Language';
 import { Modal } from '../../component/ui';
 
@@ -11,7 +11,7 @@ interface ProfileDialogProps {
 
 const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
-	const { User } = useUser();
+	const { User } = useProfile();
 
 	return (
 		<Modal.Base visible={isOpen} onCancel={onCancel}>

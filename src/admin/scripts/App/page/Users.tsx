@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -11,18 +11,8 @@ import { Button } from '../../component/ui';
 const UsersPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const [loading, setLoading] = useState<boolean>(false);
+	const [updating, setUpdating] = useState<boolean>(false);
 	const { Users } = useUsers();
-
-	useEffect(() => {
-		loadData();
-
-		return () => null;
-	}, []);
-
-	const loadData = () => {
-		// TODO: handler for load trigger ...
-	};
 
 	return (
 		<AppLayout
@@ -40,9 +30,8 @@ const UsersPage = () => {
 			<List.Items
 				route={routes.users}
 				model={'Users'}
-				// items={state.app.Users}
 				items={Users}
-				loading={loading}
+				loading={updating}
 				columnsLayout={{
 					email: true,
 					nickname: true,
@@ -53,7 +42,6 @@ const UsersPage = () => {
 					email: true,
 				}}
 				detailId={params.id}
-				onReload={loadData}
 				searchAttrs={['name', 'nickname', 'email']}
 				selectable
 				allowDelete

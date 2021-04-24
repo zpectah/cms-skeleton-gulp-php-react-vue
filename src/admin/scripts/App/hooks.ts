@@ -1,7 +1,9 @@
 import useSWR from 'swr';
+
+import api from '../utils/api';
 import { UsersItemProps } from './types';
 
-function useUser() {
+function useProfile() {
 	const User: UsersItemProps = {
 		id: 1,
 		email: 'default@user.cms',
@@ -10,47 +12,113 @@ function useUser() {
 
 	return {
 		User: User,
+		updateProfile: (data?: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: updateProfile', data);
+		},
 	};
 }
 
-function useSettings(inputData?: any) {
+function useSettings() {
 	const { data, error } = useSWR(`/api/get_settings`);
 
 	return {
 		Settings: data?.data,
-		loading: !error && !data,
-		error: error,
+		isLoading: !error && !data,
+		isError: error,
+		updateSettings: (data: any) => api.post('/api/update_settings', data),
 	};
 }
 
-function useUsers(inputData?: any) {
+function useUsers() {
 	const { data, error } = useSWR(`/api/get_users`);
 
 	return {
 		Users: data?.data,
-		loading: !error && !data,
-		error: error,
+		isLoading: !error && !data,
+		isError: error,
+		updateUsers: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: updateUsers', data);
+		},
+		createUsers: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: createUsers', data);
+		},
+		deleteUsers: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: deleteUsers', data);
+		},
+		toggleUsers: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: toggleUsers', data);
+		},
 	};
 }
 
-function usePosts(inputData?: any) {
+function usePosts() {
 	const { data, error } = useSWR(`/api/get_posts`);
 
 	return {
 		Posts: data?.data,
-		loading: !error && !data,
-		error: error,
+		isLoading: !error && !data,
+		isError: error,
+		updatePosts: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: updatePosts', data);
+		},
+		createPosts: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: createPosts', data);
+		},
+		deletePosts: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: deletePosts', data);
+		},
+		togglePosts: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: togglePosts', data);
+		},
 	};
 }
 
-function useTags(inputData?: any) {
+function useTags() {
 	const { data, error } = useSWR(`/api/get_tags`);
 
 	return {
 		Tags: data?.data,
-		loading: !error && !data,
-		error: error,
+		isLoading: !error && !data,
+		isError: error,
+		updateTags: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: updateTags', data);
+		},
+		createTags: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: createTags', data);
+		},
+		deleteTags: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: deleteTags', data);
+		},
+		toggleTags: (data: any) => {
+			// TODO
+			// create 'fake handler' for posting in hook
+			console.log('fake handler: toggleTags', data);
+		},
 	};
 }
 
-export { useUser, useSettings, useUsers, usePosts, useTags };
+export { useProfile, useSettings, useUsers, usePosts, useTags };

@@ -3,28 +3,22 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
 
-import api from '../../utils/api';
 import { useSettings } from '../hooks';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import SettingsForm from '../../component/Settings';
-import { Button, Preloader } from '../../component/ui';
+import { Preloader } from '../../component/ui';
 
 const SettingsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const [updating, setUpdating] = useState<boolean>(false);
-	const { Settings, loading } = useSettings();
-
-	const loadData = () => {
-		// TODO: handler for load trigger ...
-	};
+	const { Settings, isLoading, updateSettings } = useSettings();
 
 	const updateData = (data) => {
 		setUpdating(true);
-
-		return api.post('/api/update_settings', data).then(() => {
-			message.success('Data was updated', 2.5);
+		return updateSettings(data).then(() => {
+			message.success('Changes saved', 2.5);
 			setUpdating(false);
 		});
 	};
@@ -38,24 +32,13 @@ const SettingsPage = () => {
 			withFooter
 			metaTitle={t('page:Settings.meta.title')}
 			headerTitle={t('page:Settings.page.title')}
-			headerChildren={[
-				<Button.Base
-					key={1}
-					onClick={loadData}
-					type={'primary'}
-					loading={loading}
-					ghost
-				>
-					Reload
-				</Button.Base>,
-			]}
 		>
 			{Settings ? (
 				<SettingsForm
 					route={routes.settings}
 					panelKey={params.panel}
 					model={Settings}
-					loading={loading || updating}
+					loading={isLoading || updating}
 					onUpdate={updateData}
 				/>
 			) : (

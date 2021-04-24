@@ -39,7 +39,6 @@ interface ListItemsProps {
 	model: appProps['model'];
 	items: any[];
 	route: routeProps;
-	onReload: () => void;
 	columnsLayout?: {
 		name?: boolean;
 		email?: boolean;
@@ -83,7 +82,6 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 		searchAttrs = [],
 		allowDelete,
 		detailId,
-		onReload,
 	} = props;
 	const { control, handleSubmit } = useForm({
 		mode: 'onChange',
@@ -351,9 +349,6 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 				</div>
 				<div>
 					<Space>
-						<Button.Base onClick={onReload} loading={loading}>
-							Reload
-						</Button.Base>
 						{selectable && allowDelete && (
 							<Button.Base
 								disabled={selectedKeys.length === 0}
