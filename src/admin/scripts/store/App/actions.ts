@@ -1,26 +1,9 @@
 import api from '../../utils/api';
-import { SET_POSTS, SET_USERS, SET_SETTINGS, SET_TAGS } from './types';
+import { SET_POSTS, SET_USERS, SET_TAGS } from './types';
 import { setDataLoading, setDataError } from '../ui/actions';
 
 // Settings
-export function loadSettings() {
-	return async (dispatch) => {
-		dispatch(setDataLoading(true));
-		try {
-			let data = await api.get('/api/get_settings');
-			dispatch(setSettings(data.data));
-			dispatch(setDataLoading(false));
-		} catch (error) {
-			console.warn(error);
-			dispatch(setDataError(true));
-			dispatch(setDataLoading(false));
-		}
-	};
-}
-
-export function setSettings(payload) {
-	return { type: SET_SETTINGS, payload };
-}
+// ... replaced with SWR
 
 // Posts
 export function loadPosts() {

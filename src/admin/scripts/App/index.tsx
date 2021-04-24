@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
-import { loadSettings } from '../store/App/actions';
 import { getStyles } from '../styles/theme';
 
 import AuthRoute from '../utils/AuthRoute';
@@ -64,7 +62,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
-	const dispatch = useDispatch();
 	const [auth, setAuth] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -75,7 +72,6 @@ const App = () => {
 
 	const onInit = () => {
 		ThemeService.init();
-		dispatch(loadSettings());
 	};
 
 	return (

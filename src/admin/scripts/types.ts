@@ -12,7 +12,7 @@ export interface storeProps {
 		user?: UsersItemProps;
 	};
 	app: {
-		Settings: any[];
+		// Settings: any[];
 		Posts: PostsItemProps[];
 		Users: UsersItemProps[];
 		Tags: TagsItemProps[];

@@ -1,39 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
 import { message } from 'antd';
 
 import api from '../../utils/api';
+import { useSettings } from '../hooks';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
 import Settings from '../../component/Settings';
-import { loadSettings } from '../../store/App/actions';
 import { Button, Preloader } from '../../component/ui';
 
 const SettingsPage = () => {
 	const { t } = useTranslation('page');
-	const state: any = useSelector((state) => state);
-	const dispatch = useDispatch();
 	const params: any = useParams();
-	const [loading, setLoading] = useState<boolean>(false);
-
-	useEffect(() => {
-		loadData();
-
-		return () => null;
-	}, []);
+	const [updating, setUpdating] = useState<boolean>(false);
+	const { data, loading } = useSettings();
 
 	const loadData = () => {
-		dispatch(loadSettings());
+		// TODO: handler for load trigger ...
 	};
+
 	const updateData = (data) => {
-		setLoading(true);
+		setUpdating(true);
 
 		return api.post('/api/update_settings', data).then(() => {
 			message.success('Data was updated', 2.5);
-			// loadData();
-			setLoading(false);
+			setUpdating(false);
 		});
 	};
 
@@ -51,19 +43,19 @@ const SettingsPage = () => {
 					key={1}
 					onClick={loadData}
 					type={'primary'}
-					loading={state.ui.loadingData}
+					loading={loading}
 					ghost
 				>
 					Reload
 				</Button.Base>,
 			]}
 		>
-			{state.app.Settings ? (
+			{data && data.data ? (
 				<Settings
 					route={routes.settings}
 					panelKey={params.panel}
-					model={state.app.Settings}
-					loading={loading}
+					model={data.data}
+					loading={loading || updating}
 					onUpdate={updateData}
 				/>
 			) : (
