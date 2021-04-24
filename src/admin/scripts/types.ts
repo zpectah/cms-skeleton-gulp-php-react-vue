@@ -1,5 +1,3 @@
-import { UsersItemProps, PostsItemProps, TagsItemProps } from './App/types';
-
 export interface storeProps {
 	ui: {
 		language: string;
@@ -8,24 +6,11 @@ export interface storeProps {
 		loadingData: boolean;
 		dataError: boolean;
 	};
-	user: {
-		user?: UsersItemProps;
-	};
-	app: {
-		// Settings: any[];
-		Posts: PostsItemProps[];
-		Users: UsersItemProps[];
-		Tags: TagsItemProps[];
-	};
-	members: {};
-	crm: {};
-	market: {};
 }
 
 export interface appProps {
 	app: 'App' | 'Members' | 'Crm' | 'Market';
-	// TODO: MODEL
-	model: 'Posts' | 'Users' | 'Tags';
+	model: 'Posts' | 'Users' | 'Tags'; // TODO: new model
 }
 
 export interface routeProps {

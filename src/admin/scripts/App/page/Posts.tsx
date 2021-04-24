@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
 
 import routes from '../routes.json';
-import { loadPosts } from '../../store/App/actions';
+import { usePosts } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import List from '../../component/List';
 import { Button } from '../../component/ui';
 
 const PostsPage = () => {
 	const { t } = useTranslation('page');
-	const state: any = useSelector((state) => state);
-	const dispatch = useDispatch();
 	const params: any = useParams();
 	const [loading, setLoading] = useState<boolean>(false);
+	const { Posts } = usePosts();
 
 	useEffect(() => {
 		loadData();
@@ -22,7 +20,9 @@ const PostsPage = () => {
 		return () => null;
 	}, []);
 
-	const loadData = () => dispatch(loadPosts());
+	const loadData = () => {
+		// TODO: handler for load trigger ...
+	};
 
 	return (
 		<AppLayout
@@ -40,7 +40,7 @@ const PostsPage = () => {
 			<List.Items
 				route={routes.posts}
 				model={'Posts'}
-				items={state.app.Posts}
+				items={Posts}
 				loading={loading}
 				columnsLayout={{
 					// name: true,

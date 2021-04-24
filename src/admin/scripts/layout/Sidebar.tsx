@@ -129,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		toggleSpotlight,
 		logoutHandler,
 	} = props;
-	const { data } = useSettings();
+	const { Settings } = useSettings();
 
 	return (
 		<>
@@ -174,9 +174,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 				<PanelWrapper open={sidebarOpen}>
 					<div className="primary">
 						<div>logo</div>
-						{data && data.data && (
+						{Settings && (
 							<>
-								<div>{data.data['project_name']}</div>
+								<div>{Settings['project_name']}</div>
 							</>
 						)}
 					</div>

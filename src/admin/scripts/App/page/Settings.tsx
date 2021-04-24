@@ -7,14 +7,14 @@ import api from '../../utils/api';
 import { useSettings } from '../hooks';
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
-import Settings from '../../component/Settings';
+import SettingsForm from '../../component/Settings';
 import { Button, Preloader } from '../../component/ui';
 
 const SettingsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const [updating, setUpdating] = useState<boolean>(false);
-	const { data, loading } = useSettings();
+	const { Settings, loading } = useSettings();
 
 	const loadData = () => {
 		// TODO: handler for load trigger ...
@@ -50,11 +50,11 @@ const SettingsPage = () => {
 				</Button.Base>,
 			]}
 		>
-			{data && data.data ? (
-				<Settings
+			{Settings ? (
+				<SettingsForm
 					route={routes.settings}
 					panelKey={params.panel}
-					model={data.data}
+					model={Settings}
 					loading={loading || updating}
 					onUpdate={updateData}
 				/>

@@ -1,6 +1,6 @@
 export interface commonModelProps {
 	is_new?: boolean;
-	id: string;
+	id: string | number;
 	active: boolean;
 }
 

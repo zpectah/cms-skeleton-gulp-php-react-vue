@@ -65,7 +65,7 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 	const location = useLocation();
 	const {
 		model,
-		items,
+		items = [],
 		columnsLayout = {
 			name: false,
 			email: false,
@@ -103,14 +103,14 @@ const ListItems: React.FC<ListItemsProps> = (props) => {
 
 	// Set and remodel items to list
 	useEffect(() => {
-		if (items.length > 0) {
+		if (items && items.length > 0) {
 			setListItems(remodelItems(items));
 		}
 	}, [items]);
 
 	// Check url for detail url
 	useEffect(() => {
-		if (items.length > 0 && detailId) {
+		if (items && items.length > 0 && detailId) {
 			items.map((item) => {
 				if (item.id == detailId) {
 					editOpen(item);
