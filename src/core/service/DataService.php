@@ -4,6 +4,7 @@
 namespace core\service;
 
 
+use core\model\Profile;
 use core\model\Settings;
 use core\model\Users;
 use core\model\Posts;
@@ -14,6 +15,7 @@ class DataService {
 
 	public function get ($model, $data) {
 		$Settings = new Settings;
+		$Profile = new Profile;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -22,6 +24,9 @@ class DataService {
 
 			case 'Settings':
 				return $Settings -> get();
+
+			case 'Profile':
+				return $Profile -> get($data);
 
 			case 'Users':
 				return $Users -> get($data);
@@ -68,6 +73,7 @@ class DataService {
 
 	public function update ($model, $data) {
 		$Settings = new Settings;
+		$Profile = new Profile;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -79,6 +85,9 @@ class DataService {
 
 			case 'Users':
 				return $Users -> update($data);
+
+			case 'Profile':
+				return $Profile -> update($data);
 
 			case 'Posts':
 				return $Posts -> update($data);

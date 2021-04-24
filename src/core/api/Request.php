@@ -35,6 +35,19 @@ class Request {
 				break;
 
 
+			// Profile
+			case 'get_profile':
+				$response['data'] = $DataService -> get('Profile', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_profile':
+				$response['data'] = $DataService -> update('Profile', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			// TODO: _login / _logout / _lostPassword
+
 			// Users
 			case 'get_users':
 				$response['data'] = $DataService -> get('Users', $requestData);

@@ -4,14 +4,14 @@ import api from '../utils/api';
 import { UsersItemProps } from './types';
 
 function useProfile() {
-	const User: UsersItemProps = {
+	const Profile: UsersItemProps = {
 		id: 1,
 		email: 'default@user.cms',
 		active: true,
 	};
 
 	return {
-		User: User,
+		Profile: Profile,
 		updateProfile: (data?: any) => {
 			// TODO
 			// create 'fake handler' for posting in hook

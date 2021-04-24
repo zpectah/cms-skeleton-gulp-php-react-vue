@@ -11,13 +11,13 @@ interface ProfileDialogProps {
 
 const ProfileDialog: React.FC<ProfileDialogProps> = (props) => {
 	const { isOpen, onCancel } = props;
-	const { User } = useProfile();
+	const { Profile } = useProfile();
 
 	return (
 		<Modal.Base visible={isOpen} onCancel={onCancel}>
 			<Modal.Content>
 				Modal 'ProfileDialog' content <br /> <Language.Toggle /> <br />
-				{JSON.stringify(User)}
+				{JSON.stringify(Profile)}
 			</Modal.Content>
 		</Modal.Base>
 	);

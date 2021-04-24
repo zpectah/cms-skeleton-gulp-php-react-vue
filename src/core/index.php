@@ -22,6 +22,7 @@ require PATH_PFX . 'core/service/DataService.php';
  * Model
  */
 require PATH_PFX . 'core/model/Settings.php';
+require PATH_PFX . 'core/model/Profile.php';
 require PATH_PFX . 'core/model/Users.php';
 require PATH_PFX . 'core/model/Posts.php';
 require PATH_PFX . 'core/model/Tags.php';
