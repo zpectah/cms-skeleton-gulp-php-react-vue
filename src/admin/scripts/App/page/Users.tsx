@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -11,8 +11,7 @@ import { Button } from '../../component/ui';
 const UsersPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const [updating, setUpdating] = useState<boolean>(false);
-	const { Users } = useUsers();
+	const { Users, isLoading, toggleUsers, deleteUsers } = useUsers();
 
 	return (
 		<AppLayout
@@ -31,7 +30,7 @@ const UsersPage = () => {
 				route={routes.users}
 				model={'Users'}
 				items={Users}
-				loading={updating}
+				// loading={isLoading}
 				columnsLayout={{
 					email: true,
 					nickname: true,
@@ -43,12 +42,8 @@ const UsersPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'nickname', 'email']}
-				onToggle={(data) => {
-					console.log('onToggle', data);
-				}}
-				onDelete={(data) => {
-					console.log('onDelete', data);
-				}}
+				onToggle={toggleUsers}
+				onDelete={deleteUsers}
 				selectable
 				allowDelete
 			/>

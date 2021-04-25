@@ -5,8 +5,9 @@ import store from './store';
 import { SWRConfig } from 'swr';
 import './i18n';
 import App from './App';
+import api from './utils/api';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = api.fetcher;
 
 ReactDOM.render(
 	<Provider store={store}>

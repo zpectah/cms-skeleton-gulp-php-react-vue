@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -11,8 +11,7 @@ import { Button } from '../../component/ui';
 const PostsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const [updating, setUpdating] = useState<boolean>(false);
-	const { Posts } = usePosts();
+	const { Posts, isLoading, togglePosts, deletePosts } = usePosts();
 
 	return (
 		<AppLayout
@@ -31,7 +30,7 @@ const PostsPage = () => {
 				route={routes.posts}
 				model={'Posts'}
 				items={Posts}
-				loading={updating}
+				// loading={isLoading}
 				columnsLayout={{
 					// name: true,
 					title: true,
@@ -44,12 +43,8 @@ const PostsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'lang.en.title']}
-				onToggle={(data) => {
-					console.log('onToggle', data);
-				}}
-				onDelete={(data) => {
-					console.log('onDelete', data);
-				}}
+				onToggle={togglePosts}
+				onDelete={deletePosts}
 				selectable
 				allowDelete
 			/>

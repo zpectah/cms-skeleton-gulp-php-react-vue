@@ -8,6 +8,13 @@ function useProfile() {
 	const Profile: UsersItemProps = {
 		id: 1,
 		email: 'default@user.cms',
+		password: '...',
+		nickname: 'Nickname',
+		first_name: '...',
+		middle_name: '...',
+		last_name: '...',
+		level: 0,
+		group: [],
 		active: true,
 	};
 
@@ -22,7 +29,7 @@ function useSettings() {
 
 	return {
 		Settings: data?.data,
-		isLoading: !error && !data,
+		isLoading: !data && !error,
 		isError: error,
 		updateSettings: (data: any) => api.post('/api/update_settings', data),
 	};
@@ -33,7 +40,7 @@ function useUsers() {
 
 	return {
 		Users: data?.data,
-		isLoading: !error && !data,
+		isLoading: !data && !error,
 		isError: error,
 		updateUsers: (data: any) => api.post('/api/update_users', data),
 		createUsers: (data: any) => api.post('/api/create_users', data),
@@ -47,7 +54,7 @@ function usePosts() {
 
 	return {
 		Posts: data?.data,
-		isLoading: !error && !data,
+		isLoading: !data && !error,
 		isError: error,
 		updatePosts: (data: any) => api.post('/api/update_posts', data),
 		createPosts: (data: any) => api.post('/api/create_posts', data),
@@ -61,7 +68,7 @@ function useTags() {
 
 	return {
 		Tags: data?.data,
-		isLoading: !error && !data,
+		isLoading: !data && !error,
 		isError: error,
 		updateTags: (data: any) => api.post('/api/update_tags', data),
 		createTags: (data: any) => api.post('/api/create_tags', data),

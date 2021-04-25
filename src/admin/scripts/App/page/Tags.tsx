@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +11,7 @@ import { Button } from '../../component/ui';
 const TagsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Tags, toggleTags, deleteTags, isLoading } = useTags();
+	const { Tags, isLoading, toggleTags, deleteTags } = useTags();
 
 	return (
 		<AppLayout
@@ -30,7 +30,7 @@ const TagsPage = () => {
 				route={routes.tags}
 				model={'Tags'}
 				items={Tags}
-				loading={!isLoading}
+				// loading={isLoading}
 				columnsLayout={{
 					name: true,
 					active: true,
@@ -40,8 +40,8 @@ const TagsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name']}
-				onToggle={(data) => toggleTags(data)}
-				onDelete={(data) => deleteTags(data)}
+				onToggle={toggleTags}
+				onDelete={deleteTags}
 				selectable
 				allowDelete
 			/>
