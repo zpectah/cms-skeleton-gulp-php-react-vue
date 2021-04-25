@@ -5,7 +5,7 @@ export interface UsersItemProps extends commonModelProps {
 	password: string;
 	nickname: string;
 	first_name: string;
-	middle_name: string;
+	middle_name?: string;
 	last_name: string;
 	level: number;
 	group: string[];

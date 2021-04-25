@@ -11,7 +11,7 @@ class Settings {
 
 	public function get () {
 		$conn = new mysqli(...CFG_DB_CONN);
-		$sql = 'SELECT * FROM settings_cms';
+		$sql = 'SELECT SQL_CACHE * FROM settings_cms';
 		$result = $conn -> query($sql);
 		$response = [];
 
