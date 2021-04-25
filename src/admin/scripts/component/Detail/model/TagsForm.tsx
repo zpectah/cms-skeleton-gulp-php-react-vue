@@ -36,7 +36,12 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input type="hidden" name="id" ref={register({ required: true })} />
+			<input
+				type="hidden"
+				name="id"
+				ref={register({ required: true })}
+				defaultValue={detailData.id}
+			/>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new

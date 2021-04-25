@@ -11,7 +11,14 @@ const fetcher = api.fetcher;
 
 ReactDOM.render(
 	<Provider store={store}>
-		<SWRConfig value={{ fetcher }}>
+		<SWRConfig
+			value={{
+				fetcher,
+				// refreshInterval: 1000,
+				// refreshTimeout: 0,
+				defaultData: {},
+			}}
+		>
 			<App />
 		</SWRConfig>
 	</Provider>,

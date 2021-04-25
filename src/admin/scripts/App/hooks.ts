@@ -64,12 +64,14 @@ function usePosts() {
 }
 
 function useTags() {
-	const { data, error } = useSWR(`/api/get_tags`);
+	const { data, error, revalidate } = useSWR(`/api/get_tags`);
 
 	return {
 		Tags: data?.data,
 		isLoading: !data && !error,
+		// isLoading: isValidating,
 		isError: error,
+		revalidate: revalidate,
 		updateTags: (data: any) => api.post('/api/update_tags', data),
 		createTags: (data: any) => api.post('/api/create_tags', data),
 		deleteTags: (data: any) => api.post('/api/delete_tags', data),

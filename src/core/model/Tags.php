@@ -13,7 +13,7 @@ class Tags {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = [];
 
-		$query = 'SELECT SQL_CACHE * FROM tags';
+		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags';
 		$result = $conn -> query($query);
 
 		if ($result -> num_rows > 0) {
