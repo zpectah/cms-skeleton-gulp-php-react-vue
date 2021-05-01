@@ -20,6 +20,7 @@ function useProfile() {
 
 	return {
 		Profile: Profile,
+		// reload: () => mutate(`/api/get_profile`),
 		updateProfile: (data: any) => api.post('/api/update_profile', data),
 	};
 }
@@ -67,14 +68,12 @@ function usePosts() {
 }
 
 function useTags() {
-	const { data, error, revalidate } = useSWR(`/api/get_tags`);
+	const { data, error } = useSWR(`/api/get_tags`);
 
 	return {
 		Tags: data?.data,
 		isLoading: !data && !error,
-		// isLoading: isValidating,
 		isError: error,
-		revalidate: revalidate,
 		reload: () => mutate(`/api/get_tags`),
 		updateTags: (data: any) => api.post('/api/update_tags', data),
 		createTags: (data: any) => api.post('/api/create_tags', data),
