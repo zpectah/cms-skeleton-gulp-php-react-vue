@@ -14,9 +14,10 @@ ReactDOM.render(
 		<SWRConfig
 			value={{
 				fetcher,
-				// refreshInterval: 1000,
+				// refreshInterval: 2500,
 				// refreshTimeout: 0,
-				defaultData: {},
+				// defaultData: {},
+				// dedupingInterval: 10000,
 			}}
 		>
 			<App />

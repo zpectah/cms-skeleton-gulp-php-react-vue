@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 
 import api from '../utils/api';
 import { UsersItemProps } from './types';
@@ -31,6 +31,7 @@ function useSettings() {
 		Settings: data?.data,
 		isLoading: !data && !error,
 		isError: error,
+		reload: () => mutate(`/api/get_settings`),
 		updateSettings: (data: any) => api.post('/api/update_settings', data),
 	};
 }
@@ -42,6 +43,7 @@ function useUsers() {
 		Users: data?.data,
 		isLoading: !data && !error,
 		isError: error,
+		reload: () => mutate(`/api/get_users`),
 		updateUsers: (data: any) => api.post('/api/update_users', data),
 		createUsers: (data: any) => api.post('/api/create_users', data),
 		deleteUsers: (data: any) => api.post('/api/delete_users', data),
@@ -56,6 +58,7 @@ function usePosts() {
 		Posts: data?.data,
 		isLoading: !data && !error,
 		isError: error,
+		reload: () => mutate(`/api/get_posts`),
 		updatePosts: (data: any) => api.post('/api/update_posts', data),
 		createPosts: (data: any) => api.post('/api/create_posts', data),
 		deletePosts: (data: any) => api.post('/api/delete_posts', data),
@@ -72,6 +75,7 @@ function useTags() {
 		// isLoading: isValidating,
 		isError: error,
 		revalidate: revalidate,
+		reload: () => mutate(`/api/get_tags`),
 		updateTags: (data: any) => api.post('/api/update_tags', data),
 		createTags: (data: any) => api.post('/api/create_tags', data),
 		deleteTags: (data: any) => api.post('/api/delete_tags', data),

@@ -21,17 +21,22 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 		mode: 'onChange',
 		defaultValues: detailData,
 	});
-	const { updateTags, createTags } = useTags();
+	const { updateTags, createTags, reload } = useTags();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
-			createTags(data).then((response) => onSave(data, response));
+			createTags(data).then((response) => {
+				onSave(data, response);
+				onCancel();
+			});
 		} else {
 			updateTags(data).then((response) => {
-				onCancel();
 				onSave(data, response);
+				onCancel();
 			});
 		}
+
+		setTimeout(() => reload(), 750);
 	};
 
 	return (

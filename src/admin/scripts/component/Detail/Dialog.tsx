@@ -11,7 +11,7 @@ interface DetailItemDialogProps {
 	isOpen: boolean;
 	onCancel: (event) => void;
 	detailData: any;
-	onSave: (data) => void;
+	onSave: (data, response) => void;
 	onDelete: (data) => void;
 	afterClose?: () => void;
 }

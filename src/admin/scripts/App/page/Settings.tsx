@@ -13,13 +13,14 @@ const SettingsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const [updating, setUpdating] = useState<boolean>(false);
-	const { Settings, isLoading, updateSettings } = useSettings();
+	const { Settings, isLoading, updateSettings, reload } = useSettings();
 
 	const updateData = (data) => {
 		setUpdating(true);
 		return updateSettings(data).then(() => {
 			message.success('Changes saved', 2.5);
 			setUpdating(false);
+			return reload();
 		});
 	};
 

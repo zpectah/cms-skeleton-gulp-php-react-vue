@@ -36,7 +36,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 	});
 	const { TabPane } = Tabs;
 	const { TextArea } = Input;
-	const [updating, setUpdating] = useState<boolean>(false);
 	const [tmpState, setTmpState] = useState<{
 		language_installed: string[];
 		language_active: any;
@@ -61,7 +60,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 
 	useEffect(() => {
 		if (model) {
-			reset();
+			// reset();
 			Object.entries(model).forEach(([key, value]) => {
 				setValue(key, value);
 			});
@@ -77,7 +76,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				module_members_installed: model.module_members_installed,
 			});
 		}
-	}, [model]);
+
+		return () => {};
+	}, []);
 
 	const submitHandler = (data) => onUpdate(data);
 
@@ -778,7 +779,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				<Button.Base
 					type={'primary'}
 					htmlType={'submit'}
-					loading={updating}
+					loading={loading}
 					disabled={!formState.isValid}
 				>
 					{t('component:form.btn.update_changes')}
