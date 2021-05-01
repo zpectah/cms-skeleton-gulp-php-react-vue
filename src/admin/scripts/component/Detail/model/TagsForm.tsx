@@ -75,7 +75,9 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 					<Form.Row label={'Active'} name={'active'} control={control}>
-						{(row) => <Switch checked={row.value} onChange={row.onChange} />}
+						{(row) => (
+							<Switch checked={row.value == 1} onChange={row.onChange} />
+						)}
 					</Form.Row>
 				</Section.Base>
 			</Modal.Content>
