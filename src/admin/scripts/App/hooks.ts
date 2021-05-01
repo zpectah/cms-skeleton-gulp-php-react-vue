@@ -13,9 +13,10 @@ function useProfile() {
 		first_name: '...',
 		middle_name: '...',
 		last_name: '...',
-		level: 0,
-		group: [],
+		user_level: 0,
+		user_group: [],
 		active: true,
+		deleted: 0,
 	};
 
 	return {

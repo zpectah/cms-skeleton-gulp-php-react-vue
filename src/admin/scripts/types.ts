@@ -24,5 +24,6 @@ export interface routeProps {
 export interface commonModelProps {
 	is_new?: boolean;
 	id: string | number;
-	active: boolean;
+	active: number | boolean;
+	deleted?: number | boolean;
 }

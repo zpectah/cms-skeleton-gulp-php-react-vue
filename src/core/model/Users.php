@@ -23,7 +23,7 @@ class Users {
 
 	public function create ($conn, $requestData) {
 		// prepare
-		$query = 'INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, level, group, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?)';
+		$query = 'INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?)';
 		$types = 'ssssssisii';
 		$args = [
 			$requestData -> email,
@@ -32,8 +32,8 @@ class Users {
 			$requestData -> first_name,
 			$requestData -> middle_name,
 			$requestData -> last_name,
-			$requestData -> level,
-			$requestData -> group,
+			$requestData -> user_level,
+			$requestData -> user_group,
 			$requestData -> active,
 			0
 		];
@@ -56,7 +56,7 @@ class Users {
 
 	public function update ($conn, $requestData) {
 		// prepare
-		$query = 'UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, level = ?, group = ?, active = ? WHERE id = ?';
+		$query = 'UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?';
 		$types = 'ssssssisii';
 		$args = [
 			$requestData -> email,
@@ -65,8 +65,8 @@ class Users {
 			$requestData -> first_name,
 			$requestData -> middle_name,
 			$requestData -> last_name,
-			$requestData -> level,
-			$requestData -> group,
+			$requestData -> user_level,
+			$requestData -> user_group,
 			$requestData -> active,
 			$requestData -> id
 		];

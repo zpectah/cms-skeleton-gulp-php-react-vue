@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Switch } from 'antd';
+import { Input, Select, Switch } from 'antd';
 
+import OPTIONS from '../../../../../config/options.json';
 import { UsersItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 import { useUsers } from '../../../App/hooks';
@@ -26,8 +27,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			first_name: '',
 			middle_name: '',
 			last_name: '',
-			level: 0,
-			group: '',
+			user_level: 0,
+			user_group: '',
 			active: 1,
 			...detailData,
 		},
@@ -72,11 +73,118 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						{(row) => (
 							<Input
 								id={row.id}
-								type={'text'}
+								type={'email'}
 								name={row.name}
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Name'}
+							/>
+						)}
+					</Form.Row>
+					{/* TODO: ... */}
+					<Form.Row
+						label={'Password'}
+						name={'password'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'password'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'New password'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Nickname'}
+						name={'nickname'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Nickname'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row label={'First name'} name={'first_name'} control={control}>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'First name'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Middle name'}
+						name={'middle_name'}
+						control={control}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Middle name'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row label={'Last name'} name={'last_name'} control={control}>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Last name'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Level'}
+						name={'user_level'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Select
+								id={row.id}
+								style={{ width: '100%' }}
+								options={OPTIONS.model.Users.level}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Select level'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row label={'Group'} name={'user_group'} control={control}>
+						{(row) => (
+							<Select
+								id={row.id}
+								style={{ width: '100%' }}
+								options={OPTIONS.model.Users.group}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Select group'}
 							/>
 						)}
 					</Form.Row>
@@ -85,28 +193,6 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}
 					</Form.Row>
-					{/* TODO: ... */}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
-					{/*
-					input
-					*/}
 				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>
