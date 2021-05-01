@@ -280,7 +280,10 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		onToggle(keys);
 		setSelectedKeys([]); // TODO: reset selected for antd table !!!
 	};
-	const toggleHandler = (data: any) => onToggle(data);
+	const toggleHandler = (data: any) => {
+		message.success(`Updated successfully`, 2.5);
+		onToggle(data);
+	};
 	const deleteHandler = (data: any) => {
 		onDelete(data);
 		setSelectedKeys([]); // TODO: reset selected for antd table !!!

@@ -11,7 +11,11 @@ import { Button } from '../../component/ui';
 const TagsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Tags, isLoading, toggleTags, deleteTags } = useTags();
+	const { Tags, isLoading, toggleTags, deleteTags, reload } = useTags();
+
+	const toggleHandler = (data) => {
+		return [toggleTags(data), setTimeout(() => reload(), 250)];
+	};
 
 	return (
 		<AppLayout
@@ -40,7 +44,7 @@ const TagsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name']}
-				onToggle={toggleTags}
+				onToggle={toggleHandler}
 				onDelete={deleteTags}
 				selectable
 				allowDelete
