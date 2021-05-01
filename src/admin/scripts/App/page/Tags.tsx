@@ -17,6 +17,10 @@ const TagsPage = () => {
 		return [toggleTags(data), setTimeout(() => reload(), 250)];
 	};
 
+	const deleteHandler = (data) => {
+		return [deleteTags(data), setTimeout(() => reload(), 250)];
+	};
+
 	return (
 		<AppLayout
 			route={routes.tags}
@@ -45,7 +49,7 @@ const TagsPage = () => {
 				detailId={params.id}
 				searchAttrs={['name']}
 				onToggle={toggleHandler}
-				onDelete={deleteTags}
+				onDelete={deleteHandler}
 				selectable
 				allowDelete
 			/>

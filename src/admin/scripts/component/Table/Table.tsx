@@ -285,8 +285,10 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		onToggle(data);
 	};
 	const deleteHandler = (data: any) => {
+		message.success(`Deleted successfully`, 2.5);
 		onDelete(data);
 		setSelectedKeys([]); // TODO: reset selected for antd table !!!
+		setConfirmOpen(false);
 	};
 	const detailHandler = (data: any, response?: any) => {
 		if (data.is_new) {

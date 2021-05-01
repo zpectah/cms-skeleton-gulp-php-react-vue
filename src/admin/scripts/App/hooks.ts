@@ -20,6 +20,8 @@ function useProfile() {
 
 	return {
 		Profile: Profile,
+		// isLoading: !data && !error,
+		// isError: error,
 		// reload: () => mutate(`/api/get_profile`),
 		updateProfile: (data: any) => api.post('/api/update_profile', data),
 	};

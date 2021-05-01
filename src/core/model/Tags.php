@@ -13,7 +13,7 @@ class Tags {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = [];
 
-		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags';
+		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags WHERE deleted = 0';
 		$result = $conn -> query($query);
 
 		if ($result -> num_rows > 0) {
@@ -124,10 +124,40 @@ class Tags {
 	}
 
 	public function delete ($requestData) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
 
-		return [
-			'r' => $requestData
-		];
+		if ($conn -> connect_error) return $conn -> connect_error;
+
+		function deleteRow ($conn, $id) {
+			// prepare
+			$query = 'UPDATE tags SET deleted = 1 WHERE id = ?';
+			$types = 'i';
+			$args = [ $id ];
+
+			// execute
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$r = $stmt -> affected_rows;
+			$stmt -> close();
+
+			return $r;
+		}
+
+		$id = $requestData -> id;
+
+		if ($id) {
+			$response = deleteRow($conn, $id);
+		} else if (is_array($requestData)) {
+			foreach ($requestData as $item) {
+				$response[] = deleteRow($conn, $item['id']);
+			}
+		}
+
+		$conn -> close();
+
+		return $response;
 	}
 
 }
