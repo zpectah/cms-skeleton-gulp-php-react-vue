@@ -23,11 +23,12 @@ class Tags {
 
 	public function create ($conn, $requestData) {
 		// prepare
-		$query = 'INSERT INTO tags (name, active) VALUES (?,?)';
+		$query = 'INSERT INTO tags (name, active, deleted) VALUES (?,?)';
 		$types = 'si';
 		$args = [
 			$requestData -> name,
-			$requestData -> active
+			$requestData -> active,
+			0
 		];
 
 		// execute

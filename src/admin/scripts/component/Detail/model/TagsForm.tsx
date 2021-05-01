@@ -19,7 +19,11 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
-		defaultValues: detailData,
+		defaultValues: {
+			name: '',
+			active: 1,
+			...detailData,
+		},
 	});
 	const { updateTags, createTags, reload } = useTags();
 

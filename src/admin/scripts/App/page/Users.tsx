@@ -11,7 +11,15 @@ import { Button } from '../../component/ui';
 const UsersPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Users, isLoading, toggleUsers, deleteUsers } = useUsers();
+	const { Users, isLoading, toggleUsers, deleteUsers, reload } = useUsers();
+
+	const toggleHandler = (data) => {
+		return [toggleUsers(data), setTimeout(() => reload(), 250)];
+	};
+
+	const deleteHandler = (data) => {
+		return [deleteUsers(data), setTimeout(() => reload(), 250)];
+	};
 
 	return (
 		<AppLayout
@@ -42,8 +50,8 @@ const UsersPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'nickname', 'email']}
-				onToggle={toggleUsers}
-				onDelete={deleteUsers}
+				onToggle={toggleHandler}
+				onDelete={deleteHandler}
 				selectable
 				allowDelete
 			/>

@@ -5,7 +5,7 @@ import { Input, Switch } from 'antd';
 
 import { UsersItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
-import api from '../../../utils/api';
+import { useUsers } from '../../../App/hooks';
 
 interface UsersDetailFormProps {
 	detailData: UsersItemProps;
@@ -19,23 +19,36 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, setValue, formState } = useForm({
 		mode: 'onChange',
-		defaultValues: detailData,
+		defaultValues: {
+			email: '',
+			password: '',
+			nickname: '',
+			first_name: '',
+			middle_name: '',
+			last_name: '',
+			level: 0,
+			group: '',
+			active: 1,
+			...detailData,
+		},
 	});
 
-	// TODO
-	const model = detailData;
+	const { updateUsers, createUsers, reload } = useUsers();
 
 	const submitHandler = (data) => {
-		console.log('On Detail Submit', data);
+		if (detailData.is_new) {
+			createUsers(data).then((response) => {
+				onSave(data, response);
+				onCancel();
+			});
+		} else {
+			updateUsers(data).then((response) => {
+				onSave(data, response);
+				onCancel();
+			});
+		}
 
-		const path = detailData.is_new ? '/api/create_users' : '/api/update_users';
-
-		api.post(path, data).then((res: any) => {
-			console.log('After ... submitHandler');
-			console.log('res', res);
-
-			onSave(data);
-		});
+		setTimeout(() => reload(), 750);
 	};
 
 	return (
@@ -50,8 +63,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<Form.Row
-						label={'Name'}
-						name={'name'}
+						label={'E-mail'}
+						name={'email'}
 						control={control}
 						rules={{ required: true }}
 						required
@@ -73,13 +86,38 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 					{/* TODO: ... */}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
+					{/*
+					input
+					*/}
 				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>
 				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
 				{!detailData.is_new && (
 					<>
-						<Button.Base type="primary" onClick={() => onDelete(model)} danger>
+						<Button.Base
+							type="primary"
+							onClick={() => onDelete(detailData)}
+							danger
+						>
 							{t('btn.delete')}
 						</Button.Base>
 					</>
