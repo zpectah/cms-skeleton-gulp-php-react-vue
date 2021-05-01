@@ -6,7 +6,7 @@ namespace core\model;
 
 class Posts {
 
-	public function get ($requestData) {
+	public function get ($conn, $requestData) {
 
 		// demo data
 		return [
@@ -153,28 +153,28 @@ class Posts {
 		];
 	}
 
-	public function create ($requestData) {
+	public function create ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function update ($requestData) {
+	public function update ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function toggle ($requestData) {
+	public function toggle ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function delete ($requestData) {
+	public function delete ($conn, $requestData) {
 
 		return [
 			'r' => $requestData

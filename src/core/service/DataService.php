@@ -4,6 +4,8 @@
 namespace core\service;
 
 
+use mysqli;
+
 use core\model\Profile;
 use core\model\Settings;
 use core\model\Users;
@@ -14,6 +16,9 @@ use core\model\Tags;
 class DataService {
 
 	public function get ($model, $data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
 		$Settings = new Settings;
 		$Profile = new Profile;
 		$Users = new Users;
@@ -23,30 +28,36 @@ class DataService {
 		switch ($model) {
 
 			case 'Settings':
-				return $Settings -> get();
+				$response = $Settings -> get($conn);
+				break;
 
 			case 'Profile':
-				return $Profile -> get($data);
+				$response = $Profile -> get($conn, $data);
+				break;
 
 			case 'Users':
-				return $Users -> get($data);
+				$response = $Users -> get($conn, $data);
+				break;
 
 			case 'Posts':
-				return $Posts -> get($data);
+				$response = $Posts -> get($conn, $data);
+				break;
 
 			case 'Tags':
-				return $Tags -> get($data);
-
-
-
-			default:
-				return null;
+				$response = $Tags -> get($conn, $data);
+				break;
 
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 	public function create ($model, $data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -54,24 +65,28 @@ class DataService {
 		switch ($model) {
 
 			case 'Users':
-				return $Users -> create($data);
+				$response = $Users -> create($conn, $data);
+				break;
 
 			case 'Posts':
-				return $Posts -> create($data);
+				$response = $Posts -> create($conn, $data);
+				break;
 
 			case 'Tags':
-				return $Tags -> create($data);
-
-
-
-			default:
-				return null;
+				$response = $Tags -> create($conn, $data);
+				break;
 
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 	public function update ($model, $data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
 		$Settings = new Settings;
 		$Profile = new Profile;
 		$Users = new Users;
@@ -81,30 +96,36 @@ class DataService {
 		switch ($model) {
 
 			case 'Settings':
-				return $Settings -> update($data);
+				$response = $Settings -> update($conn, $data);
+				break;
 
 			case 'Users':
-				return $Users -> update($data);
+				$response = $Users -> update($conn, $data);
+				break;
 
 			case 'Profile':
-				return $Profile -> update($data);
+				$response = $Profile -> update($conn, $data);
+				break;
 
 			case 'Posts':
-				return $Posts -> update($data);
+				$response = $Posts -> update($conn, $data);
+				break;
 
 			case 'Tags':
-				return $Tags -> update($data);
-
-
-
-			default:
-				return null;
+				$response = $Tags -> update($conn, $data);
+				break;
 
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 	public function toggle ($model, $data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -112,24 +133,28 @@ class DataService {
 		switch ($model) {
 
 			case 'Users':
-				return $Users -> toggle($data);
+				$response = $Users -> toggle($conn, $data);
+				break;
 
 			case 'Posts':
-				return $Posts -> toggle($data);
+				$response = $Posts -> toggle($conn, $data);
+				break;
 
 			case 'Tags':
-				return $Tags -> toggle($data);
-
-
-
-			default:
-				return null;
+				$response = $Tags -> toggle($conn, $data);
+				break;
 
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 	public function delete ($model, $data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+		$response = null;
+
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -137,21 +162,22 @@ class DataService {
 		switch ($model) {
 
 			case 'Users':
-				return $Users -> delete($data);
+				$response = $Users -> delete($conn, $data);
+				break;
 
 			case 'Posts':
-				return $Posts -> delete($data);
+				$response = $Posts -> delete($conn, $data);
+				break;
 
 			case 'Tags':
-				return $Tags -> delete($data);
-
-
-
-			default:
-				return null;
+				$response = $Tags -> delete($conn, $data);
+				break;
 
 		}
 
+		$conn -> close();
+
+		return $response;
 	}
 
 

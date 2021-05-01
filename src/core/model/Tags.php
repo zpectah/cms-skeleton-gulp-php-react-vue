@@ -4,13 +4,9 @@
 namespace core\model;
 
 
-use mysqli;
-
-
 class Tags {
 
-	public function get ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function get ($conn, $requestData) {
 		$response = [];
 
 		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags WHERE deleted = 0';
@@ -22,14 +18,10 @@ class Tags {
 			}
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function create ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
-
+	public function create ($conn, $requestData) {
 		// prepare
 		$query = 'INSERT INTO tags (name, active) VALUES (?,?)';
 		$types = 'si';
@@ -51,14 +43,10 @@ class Tags {
 			$stmt -> close();
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function update ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
-
+	public function update ($conn, $requestData) {
 		// prepare
 		$query = 'UPDATE tags SET name = ?, active = ? WHERE id = ?';
 		$types = 'sii';
@@ -81,13 +69,10 @@ class Tags {
 			$stmt -> close();
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function toggle ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function toggle ($conn, $requestData) {
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -118,13 +103,10 @@ class Tags {
 			}
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function delete ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function delete ($conn, $requestData) {
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -154,8 +136,6 @@ class Tags {
 				$response[] = deleteRow($conn, $item['id']);
 			}
 		}
-
-		$conn -> close();
 
 		return $response;
 	}

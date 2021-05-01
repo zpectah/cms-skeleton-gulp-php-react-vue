@@ -4,13 +4,9 @@
 namespace core\model;
 
 
-use mysqli;
-
-
 class Settings {
 
-	public function get () {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function get ($conn) {
 		$sql = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM settings_cms';
 		$result = $conn -> query($sql);
 		$response = [];
@@ -38,13 +34,10 @@ class Settings {
 			}
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function update ($fields) {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function update ($conn, $fields) {
 		$response = [];
 
 		foreach ($fields as $k => $value) {
@@ -78,8 +71,6 @@ class Settings {
 
 			}
 		}
-
-		$conn -> close();
 
 		return $response;
 	}

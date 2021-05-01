@@ -4,13 +4,9 @@
 namespace core\model;
 
 
-use mysqli;
-
-
 class Users {
 
-	public function get ($requestData) {
-		$conn = new mysqli(...CFG_DB_CONN);
+	public function get ($conn, $requestData) {
 		$response = [];
 
 		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users';
@@ -22,33 +18,31 @@ class Users {
 			}
 		}
 
-		$conn -> close();
-
 		return $response;
 	}
 
-	public function create ($requestData) {
+	public function create ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function update ($requestData) {
+	public function update ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function toggle ($requestData) {
+	public function toggle ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function delete ($requestData) {
+	public function delete ($conn, $requestData) {
 
 		return [
 			'r' => $requestData
