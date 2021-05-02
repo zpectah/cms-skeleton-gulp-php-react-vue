@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
+import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 import api from '../../../utils/api';

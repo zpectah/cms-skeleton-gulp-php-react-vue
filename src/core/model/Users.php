@@ -126,7 +126,7 @@ class Users {
 			$response = toggleRow($conn, $id);
 		} else if (is_array($requestData)) {
 			foreach ($requestData as $item) {
-				$response[] = toggleRow($conn, $item['id']);
+				$response[] = toggleRow($conn, $item);
 			}
 		}
 
@@ -160,7 +160,7 @@ class Users {
 			$response = deleteRow($conn, $id);
 		} else if (is_array($requestData)) {
 			foreach ($requestData as $item) {
-				$response[] = deleteRow($conn, $item['id']);
+				$response[] = deleteRow($conn, $item);
 			}
 		}
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { RELOAD_HOOK_TIMEOUT } from '../../constants';
 import routes from '../routes.json';
 import { useUsers } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
@@ -14,11 +15,11 @@ const UsersPage = () => {
 	const { Users, isLoading, toggleUsers, deleteUsers, reload } = useUsers();
 
 	const toggleHandler = (data) => {
-		return [toggleUsers(data), setTimeout(() => reload(), 250)];
+		return [toggleUsers(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
 	};
 
 	const deleteHandler = (data) => {
-		return [deleteUsers(data), setTimeout(() => reload(), 250)];
+		return [deleteUsers(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
 	};
 
 	return (
@@ -38,10 +39,11 @@ const UsersPage = () => {
 				route={routes.users}
 				model={'Users'}
 				items={Users}
-				// loading={isLoading}
+				loading={isLoading}
 				columnsLayout={{
 					email: true,
 					nickname: true,
+					level: true,
 					active: true,
 				}}
 				orderByColumns={{

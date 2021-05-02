@@ -57,6 +57,7 @@ interface ListItemsProps {
 		name?: boolean;
 		email?: boolean;
 		nickname?: boolean;
+		level?: boolean;
 		title?: boolean;
 		tags?: boolean;
 		category?: boolean;
@@ -100,6 +101,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		onDelete,
 		allowDelete,
 		detailId,
+		loading,
 	} = props;
 	const { control, handleSubmit } = useForm({
 		mode: 'onChange',
@@ -110,21 +112,18 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		},
 	});
 	const [listItems, setListItems] = useState<any[]>([]);
-	const [selectedKeys, setSelectedKeys] = useState<any[]>([]);
-	const [loading, setLoading] = useState(props.loading);
+	const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([]);
 	const [detailOpen, setDetailOpen] = useState(false);
 	const [detailData, setDetailData] = useState<any>(null);
 	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [confirmData, setConfirmData] = useState<any>(null);
 
-	// Set and remodel items to list
 	useEffect(() => {
 		if (items && items.length > 0) {
 			setListItems(remodelItems(items));
 		}
 	}, [items]);
 
-	// Check url for detail url
 	useEffect(() => {
 		if (items && items.length > 0 && detailId) {
 			items.map((item) => {
@@ -135,12 +134,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		}
 	}, [items, detailId]);
 
-	// Create default object for new item (whatever)
 	useEffect(() => {
 		if (location.pathname.includes('/new')) {
 			editOpen({
-				is_new: true, // IMPORTANT
-				id: 'new', // IMPORTANT
+				// Necessary props
+				is_new: true,
+				id: 'new',
 			});
 		}
 	}, [location.pathname]);
@@ -183,6 +182,18 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'nickname',
 				key: 'nickname',
 			});
+		if (columnsLayout.level)
+			d.push({
+				title: 'Level',
+				dataIndex: 'user_level',
+				key: 'user_level',
+				render: (text) => (
+					<span>
+						{/* TODO: icon by level !!! */}
+						{text}
+					</span>
+				),
+			});
 		if (columnsLayout.tags)
 			d.push({
 				title: 'Tags',
@@ -216,6 +227,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				key: 'active',
 				align: 'end',
 				width: '100px',
+				render: (text) => (
+					<span>
+						{/* TODO: icon by active !!! */}
+						{text}
+					</span>
+				),
 			});
 
 		d.push({
@@ -263,10 +280,6 @@ const Table: React.FC<ListItemsProps> = (props) => {
 
 		return d;
 	};
-	const selectChangeHandler = (keys) => {
-		let na = [...keys];
-		setSelectedKeys(na);
-	};
 	const deleteConfirm = (record: any) => {
 		setConfirmData(record);
 		setConfirmOpen(true);
@@ -278,7 +291,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	};
 	const toggleSelected = (keys: any) => {
 		onToggle(keys);
-		setSelectedKeys([]); // TODO: reset selected for antd table !!!
+		setSelectedRowKeys([]);
 	};
 	const toggleHandler = (data: any) => {
 		message.success(`Updated successfully`, 2.5);
@@ -287,7 +300,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const deleteHandler = (data: any) => {
 		message.success(`Deleted successfully`, 2.5);
 		onDelete(data);
-		setSelectedKeys([]); // TODO: reset selected for antd table !!!
+		setSelectedRowKeys([]);
 		setConfirmOpen(false);
 	};
 	const detailHandler = (data: any, response?: any) => {
@@ -315,6 +328,18 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		}
 
 		setListItems(remodelItems(_.orderBy(tmp, [data.orderBy], [data.order])));
+	};
+
+	const rowSelection = {
+		selectedRowKeys: selectedRowKeys,
+		onSelectAll: (selected, selectedRows, changeRows) => {
+			if (selectedRowKeys.length !== 0) {
+				setSelectedRowKeys([]);
+			}
+		},
+		onChange: (selectedRowKeys, selectedRows) => {
+			setSelectedRowKeys(selectedRowKeys);
+		},
 	};
 
 	return (
@@ -382,16 +407,16 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						{selectable && allowDelete && (
 							<>
 								<Button.Base
-									disabled={selectedKeys.length === 0}
-									onClick={() => toggleSelected(selectedKeys)}
+									disabled={selectedRowKeys.length === 0}
+									onClick={() => toggleSelected(selectedRowKeys)}
 								>
-									Toggle ({selectedKeys.length})
+									Toggle ({selectedRowKeys.length})
 								</Button.Base>
 								<Button.Base
-									disabled={selectedKeys.length === 0}
-									onClick={() => deleteConfirm(selectedKeys)}
+									disabled={selectedRowKeys.length === 0}
+									onClick={() => deleteConfirm(selectedRowKeys)}
 								>
-									Delete ({selectedKeys.length})
+									Delete ({selectedRowKeys.length})
 								</Button.Base>
 							</>
 						)}
@@ -401,12 +426,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 			<AntdTable
 				columns={getColumns()}
 				dataSource={listItems}
-				rowSelection={
-					selectable && {
-						onChange: selectChangeHandler,
-					}
-				}
-				// onChange={selectChangeHandler}
+				rowSelection={selectable && rowSelection}
 				loading={loading}
 				sticky
 			/>

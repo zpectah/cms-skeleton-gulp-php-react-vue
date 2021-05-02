@@ -13,12 +13,12 @@ import {
 import Media from 'react-media';
 
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../constants';
+import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { Scrollable } from '../component/ui';
 import Navigation from '../component/Navigation';
 import { appProps } from '../types';
-import { useSettings } from '../App/hooks';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -72,6 +72,7 @@ const PanelWrapper = styled.div`
 		height: 50px;
 		flex: none;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
@@ -87,6 +88,14 @@ const PanelWrapper = styled.div`
 		width: 200px;
 		left: ${(props) => (props.open ? '50px' : '-200px')};
 	}
+`;
+const MetaName = styled.div`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: 700;
 `;
 const Trigger = styled.button`
 	width: 50px;
@@ -129,8 +138,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		toggleSpotlight,
 		logoutHandler,
 	} = props;
-	const { Settings } = useSettings();
-
 	return (
 		<>
 			<Wrapper open={sidebarOpen}>
@@ -173,12 +180,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 				</BarWrapper>
 				<PanelWrapper open={sidebarOpen}>
 					<div className="primary">
-						<div>logo</div>
-						{Settings && (
-							<>
-								<div>{Settings['project_name']}</div>
-							</>
-						)}
+						<MetaName>{CFG.CMS.META.name}</MetaName>
 					</div>
 					<div className="secondary">
 						<Scrollable.Base>

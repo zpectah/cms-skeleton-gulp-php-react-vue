@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { RELOAD_HOOK_TIMEOUT } from '../../constants';
 import routes from '../routes.json';
 import { usePosts } from '../hooks';
 import AppLayout from '../../layout/AppLayout';

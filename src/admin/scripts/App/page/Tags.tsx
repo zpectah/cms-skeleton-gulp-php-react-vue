@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { RELOAD_HOOK_TIMEOUT } from '../../constants';
 import routes from '../routes.json';
 import { useTags } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
@@ -14,11 +15,11 @@ const TagsPage = () => {
 	const { Tags, isLoading, toggleTags, deleteTags, reload } = useTags();
 
 	const toggleHandler = (data) => {
-		return [toggleTags(data), setTimeout(() => reload(), 250)];
+		return [toggleTags(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
 	};
 
 	const deleteHandler = (data) => {
-		return [deleteTags(data), setTimeout(() => reload(), 250)];
+		return [deleteTags(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
 	};
 
 	return (
@@ -38,7 +39,7 @@ const TagsPage = () => {
 				route={routes.tags}
 				model={'Tags'}
 				items={Tags}
-				// loading={isLoading}
+				loading={isLoading}
 				columnsLayout={{
 					name: true,
 					active: true,

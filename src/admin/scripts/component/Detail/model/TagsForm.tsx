@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 
+import { SUBMIT_TIMEOUT } from '../../../constants';
 import { useTags } from '../../../App/hooks';
 import { TagsItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
@@ -40,7 +41,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 			});
 		}
 
-		setTimeout(() => reload(), 750);
+		setTimeout(() => reload(), SUBMIT_TIMEOUT);
 	};
 
 	return (

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
 
 import OPTIONS from '../../../../../config/options.json';
+import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UsersItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 import { useUsers } from '../../../App/hooks';
@@ -49,7 +50,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			});
 		}
 
-		setTimeout(() => reload(), 750);
+		setTimeout(() => reload(), SUBMIT_TIMEOUT);
 	};
 
 	return (
@@ -85,6 +86,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 								onChange={row.onChange}
 								placeholder={'E-mail'}
 								disabled={!detailData.is_new}
+								// maybe set undisabled for superadmin?
 							/>
 						)}
 					</Form.Row>
@@ -96,9 +98,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						required={detailData.is_new}
 					>
 						{(row) => (
-							<Input
+							<Input.Password
 								id={row.id}
-								type={'password'}
 								name={row.name}
 								value={row.value}
 								onChange={row.onChange}

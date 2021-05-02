@@ -8,6 +8,7 @@ import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
 import { Typography } from '../component/ui';
 import { routeProps, appProps } from '../types';
+import { useSettings } from '../App/hooks';
 
 const Wrapper = styled.header`
 	width: 100%;
@@ -40,13 +41,15 @@ const Header: React.FC<HeaderProps> = (props) => {
 	const { t, i18n } = useTranslation();
 	const params: any = useParams();
 	const { children, headerTitle, route, app } = props;
+	const { Settings } = useSettings();
+	const projectName = Settings ? Settings['project_name'] : '...';
 
 	return (
 		<Wrapper>
 			<PrimaryBlock>
 				<Breadcrumb>
 					<Breadcrumb.Item>{i18n.language}</Breadcrumb.Item>
-					<Breadcrumb.Item>{CFG.CMS.META.name}</Breadcrumb.Item>
+					<Breadcrumb.Item>{projectName}</Breadcrumb.Item>
 					<Breadcrumb.Item>{app}</Breadcrumb.Item>
 					<Breadcrumb.Item>{t(`page:${route.label}`)}</Breadcrumb.Item>
 					{(params.id || params.panel) && (
