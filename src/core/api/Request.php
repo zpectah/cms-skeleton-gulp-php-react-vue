@@ -208,6 +208,113 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			// Categories
+			case 'get_categories':
+				$response['data'] = $DataService -> get('Categories', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_categories':
+				$response['data'] = $DataService -> create('Categories', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_categories':
+				$response['data'] = $DataService -> toggle('Categories', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_categories':
+				$response['data'] = $DataService -> update('Categories', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_categories':
+				$response['data'] = $DataService -> delete('Categories', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Uploads
+			case 'get_uploads':
+				$response['data'] = $DataService -> get('Uploads', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_uploads':
+				$response['data'] = $DataService -> create('Uploads', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_uploads':
+				$response['data'] = $DataService -> toggle('Uploads', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_uploads':
+				$response['data'] = $DataService -> update('Uploads', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_uploads':
+				$response['data'] = $DataService -> delete('Uploads', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Menu
+			case 'get_menu':
+				$response['data'] = $DataService -> get('Menu', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_menu':
+				$response['data'] = $DataService -> create('Menu', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_menu':
+				$response['data'] = $DataService -> toggle('Menu', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_menu':
+				$response['data'] = $DataService -> update('Menu', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_menu':
+				$response['data'] = $DataService -> delete('Menu', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// MenuItems
+			case 'get_menuItems':
+				$response['data'] = $DataService -> get('MenuItems', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_menuItems':
+				$response['data'] = $DataService -> create('MenuItems', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_menuItems':
+				$response['data'] = $DataService -> toggle('MenuItems', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_menuItems':
+				$response['data'] = $DataService -> update('MenuItems', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_menuItems':
+				$response['data'] = $DataService -> delete('MenuItems', $requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 
 			// ...

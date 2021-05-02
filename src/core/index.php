@@ -31,6 +31,10 @@ require PATH_PFX . 'core/model/Tags.php';
 require PATH_PFX . 'core/model/Requests.php';
 require PATH_PFX . 'core/model/Messages.php';
 require PATH_PFX . 'core/model/Translations.php';
+require PATH_PFX . 'core/model/Categories.php';
+require PATH_PFX . 'core/model/Uploads.php';
+require PATH_PFX . 'core/model/Menu.php';
+require PATH_PFX . 'core/model/MenuItems.php';
 
 
 /*
