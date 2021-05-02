@@ -12,14 +12,20 @@ import { Button } from '../../component/ui';
 const TagsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Tags, isLoading, toggleTags, deleteTags, reload } = useTags();
+	const { Tags, isTagsLoading, toggleTags, deleteTags, reloadTags } = useTags();
 
 	const toggleHandler = (data) => {
-		return [toggleTags(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
+		return [
+			toggleTags(data),
+			setTimeout(() => reloadTags(), RELOAD_HOOK_TIMEOUT),
+		];
 	};
 
 	const deleteHandler = (data) => {
-		return [deleteTags(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
+		return [
+			deleteTags(data),
+			setTimeout(() => reloadTags(), RELOAD_HOOK_TIMEOUT),
+		];
 	};
 
 	return (
@@ -39,7 +45,7 @@ const TagsPage = () => {
 				route={routes.tags}
 				model={'Tags'}
 				items={Tags}
-				loading={isLoading}
+				loading={isTagsLoading}
 				columnsLayout={{
 					name: true,
 					active: true,

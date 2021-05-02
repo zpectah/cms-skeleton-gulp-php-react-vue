@@ -35,7 +35,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 		},
 	});
 
-	const { updateUsers, createUsers, reload } = useUsers();
+	const { updateUsers, createUsers, reloadUsers } = useUsers();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -50,7 +50,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			});
 		}
 
-		setTimeout(() => reload(), SUBMIT_TIMEOUT);
+		setTimeout(() => reloadUsers(), SUBMIT_TIMEOUT);
 	};
 
 	return (

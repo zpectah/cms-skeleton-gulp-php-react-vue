@@ -26,7 +26,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const { updateTags, createTags, reload } = useTags();
+	const { updateTags, createTags, reloadTags } = useTags();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -41,7 +41,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 			});
 		}
 
-		setTimeout(() => reload(), SUBMIT_TIMEOUT);
+		setTimeout(() => reloadTags(), SUBMIT_TIMEOUT);
 	};
 
 	return (

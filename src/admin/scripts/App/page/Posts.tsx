@@ -12,7 +12,7 @@ import { Button } from '../../component/ui';
 const PostsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Posts, isLoading, togglePosts, deletePosts } = usePosts();
+	const { Posts, isPostsLoading, togglePosts, deletePosts } = usePosts();
 
 	return (
 		<AppLayout
@@ -31,7 +31,7 @@ const PostsPage = () => {
 				route={routes.posts}
 				model={'Posts'}
 				items={Posts}
-				// loading={isLoading}
+				loading={isPostsLoading}
 				columnsLayout={{
 					// name: true,
 					title: true,

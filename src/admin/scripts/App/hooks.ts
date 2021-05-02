@@ -21,9 +21,9 @@ function useProfile() {
 
 	return {
 		Profile: Profile,
-		// isLoading: !data && !error,
-		// isError: error,
-		// reload: () => mutate(`/api/get_profile`),
+		// isProfileLoading: !data && !error,
+		// isProfileError: error,
+		// reloadProfile: () => mutate(`/api/get_profile`),
 		updateProfile: (data: any) => api.post('/api/update_profile', data),
 		userLogin: (data: any) => api.post('/api/user_login', data),
 		userLogout: (data: any) => api.post('/api/user_logout', data),
@@ -38,9 +38,9 @@ function useSettings() {
 
 	return {
 		Settings: data?.data,
-		isLoading: !data && !error,
-		isError: error,
-		reload: () => mutate(`/api/get_settings`),
+		isSettingsLoading: !data && !error,
+		isSettingsError: error,
+		reloadSettings: () => mutate(`/api/get_settings`),
 		updateSettings: (data: any) => api.post('/api/update_settings', data),
 	};
 }
@@ -50,9 +50,9 @@ function useUsers() {
 
 	return {
 		Users: data?.data,
-		isLoading: !data && !error,
-		isError: error,
-		reload: () => mutate(`/api/get_users`),
+		isUsersLoading: !data && !error,
+		isUsersError: error,
+		reloadUsers: () => mutate(`/api/get_users`),
 		updateUsers: (data: any) => api.post('/api/update_users', data),
 		createUsers: (data: any) => api.post('/api/create_users', data),
 		deleteUsers: (data: any) => api.post('/api/delete_users', data),
@@ -65,9 +65,9 @@ function usePosts() {
 
 	return {
 		Posts: data?.data,
-		isLoading: !data && !error,
-		isError: error,
-		reload: () => mutate(`/api/get_posts`),
+		isPostsLoading: !data && !error,
+		isPostsError: error,
+		reloadPosts: () => mutate(`/api/get_posts`),
 		updatePosts: (data: any) => api.post('/api/update_posts', data),
 		createPosts: (data: any) => api.post('/api/create_posts', data),
 		deletePosts: (data: any) => api.post('/api/delete_posts', data),
@@ -80,9 +80,9 @@ function useTags() {
 
 	return {
 		Tags: data?.data,
-		isLoading: !data && !error,
-		isError: error,
-		reload: () => mutate(`/api/get_tags`),
+		isTagsLoading: !data && !error,
+		isTagsError: error,
+		reloadTags: () => mutate(`/api/get_tags`),
 		updateTags: (data: any) => api.post('/api/update_tags', data),
 		createTags: (data: any) => api.post('/api/create_tags', data),
 		deleteTags: (data: any) => api.post('/api/delete_tags', data),

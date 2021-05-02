@@ -12,14 +12,26 @@ import { Button } from '../../component/ui';
 const UsersPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Users, isLoading, toggleUsers, deleteUsers, reload } = useUsers();
+	const {
+		Users,
+		isUsersLoading,
+		toggleUsers,
+		deleteUsers,
+		reloadUsers,
+	} = useUsers();
 
 	const toggleHandler = (data) => {
-		return [toggleUsers(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
+		return [
+			toggleUsers(data),
+			setTimeout(() => reloadUsers(), RELOAD_HOOK_TIMEOUT),
+		];
 	};
 
 	const deleteHandler = (data) => {
-		return [deleteUsers(data), setTimeout(() => reload(), RELOAD_HOOK_TIMEOUT)];
+		return [
+			deleteUsers(data),
+			setTimeout(() => reloadUsers(), RELOAD_HOOK_TIMEOUT),
+		];
 	};
 
 	return (
@@ -39,7 +51,7 @@ const UsersPage = () => {
 				route={routes.users}
 				model={'Users'}
 				items={Users}
-				loading={isLoading}
+				loading={isUsersLoading}
 				columnsLayout={{
 					email: true,
 					nickname: true,

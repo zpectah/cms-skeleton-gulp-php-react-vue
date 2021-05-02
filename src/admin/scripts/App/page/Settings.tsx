@@ -13,14 +13,19 @@ const SettingsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const [updating, setUpdating] = useState<boolean>(false);
-	const { Settings, isLoading, updateSettings, reload } = useSettings();
+	const {
+		Settings,
+		isSettingsLoading,
+		updateSettings,
+		reloadSettings,
+	} = useSettings();
 
 	const updateData = (data) => {
 		setUpdating(true);
 		return updateSettings(data).then(() => {
 			message.success('Changes saved', 2.5);
 			setUpdating(false);
-			return reload();
+			return reloadSettings();
 		});
 	};
 
@@ -39,7 +44,7 @@ const SettingsPage = () => {
 					route={routes.settings}
 					panelKey={params.panel}
 					model={Settings}
-					loading={isLoading || updating}
+					loading={isSettingsLoading || updating}
 					onUpdate={updateData}
 				/>
 			) : (
