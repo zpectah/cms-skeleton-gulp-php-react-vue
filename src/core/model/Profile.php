@@ -10,6 +10,7 @@ use core\service\SessionService;
 class Profile {
 
 	public function get ($conn, $requestData) {
+		$session = new SessionService;
 		// TODO
 
 		$user = [

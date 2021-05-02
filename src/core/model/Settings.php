@@ -120,10 +120,55 @@ class Settings {
 	}
 
 	public function install_module ($conn, $requestData) {
+		$response = null;
+		$args = null;
 
-		return [
-			'r' => $requestData
-		];
+		// prepare
+		$query = ('UPDATE settings_cms SET value = ? WHERE name = ?');
+		$types = 'ss';
+		switch ($requestData -> module) {
+
+			case 'Members':
+				$args = [
+					'true',
+					'module_members_installed'
+				];
+				break;
+
+			case 'Crm':
+				$args = [
+					'true',
+					'module_crm_installed'
+				];
+				break;
+
+			case 'Market':
+				$args = [
+					'true',
+					'module_market_installed'
+				];
+				break;
+
+		}
+
+		// execute
+		if ($conn -> connect_error) {
+			$response = $conn -> connect_error;
+		} else if ($args) {
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$response = [
+				'rows' => $stmt -> affected_rows
+			];
+			$stmt -> close();
+		}
+
+		// TODO
+		// create tables for each module
+		//
+
+		return $response;
 	}
 
 	public function install_language ($conn, $requestData) {

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, message } from 'antd';
 import styled from 'styled-components';
 
 import { appProps } from '../../types';
 import { Button } from '../ui';
+import { useSettings } from '../../App/hooks';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -24,18 +25,23 @@ interface ModuleInstallerProps {
 const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
 	const { module, afterInstall, disabled = false } = props;
 	const [progress, setProgress] = useState<boolean>(false);
+	const { installModule } = useSettings();
+
+	useEffect(() => {
+		return () => {};
+	}, []);
+
 	const installHandler = () => {
 		setProgress(true);
 
-		// TODO
-		// request API
+		installModule({ module: module }).then((res) => {
+			console.log(res);
 
-		setTimeout(() => {
+			if (afterInstall) afterInstall();
 			setProgress(false);
-			afterInstall();
+
 			message.success('Module was successfully installed', 2.5);
-			// TODO: set error message when error from BE installation
-		}, 1000);
+		});
 	};
 
 	return (

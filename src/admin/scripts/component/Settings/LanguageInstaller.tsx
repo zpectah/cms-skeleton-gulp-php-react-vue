@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { message, Select, Alert } from 'antd';
 import styled from 'styled-components';
 
 import OPTIONS from '../../../../config/options.json';
 import NUMS from '../../../../config/nums.json';
 import { Button } from '../ui';
+import { useSettings } from '../../App/hooks';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -13,10 +14,6 @@ const Wrapper = styled.div`
 const StyledSelect = styled(Select)`
 	width: calc(100% - 1rem);
 	margin-right: 1rem;
-`;
-const Spacer = styled.div`
-	width: 100%;
-	height: 1rem;
 `;
 
 interface LanguageInstallerProps {
@@ -27,8 +24,9 @@ interface LanguageInstallerProps {
 const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	const { installed, afterInstall } = props;
 	const { Option } = Select;
-	const [loading, setLoading] = useState<boolean>(false);
+	const [progress, setProgress] = useState<boolean>(false);
 	const [langToInstall, setLangToInstall] = useState<string[]>([]);
+	const { installLanguage } = useSettings();
 
 	const renderOptions = () => {
 		return OPTIONS.language.available.map((item) => {
@@ -44,21 +42,23 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 		});
 	};
 
+	useEffect(() => {
+		return () => {};
+	}, []);
+
 	const installHandler = () => {
-		setLoading(true);
+		setProgress(true);
 		let na = [...installed, ...langToInstall];
 
-		// TODO
-		console.log(na);
-		// request API
+		installLanguage({ installed: na }).then((res) => {
+			console.log(res);
 
-		setTimeout(() => {
 			if (afterInstall) afterInstall(na);
+			setProgress(false);
 			setLangToInstall([]);
-			setLoading(false);
+
 			message.success('Languages was successfully installed', 2.5);
-			// TODO: set error message when error from BE installation
-		}, 1000);
+		});
 	};
 
 	return (
@@ -77,16 +77,11 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 					type="primary"
 					onClick={installHandler}
 					disabled={langToInstall.length === 0}
-					loading={loading}
+					loading={progress}
 				>
 					Install
 				</Button.Base>
 			</Wrapper>
-			<Spacer />
-			<Alert
-				message="This is an irreversible step, continue only if you know what you are doing."
-				type="info"
-			/>
 		</>
 	);
 };

@@ -434,6 +434,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						<Section.Base
 							title={'Language'}
 							titleAnchor={'language'}
+							description={
+								'This is for showing content with more language mutations. Installing new language is irreversible step and wont be uninstalled, only disabled.'
+							}
 							withBorder
 						>
 							<UiForm.Row

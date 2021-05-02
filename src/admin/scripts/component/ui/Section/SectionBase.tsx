@@ -18,18 +18,28 @@ const Wrapper = styled.section`
 const Heading = styled.div`
 	& h3 {
 	}
+	& p {
+	}
 `;
 const Content = styled.div``;
 
 interface SectionProps {
 	title?: string;
 	subtitle?: string;
+	description?: string;
 	titleAnchor?: string;
 	withBorder?: boolean;
 }
 
 const SectionBase: React.FC<SectionProps> = (props) => {
-	const { children, title, subtitle, titleAnchor, withBorder = false } = props;
+	const {
+		children,
+		title,
+		subtitle,
+		description,
+		titleAnchor,
+		withBorder = false,
+	} = props;
 
 	return (
 		<Wrapper withBorder={withBorder}>
@@ -41,6 +51,7 @@ const SectionBase: React.FC<SectionProps> = (props) => {
 						</Title>
 					)}
 					{subtitle && <Title level={'h5'}>{subtitle}</Title>}
+					{description && <p>{description}</p>}
 				</Heading>
 			)}
 			<Content>{children}</Content>

@@ -17,13 +17,13 @@ import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 
 import {
-	IconMaterial_Visibility,
-	IconMaterial_VisibilityOff,
 	IconMaterial_Face,
 	IconMaterial_PermIdentity,
 	IconMaterial_SupervisorAccount,
 	IconMaterial_SupervisedUserCircle,
 	IconMaterial_VerifiedUser,
+	IconMaterial_Check,
+	IconMaterial_Close,
 } from '../../../../libs/svg/material-icons';
 import { MESSAGE_SUCCESS_DURATION } from '../../constants';
 import { Button } from '../ui';
@@ -44,10 +44,18 @@ const Heading = styled.div`
 const StyledSearch = styled(Input)`
 	width: 250px;
 `;
+const InlineIcon = styled.span`
+	& svg {
+		max-height: 1rem;
+	}
+`;
 const RowIconBlock = styled.span`
 	& svg {
 		max-width: 1.25rem;
 	}
+`;
+const RowLink = styled.a`
+	opacity: ${(props) => (props.notActive ? '.55' : '1')};
 `;
 
 const remodelItems = (input: any[]) => {
@@ -132,6 +140,8 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 	const [detailData, setDetailData] = useState<any>(null);
 	const [confirmData, setConfirmData] = useState<any>(null);
+	// TODO: select active language toggle
+	const [lang, setLang] = useState('en');
 
 	useEffect(() => {
 		if (items && items.length > 0) {
@@ -172,7 +182,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'name',
 				key: 'name',
 				render: (text, record) => (
-					<a onClick={() => editOpen(record)}>{text}</a>
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{text}
+					</RowLink>
 				),
 			});
 		if (columnsLayout.email)
@@ -181,7 +196,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'email',
 				key: 'email',
 				render: (text, record) => (
-					<a onClick={() => editOpen(record)}>{text}</a>
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{text}
+					</RowLink>
 				),
 			});
 		if (columnsLayout.title)
@@ -190,7 +210,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'title',
 				key: 'title',
 				render: (text, record) => (
-					<a onClick={() => editOpen(record)}>{record.lang.en.title}</a>
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{record.lang[lang].title}
+					</RowLink>
 				),
 			});
 		if (columnsLayout.nickname)
@@ -198,6 +223,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: t('component:Table.column_label.nickname'),
 				dataIndex: 'nickname',
 				key: 'nickname',
+				render: (text) => <b>{text}</b>,
 			});
 		if (columnsLayout.level)
 			d.push({
@@ -242,24 +268,6 @@ const Table: React.FC<ListItemsProps> = (props) => {
 							<Tag key={ctg}>{ctg}</Tag>
 						))}
 					</>
-				),
-			});
-		if (columnsLayout.active)
-			d.push({
-				title: t('component:Table.column_label.active'),
-				dataIndex: 'active',
-				key: 'active',
-				align: 'end',
-				width: '100px',
-				render: (text) => (
-					<RowIconBlock
-						dangerouslySetInnerHTML={{
-							__html:
-								text == 1
-									? IconMaterial_Visibility
-									: IconMaterial_VisibilityOff,
-						}}
-					/>
 				),
 			});
 
