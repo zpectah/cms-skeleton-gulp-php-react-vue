@@ -4,13 +4,15 @@
 namespace core\service;
 
 
-use mysqli;
-
+use core\model\Messages;
+use core\model\Requests;
+use core\model\Translations;
 use core\model\Profile;
 use core\model\Settings;
 use core\model\Users;
 use core\model\Posts;
 use core\model\Tags;
+use mysqli;
 
 
 class DataService {
@@ -24,6 +26,9 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
+		$Translations = new Translations;
+		$Requests = new Requests;
+		$Messages = new Messages;
 
 		switch ($model) {
 
@@ -47,6 +52,18 @@ class DataService {
 				$response = $Tags -> get($conn, $data);
 				break;
 
+			case 'Translations':
+				$response = $Translations -> get($conn, $data);
+				break;
+
+			case 'Requests':
+				$response = $Requests -> get($conn, $data);
+				break;
+
+			case 'Messages':
+				$response = $Messages -> get($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -61,6 +78,9 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
+		$Translations = new Translations;
+		$Requests = new Requests;
+		$Messages = new Messages;
 
 		switch ($model) {
 
@@ -74,6 +94,18 @@ class DataService {
 
 			case 'Tags':
 				$response = $Tags -> create($conn, $data);
+				break;
+
+			case 'Translations':
+				$response = $Translations -> create($conn, $data);
+				break;
+
+			case 'Requests':
+				$response = $Requests -> create($conn, $data);
+				break;
+
+			case 'Messages':
+				$response = $Messages -> create($conn, $data);
 				break;
 
 		}
@@ -92,6 +124,7 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
+		$Translations = new Translations;
 
 		switch ($model) {
 
@@ -115,6 +148,10 @@ class DataService {
 				$response = $Tags -> update($conn, $data);
 				break;
 
+			case 'Translations':
+				$response = $Translations -> update($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -129,6 +166,7 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
+		$Translations = new Translations;
 
 		switch ($model) {
 
@@ -142,6 +180,10 @@ class DataService {
 
 			case 'Tags':
 				$response = $Tags -> toggle($conn, $data);
+				break;
+
+			case 'Translations':
+				$response = $Translations -> toggle($conn, $data);
 				break;
 
 		}
@@ -158,6 +200,9 @@ class DataService {
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
+		$Translations = new Translations;
+		$Requests = new Requests;
+		$Messages = new Messages;
 
 		switch ($model) {
 
@@ -171,6 +216,18 @@ class DataService {
 
 			case 'Tags':
 				$response = $Tags -> delete($conn, $data);
+				break;
+
+			case 'Translations':
+				$response = $Translations -> delete($conn, $data);
+				break;
+
+			case 'Requests':
+				$response = $Requests -> delete($conn, $data);
+				break;
+
+			case 'Messages':
+				$response = $Messages -> delete($conn, $data);
 				break;
 
 		}

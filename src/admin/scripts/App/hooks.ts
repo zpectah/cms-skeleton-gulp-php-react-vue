@@ -4,6 +4,7 @@ import api from '../utils/api';
 import { UsersItemProps } from './types';
 
 function useProfile() {
+	// TODO
 	// const { data, error } = useSWR(`/api/get_profile`);
 	const Profile: UsersItemProps = {
 		id: 1,
@@ -90,4 +91,54 @@ function useTags() {
 	};
 }
 
-export { useProfile, useSettings, useUsers, usePosts, useTags };
+function useRequests() {
+	// TODO
+
+	return {
+		Requests: [],
+		isRequestsLoading: false,
+		isRequestError: false,
+		reloadRequests: () => [],
+		createRequests: (data: any) => {},
+		deleteRequests: (data: any) => {},
+	};
+}
+
+function useMessages() {
+	// TODO
+
+	return {
+		Messages: [],
+		isMessagesLoading: false,
+		isMessagesError: false,
+		reloadMessages: () => [],
+		createMessages: (data: any) => {},
+		deleteMessages: (data: any) => {},
+	};
+}
+
+function useTranslations() {
+	// TODO
+
+	return {
+		Tags: [],
+		isTagsLoading: false,
+		isTagsError: false,
+		reloadTags: () => [],
+		updateTags: (data: any) => {},
+		createTags: (data: any) => {},
+		deleteTags: (data: any) => {},
+		toggleTags: (data: any) => {},
+	};
+}
+
+export {
+	useProfile,
+	useSettings,
+	useUsers,
+	usePosts,
+	useTags,
+	useRequests,
+	useMessages,
+	useTranslations,
+};

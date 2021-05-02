@@ -148,6 +148,66 @@ class Request {
 				break;
 
 
+			// Translations
+			case 'get_translations':
+				$response['data'] = $DataService -> get('Translations', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_translations':
+				$response['data'] = $DataService -> create('Translations', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_translations':
+				$response['data'] = $DataService -> toggle('Translations', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_translations':
+				$response['data'] = $DataService -> update('Translations', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_translations':
+				$response['data'] = $DataService -> delete('Translations', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Requests
+			case 'get_requests':
+				$response['data'] = $DataService -> get('Requests', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_requests':
+				$response['data'] = $DataService -> create('Requests', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_requests':
+				$response['data'] = $DataService -> delete('Requests', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Messages
+			case 'get_messages':
+				$response['data'] = $DataService -> get('Messages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_messages':
+				$response['data'] = $DataService -> create('Messages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_messages':
+				$response['data'] = $DataService -> delete('Messages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 
 			// ...
