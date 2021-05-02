@@ -18,7 +18,7 @@ interface UsersDetailFormProps {
 const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { t } = useTranslation(['common']);
-	const { control, handleSubmit, setValue, formState } = useForm({
+	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			email: '',
@@ -28,7 +28,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			middle_name: '',
 			last_name: '',
 			user_level: 0,
-			user_group: '',
+			user_group: 'default',
 			active: 1,
 			...detailData,
 		},
@@ -54,6 +54,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
+			<input
+				type="hidden"
+				name="id"
+				ref={register({ required: true })}
+				defaultValue={detailData.id}
+			/>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -81,7 +87,6 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					{/* TODO: ... */}
 					<Form.Row
 						label={'Password'}
 						name={'password'}

@@ -17,7 +17,7 @@ interface PostsDetailFormProps {
 const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { t } = useTranslation(['common']);
-	const { control, handleSubmit, setValue, formState } = useForm({
+	const { control, handleSubmit, setValue, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: detailData,
 	});
@@ -40,6 +40,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
+			<input
+				type="hidden"
+				name="id"
+				ref={register({ required: true })}
+				defaultValue={detailData.id}
+			/>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
