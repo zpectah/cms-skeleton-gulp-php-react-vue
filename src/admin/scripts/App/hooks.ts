@@ -1,30 +1,16 @@
 import useSWR, { mutate } from 'swr';
 
 import api from '../utils/api';
-import { UsersItemProps } from './types';
+// import { UsersItemProps } from './types';
 
 function useProfile() {
-	// TODO
-	// const { data, error } = useSWR(`/api/get_profile`);
-	const Profile: UsersItemProps = {
-		id: 1,
-		email: 'default@user.cms',
-		password: '...',
-		nickname: 'Nickname',
-		first_name: '...',
-		middle_name: '...',
-		last_name: '...',
-		user_level: 7,
-		user_group: '',
-		active: true,
-		deleted: 0,
-	};
+	const { data, error } = useSWR(`/api/get_profile`);
 
 	return {
-		Profile: Profile,
-		// isProfileLoading: !data && !error,
-		// isProfileError: error,
-		// reloadProfile: () => mutate(`/api/get_profile`),
+		Profile: data?.data,
+		isProfileLoading: !data && !error,
+		isProfileError: error,
+		reloadProfile: () => mutate(`/api/get_profile`),
 		updateProfile: (data: any) => api.post('/api/update_profile', data),
 		userLogin: (data: any) => api.post('/api/user_login', data),
 		userLogout: (data: any) => api.post('/api/user_logout', data),

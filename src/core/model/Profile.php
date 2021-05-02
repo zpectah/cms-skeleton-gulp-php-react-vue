@@ -10,10 +10,21 @@ use core\service\SessionService;
 class Profile {
 
 	public function get ($conn, $requestData) {
+		// TODO
 
-		return [
-			'r' => $requestData
+		$user = [
+			'id' => 1,
+			'email' => 'sychrat@gmail.com',
+			'nickname' => 'zpecter',
+			'first_name' => 'Tomas',
+			'middle_name' => '',
+			'last_name' => 'Sychra',
+			'user_level' => 7,
+			'user_group' => 'default',
+			'active' => 1
 		];
+
+		return $user;
 	}
 
 	public function update ($conn, $requestData) {

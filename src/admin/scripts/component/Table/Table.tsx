@@ -263,7 +263,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				),
 			});
 
-		if (Profile.user_level > 0)
+		if (Profile?.user_level > 0)
 			d.push({
 				title: t('component:Table.column_label.action'),
 				key: 'action',
