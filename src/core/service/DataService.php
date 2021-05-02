@@ -180,5 +180,30 @@ class DataService {
 		return $response;
 	}
 
+	public function login ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Profile = new Profile;
+
+		$response = $Profile -> login($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function logout ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Profile = new Profile;
+
+		$response = $Profile -> logout($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+
 
 }

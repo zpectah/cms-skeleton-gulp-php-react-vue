@@ -16,6 +16,7 @@ require PATH_PFX . 'config/constants.php';
  * Services
  */
 require PATH_PFX . 'core/service/DataService.php';
+require PATH_PFX . 'core/service/SessionService.php';
 
 
 /*

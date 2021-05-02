@@ -46,7 +46,16 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
-			// TODO: _login / _logout / _lostPassword
+			case 'user_login':
+				$response['data'] = $DataService -> login($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'user_logout':
+				$response['data'] = $DataService -> logout($requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 			// Users
 			case 'get_users':
