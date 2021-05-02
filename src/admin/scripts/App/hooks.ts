@@ -92,43 +92,47 @@ function useTags() {
 }
 
 function useRequests() {
-	// TODO
+	const { data, error } = useSWR(`/api/get_requests`);
 
 	return {
-		Requests: [],
-		isRequestsLoading: false,
-		isRequestError: false,
-		reloadRequests: () => [],
-		createRequests: (data: any) => {},
-		deleteRequests: (data: any) => {},
+		Requests: data?.data,
+		isRequestsLoading: !data && !error,
+		isRequestError: error,
+		reloadRequests: () => mutate(`/api/get_requests`),
+		createRequests: (data: any) => api.post('/api/create_requests', data),
+		deleteRequests: (data: any) => api.post('/api/delete_requests', data),
 	};
 }
 
 function useMessages() {
-	// TODO
+	const { data, error } = useSWR(`/api/get_messages`); // TODO
 
 	return {
-		Messages: [],
-		isMessagesLoading: false,
-		isMessagesError: false,
-		reloadMessages: () => [],
-		createMessages: (data: any) => {},
-		deleteMessages: (data: any) => {},
+		Messages: data?.data,
+		isMessagesLoading: !data && !error,
+		isMessagesError: error,
+		reloadMessages: () => mutate(`/api/get_messages`),
+		createMessages: (data: any) => api.post('/api/create_messages', data),
+		deleteMessages: (data: any) => api.post('/api/delete_messages', data),
 	};
 }
 
 function useTranslations() {
-	// TODO
+	const { data, error } = useSWR(`/api/get_translations`);
 
 	return {
-		Tags: [],
-		isTagsLoading: false,
-		isTagsError: false,
-		reloadTags: () => [],
-		updateTags: (data: any) => {},
-		createTags: (data: any) => {},
-		deleteTags: (data: any) => {},
-		toggleTags: (data: any) => {},
+		Translations: data?.data,
+		isTranslationsLoading: !data && !error,
+		isTranslationsError: error,
+		reloadTranslations: () => mutate(`/api/get_translations`),
+		updateTranslations: (data: any) =>
+			api.post('/api/update_translations', data),
+		createTranslations: (data: any) =>
+			api.post('/api/create_translations', data),
+		deleteTranslations: (data: any) =>
+			api.post('/api/delete_translations', data),
+		toggleTranslations: (data: any) =>
+			api.post('/api/toggle_translations', data),
 	};
 }
 
