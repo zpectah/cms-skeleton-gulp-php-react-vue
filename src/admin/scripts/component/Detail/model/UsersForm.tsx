@@ -83,7 +83,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 								name={row.name}
 								value={row.value}
 								onChange={row.onChange}
-								placeholder={'Name'}
+								placeholder={'E-mail'}
+								disabled={!detailData.is_new}
 							/>
 						)}
 					</Form.Row>
@@ -91,8 +92,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						label={'Password'}
 						name={'password'}
 						control={control}
-						rules={{ required: true }}
-						required
+						rules={{ required: detailData.is_new }}
+						required={detailData.is_new}
 					>
 						{(row) => (
 							<Input

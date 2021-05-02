@@ -9,7 +9,7 @@ class Tags {
 	public function get ($conn, $requestData) {
 		$response = [];
 
-		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags WHERE deleted = 0';
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags WHERE deleted = 0');
 		$result = $conn -> query($query);
 
 		if ($result -> num_rows > 0) {
@@ -23,7 +23,7 @@ class Tags {
 
 	public function create ($conn, $requestData) {
 		// prepare
-		$query = 'INSERT INTO tags (name, active, deleted) VALUES (?,?)';
+		$query = ('INSERT INTO tags (name, active, deleted) VALUES (?,?)');
 		$types = 'si';
 		$args = [
 			$requestData -> name,
@@ -49,7 +49,7 @@ class Tags {
 
 	public function update ($conn, $requestData) {
 		// prepare
-		$query = 'UPDATE tags SET name = ?, active = ? WHERE id = ?';
+		$query = ('UPDATE tags SET name = ?, active = ? WHERE id = ?');
 		$types = 'sii';
 		$args = [
 			$requestData -> name,
@@ -80,7 +80,7 @@ class Tags {
 
 		function toggleRow ($conn, $id) {
 			// prepare
-			$query = 'UPDATE tags SET active = IF(active=1, 0, 1) WHERE id = ?';
+			$query = ('UPDATE tags SET active = IF(active=1, 0, 1) WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 
@@ -114,7 +114,7 @@ class Tags {
 
 		function deleteRow ($conn, $id) {
 			// prepare
-			$query = 'UPDATE tags SET deleted = 1 WHERE id = ?';
+			$query = ('UPDATE tags SET deleted = 1 WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 

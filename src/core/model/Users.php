@@ -9,11 +9,12 @@ class Users {
 	public function get ($conn, $requestData) {
 		$response = [];
 
-		$query = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users WHERE deleted = 0';
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users WHERE deleted = 0');
 		$result = $conn -> query($query);
 
 		if ($result -> num_rows > 0) {
 			while($row = $result -> fetch_assoc()) {
+				unset($row['password']);
 				$response[] = $row;
 			}
 		}
@@ -23,7 +24,7 @@ class Users {
 
 	public function create ($conn, $requestData) {
 		// prepare
-		$query = 'INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?)';
+		$query = ('INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?)');
 		$types = 'ssssssisii';
 		$args = [
 			$requestData -> email,
@@ -56,11 +57,22 @@ class Users {
 
 	public function update ($conn, $requestData) {
 		// prepare
-		$query = 'UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?';
-		$types = 'ssssssisii';
-		$args = [
+		$password = $requestData -> password;
+		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?') : ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?');
+		$types = $password ? 'ssssssisii' : 'sssssisii';
+		$args = $password ? [
 			$requestData -> email,
 			$requestData -> password,
+			$requestData -> nickname,
+			$requestData -> first_name,
+			$requestData -> middle_name,
+			$requestData -> last_name,
+			$requestData -> user_level,
+			$requestData -> user_group,
+			$requestData -> active,
+			$requestData -> id
+		] : [
+			$requestData -> email,
 			$requestData -> nickname,
 			$requestData -> first_name,
 			$requestData -> middle_name,
@@ -94,7 +106,7 @@ class Users {
 
 		function toggleRow ($conn, $id) {
 			// prepare
-			$query = 'UPDATE users SET active = IF(active=1, 0, 1) WHERE id = ?';
+			$query = ('UPDATE users SET active = IF(active=1, 0, 1) WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 
@@ -128,7 +140,7 @@ class Users {
 
 		function deleteRow ($conn, $id) {
 			// prepare
-			$query = 'UPDATE users SET deleted = 1 WHERE id = ?';
+			$query = ('UPDATE users SET deleted = 1 WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 

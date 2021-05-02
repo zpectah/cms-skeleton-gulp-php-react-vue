@@ -7,7 +7,7 @@ namespace core\model;
 class Settings {
 
 	public function get ($conn) {
-		$sql = '/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM settings_cms';
+		$sql = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM settings_cms');
 		$result = $conn -> query($sql);
 		$response = [];
 
@@ -41,8 +41,18 @@ class Settings {
 		$response = [];
 
 		foreach ($fields as $k => $value) {
-			$query = "SELECT * FROM settings_cms WHERE name = '$k'";
-			$result = $conn -> query($query);
+			// prepare
+			$query = ('SELECT * FROM settings_cms WHERE name = ?');
+			$types = 's';
+			$args = [ $k ];
+
+			// execute
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$result = $stmt -> get_result();
+			$stmt -> close();
+
 			while ($row = $result -> fetch_assoc() ) {
 				switch ($row['format']) {
 
@@ -61,12 +71,20 @@ class Settings {
 
 				}
 
-				$sql = "UPDATE settings_cms SET value='$new_value' WHERE name='$k'";
+				// prepare
+				$query2 = ('UPDATE settings_cms SET value = ? WHERE name = ?');
+				$types2 = 'ss';
+				$args2 = [ $new_value, $k ];
 
-				if ($conn -> query($sql)) {
-					$response[$k] = 'OK';
+				// execute
+				if ($conn -> connect_error) {
+					$response = $conn -> connect_error;
 				} else {
-					$response[$k] = $conn -> error;
+					$stmt2 = $conn -> prepare($query2);
+					$stmt2 -> bind_param($types2, ...$args2);
+					$stmt2 -> execute();
+					$response[$k] = $stmt2 -> affected_rows;
+					$stmt2 -> close();
 				}
 
 			}
