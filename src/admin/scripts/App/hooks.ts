@@ -25,6 +25,11 @@ function useProfile() {
 		// isError: error,
 		// reload: () => mutate(`/api/get_profile`),
 		updateProfile: (data: any) => api.post('/api/update_profile', data),
+		userLogin: (data: any) => api.post('/api/user_login', data),
+		userLogout: (data: any) => api.post('/api/user_logout', data),
+		userLostPassword: (data: any) => api.post('/api/user_lost_password', data),
+		userLostPasswordReset: (data: any) =>
+			api.post('/api/user_lost_password_reset', data),
 	};
 }
 

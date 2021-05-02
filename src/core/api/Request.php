@@ -47,12 +47,22 @@ class Request {
 				break;
 
 			case 'user_login':
-				$response['data'] = $DataService -> login($requestData);
+				$response['data'] = $DataService -> user_login($requestData);
 				$response['status'] = 'ok';
 				break;
 
 			case 'user_logout':
-				$response['data'] = $DataService -> logout($requestData);
+				$response['data'] = $DataService -> user_logout($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'user_lost_password':
+				$response['data'] = $DataService -> user_lost_password($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'user_lost_password_reset':
+				$response['data'] = $DataService -> user_lost_password_reset($requestData);
 				$response['status'] = 'ok';
 				break;
 

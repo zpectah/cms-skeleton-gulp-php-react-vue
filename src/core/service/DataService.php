@@ -180,7 +180,7 @@ class DataService {
 		return $response;
 	}
 
-	public function login ($data) {
+	public function user_login ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
 
 		$Profile = new Profile;
@@ -192,12 +192,36 @@ class DataService {
 		return $response;
 	}
 
-	public function logout ($data) {
+	public function user_logout ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
 
 		$Profile = new Profile;
 
 		$response = $Profile -> logout($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function user_lost_password ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Profile = new Profile;
+
+		$response = $Profile -> lost_password($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function user_lost_password_reset ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Profile = new Profile;
+
+		$response = $Profile -> lost_password_reset($conn, $data);
 
 		$conn -> close();
 

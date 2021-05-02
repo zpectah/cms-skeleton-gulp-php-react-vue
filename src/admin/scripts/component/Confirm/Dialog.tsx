@@ -7,7 +7,7 @@ import { Button, Modal } from '../ui';
 const ConfirmWrapper = styled.div`
 	width: 100%;
 	height: auto;
-	padding: 1.5rem 0;
+	padding: 2.5rem 0 1.5rem 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;

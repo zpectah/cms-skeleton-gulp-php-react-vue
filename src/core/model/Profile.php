@@ -44,5 +44,23 @@ class Profile {
 		];
 	}
 
+	public function lost_password ($conn, $requestData) {
+
+		// email
+
+		return [
+			'r' => $requestData
+		];
+	}
+
+	public function lost_password_reset ($conn, $requestData) {
+
+		// email
+
+		return [
+			'r' => $requestData
+		];
+	}
+
 
 }
