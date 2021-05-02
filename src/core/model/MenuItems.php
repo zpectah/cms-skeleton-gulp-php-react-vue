@@ -11,14 +11,14 @@ class MenuItems {
 		return [];
 	}
 
-	public function create ($conn, $requestData) {
+	public function create ($conn, $requestData, $languages) {
 
 		return [
 			'r' => $requestData
 		];
 	}
 
-	public function update ($conn, $requestData) {
+	public function update ($conn, $requestData, $languages) {
 
 		return [
 			'r' => $requestData

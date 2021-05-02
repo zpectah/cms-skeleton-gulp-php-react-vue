@@ -1,7 +1,6 @@
 import useSWR, { mutate } from 'swr';
 
 import api from '../utils/api';
-// import { UsersItemProps } from './types';
 
 function useProfile() {
 	const { data, error } = useSWR(`/api/get_profile`);
@@ -29,6 +28,8 @@ function useSettings() {
 		isSettingsError: error,
 		reloadSettings: () => mutate(`/api/get_settings`),
 		updateSettings: (data: any) => api.post('/api/update_settings', data),
+		installLanguage: (data: any) => api.post('/api/install_language', data),
+		installModule: (data: any) => api.post('/api/install_module', data),
 	};
 }
 

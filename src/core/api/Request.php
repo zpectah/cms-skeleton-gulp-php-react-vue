@@ -34,6 +34,16 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+			case 'install_language':
+				$response['data'] = $DataService -> install_language($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'install_module':
+				$response['data'] = $DataService -> install_module($requestData);
+				$response['status'] = 'ok';
+				break;
+
 
 			// Profile
 			case 'get_profile':

@@ -101,6 +101,7 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Tags = new Tags;
@@ -112,6 +113,8 @@ class DataService {
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
 
+		$languages = $Settings -> get_languages($conn);
+
 		switch ($model) {
 
 			case 'Users':
@@ -119,7 +122,7 @@ class DataService {
 				break;
 
 			case 'Posts':
-				$response = $Posts -> create($conn, $data);
+				$response = $Posts -> create($conn, $data, $languages);
 				break;
 
 			case 'Tags':
@@ -127,7 +130,7 @@ class DataService {
 				break;
 
 			case 'Translations':
-				$response = $Translations -> create($conn, $data);
+				$response = $Translations -> create($conn, $data, $languages);
 				break;
 
 			case 'Requests':
@@ -139,11 +142,11 @@ class DataService {
 				break;
 
 			case 'Categories':
-				$response = $Categories -> create($conn, $data);
+				$response = $Categories -> create($conn, $data, $languages);
 				break;
 
 			case 'Uploads':
-				$response = $Uploads -> create($conn, $data);
+				$response = $Uploads -> create($conn, $data, $languages);
 				break;
 
 			case 'Menu':
@@ -151,7 +154,7 @@ class DataService {
 				break;
 
 			case 'MenuItems':
-				$response = $MenuItems -> create($conn, $data);
+				$response = $MenuItems -> create($conn, $data, $languages);
 				break;
 
 		}
@@ -176,6 +179,8 @@ class DataService {
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
 
+		$languages = $Settings -> get_languages($conn);
+
 		switch ($model) {
 
 			case 'Settings':
@@ -191,7 +196,7 @@ class DataService {
 				break;
 
 			case 'Posts':
-				$response = $Posts -> update($conn, $data);
+				$response = $Posts -> update($conn, $data, $languages);
 				break;
 
 			case 'Tags':
@@ -199,15 +204,15 @@ class DataService {
 				break;
 
 			case 'Translations':
-				$response = $Translations -> update($conn, $data);
+				$response = $Translations -> update($conn, $data, $languages);
 				break;
 
 			case 'Categories':
-				$response = $Categories -> update($conn, $data);
+				$response = $Categories -> update($conn, $data, $languages);
 				break;
 
 			case 'Uploads':
-				$response = $Uploads -> update($conn, $data);
+				$response = $Uploads -> update($conn, $data, $languages);
 				break;
 
 			case 'Menu':
@@ -215,7 +220,7 @@ class DataService {
 				break;
 
 			case 'MenuItems':
-				$response = $MenuItems -> update($conn, $data);
+				$response = $MenuItems -> update($conn, $data, $languages);
 				break;
 
 		}
@@ -388,6 +393,30 @@ class DataService {
 		$Profile = new Profile;
 
 		$response = $Profile -> lost_password_reset($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function install_language ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Settings = new Settings;
+
+		$response = $Settings -> install_language($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function install_module ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Settings = new Settings;
+
+		$response = $Settings -> install_module($conn, $data);
 
 		$conn -> close();
 

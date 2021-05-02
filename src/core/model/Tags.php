@@ -9,6 +9,18 @@ class Tags {
 	public function get ($conn, $requestData) {
 		$response = [];
 
+//		// prepare
+//		$query = ('SELECT * FROM settings_cms WHERE name = ?');
+//		$types = 's';
+//		$args = [ $k ];
+//
+//		// execute
+//		$stmt = $conn -> prepare($query);
+//		$stmt -> bind_param($types, ...$args);
+//		$stmt -> execute();
+//		$result = $stmt -> get_result();
+//		$stmt -> close();
+
 		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM tags WHERE deleted = 0');
 		$result = $conn -> query($query);
 

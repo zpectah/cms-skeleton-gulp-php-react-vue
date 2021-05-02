@@ -93,4 +93,44 @@ class Settings {
 		return $response;
 	}
 
+	public function get_languages ($conn) {
+		$response = [];
+
+		// prepare
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM settings_cms WHERE context = ?');
+		$types = 's';
+		$args = [ 'language' ];
+
+		// execute
+		$stmt = $conn -> prepare($query);
+		$stmt -> bind_param($types, ...$args);
+		$stmt -> execute();
+		$result = $stmt -> get_result();
+		$stmt -> close();
+
+		if ($result -> num_rows > 0) {
+			while($row = $result -> fetch_assoc()) {
+				if ($row['name'] == 'language_default') $response['default'] = $row['value'];
+				if ($row['name'] == 'language_installed') $response['installed'] = implode(",", $row['value']);
+				if ($row['name'] == 'language_active') $response['active'] = implode(",", $row['value']);
+			}
+		}
+
+		return $response;
+	}
+
+	public function install_module ($conn, $requestData) {
+
+		return [
+			'r' => $requestData
+		];
+	}
+
+	public function install_language ($conn, $requestData) {
+
+		return [
+			'r' => $requestData
+		];
+	}
+
 }
