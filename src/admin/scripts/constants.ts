@@ -48,3 +48,5 @@ export const zINDEX = {
 export const EMAIL_REGEX = /^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$/;
 export const SUBMIT_TIMEOUT = 750;
 export const RELOAD_HOOK_TIMEOUT = 250;
+export const MESSAGE_SUCCESS_DURATION = 2.5;
+export const MESSAGE_ERROR_DURATION = 5;

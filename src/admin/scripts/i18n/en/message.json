@@ -1,1 +1,13 @@
-{}
+{
+	"success": {
+		"items": {
+			"createId": "#{{id}} was created",
+			"create": "Item was created",
+			"create_plural": "Items was created",
+			"update": "Item was updated",
+			"update_plural": "{{count}} items was updated",
+			"delete": "Item was deleted",
+			"delete_plural": "{{count}} items was deleted"
+		}
+	}
+}

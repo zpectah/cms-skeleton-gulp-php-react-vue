@@ -13,8 +13,8 @@ function useProfile() {
 		first_name: '...',
 		middle_name: '...',
 		last_name: '...',
-		user_level: 0,
-		user_group: [],
+		user_level: 7,
+		user_group: '',
 		active: true,
 		deleted: 0,
 	};

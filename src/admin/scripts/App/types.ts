@@ -8,7 +8,7 @@ export interface UsersItemProps extends commonModelProps {
 	middle_name?: string;
 	last_name: string;
 	user_level: number;
-	user_group: string[];
+	user_group: string;
 }
 
 export interface PostsItemProps extends commonModelProps {

@@ -3,5 +3,26 @@
 		"btn": {
 			"update_changes": "Update changes"
 		}
+	},
+	"Table": {
+		"search_placeholder": "Search in table",
+		"orderBy_label": "Order by",
+		"order_label": "Order",
+		"row_action": {
+			"edit": "Edit",
+			"toggle": "Toggle",
+			"delete": "Delete"
+		},
+		"column_label": {
+			"name": "Name",
+			"email": "E-mail",
+			"title": "Title",
+			"nickname": "Nickname",
+			"level": "Level",
+			"tags": "Tags",
+			"category": "Category",
+			"active": "Active",
+			"action": "Action"
+		}
 	}
 }
