@@ -15,6 +15,7 @@ import {
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
+import { RELOAD_HOOK_TIMEOUT } from '../../constants';
 import { Button } from '../ui';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
@@ -113,9 +114,9 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	});
 	const [listItems, setListItems] = useState<any[]>([]);
 	const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([]);
-	const [detailOpen, setDetailOpen] = useState(false);
+	const [detailOpen, setDetailOpen] = useState<boolean>(false);
+	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 	const [detailData, setDetailData] = useState<any>(null);
-	const [confirmOpen, setConfirmOpen] = useState(false);
 	const [confirmData, setConfirmData] = useState<any>(null);
 
 	useEffect(() => {
@@ -292,33 +293,38 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const toggleSelected = (keys: any) => {
 		onToggle(keys);
 		setSelectedRowKeys([]);
+
+		message.success(`${keys.length} Items updated successfully`, 2.5);
 	};
 	const toggleHandler = (data: any) => {
-		message.success(`Updated successfully`, 2.5);
 		onToggle(data);
+
+		message.success(`Item updated successfully`, 2.5);
 	};
 	const deleteHandler = (data: any) => {
-		message.success(`Deleted successfully`, 2.5);
+		let msg = `Item deleted successfully`;
+		if (!data.id) msg = `${data.length} Items deleted successfully`;
 		onDelete(data);
 		setSelectedRowKeys([]);
 		setConfirmOpen(false);
+		setDetailOpen(false);
+		closeDetail();
+
+		message.success(msg, 2.5);
 	};
 	const detailHandler = (data: any, response?: any) => {
-		if (data.is_new) {
+		let msg = `Updated successfully`;
+		if (data.id == 'new') {
 			let newId = response?.data?.id;
-			if (newId) {
-				message.success(`#${newId} was created successfully`, 2.5);
-			} else {
-				message.success('Created successfully', 2.5);
-			}
-		} else {
-			message.success(`Updated successfully`, 2.5);
+			if (newId) msg = `#${newId} was created successfully`;
 		}
+
+		message.success(msg, 2.5);
 	};
 	const closeDetail = () => {
 		history.push(route.path);
 	};
-	const updateListItems = (data) => {
+	const setList = (data) => {
 		let tmp;
 
 		if (data.search.length >= 4) {
@@ -347,7 +353,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 			<Heading>
 				<div>
 					<Form
-						onChange={handleSubmit((data) => updateListItems(data))}
+						onChange={handleSubmit((data) => setList(data))}
 						layout={'inline'}
 					>
 						<Space>
