@@ -10,7 +10,8 @@
 		"toggle": "Toggle",
 		"close": "Close",
 		"agree": "Agree",
-		"reset": "Reset"
+		"reset": "Reset",
+		"confirm": "Confirm"
 	},
 	"title": {
 		"create_new": "Create new"

@@ -214,8 +214,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					onCancel={toggleLogoutConfirm}
 					confirmData={{}}
 					onConfirm={logoutHandler}
-					confirmText={'Yes, Log me out'}
-					method={'confirm'}
+					method={'logout'}
 				/>
 			</Wrapper>
 		</>

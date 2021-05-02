@@ -24,5 +24,18 @@
 			"active": "Active",
 			"action": "Action"
 		}
-	}
+	},
+	"Confirm": {
+		"btnCancel": "No, cancel",
+		"btnDelete": "Yes, delete",
+		"btnAgree": "Yes, agree",
+		"btnLogout": "Yes, log me out",
+		"message": {
+			"delete": "Are you sure, you want to delete this item?",
+			"delete_plural": "Are you sure, you want to delete these {{count}} items?",
+			"confirm": "Are you sure?",
+			"logout": "Are you sure, you want log out?"
+		}
+	},
+	"Detail": {}
 }
