@@ -133,6 +133,8 @@ class Settings {
 					'true',
 					'module_members_installed'
 				];
+				// TODO
+				// proceed table installation ...
 				break;
 
 			case 'Crm':
@@ -140,6 +142,8 @@ class Settings {
 					'true',
 					'module_crm_installed'
 				];
+				// TODO
+				// proceed table installation ...
 				break;
 
 			case 'Market':
@@ -147,6 +151,8 @@ class Settings {
 					'true',
 					'module_market_installed'
 				];
+				// TODO
+				// proceed table installation ...
 				break;
 
 		}
@@ -164,18 +170,50 @@ class Settings {
 			$stmt -> close();
 		}
 
-		// TODO
-		// create tables for each module
-		//
-
 		return $response;
 	}
 
 	public function install_language ($conn, $requestData) {
+		$response = null;
+		$installed = [];
 
-		return [
-			'r' => $requestData
+		/*
+		1. iterate all languages and install tables
+		2. save new languages to settings table
+		*/
+
+		foreach ($requestData -> toInstall as $lang) {
+
+			// TODO
+			// proceed table installation ...
+
+			$installed[] = $lang;
+
+		}
+
+		// prepare
+		$query = ('UPDATE settings_cms SET value = ? WHERE name = ?');
+		$types = 'ss';
+		$args = [
+			implode(",", $requestData -> installed),
+			'language_installed'
 		];
+
+		// execute
+		if ($conn -> connect_error) {
+			$response = $conn -> connect_error;
+		} else if ($args) {
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$response = [
+				'rows' => $stmt -> affected_rows,
+				'installed' => $installed
+			];
+			$stmt -> close();
+		}
+
+		return $response;
 	}
 
 }

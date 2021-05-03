@@ -27,6 +27,7 @@ require PATH_PFX . 'core/model/Settings.php';
 require PATH_PFX . 'core/model/Profile.php';
 require PATH_PFX . 'core/model/Users.php';
 require PATH_PFX . 'core/model/Posts.php';
+require PATH_PFX . 'core/model/Pages.php';
 require PATH_PFX . 'core/model/Tags.php';
 require PATH_PFX . 'core/model/Requests.php';
 require PATH_PFX . 'core/model/Messages.php';

@@ -131,6 +131,33 @@ class Request {
 				break;
 
 
+			// Pages
+			case 'get_pages':
+				$response['data'] = $DataService -> get('Pages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_pages':
+				$response['data'] = $DataService -> create('Pages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_pages':
+				$response['data'] = $DataService -> toggle('Pages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_pages':
+				$response['data'] = $DataService -> update('Pages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_pages':
+				$response['data'] = $DataService -> delete('Pages', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
 			// Tags
 			case 'get_tags':
 				$response['data'] = $DataService -> get('Tags', $requestData);

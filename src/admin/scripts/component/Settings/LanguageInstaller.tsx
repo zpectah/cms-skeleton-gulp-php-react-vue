@@ -50,14 +50,15 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 		setProgress(true);
 		let na = [...installed, ...langToInstall];
 
-		installLanguage({ installed: na }).then((res) => {
+		installLanguage({ installed: na, toInstall: langToInstall }).then((res) => {
 			console.log(res);
 
 			if (afterInstall) afterInstall(na);
 			setProgress(false);
 			setLangToInstall([]);
-
-			message.success('Languages was successfully installed', 2.5);
+			langToInstall.map((lng) =>
+				message.success(`Language ${lng} was successfully installed`, 2.5),
+			);
 		});
 	};
 

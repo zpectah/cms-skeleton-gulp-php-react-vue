@@ -63,6 +63,21 @@ function usePosts() {
 	};
 }
 
+function usePages() {
+	const { data, error } = useSWR(`/api/get_pages`);
+
+	return {
+		Pages: data?.data,
+		isPagesLoading: !data && !error,
+		isPagesError: error,
+		reloadPages: () => mutate(`/api/get_pages`),
+		updatePages: (data: any) => api.post('/api/update_pages', data),
+		createPages: (data: any) => api.post('/api/create_pages', data),
+		deletePages: (data: any) => api.post('/api/delete_pages', data),
+		togglePages: (data: any) => api.post('/api/toggle_pages', data),
+	};
+}
+
 function useTags() {
 	const { data, error } = useSWR(`/api/get_tags`);
 
@@ -188,6 +203,7 @@ export {
 	useSettings,
 	useUsers,
 	usePosts,
+	usePages,
 	useTags,
 	useRequests,
 	useMessages,

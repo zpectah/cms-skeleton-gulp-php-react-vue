@@ -15,6 +15,7 @@ use core\model\Settings;
 use core\model\Uploads;
 use core\model\Users;
 use core\model\Posts;
+use core\model\Pages;
 use core\model\Tags;
 use mysqli;
 
@@ -31,6 +32,7 @@ class DataService {
 		$Profile = new Profile;
 		$Users = new Users;
 		$Posts = new Posts;
+		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
 		$Requests = new Requests;
@@ -56,6 +58,10 @@ class DataService {
 
 			case 'Posts':
 				$response = $Posts -> get($conn, $data);
+				break;
+
+			case 'Pages':
+				$response = $Pages -> get($conn, $data);
 				break;
 
 			case 'Tags':
@@ -104,6 +110,7 @@ class DataService {
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
+		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
 		$Requests = new Requests;
@@ -123,6 +130,10 @@ class DataService {
 
 			case 'Posts':
 				$response = $Posts -> create($conn, $data, $languages);
+				break;
+
+			case 'Pages':
+				$response = $Pages -> create($conn, $data, $languages);
 				break;
 
 			case 'Tags':
@@ -172,6 +183,7 @@ class DataService {
 		$Profile = new Profile;
 		$Users = new Users;
 		$Posts = new Posts;
+		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
 		$Categories = new Categories;
@@ -197,6 +209,10 @@ class DataService {
 
 			case 'Posts':
 				$response = $Posts -> update($conn, $data, $languages);
+				break;
+
+			case 'Pages':
+				$response = $Pages -> update($conn, $data, $languages);
 				break;
 
 			case 'Tags':
@@ -236,6 +252,7 @@ class DataService {
 
 		$Users = new Users;
 		$Posts = new Posts;
+		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
 		$Categories = new Categories;
@@ -251,6 +268,10 @@ class DataService {
 
 			case 'Posts':
 				$response = $Posts -> toggle($conn, $data);
+				break;
+
+			case 'Pages':
+				$response = $Pages -> toggle($conn, $data);
 				break;
 
 			case 'Tags':
@@ -290,6 +311,7 @@ class DataService {
 
 		$Users = new Users;
 		$Posts = new Posts;
+		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
 		$Requests = new Requests;
@@ -307,6 +329,10 @@ class DataService {
 
 			case 'Posts':
 				$response = $Posts -> delete($conn, $data);
+				break;
+
+			case 'Pages':
+				$response = $Pages -> delete($conn, $data);
 				break;
 
 			case 'Tags':
