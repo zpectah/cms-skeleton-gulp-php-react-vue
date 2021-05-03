@@ -19,6 +19,7 @@ import media from '../styles/responsive';
 import { Scrollable } from '../component/ui';
 import Navigation from '../component/Navigation';
 import { appProps } from '../types';
+import { useSettings } from '../App/hooks';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -94,7 +95,7 @@ const MetaName = styled.div`
 	height: auto;
 	margin: 0;
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 0.85rem;
 	font-weight: 700;
 `;
 const Trigger = styled.button`
@@ -138,6 +139,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		toggleSpotlight,
 		logoutHandler,
 	} = props;
+	const { Settings } = useSettings();
+	const projectName = Settings ? Settings['project_name'] : '...';
+
 	return (
 		<>
 			<Wrapper open={sidebarOpen}>
@@ -181,6 +185,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 				<PanelWrapper open={sidebarOpen}>
 					<div className="primary">
 						<MetaName>{CFG.CMS.META.name}</MetaName>
+						<MetaName>{projectName}</MetaName>
 					</div>
 					<div className="secondary">
 						<Scrollable.Base>
