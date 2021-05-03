@@ -12,7 +12,27 @@ import { Button } from '../../component/ui';
 const PostsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
-	const { Posts, isPostsLoading, togglePosts, deletePosts } = usePosts();
+	const {
+		Posts,
+		isPostsLoading,
+		togglePosts,
+		deletePosts,
+		reloadPosts,
+	} = usePosts();
+
+	const toggleHandler = (data) => {
+		return [
+			togglePosts(data),
+			setTimeout(() => reloadPosts(), RELOAD_HOOK_TIMEOUT),
+		];
+	};
+
+	const deleteHandler = (data) => {
+		return [
+			deletePosts(data),
+			setTimeout(() => reloadPosts(), RELOAD_HOOK_TIMEOUT),
+		];
+	};
 
 	return (
 		<AppLayout
@@ -44,8 +64,8 @@ const PostsPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['name', 'lang.en.title']}
-				onToggle={togglePosts}
-				onDelete={deletePosts}
+				onToggle={toggleHandler}
+				onDelete={deleteHandler}
 				selectable
 				allowDelete
 				withLanguageToggle

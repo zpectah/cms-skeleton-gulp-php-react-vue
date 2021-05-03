@@ -29,16 +29,20 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
 	};
 
 	return (
-		<Radio.Group
-			onChange={(e) => onChange(e.target.value)}
-			defaultValue={langDefault}
-		>
-			{langList.map((lng) => (
-				<Radio.Button key={lng} value={lng}>
-					{getLabel(lng)}
-				</Radio.Button>
-			))}
-		</Radio.Group>
+		<>
+			{langList.length > 1 && (
+				<Radio.Group
+					onChange={(e) => onChange(e.target.value)}
+					defaultValue={langDefault}
+				>
+					{langList.map((lng) => (
+						<Radio.Button key={lng} value={lng}>
+							{getLabel(lng)}
+						</Radio.Button>
+					))}
+				</Radio.Group>
+			)}
+		</>
 	);
 };
 

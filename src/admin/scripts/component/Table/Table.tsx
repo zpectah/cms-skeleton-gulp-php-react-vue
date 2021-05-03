@@ -149,7 +149,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	}, [items]);
 
 	useEffect(() => {
-		if (editOptions && items && items.length > 0 && detailId) {
+		if (items && items.length > 0 && detailId) {
 			items.map((item) => {
 				if (item.id == detailId) {
 					editOpen(item);
@@ -159,7 +159,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	}, [items, detailId]);
 
 	useEffect(() => {
-		if (editOptions && location.pathname.includes('/new')) {
+		if (location.pathname.includes('/new')) {
 			editOpen({
 				// Necessary props
 				is_new: true,

@@ -9,6 +9,7 @@ import { Button, Modal, Typography, Form, Section } from '../../ui';
 import api from '../../../utils/api';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
+import { usePosts } from '../../../App/hooks';
 
 interface PostsDetailFormProps {
 	detailData: PostsItemProps;
@@ -22,24 +23,40 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, setValue, formState, register } = useForm({
 		mode: 'onChange',
-		defaultValues: detailData,
+		defaultValues: {
+			type: 'default',
+			name: '',
+			category: [],
+			tags: [],
+			active: 1,
+			lang: {
+				// TODO
+				en: {
+					title: '',
+					perex: '',
+					content: '',
+				},
+			},
+			...detailData,
+		},
 	});
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
-
-	// TODO
-	const model = detailData;
+	const { updatePosts, createPosts, reloadPosts } = usePosts();
 
 	const submitHandler = (data) => {
-		console.log('On Detail Submit', data);
+		if (detailData.is_new) {
+			createPosts(data).then((response) => {
+				onSave(data, response);
+				onCancel();
+			});
+		} else {
+			updatePosts(data).then((response) => {
+				onSave(data, response);
+				onCancel();
+			});
+		}
 
-		const path = detailData.is_new ? '/api/create_posts' : '/api/update_posts';
-
-		api.post(path, data).then((res: any) => {
-			console.log('After ... submitHandler');
-			console.log('res', res);
-
-			onSave(data);
-		});
+		setTimeout(() => reloadPosts(), SUBMIT_TIMEOUT);
 	};
 
 	return (
@@ -93,7 +110,11 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
 				{!detailData.is_new && (
 					<>
-						<Button.Base type="primary" onClick={() => onDelete(model)} danger>
+						<Button.Base
+							type="primary"
+							onClick={() => onDelete(detailData)}
+							danger
+						>
 							{t('btn.delete')}
 						</Button.Base>
 					</>

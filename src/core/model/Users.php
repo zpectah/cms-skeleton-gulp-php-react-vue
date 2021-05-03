@@ -24,6 +24,7 @@ class Users {
 		if ($result -> num_rows > 0) {
 			while($row = $result -> fetch_assoc()) {
 				unset($row['password']);
+
 				$response[] = $row;
 			}
 		}
