@@ -72,6 +72,8 @@ class Posts {
 				foreach ($active_languages as $lang) {
 					$row['lang'][$lang] = self::get_language_row($conn, $lang, $row['id']);
 				}
+				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
+				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
 
 				$response[] = $row;
 			}

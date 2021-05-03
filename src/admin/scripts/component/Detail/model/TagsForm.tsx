@@ -6,7 +6,8 @@ import { Input, Switch } from 'antd';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { useTags } from '../../../App/hooks';
 import { TagsItemProps } from '../../../App/types';
-import { Button, Modal, Typography, Form, Section } from '../../ui';
+import { Modal, Typography, Form, Section } from '../../ui';
+import DetailFooter from '../DetailFooter';
 
 interface TagsDetailFormProps {
 	detailData: TagsItemProps;
@@ -86,27 +87,13 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 					</Form.Row>
 				</Section.Base>
 			</Modal.Content>
-			<Modal.Footer>
-				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
-				{!detailData.is_new && (
-					<>
-						<Button.Base
-							type="primary"
-							onClick={() => onDelete(detailData)}
-							danger
-						>
-							{t('btn.delete')}
-						</Button.Base>
-					</>
-				)}
-				<Button.Base
-					type="primary"
-					htmlType="submit"
-					disabled={!formState.isValid}
-				>
-					{detailData.is_new ? t('btn.create') : t('btn.save')}
-				</Button.Base>
-			</Modal.Footer>
+			<DetailFooter
+				onCancel={onCancel}
+				onDelete={onDelete}
+				isNew={detailData.is_new}
+				invalid={!formState.isValid}
+				detailData={detailData}
+			/>
 		</form>
 	);
 };

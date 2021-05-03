@@ -27,8 +27,8 @@ const post = async (url: string, data: any) => {
 	return response.json();
 };
 
-// @ts-ignore
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (url) =>
+	fetch(url, { cache: 'reload' }).then((res) => res.json());
 
 export default {
 	get,

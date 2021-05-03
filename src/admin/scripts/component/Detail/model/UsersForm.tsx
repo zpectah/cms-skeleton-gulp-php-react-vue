@@ -6,8 +6,9 @@ import { Input, Select, Switch } from 'antd';
 import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UsersItemProps } from '../../../App/types';
-import { Button, Modal, Typography, Form, Section } from '../../ui';
+import { Modal, Typography, Form, Section } from '../../ui';
 import { useUsers } from '../../../App/hooks';
+import DetailFooter from '../DetailFooter';
 
 interface UsersDetailFormProps {
 	detailData: UsersItemProps;
@@ -202,27 +203,13 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 					</Form.Row>
 				</Section.Base>
 			</Modal.Content>
-			<Modal.Footer>
-				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
-				{!detailData.is_new && (
-					<>
-						<Button.Base
-							type="primary"
-							onClick={() => onDelete(detailData)}
-							danger
-						>
-							{t('btn.delete')}
-						</Button.Base>
-					</>
-				)}
-				<Button.Base
-					type="primary"
-					htmlType="submit"
-					disabled={!formState.isValid}
-				>
-					{detailData.is_new ? t('btn.create') : t('btn.save')}
-				</Button.Base>
-			</Modal.Footer>
+			<DetailFooter
+				onCancel={onCancel}
+				onDelete={onDelete}
+				isNew={detailData.is_new}
+				invalid={!formState.isValid}
+				detailData={detailData}
+			/>
 		</form>
 	);
 };
