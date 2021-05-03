@@ -42,6 +42,8 @@ class DataService {
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
 
+		$languages = $Settings -> get_languages($conn);
+
 		switch ($model) {
 
 			case 'Settings':
@@ -57,11 +59,11 @@ class DataService {
 				break;
 
 			case 'Posts':
-				$response = $Posts -> get($conn, $data);
+				$response = $Posts -> get($conn, $data, $languages);
 				break;
 
 			case 'Pages':
-				$response = $Pages -> get($conn, $data);
+				$response = $Pages -> get($conn, $data, $languages);
 				break;
 
 			case 'Tags':
@@ -69,7 +71,7 @@ class DataService {
 				break;
 
 			case 'Translations':
-				$response = $Translations -> get($conn, $data);
+				$response = $Translations -> get($conn, $data, $languages);
 				break;
 
 			case 'Requests':
@@ -81,11 +83,11 @@ class DataService {
 				break;
 
 			case 'Categories':
-				$response = $Categories -> get($conn, $data);
+				$response = $Categories -> get($conn, $data, $languages);
 				break;
 
 			case 'Uploads':
-				$response = $Uploads -> get($conn, $data);
+				$response = $Uploads -> get($conn, $data, $languages);
 				break;
 
 			case 'Menu':
@@ -93,7 +95,7 @@ class DataService {
 				break;
 
 			case 'MenuItems':
-				$response = $MenuItems -> get($conn, $data);
+				$response = $MenuItems -> get($conn, $data, $languages);
 				break;
 
 		}

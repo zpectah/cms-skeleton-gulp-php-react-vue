@@ -140,6 +140,8 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const [confirmData, setConfirmData] = useState<any>(null);
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 
+	const editOptions = Profile?.user_level > 0;
+
 	useEffect(() => {
 		if (items && items.length > 0) {
 			setListItems(remodelItems(items));
@@ -147,7 +149,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	}, [items]);
 
 	useEffect(() => {
-		if (items && items.length > 0 && detailId) {
+		if (editOptions && items && items.length > 0 && detailId) {
 			items.map((item) => {
 				if (item.id == detailId) {
 					editOpen(item);
@@ -157,7 +159,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	}, [items, detailId]);
 
 	useEffect(() => {
-		if (location.pathname.includes('/new')) {
+		if (editOptions && location.pathname.includes('/new')) {
 			editOpen({
 				// Necessary props
 				is_new: true,
@@ -261,11 +263,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				key: 'tags',
 				dataIndex: 'tags',
 				render: (tags) => (
-					<>
-						{tags.map((tag) => (
-							<Tag key={tag}>#{tag}</Tag>
-						))}
-					</>
+					<>{tags && tags.map((tag) => <Tag key={tag}>#{tag}</Tag>)}</>
 				),
 			});
 		if (columnsLayout.category)
@@ -274,15 +272,11 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				key: 'category',
 				dataIndex: 'category',
 				render: (category) => (
-					<>
-						{category.map((ctg) => (
-							<Tag key={ctg}>{ctg}</Tag>
-						))}
-					</>
+					<>{category && category.map((ctg) => <Tag key={ctg}>{ctg}</Tag>)}</>
 				),
 			});
 
-		if (Profile?.user_level > 0)
+		if (editOptions)
 			d.push({
 				title: t('component:Table.column_label.action'),
 				key: 'action',

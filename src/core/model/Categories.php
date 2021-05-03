@@ -6,7 +6,7 @@ namespace core\model;
 
 class Categories {
 
-	public function get ($conn, $requestData) {
+	public function get ($conn, $requestData, $languages) {
 
 		return [];
 	}

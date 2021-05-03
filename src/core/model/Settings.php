@@ -111,8 +111,8 @@ class Settings {
 		if ($result -> num_rows > 0) {
 			while($row = $result -> fetch_assoc()) {
 				if ($row['name'] == 'language_default') $response['default'] = $row['value'];
-				if ($row['name'] == 'language_installed') $response['installed'] = implode(",", $row['value']);
-				if ($row['name'] == 'language_active') $response['active'] = implode(",", $row['value']);
+				if ($row['name'] == 'language_installed') $response['installed'] = explode(",", $row['value']);
+				if ($row['name'] == 'language_active') $response['active'] = explode(",", $row['value']);
 			}
 		}
 
