@@ -22,11 +22,11 @@ import {
 	IconMaterial_SupervisorAccount,
 	IconMaterial_SupervisedUserCircle,
 	IconMaterial_VerifiedUser,
-	IconMaterial_Check,
-	IconMaterial_Close,
 } from '../../../../libs/svg/material-icons';
+import CFG from '../../../../config/global.json';
 import { MESSAGE_SUCCESS_DURATION } from '../../constants';
 import { Button } from '../ui';
+import LanguageToggle from '../LanguageToggle';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
 import { commonModelProps } from '../../types';
@@ -43,11 +43,6 @@ const Heading = styled.div`
 `;
 const StyledSearch = styled(Input)`
 	width: 250px;
-`;
-const InlineIcon = styled.span`
-	& svg {
-		max-height: 1rem;
-	}
 `;
 const RowIconBlock = styled.span`
 	& svg {
@@ -84,6 +79,7 @@ interface ListItemsProps {
 		nickname?: boolean;
 		level?: boolean;
 		title?: boolean;
+		title_lang?: boolean;
 		tags?: boolean;
 		category?: boolean;
 		active?: boolean;
@@ -101,6 +97,7 @@ interface ListItemsProps {
 	detailId?: string;
 	onToggle: (data: any) => void;
 	onDelete: (data: any) => void;
+	withLanguageToggle?: boolean;
 }
 
 const Table: React.FC<ListItemsProps> = (props) => {
@@ -124,6 +121,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		allowDelete,
 		detailId,
 		loading,
+		withLanguageToggle,
 	} = props;
 	const { Profile } = useProfile();
 	const { control, handleSubmit } = useForm({
@@ -140,8 +138,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 	const [detailData, setDetailData] = useState<any>(null);
 	const [confirmData, setConfirmData] = useState<any>(null);
-	// TODO: select active language toggle
-	const [lang, setLang] = useState('en');
+	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 
 	useEffect(() => {
 		if (items && items.length > 0) {
@@ -205,6 +202,20 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				),
 			});
 		if (columnsLayout.title)
+			d.push({
+				title: t('component:Table.column_label.title'),
+				dataIndex: 'title',
+				key: 'title',
+				render: (text, record) => (
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{text}
+					</RowLink>
+				),
+			});
+		if (columnsLayout.title_lang)
 			d.push({
 				title: t('component:Table.column_label.title'),
 				dataIndex: 'title',
@@ -455,6 +466,9 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				</div>
 				<div>
 					<Space>
+						{withLanguageToggle && (
+							<LanguageToggle onChange={(lang) => setLang(lang)} />
+						)}
 						{selectable && allowDelete && (
 							<>
 								<Button.Base

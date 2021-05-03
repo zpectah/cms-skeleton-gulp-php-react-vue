@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
@@ -7,6 +7,8 @@ import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
 import { Button, Modal, Typography, Form, Section } from '../../ui';
 import api from '../../../utils/api';
+import LanguageToggle from '../../LanguageToggle';
+import CFG from '../../../../../config/global.json';
 
 interface PostsDetailFormProps {
 	detailData: PostsItemProps;
@@ -22,6 +24,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 		mode: 'onChange',
 		defaultValues: detailData,
 	});
+	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 
 	// TODO
 	const model = detailData;
@@ -55,6 +58,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>
+				<LanguageToggle onChange={(lang) => setLang(lang)} />
+				<br />
 				<Section.Base>
 					<Form.Row
 						label={'Name'}
@@ -80,6 +85,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 					{/* TODO: ... */}
+					<br />
+					{'lang' + lang}
 				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>

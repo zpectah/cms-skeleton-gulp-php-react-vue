@@ -19,6 +19,7 @@ const Heading = styled.div`
 	& h3 {
 	}
 	& p {
+		color: rgba(25, 25, 25, 0.75);
 	}
 `;
 const Content = styled.div``;

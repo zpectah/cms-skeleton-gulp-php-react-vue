@@ -34,7 +34,7 @@ const PostsPage = () => {
 				loading={isPostsLoading}
 				columnsLayout={{
 					// name: true,
-					title: true,
+					title_lang: true,
 					tags: true,
 					category: true,
 					active: true,
@@ -48,6 +48,7 @@ const PostsPage = () => {
 				onDelete={deletePosts}
 				selectable
 				allowDelete
+				withLanguageToggle
 			/>
 		</AppLayout>
 	);

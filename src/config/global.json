@@ -26,7 +26,8 @@
 			"lang": "en",
 			"author": "Tomas Sychra | zpecter.com",
 			"robots": "noindex,nofollow"
-		}
+		},
+		"LANG_DEFAULT": "en"
 	},
 	"LOCATION": {
 		"admin_login": "admin/login/",
