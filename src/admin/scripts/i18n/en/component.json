@@ -37,5 +37,15 @@
 			"logout": "Are you sure, you want log out?"
 		}
 	},
-	"Detail": {}
+	"Detail": {},
+	"ModuleInstaller": {
+		"message": {
+			"success_installed": "Module was successfully installed"
+		}
+	},
+	"LanguageInstaller": {
+		"message": {
+			"success_installed": "Language {{lang}} was successfully installed"
+		}
+	}
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, message } from 'antd';
 import styled from 'styled-components';
 
@@ -23,6 +24,7 @@ interface ModuleInstallerProps {
 }
 
 const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
+	const { t } = useTranslation(['component']);
 	const { module, afterInstall, disabled = false } = props;
 	const [progress, setProgress] = useState<boolean>(false);
 	const { installModule } = useSettings();
@@ -40,7 +42,10 @@ const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
 			if (afterInstall) afterInstall();
 			setProgress(false);
 
-			message.success('Module was successfully installed', 2.5);
+			message.success(
+				t('component:ModuleInstaller.message.success_installed'),
+				2.5,
+			);
 		});
 	};
 
