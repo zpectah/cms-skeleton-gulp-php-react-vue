@@ -8,6 +8,7 @@ import Hr from './Hr';
 import Modal from './Modal';
 import Preloader from './Preloader';
 import Picker from './Picker';
+import Wysiwyg from './Wysiwyg';
 
 export {
 	Button,
@@ -20,4 +21,5 @@ export {
 	Modal,
 	Preloader,
 	Picker,
+	Wysiwyg,
 };
