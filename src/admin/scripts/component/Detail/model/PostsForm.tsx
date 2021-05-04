@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch, Select } from 'antd';
 
+import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section } from '../../ui';
+import { Modal, Typography, Form, Section, Picker } from '../../ui';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
-import { usePosts, useSettings } from '../../../App/hooks';
+import { usePosts, useSettings, useTags } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 
 const getLanguageContent = (langList = []) => {
@@ -38,6 +39,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
 	const { Settings } = useSettings();
+	const { Tags } = useTags();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>(Settings?.language_active);
 	const { control, handleSubmit, formState, register, getValues } = useForm({
@@ -52,6 +54,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
+	const { TextArea } = Input;
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -77,7 +80,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				ref={register({ required: true })}
 				defaultValue={detailData.id}
 			/>
-			{console.log(getValues())}
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -86,8 +88,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>
-				<LanguageToggle onChange={(lang) => setLang(lang)} />
-				<br />
 				<Section.Base>
 					<Form.Row
 						label={'Type'}
@@ -97,13 +97,13 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						required
 					>
 						{(row) => (
-							<Input
+							<Select
+								style={{ width: '100%' }}
 								id={row.id}
-								type={'text'}
-								name={row.name}
 								value={row.value}
 								onChange={row.onChange}
-								placeholder={'Type'}
+								placeholder={'Select categories'}
+								options={OPTIONS.model.Posts.type}
 							/>
 						)}
 					</Form.Row>
@@ -125,111 +125,91 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row
-						label={'Category'}
-						name={'category'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
+					<Form.Row label={'Category'} name={'category'} control={control}>
 						{(row) => (
-							<Select
-								mode="tags"
-								style={{ width: '100%' }}
+							<Picker.Categories
 								id={row.id}
 								value={row.value}
 								onChange={row.onChange}
-								placeholder={'Category'}
 							/>
 						)}
 					</Form.Row>
-					<Form.Row
-						label={'Tags'}
-						name={'tags'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
+					<Form.Row label={'Tags'} name={'tags'} control={control}>
 						{(row) => (
-							<Select
-								mode="tags"
-								style={{ width: '100%' }}
+							<Picker.Tags
 								id={row.id}
 								value={row.value}
 								onChange={row.onChange}
-								placeholder={'Tags'}
 							/>
 						)}
 					</Form.Row>
 					<div>
-						{/* TODO: ... language ... */}
-						{'langActive: ' + JSON.stringify(langList)}
-						{/* 'lang' + lang */}
+						<LanguageToggle onChange={(lang) => setLang(lang)} />
 						<div>
-							{langList.map((lng) => (
-								<div key={lng}>
-									language content ... {lng}
-									<br />
-									<Form.Row
-										label={'Title'}
-										name={`lang.${lng}.title`}
-										control={control}
-										rules={{ required: true }}
-										required
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'Title'}
-											/>
-										)}
-									</Form.Row>
-									<br />
-									<Form.Row
-										label={'Perex'}
-										name={`lang.${lng}.perex`}
-										control={control}
-										rules={{ required: true }}
-										required
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'Perex'}
-											/>
-										)}
-									</Form.Row>
-									<br />
-									content (wysywig editor)
-									<br />
-									<Form.Row
-										label={'Content'}
-										name={`lang.${lng}.content`}
-										control={control}
-										rules={{ required: true }}
-										required
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'Content'}
-											/>
-										)}
-									</Form.Row>
-								</div>
-							))}
+							{langList.map((lng) => {
+								if (lng == lang)
+									return (
+										<div key={lng}>
+											<Form.Row
+												label={'Title'}
+												name={`lang.${lng}.title`}
+												control={control}
+												rules={{ required: true }}
+												required
+											>
+												{(row) => (
+													<Input
+														id={row.id}
+														type={'text'}
+														name={row.name}
+														value={row.value}
+														onChange={row.onChange}
+														placeholder={'Title'}
+													/>
+												)}
+											</Form.Row>
+											<Form.Row
+												label={'Perex'}
+												name={`lang.${lng}.perex`}
+												control={control}
+												long
+											>
+												{(row) => (
+													<TextArea
+														id={row.id}
+														name={row.name}
+														value={row.value}
+														onChange={row.onChange}
+														placeholder={'Perex'}
+														rows={5}
+													/>
+												)}
+											</Form.Row>
+											<br />
+											content (wysywig editor)
+											<br />
+											<Form.Row
+												label={'Content'}
+												name={`lang.${lng}.content`}
+												control={control}
+												rules={{ required: true }}
+												required
+												long
+											>
+												{(row) => (
+													<Input
+														id={row.id}
+														type={'text'}
+														name={row.name}
+														value={row.value}
+														onChange={row.onChange}
+														placeholder={'Content'}
+													/>
+												)}
+											</Form.Row>
+										</div>
+									);
+							})}
 						</div>
 					</div>
 					<Form.Row label={'Active'} name={'active'} control={control}>

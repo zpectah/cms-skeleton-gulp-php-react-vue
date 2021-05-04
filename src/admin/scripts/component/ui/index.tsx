@@ -7,6 +7,7 @@ import Section from './Section';
 import Hr from './Hr';
 import Modal from './Modal';
 import Preloader from './Preloader';
+import Picker from './Picker';
 
 export {
 	Button,
@@ -18,4 +19,5 @@ export {
 	Hr,
 	Modal,
 	Preloader,
+	Picker,
 };

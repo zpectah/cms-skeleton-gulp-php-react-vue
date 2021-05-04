@@ -37,22 +37,26 @@
 			{
 				"key": 1,
 				"label": "index,follow",
-				"value": "index,follow"
+				"value": "index,follow",
+				"value_t": "robots.indexFollow"
 			},
 			{
 				"key": 2,
 				"label": "noindex,nofollow",
-				"value": "noindex,nofollow"
+				"value": "noindex,nofollow",
+				"value_t": "robots.noIndexNoFollow"
 			},
 			{
 				"key": 3,
 				"label": "index,nofollow",
-				"value": "index,nofollow"
+				"value": "index,nofollow",
+				"value_t": "robots.indexNoFollow"
 			},
 			{
 				"key": 4,
 				"label": "noindex,follow",
-				"value": "noindex,follow"
+				"value": "noindex,follow",
+				"value_t": "robots.noIndexFollow"
 			}
 		]
 	},
@@ -110,6 +114,34 @@
 					"label": "Managers",
 					"value": "managers",
 					"value_t": "group.managers"
+				}
+			]
+		},
+		"Posts": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "Blog",
+					"value": "blog",
+					"value_t": "type.blog"
+				},
+				{
+					"key": 3,
+					"label": "Event",
+					"value": "event",
+					"value_t": "type.event"
+				},
+				{
+					"key": 4,
+					"label": "Media",
+					"value": "media",
+					"value_t": "type.media"
 				}
 			]
 		}

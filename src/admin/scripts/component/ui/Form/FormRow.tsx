@@ -115,7 +115,7 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 									</RowLabel>
 								</Col>
 							)}
-							<Col span={24} md={grid.input + 2} lg={grid.input}>
+							<Col span={24} md={grid.input} lg={grid.input}>
 								<InputWrapper>
 									{/* TODO: resolve children function with props */}
 									{/* @ts-ignore */}
