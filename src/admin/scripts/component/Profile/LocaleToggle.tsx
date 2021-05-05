@@ -9,9 +9,7 @@ import LanguageService from '../../service/LanguageService';
 
 const Wrapper = styled.div``;
 
-interface LanguageToggleProps {}
-
-const Toggle: React.FC<LanguageToggleProps> = (props) => {
+const LocaleToggle: React.FC<{}> = () => {
 	const { i18n } = useTranslation();
 	const { control, handleSubmit } = useForm({
 		mode: 'onChange',
@@ -46,4 +44,4 @@ const Toggle: React.FC<LanguageToggleProps> = (props) => {
 	);
 };
 
-export default Toggle;
+export default LocaleToggle;

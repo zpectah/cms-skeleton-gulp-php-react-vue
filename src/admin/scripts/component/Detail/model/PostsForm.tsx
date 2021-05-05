@@ -148,9 +148,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+					<Form.Row name={'id'} control={control} blankLabel>
+						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
+					</Form.Row>
 					<LanguageWrapper>
-						<LanguageToggle onChange={(lang) => setLang(lang)} />
-						{langList.map((lng) => (
+						{console.log('langList: ', langList)}
+						{langList?.map((lng) => (
 							<LanguageWrapperPanel key={lng} isActive={lng == lang}>
 								<Form.Row
 									label={'Title'}

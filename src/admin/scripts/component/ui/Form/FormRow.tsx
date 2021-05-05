@@ -57,6 +57,7 @@ interface FormRowProps {
 	control: any;
 	rules?: any;
 	label?: string;
+	blankLabel?: boolean;
 	id?: string;
 	defaultValue?: any;
 	helpText?: string;
@@ -71,6 +72,7 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 		control,
 		rules,
 		label,
+		blankLabel,
 		id = string.getToken(2, ''),
 		defaultValue,
 		helpText,
@@ -79,8 +81,8 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 	} = props;
 
 	const grid = {
-		label: label ? 6 : 0,
-		input: label ? (long ? 18 : 10) : 24,
+		label: label || blankLabel ? 6 : 0,
+		input: label || blankLabel ? (long ? 18 : 10) : 24,
 	};
 
 	return (
@@ -108,11 +110,13 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 				>
 					<RowWrapper>
 						<Row>
-							{label && (
+							{(label || blankLabel) && (
 								<Col span={24} md={grid.label}>
-									<RowLabel htmlFor={id}>
-										{label} {required && '*'}
-									</RowLabel>
+									{label && (
+										<RowLabel htmlFor={id}>
+											{label} {required && '*'}
+										</RowLabel>
+									)}
 								</Col>
 							)}
 							<Col span={24} md={grid.input} lg={grid.input}>

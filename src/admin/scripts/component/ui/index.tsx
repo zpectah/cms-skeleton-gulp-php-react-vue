@@ -9,6 +9,7 @@ import Modal from './Modal';
 import Preloader from './Preloader';
 import Picker from './Picker';
 import Wysiwyg from './Wysiwyg';
+import Viewer from './Viewer';
 
 export {
 	Button,
@@ -22,4 +23,5 @@ export {
 	Preloader,
 	Picker,
 	Wysiwyg,
+	Viewer,
 };

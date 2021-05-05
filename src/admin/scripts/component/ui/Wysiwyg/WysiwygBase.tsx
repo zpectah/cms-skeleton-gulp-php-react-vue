@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 // https://blog.logrocket.com/building-rich-text-editors-in-react-using-draft-js-and-react-draft-wysiwyg/
 
+import toolbar from './toolbar';
+
 const Wrapper = styled.div`
 	width: 100%;
 	height: 300px;
@@ -45,6 +47,10 @@ const WysiwygBase: React.FC<WysiwygProps> = ({
 			<Editor
 				defaultEditorState={editorState}
 				onEditorStateChange={handleEditorChange}
+				toolbar={toolbar}
+				// wrapperStyle={<wrapperStyleObject>}
+				// editorStyle={<editorStyleObject>}
+				// toolbarStyle={<toolbarStyleObject>}
 			/>
 		</Wrapper>
 	);

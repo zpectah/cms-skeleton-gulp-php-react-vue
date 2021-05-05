@@ -25,7 +25,7 @@ import {
 } from '../../../../libs/svg/material-icons';
 import CFG from '../../../../config/global.json';
 import { MESSAGE_SUCCESS_DURATION } from '../../constants';
-import { Button } from '../ui';
+import { Button, Viewer } from '../ui';
 import LanguageToggle from '../LanguageToggle';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
@@ -262,9 +262,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: t('component:Table.column_label.tags'),
 				key: 'tags',
 				dataIndex: 'tags',
-				render: (tags) => (
-					<>{tags && tags.map((tag) => <Tag key={tag}>#{tag}</Tag>)}</>
-				),
+				render: (tags) => <Viewer model="Tags" items={tags} />,
 			});
 		if (columnsLayout.category)
 			d.push({
@@ -272,7 +270,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				key: 'category',
 				dataIndex: 'category',
 				render: (category) => (
-					<>{category && category.map((ctg) => <Tag key={ctg}>{ctg}</Tag>)}</>
+					<Viewer model="Categories" items={category} language={lang} />
 				),
 			});
 
