@@ -1,4 +1,4 @@
-import { storage } from 'javascript-es6-helpers';
+import { storage } from '../../../libs/js/utils';
 
 import CFG from '../../../config/global.json';
 

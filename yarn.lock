@@ -5113,10 +5113,6 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-"javascript-es6-helpers@github:zpectah/javascript-es6-helpers":
-  version "1.0.0"
-  resolved "https://codeload.github.com/zpectah/javascript-es6-helpers/tar.gz/b1fb13130623455fc5eafbe85d9f58e3affe7711"
-
 jest-diff@^26.0.0:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-26.6.2.tgz#1aa7468b52c3a68d7d5c5fdcdfcd5e49bd164394"

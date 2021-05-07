@@ -18,7 +18,7 @@ import gulpSass from 'gulp-sass';
 import gulpCleanCss from 'gulp-clean-css';
 import gulpCssImport from 'gulp-cssimport';
 
-import { date } from 'javascript-es6-helpers';
+import { date } from './src/libs/js/utils';
 import CFG from './dev.config.json';
 
 const ROOT = CFG.PATH_BASE;

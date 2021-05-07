@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { string } from 'javascript-es6-helpers';
+import { string } from '../../../../../libs/js/utils';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 

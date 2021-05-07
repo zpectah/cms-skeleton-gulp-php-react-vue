@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
-import { array } from 'javascript-es6-helpers';
+import { array } from '../../../../libs/js/utils';
 import { useForm, Controller } from 'react-hook-form';
 import {
 	Table as AntdTable,
