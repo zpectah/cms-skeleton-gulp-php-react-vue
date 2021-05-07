@@ -1,9 +1,9 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { string } from '../../../../../libs/js/utils';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 
+import { string } from '../../../../../libs/js/utils';
 import media from '../../../styles/responsive';
 
 const RowWrapper = styled.div`

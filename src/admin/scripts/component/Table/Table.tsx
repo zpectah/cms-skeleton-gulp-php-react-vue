@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
-import { array } from '../../../../libs/js/utils';
 import { useForm, Controller } from 'react-hook-form';
 import {
 	Table as AntdTable,
@@ -16,6 +15,7 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 
+import { array } from '../../../../libs/js/utils';
 import {
 	IconMaterial_Face,
 	IconMaterial_PermIdentity,

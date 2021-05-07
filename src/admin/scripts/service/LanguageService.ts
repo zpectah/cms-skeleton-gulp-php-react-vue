@@ -1,5 +1,4 @@
 import { storage } from '../../../libs/js/utils';
-
 import CFG from '../../../config/global.json';
 
 class LangService {

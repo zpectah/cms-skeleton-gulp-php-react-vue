@@ -11,7 +11,7 @@ class Posts {
 		$table_name = 'posts__' . $lang;
 
 		// prepare
-		$query = ('SELECT * FROM ' . $table_name . ' WHERE iid = ?');
+		$query = ('SELECT * FROM ' . $table_name . ' WHERE id = ?');
 		$types = 'i';
 		$args = [ $id ];
 
@@ -31,24 +31,67 @@ class Posts {
 		return $response;
 	}
 
-	private function create_language_row($conn, $lang, $id, $model) {
-		$response = null;
-		$table_name = 'posts__' . $lang;
+	private function create_language_rows($conn, $activeLanguages, $lastId, $requestData) {
+		$response = [];
 
+		foreach ($activeLanguages as $lang) {
+			$table_name = 'posts__' . $lang;
 
+			// prepare
+			$query = ('INSERT INTO ' . $table_name . ' (id, title, perex, content) VALUES (?,?,?,?)');
+			$types = 'isss';
+			$args = [
+				$lastId,
+				$requestData -> $lang -> title,
+				$requestData -> $lang -> perex,
+				$requestData -> $lang -> content
+			];
+
+			// execute
+			if ($conn -> connect_error) {
+				$response = $conn -> connect_error;
+			} else {
+				$stmt = $conn -> prepare($query);
+				$stmt -> bind_param($types, ...$args);
+				$stmt -> execute();
+				$response[] = $lang;
+				$stmt -> close();
+			}
+		}
 
 		return $response;
 	}
 
-	private function update_language_row($conn, $lang, $id, $model) {
+	private function update_language_rows($conn, $activeLanguages, $id, $requestData) {
 		$response = null;
-		$table_name = 'posts__' . $lang;
 
+		foreach ($activeLanguages as $lang) {
+			$table_name = 'posts__' . $lang;
 
+			// prepare
+			$query = ('UPDATE ' . $table_name . ' SET title = ?, perex = ?, content = ? WHERE id = ?');
+			$types = 'sssi';
+			$args = [
+				$requestData -> $lang -> title,
+				$requestData -> $lang -> perex,
+				$requestData -> $lang -> content,
+				$id
+			];
+
+			// execute
+			if ($conn -> connect_error) {
+				$response = $conn -> connect_error;
+			} else {
+				$stmt = $conn -> prepare($query);
+				$stmt -> bind_param($types, ...$args);
+				$stmt -> execute();
+				$response[] = $lang;
+				$stmt -> close();
+			}
+		}
 
 		return $response;
 	}
-
 
 
 	public function get ($conn, $requestData, $languages) {
@@ -83,17 +126,67 @@ class Posts {
 	}
 
 	public function create ($conn, $requestData, $languages) {
-
-		return [
-			'r' => $requestData
+		// prepare
+		$query = ('INSERT INTO posts (type, name, category, tags, active, deleted) VALUES (?,?,?,?,?,?)');
+		$types = 'ssssii';
+		$args = [
+			$requestData -> type,
+			$requestData -> name,
+			$requestData -> category ? implode(",", $requestData -> category) : '',
+			$requestData -> tags ? implode(",", $requestData -> tags) : '',
+			$requestData -> active,
+			0
 		];
+
+		// execute
+		if ($conn -> connect_error) {
+			$response = $conn -> connect_error;
+		} else {
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$id = $stmt -> insert_id;
+			$response = [
+				'id' => $id,
+				'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData -> lang) // created languages ... !!!
+			];
+			$stmt -> close();
+		}
+
+		return $response;
 	}
 
 	public function update ($conn, $requestData, $languages) {
 
-		return [
-			'r' => $requestData
+		// prepare
+		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, active = ? WHERE id = ?');
+		$types = 'ssssii';
+		$args = [
+			$requestData -> type,
+			$requestData -> name,
+			$requestData -> category ? implode(",", $requestData -> category) : '',
+			$requestData -> tags ? implode(",", $requestData -> tags) : '',
+			$requestData -> active,
+			$requestData -> id
 		];
+
+		// execute
+		if ($conn -> connect_error) {
+			$response = $conn -> connect_error;
+		} else {
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$response = [
+				'rows' => $stmt -> affected_rows,
+				'lang' => self::update_language_rows($conn, $languages['active'], $requestData -> id, $requestData -> lang),
+			];
+			$stmt -> close();
+		}
+
+		$response['r'] = $args;
+
+		return $response;
 	}
 
 	public function toggle ($conn, $requestData) {
