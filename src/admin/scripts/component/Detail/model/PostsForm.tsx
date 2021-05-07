@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch, Select } from 'antd';
@@ -12,26 +12,12 @@ import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
 import { usePosts, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
+import setLanguageModel from '../setLanguageModel';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 	display: ${(props) => (props.isActive ? 'block' : 'none')};
 `;
-
-const getLanguageContent = (langList = []) => {
-	let l = {};
-	const obj = {
-		title: '',
-		perex: '',
-		content: '',
-	};
-
-	langList.map((lng) => {
-		l[lng] = obj;
-	});
-
-	return l;
-};
 
 interface PostsDetailFormProps {
 	detailData: PostsItemProps;
@@ -46,7 +32,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
-	const [langList, setLangList] = useState<string[]>(Settings?.language_active);
+	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register, getValues } = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -55,11 +41,19 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			category: [],
 			tags: [],
 			active: 1,
-			lang: getLanguageContent(langList),
+			lang: setLanguageModel(langList, {
+				title: '',
+				perex: '',
+				content: '',
+			}),
 			...detailData,
 		},
 	});
 	const { TextArea } = Input;
+
+	useEffect(() => {
+		if (Settings) setLangList(Settings.language_active);
+	}, [Settings]);
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -152,14 +146,14 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.Row>
 					<LanguageWrapper>
-						{console.log('langList: ', langList)}
-						{langList?.map((lng) => (
+						{langList.map((lng) => (
 							<LanguageWrapperPanel key={lng} isActive={lng == lang}>
 								<Form.Row
 									label={'Title'}
 									name={`lang.${lng}.title`}
 									control={control}
 									rules={{ required: true }}
+									defaultValue={''}
 									required
 								>
 									{(row) => (
@@ -177,6 +171,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									label={'Perex'}
 									name={`lang.${lng}.perex`}
 									control={control}
+									defaultValue={''}
 									long
 								>
 									{(row) => (

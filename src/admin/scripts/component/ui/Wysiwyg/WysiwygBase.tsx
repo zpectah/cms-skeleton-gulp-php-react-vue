@@ -27,10 +27,11 @@ const WysiwygBase: React.FC<WysiwygProps> = ({
 	placeholder,
 }) => {
 	const [editorState, setEditorState] = useState(() =>
-		// EditorState.createEmpty(),
-		EditorState.createWithContent(
-			ContentState.createFromBlockArray(convertFromHTML(value)),
-		),
+		value
+			? EditorState.createWithContent(
+					ContentState.createFromBlockArray(convertFromHTML(value)),
+			  )
+			: EditorState.createEmpty(),
 	);
 
 	const handleEditorChange = (state) => {
