@@ -20,6 +20,7 @@ const PASS_CRYPT_OPTIONS = [
 	'threads' => 3
 ];
 define( "DEFAULT_SENDER_EMAIL",                           $JSON_GLOBAL['CMS']['SENDER_EMAIL']);
+define( "SENDER_EMAIL_HEADERS",                           $JSON_GLOBAL['CMS']['SENDER_EMAIL_HEADERS']);
 define( "CMS_NAME",                                       $JSON_GLOBAL['CMS']['META']['name']);
 
 

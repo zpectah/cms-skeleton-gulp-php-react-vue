@@ -89,7 +89,7 @@ class Profile {
 		$requestData = json_decode(json_encode($requestData), true);
 		$requests = new Requests;
 		$emailService = new EmailService;
-		// $helpers = new Helpers;
+		$helpers = new Helpers;
 		$users = new Users;
 		$response = [
 			'message' => 'user_not_found',
@@ -104,14 +104,13 @@ class Profile {
 			} else if ($user['deleted'] == 1) {
 				$response['message'] = 'user_is_deleted';
 			} else {
-				// $token = $helpers -> getToken(16, '');
-				$token = md5($email . TIMESTAMP);
+				$token = $helpers -> getToken(16, '');
+				// $token = md5($email . TIMESTAMP);
 				$project_root = CFG_ENV['ROOT_PATH'];
 				$confirm_url = $project_root . PATH_PREFIX_LOST_PASSWORD . $token;
 
 				$response['email'] = $emailService -> sendStyledMessage(
 					$email,
-					DEFAULT_SENDER_EMAIL,
 					"Lost password request",
 					"<div>Confirm password reset<br /><a href='" . $confirm_url ."' target='_blank'>this link</a></div>",
 					null,
@@ -154,7 +153,6 @@ class Profile {
 
 						$response['email'] = $emailService -> sendStyledMessage(
 							$user_row['email'],
-							DEFAULT_SENDER_EMAIL,
 							"New password",
 							"<div>This is your new password: <b>" . $tmp_password ."</b> <br /> Keep it safe, or change after login</div>",
 							null,
