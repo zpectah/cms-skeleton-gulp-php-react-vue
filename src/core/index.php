@@ -13,6 +13,12 @@ require PATH_PFX . 'config/constants.php';
 
 
 /*
+ * Utils
+ */
+require PATH_PFX . 'core/utils/Helpers.php';
+
+
+/*
  * Services
  */
 require PATH_PFX . 'core/service/DataService.php';

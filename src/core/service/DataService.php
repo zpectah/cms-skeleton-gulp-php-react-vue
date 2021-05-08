@@ -188,6 +188,7 @@ class DataService {
 		$Pages = new Pages;
 		$Tags = new Tags;
 		$Translations = new Translations;
+		$Requests = new Requests;
 		$Categories = new Categories;
 		$Uploads = new Uploads;
 		$Menu = new Menu;
@@ -223,6 +224,10 @@ class DataService {
 
 			case 'Translations':
 				$response = $Translations -> update($conn, $data, $languages);
+				break;
+
+			case 'Requests':
+				$response = $Requests -> update($conn, $data);
 				break;
 
 			case 'Categories':

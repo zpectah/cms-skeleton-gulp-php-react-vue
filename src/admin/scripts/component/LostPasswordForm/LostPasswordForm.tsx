@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Controller, useForm } from 'react-hook-form';
 import { Form, Input } from 'antd';
@@ -60,18 +60,39 @@ interface LostPasswordFormProps {}
 
 const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 	const { children } = props;
+	const [processing, setProcessing] = useState(false);
 	const { control, handleSubmit, formState } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			email: '',
 		},
 	});
+	const {
+		userLostPassword,
+		userLostPasswordReset,
+		reloadProfile,
+	} = useProfile();
 
 	const submitHandler = (data) => {
-		//
-		console.log('Submit handler', data);
-		//
+		setProcessing(true);
+		return userLostPassword(data).then((res) => {
+			setProcessing(false);
+			console.log('userLostPassword response: ', res);
+		});
 	};
+
+	const parameterHandler = () => {
+		//
+		console.log('Parameter handler', '');
+		//
+		// userLostPasswordReset(); // url from parameter
+	};
+
+	useEffect(() => {
+		parameterHandler();
+
+		return () => {};
+	}, []);
 
 	return (
 		<>

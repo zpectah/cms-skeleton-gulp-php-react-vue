@@ -4,7 +4,9 @@
 namespace core\model;
 
 
+use core\service\EmailService;
 use core\service\SessionService;
+use core\utils\Helpers;
 
 
 class Profile {
@@ -12,22 +14,8 @@ class Profile {
 	public function get ($conn, $requestData) {
 		$response = null;
 		$session = new SessionService;
-		// TODO
 
 		$email = $session -> get('user');
-
-//		$user = [
-//			'id' => 1,
-//			'email' => 'sychrat@gmail.com',
-//			'nickname' => 'zpecter',
-//			'first_name' => 'Tomas',
-//			'middle_name' => '',
-//			'last_name' => 'Sychra',
-//			'user_level' => 7,
-//			'user_group' => 'default',
-//			'active' => 1,
-//			'ss' => $userSession
-//		];
 
 		if ($email) {
 			// prepare
@@ -114,17 +102,77 @@ class Profile {
 	}
 
 	public function lost_password ($conn, $requestData) {
-
-		// email
-
-		return [
-			'r' => $requestData
+		$requests = new Requests;
+		$emailService = new EmailService;
+		$helpers = new Helpers;
+		$response = [
+			'message' => 'user_not_found',
+			'email' => null,
+			'row' => null,
 		];
+
+		$user = null;
+		$email = $requestData -> email;
+
+		// prepare
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users WHERE email = ?');
+		$types = 's';
+		$args = [ $email ];
+
+		// execute
+		$stmt = $conn -> prepare($query);
+		$stmt -> bind_param($types, ...$args);
+		$stmt -> execute();
+		$result = $stmt -> get_result();
+		$stmt -> close();
+
+		if ($result -> num_rows > 0) {
+			while($row = $result -> fetch_assoc()) {
+				$user = $row;
+			}
+		}
+
+		if ($user) {
+
+			if ($user['active'] == 0) {
+				$response['message'] = 'user_not_active';
+			} else if ($user['deleted'] == 1) {
+				$response['message'] = 'user_is_deleted';
+			} else {
+
+				// proceed first step
+
+				// create request token !!!
+				// send email message -> email with token (create url with it)
+				// create new row in requests
+
+				$token = $helpers -> getToken(16, '');
+
+				$response['email'] = $emailService -> sendEmail(
+					$email,
+					[],
+					"some content and token " . $token
+				);
+				$response['row'] = $requests -> create($conn, [
+					'type' => 'user',
+					'context' => 'lostPassword',
+					'value' => $email,
+					'token' => $token
+				]);
+
+				$response['message'] = 'request_was_send';
+			}
+
+		}
+
+		return $response;
 	}
 
 	public function lost_password_reset ($conn, $requestData) {
 
 		// email
+
+		// proceed second step
 
 		return [
 			'r' => $requestData
