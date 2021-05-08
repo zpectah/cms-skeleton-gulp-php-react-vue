@@ -7,7 +7,6 @@ import { Form as AntdForm, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
-import CFG from '../../../../config/global.json';
 import {
 	EMAIL_REGEX,
 	MESSAGE_SUCCESS_DURATION,
@@ -53,6 +52,10 @@ const BlockForm = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&.as-column {
+		flex-direction: column;
+	}
 `;
 const BlockInner = styled.div`
 	width: 100%;
@@ -62,13 +65,26 @@ const BlockInner = styled.div`
 	justify-content: center;
 	text-align: center;
 `;
+const FormTitle = styled.h3`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0.5rem 0;
+	text-align: center;
+`;
+const TemporaryBlock = styled.div`
+	width: 100%;
+	height: auto;
+	min-height: 150px;
+	text-align: center;
+`;
 
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
 	const { children } = props;
-	const { t } = useTranslation(['message']);
-	const { userLogin, reloadProfile } = useProfile();
+	const { t } = useTranslation(['message', 'component']);
+	const { Profile, userLogin, reloadProfile, userLogout } = useProfile();
 	const [processing, setProcessing] = useState(false);
 	const { control, handleSubmit, formState } = useForm({
 		mode: 'onChange',
@@ -79,6 +95,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 	});
 	const history = useHistory();
 
+	const logoutHandler = () => {
+		userLogout({}).then(() => reloadProfile());
+	};
 	const submitHandler = (data) => {
 		setProcessing(true);
 		return userLogin(data).then((res) => {
@@ -116,7 +135,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 								t('message:userLogin.user_login_success'),
 								MESSAGE_SUCCESS_DURATION,
 							);
-							history.push(CFG.CMS.RESTRICTED_REDIRECT_TARGET);
+							history.push(routes.dashboard.path);
 						});
 				}
 			}
@@ -130,63 +149,91 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 				<BlockBrand>
 					<BlockInner>{children}</BlockInner>
 				</BlockBrand>
-				<BlockForm>
-					<BlockInner>
-						<AntdForm
-							onFinish={handleSubmit(submitHandler)}
-							style={{ width: '80%' }}
-						>
-							<AntdForm.Item>
-								<Controller
-									name="email"
-									control={control}
-									rules={{ required: true, pattern: EMAIL_REGEX }}
-									render={({ name, value, onChange }) => (
-										<Input
-											type={'email'}
-											name={name}
-											value={value}
-											onChange={onChange}
-											placeholder={'E-mail'}
-											prefix={<UserOutlined className="site-form-item-icon" />}
-											style={{ width: '100%' }}
-										/>
-									)}
-								/>
-							</AntdForm.Item>
-							<AntdForm.Item>
-								<Controller
-									name="password"
-									control={control}
-									rules={{ required: true, minLength: 4 }}
-									render={({ name, value, onChange }) => (
-										<Input
-											type={'password'}
-											name={name}
-											value={value}
-											onChange={onChange}
-											placeholder={'Password'}
-											prefix={<LockOutlined className="site-form-item-icon" />}
-											style={{ width: '100%' }}
-										/>
-									)}
-								/>
-							</AntdForm.Item>
-							<AntdForm.Item>
-								<Button.Base
-									type={'primary'}
-									htmlType={'submit'}
-									style={{ width: '100%' }}
-									disabled={!formState.isValid || processing}
-								>
-									Log in
-								</Button.Base>
-							</AntdForm.Item>
-							<AntdForm.Item style={{ textAlign: 'center', marginBottom: 0 }}>
-								<Link to={routes['lost-password'].path}>Lost password</Link>
-							</AntdForm.Item>
-						</AntdForm>
-					</BlockInner>
+				<BlockForm className="as-column">
+					<FormTitle>{t('component:LoginForm.title')}</FormTitle>
+					{Profile ? (
+						<BlockInner>
+							<TemporaryBlock>
+								<p>{t('component:LoginForm.alreadyLogIn')}</p>
+								<p>
+									<Link to={routes.dashboard.path}>
+										{t('component:LoginForm.btn_returnToDashboard')}
+									</Link>
+									<br />
+									<a onClick={logoutHandler}>
+										{t('component:LoginForm.btn_logOut')}
+									</a>
+								</p>
+							</TemporaryBlock>
+						</BlockInner>
+					) : (
+						<BlockInner>
+							<AntdForm
+								onFinish={handleSubmit(submitHandler)}
+								style={{ width: '80%' }}
+							>
+								<AntdForm.Item>
+									<Controller
+										name="email"
+										control={control}
+										rules={{ required: true, pattern: EMAIL_REGEX }}
+										render={({ name, value, onChange }) => (
+											<Input
+												type={'email'}
+												name={name}
+												value={value}
+												onChange={onChange}
+												placeholder={t(
+													'component:LoginForm.input_email_placeholder',
+												)}
+												prefix={
+													<UserOutlined className="site-form-item-icon" />
+												}
+												style={{ width: '100%' }}
+											/>
+										)}
+									/>
+								</AntdForm.Item>
+								<AntdForm.Item>
+									<Controller
+										name="password"
+										control={control}
+										rules={{ required: true, minLength: 4 }}
+										render={({ name, value, onChange }) => (
+											<Input
+												type={'password'}
+												name={name}
+												value={value}
+												onChange={onChange}
+												placeholder={t(
+													'component:LoginForm.input_password_placeholder',
+												)}
+												prefix={
+													<LockOutlined className="site-form-item-icon" />
+												}
+												style={{ width: '100%' }}
+											/>
+										)}
+									/>
+								</AntdForm.Item>
+								<AntdForm.Item>
+									<Button.Base
+										type={'primary'}
+										htmlType={'submit'}
+										style={{ width: '100%' }}
+										disabled={!formState.isValid || processing}
+									>
+										{t('component:LoginForm.btn_submit')}
+									</Button.Base>
+								</AntdForm.Item>
+								<AntdForm.Item style={{ textAlign: 'center', marginBottom: 0 }}>
+									<Link to={routes['lost-password'].path}>
+										{t('component:LoginForm.btn_lostPassword')}
+									</Link>
+								</AntdForm.Item>
+							</AntdForm>
+						</BlockInner>
+					)}
 				</BlockForm>
 			</Wrapper>
 		</>

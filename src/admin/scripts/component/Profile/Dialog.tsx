@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useProfile } from '../../App/hooks';
 import { Modal } from '../../component/ui';
-import LocaleToggle from './LocaleToggle';
+import Form from './Form';
 
 interface ProfileDialogProps {
 	isOpen: boolean;
@@ -16,8 +16,7 @@ const Dialog: React.FC<ProfileDialogProps> = (props) => {
 	return (
 		<Modal.Base visible={isOpen} onCancel={onCancel}>
 			<Modal.Content>
-				Modal 'ProfileDialog' content <br /> <LocaleToggle /> <br />
-				{JSON.stringify(Profile)}
+				<Form model={Profile} />
 			</Modal.Content>
 		</Modal.Base>
 	);

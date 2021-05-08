@@ -19,7 +19,7 @@ const LostPasswordPage = () => {
 			isCentered
 		>
 			<LostPasswordForm>
-				<p>Logo & Description</p>
+				<img src={'../static/image/logo-default.svg'} alt="Logo" />
 			</LostPasswordForm>
 		</AppLayout>
 	);

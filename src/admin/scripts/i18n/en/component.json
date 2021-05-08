@@ -47,5 +47,22 @@
 		"message": {
 			"success_installed": "Language {{lang}} was successfully installed"
 		}
+	},
+	"LoginForm": {
+		"title": "Login to system",
+		"alreadyLogIn": "You are already logged in",
+		"btn_returnToDashboard": "Go to Dashboard",
+		"btn_logOut": "Log out",
+		"btn_lostPassword": "Lost password",
+		"btn_submit": "Log in",
+		"input_email_placeholder": "E-mail",
+		"input_password_placeholder": "Password"
+	},
+	"LostPasswordForm": {
+		"title": "Lost and reset password",
+		"processing": "Your request has been processing...",
+		"btn_logIn": "Log in",
+		"btn_submit": "Submit request",
+		"input_email_placeholder": "E-mail"
 	}
 }

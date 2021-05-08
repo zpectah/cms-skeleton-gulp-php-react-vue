@@ -16,12 +16,8 @@ require '../../core/index.php';
 	<meta name="author" content="<?=(VIEW['ADMIN']['meta']['author']) ?>">
 
 	<script>
-		window.$app = {
-			build: {
-				env: '<?=(ENV)?>',
-				timestamp: '<?=(TIMESTAMP)?>'
-			}
-		};
+		window.WARP_ENVIRONMENT = window.WARP_ENVIRONMENT || '<?=(ENV)?>';
+		window.WARP_TIMESTAMP = window.WARP_TIMESTAMP || '<?=(TIMESTAMP)?>';
 	</script>
 
 </head>

@@ -31,7 +31,7 @@ class Users {
 			if ($f_id) {
 				while($row = $result -> fetch_assoc()) {
 					if ($f_id == $row['id']) {
-						unset($row['password']);
+						if (!$requestData['withPassword']) unset($row['password']);
 
 						$response = $row;
 					}
@@ -39,14 +39,14 @@ class Users {
 			} else if ($f_email) {
 				while($row = $result -> fetch_assoc()) {
 					if ($f_email == $row['email']) {
-						unset($row['password']);
+						if (!$requestData['withPassword']) unset($row['password']);
 
 						$response = $row;
 					}
 				}
 			} else {
 				while($row = $result -> fetch_assoc()) {
-					unset($row['password']);
+					if (!$requestData['withPassword']) unset($row['password']);
 
 					$response[] = $row;
 				}
@@ -65,7 +65,7 @@ class Users {
 		$types = 'ssssssisii';
 		$args = [
 			$requestData['email'],
-			$requestData['password'],
+			$requestData['password'], // TODO
 			$requestData['nickname'],
 			$requestData['first_name'],
 			$requestData['middle_name'],
@@ -101,7 +101,7 @@ class Users {
 		$types = $password ? 'ssssssisii' : 'sssssisii';
 		$args = $password ? [
 			$requestData['email'],
-			$requestData['password'],
+			$requestData['password'], // TODO
 			$requestData['nickname'],
 			$requestData['first_name'],
 			$requestData['middle_name'],

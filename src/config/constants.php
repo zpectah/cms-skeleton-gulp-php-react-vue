@@ -42,6 +42,7 @@ define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBA
 define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
 define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );
 define( "PATH_CACHE",                                     PATH_PFX . $JSON_GLOBAL['PATH']['cache'] );
+const PATH_PREFIX_LOST_PASSWORD =                         'admin/lost-password/token/';
 
 
 

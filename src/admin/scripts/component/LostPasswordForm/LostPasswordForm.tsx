@@ -53,6 +53,10 @@ const BlockForm = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&.as-column {
+		flex-direction: column;
+	}
 `;
 const BlockInner = styled.div`
 	width: 100%;
@@ -62,12 +66,19 @@ const BlockInner = styled.div`
 	justify-content: center;
 	text-align: center;
 `;
+const FormTitle = styled.h3`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0.5rem 0;
+	text-align: center;
+`;
 
 interface LostPasswordFormProps {}
 
 const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 	const { children } = props;
-	const { t } = useTranslation(['message']);
+	const { t } = useTranslation(['message', 'component']);
 	const { token } = useParams<any>();
 	const [processing, setProcessing] = useState(false);
 	const [requestSend, setRequestSend] = useState(false);
@@ -188,9 +199,12 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 				<BlockBrand>
 					<BlockInner>{children}</BlockInner>
 				</BlockBrand>
-				<BlockForm>
+				<BlockForm className="as-column">
+					<FormTitle>{t('component:LostPasswordForm.title')}</FormTitle>
 					{token ? (
-						<BlockInner>Your request has been processing...</BlockInner>
+						<BlockInner>
+							{t('component:LostPasswordForm.processing')}
+						</BlockInner>
 					) : (
 						<BlockInner>
 							<Form
@@ -211,7 +225,9 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 												name={name}
 												value={value}
 												onChange={onChange}
-												placeholder={'E-mail'}
+												placeholder={t(
+													'component:LostPasswordForm.input_email_placeholder',
+												)}
 												prefix={
 													<UserOutlined className="site-form-item-icon" />
 												}
@@ -227,11 +243,13 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 										style={{ width: '100%' }}
 										disabled={!formState.isValid || processing}
 									>
-										Submit request
+										{t('component:LostPasswordForm.btn_submit')}
 									</Button.Base>
 								</Form.Item>
 								<Form.Item style={{ textAlign: 'center', marginBottom: 0 }}>
-									<Link to={routes['login'].path}>Log in</Link>
+									<Link to={routes['login'].path}>
+										{t('component:LostPasswordForm.btn_logIn')}
+									</Link>
 								</Form.Item>
 							</Form>
 						</BlockInner>
