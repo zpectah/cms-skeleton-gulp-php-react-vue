@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
@@ -27,8 +27,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
-	const [auth, setAuth] = useState<boolean>(false);
-
 	useEffect(() => {
 		onInit();
 

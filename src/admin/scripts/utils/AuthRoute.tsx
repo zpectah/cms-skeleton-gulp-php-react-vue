@@ -37,8 +37,6 @@ const AuthRoute: React.FC<AuthRouteProps> = (props) => {
 				// TODO
 				// setRedirect(CFG.CMS.RESTRICTED_REDIRECT_TARGET);
 			}
-
-			// store.dispatch(setUser(currentUser));
 		}
 
 		setUserReady(true);

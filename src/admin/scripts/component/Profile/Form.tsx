@@ -1,19 +1,154 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { message } from 'antd';
+
+import { Form as UiForm, Section } from '../ui';
+import LocaleToggle from './LocaleToggle';
+import { Input } from 'antd';
+import { useProfile } from '../../App/hooks';
 
 const Wrapper = styled.div``;
 
-import LocaleToggle from './LocaleToggle';
-
 interface FormProps {
 	model: any;
+	afterUpdate?: Function;
 }
 
-const Form: React.FC<FormProps> = ({ model }) => {
+const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
+	const { control, handleSubmit, formState, register } = useForm({
+		mode: 'onChange',
+		defaultValues: {
+			...model,
+		},
+	});
+	const { updateProfile, reloadProfile } = useProfile();
+
+	const submitHandler = (data) => {
+		return updateProfile(data).then((res) => {
+			console.log('res ', res);
+			message.success('Profile has been updated', 2.5);
+			// afterUpdate();
+			reloadProfile();
+		});
+	};
+
 	return (
 		<Wrapper>
 			<LocaleToggle />
-			<div>...Form...{JSON.stringify(model)}</div>
+			<div>card data ... {model.email}</div>
+			<form onSubmit={handleSubmit(submitHandler)}>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={model.id}
+				/>
+				<input
+					type="hidden"
+					name="email"
+					ref={register({ required: true })}
+					defaultValue={model.email}
+				/>
+				<input
+					type="hidden"
+					name="user_level"
+					ref={register({ required: true })}
+					defaultValue={model.user_level}
+				/>
+				<input
+					type="hidden"
+					name="user_group"
+					ref={register({ required: true })}
+					defaultValue={model.user_group}
+				/>
+				<input
+					type="hidden"
+					name="active"
+					ref={register({ required: true })}
+					defaultValue={model.active}
+				/>
+				<Section.Base>
+					<UiForm.Row label={'Password'} name={'password'} control={control}>
+						{(row) => (
+							<Input.Password
+								id={row.id}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'New password'}
+							/>
+						)}
+					</UiForm.Row>
+					<UiForm.Row
+						label={'Nickname'}
+						name={'nickname'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Nickname'}
+							/>
+						)}
+					</UiForm.Row>
+					<UiForm.Row
+						label={'First name'}
+						name={'first_name'}
+						control={control}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'First name'}
+							/>
+						)}
+					</UiForm.Row>
+					<UiForm.Row
+						label={'Middle name'}
+						name={'middle_name'}
+						control={control}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Middle name'}
+							/>
+						)}
+					</UiForm.Row>
+					<UiForm.Row label={'Last name'} name={'last_name'} control={control}>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Last name'}
+							/>
+						)}
+					</UiForm.Row>
+				</Section.Base>
+				{/* TODO */}
+				<button type="submit" disabled={!formState.isValid}>
+					Submit
+				</button>
+				{/* TODO */}
+			</form>
 		</Wrapper>
 	);
 };
