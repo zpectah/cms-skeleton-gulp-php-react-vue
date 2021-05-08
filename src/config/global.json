@@ -31,7 +31,8 @@
 	},
 	"LOCATION": {
 		"admin_login": "admin/login/",
-		"admin_lostPassword": "admin/lost-password/"
+		"admin_lostPassword": "admin/lost-password/",
+		"admin_lostPasswordToken_prefix": "admin/lost-password/token/"
 	},
 	"PATH": {
 		"admin": "admin/",

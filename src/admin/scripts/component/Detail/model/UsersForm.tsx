@@ -31,6 +31,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			last_name: '',
 			user_level: 0,
 			user_group: 'default',
+			user_avatar: '',
 			active: 1,
 			...detailData,
 		},
@@ -61,6 +62,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				name="id"
 				ref={register({ required: true })}
 				defaultValue={detailData.id}
+			/>
+			<input
+				type="hidden"
+				name="user_avatar"
+				ref={register({})}
+				defaultValue={detailData.user_avatar}
 			/>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>

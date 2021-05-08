@@ -6,7 +6,7 @@ require_once PATH_PFX . 'config/env.php'; // (!) Created after build (dev/prod)
 $JSON_GLOBAL = json_decode(file_get_contents(PATH_PFX . 'config/global.json'), true);
 $JSON_ENV = json_decode(file_get_contents(PATH_PFX . 'config/environmental.json'), true);
 $JSON_OPTIONS = json_decode(file_get_contents(PATH_PFX . 'config/options.json'), true);
-// $JSON_NUMS = json_decode(file_get_contents(PATH_PFX . 'config/nums.json'), true);
+$JSON_NUMS = json_decode(file_get_contents(PATH_PFX . 'config/nums.json'), true);
 
 
 
@@ -14,6 +14,11 @@ $JSON_OPTIONS = json_decode(file_get_contents(PATH_PFX . 'config/options.json'),
  * Common system definitions
  */
 const PASS_CRYPT =                                        PASSWORD_ARGON2I;
+const PASS_CRYPT_OPTIONS = [
+	'memory_cost' => 2048,
+	'time_cost' => 4,
+	'threads' => 3
+];
 
 
 
@@ -42,7 +47,7 @@ define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBA
 define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
 define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );
 define( "PATH_CACHE",                                     PATH_PFX . $JSON_GLOBAL['PATH']['cache'] );
-const PATH_PREFIX_LOST_PASSWORD =                         'admin/lost-password/token/';
+define( "PATH_PREFIX_LOST_PASSWORD",                      $JSON_GLOBAL['LOCATION']['admin_lostPasswordToken_prefix'] );
 
 
 

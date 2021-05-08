@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { message } from 'antd';
 
-import { Form as UiForm, Section } from '../ui';
+import { Form as UiForm, Section, Button } from '../ui';
 import LocaleToggle from './LocaleToggle';
 import { Input } from 'antd';
 import { useProfile } from '../../App/hooks';
@@ -26,9 +26,8 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 
 	const submitHandler = (data) => {
 		return updateProfile(data).then((res) => {
-			console.log('res ', res);
 			message.success('Profile has been updated', 2.5);
-			// afterUpdate();
+			afterUpdate();
 			reloadProfile();
 		});
 	};
@@ -67,6 +66,12 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 					name="active"
 					ref={register({ required: true })}
 					defaultValue={model.active}
+				/>
+				<input
+					type="hidden"
+					name="user_avatar"
+					ref={register({})}
+					defaultValue={model.user_avatar}
 				/>
 				<Section.Base>
 					<UiForm.Row label={'Password'} name={'password'} control={control}>
@@ -144,9 +149,13 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 					</UiForm.Row>
 				</Section.Base>
 				{/* TODO */}
-				<button type="submit" disabled={!formState.isValid}>
-					Submit
-				</button>
+				<Button.Base
+					htmlType="submit"
+					disabled={!formState.isValid || !formState.isDirty}
+					type="primary"
+				>
+					Update
+				</Button.Base>
 				{/* TODO */}
 			</form>
 		</Wrapper>

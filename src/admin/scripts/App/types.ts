@@ -9,6 +9,7 @@ export interface UsersItemProps extends commonModelProps {
 	last_name: string;
 	user_level: number;
 	user_group: string;
+	user_avatar?: string;
 }
 
 export interface PostsItemProps extends commonModelProps {

@@ -63,7 +63,7 @@ class Profile {
 		$user = $users -> get($conn, ['email' => $email, 'withPassword' => true]);
 
 		if ($user) {
-			$passwordMatches = $user['password'] == $password; // TODO
+			$passwordMatches = password_verify($password, $user['password']);
 			$response['message'] = 'user_password_not_match';
 			if ($user['active'] == 0) {
 				$response['message'] = 'user_not_active';
@@ -88,7 +88,7 @@ class Profile {
 		$requestData = json_decode(json_encode($requestData), true);
 		$requests = new Requests;
 		$emailService = new EmailService;
-		$helpers = new Helpers;
+		// $helpers = new Helpers;
 		$users = new Users;
 		$response = [
 			'message' => 'user_not_found',
@@ -103,7 +103,8 @@ class Profile {
 			} else if ($user['deleted'] == 1) {
 				$response['message'] = 'user_is_deleted';
 			} else {
-				$token = $helpers -> getToken(16, '');
+				// $token = $helpers -> getToken(16, '');
+				$token = md5($email . TIMESTAMP);
 				$project_root = CFG_ENV['ROOT_PATH'];
 				$confirm_url = $project_root . PATH_PREFIX_LOST_PASSWORD . $token;
 				$response['email'] = $emailService -> sendEmailMessage(
@@ -111,7 +112,7 @@ class Profile {
 					$email,
 					"Lost password request",
 					"",
-					"Confirm password reset with <br /><a href='" . $confirm_url ."'>this link</> "
+					"Confirm password reset<br /><a href='" . $confirm_url ."'>this link</> "
 				);
 				$response['row'] = $requests -> create($conn, [
 					'type' => 'user',
