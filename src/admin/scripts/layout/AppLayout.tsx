@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
@@ -7,6 +8,7 @@ import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
+import { useProfile } from '../App/hooks';
 
 import { routeProps, appProps } from '../types';
 import Sidebar from './Sidebar';
@@ -129,6 +131,8 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
 	const [spotlightOpen, setSpotlightOpen] = useState<boolean>(false);
 	const [logoutConfirmOpen, setLogoutConfirmOpen] = useState<boolean>(false);
+	const history = useHistory();
+	const { userLogout } = useProfile();
 
 	const toggleSidebar = () => {
 		let ns = !sidebarOpen;
@@ -142,20 +146,14 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const toggleSpotlight = () => setSpotlightOpen(!spotlightOpen);
 
 	const logoutHandler = () => {
-		// TODO: Handle logout
-		console.log('Logout now and redirect back to login');
-		setLogoutConfirmOpen(false);
+		userLogout({}).then((res) => {
+			// TODO: Handle logout
+			console.log('Logout now and redirect back to login');
+			console.log(res);
+			setLogoutConfirmOpen(false);
+			history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+		});
 	};
-
-	// Check error data from store
-	useEffect(() => {
-		if (store.ui.dataError) {
-			console.log('!! ERROR !!');
-			// TODO
-			// Display error message
-			// Toggle error false
-		}
-	}, [store.ui.dataError]);
 
 	return (
 		<>

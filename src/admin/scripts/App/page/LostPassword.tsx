@@ -13,6 +13,9 @@ const LostPasswordPage = () => {
 			route={routes['lost-password']}
 			app={'App'}
 			metaTitle={t('page:LostPassword.meta.title')}
+			footerWithBorder={false}
+			withFooter
+			footerCentered
 			isCentered
 		>
 			<LostPasswordForm>

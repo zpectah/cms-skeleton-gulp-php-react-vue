@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
+import globalStyles from '../styles/global';
 import { getStyles } from '../styles/theme';
 
 import AuthRoute from '../utils/AuthRoute';
@@ -17,48 +18,12 @@ import SettingsPage from './page/Settings';
 import TagsPage from './page/Tags';
 
 const GlobalStyle = createGlobalStyle`
-	html {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		font-size: 16px;
-	}
+	${globalStyles}
+
 	body {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		font-size: 1rem;
 		color: ${getStyles().layout.body_text};
 		background-color: ${getStyles().layout.body_bg};
 	}
-
-	// Modal dialog blur background
-	.DialogCover {
-		&:last-of-type {
-			backdrop-filter: blur(3px);
-		}
-	}
-
-	.DialogWrapper {}
-
-	.ant-modal {
-		&-close {
-			&-x {
-				width: 40px;
-				height: 40px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 1.75rem;
-			}
-		}
-		&-content {
-			background: transparent;
-		}
-	}
-
 `;
 
 const App = () => {
