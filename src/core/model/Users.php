@@ -21,31 +21,58 @@ class Users {
 		$result = $stmt -> get_result();
 		$stmt -> close();
 
-		if ($result -> num_rows > 0) {
-			while($row = $result -> fetch_assoc()) {
-				unset($row['password']);
+		// params
+		$requestData = json_decode(json_encode($requestData), true);
+		$f_id = $requestData['id'];
+		$f_email = $requestData['email'];
 
-				$response[] = $row;
+		if ($result -> num_rows > 0) {
+			// iterate by params
+			if ($f_id) {
+				while($row = $result -> fetch_assoc()) {
+					if ($f_id == $row['id']) {
+						unset($row['password']);
+
+						$response = $row;
+					}
+				}
+			} else if ($f_email) {
+				while($row = $result -> fetch_assoc()) {
+					if ($f_email == $row['email']) {
+						unset($row['password']);
+
+						$response = $row;
+					}
+				}
+			} else {
+				while($row = $result -> fetch_assoc()) {
+					unset($row['password']);
+
+					$response[] = $row;
+				}
 			}
 		}
+
 
 		return $response;
 	}
 
 	public function create ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+
 		// prepare
 		$query = ('INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?)');
 		$types = 'ssssssisii';
 		$args = [
-			$requestData -> email,
-			$requestData -> password,
-			$requestData -> nickname,
-			$requestData -> first_name,
-			$requestData -> middle_name,
-			$requestData -> last_name,
-			$requestData -> user_level,
-			$requestData -> user_group,
-			$requestData -> active,
+			$requestData['email'],
+			$requestData['password'],
+			$requestData['nickname'],
+			$requestData['first_name'],
+			$requestData['middle_name'],
+			$requestData['last_name'],
+			$requestData['user_level'],
+			$requestData['user_group'],
+			$requestData['active'],
 			0
 		];
 
@@ -66,31 +93,33 @@ class Users {
 	}
 
 	public function update ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+
 		// prepare
-		$password = $requestData -> password;
+		$password = $requestData['password'];
 		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?') : ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, active = ? WHERE id = ?');
 		$types = $password ? 'ssssssisii' : 'sssssisii';
 		$args = $password ? [
-			$requestData -> email,
-			$requestData -> password,
-			$requestData -> nickname,
-			$requestData -> first_name,
-			$requestData -> middle_name,
-			$requestData -> last_name,
-			$requestData -> user_level,
-			$requestData -> user_group,
-			$requestData -> active,
-			$requestData -> id
+			$requestData['email'],
+			$requestData['password'],
+			$requestData['nickname'],
+			$requestData['first_name'],
+			$requestData['middle_name'],
+			$requestData['last_name'],
+			$requestData['user_level'],
+			$requestData['user_group'],
+			$requestData['active'],
+			$requestData['id']
 		] : [
-			$requestData -> email,
-			$requestData -> nickname,
-			$requestData -> first_name,
-			$requestData -> middle_name,
-			$requestData -> last_name,
-			$requestData -> user_level,
-			$requestData -> user_group,
-			$requestData -> active,
-			$requestData -> id
+			$requestData['email'],
+			$requestData['nickname'],
+			$requestData['first_name'],
+			$requestData['middle_name'],
+			$requestData['last_name'],
+			$requestData['user_level'],
+			$requestData['user_group'],
+			$requestData['active'],
+			$requestData['id']
 		];
 
 		// execute
@@ -110,6 +139,7 @@ class Users {
 	}
 
 	public function toggle ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -144,6 +174,7 @@ class Users {
 	}
 
 	public function delete ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;

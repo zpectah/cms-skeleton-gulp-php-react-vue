@@ -17,5 +17,18 @@
 		"user_password_not_match": "User password wont match",
 		"user_login_success": "User is successfully logged in"
 	},
-	"userLogout": "User has been logged out"
+	"userLogout": "User has been logged out",
+	"userLostPassword": {
+		"user_not_found": "User was not found",
+		"user_not_active": "User is disabled",
+		"user_is_deleted": "User has been deleted",
+		"request_was_send": "Request on password reset was send to your e-mail address",
+		"reset": {
+			"user_password_reset_error": "Error while password reset. Reload page and try again",
+			"token_not_found": "Security token was not found in database",
+			"request_not_found": "Your request was not found or maybe is already terminated",
+			"user_password_already_reset": "Your request has been already reset",
+			"user_password_reset_success": "Your password was successfully reset. Check your inbox for new password"
+		}
+	}
 }
