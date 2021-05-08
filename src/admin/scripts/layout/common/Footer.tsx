@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CFG from '../../../config/global.json';
-import { getStyles } from '../styles/theme';
-import { routeProps } from '../types';
+import CFG from '../../../../config/global.json';
+import { getStyles } from '../../styles/theme';
+import { routeProps } from '../../types';
 
 const Wrapper = styled.footer`
 	width: 100%;

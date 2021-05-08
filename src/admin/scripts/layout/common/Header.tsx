@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Breadcrumb } from 'antd';
 import styled from 'styled-components';
 
-import { getStyles } from '../styles/theme';
-import { Typography } from '../component/ui';
-import { routeProps, appProps } from '../types';
+import { getStyles } from '../../styles/theme';
+import { Typography } from '../../component/ui';
+import { routeProps, appProps } from '../../types';
 
 const Wrapper = styled.header`
 	width: 100%;

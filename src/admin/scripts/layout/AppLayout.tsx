@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import Helmet from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import CFG from '../../../config/global.json';
 import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
-import { useProfile } from '../App/hooks';
-
 import { routeProps, appProps } from '../types';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import Footer from './Footer';
+import LogoutConfirmDialog from '../component/Profile/LogoutConfirmDialog';
+import Preloader from './common/Preloader';
+import Sidebar from './common/Sidebar';
+import Header from './common/Header';
+import Footer from './common/Footer';
 import Add from '../component/Add';
 import Help from '../component/Help';
 import Profile from '../component/Profile';
 import Spotlight from '../component/Spotlight';
-import Confirm from '../component/Confirm';
 
 const Wrapper = styled.div`
 	width: ${(props) => (props.withSidebar ? 'calc(100vw - 50px)' : '100vw')};
@@ -55,41 +53,6 @@ const Main = styled.main`
 	flex: ${(props) => (props.isCentered ? '0' : '1')};
 	color: ${getStyles().layout.body_text};
 	background-color: ${getStyles().layout.body_bg};
-`;
-
-const PreloaderAnimation = keyframes`
-  0% { width: 0%; left: 0%; }
-  10% { width: 5%; left: 0%; }
-  20% { width: 25%; left: 0%; }
-  30% { width: 50%; left: 0%; }
-  40% { width: 75%; left: 0%; }
-  50% { width: 100%; left: 0%; }
-  60% { width: 75%; left: 25%; }
-  70% { width: 50%; left: 50%; }
-  80% { width: 25%; left: 75%; }
-  90% { width: 5%; left: 95%; }
-  100% { width: 0%; left: 100%; }
-`;
-
-const PreloaderLayer = styled.div`
-	width: 100%;
-	height: 2px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 999;
-	overflow: hidden;
-	background-color: ${getStyles().palette.primary};
-
-	& .preloader-element {
-		height: 100%;
-		position: relative;
-		background-color: blue;
-		animation-name: ${PreloaderAnimation};
-		animation-duration: 1s;
-		animation-iteration-count: infinite;
-		animation-timing-function: ease-in-out;
-	}
 `;
 
 interface AppLayoutProps {
@@ -131,8 +94,6 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
 	const [spotlightOpen, setSpotlightOpen] = useState<boolean>(false);
 	const [logoutConfirmOpen, setLogoutConfirmOpen] = useState<boolean>(false);
-	const history = useHistory();
-	const { userLogout } = useProfile();
 
 	const toggleSidebar = () => {
 		let ns = !sidebarOpen;
@@ -145,16 +106,6 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const toggleProfileDialog = () => setProfileDialogOpen(!profileDialogOpen);
 	const toggleSpotlight = () => setSpotlightOpen(!spotlightOpen);
 
-	const logoutHandler = () => {
-		userLogout({}).then((res) => {
-			// TODO: Handle logout
-			console.log('Logout now and redirect back to login');
-			console.log(res);
-			setLogoutConfirmOpen(false);
-			history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
-		});
-	};
-
 	return (
 		<>
 			<Helmet>
@@ -163,11 +114,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					{metaTitle && ` | ${metaTitle}`}
 				</title>
 			</Helmet>
-			{store.ui.loadingData && (
-				<PreloaderLayer>
-					<div className="preloader-element"></div>
-				</PreloaderLayer>
-			)}
+			{store.ui.loadingData && <Preloader />}
 			<Wrapper withSidebar={withSidebar} sidebarOpen={sidebarOpen}>
 				{withSidebar && (
 					<Sidebar
@@ -207,12 +154,9 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					onCancel={toggleProfileDialog}
 				/>
 				<Spotlight.Dialog isOpen={spotlightOpen} onCancel={toggleSpotlight} />
-				<Confirm.Dialog
+				<LogoutConfirmDialog
 					isOpen={logoutConfirmOpen}
-					onCancel={toggleLogoutConfirm}
-					confirmData={{}}
-					onConfirm={logoutHandler}
-					method={'logout'}
+					toggle={toggleLogoutConfirm}
 				/>
 			</Wrapper>
 		</>

@@ -12,14 +12,14 @@ import {
 } from 'react-icons/md';
 import Media from 'react-media';
 
-import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../constants';
-import CFG from '../../../config/global.json';
-import { getStyles } from '../styles/theme';
-import media from '../styles/responsive';
-import { Scrollable } from '../component/ui';
-import Navigation from '../component/Navigation';
-import { appProps } from '../types';
-import { useSettings } from '../App/hooks';
+import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
+import CFG from '../../../../config/global.json';
+import { getStyles } from '../../styles/theme';
+import media from '../../styles/responsive';
+import { Scrollable } from '../../component/ui';
+import Navigation from '../../component/Navigation';
+import { appProps } from '../../types';
+import { useSettings } from '../../App/hooks';
 
 const Wrapper = styled.aside`
 	width: 50px;
