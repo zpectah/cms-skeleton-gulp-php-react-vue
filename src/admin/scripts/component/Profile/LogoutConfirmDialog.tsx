@@ -1,6 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
+import { useTranslation } from 'react-i18next';
 
+import { MESSAGE_SUCCESS_DURATION } from '../../constants';
 import CFG from '../../../../config/global.json';
 import Confirm from '../../component/Confirm';
 import { useProfile } from '../../App/hooks';
@@ -15,13 +18,15 @@ const LogoutConfirmDialog: React.FC<LogoutConfirmDialogProps> = ({
 	toggle,
 }) => {
 	const history = useHistory();
-	const { Profile, userLogout } = useProfile();
+	const { userLogout } = useProfile();
+	const { t } = useTranslation(['message']);
 
 	const logoutHandler = () => {
-		return userLogout({ email: Profile.email }).then((res) => {
-			console.log('Logout now and redirect back to login');
-			console.log(res);
-			history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+		return userLogout({}).then((res) => {
+			if (res.data[0] && res.data[1]) {
+				history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+				message.success(t('message:userLogout'), MESSAGE_SUCCESS_DURATION);
+			}
 		});
 	};
 

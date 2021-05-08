@@ -63,7 +63,7 @@ class Profile {
 
 	public function login ($conn, $requestData) {
 		$response = [
-			'message' => 'user_not_exist'
+			'message' => 'user_not_found'
 		];
 		$session = new SessionService;
 
@@ -98,8 +98,8 @@ class Profile {
 			} else if ($user['deleted'] == 1) {
 				$response['message'] = 'user_is_deleted';
 			} else if ($passwordMatches) {
-				$response['session'] = $session -> start('user', $email);
 				$response['message'] = 'user_login_success';
+				$response['session'] = $session -> start('user', $email);
 			}
 
 		}
