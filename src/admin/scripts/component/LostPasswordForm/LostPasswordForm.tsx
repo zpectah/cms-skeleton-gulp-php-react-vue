@@ -120,13 +120,11 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 			}
 		});
 	};
-
 	const parameterHandler = (token) => {
-		//
-		console.log('token found ', token);
+		setProcessing(true);
 		return userLostPasswordReset({ token: token }).then((res) => {
-			console.log('userLostPasswordReset ', res);
 			setRequestSend(true);
+			setProcessing(false);
 
 			if (res?.data?.message) {
 				switch (res.data.message) {
@@ -192,10 +190,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 				</BlockBrand>
 				<BlockForm>
 					{token ? (
-						<BlockInner>
-							Your request has been processing, your new password is in your
-							e-mail inbox
-						</BlockInner>
+						<BlockInner>Your request has been processing...</BlockInner>
 					) : (
 						<BlockInner>
 							<Form

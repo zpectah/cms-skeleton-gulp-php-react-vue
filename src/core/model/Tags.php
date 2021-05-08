@@ -7,6 +7,7 @@ namespace core\model;
 class Tags {
 
 	public function get ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = [];
 
 		// prepare
@@ -31,12 +32,14 @@ class Tags {
 	}
 
 	public function create ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+
 		// prepare
 		$query = ('INSERT INTO tags (name, active, deleted) VALUES (?,?,?)');
 		$types = 'sii';
 		$args = [
-			$requestData -> name,
-			$requestData -> active,
+			$requestData['name'],
+			$requestData['active'],
 			0
 		];
 
@@ -57,13 +60,15 @@ class Tags {
 	}
 
 	public function update ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+
 		// prepare
 		$query = ('UPDATE tags SET name = ?, active = ? WHERE id = ?');
 		$types = 'sii';
 		$args = [
-			$requestData -> name,
-			$requestData -> active,
-			$requestData -> id
+			$requestData['name'],
+			$requestData['active'],
+			$requestData['id']
 		];
 
 		// execute
@@ -83,6 +88,7 @@ class Tags {
 	}
 
 	public function toggle ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -103,7 +109,7 @@ class Tags {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = toggleRow($conn, $id);
@@ -117,6 +123,7 @@ class Tags {
 	}
 
 	public function delete ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -137,7 +144,7 @@ class Tags {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = deleteRow($conn, $id);

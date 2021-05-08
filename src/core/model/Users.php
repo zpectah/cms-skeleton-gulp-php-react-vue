@@ -7,6 +7,7 @@ namespace core\model;
 class Users {
 
 	public function get ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = [];
 
 		// prepare
@@ -22,7 +23,6 @@ class Users {
 		$stmt -> close();
 
 		// params
-		$requestData = json_decode(json_encode($requestData), true);
 		$f_id = $requestData['id'];
 		$f_email = $requestData['email'];
 

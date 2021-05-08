@@ -32,6 +32,7 @@ class Posts {
 	}
 
 	private function create_language_rows($conn, $activeLanguages, $lastId, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = [];
 
 		foreach ($activeLanguages as $lang) {
@@ -42,9 +43,9 @@ class Posts {
 			$types = 'isss';
 			$args = [
 				$lastId,
-				$requestData -> $lang -> title,
-				$requestData -> $lang -> perex,
-				$requestData -> $lang -> content
+				$requestData[$lang]['title'],
+				$requestData[$lang]['perex'],
+				$requestData[$lang]['content']
 			];
 
 			// execute
@@ -63,6 +64,7 @@ class Posts {
 	}
 
 	private function update_language_rows($conn, $activeLanguages, $id, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		foreach ($activeLanguages as $lang) {
@@ -72,9 +74,9 @@ class Posts {
 			$query = ('UPDATE ' . $table_name . ' SET title = ?, perex = ?, content = ? WHERE id = ?');
 			$types = 'sssi';
 			$args = [
-				$requestData -> $lang -> title,
-				$requestData -> $lang -> perex,
-				$requestData -> $lang -> content,
+				$requestData[$lang]['title'],
+				$requestData[$lang]['perex'],
+				$requestData[$lang]['content'],
 				$id
 			];
 
@@ -95,6 +97,7 @@ class Posts {
 
 
 	public function get ($conn, $requestData, $languages) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = [];
 		$active_languages = $languages['active'];
 
@@ -126,15 +129,17 @@ class Posts {
 	}
 
 	public function create ($conn, $requestData, $languages) {
+		$requestData = json_decode(json_encode($requestData), true);
+
 		// prepare
 		$query = ('INSERT INTO posts (type, name, category, tags, active, deleted) VALUES (?,?,?,?,?,?)');
 		$types = 'ssssii';
 		$args = [
-			$requestData -> type,
-			$requestData -> name,
-			$requestData -> category ? implode(",", $requestData -> category) : '',
-			$requestData -> tags ? implode(",", $requestData -> tags) : '',
-			$requestData -> active,
+			$requestData['type'],
+			$requestData['name'],
+			$requestData['category'] ? implode(",", $requestData['category']) : '',
+			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
+			$requestData['active'],
 			0
 		];
 
@@ -148,7 +153,7 @@ class Posts {
 			$id = $stmt -> insert_id;
 			$response = [
 				'id' => $id,
-				'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData -> lang) // created languages ... !!!
+				'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData['lang']) // created languages ... !!!
 			];
 			$stmt -> close();
 		}
@@ -157,17 +162,18 @@ class Posts {
 	}
 
 	public function update ($conn, $requestData, $languages) {
+		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
 		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, active = ? WHERE id = ?');
 		$types = 'ssssii';
 		$args = [
-			$requestData -> type,
-			$requestData -> name,
-			$requestData -> category ? implode(",", $requestData -> category) : '',
-			$requestData -> tags ? implode(",", $requestData -> tags) : '',
-			$requestData -> active,
-			$requestData -> id
+			$requestData['type'],
+			$requestData['name'],
+			$requestData['category'] ? implode(",", $requestData['category']) : '',
+			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
+			$requestData['active'],
+			$requestData['id']
 		];
 
 		// execute
@@ -179,7 +185,7 @@ class Posts {
 			$stmt -> execute();
 			$response = [
 				'rows' => $stmt -> affected_rows,
-				'lang' => self::update_language_rows($conn, $languages['active'], $requestData -> id, $requestData -> lang),
+				'lang' => self::update_language_rows($conn, $languages['active'], $requestData['id'], $requestData['lang']),
 			];
 			$stmt -> close();
 		}
@@ -190,6 +196,7 @@ class Posts {
 	}
 
 	public function toggle ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -210,7 +217,7 @@ class Posts {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = toggleRow($conn, $id);
@@ -224,6 +231,7 @@ class Posts {
 	}
 
 	public function delete ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 
 		if ($conn -> connect_error) return $conn -> connect_error;
@@ -244,7 +252,7 @@ class Posts {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = deleteRow($conn, $id);

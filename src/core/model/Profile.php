@@ -12,6 +12,7 @@ use core\utils\Helpers;
 class Profile {
 
 	public function get ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$response = null;
 		$session = new SessionService;
 
@@ -43,39 +44,26 @@ class Profile {
 	}
 
 	public function update ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+		$users = new Users;
+		$response = null;
 
-		return [
-			'r' => $requestData
-		];
+		// TODO: handle profile update
+
+		return $response;
 	}
 
 	public function login ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+		$users = new Users;
 		$response = [
 			'message' => 'user_not_found'
 		];
 		$session = new SessionService;
 
-		$user = null;
-		$email = $requestData -> email;
-		$password = $requestData -> password;
-
-		// prepare
-		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users WHERE email = ?');
-		$types = 's';
-		$args = [ $email ];
-
-		// execute
-		$stmt = $conn -> prepare($query);
-		$stmt -> bind_param($types, ...$args);
-		$stmt -> execute();
-		$result = $stmt -> get_result();
-		$stmt -> close();
-
-		if ($result -> num_rows > 0) {
-			while($row = $result -> fetch_assoc()) {
-				$user = $row;
-			}
-		}
+		$email = $requestData['email'];
+		$password = $requestData['password'];
+		$user = $users -> get($conn, ['email' => $email]);
 
 		if ($user) {
 			$passwordMatches = $user['password'] == $password; // TODO
@@ -102,6 +90,7 @@ class Profile {
 	}
 
 	public function lost_password ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$requests = new Requests;
 		$emailService = new EmailService;
 		$helpers = new Helpers;
@@ -112,7 +101,7 @@ class Profile {
 		];
 
 		$user = null;
-		$email = $requestData -> email;
+		$email = $requestData['email'];
 
 		// prepare
 		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM users WHERE email = ?');
@@ -165,6 +154,7 @@ class Profile {
 	}
 
 	public function lost_password_reset ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
 		$requests = new Requests;
 		$users = new Users;
 		$helpers = new Helpers;
@@ -173,7 +163,7 @@ class Profile {
 			'message' => 'user_password_reset_error',
 		];
 
-		$token = $requestData -> token;
+		$token = $requestData['token'];
 		$request_row = $requests -> get($conn, ['token' => $token]);
 
 		if ($token) {
@@ -212,6 +202,5 @@ class Profile {
 
 		return $response;
 	}
-
 
 }
