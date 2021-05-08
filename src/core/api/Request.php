@@ -62,7 +62,7 @@ class Request {
 				break;
 
 			case 'user_logout':
-				$response['data'] = $DataService -> user_logout($requestData);
+				$response['data'] = $DataService -> user_logout();
 				$response['status'] = 'ok';
 				break;
 

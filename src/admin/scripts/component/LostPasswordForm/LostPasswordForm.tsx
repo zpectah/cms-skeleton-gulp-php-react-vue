@@ -9,6 +9,8 @@ import media from '../../styles/responsive';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
 import routes from '../../App/routes.json';
+import LocaleDropdown from '../Profile/LocaleDropdown';
+import { useProfile } from '../../App/hooks';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -73,6 +75,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 
 	return (
 		<>
+			<LocaleDropdown />
 			<Wrapper>
 				<BlockBrand>
 					<BlockInner>{children}</BlockInner>

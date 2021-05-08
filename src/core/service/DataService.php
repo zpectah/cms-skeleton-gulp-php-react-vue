@@ -391,16 +391,10 @@ class DataService {
 		return $response;
 	}
 
-	public function user_logout ($data) {
-		$conn = new mysqli(...CFG_DB_CONN);
-
+	public function user_logout () {
 		$Profile = new Profile;
 
-		$response = $Profile -> logout($conn, $data);
-
-		$conn -> close();
-
-		return $response;
+		return $Profile -> logout();
 	}
 
 	public function user_lost_password ($data) {

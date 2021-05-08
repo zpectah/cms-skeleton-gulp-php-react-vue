@@ -6,24 +6,32 @@ namespace core\service;
 
 class SessionService {
 
-	public function get ($requestData) {
+	public function get ($type) {
+		session_start();
+		$response = $_SESSION;
 
-		return [
-			'r' => $requestData
-		];
+		if ($type == 'user') $response = $_SESSION["userCMS"];
+		if ($type == 'member') $response = null;
+
+		return $response;
 	}
 
-	public function start ($requestData) {
+	public function start ($type, $email) {
+		session_start();
+		$response = null;
 
-		return [
-			'r' => $requestData
-		];
+		if ($type == 'user') $response = $_SESSION["userCMS"] = $email;
+		if ($type == 'member') $response = null;
+
+		return $response;
 	}
 
-	public function close ($requestData) {
+	public function close () {
+		session_start();
 
 		return [
-			'r' => $requestData
+			session_unset(),
+			session_destroy()
 		];
 	}
 
