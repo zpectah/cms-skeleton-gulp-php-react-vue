@@ -64,6 +64,7 @@ class Profile {
 
 		if ($user) {
 			$passwordMatches = password_verify($password, $user['password']);
+
 			$response['message'] = 'user_password_not_match';
 			if ($user['active'] == 0) {
 				$response['message'] = 'user_not_active';
@@ -107,12 +108,14 @@ class Profile {
 				$token = md5($email . TIMESTAMP);
 				$project_root = CFG_ENV['ROOT_PATH'];
 				$confirm_url = $project_root . PATH_PREFIX_LOST_PASSWORD . $token;
-				$response['email'] = $emailService -> sendEmailMessage(
-					'lostPassword',
+
+				$response['email'] = $emailService -> sendStyledMessage(
 					$email,
+					DEFAULT_SENDER_EMAIL,
 					"Lost password request",
-					"",
-					"Confirm password reset<br /><a href='" . $confirm_url ."'>this link</> "
+					"<div>Confirm password reset<br /><a href='" . $confirm_url ."' target='_blank'>this link</a></div>",
+					null,
+					'lostPassword'
 				);
 				$response['row'] = $requests -> create($conn, [
 					'type' => 'user',
@@ -145,14 +148,17 @@ class Profile {
 				if ($request_row['status'] == 0) {
 					$user_row = $users -> get($conn, ['email' => $request_row['value']]);
 					if ($user_row) {
-						$tmp_password = $helpers -> getToken(4, '');
-						$user_row['password'] = $tmp_password;
-						$response['email'] = $emailService -> sendEmailMessage(
-							'passwordReset',
+						$tmp_password = $helpers -> getToken(3, '');
+						$hash_password = password_hash($tmp_password, PASS_CRYPT, PASS_CRYPT_OPTIONS);
+						$user_row['password'] = $hash_password;
+
+						$response['email'] = $emailService -> sendStyledMessage(
 							$user_row['email'],
+							DEFAULT_SENDER_EMAIL,
 							"New password",
-							"",
-							"This is your new password: <b>" . $tmp_password ."</b> <br /> Keep it safe, or change after login "
+							"<div>This is your new password: <b>" . $tmp_password ."</b> <br /> Keep it safe, or change after login</div>",
+							null,
+							'passwordReset'
 						);
 						$response['row'] = $requests -> update($conn, [
 							'status' => 1,

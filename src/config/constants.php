@@ -19,6 +19,8 @@ const PASS_CRYPT_OPTIONS = [
 	'time_cost' => 4,
 	'threads' => 3
 ];
+define( "DEFAULT_SENDER_EMAIL",                           $JSON_GLOBAL['CMS']['SENDER_EMAIL']);
+define( "CMS_NAME",                                       $JSON_GLOBAL['CMS']['META']['name']);
 
 
 
