@@ -160,7 +160,7 @@ class Users {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = toggleRow($conn, $id);
@@ -195,7 +195,7 @@ class Users {
 			return $r;
 		}
 
-		$id = $requestData -> id;
+		$id = $requestData['id'];
 
 		if ($id) {
 			$response = deleteRow($conn, $id);
