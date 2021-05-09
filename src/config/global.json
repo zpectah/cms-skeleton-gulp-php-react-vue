@@ -16,9 +16,7 @@
 		"STORAGE_KEY_LANG": "app-lang",
 		"STORAGE_KEY_THEME": "app-theme",
 		"STORAGE_KEY_UI_SIDEBAR": "ui-sidebar",
-		"USING_EXTERNAL_CSS": true,
-		"SENDER_EMAIL": "noreply@your-web-domain.com",
-		"SENDER_EMAIL_HEADERS": "From: noreply@your-web-domain.com"
+		"USING_EXTERNAL_CSS": true
 	},
 	"PROJECT": {
 		"META": {

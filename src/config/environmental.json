@@ -10,8 +10,19 @@
 			"SCRIPTS": "/web/scripts/index.js"
 		}
 	},
+	"test": {
+		"ROOT_PATH": "http://test.skeleton-php-cms/",
+		"ADMIN": {
+			"STYLES": "/admin/styles/css/index.min.css",
+			"SCRIPTS": "/admin/scripts/index.min.js"
+		},
+		"WEB": {
+			"STYLES": "/web/styles/css/index.min.css",
+			"SCRIPTS": "/web/scripts/index.min.js"
+		}
+	},
 	"production": {
-		"ROOT_PATH": "http://prod.skeleton-php-cms/",
+		"ROOT_PATH": "https://your-web-domain.com",
 		"ADMIN": {
 			"STYLES": "/admin/styles/css/index.min.css",
 			"SCRIPTS": "/admin/scripts/index.min.js"
