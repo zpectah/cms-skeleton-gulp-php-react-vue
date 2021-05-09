@@ -33,13 +33,27 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const { control, handleSubmit, formState, register, getValues } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState,
+		register,
+		watch,
+		getValues,
+	} = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			type: 'default',
 			name: '',
 			category: [],
 			tags: [],
+			event_start: '', // TODO
+			event_end: '', // TODO
+			event_location: '', // TODO
+			media: '', // TODO
+			img_main: '', // TODO
+			img_thumbnail: '', // TODO
+			author: 0,
 			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
@@ -71,6 +85,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 		setTimeout(() => reloadPosts(), SUBMIT_TIMEOUT);
 	};
 
+	const watchType = watch('type');
+
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
 			<input
@@ -79,6 +95,32 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				ref={register({ required: true })}
 				defaultValue={detailData.id}
 			/>
+			{/* blank model in case of type ...*/}
+			<input
+				type="hidden"
+				name="event_start"
+				ref={register({})}
+				defaultValue={detailData.event_start}
+			/>
+			<input
+				type="hidden"
+				name="event_end"
+				ref={register({})}
+				defaultValue={detailData.event_end}
+			/>
+			<input
+				type="hidden"
+				name="event_location"
+				ref={register({})}
+				defaultValue={detailData.event_location}
+			/>
+			<input
+				type="hidden"
+				name="media"
+				ref={register({})}
+				defaultValue={detailData.media}
+			/>
+			{/* */}
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -124,6 +166,130 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+					{''}
+					{
+						{
+							event: (
+								<>
+									<hr />
+									<Form.Row
+										label={'event start'}
+										name={'event_start'}
+										control={control}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event_start'}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'event end'}
+										name={'event_end'}
+										control={control}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event_end'}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'event location'}
+										name={'event_location'}
+										control={control}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event_location'}
+											/>
+										)}
+									</Form.Row>
+									<hr />
+								</>
+							),
+							media: (
+								<>
+									<hr />
+									<Form.Row label={'media'} name={'media'} control={control}>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'media'}
+											/>
+										)}
+									</Form.Row>
+									<hr />
+								</>
+							),
+						}[watchType]
+					}
+					<Form.Row label={'img main'} name={'img_main'} control={control}>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'img_main'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'img thumbnail'}
+						name={'img_thumbnail'}
+						control={control}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'img_thumbnail'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'author'}
+						name={'author'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'author'}
+							/>
+						)}
+					</Form.Row>
+					{''}
 					<Form.Row label={'Category'} name={'category'} control={control}>
 						{(row) => (
 							<Picker.Categories

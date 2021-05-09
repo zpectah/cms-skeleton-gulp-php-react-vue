@@ -18,6 +18,24 @@ const ActionRow = styled.div`
 	padding-top: 1rem;
 `;
 
+const TableWrapper = styled.div`
+	width: 100%;
+	height: auto;
+	position: relative;
+	overflow-y: auto;
+`;
+const StyledTable = styled.table`
+	width: 100%;
+	min-width: 700px;
+	margin-bottom: 1rem;
+
+	tr th,
+	tr td {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+`;
+
 interface SettingsFormProps {
 	route: routeProps;
 	panelKey?: string;
@@ -591,7 +609,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						)}
 					</Card.Base>
 				</TabPane>
-				<TabPane tab="Module" key="module">
+				<TabPane tab="Modules" key="modules">
 					<Card.Base withNegativeOffsetTop>
 						<Section.Base title={'Members'} titleAnchor={'members'} withBorder>
 							{tmpState.module_members_installed ? (
@@ -774,6 +792,39 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									)}
 								</>
 							)}
+						</Section.Base>
+					</Card.Base>
+				</TabPane>
+				<TabPane tab="Maintenance" key="maintenance">
+					<Card.Base withNegativeOffsetTop>
+						<Section.Base title={'Repairs'} titleAnchor={'repairs'}>
+							<TableWrapper>
+								<StyledTable>
+									{/* TODO */}
+									<tbody>
+										<tr>
+											<th>Repair missing language content</th>
+											<td>
+												<Button.Base
+													type="primary"
+													onClick={() => {
+														console.log('Repair missing language content');
+													}}
+													ghost
+												>
+													Proceed
+												</Button.Base>
+											</td>
+											<td>
+												<small>
+													Iterate all language content and create missing rows
+													in database
+												</small>
+											</td>
+										</tr>
+									</tbody>
+								</StyledTable>
+							</TableWrapper>
 						</Section.Base>
 					</Card.Base>
 				</TabPane>

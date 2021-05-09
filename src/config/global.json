@@ -16,7 +16,11 @@
 		"STORAGE_KEY_LANG": "app-lang",
 		"STORAGE_KEY_THEME": "app-theme",
 		"STORAGE_KEY_UI_SIDEBAR": "ui-sidebar",
-		"USING_EXTERNAL_CSS": true
+		"USING_EXTERNAL_CSS": true,
+		"UI": {
+			"SPOTLIGHT": false,
+			"HELP": false
+		}
 	},
 	"PROJECT": {
 		"META": {
@@ -30,6 +34,7 @@
 		"LANG_DEFAULT": "en"
 	},
 	"LOCATION": {
+		"admin_dashboard": "/admin/",
 		"admin_login": "admin/login/",
 		"admin_lostPassword": "admin/lost-password/",
 		"admin_lostPasswordToken_prefix": "admin/lost-password/token/"

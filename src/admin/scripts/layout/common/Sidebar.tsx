@@ -162,18 +162,22 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 								<MdMenu />
 							)}
 						</Trigger>
-						<Trigger onClick={toggleSpotlight}>
-							<MdSearch />
-						</Trigger>
+						{CFG.CMS.UI.SPOTLIGHT && (
+							<Trigger onClick={toggleSpotlight}>
+								<MdSearch />
+							</Trigger>
+						)}
 						<Trigger onClick={toggleAddDialog}>
 							<MdAdd />
 						</Trigger>
 					</div>
 					<div>&nbsp;</div>
 					<div>
-						<Trigger onClick={toggleHelpDialog}>
-							<MdHelpOutline />
-						</Trigger>
+						{CFG.CMS.UI.HELP && (
+							<Trigger onClick={toggleHelpDialog}>
+								<MdHelpOutline />
+							</Trigger>
+						)}
 						<Trigger onClick={toggleProfileDialog}>
 							<MdAccountCircle />
 						</Trigger>

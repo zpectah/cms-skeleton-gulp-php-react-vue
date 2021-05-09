@@ -133,15 +133,27 @@
 				},
 				{
 					"key": 3,
+					"label": "Article",
+					"value": "article",
+					"value_t": "type.article"
+				},
+				{
+					"key": 4,
 					"label": "Event",
 					"value": "event",
 					"value_t": "type.event"
 				},
 				{
-					"key": 4,
+					"key": 5,
 					"label": "Media",
 					"value": "media",
 					"value_t": "type.media"
+				},
+				{
+					"key": 6,
+					"label": "Reference",
+					"value": "reference",
+					"value_t": "type.reference"
 				}
 			]
 		}

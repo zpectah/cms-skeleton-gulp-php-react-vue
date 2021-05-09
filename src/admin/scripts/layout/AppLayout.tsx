@@ -148,12 +148,16 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					)}
 				</MainWrapper>
 				<Add.Dialog isOpen={addDialogOpen} onCancel={toggleAddDialog} />
-				<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
+				{CFG.CMS.UI.HELP && (
+					<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
+				)}
 				<Profile.Dialog
 					isOpen={profileDialogOpen}
 					onCancel={toggleProfileDialog}
 				/>
-				<Spotlight.Dialog isOpen={spotlightOpen} onCancel={toggleSpotlight} />
+				{CFG.CMS.UI.SPOTLIGHT && (
+					<Spotlight.Dialog isOpen={spotlightOpen} onCancel={toggleSpotlight} />
+				)}
 				<LogoutConfirmDialog
 					isOpen={logoutConfirmOpen}
 					toggle={toggleLogoutConfirm}

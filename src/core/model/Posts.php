@@ -120,6 +120,7 @@ class Posts {
 				}
 				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
+				$row['media'] = $row['media'] ? explode(",", $row['media']) : [];
 
 				$response[] = $row;
 			}
@@ -132,13 +133,20 @@ class Posts {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('INSERT INTO posts (type, name, category, tags, active, deleted) VALUES (?,?,?,?,?,?)');
-		$types = 'ssssii';
+		$query = ('INSERT INTO posts (type, name, category, tags, event_start, event_end, event_location, media, img_main, img_thumbnail, author, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'ssssssssssiii';
 		$args = [
 			$requestData['type'],
 			$requestData['name'],
 			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
+			$requestData['event_start'],
+			$requestData['event_end'],
+			$requestData['event_location'],
+			$requestData['media'] ? implode(",", $requestData['media']) : '',
+			$requestData['img_main'],
+			$requestData['img_thumbnail'],
+			$requestData['author'],
 			$requestData['active'],
 			0
 		];
@@ -165,13 +173,19 @@ class Posts {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, active = ? WHERE id = ?');
-		$types = 'ssssii';
+		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, event_start = ?, event_end = ?, event_location = ?, media = ?, img_main = ?, img_thumbnail = ?, active = ? WHERE id = ?');
+		$types = 'ssssssssssii';
 		$args = [
 			$requestData['type'],
 			$requestData['name'],
 			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
+			$requestData['event_start'],
+			$requestData['event_end'],
+			$requestData['event_location'],
+			$requestData['media'] ? implode(",", $requestData['media']) : '',
+			$requestData['img_main'],
+			$requestData['img_thumbnail'],
 			$requestData['active'],
 			$requestData['id']
 		];
