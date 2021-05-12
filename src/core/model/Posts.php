@@ -137,7 +137,22 @@ class Posts {
 		$event_end = $type == 'event' ? $requestData['event_end'] : '';
 
 		// prepare
-		$query = ('INSERT INTO posts (type, name, category, tags, event_start, event_end, event_location, media, img_main, img_thumbnail, published, author, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$query = ('INSERT INTO posts (
+                   type,
+                   name,
+                   category,
+                   tags,
+                   event_start,
+                   event_end,
+                   event_location,
+                   media,
+                   img_main,
+                   img_thumbnail,
+                   published,
+                   author,
+                   active,
+                   deleted
+                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
 		$types = 'sssssssssssiii';
 		$args = [
 			$type,
@@ -182,7 +197,20 @@ class Posts {
 		$event_end = $type == 'event' ? $requestData['event_end'] : '';
 
 		// prepare
-		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, event_start = ?, event_end = ?, event_location = ?, media = ?, img_main = ?, img_thumbnail = ?, published = ?, active = ? WHERE id = ?');
+		$query = ('UPDATE posts SET
+                 type = ?,
+                 name = ?,
+                 category = ?,
+                 tags = ?,
+                 event_start = ?,
+                 event_end = ?,
+                 event_location = ?,
+                 media = ?,
+                 img_main = ?,
+                 img_thumbnail = ?,
+                 published = ?,
+                 active = ?
+		WHERE id = ?');
 		$types = 'sssssssssssii';
 		$args = [
 			$type,

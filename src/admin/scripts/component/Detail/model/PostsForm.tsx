@@ -55,6 +55,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			media: '', // TODO
 			img_main: '', // TODO
 			img_thumbnail: '', // TODO
+			published: '',
 			author: 0,
 			active: 1,
 			lang: setLanguageModel(langList, {
@@ -97,32 +98,44 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				ref={register({ required: true })}
 				defaultValue={detailData.id}
 			/>
-			{/* blank model in case of type ...*/}
 			<input
 				type="hidden"
-				name="event_start"
+				name="published"
 				ref={register({})}
-				defaultValue={detailData.event_start}
+				defaultValue={detailData.published}
 			/>
-			<input
-				type="hidden"
-				name="event_end"
-				ref={register({})}
-				defaultValue={detailData.event_end}
-			/>
-			<input
-				type="hidden"
-				name="event_location"
-				ref={register({})}
-				defaultValue={detailData.event_location}
-			/>
-			<input
-				type="hidden"
-				name="media"
-				ref={register({})}
-				defaultValue={detailData.media}
-			/>
-			{/* */}
+			{watchType !== 'event' && (
+				<>
+					<input
+						type="hidden"
+						name="event_start"
+						ref={register({})}
+						defaultValue={detailData.event_start}
+					/>
+					<input
+						type="hidden"
+						name="event_end"
+						ref={register({})}
+						defaultValue={detailData.event_end}
+					/>
+					<input
+						type="hidden"
+						name="event_location"
+						ref={register({})}
+						defaultValue={detailData.event_location}
+					/>
+				</>
+			)}
+			{watchType !== 'media' && (
+				<>
+					<input
+						type="hidden"
+						name="media"
+						ref={register({})}
+						defaultValue={detailData.media}
+					/>
+				</>
+			)}
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -168,7 +181,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					{''}
 					{
 						{
 							event: (
