@@ -24,6 +24,7 @@ export interface PostsItemProps extends commonModelProps {
 	img_main?: string;
 	img_thumbnail?: string;
 	author?: number;
+	published?: string;
 }
 
 export interface TagsItemProps extends commonModelProps {

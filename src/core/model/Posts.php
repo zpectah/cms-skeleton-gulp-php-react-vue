@@ -132,20 +132,25 @@ class Posts {
 	public function create ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
+		$type = $requestData['type'];
+		$event_start = $type == 'event' ? $requestData['event_start'] : '';
+		$event_end = $type == 'event' ? $requestData['event_end'] : '';
+
 		// prepare
-		$query = ('INSERT INTO posts (type, name, category, tags, event_start, event_end, event_location, media, img_main, img_thumbnail, author, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'ssssssssssiii';
+		$query = ('INSERT INTO posts (type, name, category, tags, event_start, event_end, event_location, media, img_main, img_thumbnail, published, author, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'sssssssssssiii';
 		$args = [
-			$requestData['type'],
+			$type,
 			$requestData['name'],
 			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
-			$requestData['event_start'],
-			$requestData['event_end'],
+			$event_start,
+			$event_end,
 			$requestData['event_location'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
+			$requestData['published'],
 			$requestData['author'],
 			$requestData['active'],
 			0
@@ -172,20 +177,25 @@ class Posts {
 	public function update ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
+		$type = $requestData['type'];
+		$event_start = $type == 'event' ? $requestData['event_start'] : '';
+		$event_end = $type == 'event' ? $requestData['event_end'] : '';
+
 		// prepare
-		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, event_start = ?, event_end = ?, event_location = ?, media = ?, img_main = ?, img_thumbnail = ?, active = ? WHERE id = ?');
-		$types = 'ssssssssssii';
+		$query = ('UPDATE posts SET type = ?, name = ?, category = ?, tags = ?, event_start = ?, event_end = ?, event_location = ?, media = ?, img_main = ?, img_thumbnail = ?, published = ?, active = ? WHERE id = ?');
+		$types = 'sssssssssssii';
 		$args = [
-			$requestData['type'],
+			$type,
 			$requestData['name'],
 			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
-			$requestData['event_start'],
-			$requestData['event_end'],
+			$event_start,
+			$event_end,
 			$requestData['event_location'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
+			$requestData['published'],
 			$requestData['active'],
 			$requestData['id']
 		];

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Switch, Select } from 'antd';
+import { Input, Switch, Select, DatePicker } from 'antd';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
@@ -10,7 +11,7 @@ import { PostsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
-import { usePosts, useSettings } from '../../../App/hooks';
+import { usePosts, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
 
@@ -31,6 +32,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
 	const { Settings } = useSettings();
+	const { Profile } = useProfile();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const {
