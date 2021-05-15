@@ -32,6 +32,7 @@ import Confirm from '../Confirm';
 import { commonModelProps } from '../../types';
 import { appProps, routeProps } from '../../types';
 import { useProfile } from '../../App/hooks';
+import TableDrawer from './TableDrawer';
 
 const Heading = styled.div`
 	width: 100%;
@@ -411,84 +412,85 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		<>
 			<Heading>
 				<div>
-					<Form
-						onChange={handleSubmit((data) => setList(data))}
-						layout={'inline'}
-					>
-						<Space>
-							<Controller
-								control={control}
-								name={'search'}
-								render={({ onChange, value, name, ref }) => (
-									<StyledSearch
-										type="search"
-										name={name}
-										placeholder={t('component:Table.search_placeholder')}
-										onChange={onChange}
-										prefix={<MdSearch />}
-										value={value}
-										allowClear
-									/>
-								)}
-							/>
-							<Form.Item label={t('component:Table.orderBy_label')}>
-								<Controller
-									control={control}
-									name={'orderBy'}
-									render={({ onChange, value, name }) => (
-										<Radio.Group
-											name={name}
-											options={getOrderColumns()}
-											onChange={(e) => onChange(e.target.value)}
-											value={value}
-											optionType="button"
-										/>
-									)}
-								/>
-							</Form.Item>
-							<Form.Item label={t('component:Table.order_label')}>
-								<Controller
-									control={control}
-									name={'order'}
-									render={({ onChange, value, name }) => (
-										<Radio.Group
-											name={name}
-											options={[
-												{ label: 'Asc', value: 'asc' },
-												{ label: 'Desc', value: 'desc' },
-											]}
-											onChange={(e) => onChange(e.target.value)}
-											value={value}
-											optionType="button"
-										/>
-									)}
-								/>
-							</Form.Item>
-						</Space>
-					</Form>
+					{selectable && allowDelete && (
+						<>
+							<Button.Base
+								disabled={selectedRowKeys.length === 0}
+								onClick={() => toggleSelected(selectedRowKeys)}
+							>
+								{t('btn.toggle')} ({selectedRowKeys.length})
+							</Button.Base>
+							<Button.Base
+								disabled={selectedRowKeys.length === 0}
+								onClick={() => deleteConfirm(selectedRowKeys)}
+							>
+								{t('btn.delete')} ({selectedRowKeys.length})
+							</Button.Base>
+						</>
+					)}
 				</div>
 				<div>
-					<Space>
-						{withLanguageToggle && (
-							<LanguageToggle onChange={(lang) => setLang(lang)} />
-						)}
-						{selectable && allowDelete && (
-							<>
-								<Button.Base
-									disabled={selectedRowKeys.length === 0}
-									onClick={() => toggleSelected(selectedRowKeys)}
-								>
-									{t('btn.toggle')} ({selectedRowKeys.length})
-								</Button.Base>
-								<Button.Base
-									disabled={selectedRowKeys.length === 0}
-									onClick={() => deleteConfirm(selectedRowKeys)}
-								>
-									{t('btn.delete')} ({selectedRowKeys.length})
-								</Button.Base>
-							</>
-						)}
-					</Space>
+					<TableDrawer>
+						<div>
+							<Form onChange={handleSubmit((data) => setList(data))}>
+								<Form.Item label="Search">
+									<Controller
+										control={control}
+										name={'search'}
+										render={({ onChange, value, name, ref }) => (
+											<StyledSearch
+												type="search"
+												name={name}
+												placeholder={t('component:Table.search_placeholder')}
+												onChange={onChange}
+												prefix={<MdSearch />}
+												value={value}
+												allowClear
+											/>
+										)}
+									/>
+								</Form.Item>
+								<Form.Item label={t('component:Table.orderBy_label')}>
+									<Controller
+										control={control}
+										name={'orderBy'}
+										render={({ onChange, value, name }) => (
+											<Radio.Group
+												name={name}
+												options={getOrderColumns()}
+												onChange={(e) => onChange(e.target.value)}
+												value={value}
+												optionType="button"
+											/>
+										)}
+									/>
+								</Form.Item>
+								<Form.Item label={t('component:Table.order_label')}>
+									<Controller
+										control={control}
+										name={'order'}
+										render={({ onChange, value, name }) => (
+											<Radio.Group
+												name={name}
+												options={[
+													{ label: 'Asc', value: 'asc' },
+													{ label: 'Desc', value: 'desc' },
+												]}
+												onChange={(e) => onChange(e.target.value)}
+												value={value}
+												optionType="button"
+											/>
+										)}
+									/>
+								</Form.Item>
+							</Form>
+							<div>
+								{withLanguageToggle && (
+									<LanguageToggle onChange={(lang) => setLang(lang)} />
+								)}
+							</div>
+						</div>
+					</TableDrawer>
 				</div>
 			</Heading>
 			<AntdTable
