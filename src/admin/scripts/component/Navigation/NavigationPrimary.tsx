@@ -50,6 +50,12 @@ const links = [
 		path: routes.translations.path,
 		active: true,
 	},
+	{
+		key: 8,
+		label: routes.pages.label,
+		path: routes.pages.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`

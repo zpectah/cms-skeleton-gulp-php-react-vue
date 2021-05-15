@@ -18,6 +18,7 @@ import SettingsPage from './page/Settings';
 import TagsPage from './page/Tags';
 import TranslationsPage from './page/Translations';
 import CategoriesPage from './page/Categories';
+import PagesPage from './page/Pages';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -100,6 +101,13 @@ const App = () => {
 						path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
 						component={TagsPage}
 						auth={routes.tags.auth}
+						exact
+					/>
+
+					<AuthRoute
+						path={[routes.pages.path, routes.pages.pathDetail + '/:id']}
+						component={PagesPage}
+						auth={routes.pages.auth}
 						exact
 					/>
 

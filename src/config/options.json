@@ -178,6 +178,106 @@
 					"value_t": "type.secondary"
 				}
 			]
+		},
+		"Menu": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "Primary",
+					"value": "primary",
+					"value_t": "type.primary"
+				},
+				{
+					"key": 3,
+					"label": "Secondary",
+					"value": "secondary",
+					"value_t": "type.secondary"
+				},
+				{
+					"key": 4,
+					"label": "Tertiary",
+					"value": "tertiary",
+					"value_t": "type.tertiary"
+				}
+			]
+		},
+		"MenuItems": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "External",
+					"value": "external",
+					"value_t": "type.external"
+				}
+			]
+		},
+		"Pages": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "Primary",
+					"value": "primary",
+					"value_t": "type.primary"
+				},
+				{
+					"key": 3,
+					"label": "Secondary",
+					"value": "secondary",
+					"value_t": "type.secondary"
+				}
+			]
+		},
+		"Uploads": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Image",
+					"value": "image",
+					"value_t": "type.image"
+				},
+				{
+					"key": 2,
+					"label": "Audio",
+					"value": "audio",
+					"value_t": "type.audio"
+				},
+				{
+					"key": 3,
+					"label": "Video",
+					"value": "video",
+					"value_t": "type.video"
+				},
+				{
+					"key": 4,
+					"label": "Document",
+					"value": "document",
+					"value_t": "type.document"
+				},
+				{
+					"key": 5,
+					"label": "Archive",
+					"value": "archive",
+					"value_t": "type.archive"
+				}
+			]
 		}
 	}
 }

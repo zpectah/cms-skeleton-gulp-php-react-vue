@@ -8,9 +8,9 @@ import styled from 'styled-components';
 
 import toolbar from './toolbar';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ forPage: boolean }>`
 	width: 100%;
-	height: 300px;
+	height: ${(props) => (props.forPage ? '500px' : '300px')};
 	position: relative;
 	border: 1px solid rgba(25, 25, 25, 0.125);
 `;
@@ -19,12 +19,14 @@ export interface WysiwygProps {
 	value: string | any;
 	onChange: Function;
 	placeholder?: string;
+	forPage?: boolean;
 }
 
 const WysiwygBase: React.FC<WysiwygProps> = ({
 	value,
 	onChange,
 	placeholder,
+	forPage,
 }) => {
 	const [editorState, setEditorState] = useState(() =>
 		value
@@ -44,7 +46,7 @@ const WysiwygBase: React.FC<WysiwygProps> = ({
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper forPage={forPage}>
 			<Editor
 				defaultEditorState={editorState}
 				onEditorStateChange={handleEditorChange}
