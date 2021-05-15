@@ -71,7 +71,11 @@ interface ListItemProps extends commonModelProps {
 }
 
 interface ListItemsProps {
-	model: appProps['model'];
+	model:
+		| appProps['modelApp']
+		| appProps['modelMembers']
+		| appProps['modelCrm']
+		| appProps['modelMarket'];
 	items: ListItemProps[];
 	route: routeProps;
 	columnsLayout?: {

@@ -55,3 +55,43 @@ export interface CategoriesItemProps extends commonModelProps {
 		content?: string;
 	};
 }
+
+export interface PagesItemProps extends commonModelProps {
+	type: 'default' | 'primary' | 'secondary';
+	name: string;
+	lang?: {
+		title: string;
+		content: string;
+	};
+}
+
+export interface UploadsItemProps extends commonModelProps {
+	type: 'image' | 'audio' | 'video' | 'document' | 'archive';
+	name: string;
+	extension: string;
+	file_name: string;
+	file_mime: string;
+	file_size: string;
+	lang?: {
+		title: string;
+	};
+}
+
+export interface MessagesItemProps {
+	id: number;
+	type: 'default' | 'system';
+	sender: string;
+	recipients: string[];
+	subject: string;
+	content: string;
+	status: number;
+}
+
+export interface RequestsItemProps {
+	id: number;
+	type: 'default' | 'user' | 'system';
+	context: string;
+	value: string;
+	token: string;
+	status: number;
+}

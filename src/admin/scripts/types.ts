@@ -10,7 +10,7 @@ export interface storeProps {
 
 export interface appProps {
 	app: 'App' | 'Members' | 'Crm' | 'Market';
-	model:
+	modelApp:
 		| 'Posts'
 		| 'Users'
 		| 'Tags'
@@ -21,7 +21,17 @@ export interface appProps {
 		| 'Messages'
 		| 'Uploads'
 		| 'Menu'
-		| 'MenuItems'; // TODO: new model
+		| 'MenuItems';
+	modelMembers: 'Members';
+	modelCrm: 'Campaigns';
+	modelMarket:
+		| 'Products'
+		| 'Producers'
+		| 'Distributors'
+		| 'Stores'
+		| 'Payments'
+		| 'Deliveries';
+	// TODO: new model
 }
 
 export interface routeProps {

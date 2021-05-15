@@ -9,7 +9,11 @@ import TranslationsDetailForm from './model/TranslationsForm';
 import CategoriesDetailForm from './model/CategoriesForm';
 
 interface DetailItemDialogProps {
-	model: appProps['model'];
+	model:
+		| appProps['modelApp']
+		| appProps['modelMembers']
+		| appProps['modelCrm']
+		| appProps['modelMarket'];
 	isOpen: boolean;
 	onCancel: (event) => void;
 	detailData: any;
