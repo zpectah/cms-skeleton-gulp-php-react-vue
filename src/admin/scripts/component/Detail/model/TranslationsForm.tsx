@@ -5,7 +5,7 @@ import { Input, Switch } from 'antd';
 import styled from 'styled-components';
 
 import { SUBMIT_TIMEOUT } from '../../../constants';
-import { PostsItemProps } from '../../../App/types';
+import { TranslationsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
@@ -19,7 +19,7 @@ const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 `;
 
 interface TranslationsDetailFormProps {
-	detailData: PostsItemProps;
+	detailData: TranslationsItemProps;
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;

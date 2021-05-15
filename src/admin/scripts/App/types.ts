@@ -25,8 +25,33 @@ export interface PostsItemProps extends commonModelProps {
 	img_thumbnail?: string;
 	author?: number;
 	published?: string;
+	lang?: {
+		title: string;
+		perex?: string;
+		content: string;
+	};
 }
 
 export interface TagsItemProps extends commonModelProps {
 	name: string;
+}
+
+export interface TranslationsItemProps extends commonModelProps {
+	name: string;
+	lang?: {
+		t_value: string;
+	};
+}
+
+export interface CategoriesItemProps extends commonModelProps {
+	type: 'default' | 'primary' | 'secondary';
+	name: string;
+	parent?: string;
+	img_main?: string;
+	img_thumbnail?: string;
+	lang?: {
+		title: string;
+		perex?: string;
+		content?: string;
+	};
 }

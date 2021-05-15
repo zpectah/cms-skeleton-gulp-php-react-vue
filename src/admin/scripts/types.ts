@@ -10,7 +10,18 @@ export interface storeProps {
 
 export interface appProps {
 	app: 'App' | 'Members' | 'Crm' | 'Market';
-	model: 'Posts' | 'Users' | 'Tags' | 'Translations'; // TODO: new model
+	model:
+		| 'Posts'
+		| 'Users'
+		| 'Tags'
+		| 'Translations'
+		| 'Categories'
+		| 'Pages'
+		| 'Requests'
+		| 'Messages'
+		| 'Uploads'
+		| 'Menu'
+		| 'MenuItems'; // TODO: new model
 }
 
 export interface routeProps {

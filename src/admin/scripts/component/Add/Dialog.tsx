@@ -38,6 +38,12 @@ const Dialog: React.FC<AddDialogProps> = (props) => {
 			path: routes.translations.pathDetail,
 			active: true,
 		},
+		{
+			key: 4,
+			label: 'Create new category',
+			path: routes.categories.pathDetail,
+			active: true,
+		},
 	];
 
 	const gridStyle: any = {

@@ -85,5 +85,15 @@
 			"title": "Translations page"
 		},
 		"label": "Translations"
+	},
+
+	"Categories": {
+		"meta": {
+			"title": "Categories"
+		},
+		"page": {
+			"title": "Categories page"
+		},
+		"label": "Categories"
 	}
 }

@@ -156,6 +156,28 @@
 					"value_t": "type.custom1"
 				}
 			]
+		},
+		"Translations": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "Primary",
+					"value": "primary",
+					"value_t": "type.primary"
+				},
+				{
+					"key": 3,
+					"label": "Secondary",
+					"value": "secondary",
+					"value_t": "type.secondary"
+				}
+			]
 		}
 	}
 }

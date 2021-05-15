@@ -40,6 +40,12 @@ const links = [
 	},
 	{
 		key: 6,
+		label: routes.categories.label,
+		path: routes.categories.path,
+		active: true,
+	},
+	{
+		key: 7,
 		label: routes.translations.label,
 		path: routes.translations.path,
 		active: true,

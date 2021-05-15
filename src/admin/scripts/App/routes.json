@@ -61,5 +61,12 @@
 		"name": "translations",
 		"label": "Translations.label",
 		"auth": 2
+	},
+	"categories": {
+		"path": "/admin/categories",
+		"pathDetail": "/admin/categories/detail",
+		"name": "categories",
+		"label": "Categories.label",
+		"auth": 2
 	}
 }

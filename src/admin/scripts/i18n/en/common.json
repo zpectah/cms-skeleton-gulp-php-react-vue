@@ -20,12 +20,15 @@
 		"Settings": "Settings",
 		"Users": "Users",
 		"Posts": "Posts",
-		"Tags": "Tags"
+		"Tags": "Tags",
+		"Translations": "Translations",
+		"Categories": "Categories"
 	},
 	"model_item": {
 		"Users": "User",
 		"Posts": "Post",
 		"Tags": "Tag",
-		"Translations": "Translations"
+		"Translations": "Translation",
+		"Categories": "Category"
 	}
 }
