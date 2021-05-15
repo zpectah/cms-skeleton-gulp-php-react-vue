@@ -63,7 +63,7 @@ const PostsPage = () => {
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.{lang}.title']}
+				searchAttrs={['name', 'lang.[lang].title', 'lang.[lang].perex']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable

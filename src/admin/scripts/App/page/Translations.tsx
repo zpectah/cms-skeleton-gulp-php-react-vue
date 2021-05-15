@@ -63,7 +63,7 @@ const TranslationsPage = () => {
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.{lang}.t_value']}
+				searchAttrs={['name', 'lang.[lang].t_value']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable

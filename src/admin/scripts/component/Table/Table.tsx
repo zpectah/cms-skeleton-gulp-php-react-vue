@@ -375,8 +375,19 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const setList = (data) => {
 		let tmp;
 
+		const getSearchAttrs = (attrs) => {
+			let na = [];
+
+			attrs.map((attr) => {
+				let ni = attr.replace('[lang]', lang);
+				na.push(ni);
+			});
+
+			return na;
+		};
+
 		if (data.search.length >= 4) {
-			tmp = array.search(listItems, [...searchAttrs], data.search);
+			tmp = array.search(listItems, getSearchAttrs(searchAttrs), data.search);
 		} else {
 			tmp = items;
 		}
