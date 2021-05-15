@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Input, Switch, Select, DatePicker } from 'antd';
 import styled from 'styled-components';
-import moment from 'moment';
+import moment, { now } from 'moment';
 
 import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
@@ -35,28 +35,22 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { Profile } = useProfile();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const {
-		control,
-		handleSubmit,
-		formState,
-		register,
-		watch,
-		getValues,
-	} = useForm({
+	const DatePickerFormat = 'YYYY-MM-DD HH:mm';
+	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			type: 'default',
 			name: '',
 			category: [],
 			tags: [],
-			event_start: '', // TODO
-			event_end: '', // TODO
+			event_start: new Date(),
+			event_end: new Date(),
 			event_location: '', // TODO
 			media: '', // TODO
 			img_main: '', // TODO
 			img_thumbnail: '', // TODO
-			published: '',
-			author: 0,
+			published: new Date(),
+			author: Profile.id,
 			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
@@ -67,20 +61,41 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 		},
 	});
 	const { TextArea } = Input;
+	const [tmp_published, setTmp_published] = useState<string>(
+		moment(detailData.published).format(),
+	);
+	const [tmp_event_start, setTmp_event_start] = useState<string>(
+		detailData.event_start,
+	);
+	const [tmp_event_end, setTmp_event_end] = useState<string>(
+		detailData.event_end,
+	);
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
 	}, [Settings]);
 
 	const submitHandler = (data) => {
+		// TODO: DatePicker in Controller unexpected behavior
+		// Reduce and repair data before submit
+		const master = {
+			...data,
+			published: tmp_published
+				? tmp_published
+				: moment(detailData.published).format(),
+			event_start:
+				data.type == 'event' ? tmp_event_start : detailData.event_start,
+			event_end: data.type == 'event' ? tmp_event_end : detailData.event_end,
+		};
+
 		if (detailData.is_new) {
-			createPosts(data).then((response) => {
-				onSave(data, response);
+			createPosts(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		} else {
-			updatePosts(data).then((response) => {
-				onSave(data, response);
+			updatePosts(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		}
@@ -146,20 +161,25 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<Form.Row
-						label={'Type'}
-						name={'type'}
+						label={'Published'}
+						name={'published'}
 						control={control}
 						rules={{ required: true }}
 						required
 					>
 						{(row) => (
-							<Select
-								style={{ width: '100%' }}
+							<DatePicker
 								id={row.id}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Select categories'}
-								options={OPTIONS.model.Posts.type}
+								name={row.name}
+								value={moment(row.value, DatePickerFormat)}
+								onChange={(value) => {
+									row.onChange(value);
+									setTmp_published(value.format());
+								}}
+								placeholder={'Published'}
+								ref={row.ref}
+								style={{ width: '100%' }}
+								showTime
 							/>
 						)}
 					</Form.Row>
@@ -181,40 +201,72 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+					<Form.Row
+						label={'Type'}
+						name={'type'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Select
+								style={{ width: '100%' }}
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Select categories'}
+								options={OPTIONS.model.Posts.type}
+							/>
+						)}
+					</Form.Row>
 					{
 						{
 							event: (
 								<>
 									<hr />
 									<Form.Row
-										label={'event start'}
+										label={'Event start'}
 										name={'event_start'}
 										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
 									>
 										{(row) => (
-											<Input
+											<DatePicker
 												id={row.id}
-												type={'text'}
 												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event_start'}
+												value={moment(row.value, DatePickerFormat)}
+												onChange={(value) => {
+													row.onChange(value);
+													setTmp_event_start(value.format());
+												}}
+												placeholder={'Event start'}
+												ref={row.ref}
+												style={{ width: '100%' }}
+												showTime
 											/>
 										)}
 									</Form.Row>
 									<Form.Row
-										label={'event end'}
+										label={'Event end'}
 										name={'event_end'}
 										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
 									>
 										{(row) => (
-											<Input
+											<DatePicker
 												id={row.id}
-												type={'text'}
 												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event_end'}
+												value={moment(row.value, DatePickerFormat)}
+												onChange={(value) => {
+													row.onChange(value);
+													setTmp_event_end(value.format());
+												}}
+												placeholder={'Event end'}
+												ref={row.ref}
+												style={{ width: '100%' }}
+												showTime
 											/>
 										)}
 									</Form.Row>
