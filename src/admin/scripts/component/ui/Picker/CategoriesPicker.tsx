@@ -9,6 +9,7 @@ interface CategoriesPickerProps {
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
+	mode?: 'all' | 'category' | 'gallery';
 }
 
 const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
@@ -17,6 +18,7 @@ const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 	onChange,
 	single = false,
 	ignoredId = [],
+	mode = 'all',
 }) => {
 	const { Categories } = useCategories();
 
@@ -29,26 +31,42 @@ const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 				disabled: true,
 			},
 		];
+
 		Categories?.map((option) => {
-			if (ignoredId.length > 0) {
-				ignoredId.map((ignoredId) => {
-					if (option.id !== ignoredId)
+			switch (option.type) {
+				case 'default':
+					if (mode == 'category' || mode == 'all')
 						o.push({
 							key: option.id,
 							value: option.id,
 							label: option.name,
 							disabled: false,
 						});
-				});
-			} else {
-				o.push({
-					key: option.id,
-					value: option.id,
-					label: option.name,
-					disabled: false,
-				});
+					break;
+
+				case 'gallery':
+					if (mode == 'gallery' || mode == 'all')
+						o.push({
+							key: option.id,
+							value: option.id,
+							label: option.name,
+							disabled: false,
+						});
+					break;
 			}
 		});
+
+		if (ignoredId.length > 0) {
+			let fo = [];
+
+			o.map((oi) => {
+				ignoredId.map((ignoredId) => {
+					if (oi.key !== ignoredId) fo.push(oi);
+				});
+			});
+
+			o = fo;
+		}
 
 		return o;
 	};

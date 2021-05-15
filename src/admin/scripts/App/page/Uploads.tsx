@@ -58,7 +58,7 @@ const UploadsPage = () => {
 				columnsLayout={{
 					// file_name: true,
 					title_lang: true,
-					// tags: true, // TODO
+					category: true,
 					active: true,
 				}}
 				orderByColumns={{

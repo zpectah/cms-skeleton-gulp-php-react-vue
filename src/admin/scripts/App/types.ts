@@ -66,12 +66,13 @@ export interface PagesItemProps extends commonModelProps {
 }
 
 export interface UploadsItemProps extends commonModelProps {
-	type: 'image' | 'audio' | 'video' | 'document' | 'archive';
+	type: 'undefined' | 'image' | 'audio' | 'video' | 'document' | 'archive';
 	name: string;
 	extension: string;
 	file_name: string;
 	file_mime: string;
 	file_size: string;
+	category: any[];
 	lang?: {
 		title: string;
 	};

@@ -223,6 +223,22 @@
 				}
 			]
 		},
+		"Categories": {
+			"type": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "type.default"
+				},
+				{
+					"key": 2,
+					"label": "Gallery",
+					"value": "gallery",
+					"value_t": "type.gallery"
+				}
+			]
+		},
 		"Pages": {
 			"type": [
 				{

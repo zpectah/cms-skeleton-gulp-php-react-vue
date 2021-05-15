@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section } from '../../ui';
+import { Modal, Typography, Form, Section, Picker } from '../../ui';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
 import { useUploads, useSettings } from '../../../App/hooks';
@@ -41,6 +41,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			file_name: '',
 			file_mime: '',
 			file_size: '',
+			category: [],
 			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
@@ -108,6 +109,16 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Name'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row label={'Gallery'} name={'category'} control={control}>
+						{(row) => (
+							<Picker.Categories
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								mode="gallery"
 							/>
 						)}
 					</Form.Row>

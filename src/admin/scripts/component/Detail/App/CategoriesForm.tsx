@@ -61,8 +61,6 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	}, [Settings]);
 
 	const submitHandler = (data) => {
-		// TODO#BUG: DatePicker in Controller unexpected behavior
-		// Reduce and repair data before submit
 		const master = {
 			...data,
 		};
@@ -133,7 +131,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select type'}
-								options={OPTIONS.model.Translations.type}
+								options={OPTIONS.model.Categories.type}
 							/>
 						)}
 					</Form.Row>

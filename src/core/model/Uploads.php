@@ -92,13 +92,22 @@ class Uploads {
 	}
 
 	private function upload_file($file_object) {
+		$response = null;
 
 		//
 		// TODO: upload file to location before
 		// if success - continue to save to table ...
 		//
 
-		return true;
+		// TODO
+		$_response = [
+			'extension' => '',
+			'file_name' => '',
+			'file_mime' => '',
+			'file_size' => '',
+		];
+
+		return $response;
 	}
 
 
@@ -124,6 +133,7 @@ class Uploads {
 				foreach ($active_languages as $lang) {
 					$row['lang'][$lang] = self::get_language_row($conn, $lang, $row['id']);
 				}
+				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
 
 				$response[] = $row;
 			}
@@ -137,18 +147,24 @@ class Uploads {
 
 		$uploadedFile = self::upload_file([]);
 
+		$_extension = ''; // TODO ???
+		$_file_name = ''; // TODO ???
+		$_file_mime = ''; // TODO ???
+		$_file_size = ''; // TODO ???
+
 		if ($uploadedFile) {
 
 			// prepare
-			$query = ('INSERT INTO uploads (type, name, extension, file_name, file_mime, file_size, active, deleted) VALUES (?,?,?,?,?,?,?,?)');
-			$types = 'sii';
+			$query = ('INSERT INTO uploads (type, name, extension, file_name, file_mime, file_size, category, active, deleted) VALUES (?,?,?,?,?,?,?,?,?)');
+			$types = 'sssssssii';
 			$args = [
 				$requestData['type'],
 				$requestData['name'],
-				$requestData['extension'],
-				$requestData['file_name'],
-				$requestData['file_mime'],
-				$requestData['file_size'],
+				$requestData['extension'], // TODO: should be from $uploadedFile
+				$requestData['file_name'], // TODO: should be from $uploadedFile
+				$requestData['file_mime'], // TODO: should be from $uploadedFile
+				$requestData['file_size'], // TODO: should be from $uploadedFile
+				$requestData['category'] ? implode(",", $requestData['category']) : '',
 				$requestData['active'],
 				0
 			];
@@ -181,8 +197,8 @@ class Uploads {
 		// TODO: update whole object is necessary ...
 
 		// prepare
-		$query = ('UPDATE uploads SET type = ?, name = ?, extension = ?, file_name = ?, file_mime = ?, file_size = ?, active = ? WHERE id = ?');
-		$types = 'sssssii';
+		$query = ('UPDATE uploads SET type = ?, name = ?, extension = ?, file_name = ?, file_mime = ?, file_size = ?, category = ?, active = ? WHERE id = ?');
+		$types = 'ssssssii';
 		$args = [
 			$requestData['type'],
 			$requestData['name'],
@@ -190,6 +206,7 @@ class Uploads {
 			$requestData['file_name'],
 			$requestData['file_mime'],
 			$requestData['file_size'],
+			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['active'],
 			$requestData['id']
 		];
