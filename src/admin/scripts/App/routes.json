@@ -68,5 +68,33 @@
 		"name": "categories",
 		"label": "Categories.label",
 		"auth": 2
+	},
+	"pages": {
+		"path": "/admin/pages",
+		"pathDetail": "/admin/pages/detail",
+		"name": "pages",
+		"label": "Pages.label",
+		"auth": 2
+	},
+	"uploads": {
+		"path": "/admin/uploads",
+		"pathDetail": "/admin/uploads/detail",
+		"name": "uploads",
+		"label": "Uploads.label",
+		"auth": 2
+	},
+	"messages": {
+		"path": "/admin/messages",
+		"pathDetail": "/admin/messages/detail",
+		"name": "messages",
+		"label": "Messages.label",
+		"auth": 2
+	},
+	"menu": {
+		"path": "/admin/menu",
+		"pathDetail": "/admin/menu/detail",
+		"name": "menu",
+		"label": "Menu.label",
+		"auth": 2
 	}
 }

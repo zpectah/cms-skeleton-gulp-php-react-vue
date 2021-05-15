@@ -77,6 +77,21 @@ export interface UploadsItemProps extends commonModelProps {
 	};
 }
 
+export interface MenuItemProps extends commonModelProps {
+	type: 'default' | 'primary' | 'secondary' | 'tertiary';
+	name: string;
+	parent?: string;
+}
+
+export interface MenuItemsItemProps extends commonModelProps {
+	type: 'default' | 'external';
+	name: string;
+	parent?: string;
+	lang?: {
+		title: string;
+	};
+}
+
 export interface MessagesItemProps {
 	id: number;
 	type: 'default' | 'system';

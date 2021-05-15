@@ -22,13 +22,23 @@
 		"Posts": "Posts",
 		"Tags": "Tags",
 		"Translations": "Translations",
-		"Categories": "Categories"
+		"Categories": "Categories",
+		"Menu": "Menu",
+		"MenuItems": "Menu items",
+		"Pages": "Pages",
+		"Uploads": "Uploads",
+		"Messages": "Messages"
 	},
 	"model_item": {
 		"Users": "User",
 		"Posts": "Post",
 		"Tags": "Tag",
 		"Translations": "Translation",
-		"Categories": "Category"
+		"Categories": "Category",
+		"Menu": "Menu",
+		"MenuItems": "Menu item",
+		"Pages": "Page",
+		"Uploads": "Upload",
+		"Messages": "Message"
 	}
 }

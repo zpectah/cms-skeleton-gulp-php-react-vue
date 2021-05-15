@@ -95,5 +95,45 @@
 			"title": "Categories page"
 		},
 		"label": "Categories"
+	},
+
+	"Pages": {
+		"meta": {
+			"title": "Pages"
+		},
+		"page": {
+			"title": "Pages page"
+		},
+		"label": "Pages"
+	},
+
+	"Menu": {
+		"meta": {
+			"title": "Menu"
+		},
+		"page": {
+			"title": "Menu page"
+		},
+		"label": "Menu"
+	},
+
+	"Uploads": {
+		"meta": {
+			"title": "Uploads"
+		},
+		"page": {
+			"title": "Uploads page"
+		},
+		"label": "Uploads"
+	},
+
+	"Messages": {
+		"meta": {
+			"title": "Messages"
+		},
+		"page": {
+			"title": "Messages page"
+		},
+		"label": "Messages"
 	}
 }
