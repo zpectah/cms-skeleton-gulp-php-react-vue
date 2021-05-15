@@ -56,6 +56,12 @@ const links = [
 		path: routes.pages.path,
 		active: true,
 	},
+	{
+		key: 9,
+		label: routes.uploads.label,
+		path: routes.uploads.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`
@@ -110,7 +116,7 @@ interface PrimaryNavigationProps {
 	sidebarToggle: Function;
 }
 
-const NavigationPrimary: React.FC<PrimaryNavigationProps> = (props) => {
+const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const { sidebarToggle } = props;
@@ -146,4 +152,4 @@ const NavigationPrimary: React.FC<PrimaryNavigationProps> = (props) => {
 	);
 };
 
-export default NavigationPrimary;
+export default NavigationApp;

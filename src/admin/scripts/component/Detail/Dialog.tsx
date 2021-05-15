@@ -8,6 +8,7 @@ import PostsDetailForm from './App/PostsForm';
 import TranslationsDetailForm from './App/TranslationsForm';
 import CategoriesDetailForm from './App/CategoriesForm';
 import PagesDetailForm from './App/PagesForm';
+import UploadsDetailForm from './App/UploadsForm';
 
 interface DetailItemDialogProps {
 	model:
@@ -41,6 +42,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		Translations: TranslationsDetailForm,
 		Categories: CategoriesDetailForm,
 		Pages: PagesDetailForm,
+		Uploads: UploadsDetailForm,
 	};
 
 	const ComponentName = Component[model];

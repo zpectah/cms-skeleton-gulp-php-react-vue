@@ -19,6 +19,7 @@ import TagsPage from './page/Tags';
 import TranslationsPage from './page/Translations';
 import CategoriesPage from './page/Categories';
 import PagesPage from './page/Pages';
+import UploadsPage from './page/Uploads';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -101,6 +102,13 @@ const App = () => {
 						path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
 						component={TagsPage}
 						auth={routes.tags.auth}
+						exact
+					/>
+
+					<AuthRoute
+						path={[routes.uploads.path, routes.uploads.pathDetail + '/:id']}
+						component={UploadsPage}
+						auth={routes.uploads.auth}
 						exact
 					/>
 
