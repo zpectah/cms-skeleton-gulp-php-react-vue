@@ -4,7 +4,7 @@ import { message, Select } from 'antd';
 import styled from 'styled-components';
 
 import OPTIONS from '../../../../config/options.json';
-import NUMS from '../../../../config/nums.json';
+import LOCALES from '../../../../config/locales.json';
 import { Button } from '../ui';
 import { useSettings } from '../../App/hooks';
 
@@ -38,7 +38,7 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 			});
 			return (
 				<Option key={item} value={item} disabled={disabled}>
-					({item}) {NUMS.languageTitle[item]}
+					({item}) {LOCALES[item].label}
 				</Option>
 			);
 		});

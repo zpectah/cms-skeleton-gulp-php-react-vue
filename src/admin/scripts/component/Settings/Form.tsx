@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Form as AntdForm, Input, Select, Switch, Checkbox, Alert } from 'antd';
 import styled from 'styled-components';
 
-import NUMS from '../../../../config/nums.json';
+import LOCALES from '../../../../config/locales.json';
 import OPTIONS from '../../../../config/options.json';
 import { routeProps } from '../../types';
 // import { EMAIL_REGEX } from '../../constants'; // TODO
@@ -105,7 +105,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 
 		tmpState.language_active.map((lang) => {
 			na.push({
-				label: NUMS.languageTitle[lang],
+				label: LOCALES[lang].label,
 				value: lang,
 			});
 		});
@@ -118,7 +118,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 
 		tmpState.language_installed.map((lang) => {
 			na.push({
-				label: NUMS.languageTitle[lang],
+				label: LOCALES[lang].label,
 				value: lang,
 				disabled: tmpState.language_default == lang,
 			});

@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import CFG from '../../../../config/global.json';
-import NUMS from '../../../../config/nums.json';
+import LOCALES from '../../../../config/locales.json';
 import LanguageService from '../../service/LanguageService';
 
 const Trigger = styled.div`
@@ -34,7 +34,7 @@ const LocaleDropdown: React.FC<{}> = () => {
 		<Menu>
 			{CFG.CMS.LANG_LIST.map((lang) => (
 				<Menu.Item key={lang}>
-					<a onClick={() => toggleLanguage(lang)}>{NUMS.languageTitle[lang]}</a>
+					<a onClick={() => toggleLanguage(lang)}>{LOCALES[lang].label}</a>
 				</Menu.Item>
 			))}
 		</Menu>

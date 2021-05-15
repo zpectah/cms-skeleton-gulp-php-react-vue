@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Input, Switch, Select, DatePicker } from 'antd';
 import styled from 'styled-components';
-import moment, { now } from 'moment';
+import moment from 'moment';
 
+import config from '../../../config';
 import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
@@ -35,7 +36,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { Profile } = useProfile();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const DatePickerFormat = 'YYYY-MM-DD HH:mm'; // TODO: create form by language -> language options ...
+	const DatePickerFormat = config.LOCALES.dateTimeFormat;
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
