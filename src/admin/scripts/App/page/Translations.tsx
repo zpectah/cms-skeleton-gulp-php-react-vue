@@ -4,66 +4,66 @@ import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
 import routes from '../routes.json';
-import { usePosts } from '../hooks';
+import { useTranslations } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
 
-const PostsPage = () => {
+const TranslationsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const {
-		Posts,
-		isPostsLoading,
-		togglePosts,
-		deletePosts,
-		reloadPosts,
-	} = usePosts();
+		Translations,
+		isTranslationsLoading,
+		toggleTranslations,
+		deleteTranslations,
+		reloadTranslations,
+	} = useTranslations();
 
 	const toggleHandler = (data) => {
 		return [
-			togglePosts(data),
-			setTimeout(() => reloadPosts(), RELOAD_HOOK_TIMEOUT),
+			toggleTranslations(data),
+			setTimeout(() => reloadTranslations(), RELOAD_HOOK_TIMEOUT),
 		];
 	};
 
 	const deleteHandler = (data) => {
 		return [
-			deletePosts(data),
-			setTimeout(() => reloadPosts(), RELOAD_HOOK_TIMEOUT),
+			deleteTranslations(data),
+			setTimeout(() => reloadTranslations(), RELOAD_HOOK_TIMEOUT),
 		];
 	};
 
 	return (
 		<AppLayout
-			route={routes.posts}
+			route={routes.translations}
 			app={'App'}
 			withSidebar
 			widthHeader
 			withFooter
-			metaTitle={t('page:Posts.meta.title')}
-			headerTitle={t('page:Posts.page.title')}
+			metaTitle={t('page:Translations.meta.title')}
+			headerTitle={t('page:Translations.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.posts.pathDetail} />,
+				<Button.CreateNew
+					key={1}
+					routePathPrefix={routes.translations.pathDetail}
+				/>,
 			]}
 		>
 			<Table
-				route={routes.posts}
-				model={'Posts'}
-				items={Posts}
-				loading={isPostsLoading}
+				route={routes.translations}
+				model={'Translations'}
+				items={Translations}
+				loading={isTranslationsLoading}
 				columnsLayout={{
-					// name: true,
-					title_lang: true,
-					tags: true,
-					category: true,
+					name: true,
 					active: true,
 				}}
 				orderByColumns={{
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.{lang}.title']}
+				searchAttrs={['name', 'lang.{lang}.t_value']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable
@@ -74,4 +74,4 @@ const PostsPage = () => {
 	);
 };
 
-export default PostsPage;
+export default TranslationsPage;

@@ -25,6 +25,7 @@
 	"model_item": {
 		"Users": "User",
 		"Posts": "Post",
-		"Tags": "Tag"
+		"Tags": "Tag",
+		"Translations": "Translations"
 	}
 }

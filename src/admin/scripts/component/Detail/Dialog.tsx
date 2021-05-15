@@ -5,6 +5,7 @@ import { Modal } from '../ui';
 import TagsDetailForm from './model/TagsForm';
 import UsersDetailForm from './model/UsersForm';
 import PostsDetailForm from './model/PostsForm';
+import TranslationsDetailForm from './model/TranslationsForm';
 
 interface DetailItemDialogProps {
 	model: appProps['model'];
@@ -27,6 +28,15 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		afterClose,
 	} = props;
 
+	const Component = {
+		Tags: TagsDetailForm,
+		Users: UsersDetailForm,
+		Posts: PostsDetailForm,
+		Translations: TranslationsDetailForm,
+	};
+
+	const ComponentName = Component[model];
+
 	return (
 		<Modal.Base
 			visible={isOpen}
@@ -34,36 +44,12 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 			afterClose={afterClose}
 			size={'lg'}
 		>
-			<>
-				{
-					{
-						Tags: (
-							<TagsDetailForm
-								detailData={detailData}
-								onCancel={onCancel}
-								onSave={onSave}
-								onDelete={onDelete}
-							/>
-						),
-						Users: (
-							<UsersDetailForm
-								detailData={detailData}
-								onCancel={onCancel}
-								onSave={onSave}
-								onDelete={onDelete}
-							/>
-						),
-						Posts: (
-							<PostsDetailForm
-								detailData={detailData}
-								onCancel={onCancel}
-								onSave={onSave}
-								onDelete={onDelete}
-							/>
-						),
-					}[model]
-				}
-			</>
+			<ComponentName
+				detailData={detailData}
+				onCancel={onCancel}
+				onSave={onSave}
+				onDelete={onDelete}
+			/>
 		</Modal.Base>
 	);
 };

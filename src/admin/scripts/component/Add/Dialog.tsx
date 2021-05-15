@@ -32,6 +32,12 @@ const Dialog: React.FC<AddDialogProps> = (props) => {
 			path: routes.tags.pathDetail,
 			active: true,
 		},
+		{
+			key: 3,
+			label: 'Create new translation',
+			path: routes.translations.pathDetail,
+			active: true,
+		},
 	];
 
 	const gridStyle: any = {

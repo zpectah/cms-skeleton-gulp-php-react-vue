@@ -242,8 +242,6 @@ class Posts {
 			$stmt -> close();
 		}
 
-		$response['r'] = $args;
-
 		return $response;
 	}
 

@@ -38,6 +38,12 @@ const links = [
 		path: routes.tags.path,
 		active: true,
 	},
+	{
+		key: 6,
+		label: routes.translations.label,
+		path: routes.translations.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`

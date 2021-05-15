@@ -75,5 +75,15 @@
 			"title": "Tags page"
 		},
 		"label": "Tags"
+	},
+
+	"Translations": {
+		"meta": {
+			"title": "Translations"
+		},
+		"page": {
+			"title": "Translations page"
+		},
+		"label": "Translations"
 	}
 }

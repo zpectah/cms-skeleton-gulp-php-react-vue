@@ -54,5 +54,12 @@
 		"name": "tags",
 		"label": "Tags.label",
 		"auth": 2
+	},
+	"translations": {
+		"path": "/admin/translations",
+		"pathDetail": "/admin/translations/detail",
+		"name": "translations",
+		"label": "Translations.label",
+		"auth": 2
 	}
 }
