@@ -121,9 +121,9 @@
 			"type": [
 				{
 					"key": 1,
-					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"label": "Article",
+					"value": "article",
+					"value_t": "type.article"
 				},
 				{
 					"key": 2,
@@ -133,27 +133,27 @@
 				},
 				{
 					"key": 3,
-					"label": "Article",
-					"value": "article",
-					"value_t": "type.article"
-				},
-				{
-					"key": 4,
 					"label": "Event",
 					"value": "event",
 					"value_t": "type.event"
 				},
 				{
-					"key": 5,
+					"key": 4,
 					"label": "Media",
 					"value": "media",
 					"value_t": "type.media"
 				},
 				{
-					"key": 6,
+					"key": 5,
 					"label": "Reference",
 					"value": "reference",
 					"value_t": "type.reference"
+				},
+				{
+					"key": 6,
+					"label": "Custom 1",
+					"value": "custom_1",
+					"value_t": "type.custom1"
 				}
 			]
 		}

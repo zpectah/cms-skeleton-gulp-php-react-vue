@@ -13,7 +13,7 @@ export interface UsersItemProps extends commonModelProps {
 }
 
 export interface PostsItemProps extends commonModelProps {
-	type: string;
+	type: 'article' | 'blog' | 'event' | 'media' | 'reference' | 'custom_1';
 	name: string;
 	category?: string[];
 	tags?: string[];

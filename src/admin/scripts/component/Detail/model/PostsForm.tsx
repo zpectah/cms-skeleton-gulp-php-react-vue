@@ -35,17 +35,17 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { Profile } = useProfile();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const DatePickerFormat = 'YYYY-MM-DD HH:mm';
+	const DatePickerFormat = 'YYYY-MM-DD HH:mm'; // TODO: create form by language -> language options ...
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			type: 'default',
+			type: 'article',
 			name: '',
 			category: [],
 			tags: [],
 			event_start: new Date(),
 			event_end: new Date(),
-			event_location: '', // TODO
+			event_location: '',
 			media: '', // TODO
 			img_main: '', // TODO
 			img_thumbnail: '', // TODO
@@ -65,10 +65,10 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 		moment(detailData.published).format(),
 	);
 	const [tmp_event_start, setTmp_event_start] = useState<string>(
-		detailData.event_start,
+		detailData.event_start || moment().format(),
 	);
 	const [tmp_event_end, setTmp_event_end] = useState<string>(
-		detailData.event_end,
+		detailData.event_end || moment().format(),
 	);
 
 	useEffect(() => {
@@ -76,7 +76,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	}, [Settings]);
 
 	const submitHandler = (data) => {
-		// TODO: DatePicker in Controller unexpected behavior
+		// TODO#BUG: DatePicker in Controller unexpected behavior
 		// Reduce and repair data before submit
 		const master = {
 			...data,
@@ -115,9 +115,9 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			/>
 			<input
 				type="hidden"
-				name="published"
-				ref={register({})}
-				defaultValue={detailData.published}
+				name="author"
+				ref={register({ required: true })}
+				defaultValue={detailData.author}
 			/>
 			{watchType !== 'event' && (
 				<>
@@ -161,29 +161,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<Form.Row
-						label={'Published'}
-						name={'published'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
-						{(row) => (
-							<DatePicker
-								id={row.id}
-								name={row.name}
-								value={moment(row.value, DatePickerFormat)}
-								onChange={(value) => {
-									row.onChange(value);
-									setTmp_published(value.format());
-								}}
-								placeholder={'Published'}
-								ref={row.ref}
-								style={{ width: '100%' }}
-								showTime
-							/>
-						)}
-					</Form.Row>
-					<Form.Row
 						label={'Name'}
 						name={'name'}
 						control={control}
@@ -223,7 +200,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						{
 							event: (
 								<>
-									<hr />
 									<Form.Row
 										label={'Event start'}
 										name={'event_start'}
@@ -244,6 +220,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 												ref={row.ref}
 												style={{ width: '100%' }}
 												showTime
+												defaultValue={moment()}
 											/>
 										)}
 									</Form.Row>
@@ -253,6 +230,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
+										defaultValue={moment(moment(), DatePickerFormat)}
 									>
 										{(row) => (
 											<DatePicker
@@ -274,6 +252,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										label={'event location'}
 										name={'event_location'}
 										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
 									>
 										{(row) => (
 											<Input
@@ -286,76 +266,40 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 											/>
 										)}
 									</Form.Row>
-									<hr />
 								</>
 							),
 							media: (
 								<>
-									<hr />
-									<Form.Row label={'media'} name={'media'} control={control}>
+									<Form.Row
+										label={'media'}
+										name={'media'}
+										control={control}
+										rules={{ required: watchType == 'media' }}
+										required={watchType == 'media'}
+									>
 										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'media'}
-											/>
+											<>
+												<Picker.Media
+													value={row.value}
+													onChange={row.onChange}
+												/>
+												{/*
+												<Input
+													id={row.id}
+													type={'text'}
+													name={row.name}
+													value={row.value}
+													onChange={row.onChange}
+													placeholder={'media'}
+												/>
+												*/}
+											</>
 										)}
 									</Form.Row>
-									<hr />
 								</>
 							),
 						}[watchType]
 					}
-					<Form.Row label={'img main'} name={'img_main'} control={control}>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'img_main'}
-							/>
-						)}
-					</Form.Row>
-					<Form.Row
-						label={'img thumbnail'}
-						name={'img_thumbnail'}
-						control={control}
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'img_thumbnail'}
-							/>
-						)}
-					</Form.Row>
-					<Form.Row
-						label={'author'}
-						name={'author'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'author'}
-							/>
-						)}
-					</Form.Row>
-					{''}
 					<Form.Row label={'Category'} name={'category'} control={control}>
 						{(row) => (
 							<Picker.Categories
@@ -436,6 +380,67 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+					<Form.Row
+						label={'Published'}
+						name={'published'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<DatePicker
+								id={row.id}
+								name={row.name}
+								value={moment(row.value, DatePickerFormat)}
+								onChange={(value) => {
+									row.onChange(value);
+									setTmp_published(value.format());
+								}}
+								placeholder={'Published'}
+								ref={row.ref}
+								style={{ width: '100%' }}
+								showTime
+							/>
+						)}
+					</Form.Row>
+					<Form.Row label={'Main image'} name={'img_main'} control={control}>
+						{(row) => (
+							<>
+								<Picker.Media value={row.value} onChange={row.onChange} />
+								{/*
+								<Input
+									id={row.id}
+									type={'text'}
+									name={row.name}
+									value={row.value}
+									onChange={row.onChange}
+									placeholder={'img_main'}
+								/>
+								*/}
+							</>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Thumbnail'}
+						name={'img_thumbnail'}
+						control={control}
+					>
+						{(row) => (
+							<>
+								<Picker.Media value={row.value} onChange={row.onChange} />
+								{/*
+								<Input
+									id={row.id}
+									type={'text'}
+									name={row.name}
+									value={row.value}
+									onChange={row.onChange}
+									placeholder={'img_thumbnail'}
+								/>
+								*/}
+							</>
+						)}
+					</Form.Row>
 					<Form.Row label={'Active'} name={'active'} control={control}>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
