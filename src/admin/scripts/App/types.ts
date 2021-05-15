@@ -57,7 +57,7 @@ export interface CategoriesItemProps extends commonModelProps {
 }
 
 export interface PagesItemProps extends commonModelProps {
-	type: 'default' | 'primary' | 'secondary';
+	type: 'default' | 'system' | 'category' | 'tags';
 	name: string;
 	lang?: {
 		title: string;

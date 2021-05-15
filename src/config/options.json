@@ -233,15 +233,21 @@
 				},
 				{
 					"key": 2,
-					"label": "Primary",
-					"value": "primary",
-					"value_t": "type.primary"
+					"label": "System",
+					"value": "system",
+					"value_t": "type.system"
 				},
 				{
 					"key": 3,
-					"label": "Secondary",
-					"value": "secondary",
-					"value_t": "type.secondary"
+					"label": "Category",
+					"value": "category",
+					"value_t": "type.category"
+				},
+				{
+					"key": 4,
+					"label": "Tags",
+					"value": "tags",
+					"value_t": "type.tags"
 				}
 			]
 		},
