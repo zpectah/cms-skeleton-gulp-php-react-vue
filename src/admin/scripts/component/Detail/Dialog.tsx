@@ -2,11 +2,11 @@ import React from 'react';
 
 import { appProps } from '../../types';
 import { Modal } from '../ui';
-import TagsDetailForm from './model/TagsForm';
-import UsersDetailForm from './model/UsersForm';
-import PostsDetailForm from './model/PostsForm';
-import TranslationsDetailForm from './model/TranslationsForm';
-import CategoriesDetailForm from './model/CategoriesForm';
+import TagsDetailForm from './App/TagsForm';
+import UsersDetailForm from './App/UsersForm';
+import PostsDetailForm from './App/PostsForm';
+import TranslationsDetailForm from './App/TranslationsForm';
+import CategoriesDetailForm from './App/CategoriesForm';
 
 interface DetailItemDialogProps {
 	model:
