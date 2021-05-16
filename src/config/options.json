@@ -79,9 +79,9 @@
 			"format": [
 				{
 					"key": "thumbnail",
-					"width": 128,
-					"height": 128,
-					"quality": 25,
+					"width": 96,
+					"height": 96,
+					"quality": 40,
 					"crop": true
 				},
 				{

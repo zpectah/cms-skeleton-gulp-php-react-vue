@@ -17,9 +17,43 @@ const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 	display: ${(props) => (props.isActive ? 'block' : 'none')};
 `;
+const BlobContainer = styled.div`
+	height: 250px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(250, 250, 250, 0.9);
+`;
 const BlobImage = styled.img`
-	max-width: 100%;
+	width: auto;
+	max-height: 100%;
+`;
+const BlobTemporary = styled.div`
+	width: 100%;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+const ButtonReset = styled.button`
+	width: auto;
 	height: auto;
+	padding: 1rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	border: 0;
+	outline: none;
+	cursor: pointer;
+	color: rgb(255, 255, 255);
+	background-color: rgba(25, 25, 25, 0.5);
+	opacity: 0.75;
+
+	&:hover {
+		opacity: 1;
+	}
 `;
 
 interface UploadsDetailFormProps {
@@ -36,6 +70,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
+	const [uploading, setUploading] = useState(false);
 	const { control, handleSubmit, register, watch, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -74,11 +109,14 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		};
 
 		if (detailData.is_new) {
-			if (tmp_blob)
+			if (tmp_blob) {
+				setUploading(true);
 				createUploads(master).then((response) => {
+					setUploading(false);
 					onSave(master, response);
 					onCancel();
 				});
+			}
 		} else {
 			updateUploads(master).then((response) => {
 				onSave(master, response);
@@ -133,23 +171,24 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<>
+						{uploading && <div> ... uploading ... </div>}
 						{tmp_blob ? (
-							<>
-								<button type="button" onClick={resetBlob}>
-									reset blob
-								</button>
-								<div>
+							<BlobContainer>
+								<ButtonReset type="button" onClick={resetBlob}>
+									Clear
+								</ButtonReset>
+								<>
 									{tmp_meta.type == 'image' ? (
 										<BlobImage src={tmp_blob} alt={tmp_meta.name} />
 									) : (
-										<>icon for file type ({tmp_meta.type})</>
+										<BlobTemporary>
+											icon for file type ({tmp_meta.type})
+										</BlobTemporary>
 									)}
-								</div>
-							</>
+								</>
+							</BlobContainer>
 						) : (
-							<>
-								<Uploader onChange={uploaderHandler} />
-							</>
+							<Uploader onChange={uploaderHandler} />
 						)}
 					</>
 				</Section.Base>
@@ -222,7 +261,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!(watchName && tmp_blob)}
+				invalid={!(watchName && tmp_blob) || uploading}
 				detailData={detailData}
 			/>
 		</form>

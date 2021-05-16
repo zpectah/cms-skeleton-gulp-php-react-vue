@@ -3,42 +3,11 @@ import OPTIONS from '../../../../../config/options.json';
 export default (ext) => {
 	let type = 'undefined';
 
-	switch (ext) {
-		case 'jpg':
-		case 'jpeg':
-		case 'png':
-			type = 'image';
-			break;
-
-		case 'mp3':
-		case 'aac':
-			type = 'audio';
-			break;
-
-		case 'mpeg':
-		case 'mp4':
-			type = 'video';
-			break;
-
-		case 'doc':
-		case 'docx':
-		case 'xls':
-		case 'xlsx':
-		case 'ppt':
-		case 'pptx':
-		case 'pages':
-		case 'numbers':
-		case 'pdf':
-		case 'pps':
-		case 'ppsx':
-			type = 'document';
-			break;
-
-		case 'zip':
-		case 'rar':
-			type = 'archive';
-			break;
-	}
+	if (OPTIONS.uploads.image.extension.indexOf(ext) !== -1) type = 'image';
+	if (OPTIONS.uploads.audio.extension.indexOf(ext) !== -1) type = 'audio';
+	if (OPTIONS.uploads.video.extension.indexOf(ext) !== -1) type = 'video';
+	if (OPTIONS.uploads.document.extension.indexOf(ext) !== -1) type = 'document';
+	if (OPTIONS.uploads.archive.extension.indexOf(ext) !== -1) type = 'archive';
 
 	return type;
 };
