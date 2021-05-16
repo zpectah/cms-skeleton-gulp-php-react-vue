@@ -129,7 +129,6 @@ class Uploads {
 
 		if ($file_path) {
 
-			// save original file
 			$response['original'] = self::put_file($name . '.' . $ext, $file_base64, $file_path);
 
 			if ($type == 'image') {
@@ -219,13 +218,12 @@ class Uploads {
 				$stmt -> execute();
 				$id = $stmt -> insert_id;
 				$response = [
+					'files' => $uploadedFile,
 					'id' => $id,
 					'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData['lang']) // created languages ... !!!
 				];
 				$stmt -> close();
 			}
-
-			$response['file'] = $uploadedFile;
 
 		} else {
 			$response = [
@@ -239,18 +237,10 @@ class Uploads {
 	public function update ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
-		// TODO: update whole object is necessary ...
-
 		// prepare
-		$query = ('UPDATE uploads SET type = ?, name = ?, extension = ?, file_name = ?, file_mime = ?, file_size = ?, category = ?, active = ? WHERE id = ?');
-		$types = 'ssssssii';
+		$query = ('UPDATE uploads SET category = ?, active = ? WHERE id = ?');
+		$types = 'sii';
 		$args = [
-			$requestData['type'],
-			$requestData['name'],
-			$requestData['extension'],
-			$requestData['file_name'],
-			$requestData['file_mime'],
-			$requestData['file_size'],
 			$requestData['category'] ? implode(",", $requestData['category']) : '',
 			$requestData['active'],
 			$requestData['id']

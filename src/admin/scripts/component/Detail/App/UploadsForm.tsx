@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 import styled from 'styled-components';
 
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Uploader } from '../../ui';
@@ -17,7 +18,7 @@ const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 	display: ${(props) => (props.isActive ? 'block' : 'none')};
 `;
-const BlobContainer = styled.div`
+const MediaContainer = styled.div`
 	height: 250px;
 	position: relative;
 	display: flex;
@@ -25,11 +26,11 @@ const BlobContainer = styled.div`
 	justify-content: center;
 	background-color: rgba(250, 250, 250, 0.9);
 `;
-const BlobImage = styled.img`
+const StyledImage = styled.img`
 	width: auto;
 	max-height: 100%;
 `;
-const BlobTemporary = styled.div`
+const MediaTemporary = styled.div`
 	width: 100%;
 	height: 200px;
 	display: flex;
@@ -55,6 +56,7 @@ const ButtonReset = styled.button`
 		opacity: 1;
 	}
 `;
+const PreloaderLayer = styled.div``;
 
 interface UploadsDetailFormProps {
 	detailData: UploadsItemProps;
@@ -98,17 +100,17 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	}, [Settings]);
 
 	const submitHandler = (data) => {
-		const master = {
-			...data,
-			fileBase64: tmp_blob,
-			extension: tmp_meta.extension,
-			file_name: tmp_meta.name,
-			file_mime: tmp_meta.mime,
-			file_size: tmp_meta.size,
-			type: tmp_meta.type,
-		};
-
 		if (detailData.is_new) {
+			const master = {
+				...data,
+				fileBase64: tmp_blob,
+				extension: tmp_meta.extension,
+				file_name: tmp_meta.name,
+				file_mime: tmp_meta.mime,
+				file_size: tmp_meta.size,
+				type: tmp_meta.type,
+			};
+
 			if (tmp_blob) {
 				setUploading(true);
 				createUploads(master).then((response) => {
@@ -118,6 +120,11 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				});
 			}
 		} else {
+			const master = {
+				...detailData,
+				...data,
+			};
+
 			updateUploads(master).then((response) => {
 				onSave(master, response);
 				onCancel();
@@ -171,24 +178,45 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<>
-						{uploading && <div> ... uploading ... </div>}
-						{tmp_blob ? (
-							<BlobContainer>
-								<ButtonReset type="button" onClick={resetBlob}>
-									Clear
-								</ButtonReset>
-								<>
-									{tmp_meta.type == 'image' ? (
-										<BlobImage src={tmp_blob} alt={tmp_meta.name} />
-									) : (
-										<BlobTemporary>
-											icon for file type ({tmp_meta.type})
-										</BlobTemporary>
-									)}
-								</>
-							</BlobContainer>
+						{detailData.is_new ? (
+							<>
+								{uploading && (
+									<PreloaderLayer> ... uploading ... </PreloaderLayer>
+								)}
+								{tmp_blob ? (
+									<MediaContainer>
+										<ButtonReset type="button" onClick={resetBlob}>
+											Clear
+										</ButtonReset>
+										<>
+											{tmp_meta.type == 'image' ? (
+												<StyledImage src={tmp_blob} alt={tmp_meta.name} />
+											) : (
+												<MediaTemporary>
+													icon for file type ({tmp_meta.type})
+												</MediaTemporary>
+											)}
+										</>
+									</MediaContainer>
+								) : (
+									<Uploader onChange={uploaderHandler} />
+								)}
+							</>
 						) : (
-							<Uploader onChange={uploaderHandler} />
+							<MediaContainer>
+								{detailData.type == 'image' ? (
+									<StyledImage
+										src={
+											config.ROOT_PATH + 'uploads/image/' + detailData.file_name
+										}
+										alt={detailData.name}
+									/>
+								) : (
+									<MediaTemporary>
+										icon for file type ({detailData.type})
+									</MediaTemporary>
+								)}
+							</MediaContainer>
 						)}
 					</>
 				</Section.Base>
@@ -208,6 +236,8 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Name'}
+								readOnly={!detailData.is_new}
+								disabled={!detailData.is_new}
 							/>
 						)}
 					</Form.Row>
@@ -232,9 +262,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 									label={'Title'}
 									name={`lang.${lng}.title`}
 									control={control}
-									// rules={{ required: true }}
 									defaultValue={''}
-									// required
 								>
 									{(row) => (
 										<Input
@@ -261,7 +289,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!(watchName && tmp_blob) || uploading}
+				invalid={detailData.is_new ? !(watchName && tmp_blob) : false}
 				detailData={detailData}
 			/>
 		</form>
