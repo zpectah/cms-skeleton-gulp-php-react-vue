@@ -20,6 +20,7 @@ import TranslationsPage from './page/Translations';
 import CategoriesPage from './page/Categories';
 import PagesPage from './page/Pages';
 import UploadsPage from './page/Uploads';
+import MenuPage from './page/MenuPage';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -116,6 +117,13 @@ const App = () => {
 						path={[routes.pages.path, routes.pages.pathDetail + '/:id']}
 						component={PagesPage}
 						auth={routes.pages.auth}
+						exact
+					/>
+
+					<AuthRoute
+						path={[routes.menu.path, routes.menu.pathDetail + '/:id']}
+						component={MenuPage}
+						auth={routes.menu.auth}
 						exact
 					/>
 

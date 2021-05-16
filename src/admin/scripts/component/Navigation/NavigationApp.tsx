@@ -62,6 +62,12 @@ const links = [
 		path: routes.uploads.path,
 		active: true,
 	},
+	{
+		key: 10,
+		label: routes.menu.label,
+		path: routes.menu.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`

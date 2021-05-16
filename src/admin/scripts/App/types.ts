@@ -87,7 +87,9 @@ export interface MenuItemProps extends commonModelProps {
 export interface MenuItemsItemProps extends commonModelProps {
 	type: 'default' | 'external';
 	name: string;
+	link: string;
 	parent?: string;
+	menu?: string;
 	lang?: {
 		title: string;
 	};
