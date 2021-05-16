@@ -135,5 +135,15 @@
 			"title": "Messages page"
 		},
 		"label": "Messages"
+	},
+
+	"Members": {
+		"meta": {
+			"title": "Members"
+		},
+		"page": {
+			"title": "Members page"
+		},
+		"label": "Members"
 	}
 }

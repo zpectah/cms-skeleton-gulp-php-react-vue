@@ -27,7 +27,8 @@
 		"MenuItems": "Menu items",
 		"Pages": "Pages",
 		"Uploads": "Uploads",
-		"Messages": "Messages"
+		"Messages": "Messages",
+		"Members": "Members"
 	},
 	"model_item": {
 		"Users": "User",
@@ -39,6 +40,7 @@
 		"MenuItems": "Menu item",
 		"Pages": "Page",
 		"Uploads": "Upload",
-		"Messages": "Message"
+		"Messages": "Message",
+		"Members": "Member"
 	}
 }

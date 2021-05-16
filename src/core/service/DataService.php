@@ -5,6 +5,7 @@ namespace core\service;
 
 
 use core\model\Categories;
+use core\model\Members\Members;
 use core\model\Menu;
 use core\model\MenuItems;
 use core\model\Messages;
@@ -28,8 +29,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
-		$Settings = new Settings;
 		$Profile = new Profile;
+
+		// module: App
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -41,6 +44,14 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+
+		// module: Members
+		$Members = new Members;
+
+		// module: Crm
+
+		// module: Market
+
 
 		$languages = $Settings -> get_languages($conn);
 
@@ -98,6 +109,10 @@ class DataService {
 				$response = $MenuItems -> get($conn, $data, $languages);
 				break;
 
+			case 'Members':
+				$response = $Members -> get($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -109,6 +124,7 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		// module: App
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -121,6 +137,14 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+
+		// module: Members
+		$Members = new Members;
+
+		// module: Crm
+
+		// module: Market
+
 
 		$languages = $Settings -> get_languages($conn);
 
@@ -170,6 +194,10 @@ class DataService {
 				$response = $MenuItems -> create($conn, $data, $languages);
 				break;
 
+			case 'Members':
+				$response = $Members -> create($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -181,8 +209,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
-		$Settings = new Settings;
 		$Profile = new Profile;
+
+		// module: App
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -193,6 +223,14 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+
+		// module: Members
+		$Members = new Members;
+
+		// module: Crm
+
+		// module: Market
+
 
 		$languages = $Settings -> get_languages($conn);
 
@@ -246,6 +284,10 @@ class DataService {
 				$response = $MenuItems -> update($conn, $data, $languages);
 				break;
 
+			case 'Members':
+				$response = $Members -> update($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -257,6 +299,7 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		// module: App
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -266,6 +309,14 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+
+		// module: Members
+		$Members = new Members;
+
+		// module: Crm
+
+		// module: Market
+
 
 		switch ($model) {
 
@@ -305,6 +356,10 @@ class DataService {
 				$response = $MenuItems -> toggle($conn, $data);
 				break;
 
+			case 'Members':
+				$response = $Members -> toggle($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -316,6 +371,7 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		// module: App
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -327,6 +383,14 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+
+		// module: Members
+		$Members = new Members;
+
+		// module: Crm
+
+		// module: Market
+
 
 		switch ($model) {
 
@@ -372,6 +436,10 @@ class DataService {
 
 			case 'MenuItems':
 				$response = $MenuItems -> delete($conn, $data);
+				break;
+
+			case 'Members':
+				$response = $Members -> delete($conn, $data);
 				break;
 
 		}

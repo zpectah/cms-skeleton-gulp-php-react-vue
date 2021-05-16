@@ -1,1 +1,16 @@
-{}
+{
+	"dashboard": {
+		"path": "/admin/members/",
+		"pathDetail": null,
+		"name": "dashboard",
+		"label": "Dashboard.label",
+		"auth": 2
+	},
+	"members": {
+		"path": "/admin/members/members",
+		"pathDetail": "/admin/members/members/detail",
+		"name": "members",
+		"label": "Members.label",
+		"auth": 2
+	}
+}

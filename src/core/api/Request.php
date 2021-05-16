@@ -353,6 +353,33 @@ class Request {
 				break;
 
 
+			// Members
+			case 'get_members':
+				$response['data'] = $DataService -> get('Members', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_members':
+				$response['data'] = $DataService -> create('Members', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_members':
+				$response['data'] = $DataService -> toggle('Members', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_members':
+				$response['data'] = $DataService -> update('Members', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_members':
+				$response['data'] = $DataService -> delete('Members', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
 
 			// ...
 			default:

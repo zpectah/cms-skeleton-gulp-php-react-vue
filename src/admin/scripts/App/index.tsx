@@ -22,6 +22,7 @@ import PagesPage from './page/Pages';
 import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
+import Members from '../Members';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -48,6 +49,12 @@ const App = () => {
 			<GlobalStyle />
 			<Router>
 				<Switch>
+					<AuthRoute
+						path={['/admin/members']}
+						component={Members}
+						auth={routes.dashboard.auth}
+					/>
+
 					<Route
 						path={[
 							routes['lost-password'].path,

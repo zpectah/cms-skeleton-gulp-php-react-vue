@@ -346,6 +346,60 @@
 					"value_t": "type.archive"
 				}
 			]
+		},
+		"Members": {
+			"level": [
+				{
+					"key": 1,
+					"label": "Demo",
+					"value": 0,
+					"value_t": "level.demo"
+				},
+				{
+					"key": 2,
+					"label": "Redactor",
+					"value": 2,
+					"value_t": "level.redactor"
+				}	,
+				{
+					"key": 3,
+					"label": "Chief Redactor",
+					"value": 3,
+					"value_t": "group.chiefRedactor"
+				},
+				{
+					"key": 4,
+					"label": "Admin",
+					"value": 5,
+					"value_t": "group.admin"
+				}	,
+				{
+					"key": 5,
+					"label": "Super Admin",
+					"value": 7,
+					"value_t": "group.superAdmin"
+				}
+			],
+			"group": [
+				{
+					"key": 1,
+					"label": "Default",
+					"value": "default",
+					"value_t": "group.default"
+				},
+				{
+					"key": 2,
+					"label": "Redactors",
+					"value": "redactors",
+					"value_t": "group.redactors"
+				}	,
+				{
+					"key": 3,
+					"label": "Managers",
+					"value": "managers",
+					"value_t": "group.managers"
+				}
+			]
 		}
 	}
 }

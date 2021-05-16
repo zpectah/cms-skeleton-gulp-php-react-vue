@@ -27,7 +27,7 @@ require PATH_PFX . 'core/service/EmailService.php';
 
 
 /*
- * Model
+ * Model: App
  */
 require PATH_PFX . 'core/model/Settings.php';
 require PATH_PFX . 'core/model/Profile.php';
@@ -42,6 +42,19 @@ require PATH_PFX . 'core/model/Categories.php';
 require PATH_PFX . 'core/model/Uploads.php';
 require PATH_PFX . 'core/model/Menu.php';
 require PATH_PFX . 'core/model/MenuItems.php';
+
+/*
+ * Model: Members
+ */
+require PATH_PFX . 'core/model/Members/Members.php';
+
+/*
+ * Model: Crm
+ */
+
+/*
+ * Model: Market
+ */
 
 
 /*
