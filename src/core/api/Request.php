@@ -19,6 +19,8 @@ class Request {
 		$response = [
 			'status' => 'error',
 			'data' => null,
+			'r' => $requestData,
+			'f' => $_FILES
 		];
 
 		if ( $url[1] ) switch ($url[1]) {

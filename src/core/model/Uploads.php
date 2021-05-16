@@ -101,13 +101,15 @@ class Uploads {
 
 		// TODO
 		$_response = [
+			't' => $file_object,
+			'f' => $_FILES[$file_object['uid']],
 			'extension' => '',
 			'file_name' => '',
 			'file_mime' => '',
 			'file_size' => '',
 		];
 
-		return $response;
+		return $_response;
 	}
 
 
@@ -145,7 +147,7 @@ class Uploads {
 	public function create ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
-		$uploadedFile = self::upload_file([]);
+		$uploadedFile = self::upload_file($requestData['file']['originFileObj']);
 
 		$_extension = ''; // TODO ???
 		$_file_name = ''; // TODO ???
@@ -178,6 +180,7 @@ class Uploads {
 				$stmt -> execute();
 				$id = $stmt -> insert_id;
 				$response = [
+					'aa' => $uploadedFile,
 					'id' => $id,
 					'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData['lang']) // created languages ... !!!
 				];
