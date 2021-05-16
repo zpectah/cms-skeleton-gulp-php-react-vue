@@ -4,6 +4,9 @@
 namespace core\model;
 
 
+use Gumlet\ImageResize;
+
+
 class Uploads {
 
 	private function get_language_row($conn, $lang, $id) {
@@ -99,6 +102,22 @@ class Uploads {
 		return file_put_contents($file, $fileData);
 	}
 
+	private function put_custom_image($width, $height, $key, $imageData, $pathPrefix, $fileName, $quality, $crop = false) {
+		$image = ImageResize::createFromString($imageData);
+
+		if ($crop) {
+			$image -> crop($width, $height, true, ImageResize::CROPCENTER);
+		} else {
+			$image -> resizeToBestFit($width, $height);
+		}
+
+		$image -> quality_jpg = $quality;
+		$file_path = $pathPrefix . $key . '/';
+		$response[$key] = self::put_file($fileName, $image, $file_path);
+
+		return $response;
+	}
+
 	private function upload_file($file_object, $name, $ext, $type) {
 		$response = null;
 
@@ -110,16 +129,25 @@ class Uploads {
 
 		if ($file_path) {
 
+			// save original file
+			$response['original'] = self::put_file($name . '.' . $ext, $file_base64, $file_path);
+
 			if ($type == 'image') {
 
-				// iterate each image size ...
-				// save original file same way as other files ...
+				foreach (UPLOADS_IMAGE_FORMATS as $v) {
+					$response[$v['key']] = self::put_custom_image(
+						$v['width'],
+						$v['height'],
+						$v['key'],
+						$file_base64,
+						$file_path,
+						$name . '.' . $ext,
+						$v['quality'],
+						$v['crop']
+					);
+				}
 
-				$response = self::put_file($name . '.' . $ext, $file_base64, $file_path);
-
-			} else {
-
-				$response = self::put_file($name . '.' . $ext, $file_base64, $file_path);
+				// TODO: cropped by options
 
 			}
 
@@ -196,6 +224,8 @@ class Uploads {
 				];
 				$stmt -> close();
 			}
+
+			$response['file'] = $uploadedFile;
 
 		} else {
 			$response = [

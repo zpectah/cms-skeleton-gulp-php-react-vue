@@ -64,6 +64,7 @@ define( "LOC_ADMIN_LOST_PASSWORD",                        $JSON_GLOBAL['LOCATION
  * Uploads
  */
 define( "OPTIONS_UPLOADS",                                $JSON_OPTIONS['uploads'] );
+define( "UPLOADS_IMAGE_FORMATS",                          $JSON_OPTIONS['uploads']['image']['format'] );
 
 
 

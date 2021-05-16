@@ -1,3 +1,5 @@
+import OPTIONS from '../../../../../config/options.json';
+
 export default (ext) => {
 	let type = 'undefined';
 

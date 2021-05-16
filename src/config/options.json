@@ -61,7 +61,53 @@
 		]
 	},
 	"form": {},
-	"uploads": {},
+	"uploads": {
+		"audio": {
+			"extension": ["mp3", "aac"]
+		},
+		"video": {
+			"extension": ["mpeg", "mp4"]
+		},
+		"document": {
+			"extension": ["doc", "docs", "xls", "xlsx", "ppt", "pptx", "pps", "ppsx", "pages", "numbers", "pdf"]
+		},
+		"archive": {
+			"extension": ["zip", "rar"]
+		},
+		"image": {
+			"extension": ["jpg", "jpeg", "png"],
+			"format": [
+				{
+					"key": "thumbnail",
+					"width": 128,
+					"height": 128,
+					"quality": 25,
+					"crop": true
+				},
+				{
+					"key": "medium",
+					"width": 960,
+					"height": 960,
+					"quality": 75,
+					"crop": true
+				},
+				{
+					"key": "large",
+					"width": 1680,
+					"height": 1680,
+					"quality": 100,
+					"crop": false
+				},
+				{
+					"key": "custom_1",
+					"width": 1920,
+					"height": 640,
+					"quality": 75,
+					"crop": true
+				}
+			]
+		}
+	},
 	"model": {
 		"Users": {
 			"level": [
