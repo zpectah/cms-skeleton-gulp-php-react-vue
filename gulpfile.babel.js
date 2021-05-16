@@ -159,8 +159,8 @@ const watchSource = {
 };
 
 const task = {
-	clean: function (cb, path) {
-		progress.start(12, 1, { env: 'DEV' });
+	clean: function (cb, path, envName) {
+		progress.start(12, 1, { env: envName });
 		return del.sync(path + utils.getPathSuffix(), cb());
 	},
 	environment: function (cb, env, path) {
@@ -333,9 +333,9 @@ const task = {
 };
 
 const Clean = {
-	clean_dev: (cb) => task.clean(cb, PATH_DEV),
-	clean_test: (cb) => task.clean(cb, PATH_TEST),
-	clean_prod: (cb) => task.clean(cb, PATH_PROD),
+	clean_dev: (cb) => task.clean(cb, PATH_DEV, CFG.ENV_NAME_DEV),
+	clean_test: (cb) => task.clean(cb, PATH_TEST, CFG.ENV_NAME_TEST),
+	clean_prod: (cb) => task.clean(cb, PATH_PROD, CFG.ENV_NAME_PROD),
 };
 
 const Environment = {
