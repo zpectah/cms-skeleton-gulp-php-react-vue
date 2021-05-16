@@ -91,25 +91,77 @@ class Uploads {
 		return $response;
 	}
 
-	private function upload_file($file_object) {
-		$response = null;
-
-		//
-		// TODO: upload file to location before
-		// if success - continue to save to table ...
-		//
-
-		// TODO
-		$_response = [
-			't' => $file_object,
-			'f' => $_FILES[$file_object['uid']],
-			'extension' => '',
-			'file_name' => '',
-			'file_mime' => '',
-			'file_size' => '',
+	private function upload_file($file_object, $name, $ext) {
+		$response = [
+			'file' => null,
+			'type' => null
 		];
 
-		return $_response;
+		$file_path = null;
+		$file_parts = explode(";base64,", $file_object);
+		$file_base64 = base64_decode($file_parts[1]);
+
+		switch ($ext) {
+
+			//
+			// process by file extension
+			//
+
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+				$file_path = PATH_UPLOADS . 'image/';
+				$response['type'] = 'image';
+				break;
+
+			case 'mp3':
+			case 'aac':
+				$file_path = PATH_UPLOADS . 'audio/';
+				$response['type'] = 'audio';
+				break;
+
+			case 'mpeg':
+			case 'mp4':
+				$file_path = PATH_UPLOADS . 'video/';
+				$response['type'] = 'video';
+				break;
+
+			case 'doc':
+			case 'docx':
+			case 'xls':
+			case 'xlsx':
+			case 'ppt':
+			case 'pptx':
+			case 'pages':
+			case 'numbers':
+			case 'pdf':
+			case 'pps':
+			case 'ppsx':
+			$file_path = PATH_UPLOADS . 'document/';
+				$response['type'] = 'document';
+				break;
+
+			case 'zip':
+			case 'rar':
+				$file_path = PATH_UPLOADS . 'archive/';
+				$response['type'] = 'archive';
+				break;
+
+		}
+
+
+		if ($file_path) {
+
+			// create directory if not created and put file to it
+			if (!file_exists($file_path)) mkdir($file_path, 0777, true);
+
+			$file = $file_path . $name . '.' . $ext;
+
+			$response['file'] = file_put_contents($file, $file_base64);
+
+		}
+
+		return $response;
 	}
 
 
@@ -147,25 +199,20 @@ class Uploads {
 	public function create ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
-		$uploadedFile = self::upload_file($requestData['file']['originFileObj']);
+		$uploadedFile = self::upload_file($requestData['fileBase64'], $requestData['name'], $requestData['extension']);
 
-		$_extension = ''; // TODO ???
-		$_file_name = ''; // TODO ???
-		$_file_mime = ''; // TODO ???
-		$_file_size = ''; // TODO ???
-
-		if ($uploadedFile) {
+		if ($uploadedFile['file'] && $uploadedFile['type']) {
 
 			// prepare
 			$query = ('INSERT INTO uploads (type, name, extension, file_name, file_mime, file_size, category, active, deleted) VALUES (?,?,?,?,?,?,?,?,?)');
-			$types = 'sssssssii';
+			$types = 'sssssisii';
 			$args = [
-				$requestData['type'],
+				$uploadedFile['type'],
 				$requestData['name'],
-				$requestData['extension'], // TODO: should be from $uploadedFile
-				$requestData['file_name'], // TODO: should be from $uploadedFile
-				$requestData['file_mime'], // TODO: should be from $uploadedFile
-				$requestData['file_size'], // TODO: should be from $uploadedFile
+				$requestData['extension'],
+				$requestData['file_name'],
+				$requestData['file_mime'],
+				$requestData['file_size'],
 				$requestData['category'] ? implode(",", $requestData['category']) : '',
 				$requestData['active'],
 				0
@@ -180,7 +227,6 @@ class Uploads {
 				$stmt -> execute();
 				$id = $stmt -> insert_id;
 				$response = [
-					'aa' => $uploadedFile,
 					'id' => $id,
 					'lang' => self::create_language_rows($conn, $languages['active'], $id, $requestData['lang']) // created languages ... !!!
 				];
@@ -188,7 +234,9 @@ class Uploads {
 			}
 
 		} else {
-			$response = 'error_upload';
+			$response = [
+				'message' => 'error_while_upload',
+			];
 		}
 
 		return $response;

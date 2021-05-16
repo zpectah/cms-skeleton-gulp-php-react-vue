@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
-import { Input, Switch, Upload } from 'antd';
+import { Input, Switch } from 'antd';
 import styled from 'styled-components';
 
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker } from '../../ui';
+import { Modal, Typography, Form, Section, Picker, Uploader } from '../../ui';
 import LanguageToggle from '../../LanguageToggle';
 import CFG from '../../../../../config/global.json';
 import { useUploads, useSettings } from '../../../App/hooks';
@@ -16,10 +16,6 @@ import setLanguageModel from '../setLanguageModel';
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 	display: ${(props) => (props.isActive ? 'block' : 'none')};
-`;
-const UploaderWrapper = styled.div`
-	padding: 2rem 2rem;
-	text-align: center;
 `;
 
 interface UploadsDetailFormProps {
@@ -41,10 +37,6 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		defaultValues: {
 			type: 'undefined',
 			name: '',
-			extension: '',
-			file_name: '',
-			file_mime: '',
-			file_size: '',
 			category: [],
 			active: 1,
 			lang: setLanguageModel(langList, {
@@ -54,33 +46,34 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const [blob, setBlob] = useState<any>(null);
+	const [tmp_blob, setTmp_Blob] = useState<any>(null);
+	const [tmp_extension, setTmp_extension] = useState('');
+	const [tmp_name, setTmp_name] = useState('');
+	const [tmp_mime, setTmp_mime] = useState('');
+	const [tmp_size, setTmp_size] = useState(0);
+
 	// const { TextArea } = Input;
-	const { Dragger } = Upload;
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
 	}, [Settings]);
 
-	const toBase64 = (file) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = (error) => reject(error);
-		});
-
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			fileBase64: blob,
+			fileBase64: tmp_blob,
+			extension: tmp_extension,
+			file_name: tmp_name,
+			file_mime: tmp_mime,
+			file_size: tmp_size,
 		};
 
 		if (detailData.is_new) {
-			createUploads(master).then((response) => {
-				onSave(master, response);
-				onCancel();
-			});
+			if (tmp_blob)
+				createUploads(master).then((response) => {
+					onSave(master, response);
+					onCancel();
+				});
 		} else {
 			updateUploads(master).then((response) => {
 				onSave(master, response);
@@ -89,14 +82,6 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		}
 
 		setTimeout(() => reloadUploads(), SUBMIT_TIMEOUT);
-	};
-
-	const prepareUpload = (file) => {
-		const b64 = toBase64(file);
-
-		console.log('blob b64 ', b64);
-
-		return setBlob(b64);
 	};
 
 	return (
@@ -119,34 +104,19 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<>
-						<Controller
-							name={'file'}
-							control={control}
-							render={({ onChange, onBlur, value, name, ref }) => (
-								<Dragger
-									action={prepareUpload}
-									onChange={(info) => {
-										const { status } = info.file;
-										if (status !== 'uploading') {
-											console.log(status, info.file, info.fileList);
-										}
-										if (status === 'done') {
-											// message.success(`${info.file.name} file uploaded successfully.`);
-
-											//
-											console.log(info.file.name + ' ... uploaded');
-											console.log(info.file);
-											//
-											onChange(info.file);
-										} else if (status === 'error') {
-											// message.error(`${info.file.name} file upload failed.`);
-										}
-									}}
-								>
-									<UploaderWrapper>Pick file to upload ...</UploaderWrapper>
-								</Dragger>
-							)}
+						<Uploader
+							onChange={(blob, name, ext, mime, size) => {
+								setTmp_Blob(blob);
+								setTmp_extension(ext);
+								setTmp_name(name);
+								setTmp_mime(mime);
+								setTmp_size(size);
+							}}
 						/>
+						{'tmp_extension ' + tmp_extension}
+						{'tmp_name ' + tmp_name}
+						{'tmp_mime ' + tmp_mime}
+						{'tmp_size ' + tmp_size}
 					</>
 				</Section.Base>
 				<Section.Base>

@@ -10,6 +10,7 @@ import Preloader from './Preloader';
 import Picker from './Picker';
 import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
+import Uploader from './Uploader';
 
 export {
 	Button,
@@ -24,4 +25,5 @@ export {
 	Picker,
 	Wysiwyg,
 	Viewer,
+	Uploader,
 };
