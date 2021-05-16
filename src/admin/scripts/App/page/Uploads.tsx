@@ -57,7 +57,8 @@ const UploadsPage = () => {
 				loading={isUploadsLoading}
 				columnsLayout={{
 					// file_name: true,
-					title_lang: true,
+					// title_lang: true,
+					name: true,
 					category: true,
 					active: true,
 				}}

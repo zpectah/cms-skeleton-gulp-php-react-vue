@@ -17,6 +17,10 @@ const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 	display: ${(props) => (props.isActive ? 'block' : 'none')};
 `;
+const BlobImage = styled.img`
+	max-width: 100%;
+	height: auto;
+`;
 
 interface UploadsDetailFormProps {
 	detailData: UploadsItemProps;
@@ -32,27 +36,27 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const { control, handleSubmit, formState, register, watch } = useForm({
+	const { control, handleSubmit, register, watch, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			type: 'undefined',
 			name: '',
 			category: [],
 			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
 			}),
-			file: null,
 			...detailData,
 		},
 	});
 	const [tmp_blob, setTmp_Blob] = useState<any>(null);
-	const [tmp_extension, setTmp_extension] = useState('');
-	const [tmp_name, setTmp_name] = useState('');
-	const [tmp_mime, setTmp_mime] = useState('');
-	const [tmp_size, setTmp_size] = useState(0);
-
-	// const { TextArea } = Input;
+	const [tmp_meta, setTmp_meta] = useState({
+		extension: '',
+		name: '',
+		mime: '',
+		size: 0,
+		type: 'undefined',
+	});
+	const watchName = watch('name');
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -62,10 +66,11 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		const master = {
 			...data,
 			fileBase64: tmp_blob,
-			extension: tmp_extension,
-			file_name: tmp_name,
-			file_mime: tmp_mime,
-			file_size: tmp_size,
+			extension: tmp_meta.extension,
+			file_name: tmp_meta.name,
+			file_mime: tmp_meta.mime,
+			file_size: tmp_meta.size,
+			type: tmp_meta.type,
 		};
 
 		if (detailData.is_new) {
@@ -82,6 +87,30 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		}
 
 		setTimeout(() => reloadUploads(), SUBMIT_TIMEOUT);
+	};
+
+	const resetBlob = () => {
+		setTmp_Blob(null);
+		setTmp_meta({
+			extension: '',
+			name: '',
+			mime: '',
+			size: 0,
+			type: 'undefined',
+		});
+	};
+
+	const uploaderHandler = (blob, name, ext, mime, size, type) => {
+		setTmp_Blob(blob);
+		setTmp_meta({
+			extension: ext,
+			name: name,
+			mime: mime,
+			size: size,
+			type: type,
+		});
+
+		return setValue('name', name.split('.').slice(0, -1).join('.'));
 	};
 
 	return (
@@ -104,19 +133,24 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 			<Modal.Content>
 				<Section.Base>
 					<>
-						<Uploader
-							onChange={(blob, name, ext, mime, size) => {
-								setTmp_Blob(blob);
-								setTmp_extension(ext);
-								setTmp_name(name);
-								setTmp_mime(mime);
-								setTmp_size(size);
-							}}
-						/>
-						{'tmp_extension ' + tmp_extension}
-						{'tmp_name ' + tmp_name}
-						{'tmp_mime ' + tmp_mime}
-						{'tmp_size ' + tmp_size}
+						{tmp_blob ? (
+							<>
+								<button type="button" onClick={resetBlob}>
+									reset blob
+								</button>
+								<div>
+									{tmp_meta.type == 'image' ? (
+										<BlobImage src={tmp_blob} alt={tmp_meta.name} />
+									) : (
+										<>icon for file type ({tmp_meta.type})</>
+									)}
+								</div>
+							</>
+						) : (
+							<>
+								<Uploader onChange={uploaderHandler} />
+							</>
+						)}
 					</>
 				</Section.Base>
 				<Section.Base>
@@ -156,12 +190,12 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						{langList.map((lng) => (
 							<LanguageWrapperPanel key={lng} isActive={lng == lang}>
 								<Form.Row
-									label={'Value'}
+									label={'Title'}
 									name={`lang.${lng}.title`}
 									control={control}
-									rules={{ required: true }}
+									// rules={{ required: true }}
 									defaultValue={''}
-									required
+									// required
 								>
 									{(row) => (
 										<Input
@@ -188,7 +222,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!formState.isValid}
+				invalid={!(watchName && tmp_blob)}
 				detailData={detailData}
 			/>
 		</form>

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import getFileType from './getFileType';
+
 const Wrapper = styled.div`
 	width: 100%;
 	height: auto;
@@ -35,6 +37,7 @@ interface UploaderProps {
 		ext: string,
 		mime: string,
 		size: number,
+		type: string,
 	) => void;
 }
 
@@ -56,17 +59,15 @@ const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
 		const ext = file.name.split('.').pop().toLowerCase();
 		const mime = file.type;
 		const size = file.size;
+		const type = getFileType(ext);
 
 		console.log('blob ', !!blob);
 
-		return onChange(blob, name, ext, mime, size);
+		return onChange(blob, name, ext, mime, size, type);
 	};
 
 	const onDropHandler = (e: any) => {
 		e.preventDefault();
-
-		console.log('onDropHandler ...');
-		// console.log(e);
 
 		let file;
 
@@ -82,9 +83,6 @@ const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
 	};
 
 	const onChangeHandler = (e: any) => {
-		console.log('onChangeHandler ...');
-		// console.log(e);
-
 		const file = e.target?.files[0];
 
 		if (file) return callbackHandler(file);
@@ -98,14 +96,12 @@ const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
 		e.preventDefault();
 
 		setDragOver(true);
-		console.log('onDragStart');
 	};
 
 	const onDragLeaveHandler = (e: any) => {
 		e.preventDefault();
 
 		setDragOver(false);
-		console.log('onDragLeave');
 	};
 
 	return (
