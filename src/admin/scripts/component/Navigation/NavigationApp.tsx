@@ -68,6 +68,12 @@ const links = [
 		path: routes.menu.path,
 		active: true,
 	},
+	{
+		key: 11,
+		label: routes.messages.label,
+		path: routes.messages.path,
+		active: true,
+	},
 ];
 
 const List = styled.ul`

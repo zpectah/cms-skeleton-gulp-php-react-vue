@@ -96,6 +96,7 @@ export interface MenuItemsItemProps extends commonModelProps {
 }
 
 export interface MessagesItemProps {
+	is_new?: boolean;
 	id: number;
 	type: 'default' | 'system';
 	sender: string;

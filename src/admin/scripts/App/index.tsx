@@ -21,6 +21,7 @@ import CategoriesPage from './page/Categories';
 import PagesPage from './page/Pages';
 import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
+import MessagesPage from './page/Messages';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -124,6 +125,13 @@ const App = () => {
 						path={[routes.menu.path, routes.menu.pathDetail + '/:id']}
 						component={MenuPage}
 						auth={routes.menu.auth}
+						exact
+					/>
+
+					<AuthRoute
+						path={[routes.messages.path, routes.messages.pathDetail + '/:id']}
+						component={MessagesPage}
+						auth={routes.messages.auth}
 						exact
 					/>
 
