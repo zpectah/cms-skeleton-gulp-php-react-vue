@@ -1,1 +1,9 @@
-{}
+{
+	"dashboard": {
+		"path": "/admin/market/",
+		"pathDetail": null,
+		"name": "dashboard",
+		"label": "Dashboard.label",
+		"auth": 2
+	}
+}

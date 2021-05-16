@@ -23,6 +23,8 @@ import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
 import Members from '../Members';
+import Crm from '../Crm';
+import Market from '../Market';
 
 const GlobalStyle = createGlobalStyle`
 	${globalStyles}
@@ -37,7 +39,7 @@ const App = () => {
 	useEffect(() => {
 		onInit();
 
-		return () => null;
+		return () => {};
 	}, []);
 
 	const onInit = () => {
@@ -52,6 +54,18 @@ const App = () => {
 					<AuthRoute
 						path={['/admin/members']}
 						component={Members}
+						auth={routes.dashboard.auth}
+					/>
+
+					<AuthRoute
+						path={['/admin/crm']}
+						component={Crm}
+						auth={routes.dashboard.auth}
+					/>
+
+					<AuthRoute
+						path={['/admin/market']}
+						component={Market}
 						auth={routes.dashboard.auth}
 					/>
 
