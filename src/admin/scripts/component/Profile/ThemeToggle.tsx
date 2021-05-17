@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Radio } from 'antd';
 
+import { THEME_LIST } from '../../constants';
 import { themeToggle } from '../../store/ui/actions';
 
 interface ThemeToggleProps {}
@@ -16,11 +17,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = () => {
 		dispatch(themeToggle(key));
 	};
 
-	const themeOptions = ['default', 'dark'];
-
 	return (
 		<Radio.Group
-			options={themeOptions}
+			options={THEME_LIST}
 			onChange={(e) => onChangeHandler(e.target.value)}
 			value={theme}
 			optionType="button"

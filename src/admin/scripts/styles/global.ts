@@ -1,12 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+export const REM = '16px';
+export const SPACER = '1rem';
+
+export const sidebarWidth = '250px';
+
+export const GLOBAL = createGlobalStyle`
 	html {
 		width: 100%;
 		height: 100%;
 		margin: 0;
 		padding: 0;
-		font-size: 16px;
+		font-size: ${REM};
 	}
 	body {
 		width: 100%;

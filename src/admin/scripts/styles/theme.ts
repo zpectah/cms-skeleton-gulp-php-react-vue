@@ -1,10 +1,9 @@
-import { PALETTE, STYLES } from '../constants';
 import defaultTheme from '../styles/theme/default';
-import darkTheme from '../styles/theme/dark';
+// import darkTheme from '../styles/theme/dark';
 
 export const themes = {
 	default: defaultTheme,
-	dark: darkTheme,
+	// dark: darkTheme,
 };
 
 export const getStyles = () => {
@@ -24,7 +23,6 @@ export const getStyles = () => {
 			dark: 'rgb(33,33,33)',
 			dark_lighter: 'rgb(77,77,77)',
 			dark_darker: 'rgb(15,15,15)',
-			...PALETTE,
 		},
 		layout: {
 			link: 'rgb(30,136,229)',
@@ -54,6 +52,5 @@ export const getStyles = () => {
 			footer_text: 'rgb(80,80,80)',
 			footer_border_color: 'rgb(230,230,230)',
 		},
-		...STYLES,
 	};
 };

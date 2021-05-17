@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
-import GlobalStyle from '../styles/global';
+import { GLOBAL } from '../styles/global';
 // import { getStyles } from '../styles/theme'; // TODO
 import { themes } from '../styles/theme';
 
@@ -28,6 +28,8 @@ import Members from '../Members';
 import Crm from '../Crm';
 import Market from '../Market';
 
+const GlobalStyles = GLOBAL;
+
 const App = () => {
 	const store = useSelector((store: any) => store);
 	const [theme, setTheme] = useState(themes['default']);
@@ -48,7 +50,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<GlobalStyle />
+			<GlobalStyles />
 			<Router>
 				<Switch>
 					<AuthRoute
