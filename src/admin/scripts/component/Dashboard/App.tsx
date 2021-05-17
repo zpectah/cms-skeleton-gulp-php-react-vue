@@ -9,33 +9,39 @@ interface AppDashboardProps {}
 const AppDashboard: React.FC<AppDashboardProps> = ({}) => {
 	return (
 		<Dashboard>
-			{/* content */}
 			<Row>
-				<Col>
+				<Col span={16}>
 					<Card title="Main dashboard card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
 					</Card>
 				</Col>
+				<Col span={8}>
+					<Card title="Card A" extra={<a href="#">More</a>}>
+						<p>Card content</p>
+						<p>Card content</p>
+						<p>Card content</p>
+					</Card>
+				</Col>
 			</Row>
-			<Row gutter={16}>
+			<Row>
 				<Col span={8}>
-					<Card title="App Card" extra={<a href="#">More</a>}>
+					<Card title="Members Card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="CRM Card" bordered={false}>
+					<Card title="CRM Card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="Market Card" bordered={false}>
+					<Card title="Market Card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>

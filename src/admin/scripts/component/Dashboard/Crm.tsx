@@ -9,33 +9,16 @@ interface CrmDashboardProps {}
 const CrmDashboard: React.FC<CrmDashboardProps> = ({}) => {
 	return (
 		<Dashboard>
-			{/* content */}
 			<Row>
-				<Col>
-					<Card title="Main dashboard card" extra={<a href="#">More</a>}>
-						<p>Card content</p>
-						<p>Card content</p>
-						<p>Card content</p>
-					</Card>
-				</Col>
-			</Row>
-			<Row gutter={16}>
-				<Col span={8}>
-					<Card title="App Card" extra={<a href="#">More</a>}>
+				<Col span={16}>
+					<Card title="Card A" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="CRM Card" bordered={false}>
-						<p>Card content</p>
-						<p>Card content</p>
-						<p>Card content</p>
-					</Card>
-				</Col>
-				<Col span={8}>
-					<Card title="Market Card" bordered={false}>
+					<Card title="Card B" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>
