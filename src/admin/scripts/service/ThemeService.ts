@@ -5,6 +5,7 @@ import CFG from '../../../config/global.json';
 class ThemeService {
 	init() {
 		document.querySelector(':root').setAttribute('theme', this.get());
+		storage.set(CFG.CMS.STORAGE_KEY_THEME, this.get());
 	}
 
 	get() {

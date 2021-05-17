@@ -1,4 +1,11 @@
 import { PALETTE, STYLES } from '../constants';
+import defaultTheme from '../styles/theme/default';
+import darkTheme from '../styles/theme/dark';
+
+export const themes = {
+	default: defaultTheme,
+	dark: darkTheme,
+};
 
 export const getStyles = () => {
 	// Return styles by theme

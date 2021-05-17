@@ -1,6 +1,6 @@
-import { css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-export default css`
+export default createGlobalStyle`
 	html {
 		width: 100%;
 		height: 100%;
@@ -14,6 +14,8 @@ export default css`
 		margin: 0;
 		padding: 0;
 		font-size: 1rem;
+		color: ${(props) => props.theme.page.text};
+		background-color: ${(props) => props.theme.page.background};
 	}
 
 	//

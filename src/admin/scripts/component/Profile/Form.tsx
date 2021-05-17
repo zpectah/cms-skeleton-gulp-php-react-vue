@@ -5,6 +5,7 @@ import { message } from 'antd';
 
 import { Form as UiForm, Section, Button } from '../ui';
 import LocaleToggle from './LocaleToggle';
+import ThemeToggle from './ThemeToggle';
 import { Input } from 'antd';
 import { useProfile } from '../../App/hooks';
 
@@ -35,6 +36,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	return (
 		<Wrapper>
 			<LocaleToggle />
+			<ThemeToggle />
 			<div>card data ... {model.email}</div>
 			<form onSubmit={handleSubmit(submitHandler)}>
 				<input

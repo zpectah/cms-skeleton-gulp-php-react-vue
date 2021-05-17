@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
-import globalStyles from '../styles/global';
-import { getStyles } from '../styles/theme';
+import GlobalStyle from '../styles/global';
+// import { getStyles } from '../styles/theme'; // TODO
+import { themes } from '../styles/theme';
 
 import AuthRoute from '../utils/AuthRoute';
 import Error404Page from './page/Error404';
@@ -26,28 +28,26 @@ import Members from '../Members';
 import Crm from '../Crm';
 import Market from '../Market';
 
-const GlobalStyle = createGlobalStyle`
-	${globalStyles}
-
-	body {
-		color: ${getStyles().layout.body_text};
-		background-color: ${getStyles().layout.body_bg};
-	}
-`;
-
 const App = () => {
+	const store = useSelector((store: any) => store);
+	const [theme, setTheme] = useState(themes['default']);
+
 	useEffect(() => {
 		onInit();
 
 		return () => {};
 	}, []);
 
+	useEffect(() => {
+		if (store.ui.theme) setTheme(themes[store.ui.theme]);
+	}, [store.ui.theme]);
+
 	const onInit = () => {
 		ThemeService.init();
 	};
 
 	return (
-		<>
+		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<Router>
 				<Switch>
@@ -166,7 +166,7 @@ const App = () => {
 					<Route component={Error404Page} />
 				</Switch>
 			</Router>
-		</>
+		</ThemeProvider>
 	);
 };
 
