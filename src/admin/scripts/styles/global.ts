@@ -42,19 +42,43 @@ export const GlobalStyles = createGlobalStyle`
 	.DialogWrapper {
 	}
 
-	.ant-modal {
-		&-close {
-			&-x {
-				width: 40px;
-				height: 40px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 1.75rem;
+
+	// Antd overrides
+	.ant{
+
+		// Button
+		&-btn{
+			border-radius: .125rem;
+
+			&-primary{
+				background: ${(props) => props.theme.color.primary};
+				border-color: ${(props) => props.theme.color.primary};
+
+				&.ant-btn-background-ghost{
+					color: ${(props) => props.theme.color.primary};
+					border-color: ${(props) => props.theme.color.primary};
+				}
+
 			}
 		}
-		&-content {
-			background: transparent;
+
+		// Modal
+		&-modal{
+			&-close {
+				&-x {
+					width: 40px;
+					height: 40px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 1.75rem;
+				}
+			}
+			&-content {
+				background: transparent;
+			}
 		}
+
 	}
+
 `;

@@ -27,8 +27,6 @@ const Wrapper = styled.aside`
 	top: 0;
 	left: 0;
 	z-index: 99;
-	color: ${(props) => props.theme.sidebar.text};
-	background-color: ${(props) => props.theme.sidebar.bg};
 
 	${media.min.md} {
 		width: ${(props) => (props.open ? '250px' : '50px')};
