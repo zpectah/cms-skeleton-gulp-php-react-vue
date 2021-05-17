@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CFG from '../../../../config/global.json';
-import { getStyles } from '../../styles/theme';
 import { routeProps } from '../../types';
 
 const Wrapper = styled.footer`
@@ -12,24 +11,24 @@ const Wrapper = styled.footer`
 	display: flex;
 	justify-content: ${(props) =>
 		props.isCentered ? 'center' : 'space-between'};
-	color: ${getStyles().layout.footer_text};
-	background-color: ${getStyles().layout.footer_bg};
+	color: ${(props) => props.theme.footer.text};
+	background-color: ${(props) => props.theme.footer.bg};
 
 	&.with-border {
-		border-top: 1px solid ${getStyles().layout.footer_border_color};
+		border-top: 1px solid ${(props) => props.theme.footer.border};
 	}
 `;
 const Text = styled.p`
 	margin: 0;
 	padding: 0;
 	font-size: 0.7rem;
-	color: ${getStyles().layout.body_muted_text};
+	color: ${(props) => props.theme.body.muted};
 
 	& a {
-		color: inherit;
+		color: ${(props) => props.theme.body.link};
 
 		&: hover {
-			color: ${getStyles().layout.link};
+			color: ${(props) => props.theme.body.linkHover};
 		}
 	}
 `;

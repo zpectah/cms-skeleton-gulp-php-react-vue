@@ -5,7 +5,7 @@ export const SPACER = '1rem';
 
 export const sidebarWidth = '250px';
 
-export const GLOBAL = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 	html {
 		width: 100%;
 		height: 100%;

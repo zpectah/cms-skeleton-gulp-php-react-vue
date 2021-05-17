@@ -1,8 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { getStyles } from '../../styles/theme';
-
 const PreloaderAnimation = keyframes`
   0% { width: 0%; left: 0%; }
   10% { width: 5%; left: 0%; }
@@ -24,23 +22,20 @@ const PreloaderLayer = styled.div`
 	left: 0;
 	z-index: 999;
 	overflow: hidden;
-	background-color: ${getStyles().palette.primary};
-
-	& .preloader-element {
-		height: 100%;
-		position: relative;
-		background-color: blue;
-		animation-name: ${PreloaderAnimation};
-		animation-duration: 1s;
-		animation-iteration-count: infinite;
-		animation-timing-function: ease-in-out;
-	}
+	background-color: ${(props) => props.theme.color.primary};
+`;
+const PreloaderElement = styled.div`
+	height: 100%;
+	position: relative;
+	background-color: blue;
+	animation-name: ${PreloaderAnimation};
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
 `;
 
 const Preloader: React.FC<{}> = ({ children }) => (
-	<PreloaderLayer>
-		{children ? children : <div className="preloader-element"></div>}
-	</PreloaderLayer>
+	<PreloaderLayer>{children ? children : <PreloaderElement />}</PreloaderLayer>
 );
 
 export default Preloader;

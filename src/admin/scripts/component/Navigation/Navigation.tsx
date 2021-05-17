@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
-import { getStyles } from '../../styles/theme';
 import AppRoutes from '../../App/routes.json';
 import MembersRoutes from '../../Members/routes.json';
 import CrmRoutes from '../../Crm/routes.json';
@@ -22,7 +21,7 @@ const Item = styled.li`
 	height: auto;
 	margin: 0;
 	padding: 0;
-	border-bottom: 1px solid rgb(225, 225, 225);
+	border-bottom: 1px solid ${(props) => props.theme.sidebar.navItemBorder};
 
 	&:last-child {
 		border-bottom: 0;
@@ -42,13 +41,13 @@ const Link = styled(NavLink)`
 
 	&:hover {
 		color: inherit;
-		background-color: rgb(235, 235, 235);
+		background-color: ${(props) => props.theme.sidebar.navItemHoverBg};
 		text-decoration: none;
 	}
 
 	&.is-active {
-		color: ${getStyles().layout.active_text};
-		background-color: ${getStyles().layout.active_bg};
+		color: ${(props) => props.theme.sidebar.navItemActiveColor};
+		background-color: ${(props) => props.theme.sidebar.navItemActiveBg};
 	}
 `;
 const LinkText = styled.span`

@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Breadcrumb } from 'antd';
 import styled from 'styled-components';
 
-import { getStyles } from '../../styles/theme';
 import { Typography } from '../../component/ui';
 import { routeProps, appProps } from '../../types';
 
@@ -12,9 +11,9 @@ const Wrapper = styled.header`
 	width: 100%;
 	height: auto;
 	padding: 1rem 1rem;
-	color: ${getStyles().layout.header_text};
-	background-color: ${getStyles().layout.header_bg};
-	border-bottom: 1px solid ${getStyles().layout.header_border_color};
+	color: ${(props) => props.theme.footer.text};
+	background-color: ${(props) => props.theme.footer.bg};
+	border-bottom: 1px solid ${(props) => props.theme.footer.border};
 `;
 const PrimaryBlock = styled.div``;
 const SecondaryBlock = styled.div`

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import CFG from '../../../config/global.json';
-import { getStyles } from '../styles/theme';
 import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
 import { routeProps, appProps } from '../types';
@@ -51,8 +50,8 @@ const Main = styled.main`
 	height: auto;
 	padding: 1rem;
 	flex: ${(props) => (props.isCentered ? '0' : '1')};
-	color: ${getStyles().layout.body_text};
-	background-color: ${getStyles().layout.body_bg};
+	color: ${(props) => props.theme.body.text};
+	background-color: ${(props) => props.theme.body.bg};
 `;
 
 interface AppLayoutProps {

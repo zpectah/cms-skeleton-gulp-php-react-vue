@@ -5,9 +5,8 @@ import { useSelector } from 'react-redux';
 
 import routes from './routes.json';
 import ThemeService from '../service/ThemeService';
-import { GLOBAL } from '../styles/global';
-// import { getStyles } from '../styles/theme'; // TODO
-import { themes } from '../styles/theme';
+import themes from '../styles/theme';
+import { GlobalStyles } from '../styles/global';
 
 import AuthRoute from '../utils/AuthRoute';
 import Error404Page from './page/Error404';
@@ -27,8 +26,6 @@ import MessagesPage from './page/Messages';
 import Members from '../Members';
 import Crm from '../Crm';
 import Market from '../Market';
-
-const GlobalStyles = GLOBAL;
 
 const App = () => {
 	const store = useSelector((store: any) => store);

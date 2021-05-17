@@ -14,7 +14,6 @@ import Media from 'react-media';
 
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
 import CFG from '../../../../config/global.json';
-import { getStyles } from '../../styles/theme';
 import media from '../../styles/responsive';
 import { Scrollable } from '../../component/ui';
 import Navigation from '../../component/Navigation';
@@ -28,8 +27,8 @@ const Wrapper = styled.aside`
 	top: 0;
 	left: 0;
 	z-index: 99;
-	color: ${getStyles().layout.sidebar_text};
-	background-color: transparent;
+	color: ${(props) => props.theme.sidebar.text};
+	background-color: ${(props) => props.theme.sidebar.bg};
 
 	${media.min.md} {
 		width: ${(props) => (props.open ? '250px' : '50px')};
@@ -45,9 +44,9 @@ const BarWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	color: ${getStyles().layout.sidebar_text};
-	background-color: ${getStyles().layout.sidebar_bg};
-	border-right: 1px solid ${getStyles().layout.sidebar_border_color};
+	color: ${(props) => props.theme.sidebar.barText};
+	background-color: ${(props) => props.theme.sidebar.barBg};
+	border-right: 1px solid ${(props) => props.theme.sidebar.barBorder};
 `;
 const PanelWrapper = styled.div`
 	width: calc(100vw - 50px);
@@ -58,9 +57,9 @@ const PanelWrapper = styled.div`
 	z-index: 99;
 	display: flex;
 	flex-direction: column;
-	color: ${getStyles().layout.sidebar_panel_text};
-	background-color: ${getStyles().layout.sidebar_panel_bg};
-	border-right: 1px solid ${getStyles().layout.sidebar_border_color};
+	color: ${(props) => props.theme.sidebar.panelText};
+	background-color: ${(props) => props.theme.sidebar.panelBg};
+	border-right: 1px solid ${(props) => props.theme.sidebar.panelBorder};
 	backdrop-filter: blur(4px);
 
 	& > div {
@@ -114,7 +113,7 @@ const Trigger = styled.button`
 	color: inherit;
 
 	&:hover {
-		color: ${getStyles().layout.link};
+		color: ${(props) => props.theme.sidebar.triggerHover};
 	}
 `;
 
