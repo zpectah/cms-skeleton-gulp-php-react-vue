@@ -145,5 +145,35 @@
 			"title": "Members page"
 		},
 		"label": "Members"
+	},
+
+	"MembersDashboard": {
+		"meta": {
+			"title": "Members dashboard"
+		},
+		"page": {
+			"title": "Members dashboard page"
+		},
+		"label": "Members dashboard"
+	},
+
+	"CrmDashboard": {
+		"meta": {
+			"title": "Crm dashboard"
+		},
+		"page": {
+			"title": "Crm dashboard page"
+		},
+		"label": "Crm dashboard"
+	},
+
+	"MarketDashboard": {
+		"meta": {
+			"title": "Market dashboard"
+		},
+		"page": {
+			"title": "Market dashboard page"
+		},
+		"label": "Market dashboard"
 	}
 }

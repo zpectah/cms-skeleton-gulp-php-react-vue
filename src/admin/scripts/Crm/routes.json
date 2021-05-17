@@ -1,9 +1,9 @@
 {
 	"dashboard": {
-		"path": "/admin/crm/",
+		"path": "/admin/crm",
 		"pathDetail": null,
 		"name": "dashboard",
-		"label": "Dashboard.label",
+		"label": "CrmDashboard.label",
 		"auth": 2
 	}
 }

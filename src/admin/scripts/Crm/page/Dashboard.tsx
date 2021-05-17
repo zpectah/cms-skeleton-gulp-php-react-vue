@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import routes from '../routes.json';
 import AppLayout from '../../layout/AppLayout';
-import { Dashboard } from '../../component/Dashboard';
+import Dashboard from '../../component/Dashboard';
 
 const DashboardPage = () => {
 	const { t } = useTranslation('page');
@@ -11,13 +11,13 @@ const DashboardPage = () => {
 	return (
 		<AppLayout
 			route={routes.dashboard}
-			app={'App'}
+			app={'Crm'}
 			withSidebar
 			widthHeader
 			withFooter
-			headerTitle={t('page:Dashboard.page.title')}
+			headerTitle={t('page:CrmDashboard.page.title')}
 		>
-			<Dashboard />
+			<Dashboard.Crm />
 		</AppLayout>
 	);
 };

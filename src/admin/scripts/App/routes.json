@@ -21,7 +21,7 @@
 		"auth": 0
 	},
 	"dashboard": {
-		"path": "/admin/",
+		"path": "/admin",
 		"pathDetail": null,
 		"name": "dashboard",
 		"label": "Dashboard.label",

@@ -5,76 +5,10 @@ import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
 import { getStyles } from '../../styles/theme';
-import routes from '../../App/routes.json';
-
-const links = [
-	{
-		key: 1,
-		label: routes.dashboard.label,
-		path: routes.dashboard.path,
-		active: true,
-	},
-	{
-		key: 2,
-		label: routes.settings.label,
-		path: routes.settings.path,
-		active: true,
-	},
-	{
-		key: 3,
-		label: routes.users.label,
-		path: routes.users.path,
-		active: true,
-	},
-	{
-		key: 4,
-		label: routes.posts.label,
-		path: routes.posts.path,
-		active: true,
-	},
-	{
-		key: 5,
-		label: routes.tags.label,
-		path: routes.tags.path,
-		active: true,
-	},
-	{
-		key: 6,
-		label: routes.categories.label,
-		path: routes.categories.path,
-		active: true,
-	},
-	{
-		key: 7,
-		label: routes.translations.label,
-		path: routes.translations.path,
-		active: true,
-	},
-	{
-		key: 8,
-		label: routes.pages.label,
-		path: routes.pages.path,
-		active: true,
-	},
-	{
-		key: 9,
-		label: routes.uploads.label,
-		path: routes.uploads.path,
-		active: true,
-	},
-	{
-		key: 10,
-		label: routes.menu.label,
-		path: routes.menu.path,
-		active: true,
-	},
-	{
-		key: 11,
-		label: routes.messages.label,
-		path: routes.messages.path,
-		active: true,
-	},
-];
+import AppRoutes from '../../App/routes.json';
+import MembersRoutes from '../../Members/routes.json';
+import CrmRoutes from '../../Crm/routes.json';
+import MarketRoutes from '../../Market/routes.json';
 
 const List = styled.ul`
 	width: 100%;
@@ -103,8 +37,8 @@ const Link = styled(NavLink)`
 	align-items: center;
 	justify-content: flex-start;
 	color: inherit;
-	font-size: 0.95rem;
-	font-weight: bold;
+	font-size: 0.9rem;
+	font-weight: 500;
 
 	&:hover {
 		color: inherit;
@@ -124,17 +58,38 @@ const LinkText = styled.span`
 	color: inherit;
 `;
 
+type NavItemProps = {
+	key: number;
+	label: string;
+	path: string;
+	active: boolean;
+};
+
 interface PrimaryNavigationProps {
 	sidebarToggle: Function;
+	links: NavItemProps[];
 }
 
 const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 	const { t } = useTranslation();
 	const location = useLocation();
-	const { sidebarToggle } = props;
+	const { sidebarToggle, links } = props;
 
-	const isLinkActive = (path) => {
-		if (path !== routes.dashboard.path) return location.pathname.includes(path);
+	const getActiveClass = (path) => {
+		let name;
+
+		if (
+			!(
+				path == AppRoutes.dashboard.path ||
+				path == MembersRoutes.dashboard.path ||
+				path == CrmRoutes.dashboard.path ||
+				path == MarketRoutes.dashboard.path
+			) &&
+			location.pathname.includes(path)
+		)
+			name = 'is-active';
+
+		return name;
 	};
 	const linkTrigger = () => {
 		isMobileOnly && sidebarToggle();
@@ -145,12 +100,10 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 			{links.map((item) => {
 				if (item.active)
 					return (
-						<Item key={item.key}>
+						<Item key={item.key} title={t(`page:${item.label}`)}>
 							<Link
 								to={item.path}
-								className={[isLinkActive(item.path) ? 'is-active' : ''].join(
-									' ',
-								)}
+								className={[getActiveClass(item.path)].join(' ')}
 								activeClassName={'is-active'}
 								onClick={linkTrigger}
 								exact

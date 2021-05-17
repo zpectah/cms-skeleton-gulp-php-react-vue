@@ -195,6 +195,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 						<Scrollable.Base>
 							<div className="content">
 								<Navigation.App sidebarToggle={toggleSidebar} />
+								<Navigation.Members sidebarToggle={toggleSidebar} />
+								<Navigation.Crm sidebarToggle={toggleSidebar} />
+								<Navigation.Market sidebarToggle={toggleSidebar} />
 							</div>
 						</Scrollable.Base>
 					</div>

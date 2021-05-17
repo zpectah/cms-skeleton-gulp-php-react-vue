@@ -1,9 +1,9 @@
 {
 	"dashboard": {
-		"path": "/admin/members/",
+		"path": "/admin/members",
 		"pathDetail": null,
 		"name": "dashboard",
-		"label": "Dashboard.label",
+		"label": "MembersDashboard.label",
 		"auth": 2
 	},
 	"members": {
