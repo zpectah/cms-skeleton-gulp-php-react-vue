@@ -16,7 +16,7 @@ import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
 import CFG from '../../../../config/global.json';
 import media from '../../styles/responsive';
 import { Scrollable } from '../../component/ui';
-import Nav from '../../component/Nav';
+import Menu from '../../component/Menu';
 import { appProps } from '../../types';
 import { useSettings } from '../../App/hooks';
 
@@ -207,10 +207,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 						<Scrollable.Base>
 							<div className="content">
 								<NavList>
-									<Nav.App sidebarToggle={toggleSidebar} />
-									<Nav.Members sidebarToggle={toggleSidebar} />
-									<Nav.Crm sidebarToggle={toggleSidebar} />
-									<Nav.Market sidebarToggle={toggleSidebar} />
+									<Menu.App sidebarToggle={toggleSidebar} />
+									<Menu.Members sidebarToggle={toggleSidebar} />
+									<Menu.Crm sidebarToggle={toggleSidebar} />
+									<Menu.Market sidebarToggle={toggleSidebar} />
 								</NavList>
 							</div>
 						</Scrollable.Base>

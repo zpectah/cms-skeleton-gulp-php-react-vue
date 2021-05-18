@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
 import { Typography } from '../../component/ui';
 
@@ -20,7 +20,7 @@ const Error404Page = () => {
 
 	return (
 		<AppLayout
-			route={routes['error-404']}
+			route={routes.app['error-404']}
 			app={'App'}
 			metaTitle={t('page:Error404.meta.title')}
 			isCentered

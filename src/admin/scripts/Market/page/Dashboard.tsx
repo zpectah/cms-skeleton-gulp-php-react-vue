@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
 import Dashboard from '../../component/Dashboard';
 
@@ -10,7 +10,7 @@ const DashboardPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.dashboard}
+			route={routes.market.dashboard}
 			app={'Market'}
 			withSidebar
 			widthHeader

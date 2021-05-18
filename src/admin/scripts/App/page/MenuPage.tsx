@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useMenu } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -30,7 +30,7 @@ const MenuPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.menu}
+			route={routes.app.menu}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -38,11 +38,14 @@ const MenuPage = () => {
 			metaTitle={t('page:Menu.meta.title')}
 			headerTitle={t('page:Menu.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.menu.pathDetail} />,
+				<Button.CreateNew
+					key={1}
+					routePathPrefix={routes.app.menu.pathDetail}
+				/>,
 			]}
 		>
 			<Table
-				route={routes.menu}
+				route={routes.app.menu}
 				model={'Menu'}
 				items={Menu}
 				loading={isMenuLoading}

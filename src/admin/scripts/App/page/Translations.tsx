@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useTranslations } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const TranslationsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.translations}
+			route={routes.app.translations}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -46,12 +46,12 @@ const TranslationsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.translations.pathDetail}
+					routePathPrefix={routes.app.translations.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.translations}
+				route={routes.app.translations}
 				model={'Translations'}
 				items={Translations}
 				loading={isTranslationsLoading}

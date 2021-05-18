@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useUsers } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const UsersPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.users}
+			route={routes.app.users}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -44,11 +44,14 @@ const UsersPage = () => {
 			metaTitle={t('page:Users.meta.title')}
 			headerTitle={t('page:Users.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.users.pathDetail} />,
+				<Button.CreateNew
+					key={1}
+					routePathPrefix={routes.app.users.pathDetail}
+				/>,
 			]}
 		>
 			<Table
-				route={routes.users}
+				route={routes.app.users}
 				model={'Users'}
 				items={Users}
 				loading={isUsersLoading}

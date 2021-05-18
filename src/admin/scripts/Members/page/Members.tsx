@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useMembers } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const MembersPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.members}
+			route={routes.members.members}
 			app={'Members'}
 			withSidebar
 			widthHeader
@@ -46,12 +46,12 @@ const MembersPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.members.pathDetail}
+					routePathPrefix={routes.members.members.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.members}
+				route={routes.members.members}
 				model={'Members'}
 				items={Members}
 				loading={isMembersLoading}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import routes from './routes.json';
+import routes from '../config.routes';
 
 import AuthRoute from '../utils/AuthRoute';
 import DashboardPage from './page/Dashboard';
@@ -12,16 +12,19 @@ const Members: React.FC<{}> = () => {
 		<>
 			<Switch>
 				<AuthRoute
-					path={[routes.members.path, routes.members.pathDetail + '/:id']}
+					path={[
+						routes.members.members.path,
+						routes.members.members.pathDetail + '/:id',
+					]}
 					component={MembersPage}
-					auth={routes.members.auth}
+					auth={routes.members.members.auth}
 					exact
 				/>
 
 				<AuthRoute
-					path={routes.dashboard.path}
+					path={routes.members.dashboard.path}
 					component={DashboardPage}
-					auth={routes.dashboard.auth}
+					auth={routes.members.dashboard.auth}
 					exact
 				/>
 			</Switch>

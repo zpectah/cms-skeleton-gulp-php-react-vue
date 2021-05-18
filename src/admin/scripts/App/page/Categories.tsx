@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useCategories } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const CategoriesPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.categories}
+			route={routes.app.categories}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -46,12 +46,12 @@ const CategoriesPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.categories.pathDetail}
+					routePathPrefix={routes.app.categories.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.categories}
+				route={routes.app.categories}
 				model={'Categories'}
 				items={Categories}
 				loading={isCategoriesLoading}

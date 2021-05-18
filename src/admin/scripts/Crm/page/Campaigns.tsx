@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useCampaigns } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const CampaignsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.campaigns}
+			route={routes.crm.campaigns}
 			app={'Crm'}
 			withSidebar
 			widthHeader
@@ -46,12 +46,12 @@ const CampaignsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.campaigns.pathDetail}
+					routePathPrefix={routes.crm.campaigns.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.campaigns}
+				route={routes.crm.campaigns}
 				model={'Campaigns'}
 				items={Campaigns}
 				loading={isCampaignsLoading}

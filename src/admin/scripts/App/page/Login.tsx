@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
 import LoginForm from '../../component/LoginForm';
 
@@ -10,7 +10,7 @@ const LoginPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.login}
+			route={routes.app.login}
 			app={'App'}
 			metaTitle={t('page:Login.meta.title')}
 			footerWithBorder={false}

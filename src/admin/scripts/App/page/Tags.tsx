@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useTags } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -30,7 +30,7 @@ const TagsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.tags}
+			route={routes.app.tags}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -38,11 +38,14 @@ const TagsPage = () => {
 			metaTitle={t('page:Tags.meta.title')}
 			headerTitle={t('page:Tags.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.tags.pathDetail} />,
+				<Button.CreateNew
+					key={1}
+					routePathPrefix={routes.app.tags.pathDetail}
+				/>,
 			]}
 		>
 			<Table
-				route={routes.tags}
+				route={routes.app.tags}
 				model={'Tags'}
 				items={Tags}
 				loading={isTagsLoading}

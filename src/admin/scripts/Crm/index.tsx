@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import routes from './routes.json';
+import routes from '../config.routes';
 
 import AuthRoute from '../utils/AuthRoute';
 import DashboardPage from './page/Dashboard';
@@ -12,16 +12,19 @@ const Crm: React.FC<{}> = () => {
 		<>
 			<Switch>
 				<AuthRoute
-					path={[routes.campaigns.path, routes.campaigns.pathDetail + '/:id']}
+					path={[
+						routes.crm.campaigns.path,
+						routes.crm.campaigns.pathDetail + '/:id',
+					]}
 					component={CampaignsPage}
-					auth={routes.campaigns.auth}
+					auth={routes.crm.campaigns.auth}
 					exact
 				/>
 
 				<AuthRoute
-					path={routes.dashboard.path}
+					path={routes.crm.dashboard.path}
 					component={DashboardPage}
-					auth={routes.dashboard.auth}
+					auth={routes.crm.dashboard.auth}
 					exact
 				/>
 			</Switch>

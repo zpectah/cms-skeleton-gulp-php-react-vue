@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useMessages } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -32,7 +32,7 @@ const MessagesPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.messages}
+			route={routes.app.messages}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -42,12 +42,12 @@ const MessagesPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.messages.pathDetail}
+					routePathPrefix={routes.app.messages.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.messages}
+				route={routes.app.messages}
 				model={'Messages'}
 				items={Messages}
 				loading={isMessagesLoading}

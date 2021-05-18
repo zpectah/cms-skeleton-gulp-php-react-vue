@@ -13,7 +13,7 @@ import {
 import media from '../../styles/responsive';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
-import routes from '../../App/routes.json';
+import routes from '../../config.routes';
 import LocaleDropdown from '../Profile/LocaleDropdown';
 import { useProfile } from '../../App/hooks';
 import CFG from '../../../../config/global.json';
@@ -247,7 +247,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 									</Button.Base>
 								</Form.Item>
 								<Form.Item style={{ textAlign: 'center', marginBottom: 0 }}>
-									<Link to={routes['login'].path}>
+									<Link to={routes.app['login'].path}>
 										{t('component:LostPasswordForm.btn_logIn')}
 									</Link>
 								</Form.Item>

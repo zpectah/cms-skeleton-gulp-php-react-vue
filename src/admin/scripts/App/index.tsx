@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
 
-import routes from './routes.json';
+import { GlobalStyles } from '../styles/global';
 import ThemeService from '../service/ThemeService';
 import themes from '../styles/theme';
-import { GlobalStyles } from '../styles/global';
+import routes from '../config.routes';
 
 import AuthRoute from '../utils/AuthRoute';
 import Error404Page from './page/Error404';
@@ -53,112 +53,121 @@ const App = () => {
 					<AuthRoute
 						path={['/admin/members']}
 						component={Members}
-						auth={routes.dashboard.auth}
+						auth={routes.app.dashboard.auth}
 					/>
 
 					<AuthRoute
 						path={['/admin/crm']}
 						component={Crm}
-						auth={routes.dashboard.auth}
+						auth={routes.app.dashboard.auth}
 					/>
 
 					<AuthRoute
 						path={['/admin/market']}
 						component={Market}
-						auth={routes.dashboard.auth}
+						auth={routes.app.dashboard.auth}
 					/>
 
 					<Route
 						path={[
-							routes['lost-password'].path,
-							routes['lost-password'].path + '/token/:token',
+							routes.app['lost-password'].path,
+							routes.app['lost-password'].path + '/token/:token',
 						]}
 						component={LostPasswordPage}
 						exact
 					/>
 
-					<Route path={routes.login.path} component={LoginPage} />
+					<Route path={routes.app.login.path} component={LoginPage} />
 
 					<AuthRoute
-						path={[routes.settings.path, routes.settings.path + '/:panel']}
+						path={[
+							routes.app.settings.path,
+							routes.app.settings.path + '/:panel',
+						]}
 						component={SettingsPage}
-						auth={routes.settings.auth}
+						auth={routes.app.settings.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.posts.path, routes.posts.pathDetail + '/:id']}
+						path={[routes.app.posts.path, routes.app.posts.pathDetail + '/:id']}
 						component={PostsPage}
-						auth={routes.posts.auth}
+						auth={routes.app.posts.auth}
 						exact
 					/>
 
 					<AuthRoute
 						path={[
-							routes.categories.path,
-							routes.categories.pathDetail + '/:id',
+							routes.app.categories.path,
+							routes.app.categories.pathDetail + '/:id',
 						]}
 						component={CategoriesPage}
-						auth={routes.categories.auth}
+						auth={routes.app.categories.auth}
 						exact
 					/>
 
 					<AuthRoute
 						path={[
-							routes.translations.path,
-							routes.translations.pathDetail + '/:id',
+							routes.app.translations.path,
+							routes.app.translations.pathDetail + '/:id',
 						]}
 						component={TranslationsPage}
-						auth={routes.translations.auth}
+						auth={routes.app.translations.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.users.path, routes.users.pathDetail + '/:id']}
+						path={[routes.app.users.path, routes.app.users.pathDetail + '/:id']}
 						component={UsersPage}
-						auth={routes.users.auth}
+						auth={routes.app.users.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.tags.path, routes.tags.pathDetail + '/:id']}
+						path={[routes.app.tags.path, routes.app.tags.pathDetail + '/:id']}
 						component={TagsPage}
-						auth={routes.tags.auth}
+						auth={routes.app.tags.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.uploads.path, routes.uploads.pathDetail + '/:id']}
+						path={[
+							routes.app.uploads.path,
+							routes.app.uploads.pathDetail + '/:id',
+						]}
 						component={UploadsPage}
-						auth={routes.uploads.auth}
+						auth={routes.app.uploads.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.pages.path, routes.pages.pathDetail + '/:id']}
+						path={[routes.app.pages.path, routes.app.pages.pathDetail + '/:id']}
 						component={PagesPage}
-						auth={routes.pages.auth}
+						auth={routes.app.pages.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.menu.path, routes.menu.pathDetail + '/:id']}
+						path={[routes.app.menu.path, routes.app.menu.pathDetail + '/:id']}
 						component={MenuPage}
-						auth={routes.menu.auth}
+						auth={routes.app.menu.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.messages.path, routes.messages.pathDetail + '/:id']}
+						path={[
+							routes.app.messages.path,
+							routes.app.messages.pathDetail + '/:id',
+						]}
 						component={MessagesPage}
-						auth={routes.messages.auth}
+						auth={routes.app.messages.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={routes.dashboard.path}
+						path={routes.app.dashboard.path}
 						component={DashboardPage}
-						auth={routes.dashboard.auth}
+						auth={routes.app.dashboard.auth}
 						exact
 					/>
 

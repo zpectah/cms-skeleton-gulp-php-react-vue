@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import { useUploads } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +36,7 @@ const UploadsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.uploads}
+			route={routes.app.uploads}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -46,12 +46,12 @@ const UploadsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.uploads.pathDetail}
+					routePathPrefix={routes.app.uploads.pathDetail}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.uploads}
+				route={routes.app.uploads}
 				model={'Uploads'}
 				items={Uploads}
 				loading={isUploadsLoading}

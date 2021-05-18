@@ -4,10 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
-import AppRoutes from '../../App/routes.json';
-import MembersRoutes from '../../Members/routes.json';
-import CrmRoutes from '../../Crm/routes.json';
-import MarketRoutes from '../../Market/routes.json';
+import routes from '../../config.routes';
 
 const Item = styled.li`
 	width: 100%;
@@ -67,10 +64,10 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 
 		if (
 			!(
-				path == AppRoutes.dashboard.path ||
-				path == MembersRoutes.dashboard.path ||
-				path == CrmRoutes.dashboard.path ||
-				path == MarketRoutes.dashboard.path
+				path == routes.app.dashboard.path ||
+				path == routes.members.dashboard.path ||
+				path == routes.crm.dashboard.path ||
+				path == routes.market.dashboard.path
 			) &&
 			location.pathname.includes(path)
 		)

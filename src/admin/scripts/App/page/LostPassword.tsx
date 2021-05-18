@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import routes from '../routes.json';
+import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
 import LostPasswordForm from '../../component/LostPasswordForm';
 
@@ -10,7 +10,7 @@ const LostPasswordPage = () => {
 
 	return (
 		<AppLayout
-			route={routes['lost-password']}
+			route={routes.app['lost-password']}
 			app={'App'}
 			metaTitle={t('page:LostPassword.meta.title')}
 			footerWithBorder={false}
