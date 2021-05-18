@@ -7,8 +7,8 @@
 		"auth": 2
 	},
 	"members": {
-		"path": "/admin/members/members",
-		"pathDetail": "/admin/members/members/detail",
+		"path": "/admin/members/items",
+		"pathDetail": "/admin/members/items/detail",
 		"name": "members",
 		"label": "Members.label",
 		"auth": 2

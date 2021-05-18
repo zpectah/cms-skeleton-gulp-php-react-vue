@@ -159,12 +159,12 @@
 
 	"CrmDashboard": {
 		"meta": {
-			"title": "Crm dashboard"
+			"title": "Crm"
 		},
 		"page": {
-			"title": "Crm dashboard page"
+			"title": "Crm page"
 		},
-		"label": "Crm dashboard"
+		"label": "Crm"
 	},
 
 	"Campaigns": {
@@ -179,12 +179,12 @@
 
 	"MarketDashboard": {
 		"meta": {
-			"title": "Market dashboard"
+			"title": "Market"
 		},
 		"page": {
-			"title": "Market dashboard page"
+			"title": "Market page"
 		},
-		"label": "Market dashboard"
+		"label": "Market"
 	},
 
 	"Deliveries": {

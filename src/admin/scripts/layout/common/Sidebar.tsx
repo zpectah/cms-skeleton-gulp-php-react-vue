@@ -16,7 +16,7 @@ import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
 import CFG from '../../../../config/global.json';
 import media from '../../styles/responsive';
 import { Scrollable } from '../../component/ui';
-import Navigation from '../../component/Navigation';
+import Nav from '../../component/Nav';
 import { appProps } from '../../types';
 import { useSettings } from '../../App/hooks';
 
@@ -114,6 +114,21 @@ const Trigger = styled.button`
 		color: ${(props) => props.theme.sidebar.triggerHover};
 	}
 `;
+const NavList = styled.ul`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	& > li {
+		border-bottom: 1px solid ${(props) => props.theme.sidebar.navItemBorder};
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+`;
 
 interface SidebarProps {
 	app: appProps['app'];
@@ -191,10 +206,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 					<div className="secondary">
 						<Scrollable.Base>
 							<div className="content">
-								<Navigation.App sidebarToggle={toggleSidebar} />
-								<Navigation.Members sidebarToggle={toggleSidebar} />
-								<Navigation.Crm sidebarToggle={toggleSidebar} />
-								<Navigation.Market sidebarToggle={toggleSidebar} />
+								<NavList>
+									<Nav.App sidebarToggle={toggleSidebar} />
+									<Nav.Members sidebarToggle={toggleSidebar} />
+									<Nav.Crm sidebarToggle={toggleSidebar} />
+									<Nav.Market sidebarToggle={toggleSidebar} />
+								</NavList>
 							</div>
 						</Scrollable.Base>
 					</div>

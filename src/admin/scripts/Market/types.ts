@@ -31,10 +31,10 @@ export interface StoresItemProps extends commonModelProps {
 	store_city: string;
 	store_country: string;
 	store_zip: string;
-	store_location: any; // TODO - will be object
+	store_location: {}; // TODO - will be object
 	store_email: string[];
 	store_phone: string[];
-	store_options: any; // TODO - will be object
+	store_options: {}; // TODO - will be object
 	img_main?: string;
 	img_thumbnail?: string;
 	lang?: {
@@ -43,10 +43,14 @@ export interface StoresItemProps extends commonModelProps {
 	};
 }
 
+export interface PaymentsItemProps extends commonModelProps {
+	// with lang
+}
+
+export interface DeliveriesItemProps extends commonModelProps {
+	// with lang
+}
+
 export interface ProducersItemProps extends commonModelProps {}
 
 export interface DistributorsItemProps extends commonModelProps {}
-
-export interface PaymentsItemProps extends commonModelProps {}
-
-export interface DeliveriesItemProps extends commonModelProps {}

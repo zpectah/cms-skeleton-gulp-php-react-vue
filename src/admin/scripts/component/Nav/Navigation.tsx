@@ -9,23 +9,11 @@ import MembersRoutes from '../../Members/routes.json';
 import CrmRoutes from '../../Crm/routes.json';
 import MarketRoutes from '../../Market/routes.json';
 
-const List = styled.ul`
-	width: 100%;
-	height: auto;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-`;
 const Item = styled.li`
 	width: 100%;
 	height: auto;
 	margin: 0;
 	padding: 0;
-	border-bottom: 1px solid ${(props) => props.theme.sidebar.navItemBorder};
-
-	&:last-child {
-		border-bottom: 0;
-	}
 `;
 const Link = styled(NavLink)`
 	width: 100%;
@@ -95,7 +83,7 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 	};
 
 	return (
-		<List>
+		<>
 			{links.map((item) => {
 				if (item.active)
 					return (
@@ -112,7 +100,7 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 						</Item>
 					);
 			})}
-		</List>
+		</>
 	);
 };
 

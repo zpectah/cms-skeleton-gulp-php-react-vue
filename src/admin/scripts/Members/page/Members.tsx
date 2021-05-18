@@ -37,7 +37,7 @@ const MembersPage = () => {
 	return (
 		<AppLayout
 			route={routes.members}
-			app={'App'}
+			app={'Members'}
 			withSidebar
 			widthHeader
 			withFooter
