@@ -51,14 +51,14 @@ const MessagesPage = () => {
 				model={'Messages'}
 				items={Messages}
 				loading={isMessagesLoading}
-				columnsLayout={
-					{
-						// sender: true,
-					}
-				}
-				orderByColumns={{}}
+				columnsLayout={{
+					sender: true,
+				}}
+				orderByColumns={{
+					sender: true,
+				}}
 				detailId={params.id}
-				searchAttrs={['sender']}
+				searchAttrs={['sender', 'recipients', 'subject', 'content']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable

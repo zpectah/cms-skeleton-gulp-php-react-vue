@@ -24,7 +24,10 @@ import {
 	IconMaterial_VerifiedUser,
 } from '../../../../libs/svg/material-icons';
 import CFG from '../../../../config/global.json';
-import { MESSAGE_SUCCESS_DURATION } from '../../constants';
+import {
+	MESSAGE_SUCCESS_DURATION,
+	TABLE_ITEMS_PER_PAGE,
+} from '../../constants';
 import { Button, Viewer } from '../ui';
 import LanguageToggle from '../LanguageToggle';
 import DetailItem from '../Detail';
@@ -88,11 +91,15 @@ interface ListItemsProps {
 		tags?: boolean;
 		category?: boolean;
 		active?: boolean;
+		sender?: boolean;
+		file_name?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
 		name?: boolean;
 		email?: boolean;
+		sender?: boolean;
+		file_name?: boolean;
 		// TODO: new columns
 	};
 	selectable?: boolean;
@@ -103,6 +110,7 @@ interface ListItemsProps {
 	onToggle: (data: any) => void;
 	onDelete: (data: any) => void;
 	withLanguageToggle?: boolean;
+	itemsPerPage?: number;
 }
 
 const Table: React.FC<ListItemsProps> = (props) => {
@@ -127,6 +135,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		detailId,
 		loading,
 		withLanguageToggle,
+		itemsPerPage = TABLE_ITEMS_PER_PAGE,
 	} = props;
 	const { Profile } = useProfile();
 	const { control, handleSubmit } = useForm({
@@ -185,6 +194,34 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: t('component:Table.column_label.name'),
 				dataIndex: 'name',
 				key: 'name',
+				render: (text, record) => (
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{text}
+					</RowLink>
+				),
+			});
+		if (columnsLayout.sender)
+			d.push({
+				title: 'Sender',
+				dataIndex: 'sender',
+				key: 'sender',
+				render: (text, record) => (
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.status !== 1}
+					>
+						{text}
+					</RowLink>
+				),
+			});
+		if (columnsLayout.file_name)
+			d.push({
+				title: 'Filename',
+				dataIndex: 'file_name',
+				key: 'file_name',
 				render: (text, record) => (
 					<RowLink
 						onClick={() => editOpen(record)}
@@ -502,6 +539,9 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataSource={listItems}
 				rowSelection={selectable && rowSelection}
 				loading={loading}
+				pagination={{
+					defaultPageSize: itemsPerPage,
+				}}
 				sticky
 			/>
 			<DetailItem.Dialog

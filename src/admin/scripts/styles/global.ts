@@ -54,9 +54,25 @@ export const GlobalStyles = createGlobalStyle`
 				background: ${(props) => props.theme.color.primary};
 				border-color: ${(props) => props.theme.color.primary};
 
+				&:hover,
+				&:active,
+				&:focus{
+					background: ${(props) => props.theme.color.primary}; // lighter
+					border-color: ${(props) => props.theme.color.primary}; // lighter
+				}
+
 				&.ant-btn-background-ghost{
 					color: ${(props) => props.theme.color.primary};
 					border-color: ${(props) => props.theme.color.primary};
+
+					&:hover,
+					&:active,
+					&:focus{
+						background: transparent;
+						color: ${(props) => props.theme.color.primary}; // darker
+						border-color: ${(props) => props.theme.color.primary}; // darker
+					}
+
 				}
 
 			}

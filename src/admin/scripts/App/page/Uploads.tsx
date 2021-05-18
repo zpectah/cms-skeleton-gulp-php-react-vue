@@ -56,9 +56,8 @@ const UploadsPage = () => {
 				items={Uploads}
 				loading={isUploadsLoading}
 				columnsLayout={{
-					// file_name: true,
-					// title_lang: true,
-					name: true,
+					// img_thumbnail: true,
+					file_name: true,
 					category: true,
 					active: true,
 				}}
@@ -66,7 +65,7 @@ const UploadsPage = () => {
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.[lang].title']}
+				searchAttrs={['name', 'file_name', 'lang.[lang].title']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable

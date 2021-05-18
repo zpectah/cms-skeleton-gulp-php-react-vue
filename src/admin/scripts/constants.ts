@@ -22,3 +22,4 @@ export const SUBMIT_TIMEOUT = 750;
 export const RELOAD_HOOK_TIMEOUT = 350;
 export const MESSAGE_SUCCESS_DURATION = 2.5;
 export const MESSAGE_ERROR_DURATION = 5;
+export const TABLE_ITEMS_PER_PAGE = 30;
