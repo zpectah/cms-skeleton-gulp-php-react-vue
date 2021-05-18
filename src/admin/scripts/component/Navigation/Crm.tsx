@@ -8,6 +8,12 @@ const links = [
 		key: 1,
 		label: routes.dashboard.label,
 		path: routes.dashboard.path,
+		active: false,
+	},
+	{
+		key: 2,
+		label: routes.campaigns.label,
+		path: routes.campaigns.path,
 		active: true,
 	},
 ];

@@ -1,6 +1,6 @@
 import { commonModelProps } from '../types';
 
-export interface Campaigns extends commonModelProps {
+export interface CampaignsItemProps extends commonModelProps {
 	name: string;
 	type: 'default' | 'market';
 	recipients: string[];

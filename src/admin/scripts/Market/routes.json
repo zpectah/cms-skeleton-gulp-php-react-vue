@@ -5,5 +5,12 @@
 		"name": "dashboard",
 		"label": "MarketDashboard.label",
 		"auth": 2
+	},
+	"products": {
+		"path": "/admin/market/products",
+		"pathDetail": "/admin/market/products/detail",
+		"name": "products",
+		"label": "Products.label",
+		"auth": 2
 	}
 }

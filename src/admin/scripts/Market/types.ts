@@ -1,6 +1,6 @@
 import { commonModelProps } from '../types';
 
-export interface Products extends commonModelProps {
+export interface ProductsItemProps extends commonModelProps {
 	name: string;
 	type: 'default';
 	category?: string[];
@@ -9,6 +9,7 @@ export interface Products extends commonModelProps {
 	item_discount: number;
 	item_amount: number;
 	items_related: string[];
+	item_rating: number;
 	media?: string[];
 	img_main?: string;
 	img_thumbnail?: string;
@@ -22,7 +23,7 @@ export interface Products extends commonModelProps {
 	};
 }
 
-export interface Stores extends commonModelProps {
+export interface StoresItemProps extends commonModelProps {
 	name: string;
 	type: 'default';
 	title: string;
@@ -42,10 +43,10 @@ export interface Stores extends commonModelProps {
 	};
 }
 
-export interface Producers extends commonModelProps {}
+export interface ProducersItemProps extends commonModelProps {}
 
-export interface Distributors extends commonModelProps {}
+export interface DistributorsItemProps extends commonModelProps {}
 
-export interface Payments extends commonModelProps {}
+export interface PaymentsItemProps extends commonModelProps {}
 
-export interface Deliveries extends commonModelProps {}
+export interface DeliveriesItemProps extends commonModelProps {}

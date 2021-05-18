@@ -28,7 +28,14 @@
 		"Pages": "Pages",
 		"Uploads": "Uploads",
 		"Messages": "Messages",
-		"Members": "Members"
+		"Members": "Members",
+		"Campaigns": "Campaigns",
+		"Deliveries": "Deliveries",
+		"Distributors": "Distributors",
+		"Payments": "Payments",
+		"Producers": "Producers",
+		"Products": "Products",
+		"Stores": "Stores"
 	},
 	"model_item": {
 		"Users": "User",
@@ -41,6 +48,33 @@
 		"Pages": "Page",
 		"Uploads": "Upload",
 		"Messages": "Message",
-		"Members": "Member"
+		"Members": "Member",
+		"Campaigns": "Campaign",
+		"Deliveries": "Delivery",
+		"Distributors": "Distributor",
+		"Payments": "Payment",
+		"Producers": "Producer",
+		"Products": "Product",
+		"Stores": "Store"
+	},
+	"model_newItem": {
+		"Posts": "New post",
+		"Users": "New user",
+		"Tags": "New tag",
+		"Translations": "New translation",
+		"Categories": "New category",
+		"Menu": "New menu",
+		"MenuItems": "New Menu item",
+		"Pages": "New pages",
+		"Uploads": "New upload",
+		"Messages": "New message",
+		"Members": "New members",
+		"Campaigns": "New campaign",
+		"Deliveries": "New delivery",
+		"Distributors": "New distributor",
+		"Payments": "New payments",
+		"Producers": "New producer",
+		"Products": "New product",
+		"Stores": "New store"
 	}
 }

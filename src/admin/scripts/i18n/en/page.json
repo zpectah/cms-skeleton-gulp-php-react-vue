@@ -137,16 +137,6 @@
 		"label": "Messages"
 	},
 
-	"Members": {
-		"meta": {
-			"title": "Members"
-		},
-		"page": {
-			"title": "Members page"
-		},
-		"label": "Members"
-	},
-
 	"MembersDashboard": {
 		"meta": {
 			"title": "Members dashboard"
@@ -155,6 +145,16 @@
 			"title": "Members dashboard page"
 		},
 		"label": "Members dashboard"
+	},
+
+	"Members": {
+		"meta": {
+			"title": "Members"
+		},
+		"page": {
+			"title": "Members page"
+		},
+		"label": "Members"
 	},
 
 	"CrmDashboard": {
@@ -167,6 +167,16 @@
 		"label": "Crm dashboard"
 	},
 
+	"Campaigns": {
+		"meta": {
+			"title": "Campaigns"
+		},
+		"page": {
+			"title": "Campaigns page"
+		},
+		"label": "Campaigns"
+	},
+
 	"MarketDashboard": {
 		"meta": {
 			"title": "Market dashboard"
@@ -175,5 +185,65 @@
 			"title": "Market dashboard page"
 		},
 		"label": "Market dashboard"
+	},
+
+	"Deliveries": {
+		"meta": {
+			"title": "Deliveries"
+		},
+		"page": {
+			"title": "Deliveries page"
+		},
+		"label": "Deliveries"
+	},
+
+	"Distributors": {
+		"meta": {
+			"title": "Distributors"
+		},
+		"page": {
+			"title": "Distributors page"
+		},
+		"label": "Distributors"
+	},
+
+	"Payments": {
+		"meta": {
+			"title": "Payments"
+		},
+		"page": {
+			"title": "Payments page"
+		},
+		"label": "Payments"
+	},
+
+	"Producers": {
+		"meta": {
+			"title": "Producers"
+		},
+		"page": {
+			"title": "Producers page"
+		},
+		"label": "Producers"
+	},
+
+	"Products": {
+		"meta": {
+			"title": "Products"
+		},
+		"page": {
+			"title": "Products page"
+		},
+		"label": "Products"
+	},
+
+	"Stores": {
+		"meta": {
+			"title": "Stores"
+		},
+		"page": {
+			"title": "Stores page"
+		},
+		"label": "Stores"
 	}
 }

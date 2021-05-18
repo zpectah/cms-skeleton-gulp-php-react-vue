@@ -12,6 +12,8 @@ import UploadsDetailForm from './App/UploadsForm';
 import MenuDetailForm from './App/MenuForm';
 import MessagesDetailForm from './App/MessagesForm';
 import MembersDetailForm from './Members/MembersForm';
+import CampaignsDetailForm from './Crm/CampaignsForm';
+import ProductsDetailForm from './Market/ProductsForm';
 
 interface DetailItemDialogProps {
 	model:
@@ -38,7 +40,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		afterClose,
 	} = props;
 
-	const Component = {
+	const component = {
 		Tags: TagsDetailForm,
 		Users: UsersDetailForm,
 		Posts: PostsDetailForm,
@@ -49,9 +51,11 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		Menu: MenuDetailForm,
 		Messages: MessagesDetailForm,
 		Members: MembersDetailForm,
+		Campaigns: CampaignsDetailForm,
+		Products: ProductsDetailForm,
 	};
 
-	const ComponentName = Component[model];
+	const ComponentName = component[model];
 
 	return (
 		<Modal.Base

@@ -5,5 +5,12 @@
 		"name": "dashboard",
 		"label": "CrmDashboard.label",
 		"auth": 2
+	},
+	"campaigns": {
+		"path": "/admin/crm/campaigns",
+		"pathDetail": "/admin/crm/campaigns/detail",
+		"name": "campaigns",
+		"label": "Campaigns.label",
+		"auth": 2
 	}
 }

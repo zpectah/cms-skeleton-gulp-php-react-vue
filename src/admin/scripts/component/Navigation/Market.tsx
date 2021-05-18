@@ -10,6 +10,12 @@ const links = [
 		path: routes.dashboard.path,
 		active: true,
 	},
+	{
+		key: 2,
+		label: routes.products.label,
+		path: routes.products.path,
+		active: true,
+	},
 ];
 
 interface NavigationMarketProps {
