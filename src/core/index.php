@@ -51,11 +51,17 @@ require PATH_PFX . 'core/model/Members/Members.php';
 /*
  * Model: Crm
  */
+require PATH_PFX . 'core/model/Crm/Campaigns.php';
 
 /*
  * Model: Market
  */
-
+require PATH_PFX . 'core/model/Market/Products.php';
+require PATH_PFX . 'core/model/Market/Stores.php';
+require PATH_PFX . 'core/model/Market/Producers.php';
+require PATH_PFX . 'core/model/Market/Payments.php';
+require PATH_PFX . 'core/model/Market/Distributors.php';
+require PATH_PFX . 'core/model/Market/Deliveries.php';
 
 /*
  * Api

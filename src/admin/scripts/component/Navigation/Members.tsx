@@ -8,7 +8,7 @@ const links = [
 		key: 1,
 		label: routes.dashboard.label,
 		path: routes.dashboard.path,
-		active: true,
+		active: false,
 	},
 	{
 		key: 2,
