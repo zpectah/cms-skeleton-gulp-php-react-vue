@@ -5,6 +5,13 @@ namespace core\service;
 
 
 use core\model\Categories;
+use core\model\Crm\Campaigns;
+use core\model\Market\Deliveries;
+use core\model\Market\Distributors;
+use core\model\Market\Payments;
+use core\model\Market\Producers;
+use core\model\Market\Products;
+use core\model\Market\Stores;
 use core\model\Members\Members;
 use core\model\Menu;
 use core\model\MenuItems;
@@ -49,8 +56,15 @@ class DataService {
 		$Members = new Members;
 
 		// module: Crm
+		$Campaigns = new Campaigns;
 
 		// module: Market
+		$Deliveries = new Deliveries;
+		$Distributors = new Distributors;
+		$Payments = new Payments;
+		$Producers = new Producers;
+		$Products = new Products;
+		$Stores = new Stores;
 
 
 		$languages = $Settings -> get_languages($conn);
@@ -113,6 +127,34 @@ class DataService {
 				$response = $Members -> get($conn, $data);
 				break;
 
+			case 'Campaigns':
+				$response = $Campaigns -> get($conn, $data);
+				break;
+
+			case 'Deliveries':
+				$response = $Deliveries -> get($conn, $data);
+				break;
+
+			case 'Distributors':
+				$response = $Distributors -> get($conn, $data);
+				break;
+
+			case 'Payments':
+				$response = $Payments -> get($conn, $data);
+				break;
+
+			case 'Producers':
+				$response = $Producers -> get($conn, $data);
+				break;
+
+			case 'Products':
+				$response = $Products -> get($conn, $data);
+				break;
+
+			case 'Stores':
+				$response = $Stores -> get($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -142,8 +184,15 @@ class DataService {
 		$Members = new Members;
 
 		// module: Crm
+		$Campaigns = new Campaigns;
 
 		// module: Market
+		$Deliveries = new Deliveries;
+		$Distributors = new Distributors;
+		$Payments = new Payments;
+		$Producers = new Producers;
+		$Products = new Products;
+		$Stores = new Stores;
 
 
 		$languages = $Settings -> get_languages($conn);
@@ -198,6 +247,34 @@ class DataService {
 				$response = $Members -> create($conn, $data);
 				break;
 
+			case 'Campaigns':
+				$response = $Campaigns -> create($conn, $data);
+				break;
+
+			case 'Deliveries':
+				$response = $Deliveries -> create($conn, $data);
+				break;
+
+			case 'Distributors':
+				$response = $Distributors -> create($conn, $data);
+				break;
+
+			case 'Payments':
+				$response = $Payments -> create($conn, $data);
+				break;
+
+			case 'Producers':
+				$response = $Producers -> create($conn, $data);
+				break;
+
+			case 'Products':
+				$response = $Products -> create($conn, $data);
+				break;
+
+			case 'Stores':
+				$response = $Stores -> create($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -228,8 +305,15 @@ class DataService {
 		$Members = new Members;
 
 		// module: Crm
+		$Campaigns = new Campaigns;
 
 		// module: Market
+		$Deliveries = new Deliveries;
+		$Distributors = new Distributors;
+		$Payments = new Payments;
+		$Producers = new Producers;
+		$Products = new Products;
+		$Stores = new Stores;
 
 
 		$languages = $Settings -> get_languages($conn);
@@ -288,6 +372,34 @@ class DataService {
 				$response = $Members -> update($conn, $data);
 				break;
 
+			case 'Campaigns':
+				$response = $Campaigns -> update($conn, $data);
+				break;
+
+			case 'Deliveries':
+				$response = $Deliveries -> update($conn, $data);
+				break;
+
+			case 'Distributors':
+				$response = $Distributors -> update($conn, $data);
+				break;
+
+			case 'Payments':
+				$response = $Payments -> update($conn, $data);
+				break;
+
+			case 'Producers':
+				$response = $Producers -> update($conn, $data);
+				break;
+
+			case 'Products':
+				$response = $Products -> update($conn, $data);
+				break;
+
+			case 'Stores':
+				$response = $Stores -> update($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -314,8 +426,15 @@ class DataService {
 		$Members = new Members;
 
 		// module: Crm
+		$Campaigns = new Campaigns;
 
 		// module: Market
+		$Deliveries = new Deliveries;
+		$Distributors = new Distributors;
+		$Payments = new Payments;
+		$Producers = new Producers;
+		$Products = new Products;
+		$Stores = new Stores;
 
 
 		switch ($model) {
@@ -360,6 +479,34 @@ class DataService {
 				$response = $Members -> toggle($conn, $data);
 				break;
 
+			case 'Campaigns':
+				$response = $Campaigns -> toggle($conn, $data);
+				break;
+
+			case 'Deliveries':
+				$response = $Deliveries -> toggle($conn, $data);
+				break;
+
+			case 'Distributors':
+				$response = $Distributors -> toggle($conn, $data);
+				break;
+
+			case 'Payments':
+				$response = $Payments -> toggle($conn, $data);
+				break;
+
+			case 'Producers':
+				$response = $Producers -> toggle($conn, $data);
+				break;
+
+			case 'Products':
+				$response = $Products -> toggle($conn, $data);
+				break;
+
+			case 'Stores':
+				$response = $Stores -> toggle($conn, $data);
+				break;
+
 		}
 
 		$conn -> close();
@@ -388,8 +535,15 @@ class DataService {
 		$Members = new Members;
 
 		// module: Crm
+		$Campaigns = new Campaigns;
 
 		// module: Market
+		$Deliveries = new Deliveries;
+		$Distributors = new Distributors;
+		$Payments = new Payments;
+		$Producers = new Producers;
+		$Products = new Products;
+		$Stores = new Stores;
 
 
 		switch ($model) {
@@ -440,6 +594,34 @@ class DataService {
 
 			case 'Members':
 				$response = $Members -> delete($conn, $data);
+				break;
+
+			case 'Campaigns':
+				$response = $Campaigns -> delete($conn, $data);
+				break;
+
+			case 'Deliveries':
+				$response = $Deliveries -> delete($conn, $data);
+				break;
+
+			case 'Distributors':
+				$response = $Distributors -> delete($conn, $data);
+				break;
+
+			case 'Payments':
+				$response = $Payments -> delete($conn, $data);
+				break;
+
+			case 'Producers':
+				$response = $Producers -> delete($conn, $data);
+				break;
+
+			case 'Products':
+				$response = $Products -> delete($conn, $data);
+				break;
+
+			case 'Stores':
+				$response = $Stores -> delete($conn, $data);
 				break;
 
 		}

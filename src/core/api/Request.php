@@ -380,6 +380,195 @@ class Request {
 				break;
 
 
+			// Campaigns
+			case 'get_campaigns':
+				$response['data'] = $DataService -> get('Campaigns', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_campaigns':
+				$response['data'] = $DataService -> create('Campaigns', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_campaigns':
+				$response['data'] = $DataService -> toggle('Campaigns', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_campaigns':
+				$response['data'] = $DataService -> update('Campaigns', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_campaigns':
+				$response['data'] = $DataService -> delete('Campaigns', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Deliveries
+			case 'get_deliveries':
+				$response['data'] = $DataService -> get('Deliveries', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_deliveries':
+				$response['data'] = $DataService -> create('Deliveries', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_deliveries':
+				$response['data'] = $DataService -> toggle('Deliveries', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_deliveries':
+				$response['data'] = $DataService -> update('Deliveries', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_deliveries':
+				$response['data'] = $DataService -> delete('Deliveries', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Distributors
+			case 'get_distributors':
+				$response['data'] = $DataService -> get('Distributors', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_distributors':
+				$response['data'] = $DataService -> create('Distributors', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_distributors':
+				$response['data'] = $DataService -> toggle('Distributors', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_distributors':
+				$response['data'] = $DataService -> update('Distributors', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_distributors':
+				$response['data'] = $DataService -> delete('Distributors', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Payments
+			case 'get_payments':
+				$response['data'] = $DataService -> get('Payments', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_payments':
+				$response['data'] = $DataService -> create('Payments', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_payments':
+				$response['data'] = $DataService -> toggle('Payments', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_payments':
+				$response['data'] = $DataService -> update('Payments', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_payments':
+				$response['data'] = $DataService -> delete('Payments', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Producers
+			case 'get_producers':
+				$response['data'] = $DataService -> get('Producers', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_producers':
+				$response['data'] = $DataService -> create('Producers', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_producers':
+				$response['data'] = $DataService -> toggle('Producers', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_producers':
+				$response['data'] = $DataService -> update('Producers', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_producers':
+				$response['data'] = $DataService -> delete('Producers', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Products
+			case 'get_products':
+				$response['data'] = $DataService -> get('Products', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_products':
+				$response['data'] = $DataService -> create('Products', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_products':
+				$response['data'] = $DataService -> toggle('Products', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_products':
+				$response['data'] = $DataService -> update('Products', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_products':
+				$response['data'] = $DataService -> delete('Products', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Stores
+			case 'get_stores':
+				$response['data'] = $DataService -> get('Stores', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'create_stores':
+				$response['data'] = $DataService -> create('Stores', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'toggle_stores':
+				$response['data'] = $DataService -> toggle('Stores', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'update_stores':
+				$response['data'] = $DataService -> update('Stores', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'delete_stores':
+				$response['data'] = $DataService -> delete('Stores', $requestData);
+				$response['status'] = 'ok';
+				break;
+
+
 
 			// ...
 			default:
