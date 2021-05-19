@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { message, Select } from 'antd';
 import styled from 'styled-components';
 
-import OPTIONS from '../../../../config/options.json';
-import LOCALES from '../../../../config/locales.json';
+import config from '../../config';
 import { Button } from '../ui';
 import { useSettings } from '../../App/hooks';
 
@@ -31,14 +30,14 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	const { installLanguage } = useSettings();
 
 	const renderOptions = () => {
-		return OPTIONS.language.available.map((item) => {
+		return config.OPTIONS.language.available.map((item) => {
 			let disabled = false;
 			installed.map((sub) => {
 				if (item === sub) disabled = true;
 			});
 			return (
 				<Option key={item} value={item} disabled={disabled}>
-					({item}) {LOCALES[item].label}
+					({item}) {config.LOCALES_LIST[item].label}
 				</Option>
 			);
 		});

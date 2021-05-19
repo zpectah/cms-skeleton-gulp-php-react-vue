@@ -12,8 +12,8 @@ import {
 } from 'react-icons/md';
 import Media from 'react-media';
 
+import config from '../../config';
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
-import CFG from '../../../../config/global.json';
 import media from '../../styles/responsive';
 import { Scrollable } from '../../component/ui';
 import Menu from '../../component/Menu';
@@ -174,7 +174,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 								<MdMenu />
 							)}
 						</Trigger>
-						{CFG.CMS.UI.SPOTLIGHT && (
+						{config.GLOBAL.CMS.UI.SPOTLIGHT && (
 							<Trigger onClick={toggleSpotlight}>
 								<MdSearch />
 							</Trigger>
@@ -185,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 					</div>
 					<div>&nbsp;</div>
 					<div>
-						{CFG.CMS.UI.HELP && (
+						{config.GLOBAL.CMS.UI.HELP && (
 							<Trigger onClick={toggleHelpDialog}>
 								<MdHelpOutline />
 							</Trigger>
@@ -200,7 +200,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 				</BarWrapper>
 				<PanelWrapper open={sidebarOpen}>
 					<div className="primary">
-						<MetaName>{CFG.CMS.META.name}</MetaName>
+						<MetaName>{config.GLOBAL.CMS.META.name}</MetaName>
 						<MetaName>{projectName}</MetaName>
 					</div>
 					<div className="secondary">

@@ -6,8 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Form as AntdForm, Input, Select, Switch, Checkbox, Alert } from 'antd';
 import styled from 'styled-components';
 
-import LOCALES from '../../../../config/locales.json';
-import OPTIONS from '../../../../config/options.json';
+import config from '../../config';
 import { routeProps } from '../../types';
 // import { EMAIL_REGEX } from '../../constants'; // TODO
 import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
@@ -105,7 +104,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 
 		tmpState.language_active.map((lang) => {
 			na.push({
-				label: LOCALES[lang].label,
+				label: config.LOCALES_LIST[lang].label,
 				value: lang,
 			});
 		});
@@ -118,7 +117,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 
 		tmpState.language_installed.map((lang) => {
 			na.push({
-				label: LOCALES[lang].label,
+				label: config.LOCALES_LIST[lang].label,
 				value: lang,
 				disabled: tmpState.language_default == lang,
 			});
@@ -389,7 +388,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									<Select
 										id={row.id}
 										style={{ width: '100%' }}
-										options={OPTIONS.meta.robots}
+										options={config.OPTIONS.meta.robots}
 										value={row.value}
 										onChange={row.onChange}
 										placeholder={'Page meta robots'}

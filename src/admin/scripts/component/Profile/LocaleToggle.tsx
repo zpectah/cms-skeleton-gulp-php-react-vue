@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Radio } from 'antd';
 
-import CFG from '../../../../config/global.json';
+import config from '../../config';
 import LanguageService from '../../service/LanguageService';
 
 const LocaleToggle: React.FC<{}> = () => {
@@ -17,7 +17,7 @@ const LocaleToggle: React.FC<{}> = () => {
 
 	return (
 		<Radio.Group
-			options={CFG.CMS.LANG_LIST}
+			options={config.GLOBAL.CMS.LANG_LIST}
 			onChange={(e) => onChangeHandler(e.target.value)}
 			value={lang}
 			optionType="button"

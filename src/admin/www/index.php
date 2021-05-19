@@ -13,7 +13,7 @@ require '../../core/index.php';
 	<meta name="keywords" content="<?=(VIEW['ADMIN']['meta']['keywords']) ?>">
 	<meta name="robots" content="<?=(VIEW['ADMIN']['meta']['robots']) ?>">
 	<meta name="og:url" content="<?=(VIEW['ADMIN']['url']) ?>">
-	<meta name="author" content="<?=(VIEW['ADMIN']['meta']['author']) ?>">
+	<meta name="author" content="<?=(VIEW['@']['author_meta']) ?>">
 
 	<script>
 		window.WARP_ENVIRONMENT = window.WARP_ENVIRONMENT || '<?=(ENV)?>';

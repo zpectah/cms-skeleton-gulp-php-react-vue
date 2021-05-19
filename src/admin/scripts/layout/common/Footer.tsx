@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CFG from '../../../../config/global.json';
+import config from '../../config';
 import { routeProps } from '../../types';
 
 const Wrapper = styled.footer`
@@ -49,10 +49,10 @@ const Footer: React.FC<FooterProps> = (props) => {
 		>
 			<div>
 				<Text>
-					&copy; {new Date().getFullYear()} {CFG.CMS.META.name} | Developed
-					by&nbsp;
-					<a href={'http://www.zpecter.com/'} target="_blank">
-						zpecter
+					&copy; {new Date().getFullYear()}{' '}
+					{config.GLOBAL['@COPYRIGHT'].cms_name} | Developed by&nbsp;
+					<a href={config.GLOBAL['@COPYRIGHT'].author_url} target="_blank">
+						{config.GLOBAL['@COPYRIGHT'].author_name}
 					</a>
 				</Text>
 			</div>

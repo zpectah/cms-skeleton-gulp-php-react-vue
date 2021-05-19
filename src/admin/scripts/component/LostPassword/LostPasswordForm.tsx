@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Form, Input, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
+import config from '../../config';
 import {
 	EMAIL_REGEX,
 	MESSAGE_ERROR_DURATION,
@@ -16,7 +17,6 @@ import { Link } from 'react-router-dom';
 import routes from '../../config.routes';
 import LocaleDropdown from '../Profile/LocaleDropdown';
 import { useProfile } from '../../App/hooks';
-import CFG from '../../../../config/global.json';
 import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
@@ -154,7 +154,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 							MESSAGE_ERROR_DURATION,
 						);
 
-						history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+						history.push(config.GLOBAL.CMS.UNAUTHORIZED_REDIRECT_TARGET);
 						break;
 
 					case 'request_not_found':
@@ -163,7 +163,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 							MESSAGE_ERROR_DURATION,
 						);
 
-						history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+						history.push(config.GLOBAL.CMS.UNAUTHORIZED_REDIRECT_TARGET);
 						break;
 
 					case 'user_password_already_reset':
@@ -172,7 +172,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 							MESSAGE_ERROR_DURATION,
 						);
 
-						history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+						history.push(config.GLOBAL.CMS.UNAUTHORIZED_REDIRECT_TARGET);
 						break;
 
 					case 'user_password_reset_success':
@@ -181,7 +181,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 							MESSAGE_SUCCESS_DURATION,
 						);
 
-						history.push(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+						history.push(config.GLOBAL.CMS.UNAUTHORIZED_REDIRECT_TARGET);
 						break;
 				}
 			}

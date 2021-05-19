@@ -1,20 +1,19 @@
 import { storage } from '../../../libs/js/utils';
-
-import CFG from '../../../config/global.json';
+import global from '../../../config/global.json';
 
 class ThemeService {
 	init() {
 		document.querySelector(':root').setAttribute('theme', this.get());
-		storage.set(CFG.CMS.STORAGE_KEY_THEME, this.get());
+		storage.set(global.CMS.STORAGE_KEY_THEME, this.get());
 	}
 
 	get() {
-		return storage.get(CFG.CMS.STORAGE_KEY_THEME) || 'default';
+		return storage.get(global.CMS.STORAGE_KEY_THEME) || 'default';
 	}
 
 	set(theme) {
 		document.querySelector(':root').setAttribute('theme', theme);
-		storage.set(CFG.CMS.STORAGE_KEY_THEME, theme);
+		storage.set(global.CMS.STORAGE_KEY_THEME, theme);
 	}
 }
 

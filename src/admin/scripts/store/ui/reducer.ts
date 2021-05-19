@@ -1,5 +1,5 @@
 import { storage } from '../../../../libs/js/utils';
-import CFG from '../../../../config/global.json';
+import config from '../../config';
 import LangService from '../../service/LanguageService';
 import ThemeService from '../../service/ThemeService';
 import UiStoreState from './store';
@@ -26,7 +26,7 @@ function UiReducer(state = UiStoreState, action) {
 			});
 
 		case SIDEBAR_TOGGLE:
-			storage.set(CFG.CMS.STORAGE_KEY_UI_SIDEBAR, action.payload);
+			storage.set(config.GLOBAL.CMS.STORAGE_KEY_UI_SIDEBAR, action.payload);
 			return Object.assign({}, state, {
 				sideBarOpen: action.payload,
 			});

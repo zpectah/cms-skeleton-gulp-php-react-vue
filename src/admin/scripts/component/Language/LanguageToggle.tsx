@@ -1,8 +1,7 @@
 import React from 'react';
 import { Radio } from 'antd';
 
-import CFG from '../../../../config/global.json';
-import LOCALES from '../../../../config/locales.json';
+import config from '../../config';
 import { useSettings } from '../../App/hooks';
 
 interface LanguageToggleProps {
@@ -18,11 +17,11 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
 }) => {
 	const { Settings } = useSettings();
 	const langDefault =
-		lang || Settings?.language_default || CFG.PROJECT.LANG_DEFAULT;
+		lang || Settings?.language_default || config.GLOBAL.PROJECT.LANG_DEFAULT;
 	const langList = Settings?.language_installed || [];
 
 	const getLabel = (lng) => {
-		let label = LOCALES[lng].label;
+		let label = config.LOCALES_LIST[lng].label;
 		if (langList.length > onBreak) label = lng;
 
 		return label;

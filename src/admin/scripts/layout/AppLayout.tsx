@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import CFG from '../../../config/global.json';
+import config from '../config';
 import media from '../styles/responsive';
 import { sidebarToggle } from '../store/ui/actions';
 import { routeProps, appProps } from '../types';
@@ -109,7 +109,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 		<>
 			<Helmet>
 				<title>
-					{CFG.CMS.META.name}
+					{config.GLOBAL.CMS.META.name}
 					{metaTitle && ` | ${metaTitle}`}
 				</title>
 			</Helmet>
@@ -151,14 +151,14 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					onCancel={toggleAddDialog}
 					afterClick={toggleAddDialog}
 				/>
-				{CFG.CMS.UI.HELP && (
+				{config.GLOBAL.CMS.UI.HELP && (
 					<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
 				)}
 				<Profile.Dialog
 					isOpen={profileDialogOpen}
 					onCancel={toggleProfileDialog}
 				/>
-				{CFG.CMS.UI.SPOTLIGHT && (
+				{config.GLOBAL.CMS.UI.SPOTLIGHT && (
 					<Spotlight.Dialog isOpen={spotlightOpen} onCancel={toggleSpotlight} />
 				)}
 				<LogoutConfirmDialog

@@ -12,6 +12,7 @@ export default {
 	TIMESTAMP: build_timestamp,
 	ROOT_PATH: environmental[build_env].ROOT_PATH,
 	LOCALES: locales[LanguageService.get()],
+	LOCALES_LIST: locales,
 	GLOBAL: global,
 	NUMS: nums,
 	OPTIONS: options,

@@ -43,7 +43,7 @@ const CFG_DB_CONN =                                       [CFG_DB['server'], CFG
 /*
  * Path
  */
-const PATH_BASE =                                         '../';
+const PATH_BASE =                                         PATH_PFX;
 define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBAL['PATH']['uploads'] );
 define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
 define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );
@@ -72,6 +72,7 @@ define( "UPLOADS_IMAGE_FORMATS",                          $JSON_OPTIONS['uploads
  * Index endpoints defaults
  */
 define( "VIEW", [
+	'@' =>                                                  $JSON_GLOBAL['@COPYRIGHT'],
 	'ADMIN' => [
 		'url' =>                                              CFG_ENV['ROOT_PATH'] . $JSON_GLOBAL['path']['admin'],
 		'styles' =>                                           CFG_ENV['ADMIN']['STYLES'],
@@ -82,7 +83,6 @@ define( "VIEW", [
 			'keywords' =>                                       $JSON_GLOBAL['CMS']['META']['keywords'],
 			'robots' =>                                         $JSON_GLOBAL['CMS']['META']['robots'],
 			'lang' =>                                           $JSON_GLOBAL['CMS']['META']['lang'],
-			'author' =>                                         $JSON_GLOBAL['CMS']['META']['author'],
 		],
 		"using_external_css" =>                               $JSON_GLOBAL['CMS']['USING_EXTERNAL_CSS'],
 	],
@@ -96,7 +96,7 @@ define( "VIEW", [
 			'keywords' =>                                       $JSON_GLOBAL['PROJECT']['META']['keywords'],
 			'robots' =>                                         $JSON_GLOBAL['PROJECT']['META']['robots'],
 			'lang' =>                                           $JSON_GLOBAL['PROJECT']['META']['lang'],
-			'author' =>                                         $JSON_GLOBAL['PROJECT']['META']['author'],
+			'author' =>                                         $JSON_GLOBAL['PROJECT']['META']['author'] ? $JSON_GLOBAL['PROJECT']['META']['author'] : $JSON_GLOBAL['@COPYRIGHT']['author_meta'],
 		],
 	],
 	'Api' => [

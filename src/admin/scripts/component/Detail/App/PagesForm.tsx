@@ -4,12 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Input, Switch, Select } from 'antd';
 import styled from 'styled-components';
 
-import OPTIONS from '../../../../../config/options.json';
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PagesItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Wysiwyg } from '../../ui';
 import LanguageToggle from '../../Language';
-import CFG from '../../../../../config/global.json';
 import { usePages, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
@@ -31,7 +30,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { updatePages, createPages, reloadPages } = usePages();
 	const { Settings } = useSettings();
-	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
+	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
@@ -124,7 +123,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select categories'}
-								options={OPTIONS.model.Pages.type}
+								options={config.OPTIONS.model.Pages.type}
 							/>
 						)}
 					</Form.Row>

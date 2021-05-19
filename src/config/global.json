@@ -5,7 +5,6 @@
 			"description": "Content Managing System for easy building websites with custom models and api",
 			"keywords": "CMS,JavaScript,React,TypeScript,API",
 			"lang": "en",
-			"author": "Tomas Sychra | zpecter.com",
 			"robots": "noindex,nofollow",
 			"version": "0.1.0"
 		},
@@ -28,7 +27,7 @@
 			"description": "PROJECT DESCRIPTION",
 			"keywords": "",
 			"lang": "en",
-			"author": "Tomas Sychra | zpecter.com",
+			"author": null,
 			"robots": "noindex,nofollow"
 		},
 		"LANG_DEFAULT": "en"
@@ -47,5 +46,11 @@
 		"logs": "logs/",
 		"tmp": "tmp/",
 		"cache": "cache/"
+	},
+	"@COPYRIGHT": {
+		"cms_name": "WarpCMS",
+		"author_name": "zpecter",
+		"author_url": "http://www.zpecter.com/",
+		"author_meta": "Tomas Sychra | zpecter.com"
 	}
 }

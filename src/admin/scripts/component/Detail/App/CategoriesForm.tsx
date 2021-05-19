@@ -4,12 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Input, Switch, Select } from 'antd';
 import styled from 'styled-components';
 
-import OPTIONS from '../../../../../config/options.json';
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { CategoriesItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
 import LanguageToggle from '../../Language';
-import CFG from '../../../../../config/global.json';
 import { useCategories, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
@@ -35,7 +34,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 		reloadCategories,
 	} = useCategories();
 	const { Settings } = useSettings();
-	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
+	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
@@ -131,7 +130,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select type'}
-								options={OPTIONS.model.Categories.type}
+								options={config.OPTIONS.model.Categories.type}
 							/>
 						)}
 					</Form.Row>

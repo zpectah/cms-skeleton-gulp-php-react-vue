@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 import styled from 'styled-components';
 
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { TranslationsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import LanguageToggle from '../../Language';
-import CFG from '../../../../../config/global.json';
 import { useTranslations, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
@@ -36,7 +36,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 		reloadTranslations,
 	} = useTranslations();
 	const { Settings } = useSettings();
-	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
+	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',

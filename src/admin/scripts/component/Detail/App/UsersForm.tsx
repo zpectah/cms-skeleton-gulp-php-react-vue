@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
 
-import OPTIONS from '../../../../../config/options.json';
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UsersItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
@@ -184,7 +184,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							<Select
 								id={row.id}
 								style={{ width: '100%' }}
-								options={OPTIONS.model.Users.level}
+								options={config.OPTIONS.model.Users.level}
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select level'}
@@ -196,7 +196,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							<Select
 								id={row.id}
 								style={{ width: '100%' }}
-								options={OPTIONS.model.Users.group}
+								options={config.OPTIONS.model.Users.group}
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select group'}

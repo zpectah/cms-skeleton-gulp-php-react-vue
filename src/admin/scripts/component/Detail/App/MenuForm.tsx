@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
 
+import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { useMenu } from '../../../App/hooks';
 import { MenuItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker } from '../../ui';
 import DetailFooter from '../DetailFooter';
-import OPTIONS from '../../../../../config/options.json';
 
 interface MenuDetailFormProps {
 	detailData: MenuItemProps;
@@ -106,7 +106,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select type'}
-								options={OPTIONS.model.Menu.type}
+								options={config.OPTIONS.model.Menu.type}
 							/>
 						)}
 					</Form.Row>

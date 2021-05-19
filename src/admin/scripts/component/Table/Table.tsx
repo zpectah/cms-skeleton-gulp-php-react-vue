@@ -24,7 +24,6 @@ import {
 	IconMaterial_SupervisedUserCircle,
 	IconMaterial_VerifiedUser,
 } from '../../../../libs/svg/material-icons';
-import CFG from '../../../../config/global.json';
 import {
 	MESSAGE_SUCCESS_DURATION,
 	TABLE_ITEMS_PER_PAGE,
@@ -167,7 +166,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 	const [detailData, setDetailData] = useState<any>(null);
 	const [confirmData, setConfirmData] = useState<any>(null);
-	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
+	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 
 	const editOptions = Profile?.user_level > 0;
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
 import styled from 'styled-components';
 
@@ -9,7 +9,6 @@ import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Uploader } from '../../ui';
 import LanguageToggle from '../../Language';
-import CFG from '../../../../../config/global.json';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
@@ -70,7 +69,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const { detailData, onCancel, onSave, onDelete } = props;
 	const { updateUploads, createUploads, reloadUploads } = useUploads();
 	const { Settings } = useSettings();
-	const [lang, setLang] = useState(CFG.PROJECT.LANG_DEFAULT);
+	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const [uploading, setUploading] = useState(false);
 	const { control, handleSubmit, register, watch, setValue } = useForm({

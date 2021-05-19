@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Menu, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import CFG from '../../../../config/global.json';
-import LOCALES from '../../../../config/locales.json';
+import config from '../../config';
 import LanguageService from '../../service/LanguageService';
 
 const Trigger = styled.div`
@@ -32,9 +31,11 @@ const LocaleDropdown: React.FC<{}> = () => {
 
 	const menu = (
 		<Menu>
-			{CFG.CMS.LANG_LIST.map((lang) => (
+			{config.GLOBAL.CMS.LANG_LIST.map((lang) => (
 				<Menu.Item key={lang}>
-					<a onClick={() => toggleLanguage(lang)}>{LOCALES[lang].label}</a>
+					<a onClick={() => toggleLanguage(lang)}>
+						{config.LOCALES_LIST[lang].label}
+					</a>
 				</Menu.Item>
 			))}
 		</Menu>

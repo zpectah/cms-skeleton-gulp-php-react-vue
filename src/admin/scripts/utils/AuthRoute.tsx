@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import CFG from '../../../config/global.json';
+import config from '../config';
 import { useProfile } from '../App/hooks';
 import Preloader from '../layout/common/Preloader';
 
@@ -22,7 +22,7 @@ const AuthRoute: React.FC<AuthRouteProps> = (props) => {
 		const currentUser = Profile;
 
 		if (!currentUser && !isProfileLoading) {
-			setRedirect(CFG.CMS.UNAUTHORIZED_REDIRECT_TARGET);
+			setRedirect(config.GLOBAL.CMS.UNAUTHORIZED_REDIRECT_TARGET);
 
 			return;
 		} else if (currentUser && !isProfileLoading) {
