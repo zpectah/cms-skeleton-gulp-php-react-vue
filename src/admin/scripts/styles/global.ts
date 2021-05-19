@@ -51,31 +51,51 @@ export const GlobalStyles = createGlobalStyle`
 			border-radius: .125rem;
 
 			&-primary{
-				background: ${(props) => props.theme.color.primary};
-				border-color: ${(props) => props.theme.color.primary};
+				color: ${(props) => props.theme.button.primary.text};
+				background: ${(props) => props.theme.button.primary.bg};
+				border-color: ${(props) => props.theme.button.primary.border};
 
-				&:hover,
+				&:hover{
+					color: ${(props) => props.theme.button.primary.textHover};
+					background: ${(props) => props.theme.button.primary.bgHover};
+					border-color: ${(props) => props.theme.button.primary.borderHover};
+				}
 				&:active,
 				&:focus{
-					background: ${(props) => props.theme.color.primary}; // lighter
-					border-color: ${(props) => props.theme.color.primary}; // lighter
+					color: ${(props) => props.theme.button.primary.textActive};
+					background: ${(props) => props.theme.button.primary.bgActive};
+					border-color: ${(props) => props.theme.button.primary.borderActive};
 				}
 
 				&.ant-btn-background-ghost{
-					color: ${(props) => props.theme.color.primary};
-					border-color: ${(props) => props.theme.color.primary};
+					color: ${(props) => props.theme.button.primaryOutline.text};
+					background: ${(props) => props.theme.button.primaryOutline.bg};
+					border-color: ${(props) => props.theme.button.primaryOutline.border};
 
-					&:hover,
+					&:hover{
+						color: ${(props) => props.theme.button.primaryOutline.textHover};
+						background: ${(props) => props.theme.button.primaryOutline.bgHover};
+						border-color: ${(props) => props.theme.button.primaryOutline.borderHover};
+					}
 					&:active,
 					&:focus{
-						background: transparent;
-						color: ${(props) => props.theme.color.primary}; // darker
-						border-color: ${(props) => props.theme.color.primary}; // darker
+						color: ${(props) => props.theme.button.primaryOutline.textActive};
+						background: ${(props) => props.theme.button.primaryOutline.bgActive};
+						border-color: ${(props) => props.theme.button.primaryOutline.borderActive};
 					}
 
 				}
 
 			}
+		}
+
+		// Table
+		&-table{
+			&-body{
+				padding-bottom: 1rem;
+				overflow-x: auto;
+			}
+			&-wrapper{}
 		}
 
 		// Modal
@@ -87,7 +107,7 @@ export const GlobalStyles = createGlobalStyle`
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					font-size: 1.75rem;
+					font-size: 1.45rem;
 				}
 			}
 			&-content {

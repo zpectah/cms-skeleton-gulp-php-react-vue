@@ -10,7 +10,7 @@ import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
-import LanguageToggle from '../../LanguageToggle';
+import LanguageToggle from '../../Language';
 import CFG from '../../../../../config/global.json';
 import { usePosts, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';

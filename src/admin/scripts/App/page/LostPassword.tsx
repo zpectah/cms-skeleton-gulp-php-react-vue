@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
-import LostPasswordForm from '../../component/LostPasswordForm';
+import LostPasswordForm from '../../component/LostPassword';
 
 const LostPasswordPage = () => {
 	const { t } = useTranslation('page');

@@ -8,7 +8,7 @@ import OPTIONS from '../../../../../config/options.json';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PagesItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Wysiwyg } from '../../ui';
-import LanguageToggle from '../../LanguageToggle';
+import LanguageToggle from '../../Language';
 import CFG from '../../../../../config/global.json';
 import { usePages, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';

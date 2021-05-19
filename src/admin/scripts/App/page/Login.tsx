@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
-import LoginForm from '../../component/LoginForm';
+import LoginForm from '../../component/Login';
 
 const LoginPage = () => {
 	const { t } = useTranslation('page');

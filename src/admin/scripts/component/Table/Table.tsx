@@ -27,9 +27,10 @@ import CFG from '../../../../config/global.json';
 import {
 	MESSAGE_SUCCESS_DURATION,
 	TABLE_ITEMS_PER_PAGE,
+	BREAKPOINTS,
 } from '../../constants';
 import { Button, Viewer } from '../ui';
-import LanguageToggle from '../LanguageToggle';
+import LanguageToggle from '../Language';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
 import { commonModelProps } from '../../types';
@@ -55,6 +56,10 @@ const RowIconBlock = styled.span`
 `;
 const RowLink = styled.a`
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
+`;
+const StyledTable = styled.table`
+	width: 100%;
+	min-width: ${BREAKPOINTS.md}px;
 `;
 
 const remodelItems = (input: any[]) => {
@@ -541,6 +546,11 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				loading={loading}
 				pagination={{
 					defaultPageSize: itemsPerPage,
+					position: ['bottomCenter'],
+				}}
+				tableLayout="fixed"
+				components={{
+					table: StyledTable,
 				}}
 				sticky
 			/>

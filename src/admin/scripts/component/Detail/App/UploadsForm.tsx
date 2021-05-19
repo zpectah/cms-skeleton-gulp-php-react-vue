@@ -8,7 +8,7 @@ import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Uploader } from '../../ui';
-import LanguageToggle from '../../LanguageToggle';
+import LanguageToggle from '../../Language';
 import CFG from '../../../../../config/global.json';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';

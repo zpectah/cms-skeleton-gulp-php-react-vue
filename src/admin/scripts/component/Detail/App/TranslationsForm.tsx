@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { TranslationsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
-import LanguageToggle from '../../LanguageToggle';
+import LanguageToggle from '../../Language';
 import CFG from '../../../../../config/global.json';
 import { useTranslations, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';

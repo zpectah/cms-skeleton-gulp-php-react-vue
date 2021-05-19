@@ -2,13 +2,119 @@ import palette from '../palette';
 
 const color = {
 	...palette,
-	primary: palette.pink,
-	secondary: 'rgb(38,50,56)',
+	brand: palette.pink,
+	primary: palette.deepPurple,
+	secondary: palette.blueGrey,
 	muted: 'rgba(69,90,100, .75)',
 };
 
 export default {
 	color: color,
+	button: {
+		default: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		defaultOutline: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		primary: {
+			text: color.white,
+			bg: color.primary,
+			border: color.primary,
+			textHover: color.white,
+			bgHover: color.primary, // lighter
+			borderHover: color.primary, // lighter
+			textActive: color.white,
+			bgActive: color.primary, // darker
+			borderActive: color.primary, // darker
+		},
+		primaryOutline: {
+			text: color.primary,
+			bg: 'transparent',
+			border: color.primary,
+			textHover: color.primary, // lighter
+			bgHover: 'transparent',
+			borderHover: color.primary, // lighter
+			textActive: color.primary, // darker
+			bgActive: 'transparent',
+			borderActive: color.primary, // darker
+		},
+		secondary: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		secondaryOutline: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		/*
+		success: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		successOutline: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+		*/
+	},
+	form: {
+		input: {
+			text: '',
+			bg: '',
+			border: '',
+			textHover: '',
+			bgHover: '',
+			borderHover: '',
+			textActive: '',
+			bgActive: '',
+			borderActive: '',
+		},
+	},
 	page: {
 		text: palette.black,
 		muted: color.muted,
