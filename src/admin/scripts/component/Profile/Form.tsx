@@ -35,9 +35,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 
 	return (
 		<Wrapper>
-			<LocaleToggle />
-			<ThemeToggle />
-			<div>card data ... {model.email}</div>
+			{/* TODO: Avatar picker -> returns base64 */}
 			<form onSubmit={handleSubmit(submitHandler)}>
 				<input
 					type="hidden"
@@ -76,6 +74,25 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 					defaultValue={model.user_avatar}
 				/>
 				<Section.Base>
+					<UiForm.Row
+						label={'E-mail'}
+						name={'email'}
+						control={control}
+						rules={{ required: true }}
+						required
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								readOnly
+								disabled
+							/>
+						)}
+					</UiForm.Row>
 					<UiForm.Row label={'Password'} name={'password'} control={control}>
 						{(row) => (
 							<Input.Password
@@ -149,16 +166,22 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 							/>
 						)}
 					</UiForm.Row>
+					<UiForm.RowNoController label={'Language'}>
+						{() => <LocaleToggle />}
+					</UiForm.RowNoController>
+					<UiForm.RowNoController label={'Theme'}>
+						{() => <ThemeToggle />}
+					</UiForm.RowNoController>
 				</Section.Base>
-				{/* TODO */}
-				<Button.Base
-					htmlType="submit"
-					disabled={!formState.isValid || !formState.isDirty}
-					type="primary"
-				>
-					Update
-				</Button.Base>
-				{/* TODO */}
+				<Section.Base>
+					<Button.Base
+						htmlType="submit"
+						disabled={!formState.isValid || !formState.isDirty}
+						type="primary"
+					>
+						Update
+					</Button.Base>
+				</Section.Base>
 			</form>
 		</Wrapper>
 	);

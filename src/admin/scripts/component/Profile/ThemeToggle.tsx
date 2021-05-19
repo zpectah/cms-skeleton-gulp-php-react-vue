@@ -5,9 +5,7 @@ import { Radio } from 'antd';
 import { THEME_LIST } from '../../constants';
 import { themeToggle } from '../../store/ui/actions';
 
-interface ThemeToggleProps {}
-
-const ThemeToggle: React.FC<ThemeToggleProps> = () => {
+const ThemeToggle: React.FC<{}> = () => {
 	const store = useSelector((store: any) => store);
 	const [theme, setTheme] = useState(store.ui.theme);
 	const dispatch = useDispatch();

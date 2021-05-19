@@ -252,9 +252,9 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 
-					<Form.Row name={'id'} control={control} blankLabel>
+					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
-					</Form.Row>
+					</Form.RowNoController>
 					<LanguageWrapper>
 						{langList.map((lng) => (
 							<LanguageWrapperPanel key={lng} isActive={lng == lang}>
