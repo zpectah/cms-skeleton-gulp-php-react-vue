@@ -5,7 +5,7 @@ type NavItemProps = {
 	label: string;
 	path: string | null; // TODO
 	active: boolean;
-	auth?: number;
+	auth: number;
 };
 
 const app: NavItemProps[] = [

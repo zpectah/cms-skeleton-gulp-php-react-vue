@@ -44,41 +44,41 @@ export const GlobalStyles = createGlobalStyle`
 
 
 	// Antd overrides
-	.ant{
+	.ant {
 
 		// Button
-		&-btn{
+		&-btn {
 			border-radius: .125rem;
 
-			&-primary{
+			&-primary {
 				color: ${(props) => props.theme.button.primary.text};
 				background: ${(props) => props.theme.button.primary.bg};
 				border-color: ${(props) => props.theme.button.primary.border};
 
-				&:hover{
+				&:hover {
 					color: ${(props) => props.theme.button.primary.textHover};
 					background: ${(props) => props.theme.button.primary.bgHover};
 					border-color: ${(props) => props.theme.button.primary.borderHover};
 				}
 				&:active,
-				&:focus{
+				&:focus {
 					color: ${(props) => props.theme.button.primary.textActive};
 					background: ${(props) => props.theme.button.primary.bgActive};
 					border-color: ${(props) => props.theme.button.primary.borderActive};
 				}
 
-				&.ant-btn-background-ghost{
+				&.ant-btn-background-ghost {
 					color: ${(props) => props.theme.button.primaryOutline.text};
 					background: ${(props) => props.theme.button.primaryOutline.bg};
 					border-color: ${(props) => props.theme.button.primaryOutline.border};
 
-					&:hover{
+					&:hover {
 						color: ${(props) => props.theme.button.primaryOutline.textHover};
 						background: ${(props) => props.theme.button.primaryOutline.bgHover};
 						border-color: ${(props) => props.theme.button.primaryOutline.borderHover};
 					}
 					&:active,
-					&:focus{
+					&:focus {
 						color: ${(props) => props.theme.button.primaryOutline.textActive};
 						background: ${(props) => props.theme.button.primaryOutline.bgActive};
 						border-color: ${(props) => props.theme.button.primaryOutline.borderActive};
@@ -90,8 +90,8 @@ export const GlobalStyles = createGlobalStyle`
 		}
 
 		// Table
-		&-table{
-			&-body{
+		&-table {
+			&-body {
 				margin-bottom: 1rem;
 				overflow-x: auto;
 			}
@@ -99,7 +99,7 @@ export const GlobalStyles = createGlobalStyle`
 		}
 
 		// Modal
-		&-modal{
+		&-modal {
 			&-close {
 				&-x {
 					width: 40px;
@@ -113,6 +113,30 @@ export const GlobalStyles = createGlobalStyle`
 			&-content {
 				background: transparent;
 			}
+		}
+
+		// Input
+		&-input {
+				color: ${(props) => props.theme.form.input.text};
+				background: ${(props) => props.theme.form.input.bg};
+				border-color: ${(props) => props.theme.form.input.border};
+
+				&:hover{
+					color: ${(props) => props.theme.form.input.textHover};
+					background: ${(props) => props.theme.form.input.bgHover};
+					border-color: ${(props) => props.theme.form.input.borderHover};
+					box-shadow: ${(props) => props.theme.form.input.shadowHover};
+				}
+
+				&:focus,
+				&:active,
+				&-focused{
+					color: ${(props) => props.theme.form.input.textActive};
+					background: ${(props) => props.theme.form.input.bgActive};
+					border-color: ${(props) => props.theme.form.input.borderActive};
+					box-shadow: ${(props) => props.theme.form.input.shadowActive};
+				}
+
 		}
 
 	}

@@ -153,6 +153,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 	} = props;
 	const { Settings } = useSettings();
 	const projectName = Settings ? Settings['project_name'] : '...';
+	const modules = {
+		Members: Settings ? Settings['module_members_active'] : false,
+		Crm: Settings ? Settings['module_crm_active'] : false,
+		Market: Settings ? Settings['module_market_active'] : false,
+	};
 
 	return (
 		<>
@@ -208,9 +213,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 							<div className="content">
 								<NavList>
 									<Menu.App sidebarToggle={toggleSidebar} />
-									<Menu.Members sidebarToggle={toggleSidebar} />
-									<Menu.Crm sidebarToggle={toggleSidebar} />
-									<Menu.Market sidebarToggle={toggleSidebar} />
+									{modules.Members && (
+										<Menu.Members sidebarToggle={toggleSidebar} />
+									)}
+									{modules.Crm && <Menu.Crm sidebarToggle={toggleSidebar} />}
+									{modules.Market && (
+										<Menu.Market sidebarToggle={toggleSidebar} />
+									)}
 								</NavList>
 							</div>
 						</Scrollable.Base>

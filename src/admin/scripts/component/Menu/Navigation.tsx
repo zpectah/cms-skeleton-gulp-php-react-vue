@@ -25,7 +25,7 @@ const Link = styled(NavLink)`
 	font-weight: 500;
 
 	&:hover {
-		color: inherit;
+		color: ${(props) => props.theme.sidebar.navItemHoverText};
 		background-color: ${(props) => props.theme.sidebar.navItemHoverBg};
 		text-decoration: none;
 	}
