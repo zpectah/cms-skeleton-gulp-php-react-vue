@@ -92,7 +92,7 @@ export const GlobalStyles = createGlobalStyle`
 		// Table
 		&-table{
 			&-body{
-				padding-bottom: 1rem;
+				margin-bottom: 1rem;
 				overflow-x: auto;
 			}
 			&-wrapper{}

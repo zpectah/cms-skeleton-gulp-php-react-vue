@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 
+import config from '../../config';
 import { array } from '../../../../libs/js/utils';
 import {
 	IconMaterial_Face,
@@ -57,6 +58,14 @@ const RowIconBlock = styled.span`
 const RowLink = styled.a`
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
 `;
+const RowLinkImage = styled.img`
+	max-width: 50px;
+	height: auto;
+	margin-right: 0.5rem;
+`;
+const RowLinkAvatar = styled(RowLinkImage)`
+	border-radius: 50px;
+`;
 const StyledTable = styled.table`
 	width: 100%;
 	min-width: ${BREAKPOINTS.md}px;
@@ -98,6 +107,7 @@ interface ListItemsProps {
 		active?: boolean;
 		sender?: boolean;
 		file_name?: boolean;
+		type?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
@@ -232,6 +242,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
+						{record.type == 'image' && (
+							<RowLinkImage
+								src={config.ROOT_PATH + 'uploads/image/thumbnail/' + text}
+								alt={record.name}
+							/>
+						)}
 						{text}
 					</RowLink>
 				),
@@ -246,6 +262,9 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
+						{record.user_avatar && (
+							<RowLinkImage src={record.user_avatar} alt={record.email} />
+						)}
 						{text}
 					</RowLink>
 				),
@@ -303,6 +322,13 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						}}
 					/>
 				),
+			});
+		if (columnsLayout.type)
+			d.push({
+				title: 'Type',
+				dataIndex: 'type',
+				key: 'type',
+				render: (text) => <span>{text}</span>,
 			});
 		if (columnsLayout.tags)
 			d.push({

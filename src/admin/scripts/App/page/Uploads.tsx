@@ -56,10 +56,10 @@ const UploadsPage = () => {
 				items={Uploads}
 				loading={isUploadsLoading}
 				columnsLayout={{
-					// img_thumbnail: true,
 					file_name: true,
 					category: true,
 					active: true,
+					type: true,
 				}}
 				orderByColumns={{
 					name: true,
