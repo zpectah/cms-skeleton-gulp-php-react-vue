@@ -1,4 +1,4 @@
-export const THEME_LIST = ['default'];
+export const THEMES = ['default'];
 export const PIXEL_COEFFICIENT = 0.02;
 export const BREAKPOINTS = {
 	xs: 0,

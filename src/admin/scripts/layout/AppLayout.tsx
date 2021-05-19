@@ -146,7 +146,11 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 						/>
 					)}
 				</MainWrapper>
-				<Add.Dialog isOpen={addDialogOpen} onCancel={toggleAddDialog} />
+				<Add.Dialog
+					isOpen={addDialogOpen}
+					onCancel={toggleAddDialog}
+					afterClick={toggleAddDialog}
+				/>
 				{CFG.CMS.UI.HELP && (
 					<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
 				)}
