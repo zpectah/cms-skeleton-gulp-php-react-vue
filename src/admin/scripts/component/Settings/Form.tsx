@@ -821,6 +821,26 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												</small>
 											</td>
 										</tr>
+										<tr>
+											<th>Export data (test)</th>
+											<td>
+												<Button.Base
+													type="primary"
+													onClick={() => {
+														console.log('... export data ...');
+													}}
+													ghost
+												>
+													Proceed
+												</Button.Base>
+											</td>
+											<td>
+												<small>
+													TEST - Export all data and save as file .sql format -
+													TEST
+												</small>
+											</td>
+										</tr>
 									</tbody>
 								</StyledTable>
 							</TableWrapper>

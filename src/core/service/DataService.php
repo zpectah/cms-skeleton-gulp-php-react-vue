@@ -6,6 +6,7 @@ namespace core\service;
 
 use core\handler\Handyman;
 use core\handler\Installer;
+use core\handler\SqlDumper;
 use core\model\Categories;
 use core\model\Crm\Campaigns;
 use core\model\Market\Deliveries;
@@ -679,6 +680,7 @@ class DataService {
 	}
 
 	//
+	//
 
 	public function install_language ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
@@ -704,6 +706,9 @@ class DataService {
 		return $response;
 	}
 
+	//
+	//
+
 	public function repair_language_tables ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
 
@@ -712,6 +717,25 @@ class DataService {
 		$response = $Handyman -> repair_language_tables($conn, $data);
 
 		$conn -> close();
+
+		return $response;
+	}
+
+	//
+	//
+
+	public function export_table_dump ($data) {
+		$SqlDumper = new SqlDumper;
+
+		$response = $SqlDumper -> export_table_dump($data);
+
+		return $response;
+	}
+
+	public function import_table_data ($data) {
+		$SqlDumper = new SqlDumper;
+
+		$response = $SqlDumper -> import_table_data($data);
 
 		return $response;
 	}

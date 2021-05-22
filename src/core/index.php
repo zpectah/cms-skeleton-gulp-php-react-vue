@@ -68,6 +68,7 @@ require PATH_PFX . 'core/model/Market/Deliveries.php';
  */
 require PATH_PFX . 'core/handler/Installer.php';
 require PATH_PFX . 'core/handler/Handyman.php';
+require PATH_PFX . 'core/handler/SqlDumper.php';
 
 /*
  * Api

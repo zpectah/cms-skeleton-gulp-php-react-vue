@@ -578,6 +578,18 @@ class Request {
 				break;
 
 
+			// SqlDumper
+			case 'export_table_dump':
+				$response['data'] = $DataService -> export_table_dump($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'import_table_data':
+				$response['data'] = $DataService -> import_table_data($requestData);
+				$response['status'] = 'ok';
+				break;
+
+
 			// ...
 			default:
 				$response['message'] = 'Wrong response';

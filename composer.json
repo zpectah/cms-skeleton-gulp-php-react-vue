@@ -6,7 +6,8 @@
 		"eftec/bladeone": "^3.51",
 		"ext-json": "*",
       "ext-mysqli": "*",
-		"gumlet/php-image-resize": "^2.0"
+		"gumlet/php-image-resize": "^2.0",
+		"ifsnop/mysqldump-php": "^2.9"
     },
 	"config": {
 		"vendor-dir": "src/vendor"
