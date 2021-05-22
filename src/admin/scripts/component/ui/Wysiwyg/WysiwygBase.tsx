@@ -12,7 +12,9 @@ const Wrapper = styled.div<{ forPage: boolean }>`
 	width: 100%;
 	height: ${(props) => (props.forPage ? '500px' : '300px')};
 	position: relative;
-	border: 1px solid rgba(25, 25, 25, 0.125);
+	color: ${(props) => props.theme.form.input.text};
+	background: ${(props) => props.theme.form.input.bg};
+	border: 1px solid ${(props) => props.theme.form.input.border};
 `;
 
 export interface WysiwygProps {

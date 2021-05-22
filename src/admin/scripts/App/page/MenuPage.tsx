@@ -51,6 +51,7 @@ const MenuPage = () => {
 				loading={isMenuLoading}
 				columnsLayout={{
 					name: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{

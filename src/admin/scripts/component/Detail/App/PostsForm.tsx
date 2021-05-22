@@ -24,11 +24,20 @@ interface PostsDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
 	const { Settings } = useSettings();
 	const { Profile } = useProfile();
@@ -453,6 +462,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

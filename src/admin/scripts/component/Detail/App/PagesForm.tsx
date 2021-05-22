@@ -23,11 +23,20 @@ interface PagesDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const { updatePages, createPages, reloadPages } = usePages();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
@@ -187,6 +196,8 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

@@ -15,10 +15,19 @@ interface UsersDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
@@ -216,6 +225,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

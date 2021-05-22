@@ -116,6 +116,11 @@ interface ListItemsProps {
 		file_name?: boolean;
 		// TODO: new columns
 	};
+	actionColumn?: {
+		edit?: boolean;
+		toggle?: boolean;
+		delete?: boolean;
+	};
 	selectable?: boolean;
 	searchAttrs?: string[];
 	allowDelete?: boolean;
@@ -140,6 +145,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		orderByColumns = {
 			// TODO: new columns
 		},
+		actionColumn,
 		route,
 		selectable,
 		searchAttrs = [],
@@ -167,6 +173,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	const [detailData, setDetailData] = useState<any>(null);
 	const [confirmData, setConfirmData] = useState<any>(null);
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
+	const actions = {
+		edit: true,
+		toggle: true,
+		delete: true,
+		...actionColumn,
+	};
 
 	const editOptions = Profile?.user_level > 0;
 
@@ -358,16 +370,18 @@ const Table: React.FC<ListItemsProps> = (props) => {
 							onClick={() => editOpen(record)}
 							title={t('component:Table.row_action.edit')}
 						>
-							{t('component:Table.row_action.edit')}
+							{actions.edit ? t('component:Table.row_action.edit') : 'Detail'}
 						</Button.Base>
-						<Button.Base
-							type="link"
-							onClick={() => toggleHandler(record)}
-							title={t('component:Table.row_action.toggle')}
-						>
-							{t('component:Table.row_action.toggle')}
-						</Button.Base>
-						{allowDelete && (
+						{actions.toggle && (
+							<Button.Base
+								type="link"
+								onClick={() => toggleHandler(record)}
+								title={t('component:Table.row_action.toggle')}
+							>
+								{t('component:Table.row_action.toggle')}
+							</Button.Base>
+						)}
+						{actions.delete && allowDelete && (
 							<Button.Base
 								type="link"
 								onClick={() => deleteConfirm(record)}
@@ -485,12 +499,14 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				<div>
 					{selectable && allowDelete && (
 						<>
-							<Button.Base
-								disabled={selectedRowKeys.length === 0}
-								onClick={() => toggleSelected(selectedRowKeys)}
-							>
-								{t('btn.toggle')} ({selectedRowKeys.length})
-							</Button.Base>
+							{actions.toggle && (
+								<Button.Base
+									disabled={selectedRowKeys.length === 0}
+									onClick={() => toggleSelected(selectedRowKeys)}
+								>
+									{t('btn.toggle')} ({selectedRowKeys.length})
+								</Button.Base>
+							)}
 							<Button.Base
 								disabled={selectedRowKeys.length === 0}
 								onClick={() => deleteConfirm(selectedRowKeys)}
@@ -587,6 +603,8 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				onSave={detailHandler}
 				onDelete={deleteConfirm}
 				afterClose={closeDetail}
+				allowSave={actions.edit}
+				allowDelete={actions.delete && allowDelete}
 			/>
 			<Confirm.Dialog
 				isOpen={confirmOpen}

@@ -57,6 +57,10 @@ const MessagesPage = () => {
 				orderByColumns={{
 					sender: true,
 				}}
+				actionColumn={{
+					edit: false,
+					toggle: false,
+				}}
 				detailId={params.id}
 				searchAttrs={['sender', 'recipients', 'subject', 'content']}
 				onToggle={toggleHandler}

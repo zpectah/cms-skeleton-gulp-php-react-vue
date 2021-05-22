@@ -9,6 +9,8 @@ interface DetailFooterProps {
 	isNew: boolean;
 	invalid: boolean;
 	detailData: any;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const DetailFooter: React.FC<DetailFooterProps> = ({
@@ -17,26 +19,34 @@ const DetailFooter: React.FC<DetailFooterProps> = ({
 	isNew,
 	invalid,
 	detailData,
+	allowSave,
+	allowDelete,
 }) => {
 	const { t } = useTranslation(['common']);
 
 	return (
 		<Modal.Footer>
 			<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
-			{!isNew && (
+			{allowDelete && (
 				<>
-					<Button.Base
-						type="primary"
-						onClick={() => onDelete(detailData)}
-						danger
-					>
-						{t('btn.delete')}
-					</Button.Base>
+					{!isNew && (
+						<>
+							<Button.Base
+								type="primary"
+								onClick={() => onDelete(detailData)}
+								danger
+							>
+								{t('btn.delete')}
+							</Button.Base>
+						</>
+					)}
 				</>
 			)}
-			<Button.Base type="primary" htmlType="submit" disabled={invalid}>
-				{isNew ? t('btn.create') : t('btn.save')}
-			</Button.Base>
+			{allowSave && (
+				<Button.Base type="primary" htmlType="submit" disabled={invalid}>
+					{isNew ? t('btn.create') : t('btn.save')}
+				</Button.Base>
+			)}
 		</Modal.Footer>
 	);
 };

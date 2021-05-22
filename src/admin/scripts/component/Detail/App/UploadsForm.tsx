@@ -62,11 +62,20 @@ interface UploadsDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const { updateUploads, createUploads, reloadUploads } = useUploads();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
@@ -290,6 +299,8 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={detailData.is_new ? !(watchName && tmp_blob) : false}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

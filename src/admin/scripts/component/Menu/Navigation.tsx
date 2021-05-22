@@ -5,6 +5,7 @@ import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
 import routes from '../../config.routes';
+import media from '../../styles/responsive';
 
 const Item = styled.li`
 	width: 100%;
@@ -16,13 +17,13 @@ const Link = styled(NavLink)`
 	width: 100%;
 	height: auto;
 	margin: 0;
-	padding: 0.4rem 1rem;
+	padding: 1rem 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	color: inherit;
-	font-size: 0.9rem;
-	font-weight: 500;
+	font-size: 1rem;
+	font-weight: 300;
 
 	&:hover {
 		color: ${(props) => props.theme.sidebar.navItemHoverText};
@@ -33,6 +34,13 @@ const Link = styled(NavLink)`
 	&.is-active {
 		color: ${(props) => props.theme.sidebar.navItemActiveColor};
 		background-color: ${(props) => props.theme.sidebar.navItemActiveBg};
+		font-weight: 500;
+	}
+
+	${media.min.md} {
+		padding: 0.4rem 1rem;
+		font-size: 0.9rem;
+		font-weight: 500;
 	}
 `;
 const LinkText = styled.span`

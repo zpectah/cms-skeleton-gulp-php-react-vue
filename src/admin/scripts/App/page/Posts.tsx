@@ -58,6 +58,7 @@ const PostsPage = () => {
 				columnsLayout={{
 					// name: true,
 					title_lang: true,
+					type: true,
 					tags: true,
 					category: true,
 					active: true,

@@ -117,15 +117,51 @@ export const GlobalStyles = createGlobalStyle`
 
 		// Input
 		&-input {
+			color: ${(props) => props.theme.form.input.text};
+			background: ${(props) => props.theme.form.input.bg};
+			border: 1px solid ${(props) => props.theme.form.input.border};
+
+			&:hover{
+				color: ${(props) => props.theme.form.input.textHover};
+				background: ${(props) => props.theme.form.input.bgHover};
+				border: 1px solid ${(props) => props.theme.form.input.borderHover};
+				box-shadow: ${(props) => props.theme.form.input.shadowHover}; // TODO
+			}
+
+			&:focus,
+			&:active,
+			&-focused{
+				color: ${(props) => props.theme.form.input.textActive};
+				background: ${(props) => props.theme.form.input.bgActive};
+				border: 1px solid ${(props) => props.theme.form.input.borderActive};
+				box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+			}
+
+			&-password{
 				color: ${(props) => props.theme.form.input.text};
 				background: ${(props) => props.theme.form.input.bg};
-				border-color: ${(props) => props.theme.form.input.border};
+				border: 1px solid ${(props) => props.theme.form.input.border};
+
+				// TODO: hover, focus, active ...
+
+			}
+
+		}
+
+		// Select
+		&-select{
+
+			&:not(.ant-select-customize-input) .ant-select-selector,
+			&-selector{
+				color: ${(props) => props.theme.form.input.text};
+				background: ${(props) => props.theme.form.input.bg};
+				border: 1px solid ${(props) => props.theme.form.input.border};
 
 				&:hover{
 					color: ${(props) => props.theme.form.input.textHover};
 					background: ${(props) => props.theme.form.input.bgHover};
-					border-color: ${(props) => props.theme.form.input.borderHover};
-					box-shadow: ${(props) => props.theme.form.input.shadowHover};
+					border: 1px solid ${(props) => props.theme.form.input.borderHover};
+					box-shadow: ${(props) => props.theme.form.input.shadowHover}; // TODO
 				}
 
 				&:focus,
@@ -133,10 +169,77 @@ export const GlobalStyles = createGlobalStyle`
 				&-focused{
 					color: ${(props) => props.theme.form.input.textActive};
 					background: ${(props) => props.theme.form.input.bgActive};
-					border-color: ${(props) => props.theme.form.input.borderActive};
-					box-shadow: ${(props) => props.theme.form.input.shadowActive};
+					border: 1px solid ${(props) => props.theme.form.input.borderActive};
+					box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
 				}
 
+			}
+
+			&-open{
+				color: ${(props) => props.theme.form.input.textActive};
+				background: ${(props) => props.theme.form.input.bgActive};
+				border: 1px solid ${(props) => props.theme.form.input.borderActive};
+				box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+			}
+
+		}
+
+		// Picker
+		&-picker{
+			color: ${(props) => props.theme.form.input.text};
+			background: ${(props) => props.theme.form.input.bg};
+			border: 1px solid ${(props) => props.theme.form.input.border};
+
+			&:hover{
+				color: ${(props) => props.theme.form.input.textHover};
+				background: ${(props) => props.theme.form.input.bgHover};
+				border: 1px solid ${(props) => props.theme.form.input.borderHover};
+				box-shadow: ${(props) => props.theme.form.input.shadowHover}; // TODO
+			}
+
+			&:focus,
+			&:active,
+			&-focused{
+				color: ${(props) => props.theme.form.input.textActive};
+				background: ${(props) => props.theme.form.input.bgActive};
+				border: 1px solid ${(props) => props.theme.form.input.borderActive};
+				box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+			}
+
+		}
+
+		// Switch
+		&-switch{
+			background-color: ${(props) => props.theme.color.grey}; // TODO
+			&-checked{
+				background-color: ${(props) => props.theme.button.primary.bg}; // TODO
+			}
+
+			&-handle{
+
+			}
+		}
+
+		// Tabs
+		&-tabs{
+			&-ink{
+				&-bar{
+					background-color: ${(props) => props.theme.color.primary};
+				}
+			}
+
+			&-tab{
+
+				&:hover,
+				&:focus,
+				&:active{
+					color: ${(props) => props.theme.color.primary};
+				}
+
+				&.ant-tabs-tab-active .ant-tabs-tab-btn{
+					color: ${(props) => props.theme.color.primary};
+				}
+			}
 		}
 
 	}

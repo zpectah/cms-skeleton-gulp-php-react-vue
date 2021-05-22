@@ -14,10 +14,19 @@ interface MessagesDetailFormProps {
 	onCancel: Function;
 	onSave: (data, response) => void;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
@@ -94,6 +103,8 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

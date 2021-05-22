@@ -58,6 +58,7 @@ const CategoriesPage = () => {
 				columnsLayout={{
 					title_lang: true,
 					// parent: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{

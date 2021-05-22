@@ -23,13 +23,22 @@ interface TranslationsDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 	props,
 ) => {
 	const { t } = useTranslation(['common']);
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const {
 		updateTranslations,
 		createTranslations,
@@ -154,6 +163,8 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

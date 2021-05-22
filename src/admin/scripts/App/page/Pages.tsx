@@ -57,6 +57,7 @@ const PagesPage = () => {
 				loading={isPagesLoading}
 				columnsLayout={{
 					title_lang: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{

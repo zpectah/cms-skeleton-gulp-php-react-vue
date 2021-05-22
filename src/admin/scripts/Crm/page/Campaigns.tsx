@@ -57,6 +57,7 @@ const CampaignsPage = () => {
 				loading={isCampaignsLoading}
 				columnsLayout={{
 					name: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{

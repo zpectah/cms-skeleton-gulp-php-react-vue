@@ -27,6 +27,8 @@ interface DetailItemDialogProps {
 	onSave: (data, response) => void;
 	onDelete: (data) => void;
 	afterClose?: () => void;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const Dialog: React.FC<DetailItemDialogProps> = (props) => {
@@ -38,6 +40,8 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		onSave,
 		onDelete,
 		afterClose,
+		allowSave,
+		allowDelete,
 	} = props;
 
 	const component = {
@@ -69,6 +73,8 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 				onCancel={onCancel}
 				onSave={onSave}
 				onDelete={onDelete}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</Modal.Base>
 	);

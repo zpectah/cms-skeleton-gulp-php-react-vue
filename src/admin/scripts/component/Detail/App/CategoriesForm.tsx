@@ -23,11 +23,20 @@ interface CategoriesDetailFormProps {
 	onCancel: Function;
 	onSave: Function;
 	onDelete: Function;
+	allowSave: boolean;
+	allowDelete: boolean;
 }
 
 const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	const { t } = useTranslation(['common']);
-	const { detailData, onCancel, onSave, onDelete } = props;
+	const {
+		detailData,
+		onCancel,
+		onSave,
+		onDelete,
+		allowSave,
+		allowDelete,
+	} = props;
 	const {
 		updateCategories,
 		createCategories,
@@ -256,6 +265,8 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
 				detailData={detailData}
+				allowSave={allowSave}
+				allowDelete={allowDelete}
 			/>
 		</form>
 	);

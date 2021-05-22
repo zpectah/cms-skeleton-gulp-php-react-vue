@@ -141,8 +141,8 @@ export default {
 		},
 	},
 	sidebar: {
-		navItemHoverText: 'rgb(50,50,50)',
-		navItemHoverBg: 'rgb(235, 235, 235)',
+		navItemHoverText: 'rgb(235, 235, 235)',
+		navItemHoverBg: 'rgba(235, 235, 235, .05)',
 		navItemBorder: 'rgba(50,50,50,.5)',
 		navItemActiveColor: palette.white,
 		navItemActiveBg: color.primary,
