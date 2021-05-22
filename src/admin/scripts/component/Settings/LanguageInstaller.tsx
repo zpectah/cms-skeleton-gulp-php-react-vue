@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import config from '../../config';
 import { Button } from '../ui';
-import { useSettings } from '../../App/hooks';
+import { useSystemApi } from '../../App/hooks';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -27,7 +27,7 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 	const { Option } = Select;
 	const [progress, setProgress] = useState<boolean>(false);
 	const [langToInstall, setLangToInstall] = useState<string[]>([]);
-	const { installLanguage } = useSettings();
+	const { installLanguage } = useSystemApi();
 
 	const renderOptions = () => {
 		return config.OPTIONS.language.available.map((item) => {

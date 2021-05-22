@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { appProps } from '../../types';
 import { Button } from '../ui';
-import { useSettings } from '../../App/hooks';
+import { useSystemApi } from '../../App/hooks';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -27,7 +27,7 @@ const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
 	const { t } = useTranslation(['component']);
 	const { module, afterInstall, disabled = false } = props;
 	const [progress, setProgress] = useState<boolean>(false);
-	const { installModule } = useSettings();
+	const { installModule } = useSystemApi();
 
 	useEffect(() => {
 		return () => {};

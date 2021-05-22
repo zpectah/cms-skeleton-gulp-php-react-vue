@@ -12,6 +12,9 @@ import { routeProps } from '../../types';
 import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
+import RepairSqlTables from './RepairSqlTables';
+import ExportSqlDump from './ExportSqlDump';
+import ImportSqlDump from './ImportSqlDump';
 
 const ActionRow = styled.div`
 	padding-top: 1rem;
@@ -799,48 +802,10 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						<Section.Base title={'Repairs'} titleAnchor={'repairs'}>
 							<TableWrapper>
 								<StyledTable>
-									{/* TODO */}
 									<tbody>
-										<tr>
-											<th>Repair missing language content</th>
-											<td>
-												<Button.Base
-													type="primary"
-													onClick={() => {
-														console.log('Repair missing language content');
-													}}
-													ghost
-												>
-													Proceed
-												</Button.Base>
-											</td>
-											<td>
-												<small>
-													Iterate all language content and create missing rows
-													in database
-												</small>
-											</td>
-										</tr>
-										<tr>
-											<th>Export data (test)</th>
-											<td>
-												<Button.Base
-													type="primary"
-													onClick={() => {
-														console.log('... export data ...');
-													}}
-													ghost
-												>
-													Proceed
-												</Button.Base>
-											</td>
-											<td>
-												<small>
-													TEST - Export all data and save as file .sql format -
-													TEST
-												</small>
-											</td>
-										</tr>
+										<RepairSqlTables />
+										<ExportSqlDump />
+										<ImportSqlDump />
 									</tbody>
 								</StyledTable>
 							</TableWrapper>

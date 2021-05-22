@@ -2,6 +2,17 @@ import useSWR, { mutate } from 'swr';
 
 import api from '../utils/api';
 
+function useSystemApi() {
+	return {
+		installLanguage: (data: any) => api.post('/api/install_language', data),
+		installModule: (data: any) => api.post('/api/install_module', data),
+		repairLanguageTables: (data: any) =>
+			api.post('/api/repair_language_tables', data),
+		exportSqlDump: (data: any) => api.post('/api/export_table_dump', data),
+		importSqlDump: (data: any) => api.post('/api/import_table_data', data),
+	};
+}
+
 function useProfile() {
 	const { data, error } = useSWR(`/api/get_profile`);
 
@@ -28,8 +39,6 @@ function useSettings() {
 		isSettingsError: error,
 		reloadSettings: () => mutate(`/api/get_settings`),
 		updateSettings: (data: any) => api.post('/api/update_settings', data),
-		installLanguage: (data: any) => api.post('/api/install_language', data),
-		installModule: (data: any) => api.post('/api/install_module', data),
 	};
 }
 
@@ -212,4 +221,5 @@ export {
 	useUploads,
 	useMenu,
 	useMenuItems,
+	useSystemApi,
 };
