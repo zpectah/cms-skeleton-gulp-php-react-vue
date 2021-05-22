@@ -11,17 +11,16 @@ const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 
 	const processHandler = () => {
 		setProgress(true);
-		console.log('... processHandler ...');
 
 		exportSqlDump({}).then((res) => {
-			console.log('res ', res);
+			if (res && res.url) window.open(res.url);
 			setProgress(false);
 		});
 	};
 
 	return (
 		<tr>
-			<th>Export data (test)</th>
+			<th>Export data tables</th>
 			<td>
 				<Button.Base
 					type="primary"
@@ -33,9 +32,7 @@ const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 				</Button.Base>
 			</td>
 			<td>
-				<small>
-					TEST - Export all data and save as file .sql format - TEST
-				</small>
+				<small>Export all data and save as file .sql format</small>
 			</td>
 		</tr>
 	);

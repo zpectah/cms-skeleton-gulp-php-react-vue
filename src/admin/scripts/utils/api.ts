@@ -27,11 +27,22 @@ const post = async (url: string, data: any) => {
 	return response.json();
 };
 
+const postRaw = async (url: string, data: any) => {
+	console.log('data', data);
+	const response = await fetch(url, {
+		method: 'POST',
+		...init,
+		body: JSON.stringify(data),
+	});
+	return response;
+};
+
 const fetcher = (url) =>
 	fetch(url, { cache: 'reload' }).then((res) => res.json());
 
 export default {
 	get,
 	post,
+	postRaw,
 	fetcher,
 };

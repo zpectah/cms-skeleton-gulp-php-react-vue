@@ -805,7 +805,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									<tbody>
 										<RepairSqlTables />
 										<ExportSqlDump />
-										<ImportSqlDump />
+										{config.GLOBAL.CMS.USE_IMPORT_SQL && <ImportSqlDump />}
 									</tbody>
 								</StyledTable>
 							</TableWrapper>
