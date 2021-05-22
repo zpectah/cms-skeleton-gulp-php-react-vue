@@ -34,16 +34,6 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
-			case 'install_language':
-				$response['data'] = $DataService -> install_language($requestData);
-				$response['status'] = 'ok';
-				break;
-
-			case 'install_module':
-				$response['data'] = $DataService -> install_module($requestData);
-				$response['status'] = 'ok';
-				break;
-
 
 			// Profile
 			case 'get_profile':
@@ -568,6 +558,24 @@ class Request {
 				$response['status'] = 'ok';
 				break;
 
+
+			// Installer
+			case 'install_language':
+				$response['data'] = $DataService -> install_language($requestData);
+				$response['status'] = 'ok';
+				break;
+
+			case 'install_module':
+				$response['data'] = $DataService -> install_module($requestData);
+				$response['status'] = 'ok';
+				break;
+
+
+			// Handyman
+			case 'repair_language_tables':
+				$response['data'] = $DataService -> repair_language_tables($requestData);
+				$response['status'] = 'ok';
+				break;
 
 
 			// ...

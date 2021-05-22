@@ -64,6 +64,12 @@ require PATH_PFX . 'core/model/Market/Distributors.php';
 require PATH_PFX . 'core/model/Market/Deliveries.php';
 
 /*
+ * Handlers
+ */
+require PATH_PFX . 'core/handler/Installer.php';
+require PATH_PFX . 'core/handler/Handyman.php';
+
+/*
  * Api
  */
 require PATH_PFX . 'core/api/Request.php';

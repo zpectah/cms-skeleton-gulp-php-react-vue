@@ -4,6 +4,8 @@
 namespace core\service;
 
 
+use core\handler\Handyman;
+use core\handler\Installer;
 use core\model\Categories;
 use core\model\Crm\Campaigns;
 use core\model\Market\Deliveries;
@@ -676,12 +678,14 @@ class DataService {
 		return $response;
 	}
 
+	//
+
 	public function install_language ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
 
-		$Settings = new Settings;
+		$Installer = new Installer;
 
-		$response = $Settings -> install_language($conn, $data);
+		$response = $Installer -> install_language($conn, $data);
 
 		$conn -> close();
 
@@ -691,9 +695,21 @@ class DataService {
 	public function install_module ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
 
-		$Settings = new Settings;
+		$Installer = new Installer;
 
-		$response = $Settings -> install_module($conn, $data);
+		$response = $Installer -> install_module($conn, $data);
+
+		$conn -> close();
+
+		return $response;
+	}
+
+	public function repair_language_tables ($data) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
+		$Handyman = new Handyman;
+
+		$response = $Handyman -> repair_language_tables($conn, $data);
 
 		$conn -> close();
 
