@@ -5,6 +5,7 @@ import { Input, Select, Switch } from 'antd';
 
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
+import { replaceSpaces } from '../../../utils/string';
 import { useMenu } from '../../../App/hooks';
 import { MenuItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker } from '../../ui';
@@ -36,17 +37,21 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 		},
 	});
 	const { updateMenu, createMenu, reloadMenu } = useMenu();
-	const activeParentField = false; // TODO
 
 	const submitHandler = (data) => {
+		const master = {
+			...data,
+			name: replaceSpaces(data.name),
+		};
+
 		if (detailData.is_new) {
-			createMenu(data).then((response) => {
-				onSave(data, response);
+			createMenu(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		} else {
-			updateMenu(data).then((response) => {
-				onSave(data, response);
+			updateMenu(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		}
@@ -63,14 +68,6 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 					ref={register({ required: true })}
 					defaultValue={detailData.id}
 				/>
-				{!activeParentField && (
-					<input
-						type="hidden"
-						name="parent"
-						ref={register({})}
-						defaultValue={detailData.parent}
-					/>
-				)}
 			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
@@ -119,24 +116,22 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					{activeParentField && (
-						<Form.Row
-							label={'Parent'}
-							name={'parent'}
-							control={control}
-							defaultValue={detailData.parent || ''}
-						>
-							{(row) => (
-								<Picker.Menu
-									id={row.id}
-									value={row.value}
-									onChange={row.onChange}
-									ignoredId={detailData.id !== 'new' && [detailData.id]}
-									single
-								/>
-							)}
-						</Form.Row>
-					)}
+					<Form.Row
+						label={'Parent'}
+						name={'parent'}
+						control={control}
+						defaultValue={detailData.parent || ''}
+					>
+						{(row) => (
+							<Picker.Menu
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								ignoredId={detailData.id !== 'new' && [detailData.id]}
+								single
+							/>
+						)}
+					</Form.Row>
 					<Form.Row
 						label={'Active'}
 						name={'active'}
@@ -148,7 +143,15 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 					<Form.RowNoController label={'Menu items'} long>
-						{() => <div>...menu items picker ...</div>}
+						{() => (
+							<>
+								{detailData.is_new ? (
+									<div>Menu items should be added when menu is created ...</div>
+								) : (
+									<Picker.MenuItems />
+								)}
+							</>
+						)}
 					</Form.RowNoController>
 				</Section.Base>
 			</Modal.Content>

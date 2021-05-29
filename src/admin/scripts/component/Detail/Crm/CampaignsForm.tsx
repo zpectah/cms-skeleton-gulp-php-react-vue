@@ -8,6 +8,7 @@ import { useCampaigns } from '../../../Crm/hooks';
 import { CampaignsItemProps } from '../../../Crm/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
+import { replaceSpaces } from '../../../utils/string';
 
 interface CampaignsDetailFormProps {
 	detailData: CampaignsItemProps;
@@ -37,14 +38,19 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 	const { updateCampaigns, createCampaigns, reloadCampaigns } = useCampaigns();
 
 	const submitHandler = (data) => {
+		const master = {
+			...data,
+			name: replaceSpaces(data.name),
+		};
+
 		if (detailData.is_new) {
-			createCampaigns(data).then((response) => {
-				onSave(data, response);
+			createCampaigns(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		} else {
-			updateCampaigns(data).then((response) => {
-				onSave(data, response);
+			updateCampaigns(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		}

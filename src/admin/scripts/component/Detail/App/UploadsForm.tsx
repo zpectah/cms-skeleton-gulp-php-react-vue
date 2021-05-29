@@ -12,6 +12,7 @@ import LanguageToggle from '../../Language';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
+import { replaceSpaces } from '../../../utils/string';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -108,9 +109,10 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		if (detailData.is_new) {
 			const master = {
 				...data,
+				name: replaceSpaces(data.name),
 				fileBase64: tmp_blob,
 				extension: tmp_meta.extension,
-				file_name: tmp_meta.name,
+				file_name: replaceSpaces(tmp_meta.name),
 				file_mime: tmp_meta.mime,
 				file_size: tmp_meta.size,
 				type: tmp_meta.type,

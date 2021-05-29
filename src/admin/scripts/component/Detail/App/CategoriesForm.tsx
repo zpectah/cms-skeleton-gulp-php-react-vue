@@ -12,6 +12,7 @@ import LanguageToggle from '../../Language';
 import { useCategories, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
+import { replaceSpaces } from '../../../utils/string';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -65,6 +66,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
+			name: replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {

@@ -8,6 +8,7 @@ import { useTags } from '../../../App/hooks';
 import { TagsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
+import { replaceSpaces } from '../../../utils/string';
 
 interface TagsDetailFormProps {
 	detailData: TagsItemProps;
@@ -37,14 +38,19 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	const { updateTags, createTags, reloadTags } = useTags();
 
 	const submitHandler = (data) => {
+		const master = {
+			...data,
+			name: replaceSpaces(data.name),
+		};
+
 		if (detailData.is_new) {
-			createTags(data).then((response) => {
-				onSave(data, response);
+			createTags(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		} else {
-			updateTags(data).then((response) => {
-				onSave(data, response);
+			updateTags(master).then((response) => {
+				onSave(master, response);
 				onCancel();
 			});
 		}

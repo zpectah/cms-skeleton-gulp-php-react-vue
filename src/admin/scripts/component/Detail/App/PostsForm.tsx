@@ -13,6 +13,7 @@ import { usePosts, useSettings, useProfile } from '../../../App/hooks';
 import LanguageToggle from '../../Language';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
+import { replaceSpaces } from '../../../utils/string';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -73,6 +74,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
+			name: replaceSpaces(data.name),
 			// Reduce and repair date data before submit
 			published: tmp_published
 				? tmp_published

@@ -12,6 +12,7 @@ import LanguageToggle from '../../Language';
 import { usePages, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
+import { replaceSpaces } from '../../../utils/string';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -58,10 +59,9 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	}, [Settings]);
 
 	const submitHandler = (data) => {
-		// TODO#BUG: DatePicker in Controller unexpected behavior
-		// Reduce and repair data before submit
 		const master = {
 			...data,
+			name: replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {
