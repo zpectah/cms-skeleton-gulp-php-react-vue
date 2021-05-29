@@ -255,7 +255,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 					>
 						{record.type == 'image' && (
 							<RowLinkImage
-								src={config.ROOT_PATH + 'uploads/image/thumbnail/' + text}
+								src={config.UPLOADS_PATH.image.thumbnail + text}
 								alt={record.name}
 							/>
 						)}

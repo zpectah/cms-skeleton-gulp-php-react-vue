@@ -214,7 +214,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								{detailData.type == 'image' ? (
 									<StyledImage
 										src={
-											config.ROOT_PATH + 'uploads/image/' + detailData.file_name
+											config.UPLOADS_PATH.image.default + detailData.file_name
 										}
 										alt={detailData.name}
 									/>

@@ -146,7 +146,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 
 	useEffect(() => {
 		if (Uploads) setInitialItems();
-	}, [selected, Uploads]);
+	}, [Uploads]);
 
 	const onSelectHandler = (fileName) => {
 		let tmp_selected = [...tmpItemsSelected];
@@ -162,9 +162,11 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 	};
 
 	const onConfirmHandler = () => {
+		console.log('!!!', tmpItemsSelected);
+
 		if (onChange) {
 			if (single) {
-				onChange(tmpItemsSelected[0]);
+				onChange(tmpItemsSelected[0] || '');
 			} else {
 				onChange(tmpItemsSelected);
 			}
@@ -193,9 +195,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 										<>
 											<img
 												src={
-													config.ROOT_PATH +
-													'uploads/image/thumbnail/' +
-													item.file_name
+													config.UPLOADS_PATH.image.thumbnail + item.file_name
 												}
 												alt={item.name}
 												className="img"
@@ -232,9 +232,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 									<SelectedListItem key={item}>
 										{type == 'image' ? (
 											<img
-												src={
-													config.ROOT_PATH + 'uploads/image/thumbnail/' + item
-												}
+												src={config.UPLOADS_PATH.image.thumbnail + item}
 												alt={item}
 												className="img"
 											/>
