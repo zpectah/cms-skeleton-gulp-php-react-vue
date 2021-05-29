@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import config from '../../config';
 import { routeProps } from '../../types';
 // import { EMAIL_REGEX } from '../../constants'; // TODO
-import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
+import { Button, Form as UiForm, Card, Section, Hr, Manager } from '../ui';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
 import RepairSqlTables from './RepairSqlTables';
@@ -328,14 +328,20 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								helpText={'This information are optional'}
 							>
 								{(row) => (
-									<TextArea
-										id={row.id}
-										rows={3}
-										name={row.name}
-										value={row.value}
-										onChange={row.onChange}
-										placeholder={'Company location object'}
-									/>
+									<>
+										<TextArea
+											id={row.id}
+											rows={3}
+											name={row.name}
+											value={row.value}
+											onChange={row.onChange}
+											placeholder={'Company location object'} // ???
+										/>
+										<Manager.Location
+											value={row.value}
+											onChange={row.onChange}
+										/>
+									</>
 								)}
 							</UiForm.Row>
 						</Section.Base>

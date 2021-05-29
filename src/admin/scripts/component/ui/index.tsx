@@ -12,6 +12,7 @@ import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
 import Uploader from './Uploader';
 import Manager from './Manager';
+import Map from './Map';
 
 export {
 	Button,
@@ -28,4 +29,5 @@ export {
 	Viewer,
 	Uploader,
 	Manager,
+	Map,
 };

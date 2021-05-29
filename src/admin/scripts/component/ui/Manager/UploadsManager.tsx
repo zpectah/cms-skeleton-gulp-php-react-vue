@@ -251,7 +251,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 						</SelectedStructureContainer>
 					</>
 				) : (
-					<div>...</div>
+					<div></div>
 				)}
 			</Wrapper>
 		</>

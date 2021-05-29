@@ -273,14 +273,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										defaultValue={detailData.event_location || ''}
 									>
 										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event_location'}
-											/>
+											<>
+												<Manager.Location
+													value={row.value}
+													onChange={row.onChange}
+												/>
+											</>
 										)}
 									</Form.Row>
 								</>
@@ -296,13 +294,11 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										defaultValue={detailData.media || ''}
 									>
 										{(row) => (
-											<>
-												<Manager.Uploads
-													type="image"
-													selected={row.value}
-													onChange={row.onChange}
-												/>
-											</>
+											<Manager.Uploads
+												type="image"
+												selected={row.value}
+												onChange={row.onChange}
+											/>
 										)}
 									</Form.Row>
 								</>
@@ -494,5 +490,4 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 		</form>
 	);
 };
-
 export default PostsDetailForm;
