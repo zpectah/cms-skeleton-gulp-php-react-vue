@@ -26,7 +26,6 @@ export interface ProductsItemProps extends commonModelProps {
 export interface StoresItemProps extends commonModelProps {
 	name: string;
 	type: 'default';
-	title: string;
 	store_address: string;
 	store_city: string;
 	store_country: string;
@@ -44,13 +43,37 @@ export interface StoresItemProps extends commonModelProps {
 }
 
 export interface PaymentsItemProps extends commonModelProps {
-	// with lang
+	name: string;
+	type: 'default';
+	payment_options: {}; // TODO - will be object
+	img_main?: string;
+	lang?: {
+		title: string;
+		description?: string;
+	};
 }
 
 export interface DeliveriesItemProps extends commonModelProps {
-	// with lang
+	name: string;
+	type: 'default';
+	delivery_options: {}; // TODO - will be object
+	img_main?: string;
+	lang?: {
+		title: string;
+		description?: string;
+	};
 }
 
-export interface ProducersItemProps extends commonModelProps {}
+export interface ProducersItemProps extends commonModelProps {
+	name: string;
+	type: 'default';
+	producer_options: {};
+	img_main?: string;
+}
 
-export interface DistributorsItemProps extends commonModelProps {}
+export interface DistributorsItemProps extends commonModelProps {
+	name: string;
+	type: 'default';
+	distributor_options: {};
+	img_main?: string;
+}
