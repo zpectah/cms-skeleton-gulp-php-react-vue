@@ -799,11 +799,19 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				</TabPane>
 				<TabPane tab="Maintenance" key="maintenance">
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Repairs'} titleAnchor={'repairs'}>
+						<Section.Base title={'Repairs'} titleAnchor={'repairs'} withBorder>
 							<TableWrapper>
 								<StyledTable>
 									<tbody>
 										<RepairSqlTables />
+									</tbody>
+								</StyledTable>
+							</TableWrapper>
+						</Section.Base>
+						<Section.Base title={'Export'} titleAnchor={'export'}>
+							<TableWrapper>
+								<StyledTable>
+									<tbody>
 										<ExportSqlDump />
 										{config.GLOBAL.CMS.USE_IMPORT_SQL && <ImportSqlDump />}
 									</tbody>

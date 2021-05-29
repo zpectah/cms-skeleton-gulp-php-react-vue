@@ -71,6 +71,7 @@ class DataService {
 
 
 		$languages = $Settings -> get_languages($conn);
+		$modules = $Settings -> get_modules($conn);
 
 		switch ($model) {
 
@@ -126,36 +127,71 @@ class DataService {
 				$response = $MenuItems -> get($conn, $data, $languages);
 				break;
 
+			// module: Members
 			case 'Members':
-				$response = $Members -> get($conn, $data);
+				if ($modules['module_members_installed'] == 'true') {
+					$response = $Members -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Crm
 			case 'Campaigns':
-				$response = $Campaigns -> get($conn, $data);
+				if ($modules['module_crm_installed'] == 'true') {
+					$response = $Campaigns -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Market
 			case 'Deliveries':
-				$response = $Deliveries -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Deliveries -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Distributors':
-				$response = $Distributors -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Distributors -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Payments':
-				$response = $Payments -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Payments -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Producers':
-				$response = $Producers -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Producers -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Products':
-				$response = $Products -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Products -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Stores':
-				$response = $Stores -> get($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Stores -> get($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 		}
@@ -199,6 +235,7 @@ class DataService {
 
 
 		$languages = $Settings -> get_languages($conn);
+		$modules = $Settings -> get_modules($conn);
 
 		switch ($model) {
 
@@ -246,36 +283,71 @@ class DataService {
 				$response = $MenuItems -> create($conn, $data, $languages);
 				break;
 
+			// module: Members
 			case 'Members':
-				$response = $Members -> create($conn, $data);
+				if ($modules['module_members_installed'] == 'true') {
+					$response = $Members -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Crm
 			case 'Campaigns':
-				$response = $Campaigns -> create($conn, $data);
+				if ($modules['module_crm_installed'] == 'true') {
+					$response = $Campaigns -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Market
 			case 'Deliveries':
-				$response = $Deliveries -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Deliveries -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Distributors':
-				$response = $Distributors -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Distributors -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Payments':
-				$response = $Payments -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Payments -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Producers':
-				$response = $Producers -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Producers -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Products':
-				$response = $Products -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Products -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Stores':
-				$response = $Stores -> create($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Stores -> create($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 		}
@@ -320,6 +392,7 @@ class DataService {
 
 
 		$languages = $Settings -> get_languages($conn);
+		$modules = $Settings -> get_modules($conn);
 
 		switch ($model) {
 
@@ -371,36 +444,71 @@ class DataService {
 				$response = $MenuItems -> update($conn, $data, $languages);
 				break;
 
+			// module: Members
 			case 'Members':
-				$response = $Members -> update($conn, $data);
+				if ($modules['module_members_installed'] == 'true') {
+					$response = $Members -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Crm
 			case 'Campaigns':
-				$response = $Campaigns -> update($conn, $data);
+				if ($modules['module_crm_installed'] == 'true') {
+					$response = $Campaigns -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Market
 			case 'Deliveries':
-				$response = $Deliveries -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Deliveries -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Distributors':
-				$response = $Distributors -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Distributors -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Payments':
-				$response = $Payments -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Payments -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Producers':
-				$response = $Producers -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Producers -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Products':
-				$response = $Products -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Products -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Stores':
-				$response = $Stores -> update($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Stores -> update($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 		}
@@ -415,6 +523,7 @@ class DataService {
 		$response = null;
 
 		// module: App
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -439,6 +548,8 @@ class DataService {
 		$Products = new Products;
 		$Stores = new Stores;
 
+
+		$modules = $Settings -> get_modules($conn);
 
 		switch ($model) {
 
@@ -478,36 +589,71 @@ class DataService {
 				$response = $MenuItems -> toggle($conn, $data);
 				break;
 
+			// module: Members
 			case 'Members':
-				$response = $Members -> toggle($conn, $data);
+				if ($modules['module_members_installed'] == 'true') {
+					$response = $Members -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Crm
 			case 'Campaigns':
-				$response = $Campaigns -> toggle($conn, $data);
+				if ($modules['module_crm_installed'] == 'true') {
+					$response = $Campaigns -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Market
 			case 'Deliveries':
-				$response = $Deliveries -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Deliveries -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Distributors':
-				$response = $Distributors -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Distributors -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Payments':
-				$response = $Payments -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Payments -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Producers':
-				$response = $Producers -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Producers -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Products':
-				$response = $Products -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Products -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Stores':
-				$response = $Stores -> toggle($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Stores -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 		}
@@ -522,6 +668,7 @@ class DataService {
 		$response = null;
 
 		// module: App
+		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
 		$Pages = new Pages;
@@ -548,6 +695,8 @@ class DataService {
 		$Products = new Products;
 		$Stores = new Stores;
 
+
+		$modules = $Settings -> get_modules($conn);
 
 		switch ($model) {
 
@@ -595,36 +744,71 @@ class DataService {
 				$response = $MenuItems -> delete($conn, $data);
 				break;
 
+			// module: Members
 			case 'Members':
-				$response = $Members -> delete($conn, $data);
+				if ($modules['module_members_installed'] == 'true') {
+					$response = $Members -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Crm
 			case 'Campaigns':
-				$response = $Campaigns -> delete($conn, $data);
+				if ($modules['module_crm_installed'] == 'true') {
+					$response = $Campaigns -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
+			// module: Market
 			case 'Deliveries':
-				$response = $Deliveries -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Deliveries -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Distributors':
-				$response = $Distributors -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Distributors -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Payments':
-				$response = $Payments -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Payments -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Producers':
-				$response = $Producers -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Producers -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Products':
-				$response = $Products -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Products -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 			case 'Stores':
-				$response = $Stores -> delete($conn, $data);
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $Stores -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
 				break;
 
 		}

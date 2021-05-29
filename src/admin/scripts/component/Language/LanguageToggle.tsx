@@ -18,7 +18,7 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
 	const { Settings } = useSettings();
 	const langDefault =
 		lang || Settings?.language_default || config.GLOBAL.PROJECT.LANG_DEFAULT;
-	const langList = Settings?.language_installed || [];
+	const langList = Settings?.language_active || [];
 
 	const getLabel = (lng) => {
 		let label = config.LOCALES_LIST[lng].label;

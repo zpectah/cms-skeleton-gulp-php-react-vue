@@ -28,7 +28,7 @@ const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 					loading={progress}
 					ghost
 				>
-					Proceed
+					Export SQL
 				</Button.Base>
 			</td>
 			<td>

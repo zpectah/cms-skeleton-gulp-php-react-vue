@@ -119,4 +119,30 @@ class Settings {
 		return $response;
 	}
 
+	public function get_modules ($conn) {
+		$response = [];
+
+		// prepare
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM settings_cms WHERE context = ?');
+		$types = 's';
+		$args = [ 'module' ];
+
+		// execute
+		$stmt = $conn -> prepare($query);
+		$stmt -> bind_param($types, ...$args);
+		$stmt -> execute();
+		$result = $stmt -> get_result();
+		$stmt -> close();
+
+		if ($result -> num_rows > 0) {
+			while($row = $result -> fetch_assoc()) {
+				$nv = $row['value'] == 'true';
+
+				$response[$row['name']] = $nv;
+			}
+		}
+
+		return $response;
+	}
+
 }

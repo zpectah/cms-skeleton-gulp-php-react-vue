@@ -12,7 +12,7 @@ class SqlDumper {
 
 	public function export_table_dump($requestData) {
 		$date = date_create();
-		$filePrefix = 'sqlDump__' . date_timestamp_get($date);
+		$filePrefix = CMS_NAME . '_dump_' . date_timestamp_get($date);
 
 		try {
 			$dump = new IMysqldump\Mysqldump('mysql:host=' . CFG_DB['server'] .';dbname=' . CFG_DB['name'], CFG_DB['user'], CFG_DB['password']);
