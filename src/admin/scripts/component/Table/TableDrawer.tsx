@@ -22,13 +22,11 @@ const TableDrawer: React.FC<TableDrawerProps> = ({ children }) => {
 				Table options
 			</Button.Base>
 			<Drawer
-				title="Table options"
-				placement="right"
+				placement="top"
 				closable={false}
 				onClose={onClose}
 				visible={visible}
 				children={children}
-				width={400}
 			/>
 		</>
 	);

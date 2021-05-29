@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Drawer } from 'antd';
+
+import Modal from '../Modal';
 
 interface MediaPickerProps {
 	value: string;
@@ -9,7 +10,7 @@ interface MediaPickerProps {
 const MediaPicker: React.FC<MediaPickerProps> = ({ value, onChange }) => {
 	const [visible, setVisible] = useState(false);
 
-	const showDrawer = () => {
+	const showDialog = () => {
 		setVisible(true);
 	};
 
@@ -19,20 +20,14 @@ const MediaPicker: React.FC<MediaPickerProps> = ({ value, onChange }) => {
 
 	return (
 		<>
-			<button type="button" onClick={showDrawer}>
-				Open media drawer
+			<button type="button" onClick={showDialog}>
+				Open media dialog
 			</button>
-			<Drawer
-				title="Basic Drawer"
-				placement="right"
-				closable={false}
-				onClose={onClose}
-				visible={visible}
-				zIndex={1025}
-				width={400}
-			>
-				<div>input for media ... {value}</div>
-			</Drawer>
+			<Modal.Base visible={visible} onCancel={onClose}>
+				<Modal.Content>
+					<div>input for media ... {value}</div>
+				</Modal.Content>
+			</Modal.Base>
 		</>
 	);
 };
