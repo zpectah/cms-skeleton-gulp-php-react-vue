@@ -8,7 +8,15 @@ import moment from 'moment';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
+import {
+	Modal,
+	Typography,
+	Form,
+	Section,
+	Picker,
+	Wysiwyg,
+	Manager,
+} from '../../ui';
 import { usePosts, useSettings, useProfile } from '../../../App/hooks';
 import LanguageToggle from '../../Language';
 import DetailFooter from '../DetailFooter';
@@ -289,8 +297,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									>
 										{(row) => (
 											<>
-												<Picker.Media
-													value={row.value}
+												<Manager.Uploads
+													selected={row.value}
 													onChange={row.onChange}
 												/>
 											</>
@@ -423,7 +431,11 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 					>
 						{(row) => (
 							<>
-								<Picker.Media value={row.value} onChange={row.onChange} />
+								<Manager.Uploads
+									selected={row.value}
+									onChange={row.onChange}
+									single
+								/>
 							</>
 						)}
 					</Form.Row>
@@ -435,7 +447,11 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 					>
 						{(row) => (
 							<>
-								<Picker.Media value={row.value} onChange={row.onChange} />
+								<Manager.Uploads
+									selected={row.value}
+									onChange={row.onChange}
+									single
+								/>
 							</>
 						)}
 					</Form.Row>

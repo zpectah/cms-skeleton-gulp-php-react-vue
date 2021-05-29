@@ -8,7 +8,7 @@ import { SUBMIT_TIMEOUT } from '../../../constants';
 import { replaceSpaces } from '../../../utils/string';
 import { useMenu } from '../../../App/hooks';
 import { MenuItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker } from '../../ui';
+import { Modal, Typography, Form, Section, Picker, Manager } from '../../ui';
 import DetailFooter from '../DetailFooter';
 
 interface MenuDetailFormProps {
@@ -148,7 +148,12 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 								{detailData.is_new ? (
 									<div>Menu items should be added when menu is created ...</div>
 								) : (
-									<Picker.MenuItems />
+									<Manager.MenuItems
+										menuId={detailData.id}
+										onUpdate={() => {
+											console.log('onUpdate menu items');
+										}}
+									/>
 								)}
 							</>
 						)}

@@ -7,7 +7,15 @@ import styled from 'styled-components';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { CategoriesItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
+import {
+	Modal,
+	Typography,
+	Form,
+	Section,
+	Picker,
+	Wysiwyg,
+	Manager,
+} from '../../ui';
 import LanguageToggle from '../../Language';
 import { useCategories, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
@@ -227,7 +235,11 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 					>
 						{(row) => (
 							<>
-								<Picker.Media value={row.value} onChange={row.onChange} />
+								<Manager.Uploads
+									selected={row.value}
+									onChange={row.onChange}
+									single
+								/>
 							</>
 						)}
 					</Form.Row>
@@ -239,7 +251,11 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 					>
 						{(row) => (
 							<>
-								<Picker.Media value={row.value} onChange={row.onChange} />
+								<Manager.Uploads
+									selected={row.value}
+									onChange={row.onChange}
+									single
+								/>
 							</>
 						)}
 					</Form.Row>

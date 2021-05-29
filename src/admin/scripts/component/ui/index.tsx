@@ -11,6 +11,7 @@ import Picker from './Picker';
 import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
 import Uploader from './Uploader';
+import Manager from './Manager';
 
 export {
 	Button,
@@ -26,4 +27,5 @@ export {
 	Wysiwyg,
 	Viewer,
 	Uploader,
+	Manager,
 };
