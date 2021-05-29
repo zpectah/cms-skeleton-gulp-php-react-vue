@@ -43,7 +43,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 
 	return (
 		<>
-			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'lg'}>
+			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'xxl'}>
 				<Modal.Header>Menu items manager</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>

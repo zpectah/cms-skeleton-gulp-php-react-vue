@@ -16,6 +16,7 @@ export interface ProductsItemProps extends commonModelProps {
 	published?: string;
 	item_new: number;
 	item_campaign: number;
+	rating?: number;
 	lang?: {
 		title: string;
 		description?: string;
@@ -36,6 +37,7 @@ export interface StoresItemProps extends commonModelProps {
 	store_options: {}; // TODO - will be object
 	img_main?: string;
 	img_thumbnail?: string;
+	rating?: number;
 	lang?: {
 		title: string;
 		description?: string;

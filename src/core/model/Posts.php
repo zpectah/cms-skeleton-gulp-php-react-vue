@@ -152,10 +152,11 @@ class Posts {
                    img_thumbnail,
                    published,
                    author,
+                   rating,
                    active,
                    deleted
-                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'ssssssssssssiii';
+                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'ssssssssssssiiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -171,6 +172,7 @@ class Posts {
 			$requestData['img_thumbnail'],
 			$requestData['published'],
 			$requestData['author'],
+			$requestData['rating'],
 			$requestData['active'],
 			0
 		];
@@ -214,9 +216,10 @@ class Posts {
                  img_main = ?,
                  img_thumbnail = ?,
                  published = ?,
+                 rating = ?,
                  active = ?
 		WHERE id = ?');
-		$types = 'ssssssssssssii';
+		$types = 'ssssssssssssiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -231,6 +234,7 @@ class Posts {
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['published'],
+			$requestData['rating'],
 			$requestData['active'],
 			$requestData['id']
 		];

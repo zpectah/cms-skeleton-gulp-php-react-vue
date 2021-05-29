@@ -26,6 +26,7 @@ export interface PostsItemProps extends commonModelProps {
 	img_thumbnail?: string;
 	author?: number;
 	published?: string;
+	rating?: number;
 	lang?: {
 		title: string;
 		perex?: string;

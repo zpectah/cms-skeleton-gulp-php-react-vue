@@ -29,6 +29,7 @@ interface DetailItemDialogProps {
 	afterClose?: () => void;
 	allowSave: boolean;
 	allowDelete: boolean;
+	size?: 'lg' | 'xl' | 'xxl';
 }
 
 const Dialog: React.FC<DetailItemDialogProps> = (props) => {
@@ -42,6 +43,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		afterClose,
 		allowSave,
 		allowDelete,
+		size = 'xl',
 	} = props;
 
 	const component = {
@@ -66,7 +68,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 			visible={isOpen}
 			onCancel={onCancel}
 			afterClose={afterClose}
-			size={'lg'}
+			size={size}
 		>
 			<ComponentName
 				detailData={detailData}

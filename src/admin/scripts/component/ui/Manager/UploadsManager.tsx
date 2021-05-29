@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Carousel } from 'antd';
 
 import { useUploads } from '../../../App/hooks';
 import Modal from '../Modal';
@@ -64,8 +65,13 @@ const DialogListItem = styled.button<{ selected?: boolean }>`
 		height: auto;
 	}
 `;
-const SelectedList = styled.ul``;
-const SelectedListItem = styled.li``;
+const CarouselItem = styled.div`
+	height: 160px;
+	color: #fff;
+	lineheight: 160px;
+	textalign: center;
+	background: #364d79;
+`;
 
 interface UploadsManagerProps {
 	selected?: string[] | string;
@@ -162,8 +168,6 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 	};
 
 	const onConfirmHandler = () => {
-		console.log('!!!', tmpItemsSelected);
-
 		if (onChange) {
 			if (single) {
 				onChange(tmpItemsSelected[0] || '');
@@ -179,7 +183,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 
 	return (
 		<>
-			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'lg'}>
+			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'xxl'}>
 				<Modal.Header>Menu items manager</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
@@ -227,21 +231,23 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 				{itemsSelected.length > 0 ? (
 					<>
 						<SelectedStructureContainer>
-							<SelectedList>
+							<Carousel>
 								{itemsSelected.map((item) => (
-									<SelectedListItem key={item}>
-										{type == 'image' ? (
-											<img
-												src={config.UPLOADS_PATH.image.thumbnail + item}
-												alt={item}
-												className="img"
-											/>
-										) : (
-											<span className="span">{item}</span>
-										)}
-									</SelectedListItem>
+									<div key={item}>
+										<CarouselItem>
+											{type == 'image' ? (
+												<img
+													src={config.UPLOADS_PATH.image.thumbnail + item}
+													alt={item}
+													className="img"
+												/>
+											) : (
+												<span className="span">{item}</span>
+											)}
+										</CarouselItem>
+									</div>
 								))}
-							</SelectedList>
+							</Carousel>
 						</SelectedStructureContainer>
 					</>
 				) : (

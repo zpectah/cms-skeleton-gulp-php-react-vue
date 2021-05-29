@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Switch, Select, DatePicker } from 'antd';
+import { Input, Switch, Select, DatePicker, Rate } from 'antd';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -455,6 +455,18 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									onChange={row.onChange}
 									single
 								/>
+							</>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Rating'}
+						name={'rating'}
+						control={control}
+						defaultValue={detailData.rating || 0}
+					>
+						{(row) => (
+							<>
+								<Rate value={row.value} onChange={row.onChange} />
 							</>
 						)}
 					</Form.Row>
