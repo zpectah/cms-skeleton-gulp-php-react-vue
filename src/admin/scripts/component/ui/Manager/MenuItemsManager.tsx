@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import config from '../../../config';
 import { useMenuItems } from '../../../App/hooks';
 import Modal from '../Modal';
 import BaseButton from '../Button/BaseButton';
@@ -53,7 +54,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 			</Modal.Base>
 			<Wrapper>
 				<BaseButton onClick={toggleDialog} type="primary" ghost>
-					Open manager
+					Manager
 				</BaseButton>
 				<SelectedStructureContainer>
 					... selected items structure ...

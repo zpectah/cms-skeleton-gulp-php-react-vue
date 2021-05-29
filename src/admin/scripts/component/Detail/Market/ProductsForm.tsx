@@ -8,7 +8,7 @@ import { useProducts } from '../../../Market/hooks';
 import { ProductsItemProps } from '../../../Market/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
-import { replaceSpaces } from '../../../utils/string';
+import { string } from '../../../../../libs/js/utils';
 
 interface ProductsDetailFormProps {
 	detailData: ProductsItemProps;
@@ -40,7 +40,7 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			name: replaceSpaces(data.name),
+			name: string.replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {

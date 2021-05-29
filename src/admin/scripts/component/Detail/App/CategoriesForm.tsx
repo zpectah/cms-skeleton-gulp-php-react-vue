@@ -20,7 +20,7 @@ import LanguageToggle from '../../Language';
 import { useCategories, useSettings, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
-import { replaceSpaces } from '../../../utils/string';
+import { string } from '../../../../../libs/js/utils';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -74,7 +74,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			name: replaceSpaces(data.name),
+			name: string.replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {
@@ -236,6 +236,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 						{(row) => (
 							<>
 								<Manager.Uploads
+									type="image"
 									selected={row.value}
 									onChange={row.onChange}
 									single
@@ -252,6 +253,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 						{(row) => (
 							<>
 								<Manager.Uploads
+									type="image"
 									selected={row.value}
 									onChange={row.onChange}
 									single

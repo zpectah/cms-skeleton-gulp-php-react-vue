@@ -8,7 +8,7 @@ import { useTags } from '../../../App/hooks';
 import { TagsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
-import { replaceSpaces } from '../../../utils/string';
+import { string } from '../../../../../libs/js/utils';
 
 interface TagsDetailFormProps {
 	detailData: TagsItemProps;
@@ -40,7 +40,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			name: replaceSpaces(data.name),
+			name: string.replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {

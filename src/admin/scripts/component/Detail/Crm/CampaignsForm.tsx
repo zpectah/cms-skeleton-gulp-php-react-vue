@@ -8,7 +8,7 @@ import { useCampaigns } from '../../../Crm/hooks';
 import { CampaignsItemProps } from '../../../Crm/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
-import { replaceSpaces } from '../../../utils/string';
+import { string } from '../../../../../libs/js/utils';
 
 interface CampaignsDetailFormProps {
 	detailData: CampaignsItemProps;
@@ -40,7 +40,7 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			name: replaceSpaces(data.name),
+			name: string.replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {

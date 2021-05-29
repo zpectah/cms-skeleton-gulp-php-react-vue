@@ -5,7 +5,7 @@ import { Input, Select, Switch } from 'antd';
 
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
-import { replaceSpaces } from '../../../utils/string';
+import { string } from '../../../../../libs/js/utils';
 import { useMenu } from '../../../App/hooks';
 import { MenuItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Manager } from '../../ui';
@@ -41,7 +41,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			name: replaceSpaces(data.name),
+			name: string.replaceSpaces(data.name),
 		};
 
 		if (detailData.is_new) {

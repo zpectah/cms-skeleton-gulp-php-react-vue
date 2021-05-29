@@ -151,6 +151,9 @@ export const string = {
 		name = name.substr(0, length) + (fileName.length > length ? separator : '');
 		return name + '.' + ext;
 	},
+	replaceSpaces: function (string) {
+		return string.split(' ').join('-');
+	},
 };
 
 export const date = {
