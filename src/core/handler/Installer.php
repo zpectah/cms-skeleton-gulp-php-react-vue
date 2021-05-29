@@ -51,9 +51,7 @@ class Installer {
 			$stmt = $conn -> prepare($query);
 			$stmt -> bind_param($types, ...$args);
 			$stmt -> execute();
-			$response = [
-				'rows' => $stmt -> affected_rows
-			];
+			$response['rows'] = $stmt -> affected_rows;
 			$stmt -> close();
 		}
 
@@ -93,10 +91,8 @@ class Installer {
 			$stmt = $conn -> prepare($query);
 			$stmt -> bind_param($types, ...$args);
 			$stmt -> execute();
-			$response = [
-				'rows' => $stmt -> affected_rows,
-				'installed' => $installed
-			];
+			$response['rows'] = $stmt -> affected_rows;
+			$response['installed'] = $installed;
 			$stmt -> close();
 		}
 
