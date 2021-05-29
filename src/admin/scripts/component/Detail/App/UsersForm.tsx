@@ -32,16 +32,6 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			email: '',
-			password: '',
-			nickname: '',
-			first_name: '',
-			middle_name: '',
-			last_name: '',
-			user_level: 0,
-			user_group: 'default',
-			user_avatar: '',
-			active: 1,
 			...detailData,
 		},
 	});
@@ -66,18 +56,20 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
-			<input
-				type="hidden"
-				name="user_avatar"
-				ref={register({})}
-				defaultValue={detailData.user_avatar}
-			/>
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+				<input
+					type="hidden"
+					name="user_avatar"
+					ref={register({})}
+					defaultValue={detailData.user_avatar}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -93,6 +85,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.email || ''}
 					>
 						{(row) => (
 							<Input
@@ -113,6 +106,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: detailData.is_new }}
 						required={detailData.is_new}
+						defaultValue={detailData.password || ''}
 					>
 						{(row) => (
 							<Input.Password
@@ -130,6 +124,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.nickname || ''}
 					>
 						{(row) => (
 							<Input
@@ -142,7 +137,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'First name'} name={'first_name'} control={control}>
+					<Form.Row
+						label={'First name'}
+						name={'first_name'}
+						control={control}
+						defaultValue={detailData.first_name || ''}
+					>
 						{(row) => (
 							<Input
 								id={row.id}
@@ -158,6 +158,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						label={'Middle name'}
 						name={'middle_name'}
 						control={control}
+						defaultValue={detailData.middle_name || ''}
 					>
 						{(row) => (
 							<Input
@@ -170,7 +171,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Last name'} name={'last_name'} control={control}>
+					<Form.Row
+						label={'Last name'}
+						name={'last_name'}
+						control={control}
+						defaultValue={detailData.last_name || ''}
+					>
 						{(row) => (
 							<Input
 								id={row.id}
@@ -188,6 +194,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.user_level || 0}
 					>
 						{(row) => (
 							<Select
@@ -200,7 +207,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Group'} name={'user_group'} control={control}>
+					<Form.Row
+						label={'Group'}
+						name={'user_group'}
+						control={control}
+						defaultValue={detailData.user_group || 'default'}
+					>
 						{(row) => (
 							<Select
 								id={row.id}
@@ -212,7 +224,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

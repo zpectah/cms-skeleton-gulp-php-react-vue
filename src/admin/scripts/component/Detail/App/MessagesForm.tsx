@@ -31,8 +31,6 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			subject: '',
-			status: 0,
 			...detailData,
 		},
 	});
@@ -51,18 +49,20 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
-			<input
-				type="hidden"
-				name="status"
-				ref={register({ required: true })}
-				defaultValue={detailData.status}
-			/>
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+				<input
+					type="hidden"
+					name="status"
+					ref={register({ required: true })}
+					defaultValue={detailData.status || 0}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -82,6 +82,7 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={''}
 					>
 						{(row) => (
 							<Input

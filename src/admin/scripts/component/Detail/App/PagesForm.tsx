@@ -44,9 +44,6 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			type: 'default',
-			name: '',
-			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
 				content: '',
@@ -84,13 +81,14 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
-
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -106,6 +104,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -124,6 +123,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.type || 'default'}
 					>
 						{(row) => (
 							<Select
@@ -182,8 +182,12 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
-
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

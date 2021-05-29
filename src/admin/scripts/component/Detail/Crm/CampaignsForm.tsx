@@ -31,8 +31,6 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			name: '',
-			active: 1,
 			...detailData,
 		},
 	});
@@ -56,12 +54,14 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -79,6 +79,7 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -91,7 +92,12 @@ const CampaignsDetailForm: React.FC<CampaignsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

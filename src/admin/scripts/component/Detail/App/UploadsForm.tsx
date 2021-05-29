@@ -84,9 +84,6 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const { control, handleSubmit, register, watch, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			name: '',
-			category: [],
-			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
 			}),
@@ -235,6 +232,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -249,7 +247,12 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Gallery'} name={'category'} control={control}>
+					<Form.Row
+						label={'Gallery'}
+						name={'category'}
+						control={control}
+						defaultValue={detailData.category || []}
+					>
 						{(row) => (
 							<Picker.Categories
 								id={row.id}
@@ -286,7 +289,12 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

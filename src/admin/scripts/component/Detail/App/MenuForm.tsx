@@ -32,10 +32,6 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			name: '',
-			type: 'default',
-			parent: '',
-			active: 1,
 			...detailData,
 		},
 	});
@@ -60,20 +56,22 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
-			{!activeParentField && (
+			<div>
 				<input
 					type="hidden"
-					name="parent"
-					ref={register({})}
-					defaultValue={detailData.parent}
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
 				/>
-			)}
+				{!activeParentField && (
+					<input
+						type="hidden"
+						name="parent"
+						ref={register({})}
+						defaultValue={detailData.parent}
+					/>
+				)}
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -89,6 +87,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -107,6 +106,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.type || 'default'}
 					>
 						{(row) => (
 							<Select
@@ -120,7 +120,12 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 					{activeParentField && (
-						<Form.Row label={'Parent'} name={'parent'} control={control}>
+						<Form.Row
+							label={'Parent'}
+							name={'parent'}
+							control={control}
+							defaultValue={detailData.parent || ''}
+						>
 							{(row) => (
 								<Picker.Menu
 									id={row.id}
@@ -133,7 +138,12 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 						</Form.Row>
 					)}
 					<div>...menu items handler ...</div>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

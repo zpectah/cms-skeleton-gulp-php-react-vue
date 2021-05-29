@@ -48,12 +48,6 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			type: 'default',
-			name: '',
-			parent: '',
-			img_main: '', // TODO
-			img_thumbnail: '', // TODO
-			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
 				perex: '',
@@ -90,12 +84,14 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -113,6 +109,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -131,6 +128,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.type || 'default'}
 					>
 						{(row) => (
 							<Select
@@ -143,7 +141,12 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Parent'} name={'parent'} control={control}>
+					<Form.Row
+						label={'Parent'}
+						name={'parent'}
+						control={control}
+						defaultValue={detailData.parent || ''}
+					>
 						{(row) => (
 							<Picker.Categories
 								id={row.id}
@@ -214,20 +217,15 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
-					<Form.Row label={'Main image'} name={'img_main'} control={control}>
+					<Form.Row
+						label={'Main image'}
+						name={'img_main'}
+						control={control}
+						defaultValue={detailData.img_main || ''}
+					>
 						{(row) => (
 							<>
 								<Picker.Media value={row.value} onChange={row.onChange} />
-								{/*
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={row.onChange}
-									placeholder={'img_main'}
-								/>
-								*/}
 							</>
 						)}
 					</Form.Row>
@@ -235,24 +233,20 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 						label={'Thumbnail'}
 						name={'img_thumbnail'}
 						control={control}
+						defaultValue={detailData.img_thumbnail || ''}
 					>
 						{(row) => (
 							<>
 								<Picker.Media value={row.value} onChange={row.onChange} />
-								{/*
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={row.onChange}
-									placeholder={'img_thumbnail'}
-								/>
-								*/}
 							</>
 						)}
 					</Form.Row>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

@@ -50,8 +50,6 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			name: '',
-			active: 1,
 			lang: setLanguageModel(langList, {
 				t_value: '',
 			}),
@@ -86,12 +84,14 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -109,6 +109,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -150,7 +151,12 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}

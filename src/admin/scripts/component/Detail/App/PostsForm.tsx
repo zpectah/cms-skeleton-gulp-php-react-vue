@@ -9,8 +9,8 @@ import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Picker, Wysiwyg } from '../../ui';
-import LanguageToggle from '../../Language';
 import { usePosts, useSettings, useProfile } from '../../../App/hooks';
+import LanguageToggle from '../../Language';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
 
@@ -47,20 +47,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const { control, handleSubmit, formState, register, watch } = useForm({
 		mode: 'onChange',
 		defaultValues: {
-			type: 'article',
-			name: '',
-			category: [],
-			tags: [],
-			event_start: new Date(),
-			event_end: new Date(),
-			event_location: '',
-			post_options: '{}',
-			media: '', // TODO
-			img_main: '', // TODO
-			img_thumbnail: '', // TODO
-			published: new Date(),
-			author: Profile.id,
-			active: 1,
 			lang: setLanguageModel(langList, {
 				title: '',
 				perex: '',
@@ -85,16 +71,16 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	}, [Settings]);
 
 	const submitHandler = (data) => {
-		// TODO#BUG: DatePicker in Controller unexpected behavior
-		// Reduce and repair data before submit
 		const master = {
 			...data,
+			// Reduce and repair date data before submit
 			published: tmp_published
 				? tmp_published
 				: moment(detailData.published).format(),
 			event_start:
 				data.type == 'event' ? tmp_event_start : detailData.event_start,
 			event_end: data.type == 'event' ? tmp_event_end : detailData.event_end,
+			//
 		};
 
 		if (detailData.is_new) {
@@ -116,56 +102,58 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
-			<input
-				type="hidden"
-				name="author"
-				ref={register({ required: true })}
-				defaultValue={detailData.author}
-			/>
-			<input
-				type="hidden"
-				name="post_options"
-				ref={register({ required: true })}
-				defaultValue={detailData.post_options}
-			/>
-			{watchType !== 'event' && (
-				<>
-					<input
-						type="hidden"
-						name="event_start"
-						ref={register({})}
-						defaultValue={detailData.event_start}
-					/>
-					<input
-						type="hidden"
-						name="event_end"
-						ref={register({})}
-						defaultValue={detailData.event_end}
-					/>
-					<input
-						type="hidden"
-						name="event_location"
-						ref={register({})}
-						defaultValue={detailData.event_location}
-					/>
-				</>
-			)}
-			{watchType !== 'media' && (
-				<>
-					<input
-						type="hidden"
-						name="media"
-						ref={register({})}
-						defaultValue={detailData.media}
-					/>
-				</>
-			)}
+			<div>
+				<input
+					type="hidden"
+					name="id"
+					ref={register({ required: true })}
+					defaultValue={detailData.id}
+				/>
+				<input
+					type="hidden"
+					name="author"
+					ref={register({ required: true })}
+					defaultValue={detailData.author}
+				/>
+				<input
+					type="hidden"
+					name="post_options"
+					ref={register({ required: true })}
+					defaultValue={detailData.post_options}
+				/>
+				{watchType !== 'event' && (
+					<>
+						<input
+							type="hidden"
+							name="event_start"
+							ref={register({})}
+							defaultValue={detailData.event_start}
+						/>
+						<input
+							type="hidden"
+							name="event_end"
+							ref={register({})}
+							defaultValue={detailData.event_end}
+						/>
+						<input
+							type="hidden"
+							name="event_location"
+							ref={register({})}
+							defaultValue={detailData.event_location}
+						/>
+					</>
+				)}
+				{watchType !== 'media' && (
+					<>
+						<input
+							type="hidden"
+							name="media"
+							ref={register({})}
+							defaultValue={detailData.media}
+						/>
+					</>
+				)}
+			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
 					{detailData.is_new
@@ -181,6 +169,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.name || ''}
 					>
 						{(row) => (
 							<Input
@@ -199,6 +188,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.type || 'article'}
 					>
 						{(row) => (
 							<Select
@@ -221,6 +211,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
+										defaultValue={detailData.event_start || new Date()}
 									>
 										{(row) => (
 											<DatePicker
@@ -245,7 +236,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
-										defaultValue={moment(moment(), DatePickerFormat)}
+										defaultValue={detailData.event_end || new Date()}
 									>
 										{(row) => (
 											<DatePicker
@@ -269,6 +260,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
+										defaultValue={detailData.event_location || ''}
 									>
 										{(row) => (
 											<Input
@@ -291,6 +283,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'media' }}
 										required={watchType == 'media'}
+										defaultValue={detailData.media || ''}
 									>
 										{(row) => (
 											<>
@@ -298,16 +291,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 													value={row.value}
 													onChange={row.onChange}
 												/>
-												{/*
-												<Input
-													id={row.id}
-													type={'text'}
-													name={row.name}
-													value={row.value}
-													onChange={row.onChange}
-													placeholder={'media'}
-												/>
-												*/}
 											</>
 										)}
 									</Form.Row>
@@ -315,7 +298,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							),
 						}[watchType]
 					}
-					<Form.Row label={'Category'} name={'category'} control={control}>
+					<Form.Row
+						label={'Category'}
+						name={'category'}
+						control={control}
+						defaultValue={detailData.category || []}
+					>
 						{(row) => (
 							<Picker.Categories
 								id={row.id}
@@ -324,7 +312,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Tags'} name={'tags'} control={control}>
+					<Form.Row
+						label={'Tags'}
+						name={'tags'}
+						control={control}
+						defaultValue={detailData.tags || []}
+					>
 						{(row) => (
 							<Picker.Tags
 								id={row.id}
@@ -344,8 +337,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									name={`lang.${lng}.title`}
 									control={control}
 									rules={{ required: true }}
-									defaultValue={''}
 									required
+									// defaultValue={detailData.lang[lng].title || ''}
 								>
 									{(row) => (
 										<Input
@@ -362,8 +355,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									label={'Perex'}
 									name={`lang.${lng}.perex`}
 									control={control}
-									defaultValue={''}
 									long
+									// defaultValue={detailData.lang[lng].perex || ''}
 								>
 									{(row) => (
 										<TextArea
@@ -383,6 +376,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									rules={{ required: true }}
 									required
 									long
+									// defaultValue={detailData.lang[lng].content || ''}
 								>
 									{(row) => (
 										<Wysiwyg.Base
@@ -401,6 +395,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
+						defaultValue={detailData.published || new Date()}
 					>
 						{(row) => (
 							<DatePicker
@@ -418,20 +413,15 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					<Form.Row label={'Main image'} name={'img_main'} control={control}>
+					<Form.Row
+						label={'Main image'}
+						name={'img_main'}
+						control={control}
+						defaultValue={detailData.img_main || ''}
+					>
 						{(row) => (
 							<>
 								<Picker.Media value={row.value} onChange={row.onChange} />
-								{/*
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={row.onChange}
-									placeholder={'img_main'}
-								/>
-								*/}
 							</>
 						)}
 					</Form.Row>
@@ -439,24 +429,20 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						label={'Thumbnail'}
 						name={'img_thumbnail'}
 						control={control}
+						defaultValue={detailData.img_thumbnail || ''}
 					>
 						{(row) => (
 							<>
 								<Picker.Media value={row.value} onChange={row.onChange} />
-								{/*
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={row.onChange}
-									placeholder={'img_thumbnail'}
-								/>
-								*/}
 							</>
 						)}
 					</Form.Row>
-					<Form.Row label={'Active'} name={'active'} control={control}>
+					<Form.Row
+						label={'Active'}
+						name={'active'}
+						control={control}
+						defaultValue={detailData.active || true}
+					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}
