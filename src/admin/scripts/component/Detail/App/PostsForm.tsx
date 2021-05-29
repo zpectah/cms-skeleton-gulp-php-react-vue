@@ -54,6 +54,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 			event_start: new Date(),
 			event_end: new Date(),
 			event_location: '',
+			post_options: '{}',
 			media: '', // TODO
 			img_main: '', // TODO
 			img_thumbnail: '', // TODO
@@ -126,6 +127,12 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				name="author"
 				ref={register({ required: true })}
 				defaultValue={detailData.author}
+			/>
+			<input
+				type="hidden"
+				name="post_options"
+				ref={register({ required: true })}
+				defaultValue={detailData.post_options}
 			/>
 			{watchType !== 'event' && (
 				<>

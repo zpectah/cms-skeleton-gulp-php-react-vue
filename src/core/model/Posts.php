@@ -121,6 +121,7 @@ class Posts {
 				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
 				$row['media'] = $row['media'] ? explode(",", $row['media']) : [];
+				// $row['post_options'] = json_decode($row['post_options'], true);
 
 				$response[] = $row;
 			}
@@ -145,6 +146,7 @@ class Posts {
                    event_start,
                    event_end,
                    event_location,
+                   post_options,
                    media,
                    img_main,
                    img_thumbnail,
@@ -152,8 +154,8 @@ class Posts {
                    author,
                    active,
                    deleted
-                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'sssssssssssiii';
+                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'ssssssssssssiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -162,6 +164,8 @@ class Posts {
 			$event_start,
 			$event_end,
 			$requestData['event_location'],
+			// json_encode($requestData['post_options']),
+			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
@@ -205,13 +209,14 @@ class Posts {
                  event_start = ?,
                  event_end = ?,
                  event_location = ?,
+                 post_options = ?,
                  media = ?,
                  img_main = ?,
                  img_thumbnail = ?,
                  published = ?,
                  active = ?
 		WHERE id = ?');
-		$types = 'sssssssssssii';
+		$types = 'ssssssssssssii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -220,6 +225,8 @@ class Posts {
 			$event_start,
 			$event_end,
 			$requestData['event_location'],
+			// json_encode($requestData['post_options']),
+			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
