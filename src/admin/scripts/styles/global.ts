@@ -135,6 +135,7 @@ export const GlobalStyles = createGlobalStyle`
 				background: ${(props) => props.theme.form.input.bgActive};
 				border: 1px solid ${(props) => props.theme.form.input.borderActive};
 				box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+				outline: none;
 			}
 
 			&-password{
@@ -142,8 +143,72 @@ export const GlobalStyles = createGlobalStyle`
 				background: ${(props) => props.theme.form.input.bg};
 				border: 1px solid ${(props) => props.theme.form.input.border};
 
+				&.ant-input-affix-wrapper{
+					&:hover{
+						color: ${(props) => props.theme.form.input.textHover};
+						background: ${(props) => props.theme.form.input.bgHover};
+						border: 1px solid ${(props) => props.theme.form.input.borderHover};
+						box-shadow: ${(props) => props.theme.form.input.shadowHover}; // TODO
+					}
+				}
+
 				// TODO: hover, focus, active ...
 
+			}
+
+			&[disabled],
+			&-disabled{
+				opacity: .5;
+
+				&:hover{
+					opacity: .5;
+					border-color: inherit;
+				}
+			}
+
+		}
+
+		&-checkbox{
+			& .ant-checkbox-inner{
+					background-color: transparent;
+					border-color: ${(props) => props.theme.form.input.borderActive};
+
+					&::after{
+						border-color: ${(props) => props.theme.color.borderActive};
+					}
+			}
+
+			&-checked{
+				& .ant-checkbox-inner{
+						background-color: ${(props) => props.theme.form.input.borderActive};
+						border-color: ${(props) => props.theme.form.input.borderActive};
+
+						&::after{
+							border-color: ${(props) => props.theme.color.white};
+						}
+				}
+
+				&.ant-checkbox-disabled{
+					& .ant-checkbox-inner{
+						border-color: ${(props) => props.theme.form.input.borderActive};
+						opacity: .75;
+
+						&::after{
+							border-color: ${(props) => props.theme.color.white};
+						}
+					}
+				}
+
+			}
+
+			&-wrapper{
+				&:hover,
+				&:active,
+				&:focus{
+					.ant-checkbox-inner{
+							border-color: ${(props) => props.theme.form.input.borderActive};
+					}
+				}
 			}
 
 		}
@@ -170,7 +235,8 @@ export const GlobalStyles = createGlobalStyle`
 					color: ${(props) => props.theme.form.input.textActive};
 					background: ${(props) => props.theme.form.input.bgActive};
 					border: 1px solid ${(props) => props.theme.form.input.borderActive};
-					box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+					/* box-shadow: ${(props) => props.theme.form.input.shadowActive}; */
+					outline: none;
 				}
 
 			}
@@ -178,8 +244,8 @@ export const GlobalStyles = createGlobalStyle`
 			&-open{
 				color: ${(props) => props.theme.form.input.textActive};
 				background: ${(props) => props.theme.form.input.bgActive};
-				border: 1px solid ${(props) => props.theme.form.input.borderActive};
-				box-shadow: ${(props) => props.theme.form.input.shadowActive}; // TODO
+				border-color: ${(props) => props.theme.form.input.borderActive};
+				/* box-shadow: ${(props) => props.theme.form.input.shadowActive}; */
 			}
 
 		}
