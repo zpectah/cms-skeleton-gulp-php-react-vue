@@ -37,26 +37,22 @@
 			{
 				"key": 1,
 				"label": "index,follow",
-				"value": "index,follow",
-				"value_t": "robots.indexFollow"
+				"value": "index,follow"
 			},
 			{
 				"key": 2,
 				"label": "noindex,nofollow",
-				"value": "noindex,nofollow",
-				"value_t": "robots.noIndexNoFollow"
+				"value": "noindex,nofollow"
 			},
 			{
 				"key": 3,
 				"label": "index,nofollow",
-				"value": "index,nofollow",
-				"value_t": "robots.indexNoFollow"
+				"value": "index,nofollow"
 			},
 			{
 				"key": 4,
 				"label": "noindex,follow",
-				"value": "noindex,follow",
-				"value_t": "robots.noIndexFollow"
+				"value": "noindex,follow"
 			}
 		]
 	},
@@ -114,52 +110,44 @@
 				{
 					"key": 1,
 					"label": "Demo",
-					"value": 0,
-					"value_t": "level.demo"
+					"value": 0
 				},
 				{
 					"key": 2,
 					"label": "Redactor",
-					"value": 2,
-					"value_t": "level.redactor"
+					"value": 2
 				}	,
 				{
 					"key": 3,
 					"label": "Chief Redactor",
-					"value": 3,
-					"value_t": "group.chiefRedactor"
+					"value": 3
 				},
 				{
 					"key": 4,
 					"label": "Admin",
-					"value": 5,
-					"value_t": "group.admin"
+					"value": 5
 				}	,
 				{
 					"key": 5,
 					"label": "Super Admin",
-					"value": 7,
-					"value_t": "group.superAdmin"
+					"value": 7
 				}
 			],
 			"group": [
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "group.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "Redactors",
-					"value": "redactors",
-					"value_t": "group.redactors"
+					"value": "redactors"
 				}	,
 				{
 					"key": 3,
 					"label": "Managers",
-					"value": "managers",
-					"value_t": "group.managers"
+					"value": "managers"
 				}
 			]
 		},
@@ -168,38 +156,32 @@
 				{
 					"key": 1,
 					"label": "Article",
-					"value": "article",
-					"value_t": "type.article"
+					"value": "article"
 				},
 				{
 					"key": 2,
 					"label": "Blog",
-					"value": "blog",
-					"value_t": "type.blog"
+					"value": "blog"
 				},
 				{
 					"key": 3,
 					"label": "Event",
-					"value": "event",
-					"value_t": "type.event"
+					"value": "event"
 				},
 				{
 					"key": 4,
 					"label": "Media",
-					"value": "media",
-					"value_t": "type.media"
+					"value": "media"
 				},
 				{
 					"key": 5,
 					"label": "Reference",
-					"value": "reference",
-					"value_t": "type.reference"
+					"value": "reference"
 				},
 				{
 					"key": 6,
 					"label": "Custom 1",
-					"value": "custom_1",
-					"value_t": "type.custom1"
+					"value": "custom_1"
 				}
 			]
 		},
@@ -208,20 +190,17 @@
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "Primary",
-					"value": "primary",
-					"value_t": "type.primary"
+					"value": "primary"
 				},
 				{
 					"key": 3,
 					"label": "Secondary",
-					"value": "secondary",
-					"value_t": "type.secondary"
+					"value": "secondary"
 				}
 			]
 		},
@@ -230,26 +209,22 @@
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "Primary",
-					"value": "primary",
-					"value_t": "type.primary"
+					"value": "primary"
 				},
 				{
 					"key": 3,
 					"label": "Secondary",
-					"value": "secondary",
-					"value_t": "type.secondary"
+					"value": "secondary"
 				},
 				{
 					"key": 4,
 					"label": "Tertiary",
-					"value": "tertiary",
-					"value_t": "type.tertiary"
+					"value": "tertiary"
 				}
 			]
 		},
@@ -258,14 +233,12 @@
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "External",
-					"value": "external",
-					"value_t": "type.external"
+					"value": "external"
 				}
 			]
 		},
@@ -274,14 +247,12 @@
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "Gallery",
-					"value": "gallery",
-					"value_t": "type.gallery"
+					"value": "gallery"
 				}
 			]
 		},
@@ -290,26 +261,22 @@
 				{
 					"key": 1,
 					"label": "Default",
-					"value": "default",
-					"value_t": "type.default"
+					"value": "default"
 				},
 				{
 					"key": 2,
 					"label": "System",
-					"value": "system",
-					"value_t": "type.system"
+					"value": "system"
 				},
 				{
 					"key": 3,
 					"label": "Category",
-					"value": "category",
-					"value_t": "type.category"
+					"value": "category"
 				},
 				{
 					"key": 4,
 					"label": "Tags",
-					"value": "tags",
-					"value_t": "type.tags"
+					"value": "tags"
 				}
 			]
 		},
@@ -318,32 +285,27 @@
 				{
 					"key": 1,
 					"label": "Image",
-					"value": "image",
-					"value_t": "type.image"
+					"value": "image"
 				},
 				{
 					"key": 2,
 					"label": "Audio",
-					"value": "audio",
-					"value_t": "type.audio"
+					"value": "audio"
 				},
 				{
 					"key": 3,
 					"label": "Video",
-					"value": "video",
-					"value_t": "type.video"
+					"value": "video"
 				},
 				{
 					"key": 4,
 					"label": "Document",
-					"value": "document",
-					"value_t": "type.document"
+					"value": "document"
 				},
 				{
 					"key": 5,
 					"label": "Archive",
-					"value": "archive",
-					"value_t": "type.archive"
+					"value": "archive"
 				}
 			]
 		},
@@ -352,52 +314,34 @@
 				{
 					"key": 1,
 					"label": "Demo",
-					"value": 0,
-					"value_t": "level.demo"
+					"value": 0
 				},
 				{
 					"key": 2,
-					"label": "Redactor",
-					"value": 2,
-					"value_t": "level.redactor"
-				}	,
-				{
-					"key": 3,
-					"label": "Chief Redactor",
-					"value": 3,
-					"value_t": "group.chiefRedactor"
-				},
-				{
-					"key": 4,
-					"label": "Admin",
-					"value": 5,
-					"value_t": "group.admin"
-				}	,
-				{
-					"key": 5,
-					"label": "Super Admin",
-					"value": 7,
-					"value_t": "group.superAdmin"
+					"label": "Default",
+					"value": 2
 				}
 			],
 			"group": [
 				{
 					"key": 1,
-					"label": "Default",
-					"value": "default",
-					"value_t": "group.default"
+					"label": "None",
+					"value": "none"
 				},
 				{
 					"key": 2,
-					"label": "Redactors",
-					"value": "redactors",
-					"value_t": "group.redactors"
-				}	,
+					"label": "Members",
+					"value": "members"
+				},
 				{
 					"key": 3,
-					"label": "Managers",
-					"value": "managers",
-					"value_t": "group.managers"
+					"label": "Subscribers",
+					"value": "subscribers"
+				},
+				{
+					"key": 4,
+					"label": "Customers",
+					"value": "customers"
 				}
 			]
 		}

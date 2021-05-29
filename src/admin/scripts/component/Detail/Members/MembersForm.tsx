@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
@@ -35,6 +35,7 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
+	const userModel = !detailData.is_new || false;
 
 	const { updateMembers, createMembers, reloadMembers } = useMembers();
 
@@ -65,9 +66,9 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 				/>
 				<input
 					type="hidden"
-					name="user_avatar"
+					name="member_avatar"
 					ref={register({})}
-					defaultValue={detailData.user_avatar}
+					defaultValue={detailData.member_avatar}
 				/>
 			</div>
 			<Modal.Header>
@@ -106,8 +107,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 						label={'Password'}
 						name={'password'}
 						control={control}
-						rules={{ required: detailData.is_new }}
-						required={detailData.is_new}
+						rules={{ required: userModel }}
+						required={userModel}
 						defaultValue={detailData.password || ''}
 					>
 						{(row) => (
@@ -124,8 +125,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 						label={'Nickname'}
 						name={'nickname'}
 						control={control}
-						rules={{ required: true }}
-						required
+						rules={{ required: userModel }}
+						required={userModel}
 						defaultValue={detailData.nickname || ''}
 					>
 						{(row) => (
@@ -190,13 +191,132 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+					{''}
+					<Form.Row
+						label={'Country'}
+						name={'member_country'}
+						control={control}
+						defaultValue={detailData.member_country || ''}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Coutry'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'City'}
+						name={'member_city'}
+						control={control}
+						defaultValue={detailData.member_city || ''}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'City'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Address'}
+						name={'member_address'}
+						control={control}
+						defaultValue={detailData.member_address || ''}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Address'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'ZIP Code'}
+						name={'member_zip'}
+						control={control}
+						defaultValue={detailData.member_zip || ''}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'ZIP Code'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Phone'}
+						name={'member_phone'}
+						control={control}
+						defaultValue={detailData.member_phone || []}
+					>
+						{(row) => (
+							<Select
+								mode="tags"
+								style={{ width: '100%' }}
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Phone'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Alternative E-mail'}
+						name={'member_email'}
+						control={control}
+						defaultValue={detailData.member_email || []}
+					>
+						{(row) => (
+							<Select
+								mode="tags"
+								style={{ width: '100%' }}
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'E-mails'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Description'}
+						name={'description'}
+						control={control}
+						defaultValue={detailData.description || ''}
+					>
+						{(row) => (
+							<Input.TextArea
+								id={row.id}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Description'}
+								rows={5}
+							/>
+						)}
+					</Form.Row>
+					{''}
 					<Form.Row
 						label={'Level'}
-						name={'user_level'}
+						name={'member_level'}
 						control={control}
-						rules={{ required: true }}
-						required
-						defaultValue={detailData.user_level || 0}
+						defaultValue={detailData.member_level || 0}
 					>
 						{(row) => (
 							<Select
@@ -211,9 +331,9 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 					</Form.Row>
 					<Form.Row
 						label={'Group'}
-						name={'user_group'}
+						name={'member_group'}
 						control={control}
-						defaultValue={detailData.user_group || 'default'}
+						defaultValue={detailData.member_group || 'none'}
 					>
 						{(row) => (
 							<Select

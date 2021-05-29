@@ -98,7 +98,8 @@ class Users {
 
 		// prepare
 		$password = $requestData['password'];
-		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?') : ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?');
+		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?')
+			: ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?');
 		$types = $password ? 'ssssssissii' : 'sssssissii';
 		$args = $password ? [
 			$requestData['email'],
