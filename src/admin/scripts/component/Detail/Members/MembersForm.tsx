@@ -299,6 +299,7 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 						name={'description'}
 						control={control}
 						defaultValue={detailData.description || ''}
+						long
 					>
 						{(row) => (
 							<Input.TextArea

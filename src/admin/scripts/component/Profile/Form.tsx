@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { message } from 'antd';
+import { message, Descriptions, Avatar } from 'antd';
 
-import { Form as UiForm, Section, Button } from '../ui';
+import { Form as UiForm, Section, Button, Picker } from '../ui';
 import LocaleToggle from './LocaleToggle';
 import ThemeToggle from './ThemeToggle';
 import { Input } from 'antd';
 import { useProfile } from '../../App/hooks';
 
 const Wrapper = styled.div``;
+const AvatarContainer = styled.div`
+	width: 100%;
+	height: auto;
+	padding: 0 0 2rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: row;
+
+	& .avatar-email {
+		padding-left: 1rem;
+		font-size: 1.25rem;
+		font-weight: 500;
+	}
+`;
+const FormContainer = styled.div``;
 
 interface FormProps {
 	model: any;
@@ -17,13 +33,14 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
-	const { control, handleSubmit, formState, register } = useForm({
+	const { control, handleSubmit, formState, register, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			...model,
 		},
 	});
 	const { updateProfile, reloadProfile } = useProfile();
+	const [formOpen, setFormOpen] = useState(false);
 
 	const submitHandler = (data) => {
 		return updateProfile(data).then((res) => {
@@ -33,156 +50,201 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 		});
 	};
 
+	const avatarChangeHandler = (value) => {
+		console.log('avatarChangeHandler ', value);
+		// setValue('user_avatar', value);
+	};
+
 	return (
 		<Wrapper>
-			{/* TODO: Avatar picker -> returns base64 */}
-			<form onSubmit={handleSubmit(submitHandler)}>
-				<input
-					type="hidden"
-					name="id"
-					ref={register({ required: true })}
-					defaultValue={model.id}
-				/>
-				<input
-					type="hidden"
-					name="email"
-					ref={register({ required: true })}
-					defaultValue={model.email}
-				/>
-				<input
-					type="hidden"
-					name="user_level"
-					ref={register({ required: true })}
-					defaultValue={model.user_level}
-				/>
-				<input
-					type="hidden"
-					name="user_group"
-					ref={register({ required: true })}
-					defaultValue={model.user_group}
-				/>
-				<input
-					type="hidden"
-					name="active"
-					ref={register({ required: true })}
-					defaultValue={model.active}
-				/>
-				<input
-					type="hidden"
-					name="user_avatar"
-					ref={register({})}
-					defaultValue={model.user_avatar}
-				/>
-				<Section.Base>
-					<UiForm.Row
-						label={'E-mail'}
-						name={'email'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								readOnly
-								disabled
+			<AvatarContainer>
+				<div>
+					<Picker.Avatar
+						label={
+							model.first_name && model.last_name
+								? model.first_name.charAt(0) + model.last_name.charAt(0)
+								: model.nickname.charAt(0)
+						}
+						src={model.user_avatar}
+						onChange={avatarChangeHandler}
+					/>
+				</div>
+				<div className="avatar-email">{model.email}</div>
+			</AvatarContainer>
+			<Section.Base>
+				{!formOpen && (
+					<div>
+						<Descriptions>
+							<Descriptions.Item label="Nick">
+								{model.nickname}
+							</Descriptions.Item>
+							<Descriptions.Item label="Full Name" span={2}>
+								{model.first_name}{' '}
+								{model.middle_name && model.middle_name + ' '}
+								{model.last_name}
+							</Descriptions.Item>
+							<Descriptions.Item label="Level">
+								{model.user_level}
+							</Descriptions.Item>
+							<Descriptions.Item label="Group">
+								{model.user_group}
+							</Descriptions.Item>
+						</Descriptions>
+					</div>
+				)}
+				<UiForm.RowNoController label={'Language'}>
+					{() => <LocaleToggle />}
+				</UiForm.RowNoController>
+				<UiForm.RowNoController label={'Theme'}>
+					{() => <ThemeToggle />}
+				</UiForm.RowNoController>
+				{!formOpen && (
+					<div>
+						<Button.Base onClick={() => setFormOpen(!formOpen)}>
+							Edit profile
+						</Button.Base>
+					</div>
+				)}
+			</Section.Base>
+			{formOpen && (
+				<FormContainer>
+					<form onSubmit={handleSubmit(submitHandler)}>
+						<div>
+							<input
+								type="hidden"
+								name="id"
+								ref={register({ required: true })}
+								defaultValue={model.id}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.Row label={'Password'} name={'password'} control={control}>
-						{(row) => (
-							<Input.Password
-								id={row.id}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'New password'}
+							<input
+								type="hidden"
+								name="email"
+								ref={register({ required: true })}
+								defaultValue={model.email}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.Row
-						label={'Nickname'}
-						name={'nickname'}
-						control={control}
-						rules={{ required: true }}
-						required
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Nickname'}
+							<input
+								type="hidden"
+								name="user_level"
+								ref={register({ required: true })}
+								defaultValue={model.user_level}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.Row
-						label={'First name'}
-						name={'first_name'}
-						control={control}
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'First name'}
+							<input
+								type="hidden"
+								name="user_group"
+								ref={register({ required: true })}
+								defaultValue={model.user_group}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.Row
-						label={'Middle name'}
-						name={'middle_name'}
-						control={control}
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Middle name'}
+							<input
+								type="hidden"
+								name="active"
+								ref={register({ required: true })}
+								defaultValue={model.active}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.Row label={'Last name'} name={'last_name'} control={control}>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Last name'}
+							<input
+								type="hidden"
+								name="user_avatar"
+								ref={register({})}
+								defaultValue={model.user_avatar}
 							/>
-						)}
-					</UiForm.Row>
-					<UiForm.RowNoController label={'Language'}>
-						{() => <LocaleToggle />}
-					</UiForm.RowNoController>
-					<UiForm.RowNoController label={'Theme'}>
-						{() => <ThemeToggle />}
-					</UiForm.RowNoController>
-				</Section.Base>
-				<Section.Base>
-					<Button.Base
-						htmlType="submit"
-						disabled={!formState.isValid || !formState.isDirty}
-						type="primary"
-					>
-						Update
-					</Button.Base>
-				</Section.Base>
-			</form>
+						</div>
+						<Section.Base>
+							<UiForm.Row
+								label={'New password'}
+								name={'password'}
+								control={control}
+							>
+								{(row) => (
+									<Input.Password
+										id={row.id}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'New password'}
+									/>
+								)}
+							</UiForm.Row>
+							<UiForm.Row
+								label={'Nickname'}
+								name={'nickname'}
+								control={control}
+								rules={{ required: true }}
+								required
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Nickname'}
+									/>
+								)}
+							</UiForm.Row>
+							<UiForm.Row
+								label={'First name'}
+								name={'first_name'}
+								control={control}
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'First name'}
+									/>
+								)}
+							</UiForm.Row>
+							<UiForm.Row
+								label={'Middle name'}
+								name={'middle_name'}
+								control={control}
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Middle name'}
+									/>
+								)}
+							</UiForm.Row>
+							<UiForm.Row
+								label={'Last name'}
+								name={'last_name'}
+								control={control}
+							>
+								{(row) => (
+									<Input
+										id={row.id}
+										type={'text'}
+										name={row.name}
+										value={row.value}
+										onChange={row.onChange}
+										placeholder={'Last name'}
+									/>
+								)}
+							</UiForm.Row>
+						</Section.Base>
+						<Section.Base>
+							<Button.Base onClick={() => setFormOpen(false)}>
+								Cancel
+							</Button.Base>
+							<Button.Base
+								htmlType="submit"
+								disabled={!formState.isValid || !formState.isDirty}
+								type="primary"
+							>
+								Update
+							</Button.Base>
+						</Section.Base>
+					</form>
+				</FormContainer>
+			)}
 		</Wrapper>
 	);
 };
