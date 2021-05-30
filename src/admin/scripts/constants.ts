@@ -25,3 +25,8 @@ export const MESSAGE_ERROR_DURATION = 5;
 export const TABLE_ITEMS_PER_PAGE = 30;
 export const CMS_MAPBOX_TOKEN =
 	'pk.eyJ1IjoienBlY3RlciIsImEiOiJja3BhYm5qMDIwc2plMnVuMTUzb3cxdWl6In0.BmfujOqcuQklZDV3HB-JCA';
+export const MAPBOX_DEFAULTS = {
+	longitude: 14.501273600376752,
+	latitude: 50.08322927731517,
+	zoom: 10,
+};

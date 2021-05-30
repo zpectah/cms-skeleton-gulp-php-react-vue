@@ -270,7 +270,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
-										defaultValue={detailData.event_location || ''}
+										defaultValue={detailData.event_location || [0, 0]}
 									>
 										{(row) => (
 											<>

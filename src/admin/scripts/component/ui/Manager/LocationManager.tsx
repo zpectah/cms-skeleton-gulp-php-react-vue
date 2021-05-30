@@ -1,27 +1,132 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import styled from 'styled-components';
+import { Input } from 'antd';
+import { Marker } from 'react-map-gl';
 
 import Map from '../Map';
+import Button from '../Button';
+import Modal from '../Modal';
+import { IconMaterial_Place } from '../../../../../libs/svg/material-icons';
+import { MAPBOX_DEFAULTS } from '../../../constants';
+
+const Wrapper = styled.div`
+	width: 100%;
+	display: flex;
+`;
+const ModalContent = styled.div`
+	position: relative;
+	overflow: hidden;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+`;
+const StyledInput = styled(Input)`
+	width: calc(100% - 1rem);
+	margin-right: 1rem;
+`;
+const StyledMarker = styled(Marker)`
+	width: 50px;
+	height: 50px;
+	background-color: transparent;
+	border-radius: 50px;
+`;
+const IconWrapper = styled.span`
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& svg {
+		width: 40px;
+		height: 40px;
+	}
+`;
 
 interface LocationManagerProps {
-	value: any;
+	value: [number | string, number | string];
 	onChange: (value: any) => void;
+	zoom?: number;
 }
 
 const LocationManager: React.FC<LocationManagerProps> = ({
 	value,
 	onChange,
+	zoom,
 }) => {
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [locationChanged, setLocationChanged] = useState(false);
+	const [tmpLocation, setTmpLocation] = useState<
+		[number | string, number | string]
+	>([MAPBOX_DEFAULTS.longitude, MAPBOX_DEFAULTS.latitude]);
+
+	const toggleDialog = () => setDialogOpen(!dialogOpen);
+
+	const onSelectHandler = (e) => {
+		setLocationChanged(true);
+		setTmpLocation([e.lngLat[0], e.lngLat[1]]);
+	};
+
+	const onConfirmLocation = () => {
+		if (onChange) onChange([...tmpLocation]);
+
+		onCancelHandler();
+	};
+
+	const onCancelHandler = () => {
+		setTmpLocation([...value]);
+		setLocationChanged(false);
+		setDialogOpen(false);
+	};
+
+	useEffect(() => {
+		if (value && value[0] && value[1]) setTmpLocation([...value]);
+	}, [value]);
+
+	const Markers = useMemo(() => {
+		return (
+			<StyledMarker
+				longitude={Number(tmpLocation[0])}
+				latitude={Number(tmpLocation[1])}
+				offsetLeft={-25}
+				offsetTop={-40}
+			>
+				<IconWrapper dangerouslySetInnerHTML={{ __html: IconMaterial_Place }} />
+			</StyledMarker>
+		);
+	}, [tmpLocation]);
+
 	return (
 		<>
-			<Map />
-			<br />
-			<br />
-			<input
-				type="text"
-				value={value}
-				onChange={(e) => onChange(e.target.value)}
-			/>
-			<br />
+			<Modal.Base visible={dialogOpen} onCancel={onCancelHandler} size={'xxl'}>
+				<ModalContent>
+					<Map
+						zoom={zoom}
+						longitude={Number(value[0]) || MAPBOX_DEFAULTS.longitude}
+						latitude={Number(value[1] || MAPBOX_DEFAULTS.latitude)}
+						height={'50vh'}
+						onClick={onSelectHandler}
+					>
+						{Markers}
+					</Map>
+				</ModalContent>
+				<Modal.Footer>
+					<Button.Base onClick={onCancelHandler}>Cancel</Button.Base>
+					<Button.Base
+						type="primary"
+						onClick={onConfirmLocation}
+						disabled={!locationChanged}
+					>
+						Confirm location
+					</Button.Base>
+				</Modal.Footer>
+			</Modal.Base>
+			<Wrapper>
+				<StyledInput value={value} type="text" readOnly />
+				<Button.Base type="primary" onClick={toggleDialog} ghost>
+					Select location
+				</Button.Base>
+				{/* TODO: small map if location is set? */}
+			</Wrapper>
 		</>
 	);
 };

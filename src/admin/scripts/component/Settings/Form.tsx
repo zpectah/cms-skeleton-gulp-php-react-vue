@@ -325,23 +325,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								label={'Location'}
 								name={'company_location'}
 								control={control}
-								helpText={'This information are optional'}
 							>
 								{(row) => (
-									<>
-										<TextArea
-											id={row.id}
-											rows={3}
-											name={row.name}
-											value={row.value}
-											onChange={row.onChange}
-											placeholder={'Company location object'} // ???
-										/>
-										<Manager.Location
-											value={row.value}
-											onChange={row.onChange}
-										/>
-									</>
+									<Manager.Location value={row.value} onChange={row.onChange} />
 								)}
 							</UiForm.Row>
 						</Section.Base>

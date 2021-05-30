@@ -121,6 +121,7 @@ class Posts {
 				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
 				$row['media'] = $row['media'] ? explode(",", $row['media']) : [];
+				$row['event_location'] = $row['event_location'] ? explode(",", $row['event_location']) : [0,0];
 				// $row['post_options'] = json_decode($row['post_options'], true);
 
 				$response[] = $row;
@@ -164,7 +165,8 @@ class Posts {
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
 			$event_start,
 			$event_end,
-			$requestData['event_location'],
+			// $requestData['event_location'],
+			$requestData['event_location'] ? implode(",", $requestData['event_location']) : '',
 			// json_encode($requestData['post_options']),
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
@@ -227,7 +229,8 @@ class Posts {
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
 			$event_start,
 			$event_end,
-			$requestData['event_location'],
+			// $requestData['event_location'],
+			$requestData['event_location'] ? implode(",", $requestData['event_location']) : '',
 			// json_encode($requestData['post_options']),
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
