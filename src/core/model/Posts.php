@@ -38,14 +38,18 @@ class Posts {
 		foreach ($activeLanguages as $lang) {
 			$table_name = 'posts__' . $lang;
 
+			// For prevent error while column is blank
+			$tmp_perex = $requestData[$lang]['perex'] ? $requestData[$lang]['perex'] : '';
+			$tmp_content = $requestData[$lang]['content'] ? $requestData[$lang]['content'] : '';
+
 			// prepare
 			$query = ('INSERT INTO ' . $table_name . ' (id, title, perex, content) VALUES (?,?,?,?)');
 			$types = 'isss';
 			$args = [
 				$lastId,
 				$requestData[$lang]['title'],
-				$requestData[$lang]['perex'],
-				$requestData[$lang]['content']
+				$tmp_perex,
+				$tmp_content
 			];
 
 			// execute
@@ -122,7 +126,6 @@ class Posts {
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
 				$row['media'] = $row['media'] ? explode(",", $row['media']) : [];
 				$row['event_location'] = $row['event_location'] ? explode(",", $row['event_location']) : [0,0];
-				// $row['post_options'] = json_decode($row['post_options'], true);
 
 				$response[] = $row;
 			}
@@ -135,8 +138,16 @@ class Posts {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		$type = $requestData['type'];
-		$event_start = $type == 'event' ? $requestData['event_start'] : '';
-		$event_end = $type == 'event' ? $requestData['event_end'] : '';
+
+		if ($type == 'event') {
+			$event_start = $requestData['event_start'];
+			$event_end = $requestData['event_end'];
+			$event_location = $requestData['event_location'] ? implode(",", $requestData['event_location']) : '';
+		} else {
+			$event_start = '';
+			$event_end = '';
+			$event_location = '';
+		}
 
 		// prepare
 		$query = ('INSERT INTO posts (
@@ -165,9 +176,7 @@ class Posts {
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
 			$event_start,
 			$event_end,
-			// $requestData['event_location'],
-			$requestData['event_location'] ? implode(",", $requestData['event_location']) : '',
-			// json_encode($requestData['post_options']),
+			$event_location,
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],
@@ -201,8 +210,16 @@ class Posts {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		$type = $requestData['type'];
-		$event_start = $type == 'event' ? $requestData['event_start'] : '';
-		$event_end = $type == 'event' ? $requestData['event_end'] : '';
+
+		if ($type == 'event') {
+			$event_start = $requestData['event_start'];
+			$event_end = $requestData['event_end'];
+			$event_location = $requestData['event_location'] ? implode(",", $requestData['event_location']) : '';
+		} else {
+			$event_start = '';
+			$event_end = '';
+			$event_location = '';
+		}
 
 		// prepare
 		$query = ('UPDATE posts SET
@@ -229,9 +246,7 @@ class Posts {
 			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
 			$event_start,
 			$event_end,
-			// $requestData['event_location'],
-			$requestData['event_location'] ? implode(",", $requestData['event_location']) : '',
-			// json_encode($requestData['post_options']),
+			$event_location,
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
 			$requestData['img_main'],

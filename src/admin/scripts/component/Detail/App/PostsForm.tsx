@@ -122,14 +122,14 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				<input
 					type="hidden"
 					name="author"
-					ref={register({ required: true })}
-					defaultValue={detailData.author}
+					ref={register({})}
+					defaultValue={detailData.author || Profile.id}
 				/>
 				<input
 					type="hidden"
 					name="post_options"
-					ref={register({ required: true })}
-					defaultValue={detailData.post_options}
+					ref={register({})}
+					defaultValue={detailData.post_options || null}
 				/>
 				{watchType !== 'event' && (
 					<>
@@ -137,19 +137,19 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							type="hidden"
 							name="event_start"
 							ref={register({})}
-							defaultValue={detailData.event_start}
+							defaultValue={detailData.event_start || ''}
 						/>
 						<input
 							type="hidden"
 							name="event_end"
 							ref={register({})}
-							defaultValue={detailData.event_end}
+							defaultValue={detailData.event_end || ''}
 						/>
 						<input
 							type="hidden"
 							name="event_location"
 							ref={register({})}
-							defaultValue={detailData.event_location}
+							defaultValue={detailData.event_location || []}
 						/>
 					</>
 				)}
@@ -159,7 +159,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							type="hidden"
 							name="media"
 							ref={register({})}
-							defaultValue={detailData.media}
+							defaultValue={detailData.media || ''}
 						/>
 					</>
 				)}
@@ -221,7 +221,10 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
-										defaultValue={detailData.event_start || new Date()}
+										defaultValue={
+											detailData.event_start ||
+											moment().format(DatePickerFormat)
+										}
 									>
 										{(row) => (
 											<DatePicker
@@ -246,7 +249,9 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										control={control}
 										rules={{ required: watchType == 'event' }}
 										required={watchType == 'event'}
-										defaultValue={detailData.event_end || new Date()}
+										defaultValue={
+											detailData.event_end || moment().format(DatePickerFormat)
+										}
 									>
 										{(row) => (
 											<DatePicker
@@ -265,11 +270,11 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										)}
 									</Form.Row>
 									<Form.Row
-										label={'event location'}
+										label={'Event location'}
 										name={'event_location'}
 										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
+										// rules={{ required: watchType == 'event' }}
+										// required={watchType == 'event'}
 										defaultValue={detailData.event_location || [0, 0]}
 									>
 										{(row) => (
@@ -344,8 +349,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									name={`lang.${lng}.title`}
 									control={control}
 									rules={{ required: true }}
+									defaultValue={''}
 									required
-									// defaultValue={detailData.lang[lng].title || ''}
 								>
 									{(row) => (
 										<Input
@@ -362,8 +367,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									label={'Perex'}
 									name={`lang.${lng}.perex`}
 									control={control}
+									defaultValue={''}
 									long
-									// defaultValue={detailData.lang[lng].perex || ''}
 								>
 									{(row) => (
 										<TextArea
@@ -380,10 +385,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									label={'Content'}
 									name={`lang.${lng}.content`}
 									control={control}
-									rules={{ required: true }}
-									required
 									long
-									// defaultValue={detailData.lang[lng].content || ''}
 								>
 									{(row) => (
 										<Wysiwyg.Base
@@ -400,8 +402,6 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						label={'Published'}
 						name={'published'}
 						control={control}
-						rules={{ required: true }}
-						required
 						defaultValue={detailData.published || new Date()}
 					>
 						{(row) => (
@@ -483,6 +483,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				onDelete={onDelete}
 				isNew={detailData.is_new}
 				invalid={!formState.isValid}
+				// invalid={false}
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}

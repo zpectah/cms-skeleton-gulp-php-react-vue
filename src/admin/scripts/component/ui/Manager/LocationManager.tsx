@@ -58,11 +58,13 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 	const [tmpLocation, setTmpLocation] = useState<
 		[number | string, number | string]
 	>([MAPBOX_DEFAULTS.longitude, MAPBOX_DEFAULTS.latitude]);
+	const [markerVisible, setMarkerVisible] = useState(false);
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
 	const onSelectHandler = (e) => {
 		setLocationChanged(true);
+		setMarkerVisible(true);
 		setTmpLocation([e.lngLat[0], e.lngLat[1]]);
 	};
 
@@ -83,21 +85,35 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 	}, [value]);
 
 	const Markers = useMemo(() => {
+		if (value[0] == 0 && value[1] == 0) {
+			setMarkerVisible(false);
+		} else {
+			setMarkerVisible(true);
+		}
+
 		return (
-			<StyledMarker
-				longitude={Number(tmpLocation[0])}
-				latitude={Number(tmpLocation[1])}
-				offsetLeft={-25}
-				offsetTop={-40}
-			>
-				<IconWrapper dangerouslySetInnerHTML={{ __html: IconMaterial_Place }} />
-			</StyledMarker>
+			<>
+				{markerVisible && (
+					<>
+						<StyledMarker
+							longitude={Number(tmpLocation[0])}
+							latitude={Number(tmpLocation[1])}
+							offsetLeft={-25}
+							offsetTop={-40}
+						>
+							<IconWrapper
+								dangerouslySetInnerHTML={{ __html: IconMaterial_Place }}
+							/>
+						</StyledMarker>
+					</>
+				)}
+			</>
 		);
 	}, [tmpLocation]);
 
 	return (
 		<>
-			<Modal.Base visible={dialogOpen} onCancel={onCancelHandler} size={'xxl'}>
+			<Modal.Base visible={dialogOpen} onCancel={onCancelHandler} size={'lg'}>
 				<ModalContent>
 					<Map
 						zoom={zoom}
