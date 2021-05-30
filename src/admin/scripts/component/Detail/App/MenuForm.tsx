@@ -29,7 +29,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 		allowSave,
 		allowDelete,
 	} = props;
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'types']);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -112,8 +112,13 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select type'}
-								options={config.OPTIONS.model.Menu.type}
-							/>
+							>
+								{config.OPTIONS.model.Menu.type_list.map((item) => (
+									<Select.Option value={item} key={item}>
+										{t(`types:${item}`)}
+									</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Row>
 					<Form.Row

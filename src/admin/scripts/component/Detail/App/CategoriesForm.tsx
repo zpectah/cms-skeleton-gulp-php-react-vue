@@ -37,7 +37,7 @@ interface CategoriesDetailFormProps {
 }
 
 const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'types']);
 	const {
 		detailData,
 		onCancel,
@@ -147,8 +147,13 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select type'}
-								options={config.OPTIONS.model.Categories.type}
-							/>
+							>
+								{config.OPTIONS.model.Categories.type_list.map((item) => (
+									<Select.Option value={item} key={item}>
+										{t(`types:${item}`)}
+									</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Row>
 					<Form.Row

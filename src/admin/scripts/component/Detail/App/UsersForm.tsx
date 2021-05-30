@@ -28,7 +28,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 		allowSave,
 		allowDelete,
 	} = props;
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'types']);
 	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -200,11 +200,16 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							<Select
 								id={row.id}
 								style={{ width: '100%' }}
-								options={config.OPTIONS.model.Users.level}
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select level'}
-							/>
+							>
+								{config.OPTIONS.model.Users.level.map((item) => (
+									<Select.Option value={item.value} key={item.value}>
+										{t(`types:${item.label}`)}
+									</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Row>
 					<Form.Row
@@ -217,11 +222,16 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							<Select
 								id={row.id}
 								style={{ width: '100%' }}
-								options={config.OPTIONS.model.Users.group}
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Select group'}
-							/>
+							>
+								{config.OPTIONS.model.Users.group_list.map((item) => (
+									<Select.Option value={item} key={item}>
+										{t(`types:${item}`)}
+									</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Row>
 					<Form.Row

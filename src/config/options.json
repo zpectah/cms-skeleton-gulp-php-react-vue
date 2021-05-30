@@ -33,30 +33,8 @@
 		]
 	},
 	"meta": {
-		"robots": [
-			{
-				"key": 1,
-				"label": "index,follow",
-				"value": "index,follow"
-			},
-			{
-				"key": 2,
-				"label": "noindex,nofollow",
-				"value": "noindex,nofollow"
-			},
-			{
-				"key": 3,
-				"label": "index,nofollow",
-				"value": "index,nofollow"
-			},
-			{
-				"key": 4,
-				"label": "noindex,follow",
-				"value": "noindex,follow"
-			}
-		]
+		"robots": ["index,follow","noindex,nofollow","index,nofollow","noindex,follow"]
 	},
-	"form": {},
 	"uploads": {
 		"audio": {
 			"extension": ["mp3", "aac"]
@@ -108,253 +86,55 @@
 		"Users": {
 			"level": [
 				{
-					"key": 1,
-					"label": "Demo",
+					"label": "demo",
 					"value": 0
 				},
 				{
-					"key": 2,
-					"label": "Redactor",
+					"label": "redactor",
 					"value": 2
 				}	,
 				{
-					"key": 3,
-					"label": "Chief Redactor",
+					"label": "chief_redactor",
 					"value": 3
 				},
 				{
-					"key": 4,
-					"label": "Admin",
+					"label": "admin",
 					"value": 5
 				}	,
 				{
-					"key": 5,
-					"label": "Super Admin",
+					"label": "super_admin",
 					"value": 7
-				}
-			],
-			"group": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "Redactors",
-					"value": "redactors"
-				}	,
-				{
-					"key": 3,
-					"label": "Managers",
-					"value": "managers"
 				}
 			],
 			"group_list": ["default","redactors","managers"]
 		},
 		"Posts": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Article",
-					"value": "article"
-				},
-				{
-					"key": 2,
-					"label": "Blog",
-					"value": "blog"
-				},
-				{
-					"key": 3,
-					"label": "Event",
-					"value": "event"
-				},
-				{
-					"key": 4,
-					"label": "Media",
-					"value": "media"
-				},
-				{
-					"key": 5,
-					"label": "Reference",
-					"value": "reference"
-				},
-				{
-					"key": 6,
-					"label": "Attachment",
-					"value": "attachment"
-				},
-				{
-					"key": 7,
-					"label": "Custom 1",
-					"value": "custom_1"
-				}
-			],
 			"type_list": ["article","blog","event","media","reference","attachment","custom_1"]
 		},
-		"Translations": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "Primary",
-					"value": "primary"
-				},
-				{
-					"key": 3,
-					"label": "Secondary",
-					"value": "secondary"
-				}
-			],
-			"type_list": ["default","primary","secondary"]
-		},
 		"Menu": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "Primary",
-					"value": "primary"
-				},
-				{
-					"key": 3,
-					"label": "Secondary",
-					"value": "secondary"
-				},
-				{
-					"key": 4,
-					"label": "Tertiary",
-					"value": "tertiary"
-				}
-			],
 			"type_list": ["default","primary","secondary","tertiary"]
 		},
 		"MenuItems": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "External",
-					"value": "external"
-				}
-			],
 			"type_list": ["default","external"]
 		},
 		"Categories": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "Gallery",
-					"value": "gallery"
-				}
-			],
 			"type_list": ["default","gallery"]
 		},
 		"Pages": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Default",
-					"value": "default"
-				},
-				{
-					"key": 2,
-					"label": "System",
-					"value": "system"
-				},
-				{
-					"key": 3,
-					"label": "Category",
-					"value": "category"
-				},
-				{
-					"key": 4,
-					"label": "Tags",
-					"value": "tags"
-				}
-			],
 			"type_list": ["default","system","category","tags"]
 		},
 		"Uploads": {
-			"type": [
-				{
-					"key": 1,
-					"label": "Image",
-					"value": "image"
-				},
-				{
-					"key": 2,
-					"label": "Audio",
-					"value": "audio"
-				},
-				{
-					"key": 3,
-					"label": "Video",
-					"value": "video"
-				},
-				{
-					"key": 4,
-					"label": "Document",
-					"value": "document"
-				},
-				{
-					"key": 5,
-					"label": "Archive",
-					"value": "archive"
-				}
-			],
 			"type_list": ["image","audio","video","document","archive"]
 		},
 		"Members": {
 			"level": [
 				{
-					"key": 1,
-					"label": "Demo",
+					"label": "demo",
 					"value": 0
 				},
 				{
-					"key": 2,
-					"label": "Default",
+					"label": "default",
 					"value": 2
-				}
-			],
-			"group": [
-				{
-					"key": 1,
-					"label": "None",
-					"value": "none"
-				},
-				{
-					"key": 2,
-					"label": "Members",
-					"value": "members"
-				},
-				{
-					"key": 3,
-					"label": "Subscribers",
-					"value": "subscribers"
-				},
-				{
-					"key": 4,
-					"label": "Customers",
-					"value": "customers"
 				}
 			],
 			"group_list": ["none","members","subscribers","customers"]

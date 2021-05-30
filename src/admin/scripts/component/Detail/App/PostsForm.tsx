@@ -38,7 +38,7 @@ interface PostsDetailFormProps {
 }
 
 const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'types']);
 	const {
 		detailData,
 		onCancel,
@@ -240,9 +240,14 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 								id={row.id}
 								value={row.value}
 								onChange={row.onChange}
-								placeholder={'Select categories'}
-								options={config.OPTIONS.model.Posts.type}
-							/>
+								placeholder={'Select type'}
+							>
+								{config.OPTIONS.model.Posts.type_list.map((item) => (
+									<Select.Option value={item} key={item}>
+										{t(`types:${item}`)}
+									</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Row>
 					{

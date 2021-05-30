@@ -48,7 +48,7 @@ interface SettingsFormProps {
 
 const Form: React.FC<SettingsFormProps> = (props) => {
 	const history = useHistory();
-	const { t } = useTranslation(['common', 'component']);
+	const { t } = useTranslation(['common', 'component', 'types']);
 	const { route, panelKey, model, loading, onUpdate } = props;
 	const { control, handleSubmit, setValue, formState, reset } = useForm({
 		mode: 'onChange',
@@ -383,11 +383,16 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									<Select
 										id={row.id}
 										style={{ width: '100%' }}
-										options={config.OPTIONS.meta.robots}
 										value={row.value}
 										onChange={row.onChange}
 										placeholder={'Page meta robots'}
-									/>
+									>
+										{config.OPTIONS.meta.robots.map((item) => (
+											<Select.Option value={item} key={item}>
+												{t(`types:${item}`)}
+											</Select.Option>
+										))}
+									</Select>
 								)}
 							</UiForm.Row>
 							<UiForm.Row

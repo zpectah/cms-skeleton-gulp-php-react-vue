@@ -137,7 +137,12 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>
-				<StyledInput value={value} type="text" readOnly />
+				<StyledInput
+					value={value}
+					type="text"
+					readOnly
+					onClick={toggleDialog}
+				/>
 				<Button.Base type="primary" onClick={toggleDialog} ghost>
 					Select location
 				</Button.Base>
