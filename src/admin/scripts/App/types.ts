@@ -1,5 +1,7 @@
 import { commonModelProps } from '../types';
 
+import config from '../config'; // TODO
+
 export interface UsersItemProps extends commonModelProps {
 	email: string;
 	password: string;
@@ -13,15 +15,27 @@ export interface UsersItemProps extends commonModelProps {
 }
 
 export interface PostsItemProps extends commonModelProps {
-	type: 'article' | 'blog' | 'event' | 'media' | 'reference' | 'custom_1';
+	type:
+		| 'article'
+		| 'blog'
+		| 'event'
+		| 'media'
+		| 'reference'
+		| 'attachment'
+		| 'custom_1';
 	name: string;
 	category?: string[];
 	tags?: string[];
 	event_start?: string;
 	event_end?: string;
 	event_location?: string;
+	event_address?: string;
+	event_country?: string;
+	event_city?: string;
+	event_zip?: string;
 	post_options?: string;
 	media?: string[];
+	attachments?: string[];
 	img_main?: string;
 	img_thumbnail?: string;
 	author?: number;

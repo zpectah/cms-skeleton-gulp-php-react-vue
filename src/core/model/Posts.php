@@ -126,6 +126,7 @@ class Posts {
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
 				$row['media'] = $row['media'] ? explode(",", $row['media']) : [];
 				$row['event_location'] = $row['event_location'] ? explode(",", $row['event_location']) : [0,0];
+				$row['attachments'] = $row['attachments'] ? explode(",", $row['attachments']) : [];
 
 				$response[] = $row;
 			}
@@ -158,8 +159,13 @@ class Posts {
                    event_start,
                    event_end,
                    event_location,
+                   event_address,
+                   event_country,
+                   event_city,
+                   event_zip,
                    post_options,
                    media,
+                   attachments,
                    img_main,
                    img_thumbnail,
                    published,
@@ -167,8 +173,8 @@ class Posts {
                    rating,
                    active,
                    deleted
-                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'ssssssssssssiiii';
+                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'sssssssssssssssssiiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -177,8 +183,13 @@ class Posts {
 			$event_start,
 			$event_end,
 			$event_location,
+			$requestData['event_address'],
+			$requestData['event_country'],
+			$requestData['event_city'],
+			$requestData['event_zip'],
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
+			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['published'],
@@ -230,15 +241,20 @@ class Posts {
                  event_start = ?,
                  event_end = ?,
                  event_location = ?,
+                 event_address = ?,
+                 event_country = ?,
+                 event_city = ?,
+                 event_zip = ?,
                  post_options = ?,
                  media = ?,
+                 attachments = ?,
                  img_main = ?,
                  img_thumbnail = ?,
                  published = ?,
                  rating = ?,
                  active = ?
 		WHERE id = ?');
-		$types = 'ssssssssssssiii';
+		$types = 'sssssssssssssssssiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -247,8 +263,13 @@ class Posts {
 			$event_start,
 			$event_end,
 			$event_location,
+			$requestData['event_address'],
+			$requestData['event_country'],
+			$requestData['event_city'],
+			$requestData['event_zip'],
 			$requestData['post_options'],
 			$requestData['media'] ? implode(",", $requestData['media']) : '',
+			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['published'],

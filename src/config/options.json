@@ -149,7 +149,8 @@
 					"label": "Managers",
 					"value": "managers"
 				}
-			]
+			],
+			"group_list": ["default","redactors","managers"]
 		},
 		"Posts": {
 			"type": [
@@ -188,7 +189,8 @@
 					"label": "Custom 1",
 					"value": "custom_1"
 				}
-			]
+			],
+			"type_list": ["article","blog","event","media","reference","attachment","custom_1"]
 		},
 		"Translations": {
 			"type": [
@@ -207,7 +209,8 @@
 					"label": "Secondary",
 					"value": "secondary"
 				}
-			]
+			],
+			"type_list": ["default","primary","secondary"]
 		},
 		"Menu": {
 			"type": [
@@ -231,7 +234,8 @@
 					"label": "Tertiary",
 					"value": "tertiary"
 				}
-			]
+			],
+			"type_list": ["default","primary","secondary","tertiary"]
 		},
 		"MenuItems": {
 			"type": [
@@ -245,7 +249,8 @@
 					"label": "External",
 					"value": "external"
 				}
-			]
+			],
+			"type_list": ["default","external"]
 		},
 		"Categories": {
 			"type": [
@@ -259,7 +264,8 @@
 					"label": "Gallery",
 					"value": "gallery"
 				}
-			]
+			],
+			"type_list": ["default","gallery"]
 		},
 		"Pages": {
 			"type": [
@@ -283,7 +289,8 @@
 					"label": "Tags",
 					"value": "tags"
 				}
-			]
+			],
+			"type_list": ["default","system","category","tags"]
 		},
 		"Uploads": {
 			"type": [
@@ -312,7 +319,8 @@
 					"label": "Archive",
 					"value": "archive"
 				}
-			]
+			],
+			"type_list": ["image","audio","video","document","archive"]
 		},
 		"Members": {
 			"level": [
@@ -348,7 +356,8 @@
 					"label": "Customers",
 					"value": "customers"
 				}
-			]
+			],
+			"group_list": ["none","members","subscribers","customers"]
 		}
 	}
 }

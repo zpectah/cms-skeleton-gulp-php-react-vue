@@ -151,6 +151,30 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							ref={register({})}
 							defaultValue={detailData.event_location || []}
 						/>
+						<input
+							type="hidden"
+							name="event_address"
+							ref={register({})}
+							defaultValue={detailData.event_address || ''}
+						/>
+						<input
+							type="hidden"
+							name="event_country"
+							ref={register({})}
+							defaultValue={detailData.event_country || ''}
+						/>
+						<input
+							type="hidden"
+							name="event_city"
+							ref={register({})}
+							defaultValue={detailData.event_city || ''}
+						/>
+						<input
+							type="hidden"
+							name="event_zip"
+							ref={register({})}
+							defaultValue={detailData.event_zip || ''}
+						/>
 					</>
 				)}
 				{watchType !== 'media' && (
@@ -160,6 +184,16 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							name="media"
 							ref={register({})}
 							defaultValue={detailData.media || ''}
+						/>
+					</>
+				)}
+				{watchType !== 'attachment' && (
+					<>
+						<input
+							type="hidden"
+							name="attachments"
+							ref={register({})}
+							defaultValue={detailData.attachments || ''}
 						/>
 					</>
 				)}
@@ -215,6 +249,82 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 						{
 							event: (
 								<>
+									<Form.Row
+										label={'event address'}
+										name={'event_address'}
+										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
+										defaultValue={detailData.event_address || ''}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event address'}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'event country'}
+										name={'event_country'}
+										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
+										defaultValue={detailData.event_country || ''}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event country'}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'event city'}
+										name={'event_city'}
+										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
+										defaultValue={detailData.event_city || ''}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event city'}
+											/>
+										)}
+									</Form.Row>
+									<Form.Row
+										label={'event zip'}
+										name={'event_zip'}
+										control={control}
+										rules={{ required: watchType == 'event' }}
+										required={watchType == 'event'}
+										defaultValue={detailData.event_zip || ''}
+									>
+										{(row) => (
+											<Input
+												id={row.id}
+												type={'text'}
+												name={row.name}
+												value={row.value}
+												onChange={row.onChange}
+												placeholder={'event zip'}
+											/>
+										)}
+									</Form.Row>
 									<Form.Row
 										label={'Event start'}
 										name={'event_start'}
@@ -301,6 +411,26 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 										{(row) => (
 											<Manager.Uploads
 												type="image"
+												selected={row.value}
+												onChange={row.onChange}
+											/>
+										)}
+									</Form.Row>
+								</>
+							),
+							attachment: (
+								<>
+									<Form.Row
+										label={'Attachments'}
+										name={'attachments'}
+										control={control}
+										rules={{ required: watchType == 'attachment' }}
+										required={watchType == 'attachment'}
+										defaultValue={detailData.attachments || ''}
+									>
+										{(row) => (
+											<Manager.Uploads
+												type="all"
 												selected={row.value}
 												onChange={row.onChange}
 											/>
