@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { AntdDefaults } from './antd';
+
 export const REM = '16px';
 export const SPACER = '1rem';
 
@@ -42,79 +44,11 @@ export const GlobalStyles = createGlobalStyle`
 	.DialogWrapper {
 	}
 
-
 	// Antd overrides
+	${AntdDefaults}
+
+	/*
 	.ant {
-
-		// Button
-		&-btn {
-			border-radius: .125rem;
-
-			&-primary {
-				color: ${(props) => props.theme.button.primary.text};
-				background: ${(props) => props.theme.button.primary.bg};
-				border-color: ${(props) => props.theme.button.primary.border};
-
-				&:hover {
-					color: ${(props) => props.theme.button.primary.textHover};
-					background: ${(props) => props.theme.button.primary.bgHover};
-					border-color: ${(props) => props.theme.button.primary.borderHover};
-				}
-				&:active,
-				&:focus {
-					color: ${(props) => props.theme.button.primary.textActive};
-					background: ${(props) => props.theme.button.primary.bgActive};
-					border-color: ${(props) => props.theme.button.primary.borderActive};
-				}
-
-				&.ant-btn-background-ghost {
-					color: ${(props) => props.theme.button.primaryOutline.text};
-					background: ${(props) => props.theme.button.primaryOutline.bg};
-					border-color: ${(props) => props.theme.button.primaryOutline.border};
-
-					&:hover {
-						color: ${(props) => props.theme.button.primaryOutline.textHover};
-						background: ${(props) => props.theme.button.primaryOutline.bgHover};
-						border-color: ${(props) => props.theme.button.primaryOutline.borderHover};
-					}
-					&:active,
-					&:focus {
-						color: ${(props) => props.theme.button.primaryOutline.textActive};
-						background: ${(props) => props.theme.button.primaryOutline.bgActive};
-						border-color: ${(props) => props.theme.button.primaryOutline.borderActive};
-					}
-
-				}
-
-			}
-		}
-
-		// Table
-		&-table {
-			&-body {
-				margin-bottom: 1rem;
-				overflow-x: auto;
-			}
-			&-wrapper{}
-		}
-
-		// Modal
-		&-modal {
-			&-close {
-				&-x {
-					width: 40px;
-					height: 40px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					font-size: 1.45rem;
-				}
-			}
-			&-content {
-				background: transparent;
-			}
-		}
-
 		// Input
 		&-input {
 			color: ${(props) => props.theme.form.input.text};
@@ -309,5 +243,6 @@ export const GlobalStyles = createGlobalStyle`
 		}
 
 	}
+	*/
 
 `;
