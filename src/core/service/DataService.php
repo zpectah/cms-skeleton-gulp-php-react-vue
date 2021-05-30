@@ -911,9 +911,7 @@ class DataService {
 	public function export_table_dump ($data) {
 		$SqlDumper = new SqlDumper;
 
-		$response = $SqlDumper -> export_table_dump($data);
-
-		return $response;
+		return $SqlDumper -> export_table_dump($data);
 	}
 
 	public function import_table_data ($data) {

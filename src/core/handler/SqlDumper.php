@@ -4,7 +4,6 @@
 namespace core\handler;
 
 
-// https://github.com/ifsnop/mysqldump-php
 use Ifsnop\Mysqldump as IMysqldump;
 
 
@@ -26,12 +25,11 @@ class SqlDumper {
 			readfile($file);
 			@unlink($file);
 
-			$response = $file;
+			print_r('-- Filename: ' . $file . '');
+			exit;
 		} catch (\Exception $e) {
-			$response = $e -> getMessage();
+			return $e -> getMessage();
 		}
-
-		return $response;
 	}
 
 	public function import_table_data($requestData) {
