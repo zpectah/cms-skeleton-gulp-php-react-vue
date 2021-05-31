@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { message, Descriptions } from 'antd';
 
-import { Form as UiForm, Section, Button, Picker, Modal } from '../ui';
+import { Form as UiForm, Section, Button, Picker, Modal, Icon } from '../ui';
 import LocaleToggle from './LocaleToggle';
 import ThemeToggle from './ThemeToggle';
 import { Input } from 'antd';
@@ -24,6 +24,10 @@ const AvatarContainer = styled.div`
 		${(props) => props.theme.color.primary},
 		${(props) => props.theme.color.pink}
 	);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	position: relative;
+	overflow: hidden;
 
 	& .avatar-email {
 		padding-left: 1rem;
@@ -92,7 +96,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 									{model.last_name}
 								</Descriptions.Item>
 								<Descriptions.Item label="Level">
-									{model.user_level}
+									<Icon.Profile level={model.user_level} size={20} />
 								</Descriptions.Item>
 								<Descriptions.Item label="Group">
 									{model.user_group}

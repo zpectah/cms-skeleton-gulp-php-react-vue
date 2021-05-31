@@ -6,8 +6,8 @@ import { Marker } from 'react-map-gl';
 import Map from '../Map';
 import Button from '../Button';
 import Modal from '../Modal';
-import { IconMaterial_Place } from '../../../../../libs/svg/material-icons';
 import { MAPBOX_DEFAULTS } from '../../../constants';
+import Icon from '../Icon';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -28,18 +28,6 @@ const StyledMarker = styled(Marker)`
 	height: 50px;
 	background-color: transparent;
 	border-radius: 50px;
-`;
-const IconWrapper = styled.span`
-	width: 50px;
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	& svg {
-		width: 40px;
-		height: 40px;
-	}
 `;
 
 interface LocationManagerProps {
@@ -101,9 +89,7 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 							offsetLeft={-25}
 							offsetTop={-40}
 						>
-							<IconWrapper
-								dangerouslySetInnerHTML={{ __html: IconMaterial_Place }}
-							/>
+							<Icon.Material type={'Place'} />
 						</StyledMarker>
 					</>
 				)}

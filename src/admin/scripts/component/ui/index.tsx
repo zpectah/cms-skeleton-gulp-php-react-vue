@@ -13,6 +13,7 @@ import Viewer from './Viewer';
 import Uploader from './Uploader';
 import Manager from './Manager';
 import Map from './Map';
+import Icon from './Icon';
 
 export {
 	Button,
@@ -30,4 +31,5 @@ export {
 	Uploader,
 	Manager,
 	Map,
+	Icon,
 };

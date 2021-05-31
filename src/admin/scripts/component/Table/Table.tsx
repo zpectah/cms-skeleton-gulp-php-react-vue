@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { useForm, Controller } from 'react-hook-form';
-import {
-	Table as AntdTable,
-	Tag,
-	Input,
-	Radio,
-	Form,
-	Space,
-	message,
-} from 'antd';
+import { Table as AntdTable, Input, Radio, Form, message } from 'antd';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
@@ -18,18 +10,11 @@ import { useTranslation } from 'react-i18next';
 import config from '../../config';
 import { array } from '../../../../libs/js/utils';
 import {
-	IconMaterial_Face,
-	IconMaterial_PermIdentity,
-	IconMaterial_SupervisorAccount,
-	IconMaterial_SupervisedUserCircle,
-	IconMaterial_VerifiedUser,
-} from '../../../../libs/svg/material-icons';
-import {
 	MESSAGE_SUCCESS_DURATION,
 	TABLE_ITEMS_PER_PAGE,
 	BREAKPOINTS,
 } from '../../constants';
-import { Button, Viewer } from '../ui';
+import { Button, Viewer, Icon } from '../ui';
 import LanguageToggle from '../Language';
 import DetailItem from '../Detail';
 import Confirm from '../Confirm';
@@ -48,11 +33,6 @@ const Heading = styled.div`
 `;
 const StyledSearch = styled(Input)`
 	width: 250px;
-`;
-const RowIconBlock = styled.span`
-	& svg {
-		max-width: 1.25rem;
-	}
 `;
 const RowLink = styled.a`
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
@@ -320,19 +300,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: t('component:Table.column_label.level'),
 				dataIndex: 'user_level',
 				key: 'user_level',
-				render: (text) => (
-					<RowIconBlock
-						dangerouslySetInnerHTML={{
-							__html: {
-								0: IconMaterial_Face,
-								2: IconMaterial_PermIdentity,
-								3: IconMaterial_SupervisorAccount,
-								5: IconMaterial_SupervisedUserCircle,
-								7: IconMaterial_VerifiedUser,
-							}[text],
-						}}
-					/>
-				),
+				render: (text) => <Icon.Profile level={text} size={15} />,
 			});
 		if (columnsLayout.type)
 			d.push({
