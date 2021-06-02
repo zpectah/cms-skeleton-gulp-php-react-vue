@@ -7,7 +7,14 @@ import styled from 'styled-components';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker, Uploader } from '../../ui';
+import {
+	Modal,
+	Typography,
+	Form,
+	Section,
+	Picker,
+	FileDropper,
+} from '../../ui';
 import LanguageToggle from '../../Language';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
@@ -36,25 +43,6 @@ const MediaTemporary = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-`;
-const ButtonReset = styled.button`
-	width: auto;
-	height: auto;
-	padding: 1rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: flex;
-	border: 0;
-	outline: none;
-	cursor: pointer;
-	color: rgb(255, 255, 255);
-	background-color: rgba(25, 25, 25, 0.5);
-	opacity: 0.75;
-
-	&:hover {
-		opacity: 1;
-	}
 `;
 const PreloaderLayer = styled.div``;
 
@@ -141,19 +129,12 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		setTimeout(() => reloadUploads(), SUBMIT_TIMEOUT);
 	};
 
-	const resetBlob = () => {
-		setTmp_Blob(null);
-		setTmp_meta({
-			extension: '',
-			name: '',
-			mime: '',
-			size: 0,
-			type: 'undefined',
-		});
-	};
-
-	const uploaderHandler = (blob, name, ext, mime, size, type) => {
-		setTmp_Blob(blob);
+	const uploaderHandler = (blob, name, ext, mime, size, type, cropped) => {
+		if (cropped) {
+			setTmp_Blob(cropped);
+		} else {
+			setTmp_Blob(blob);
+		}
 		setTmp_meta({
 			extension: ext,
 			name: name,
@@ -190,24 +171,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								{uploading && (
 									<PreloaderLayer> ... uploading ... </PreloaderLayer>
 								)}
-								{tmp_blob ? (
-									<MediaContainer>
-										<ButtonReset type="button" onClick={resetBlob}>
-											Clear
-										</ButtonReset>
-										<>
-											{tmp_meta.type == 'image' ? (
-												<StyledImage src={tmp_blob} alt={tmp_meta.name} />
-											) : (
-												<MediaTemporary>
-													icon for file type ({tmp_meta.type})
-												</MediaTemporary>
-											)}
-										</>
-									</MediaContainer>
-								) : (
-									<Uploader onChange={uploaderHandler} />
-								)}
+								<FileDropper onChange={uploaderHandler} />
 							</>
 						) : (
 							<MediaContainer>

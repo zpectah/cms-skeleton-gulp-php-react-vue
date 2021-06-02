@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Avatar } from 'antd';
 import styled from 'styled-components';
 
 import Modal from '../Modal';
+// import Uploader from '../Uploader';
+// import ImageCropper from '../ImageCropper';
+import FileDropper from '../FileDropper';
 
+const DialogContent = styled.div`
+	width: 100%;
+	height: 30vh;
+`;
 const AvatarWrapper = styled.div<{ size: number; bgImage?: string }>`
 	width: ${(props) => props.size}px;
 	height: ${(props) => props.size}px;
@@ -61,14 +67,17 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
+	const uploaderHandler = (blob, name, ext, mime, size, type) => {
+		console.log('uploaderHandler .......');
+	};
+
 	return (
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog}>
-				<Modal.Content>
-					<br />
-					Picker avatar ... and crop ... then returns as base64
-					<br />
-				</Modal.Content>
+				<DialogContent>
+					<FileDropper onChange={uploaderHandler} />
+				</DialogContent>
+				<Modal.Footer>btn to close/cancel and confirm</Modal.Footer>
 			</Modal.Base>
 			<AvatarTrigger type="button" size={size} onClick={toggleDialog}>
 				<AvatarWrapper bgImage={src} size={size}>

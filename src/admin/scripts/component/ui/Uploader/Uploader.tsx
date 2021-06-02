@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import getFileType from './getFileType';
+import getFileType from '../../../utils/getFileType';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ invisible: boolean }>`
 	width: 100%;
 	height: auto;
 `;
-const Label = styled.label<{ isDragOver: boolean }>`
+const Label = styled.label<{ isDragOver: boolean; height: number }>`
 	width: 100%;
-	height: 200px;
+	height: ${(props) => props.height}px;
 	padding: 2rem 2rem;
 	text-align: center;
 	display: flex;
@@ -28,7 +28,13 @@ const Input = styled.input`
 	right: 0;
 	opacity: 0;
 `;
-const DropArea = styled.div``;
+const DropArea = styled.div<{ invisible: boolean }>`
+	${(props) =>
+		props.invisible &&
+		`
+		background-color: red;
+	`}
+`;
 
 interface UploaderProps {
 	onChange: (
@@ -39,9 +45,17 @@ interface UploaderProps {
 		size: number,
 		type: string,
 	) => void;
+	height?: number;
+	accept?: string;
+	invisible?: boolean;
 }
 
-const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
+const Uploader: React.FC<UploaderProps> = ({
+	onChange,
+	height = 250,
+	accept,
+	invisible = false,
+}) => {
 	const input = useRef();
 	const [dragOver, setDragOver] = useState(false);
 
@@ -55,15 +69,10 @@ const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
 
 	const callbackHandler = async (file) => {
 		const blob = await toBase64(file);
-		const name = file.name;
 		const ext = file.name.split('.').pop().toLowerCase();
-		const mime = file.type;
-		const size = file.size;
 		const type = getFileType(ext);
 
-		console.log('blob ', !!blob);
-
-		return onChange(blob, name, ext, mime, size, type);
+		return onChange(blob, file.name, ext, file.type, file.size, type);
 	};
 
 	const onDropHandler = (e: any) => {
@@ -105,21 +114,23 @@ const Uploader: React.FC<UploaderProps> = ({ onChange }) => {
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper invisible={invisible}>
 			<Label
 				onDrop={onDropHandler}
 				onDragOver={onDragOverHandler}
 				onDragEnter={onDragEnterHandler}
 				onDragLeave={onDragLeaveHandler}
 				isDragOver={dragOver}
+				height={height}
 			>
 				<Input
 					type="file"
 					name="FileUploader"
+					accept={accept}
 					ref={input}
 					onChange={onChangeHandler}
 				/>
-				<DropArea>...DropArea...</DropArea>
+				<DropArea invisible={invisible}>...DropArea...</DropArea>
 			</Label>
 		</Wrapper>
 	);

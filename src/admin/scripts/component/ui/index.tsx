@@ -14,6 +14,8 @@ import Uploader from './Uploader';
 import Manager from './Manager';
 import Map from './Map';
 import Icon from './Icon';
+import ImageCropper from './ImageCropper';
+import FileDropper from './FileDropper';
 
 export {
 	Button,
@@ -32,4 +34,6 @@ export {
 	Manager,
 	Map,
 	Icon,
+	ImageCropper,
+	FileDropper,
 };
