@@ -175,7 +175,7 @@ const FileDropper: React.FC<FileDropperProps> = ({
 				</OuterDropContainer>
 			) : (
 				<DropContainer>
-					<Uploader onChange={onSelectFile} accept={accept} />
+					<Uploader onChange={onSelectFile} accept={accept} height={400} />
 				</DropContainer>
 			)}
 		</Wrapper>

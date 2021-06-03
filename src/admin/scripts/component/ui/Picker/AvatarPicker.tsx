@@ -68,12 +68,12 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
 	const uploaderHandler = (blob, name, ext, mime, size, type) => {
-		console.log('uploaderHandler .......');
+		console.log('uploaderHandler .......', name, ext, mime, size);
 	};
 
 	return (
 		<>
-			<Modal.Base visible={dialogOpen} onCancel={toggleDialog}>
+			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size="xl">
 				<DialogContent>
 					<FileDropper onChange={uploaderHandler} accept="image/*" />
 				</DialogContent>
