@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import getFileType from '../../../utils/getFileType';
+import { file as fileUtils } from '../../../../../libs/js/utils';
 
-const Wrapper = styled.div<{ invisible: boolean }>`
+const Wrapper = styled.div`
 	width: 100%;
 	height: auto;
 `;
@@ -28,13 +29,7 @@ const Input = styled.input`
 	right: 0;
 	opacity: 0;
 `;
-const DropArea = styled.div<{ invisible: boolean }>`
-	${(props) =>
-		props.invisible &&
-		`
-		background-color: red;
-	`}
-`;
+const DropArea = styled.div``;
 
 interface UploaderProps {
 	onChange: (
@@ -47,28 +42,18 @@ interface UploaderProps {
 	) => void;
 	height?: number;
 	accept?: string;
-	invisible?: boolean;
 }
 
 const Uploader: React.FC<UploaderProps> = ({
 	onChange,
 	height = 250,
 	accept,
-	invisible = false,
 }) => {
 	const input = useRef();
 	const [dragOver, setDragOver] = useState(false);
 
-	const toBase64 = (file) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = (error) => reject(error);
-		});
-
 	const callbackHandler = async (file) => {
-		const blob = await toBase64(file);
+		const blob = await fileUtils.toBase64(file);
 		const ext = file.name.split('.').pop().toLowerCase();
 		const type = getFileType(ext);
 
@@ -114,7 +99,7 @@ const Uploader: React.FC<UploaderProps> = ({
 	};
 
 	return (
-		<Wrapper invisible={invisible}>
+		<Wrapper>
 			<Label
 				onDrop={onDropHandler}
 				onDragOver={onDragOverHandler}
@@ -130,7 +115,7 @@ const Uploader: React.FC<UploaderProps> = ({
 					ref={input}
 					onChange={onChangeHandler}
 				/>
-				<DropArea invisible={invisible}>...DropArea...</DropArea>
+				<DropArea>...DropArea...</DropArea>
 			</Label>
 		</Wrapper>
 	);

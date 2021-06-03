@@ -1,34 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Uploader from '../Uploader';
 import ImageCropper from '../ImageCropper';
+import getFileType from '../../../utils/getFileType';
+import Button from '../Button';
+import { file as fileUtils } from '../../../../../libs/js/utils';
 
 const Wrapper = styled.div`
 	position: relative;
 `;
 const DropContainer = styled.div``;
 const CropperContainer = styled.div``;
-const ButtonReset = styled.button`
-	width: auto;
-	height: auto;
-	padding: 1rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 999;
-	display: flex;
-	border: 0;
-	outline: none;
-	cursor: pointer;
-	color: rgb(255, 255, 255);
-	background-color: rgba(25, 25, 25, 0.5);
-	opacity: 0.75;
-
-	&:hover {
-		opacity: 1;
-	}
-`;
+const OuterDropContainer = styled.div<{ dragOver: boolean }>``;
 
 interface FileDropperProps {
 	onChange: (
@@ -40,12 +24,19 @@ interface FileDropperProps {
 		type: string,
 		cropped?: any, // TODO
 	) => void;
+	onReset?: () => void;
 	accept?: string;
 }
 
-const FileDropper: React.FC<FileDropperProps> = ({ onChange, accept }) => {
+const FileDropper: React.FC<FileDropperProps> = ({
+	onChange,
+	onReset,
+	accept,
+}) => {
 	const [src, setSrc] = useState(null);
 	const [file, setFile] = useState(null);
+	const [fileType, setFileType] = useState(null);
+	const [dragOver, setDragOver] = useState(false);
 
 	const onSelectFile = (blob, name, ext, mime, size, type) => {
 		setSrc(blob);
@@ -63,7 +54,6 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChange, accept }) => {
 	};
 
 	const onCropperChange = (blob) => {
-		console.log(blob);
 		onChange(
 			file?.blob,
 			file?.name,
@@ -71,53 +61,101 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChange, accept }) => {
 			file?.mime,
 			file?.size,
 			file?.type,
-			blob, // TODO -> new cropped image blob
+			blob,
 		);
-
 		setFile({
 			...file,
 			cropped: blob,
 		});
+	};
 
-		console.log(
-			'image ',
-			file?.name,
-			file?.ext,
-			file?.mime,
-			file?.size,
-			file?.type,
-		);
+	useEffect(() => {
+		setFileType(file?.type);
+	}, [file?.type]);
+
+	const callbackHandler = async (file) => {
+		const blob = await fileUtils.toBase64(file);
+		const ext = file.name.split('.').pop().toLowerCase();
+		const type = getFileType(ext);
+
+		if (type !== 'image') {
+			setSrc(null);
+			setFile(null);
+			setFileType(null);
+		}
+
+		setSrc(blob);
+		setFile({
+			name: file.name,
+			ext: file.ext,
+			mime: file.type,
+			size: file.size,
+			type: type,
+		});
+	};
+
+	const resetFile = () => {
+		setSrc(null);
+		setFile(null);
+		setFileType(null);
+		if (onReset) onReset();
+	};
+
+	const dragEvents = {
+		onDrop: (e) => {
+			e.preventDefault();
+			if (fileType) {
+				let file;
+
+				if (e.dataTransfer.items) {
+					file = e.dataTransfer.items[0].getAsFile();
+				} else {
+					file = e.dataTransfer.files[0];
+				}
+
+				setDragOver(false);
+
+				if (file) return callbackHandler(file);
+			}
+		},
+		onDragOver: (e) => {
+			e.preventDefault();
+		},
+		onDragEnter: (e) => {
+			e.preventDefault();
+			if (fileType) setDragOver(true);
+		},
+		onDragLeave: (e) => {
+			e.preventDefault();
+			if (fileType) setDragOver(false);
+		},
 	};
 
 	return (
 		<Wrapper>
-			{file && (
-				<ButtonReset
-					type="button"
-					onClick={() => {
-						console.log(' ... reset blob ');
-					}}
-				>
-					Clear
-				</ButtonReset>
-			)}
-			<DropContainer>
-				<Uploader
-					onChange={onSelectFile}
-					accept={accept}
-					invisible={src && file?.type == 'image'}
-				/>
-			</DropContainer>
-			{src && (
-				<>
-					{file?.type == 'image' ? (
+			{src && file ? (
+				<OuterDropContainer {...dragEvents} dragOver={dragOver}>
+					{file.type == 'image' ? (
 						<CropperContainer>
-							<ImageCropper src={src} onChange={onCropperChange} />
+							<ImageCropper src={src} onChange={onCropperChange}>
+								<Button.Base type="primary" onClick={resetFile} ghost>
+									Reset
+								</Button.Base>
+							</ImageCropper>
 						</CropperContainer>
 					) : (
-						<>other file icon ...</>
+						<>
+							other file icon ... {file?.ext}
+							<Button.Base type="primary" onClick={resetFile} ghost>
+								Reset
+							</Button.Base>
+						</>
 					)}
-				</>
+				</OuterDropContainer>
+			) : (
+				<DropContainer>
+					<Uploader onChange={onSelectFile} accept={accept} />
+				</DropContainer>
 			)}
 		</Wrapper>
 	);

@@ -146,6 +146,17 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		return setValue('name', name.split('.').slice(0, -1).join('.'));
 	};
 
+	const onUploadReset = () => {
+		setTmp_Blob(null);
+		setTmp_meta({
+			extension: '',
+			name: '',
+			mime: '',
+			size: 0,
+			type: 'undefined',
+		});
+	};
+
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
 			<input
@@ -171,7 +182,10 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								{uploading && (
 									<PreloaderLayer> ... uploading ... </PreloaderLayer>
 								)}
-								<FileDropper onChange={uploaderHandler} />
+								<FileDropper
+									onChange={uploaderHandler}
+									onReset={onUploadReset}
+								/>
 							</>
 						) : (
 							<MediaContainer>

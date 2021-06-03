@@ -7,28 +7,56 @@ const Wrapper = styled.div`
 	height: auto;
 	display: flex;
 `;
-const CropperSource = styled.div``;
+const CropperSource = styled.div`
+	width: 50%;
+	height: 50vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.ReactCrop {
+		max-width: 80%;
+		flex: none;
+	}
+`;
 const CropperOutput = styled.div`
-	width: 100%;
-	height: auto;
+	width: 50%;
+	height: 50vh;
 	display: flex;
 	flex-direction: column;
 `;
-const styleCropperOutputBlock = css`
-	img {
-		max-width: 100%;
-		height: auto;
-	}
-`;
 const CropperMeta = styled.div`
-	${styleCropperOutputBlock}
-
-	width: 70%;
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 const CropperThumbnail = styled.div`
-	${styleCropperOutputBlock}
+	width: 100%;
+	height: auto;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	position: relative;
+	overflow: hidden;
+	background-color: rgba(25, 25, 25, 0.125);
 
-	width: 30%;
+	img {
+		max-width: 80%;
+		height: auto;
+		display: block;
+		flex: none;
+	}
+`;
+const CropperAction = styled.div`
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 interface ImageCropperProps {
@@ -38,7 +66,11 @@ interface ImageCropperProps {
 	src: any; // TODO
 }
 
-const ImageCropper: React.FC<ImageCropperProps> = ({ onChange, src }) => {
+const ImageCropper: React.FC<ImageCropperProps> = ({
+	children,
+	onChange,
+	src,
+}) => {
 	const [imageRef, setImageRef] = useState(null);
 	const [fileBlob, setFileBlob] = useState(null);
 	const [crop, setCrop] = useState({
@@ -129,13 +161,14 @@ const ImageCropper: React.FC<ImageCropperProps> = ({ onChange, src }) => {
 			</CropperSource>
 			<CropperOutput>
 				<CropperMeta>
-					... Cropper Meta Data ... {JSON.stringify(crop)} ...{' '}
+					Width: {crop.width}| Height: {crop.height}
 				</CropperMeta>
 				<CropperThumbnail>
 					{fileBlob && (
 						<img src={fileBlob} style={{ maxWidth: '100%' }} alt="tmp_image" />
 					)}
 				</CropperThumbnail>
+				<CropperAction>{children}</CropperAction>
 			</CropperOutput>
 		</Wrapper>
 	);
