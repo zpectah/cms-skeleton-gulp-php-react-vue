@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -88,6 +88,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const store = useSelector((store: any) => store);
 	const dispatch = useDispatch();
 	const [sidebarOpen, setSidebarOpen] = useState<boolean>(store.ui.sideBarOpen);
+	const [showHelp, setSHowHelp] = useState<string>(store.ui.help);
 	const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
 	const [helpDialogOpen, setHelpDialogOpen] = useState<boolean>(false);
 	const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
@@ -104,6 +105,10 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 	const toggleHelpDialog = () => setHelpDialogOpen(!helpDialogOpen);
 	const toggleProfileDialog = () => setProfileDialogOpen(!profileDialogOpen);
 	const toggleSpotlight = () => setSpotlightOpen(!spotlightOpen);
+
+	useEffect(() => {
+		setSHowHelp(store.ui.help);
+	}, [store.ui.help]);
 
 	return (
 		<>
@@ -151,7 +156,7 @@ const AppLayout: React.FC<AppLayoutProps> = (props) => {
 					onCancel={toggleAddDialog}
 					afterClick={toggleAddDialog}
 				/>
-				{config.GLOBAL.CMS.UI.HELP && (
+				{showHelp == 'true' && (
 					<Help.Dialog isOpen={helpDialogOpen} onCancel={toggleHelpDialog} />
 				)}
 				<Profile.Dialog

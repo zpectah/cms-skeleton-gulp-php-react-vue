@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { GlobalStyles } from '../styles/global';
 import ThemeService from '../service/ThemeService';
+import HelpService from '../service/HelpService';
 import themes from '../styles/theme';
 import routes from '../config.routes';
 
@@ -43,6 +44,7 @@ const App = () => {
 
 	const onInit = () => {
 		ThemeService.init();
+		HelpService.init();
 	};
 
 	return (

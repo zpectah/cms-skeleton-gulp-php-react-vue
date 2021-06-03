@@ -14,12 +14,12 @@
 		"RESTRICTED_REDIRECT_TARGET": "/admin/",
 		"STORAGE_KEY_LANG": "app-lang",
 		"STORAGE_KEY_THEME": "app-theme",
+		"STORAGE_KEY_HELP": "app-help",
 		"STORAGE_KEY_UI_SIDEBAR": "ui-sidebar",
 		"USING_EXTERNAL_CSS": true,
 		"USE_IMPORT_SQL": false,
 		"UI": {
-			"SPOTLIGHT": false,
-			"HELP": false
+			"SPOTLIGHT": false
 		}
 	},
 	"PROJECT": {

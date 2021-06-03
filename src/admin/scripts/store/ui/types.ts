@@ -1,5 +1,4 @@
 export const LANGUAGE_TOGGLE = 'LANGUAGE_TOGGLE';
 export const THEME_TOGGLE = 'THEME_TOGGLE';
 export const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE';
-export const SET_DATA_LOADING = 'SET_DATA_LOADING';
-export const SET_DATA_ERROR = 'SET_DATA_ERROR';
+export const HELP_TOGGLE = 'HELP_TOGGLE';

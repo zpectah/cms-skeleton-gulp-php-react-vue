@@ -2,9 +2,8 @@ export interface storeProps {
 	ui: {
 		language: string;
 		theme: string;
+		help: string;
 		sideBarOpen: boolean;
-		loadingData: boolean;
-		dataError: boolean;
 	};
 }
 

@@ -5,7 +5,7 @@ import { Radio } from 'antd';
 import config from '../../config';
 import LanguageService from '../../service/LanguageService';
 
-const LocaleToggle: React.FC<{}> = () => {
+const LocaleToggle = () => {
 	const { i18n } = useTranslation();
 	const [lang, setLang] = useState<string>(i18n.language);
 

@@ -2,13 +2,13 @@ import { storage } from '../../../../libs/js/utils';
 import config from '../../config';
 import LangService from '../../service/LanguageService';
 import ThemeService from '../../service/ThemeService';
+import HelpService from '../../service/HelpService';
 import UiStoreState from './store';
 import {
 	LANGUAGE_TOGGLE,
 	SIDEBAR_TOGGLE,
 	THEME_TOGGLE,
-	SET_DATA_LOADING,
-	SET_DATA_ERROR,
+	HELP_TOGGLE,
 } from './types';
 
 function UiReducer(state = UiStoreState, action) {
@@ -25,20 +25,17 @@ function UiReducer(state = UiStoreState, action) {
 				theme: action.payload,
 			});
 
+		case HELP_TOGGLE:
+			HelpService.set(action.payload);
+			console.log(typeof action.payload, action.payload);
+			return Object.assign({}, state, {
+				help: action.payload,
+			});
+
 		case SIDEBAR_TOGGLE:
 			storage.set(config.GLOBAL.CMS.STORAGE_KEY_UI_SIDEBAR, action.payload);
 			return Object.assign({}, state, {
 				sideBarOpen: action.payload,
-			});
-
-		case SET_DATA_LOADING:
-			return Object.assign({}, state, {
-				loadingData: action.payload,
-			});
-
-		case SET_DATA_ERROR:
-			return Object.assign({}, state, {
-				dataError: action.payload,
 			});
 	}
 

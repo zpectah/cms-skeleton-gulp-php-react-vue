@@ -7,6 +7,7 @@ import { Form as UiForm, Section, Button, Modal, Icon } from '../ui';
 import FileUpload from '../FileUpload';
 import LocaleToggle from './LocaleToggle';
 import ThemeToggle from './ThemeToggle';
+import HelpToggle from './HelpToggle';
 import { Input } from 'antd';
 import { useProfile } from '../../App/hooks';
 
@@ -110,6 +111,9 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 					</UiForm.RowNoController>
 					<UiForm.RowNoController label={'Theme'}>
 						{() => <ThemeToggle />}
+					</UiForm.RowNoController>
+					<UiForm.RowNoController label={'Show Help'}>
+						{() => <HelpToggle />}
 					</UiForm.RowNoController>
 					{!formOpen && (
 						<div>

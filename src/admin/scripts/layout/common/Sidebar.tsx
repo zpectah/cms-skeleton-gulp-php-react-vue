@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
 	MdMenu,
@@ -19,6 +19,7 @@ import { Scrollable } from '../../component/ui';
 import Menu from '../../component/Menu';
 import { appProps } from '../../types';
 import { useSettings } from '../../App/hooks';
+import { useSelector } from 'react-redux';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -158,6 +159,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 		Crm: Settings ? Settings['module_crm_active'] : false,
 		Market: Settings ? Settings['module_market_active'] : false,
 	};
+	const store = useSelector((store: any) => store);
+	const [showHelp, setSHowHelp] = useState<string>(store.ui.help);
+
+	useEffect(() => {
+		setSHowHelp(store.ui.help);
+	}, [store.ui.help]);
 
 	return (
 		<>
@@ -190,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 					</div>
 					<div>&nbsp;</div>
 					<div>
-						{config.GLOBAL.CMS.UI.HELP && (
+						{showHelp == 'true' && (
 							<Trigger onClick={toggleHelpDialog}>
 								<MdHelpOutline />
 							</Trigger>
