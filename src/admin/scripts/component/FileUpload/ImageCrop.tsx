@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -59,18 +59,14 @@ const CropperAction = styled.div`
 	justify-content: center;
 `;
 
-interface ImageCropperProps {
+interface ImageCropProps {
 	onChange: (
 		blob: any, // TODO
 	) => void;
 	src: any; // TODO
 }
 
-const ImageCropper: React.FC<ImageCropperProps> = ({
-	children,
-	onChange,
-	src,
-}) => {
+const ImageCrop: React.FC<ImageCropProps> = ({ children, onChange, src }) => {
 	const [imageRef, setImageRef] = useState(null);
 	const [fileBlob, setFileBlob] = useState(null);
 	const [crop, setCrop] = useState({
@@ -174,4 +170,4 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
 	);
 };
 
-export default ImageCropper;
+export default ImageCrop;

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Modal from '../Modal';
-// import Uploader from '../Uploader';
-// import ImageCropper from '../ImageCropper';
-import FileDropper from '../FileDropper';
+import { Modal } from '../ui';
+import FileUpload from './FileUpload';
 
 const DialogContent = styled.div`
 	width: 100%;
@@ -50,14 +48,14 @@ const AvatarTrigger = styled.button<{ size: number }>`
 	cursor: pointer;
 `;
 
-interface AvatarPickerProps {
+interface AvatarUploaderProps {
 	src?: string;
 	label: string;
 	size?: number;
 	onChange?: (string) => void;
 }
 
-const AvatarPicker: React.FC<AvatarPickerProps> = ({
+const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 	src,
 	label,
 	size = 50,
@@ -75,7 +73,7 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size="xl">
 				<DialogContent>
-					<FileDropper onChange={uploaderHandler} accept="image/*" />
+					<FileUpload onChange={uploaderHandler} accept="image/*" />
 				</DialogContent>
 				<Modal.Footer>btn to close/cancel and confirm</Modal.Footer>
 			</Modal.Base>
@@ -88,4 +86,4 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
 	);
 };
 
-export default AvatarPicker;
+export default AvatarUploader;

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import getFileType from '../../../utils/getFileType';
-import { file as fileUtils } from '../../../../../libs/js/utils';
+import getFileType from '../../utils/getFileType';
+import { file as fileUtils } from '../../../../libs/js/utils';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -31,7 +31,7 @@ const Input = styled.input`
 `;
 const DropArea = styled.div``;
 
-interface UploaderProps {
+interface FileDropProps {
 	onChange: (
 		blob: any, // TODO
 		name: string,
@@ -44,7 +44,7 @@ interface UploaderProps {
 	accept?: string;
 }
 
-const Uploader: React.FC<UploaderProps> = ({
+const FileDrop: React.FC<FileDropProps> = ({
 	onChange,
 	height = 250,
 	accept,
@@ -132,4 +132,4 @@ const Uploader: React.FC<UploaderProps> = ({
 	);
 };
 
-export default Uploader;
+export default FileDrop;

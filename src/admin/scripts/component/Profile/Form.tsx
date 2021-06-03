@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { message, Descriptions } from 'antd';
 
-import { Form as UiForm, Section, Button, Picker, Modal, Icon } from '../ui';
+import { Form as UiForm, Section, Button, Modal, Icon } from '../ui';
+import FileUpload from '../FileUpload';
 import LocaleToggle from './LocaleToggle';
 import ThemeToggle from './ThemeToggle';
 import { Input } from 'antd';
@@ -70,7 +71,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 		<Wrapper>
 			<AvatarContainer>
 				<div>
-					<Picker.Avatar
+					<FileUpload.Avatar
 						label={
 							model.first_name && model.last_name
 								? model.first_name.charAt(0) + model.last_name.charAt(0)

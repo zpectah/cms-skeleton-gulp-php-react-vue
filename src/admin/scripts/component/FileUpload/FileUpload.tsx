@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Uploader from '../Uploader';
-import ImageCropper from '../ImageCropper';
-import getFileType from '../../../utils/getFileType';
-import Button from '../Button';
-import { file as fileUtils } from '../../../../../libs/js/utils';
+import FileDrop from './FileDrop';
+import ImageCrop from './ImageCrop';
+import getFileType from '../../utils/getFileType';
+import { Button } from '../ui';
+import { file as fileUtils } from '../../../../libs/js/utils';
 
 const Wrapper = styled.div`
 	position: relative;
@@ -14,7 +14,7 @@ const DropContainer = styled.div``;
 const CropperContainer = styled.div``;
 const OuterDropContainer = styled.div<{ dragOver: boolean }>``;
 
-interface FileDropperProps {
+interface FileUploadProps {
 	onChange: (
 		blob: any, // TODO
 		name: string,
@@ -28,7 +28,7 @@ interface FileDropperProps {
 	accept?: string;
 }
 
-const FileDropper: React.FC<FileDropperProps> = ({
+const FileUpload: React.FC<FileUploadProps> = ({
 	onChange,
 	onReset,
 	accept,
@@ -158,11 +158,11 @@ const FileDropper: React.FC<FileDropperProps> = ({
 				<OuterDropContainer {...dragEvents} dragOver={dragOver}>
 					{file.type == 'image' ? (
 						<CropperContainer>
-							<ImageCropper src={src} onChange={onCropperChange}>
+							<ImageCrop src={src} onChange={onCropperChange}>
 								<Button.Base type="primary" onClick={resetFile} ghost>
 									Reset
 								</Button.Base>
-							</ImageCropper>
+							</ImageCrop>
 						</CropperContainer>
 					) : (
 						<>
@@ -175,11 +175,11 @@ const FileDropper: React.FC<FileDropperProps> = ({
 				</OuterDropContainer>
 			) : (
 				<DropContainer>
-					<Uploader onChange={onSelectFile} accept={accept} height={400} />
+					<FileDrop onChange={onSelectFile} accept={accept} height={400} />
 				</DropContainer>
 			)}
 		</Wrapper>
 	);
 };
 
-export default FileDropper;
+export default FileUpload;

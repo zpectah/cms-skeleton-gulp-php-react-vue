@@ -7,14 +7,8 @@ import styled from 'styled-components';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
-import {
-	Modal,
-	Typography,
-	Form,
-	Section,
-	Picker,
-	FileDropper,
-} from '../../ui';
+import { Modal, Typography, Form, Section, Picker } from '../../ui';
+import FileUpload from '../../FileUpload';
 import LanguageToggle from '../../Language';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
@@ -183,7 +177,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								{uploading && (
 									<PreloaderLayer> ... uploading ... </PreloaderLayer>
 								)}
-								<FileDropper
+								<FileUpload.Uploader
 									onChange={uploaderHandler}
 									onReset={onUploadReset}
 								/>
