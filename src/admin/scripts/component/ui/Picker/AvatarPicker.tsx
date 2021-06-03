@@ -8,7 +8,7 @@ import FileDropper from '../FileDropper';
 
 const DialogContent = styled.div`
 	width: 100%;
-	height: 30vh;
+	height: auto;
 `;
 const AvatarWrapper = styled.div<{ size: number; bgImage?: string }>`
 	width: ${(props) => props.size}px;
@@ -75,7 +75,7 @@ const AvatarPicker: React.FC<AvatarPickerProps> = ({
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog}>
 				<DialogContent>
-					<FileDropper onChange={uploaderHandler} />
+					<FileDropper onChange={uploaderHandler} accept="image/*" />
 				</DialogContent>
 				<Modal.Footer>btn to close/cancel and confirm</Modal.Footer>
 			</Modal.Base>

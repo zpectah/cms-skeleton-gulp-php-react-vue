@@ -57,7 +57,18 @@ const Uploader: React.FC<UploaderProps> = ({
 		const ext = file.name.split('.').pop().toLowerCase();
 		const type = getFileType(ext);
 
-		return onChange(blob, file.name, ext, file.type, file.size, type);
+		if (accept) {
+			console.log(accept);
+			console.log(file.type);
+
+			if (file.type.includes(accept.replace('*', ''))) {
+				return onChange(blob, file.name, ext, file.type, file.size, type);
+			} else {
+				console.warn('Error !!!');
+			}
+		} else {
+			return onChange(blob, file.name, ext, file.type, file.size, type);
+		}
 	};
 
 	const onDropHandler = (e: any) => {

@@ -99,6 +99,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				...data,
 				name: string.replaceSpaces(data.name),
 				fileBase64: tmp_blob,
+				fileBase64Cropped: null, // TODO
 				extension: tmp_meta.extension,
 				file_name: string.replaceSpaces(tmp_meta.name),
 				file_mime: tmp_meta.mime,

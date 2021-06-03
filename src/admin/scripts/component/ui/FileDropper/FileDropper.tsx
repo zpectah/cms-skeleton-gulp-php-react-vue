@@ -78,20 +78,41 @@ const FileDropper: React.FC<FileDropperProps> = ({
 		const ext = file.name.split('.').pop().toLowerCase();
 		const type = getFileType(ext);
 
-		if (type !== 'image') {
-			setSrc(null);
-			setFile(null);
-			setFileType(null);
-		}
+		if (accept) {
+			if (file.type.includes(accept.replace('*', ''))) {
+				if (type !== 'image') {
+					setSrc(null);
+					setFile(null);
+					setFileType(null);
+				}
 
-		setSrc(blob);
-		setFile({
-			name: file.name,
-			ext: file.ext,
-			mime: file.type,
-			size: file.size,
-			type: type,
-		});
+				setSrc(blob);
+				setFile({
+					name: file.name,
+					ext: file.ext,
+					mime: file.type,
+					size: file.size,
+					type: type,
+				});
+			} else {
+				console.warn('Error !!!');
+			}
+		} else {
+			if (type !== 'image') {
+				setSrc(null);
+				setFile(null);
+				setFileType(null);
+			}
+
+			setSrc(blob);
+			setFile({
+				name: file.name,
+				ext: file.ext,
+				mime: file.type,
+				size: file.size,
+				type: type,
+			});
+		}
 	};
 
 	const resetFile = () => {
