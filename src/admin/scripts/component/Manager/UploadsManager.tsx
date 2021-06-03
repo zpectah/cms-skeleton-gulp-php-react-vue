@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import { Carousel } from 'antd';
 
 import { useUploads } from '../../App/hooks';
-import Modal from '../ui/Modal';
+import { Modal } from '../ui';
 import BaseButton from '../ui/Button/BaseButton';
 import { UploadsItemProps } from '../../App/types';
 import config from '../../config';
-import { isArray } from 'util';
 
 const Wrapper = styled.div`
 	width: 100%;

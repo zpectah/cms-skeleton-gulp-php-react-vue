@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { useTags } from '../../../App/hooks';
+import { useTags } from '../../App/hooks';
 
 interface TagsPickerProps {
 	id?: string;

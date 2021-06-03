@@ -8,7 +8,8 @@ import { SUBMIT_TIMEOUT } from '../../../constants';
 import { string } from '../../../../../libs/js/utils';
 import { useMenu } from '../../../App/hooks';
 import { MenuItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Picker } from '../../ui';
+import { Modal, Typography, Form, Section } from '../../ui';
+import Picker from '../../Picker';
 import Manager from '../../Manager';
 import DetailFooter from '../DetailFooter';
 

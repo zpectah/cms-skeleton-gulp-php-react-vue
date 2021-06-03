@@ -1,42 +1,59 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { useMenuItems } from '../../../App/hooks';
+import { useCategories } from '../../App/hooks';
 
-interface MenuItemsPickerProps {
+interface CategoriesPickerProps {
 	id?: string;
 	value: string[];
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
+	mode?: 'all' | 'category' | 'gallery';
 }
 
-const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
+const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 	id,
 	value,
 	onChange,
 	single = false,
 	ignoredId = [],
+	mode = 'all',
 }) => {
-	const { MenuItems } = useMenuItems();
+	const { Categories } = useCategories();
 
 	const getOptions = () => {
 		let o = [
 			{
 				key: 0,
 				value: '',
-				label: 'Select MenuItems',
+				label: 'Select category',
 				disabled: true,
 			},
 		];
 
-		MenuItems?.map((option) => {
-			o.push({
-				key: option.id,
-				value: option.id,
-				label: option.name,
-				disabled: false,
-			});
+		Categories?.map((option) => {
+			switch (option.type) {
+				case 'default':
+					if (mode == 'category' || mode == 'all')
+						o.push({
+							key: option.id,
+							value: option.id,
+							label: option.name,
+							disabled: false,
+						});
+					break;
+
+				case 'gallery':
+					if (mode == 'gallery' || mode == 'all')
+						o.push({
+							key: option.id,
+							value: option.id,
+							label: option.name,
+							disabled: false,
+						});
+					break;
+			}
 		});
 
 		if (ignoredId.length > 0) {
@@ -56,13 +73,14 @@ const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 
 	const getVariableProps = () => {
 		let p: any = {
-			placeholder: 'Select MenuItems',
+			placeholder: 'Select category',
 		};
 
 		if (!single) {
 			p = {
 				...p,
 				mode: 'multiple',
+				placeholder: 'Select categories',
 			};
 		}
 
@@ -81,4 +99,4 @@ const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 	);
 };
 
-export default MenuItemsPicker;
+export default CategoriesPicker;

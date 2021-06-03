@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { useMenu } from '../../../App/hooks';
+import { useMenuItems } from '../../App/hooks';
 
-interface MenuPickerProps {
+interface MenuItemsPickerProps {
 	id?: string;
 	value: string[];
 	onChange: (value, option) => void;
@@ -11,26 +11,26 @@ interface MenuPickerProps {
 	ignoredId?: any[];
 }
 
-const MenuPicker: React.FC<MenuPickerProps> = ({
+const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 	id,
 	value,
 	onChange,
 	single = false,
 	ignoredId = [],
 }) => {
-	const { Menu } = useMenu();
+	const { MenuItems } = useMenuItems();
 
 	const getOptions = () => {
 		let o = [
 			{
 				key: 0,
 				value: '',
-				label: 'Select menu',
+				label: 'Select MenuItems',
 				disabled: true,
 			},
 		];
 
-		Menu?.map((option) => {
+		MenuItems?.map((option) => {
 			o.push({
 				key: option.id,
 				value: option.id,
@@ -56,7 +56,7 @@ const MenuPicker: React.FC<MenuPickerProps> = ({
 
 	const getVariableProps = () => {
 		let p: any = {
-			placeholder: 'Select menu',
+			placeholder: 'Select MenuItems',
 		};
 
 		if (!single) {
@@ -81,4 +81,4 @@ const MenuPicker: React.FC<MenuPickerProps> = ({
 	);
 };
 
-export default MenuPicker;
+export default MenuItemsPicker;

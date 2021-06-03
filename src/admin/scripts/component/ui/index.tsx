@@ -7,7 +7,6 @@ import Section from './Section';
 import Hr from './Hr';
 import Modal from './Modal';
 import Preloader from './Preloader';
-import Picker from './Picker';
 import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
 import Map from './Map';
@@ -23,7 +22,6 @@ export {
 	Hr,
 	Modal,
 	Preloader,
-	Picker,
 	Wysiwyg,
 	Viewer,
 	Map,

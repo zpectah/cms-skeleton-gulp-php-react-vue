@@ -1,59 +1,42 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { useCategories } from '../../../App/hooks';
+import { useMenu } from '../../App/hooks';
 
-interface CategoriesPickerProps {
+interface MenuPickerProps {
 	id?: string;
 	value: string[];
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
-	mode?: 'all' | 'category' | 'gallery';
 }
 
-const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
+const MenuPicker: React.FC<MenuPickerProps> = ({
 	id,
 	value,
 	onChange,
 	single = false,
 	ignoredId = [],
-	mode = 'all',
 }) => {
-	const { Categories } = useCategories();
+	const { Menu } = useMenu();
 
 	const getOptions = () => {
 		let o = [
 			{
 				key: 0,
 				value: '',
-				label: 'Select category',
+				label: 'Select menu',
 				disabled: true,
 			},
 		];
 
-		Categories?.map((option) => {
-			switch (option.type) {
-				case 'default':
-					if (mode == 'category' || mode == 'all')
-						o.push({
-							key: option.id,
-							value: option.id,
-							label: option.name,
-							disabled: false,
-						});
-					break;
-
-				case 'gallery':
-					if (mode == 'gallery' || mode == 'all')
-						o.push({
-							key: option.id,
-							value: option.id,
-							label: option.name,
-							disabled: false,
-						});
-					break;
-			}
+		Menu?.map((option) => {
+			o.push({
+				key: option.id,
+				value: option.id,
+				label: option.name,
+				disabled: false,
+			});
 		});
 
 		if (ignoredId.length > 0) {
@@ -73,14 +56,13 @@ const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 
 	const getVariableProps = () => {
 		let p: any = {
-			placeholder: 'Select category',
+			placeholder: 'Select menu',
 		};
 
 		if (!single) {
 			p = {
 				...p,
 				mode: 'multiple',
-				placeholder: 'Select categories',
 			};
 		}
 
@@ -99,4 +81,4 @@ const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 	);
 };
 
-export default CategoriesPicker;
+export default MenuPicker;
