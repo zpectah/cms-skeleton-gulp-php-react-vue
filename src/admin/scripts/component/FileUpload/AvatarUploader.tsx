@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Modal } from '../ui';
+import { Modal, Icon } from '../ui';
 import FileUpload from './FileUpload';
 
 const DialogContent = styled.div`
@@ -46,6 +46,32 @@ const AvatarTrigger = styled.button<{ size: number }>`
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
+
+	.avatar-change-popup {
+		width: ${(props) => props.size}px;
+		height: ${(props) => props.size}px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba(25, 25, 25, 0.5);
+		border-radius: ${(props) => props.size}px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: inherit;
+		opacity: 0;
+		transition: opacity 0.25s ease-in-out 0s;
+
+		& svg {
+			fill: rgb(250, 250, 250);
+		}
+	}
+
+	&:hover {
+		.avatar-change-popup {
+			opacity: 1;
+		}
+	}
 `;
 
 interface AvatarUploaderProps {
@@ -81,6 +107,9 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 				<AvatarWrapper bgImage={src} size={size}>
 					{label}
 				</AvatarWrapper>
+				<div className="avatar-change-popup">
+					<Icon.Material type="Add" size={20} />
+				</div>
 			</AvatarTrigger>
 		</>
 	);

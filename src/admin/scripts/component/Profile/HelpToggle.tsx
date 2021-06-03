@@ -10,7 +10,6 @@ const HelpToggle = () => {
 	const dispatch = useDispatch();
 
 	const onChangeHandler = (key) => {
-		console.log('key', key);
 		setHelp(key);
 		dispatch(helpToggle(String(key)));
 	};
