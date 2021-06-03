@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Carousel } from 'antd';
 
-import { useUploads } from '../../../App/hooks';
-import Modal from '../Modal';
-import BaseButton from '../Button/BaseButton';
-import { UploadsItemProps } from '../../../App/types';
-import config from '../../../config';
+import { useUploads } from '../../App/hooks';
+import Modal from '../ui/Modal';
+import BaseButton from '../ui/Button/BaseButton';
+import { UploadsItemProps } from '../../App/types';
+import config from '../../config';
 import { isArray } from 'util';
 
 const Wrapper = styled.div`

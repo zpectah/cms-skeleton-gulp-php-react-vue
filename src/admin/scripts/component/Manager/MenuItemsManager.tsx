@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import config from '../../../config';
-import { useMenuItems } from '../../../App/hooks';
-import Modal from '../Modal';
-import BaseButton from '../Button/BaseButton';
+import config from '../../config';
+import { useMenuItems } from '../../App/hooks';
+import Modal from '../ui/Modal';
+import BaseButton from '../ui/Button/BaseButton';
 
 const Wrapper = styled.div`
 	width: 100%;

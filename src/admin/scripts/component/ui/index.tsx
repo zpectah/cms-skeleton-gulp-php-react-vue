@@ -10,7 +10,6 @@ import Preloader from './Preloader';
 import Picker from './Picker';
 import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
-import Manager from './Manager';
 import Map from './Map';
 import Icon from './Icon';
 
@@ -27,7 +26,6 @@ export {
 	Picker,
 	Wysiwyg,
 	Viewer,
-	Manager,
 	Map,
 	Icon,
 };

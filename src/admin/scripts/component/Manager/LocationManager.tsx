@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { Input } from 'antd';
 import { Marker } from 'react-map-gl';
 
-import Map from '../Map';
-import Button from '../Button';
-import Modal from '../Modal';
-import { MAPBOX_DEFAULTS } from '../../../constants';
-import Icon from '../Icon';
+import Map from '../ui/Map';
+import Button from '../ui/Button';
+import Modal from '../ui/Modal';
+import { MAPBOX_DEFAULTS } from '../../constants';
+import Icon from '../ui/Icon';
 
 const Wrapper = styled.div`
 	width: 100%;

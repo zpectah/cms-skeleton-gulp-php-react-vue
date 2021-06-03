@@ -9,7 +9,8 @@ import styled from 'styled-components';
 import config from '../../config';
 import { routeProps } from '../../types';
 // import { EMAIL_REGEX } from '../../constants'; // TODO
-import { Button, Form as UiForm, Card, Section, Hr, Manager } from '../ui';
+import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
+import Manager from '../Manager';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
 import RepairSqlTables from './RepairSqlTables';
