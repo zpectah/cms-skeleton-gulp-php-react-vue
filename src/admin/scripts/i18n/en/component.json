@@ -64,5 +64,16 @@
 		"btn_logIn": "Log in",
 		"btn_submit": "Submit request",
 		"input_email_placeholder": "E-mail"
+	},
+	"FileUpload": {
+		"title": {
+			"fileDrop": "Drop or select file",
+			"fileCrop": "Select area on image to crop"
+		},
+		"btn": {
+			"resetAvatar": "Reset avatar",
+			"removeFile": "Remove file",
+			"removeImage": "Remove image"
+		}
 	}
 }

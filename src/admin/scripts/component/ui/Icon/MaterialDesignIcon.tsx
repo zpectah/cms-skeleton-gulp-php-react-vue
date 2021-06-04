@@ -1,25 +1,30 @@
 import React from 'react';
 
 import {
-	IconMaterial_Place,
-	IconMaterial_Face,
-	IconMaterial_PermIdentity,
-	IconMaterial_SupervisorAccount,
-	IconMaterial_SupervisedUserCircle,
-	IconMaterial_VerifiedUser,
-	IconMaterial_Visibility,
-	IconMaterial_VisibilityOff,
-	IconMaterial_Check,
-	IconMaterial_Close,
-	IconMaterial_Add,
-	IconMaterial_Remove,
-	IconMaterial_PushPin,
-	IconMaterial_Create,
-	IconMaterial_CloudUpload,
-	IconMaterial_CloudDownload,
-	IconMaterial_Download,
-	IconMaterial_CloudQueue,
-	IconMaterial_Upload,
+	Place,
+	Face,
+	PermIdentity,
+	SupervisorAccount,
+	SupervisedUserCircle,
+	VerifiedUser,
+	Visibility,
+	VisibilityOff,
+	Check,
+	Close,
+	Add,
+	Remove,
+	PushPin,
+	Create,
+	CloudUpload,
+	CloudDownload,
+	Download,
+	CloudQueue,
+	Upload,
+	Description,
+	Save,
+	Image,
+	Mic,
+	Movie,
 } from '../../../../../libs/svg/material-icons';
 import Icon from './Icon';
 
@@ -43,31 +48,41 @@ interface MaterialDesignIconProps {
 		| 'CloudDownload'
 		| 'Download'
 		| 'CloudQueue'
-		| 'Upload';
+		| 'Upload'
+		| 'Description'
+		| 'Save'
+		| 'Image'
+		| 'Mic'
+		| 'Movie';
 	size?: number;
 }
 
 const MaterialDesignIcon = ({ type, size = 50 }: MaterialDesignIconProps) => {
 	const iconKey = {
-		Place: IconMaterial_Place,
-		Face: IconMaterial_Face,
-		PermIdentity: IconMaterial_PermIdentity,
-		SupervisorAccount: IconMaterial_SupervisorAccount,
-		SupervisedUserCircle: IconMaterial_SupervisedUserCircle,
-		VerifiedUser: IconMaterial_VerifiedUser,
-		Visibility: IconMaterial_Visibility,
-		VisibilityOff: IconMaterial_VisibilityOff,
-		Check: IconMaterial_Check,
-		Close: IconMaterial_Close,
-		Add: IconMaterial_Add,
-		Remove: IconMaterial_Remove,
-		PushPin: IconMaterial_PushPin,
-		Create: IconMaterial_Create,
-		CloudUpload: IconMaterial_CloudUpload,
-		CloudDownload: IconMaterial_CloudDownload,
-		Download: IconMaterial_Download,
-		CloudQueue: IconMaterial_CloudQueue,
-		Upload: IconMaterial_Upload,
+		Place: Place,
+		Face: Face,
+		PermIdentity: PermIdentity,
+		SupervisorAccount: SupervisorAccount,
+		SupervisedUserCircle: SupervisedUserCircle,
+		VerifiedUser: VerifiedUser,
+		Visibility: Visibility,
+		VisibilityOff: VisibilityOff,
+		Check: Check,
+		Close: Close,
+		Add: Add,
+		Remove: Remove,
+		PushPin: PushPin,
+		Create: Create,
+		CloudUpload: CloudUpload,
+		CloudDownload: CloudDownload,
+		Download: Download,
+		CloudQueue: CloudQueue,
+		Upload: Upload,
+		Description: Description,
+		Save: Save,
+		Image: Image,
+		Mic: Mic,
+		Movie: Movie,
 	};
 
 	return <Icon source={iconKey[type]} size={size} />;

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import getFileType from '../../utils/getFileType';
 import { file as fileUtils } from '../../../../libs/js/utils';
@@ -62,6 +63,7 @@ const FileDrop: React.FC<FileDropProps> = ({
 }) => {
 	const input = useRef();
 	const [dragOver, setDragOver] = useState(false);
+	const { t } = useTranslation(['component']);
 
 	const callbackHandler = async (file) => {
 		const blob = await fileUtils.toBase64(file);
@@ -139,7 +141,7 @@ const FileDrop: React.FC<FileDropProps> = ({
 				/>
 				<DropArea>
 					<Icon.Material type="CloudUpload" />
-					Drop or select file
+					{t('component:FileUpload.title.fileDrop')}
 				</DropArea>
 			</Label>
 		</Wrapper>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+import { IMAGE_CROP_MIN_SIZE } from '../../constants';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -45,7 +48,11 @@ const CropperMeta = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: rgba(250, 250, 250, 0.75);
+
+	& small {
+		padding: 0.5rem;
+		background-color: rgb(250, 250, 250);
+	}
 `;
 const CropperThumbnail = styled.div`
 	width: 100%;
@@ -57,7 +64,6 @@ const CropperThumbnail = styled.div`
 	flex: 1;
 	position: relative;
 	overflow: hidden;
-	background-color: rgba(25, 25, 25, 0.125);
 
 	img {
 		display: block;
@@ -75,7 +81,6 @@ const CropperAction = styled.div`
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	background-color: rgba(250, 250, 250, 0.75);
 `;
 
 interface ImageCropProps {
@@ -97,8 +102,8 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 	onChange,
 	src,
 	locked,
-	minWidth = 150,
-	minHeight = 150,
+	minWidth = IMAGE_CROP_MIN_SIZE,
+	minHeight = IMAGE_CROP_MIN_SIZE,
 	maxWidth,
 	maxHeight,
 	aspect,
@@ -119,6 +124,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 		y: 0,
 		aspect: aspect,
 	});
+	const { t } = useTranslation(['component']);
 
 	const onImageLoaded = (image) => setImageRef(image);
 
@@ -210,12 +216,12 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 					{fileBlob ? (
 						<img src={fileBlob} style={{ maxWidth: '100%' }} alt="tmp_image" />
 					) : (
-						<div>create crop</div>
+						<div>{t('component:FileUpload.title.fileCrop')}</div>
 					)}
 				</CropperThumbnail>
 				<CropperMeta>
 					<small>
-						Width: {crop.width} &nbsp; Height: {crop.height}
+						{crop.width} x {crop.height}
 					</small>
 				</CropperMeta>
 				<CropperAction>{children}</CropperAction>

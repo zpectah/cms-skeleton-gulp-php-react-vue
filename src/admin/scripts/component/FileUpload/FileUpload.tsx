@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import FileDrop from './FileDrop';
 import ImageCrop from './ImageCrop';
 import getFileType from '../../utils/getFileType';
-import { Button } from '../ui';
+import { Button, Icon } from '../ui';
 import { file as fileUtils } from '../../../../libs/js/utils';
 
 const Wrapper = styled.div`
@@ -12,6 +13,21 @@ const Wrapper = styled.div`
 `;
 const DropContainer = styled.div``;
 const CropperContainer = styled.div``;
+const OtherFileContainer = styled.div`
+	width: 100%;
+	height: 250px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	& p {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+`;
 const OuterDropContainer = styled.div<{ dragOver: boolean }>``;
 
 interface FileUploadProps {
@@ -51,6 +67,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 	const [file, setFile] = useState(null);
 	const [fileType, setFileType] = useState(null);
 	const [dragOver, setDragOver] = useState(false);
+	const { t } = useTranslation(['component']);
 
 	const onSelectFile = (blob, name, ext, mime, size, type) => {
 		setSrc(blob);
@@ -183,18 +200,21 @@ const FileUpload: React.FC<FileUploadProps> = ({
 								maxHeight={cropMaxHeight}
 								avatarMaxSize={avatarMaxSize}
 							>
-								<Button.Base type="primary" onClick={resetFile} ghost>
-									Remove image
+								<Button.Base type="primary" onClick={resetFile} danger>
+									{t('component:FileUpload.btn.removeImage')}
 								</Button.Base>
 							</ImageCrop>
 						</CropperContainer>
 					) : (
-						<>
-							other file icon ... {file?.ext}
-							<Button.Base type="primary" onClick={resetFile} ghost>
-								Remove file
+						<OtherFileContainer>
+							<p>
+								<Icon.FileType type={file.type} />
+								<small>{file.name}</small>
+							</p>
+							<Button.Base type="primary" onClick={resetFile} danger>
+								{t('component:FileUpload.btn.removeFile')}
 							</Button.Base>
-						</>
+						</OtherFileContainer>
 					)}
 				</OuterDropContainer>
 			) : (

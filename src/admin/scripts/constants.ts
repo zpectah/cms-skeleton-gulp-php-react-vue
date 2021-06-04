@@ -21,3 +21,4 @@ export const MAPBOX_DEFAULTS = {
 	latitude: 50.08322927731517,
 	zoom: 10,
 };
+export const IMAGE_CROP_MIN_SIZE = 150;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { Modal, Icon, Button } from '../ui';
 import FileUpload from './FileUpload';
@@ -87,12 +88,12 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [tmpBlob, setTmpBlob] = useState<any | null>(null);
+	const { t } = useTranslation(['common', 'component']);
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
-	const onChangeHandler = (blob) => {
-		setTmpBlob(blob);
-	};
+	const onChangeHandler = (blob, name, ext, mime, size, type, cropped) =>
+		setTmpBlob(cropped);
 
 	const confirmHandler = () => {
 		onChange(tmpBlob);
@@ -130,11 +131,11 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 						onClick={confirmHandler}
 						disabled={!tmpBlob}
 					>
-						Confirm
+						{t('btn.confirm')}
 					</Button.Base>
 					{src && !tmpBlob && (
 						<Button.Base onClick={resetHandler} type="primary" danger ghost>
-							Reset avatar
+							{t('component:FileUpload.btn.resetAvatar')}
 						</Button.Base>
 					)}
 				</Modal.Footer>
