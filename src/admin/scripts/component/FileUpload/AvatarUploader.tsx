@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Modal, Icon } from '../ui';
+import { Modal, Icon, Button } from '../ui';
 import FileUpload from './FileUpload';
 
 const DialogContent = styled.div`
 	width: 100%;
 	height: auto;
 `;
-const AvatarWrapper = styled.div<{ size: number; bgImage?: string }>`
+const AvatarWrapper = styled.div<{ size: number }>`
 	width: ${(props) => props.size}px;
 	height: ${(props) => props.size}px;
 	border-radius: ${(props) => props.size}px;
@@ -22,16 +22,10 @@ const AvatarWrapper = styled.div<{ size: number; bgImage?: string }>`
 	font-weight: 500;
 	background-color: rgba(200, 200, 200, 0.5);
 
-	${(props) =>
-		props.bgImage
-			? `
-		color: transparent;
-		background: url(${props.bgImage}) no-repeat center center fixed;
-		background-size: cover;
-	`
-			: `
-		color: inherit;
-	`}
+	& img {
+		max-width: 100%;
+		height: auto;
+	}
 `;
 const AvatarTrigger = styled.button<{ size: number }>`
 	width: ${(props) => props.size}px;
@@ -78,7 +72,7 @@ interface AvatarUploaderProps {
 	src?: string;
 	label: string;
 	size?: number;
-	onChange?: (string) => void;
+	onChange?: (blob: any) => void;
 }
 
 const AvatarUploader: React.FC<AvatarUploaderProps> = ({
@@ -88,27 +82,53 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 	onChange,
 }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
+	const [tmpBlob, setTmpBlob] = useState<any | null>(null);
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
 	const uploaderHandler = (blob, name, ext, mime, size, type) => {
-		console.log('uploaderHandler .......', name, ext, mime, size);
+		setTmpBlob(blob);
+	};
+
+	const confirmHandler = () => {
+		onChange(tmpBlob);
+		closeHandler();
+	};
+
+	const closeHandler = () => {
+		setTmpBlob(null);
+		setDialogOpen(null);
 	};
 
 	return (
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size="xl">
 				<DialogContent>
-					<FileUpload onChange={uploaderHandler} accept="image/*" />
+					<FileUpload
+						onChange={uploaderHandler}
+						accept="image/*"
+						onReset={() => {
+							setTmpBlob(null);
+						}}
+					/>
 				</DialogContent>
-				<Modal.Footer>btn to close/cancel and confirm</Modal.Footer>
+				<Modal.Footer>
+					<Button.Base onClick={closeHandler}>Close</Button.Base>
+					<Button.Base
+						type="primary"
+						onClick={confirmHandler}
+						disabled={!tmpBlob}
+					>
+						Confirm
+					</Button.Base>
+				</Modal.Footer>
 			</Modal.Base>
 			<AvatarTrigger type="button" size={size} onClick={toggleDialog}>
-				<AvatarWrapper bgImage={src} size={size}>
-					{label}
+				<AvatarWrapper size={size}>
+					{src ? <img src={src} alt="Temporary image" /> : <>{label}</>}
 				</AvatarWrapper>
 				<div className="avatar-change-popup">
-					<Icon.Material type="Add" size={20} />
+					<Icon.Material type="Create" size={20} />
 				</div>
 			</AvatarTrigger>
 		</>

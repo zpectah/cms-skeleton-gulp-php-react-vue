@@ -14,6 +14,7 @@ import {
 	IconMaterial_Add,
 	IconMaterial_Remove,
 	IconMaterial_PushPin,
+	IconMaterial_Create,
 } from '../../../../../libs/svg/material-icons';
 import Icon from './Icon';
 
@@ -31,7 +32,8 @@ interface MaterialDesignIconProps {
 		| 'Close'
 		| 'Add'
 		| 'Remove'
-		| 'PushPin';
+		| 'PushPin'
+		| 'Create';
 	size?: number;
 }
 
@@ -50,6 +52,7 @@ const MaterialDesignIcon = ({ type, size = 50 }: MaterialDesignIconProps) => {
 		Add: IconMaterial_Add,
 		Remove: IconMaterial_Remove,
 		PushPin: IconMaterial_PushPin,
+		Create: IconMaterial_Create,
 	};
 
 	return <Icon source={iconKey[type]} size={size} />;

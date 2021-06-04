@@ -46,17 +46,24 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
-	const { control, handleSubmit, formState, register, setValue } = useForm({
+	const { control, handleSubmit, formState, register } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			...model,
+			password: '',
 		},
 	});
 	const { updateProfile, reloadProfile } = useProfile();
 	const [formOpen, setFormOpen] = useState(false);
+	const [tmpAvatar, setTmpAvatar] = useState(model.user_avatar);
 
 	const submitHandler = (data) => {
-		return updateProfile(data).then((res) => {
+		const master = {
+			...data,
+			user_avatar: tmpAvatar,
+		};
+
+		return updateProfile(master).then((res) => {
 			message.success('Profile has been updated', 2.5);
 			afterUpdate();
 			reloadProfile();
@@ -64,8 +71,8 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	};
 
 	const avatarChangeHandler = (value) => {
-		console.log('avatarChangeHandler ', value);
-		// setValue('user_avatar', value);
+		setTmpAvatar(value);
+		setFormOpen(true);
 	};
 
 	return (
@@ -78,7 +85,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 								? model.first_name.charAt(0) + model.last_name.charAt(0)
 								: model.nickname.charAt(0)
 						}
-						src={model.user_avatar}
+						src={tmpAvatar}
 						onChange={avatarChangeHandler}
 					/>
 				</div>
