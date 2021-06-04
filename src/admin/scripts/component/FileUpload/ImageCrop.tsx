@@ -9,14 +9,23 @@ const Wrapper = styled.div`
 `;
 const CropperSource = styled.div`
 	width: 50%;
-	height: 50vh;
+	min-height: 50vh;
+	padding: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 
 	.ReactCrop {
-		max-width: 80%;
+		max-width: 75%;
+		height: auto;
 		flex: none;
+	}
+	.ReactCrop__image {
+		display: block;
+		flex: none;
+		align-self: stretch;
+		object-fit: contain;
 	}
 `;
 const CropperOutput = styled.div`
@@ -45,10 +54,10 @@ const CropperThumbnail = styled.div`
 	background-color: rgba(25, 25, 25, 0.125);
 
 	img {
-		max-width: 80%;
-		height: auto;
 		display: block;
 		flex: none;
+		align-self: stretch;
+		object-fit: contain;
 	}
 `;
 const CropperAction = styled.div`
@@ -64,9 +73,23 @@ interface ImageCropProps {
 		blob: any, // TODO
 	) => void;
 	src: any; // TODO
+	locked?: boolean;
+	minWidth?: number;
+	minHeight?: number;
+	maxWidth?: number;
+	maxHeight?: number;
 }
 
-const ImageCrop: React.FC<ImageCropProps> = ({ children, onChange, src }) => {
+const ImageCrop: React.FC<ImageCropProps> = ({
+	children,
+	onChange,
+	src,
+	locked,
+	minWidth,
+	minHeight,
+	maxWidth,
+	maxHeight,
+}) => {
 	const [imageRef, setImageRef] = useState(null);
 	const [fileBlob, setFileBlob] = useState(null);
 	const [crop, setCrop] = useState({
@@ -75,6 +98,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({ children, onChange, src }) => {
 		y: 0,
 		width: 200,
 		height: 200,
+		// aspect: 16 / 9,
 	});
 
 	const onImageLoaded = (image) => {
@@ -152,6 +176,11 @@ const ImageCrop: React.FC<ImageCropProps> = ({ children, onChange, src }) => {
 						onImageLoaded={onImageLoaded}
 						onComplete={onCropComplete}
 						onChange={onCropChange}
+						locked={locked}
+						minWidth={minWidth}
+						minHeight={minHeight}
+						maxWidth={maxWidth}
+						maxHeight={maxHeight}
 					/>
 				)}
 			</CropperSource>

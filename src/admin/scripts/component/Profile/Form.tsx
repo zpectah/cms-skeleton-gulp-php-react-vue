@@ -46,7 +46,7 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
-	const { control, handleSubmit, formState, register } = useForm({
+	const { control, handleSubmit, formState, register, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			...model,
@@ -56,6 +56,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	const { updateProfile, reloadProfile } = useProfile();
 	const [formOpen, setFormOpen] = useState(false);
 	const [tmpAvatar, setTmpAvatar] = useState(model.user_avatar);
+	const [formDirty, setFormDirty] = useState<boolean>(false);
 
 	const submitHandler = (data) => {
 		const master = {
@@ -66,13 +67,16 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 		return updateProfile(master).then((res) => {
 			message.success('Profile has been updated', 2.5);
 			afterUpdate();
+			setFormDirty(false);
 			reloadProfile();
 		});
 	};
 
 	const avatarChangeHandler = (value) => {
 		setTmpAvatar(value);
+		setFormDirty(true);
 		setFormOpen(true);
+		setValue('user_avatar', value);
 	};
 
 	return (
@@ -87,15 +91,14 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 						}
 						src={tmpAvatar}
 						onChange={avatarChangeHandler}
-						onReset={() => {
-							setTmpAvatar(null);
-						}}
+						onReset={() => avatarChangeHandler(null)}
 					/>
 				</div>
 				<div className="avatar-email">{model.email}</div>
 			</AvatarContainer>
 			<Modal.Content>
 				<Section.Base>
+					{JSON.stringify(formDirty)}
 					{!formOpen && (
 						<div>
 							<Descriptions>
@@ -263,9 +266,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 								</Button.Base>
 								<Button.Base
 									htmlType="submit"
-									disabled={
-										!(formState.isValid || formState.isDirty) || !tmpAvatar
-									}
+									disabled={!(formState.isValid || formState.isDirty)}
 									type="primary"
 								>
 									Update
