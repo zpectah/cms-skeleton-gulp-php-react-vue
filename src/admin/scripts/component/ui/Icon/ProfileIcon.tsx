@@ -1,36 +1,47 @@
 import React, { useMemo, useState } from 'react';
+import styled from 'styled-components';
+
+import { USER_LEVEL } from '../../../constants';
+
+const Wrapper = styled.span``;
 
 import MaterialDesignIcon from '../Icon/MaterialDesignIcon';
 
 interface ProfileIconProps {
 	level: number;
 	size?: number;
+	withLabel?: boolean;
 }
 
-const ProfileIcon = ({ level, size = 40 }: ProfileIconProps) => {
+const ProfileIcon = ({ level, size = 40, withLabel }: ProfileIconProps) => {
 	const [type, setType] = useState(null);
 
 	useMemo(() => {
 		switch (level) {
-			case 0:
+			case USER_LEVEL.demo.id:
 				setType('Face');
 				break;
-			case 2:
+			case USER_LEVEL.redactor.id:
 				setType('PermIdentity');
 				break;
-			case 3:
+			case USER_LEVEL.chief_redactor.id:
 				setType('SupervisorAccount');
 				break;
-			case 5:
+			case USER_LEVEL.admin.id:
 				setType('SupervisedUserCircle');
 				break;
-			case 7:
+			case USER_LEVEL.super_admin.id:
 				setType('VerifiedUser');
 				break;
 		}
 	}, []);
 
-	return <MaterialDesignIcon type={type} size={size} />;
+	return (
+		<Wrapper>
+			<MaterialDesignIcon type={type} size={size} />
+			{withLabel && <span></span>}
+		</Wrapper>
+	);
 };
 
 export default ProfileIcon;

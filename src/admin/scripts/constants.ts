@@ -22,3 +22,25 @@ export const MAPBOX_DEFAULTS = {
 	zoom: 10,
 };
 export const IMAGE_CROP_MIN_SIZE = 150;
+export const USER_LEVEL = {
+	demo: {
+		id: 0,
+		key: 'demo',
+	},
+	redactor: {
+		id: 2,
+		key: 'redactor',
+	},
+	chief_redactor: {
+		id: 3,
+		key: 'chief_redactor',
+	},
+	admin: {
+		id: 5,
+		key: 'admin',
+	},
+	super_admin: {
+		id: 7,
+		key: 'super_admin',
+	},
+};

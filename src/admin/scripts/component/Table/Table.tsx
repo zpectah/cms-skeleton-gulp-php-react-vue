@@ -254,7 +254,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						notActive={record.active !== 1}
 					>
 						{record.user_avatar && (
-							<RowLinkImage src={record.user_avatar} alt={record.email} />
+							<RowLinkAvatar src={record.user_avatar} alt={record.email} />
 						)}
 						{text}
 					</RowLink>
