@@ -11,7 +11,11 @@
 		"close": "Close",
 		"agree": "Agree",
 		"reset": "Reset",
-		"confirm": "Confirm"
+		"confirm": "Confirm",
+		"edit": "Edit",
+		"detail": "Detail",
+		"active": "Active",
+		"disable": "Disable"
 	},
 	"title": {
 		"create_new": "Create new"

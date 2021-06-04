@@ -84,28 +84,7 @@
 	},
 	"model": {
 		"Users": {
-			"level": [
-				{
-					"label": "demo",
-					"value": 0
-				},
-				{
-					"label": "redactor",
-					"value": 2
-				}	,
-				{
-					"label": "chief_redactor",
-					"value": 3
-				},
-				{
-					"label": "admin",
-					"value": 5
-				}	,
-				{
-					"label": "super_admin",
-					"value": 7
-				}
-			],
+			"level_list": ["demo","redactor","chief_redactor","admin","super_admin"],
 			"group_list": ["default","redactors","managers"]
 		},
 		"Posts": {

@@ -1,9 +1,9 @@
 import MaterialDesignIcon from './MaterialDesignIcon';
-import ProfileIcon from './ProfileIcon';
+import UserIcon from './UserIcon';
 import FileTypeIcon from './FileTypeIcon';
 
 export default {
 	Material: MaterialDesignIcon,
-	Profile: ProfileIcon,
+	UserLevel: UserIcon,
 	FileType: FileTypeIcon,
 };

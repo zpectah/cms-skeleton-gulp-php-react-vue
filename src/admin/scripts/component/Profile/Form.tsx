@@ -38,7 +38,10 @@ const AvatarContainer = styled.div`
 		color: ${(props) => props.theme.color.white};
 	}
 `;
-const FormContainer = styled.div``;
+const FormContainer = styled.div`
+	padding-top: 1rem;
+	border-top: 1rem solid rgba(25, 25, 25, 0.25);
+`;
 
 interface FormProps {
 	model: any;
@@ -111,7 +114,11 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 									{model.last_name}
 								</Descriptions.Item>
 								<Descriptions.Item label="Level">
-									<Icon.Profile level={model.user_level} size={20} />
+									<Icon.UserLevel
+										level={model.user_level}
+										size={20}
+										withLabel
+									/>
 								</Descriptions.Item>
 								<Descriptions.Item label="Group">
 									{model.user_group}

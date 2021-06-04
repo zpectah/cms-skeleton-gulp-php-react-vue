@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
 
 import config from '../../../config';
-import { SUBMIT_TIMEOUT } from '../../../constants';
+import { SUBMIT_TIMEOUT, USER_LEVEL } from '../../../constants';
 import { UsersItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
-import { useUsers } from '../../../App/hooks';
+import { useUsers, useProfile } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 
 interface UsersDetailFormProps {
@@ -37,6 +37,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	});
 
 	const { updateUsers, createUsers, reloadUsers } = useUsers();
+	const { Profile } = useProfile();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -204,9 +205,13 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 								onChange={row.onChange}
 								placeholder={'Select level'}
 							>
-								{config.OPTIONS.model.Users.level.map((item) => (
-									<Select.Option value={item.value} key={item.value}>
-										{t(`types:${item.label}`)}
+								{config.OPTIONS.model.Users.level_list.map((item) => (
+									<Select.Option
+										value={USER_LEVEL[item].id}
+										key={item}
+										disabled={USER_LEVEL[item].id > Profile?.user_level}
+									>
+										{t(`types:${item}`)}
 									</Select.Option>
 								))}
 							</Select>

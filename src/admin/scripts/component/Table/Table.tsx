@@ -38,7 +38,7 @@ const RowLink = styled.a`
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
 `;
 const RowLinkImage = styled.img`
-	max-width: 50px;
+	max-width: 40px;
 	height: auto;
 	margin-right: 0.5rem;
 `;
@@ -300,7 +300,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: t('component:Table.column_label.level'),
 				dataIndex: 'user_level',
 				key: 'user_level',
-				render: (text) => <Icon.Profile level={text} size={15} />,
+				render: (text) => <Icon.UserLevel level={text} size={15} withLabel />,
 			});
 		if (columnsLayout.type)
 			d.push({
@@ -333,33 +333,22 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				align: 'end',
 				render: (text, record) => (
 					<>
-						<Button.Base
-							type="link"
+						<Button.Edit
 							onClick={() => editOpen(record)}
 							title={t('component:Table.row_action.edit')}
-						>
-							{actions.edit ? t('component:Table.row_action.edit') : 'Detail'}
-						</Button.Base>
-						{actions.toggle && (
-							<Button.Base
-								type="link"
-								onClick={() => toggleHandler(record)}
-								title={t('component:Table.row_action.toggle')}
-							>
-								{t('component:Table.row_action.toggle')}
-							</Button.Base>
-						)}
-						{actions.delete && allowDelete && (
-							<Button.Base
-								type="link"
-								onClick={() => deleteConfirm(record)}
-								style={{ marginLeft: '-1px' }}
-								title={t('component:Table.row_action.delete')}
-								danger
-							>
-								{t('component:Table.row_action.delete')}
-							</Button.Base>
-						)}
+						/>
+						<Button.Toggle
+							onClick={() => toggleHandler(record)}
+							title={t('component:Table.row_action.toggle')}
+							isToggled={record.active == 1}
+							isHidden={!actions.toggle}
+						/>
+						<Button.Delete
+							onClick={() => deleteConfirm(record)}
+							style={{ marginLeft: '-1px' }}
+							title={t('component:Table.row_action.delete')}
+							isHidden={!(actions.delete && allowDelete)}
+						/>
 					</>
 				),
 			});
