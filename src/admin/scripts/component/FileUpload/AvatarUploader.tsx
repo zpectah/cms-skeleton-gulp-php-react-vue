@@ -25,6 +25,8 @@ const AvatarWrapper = styled.div<{ size: number }>`
 	& img {
 		max-width: 100%;
 		height: auto;
+		margin: 0;
+		flex: none;
 	}
 `;
 const AvatarTrigger = styled.button<{ size: number }>`
@@ -73,6 +75,7 @@ interface AvatarUploaderProps {
 	label: string;
 	size?: number;
 	onChange?: (blob: any) => void;
+	onReset?: () => void;
 }
 
 const AvatarUploader: React.FC<AvatarUploaderProps> = ({
@@ -80,6 +83,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 	label,
 	size = 50,
 	onChange,
+	onReset,
 }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [tmpBlob, setTmpBlob] = useState<any | null>(null);
@@ -98,6 +102,11 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 	const closeHandler = () => {
 		setTmpBlob(null);
 		setDialogOpen(null);
+	};
+
+	const resetHandler = () => {
+		setDialogOpen(null);
+		if (onReset) onReset();
 	};
 
 	return (
@@ -121,6 +130,11 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 					>
 						Confirm
 					</Button.Base>
+					{src && (
+						<Button.Base onClick={resetHandler} type="primary" danger ghost>
+							Reset
+						</Button.Base>
+					)}
 				</Modal.Footer>
 			</Modal.Base>
 			<AvatarTrigger type="button" size={size} onClick={toggleDialog}>

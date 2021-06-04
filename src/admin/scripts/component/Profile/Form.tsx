@@ -60,7 +60,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			user_avatar: tmpAvatar,
+			user_avatar: tmpAvatar || '',
 		};
 
 		return updateProfile(master).then((res) => {
@@ -87,6 +87,9 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 						}
 						src={tmpAvatar}
 						onChange={avatarChangeHandler}
+						onReset={() => {
+							setTmpAvatar(null);
+						}}
 					/>
 				</div>
 				<div className="avatar-email">{model.email}</div>
