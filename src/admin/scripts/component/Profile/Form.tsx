@@ -263,7 +263,9 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 								</Button.Base>
 								<Button.Base
 									htmlType="submit"
-									disabled={!formState.isValid || !formState.isDirty}
+									disabled={
+										!(formState.isValid || formState.isDirty) || !tmpAvatar
+									}
 									type="primary"
 								>
 									Update
