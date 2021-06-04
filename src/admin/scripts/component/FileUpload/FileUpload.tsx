@@ -26,12 +26,26 @@ interface FileUploadProps {
 	) => void;
 	onReset?: () => void;
 	accept?: string;
+	cropAspect?: number;
+	cropAspectLocked?: boolean;
+	cropMinWidth?: number;
+	cropMinHeight?: number;
+	cropMaxWidth?: number;
+	cropMaxHeight?: number;
+	avatarMaxSize?: number;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
 	onChange,
 	onReset,
 	accept,
+	cropAspect,
+	cropAspectLocked,
+	cropMinWidth,
+	cropMinHeight,
+	cropMaxWidth,
+	cropMaxHeight,
+	avatarMaxSize,
 }) => {
 	const [src, setSrc] = useState(null);
 	const [file, setFile] = useState(null);
@@ -158,9 +172,19 @@ const FileUpload: React.FC<FileUploadProps> = ({
 				<OuterDropContainer {...dragEvents} dragOver={dragOver}>
 					{file.type == 'image' ? (
 						<CropperContainer>
-							<ImageCrop src={src} onChange={onCropperChange}>
+							<ImageCrop
+								src={src}
+								onChange={onCropperChange}
+								aspect={cropAspect}
+								locked={cropAspectLocked}
+								minWidth={cropMinWidth}
+								minHeight={cropMinHeight}
+								maxWidth={cropMaxWidth}
+								maxHeight={cropMaxHeight}
+								avatarMaxSize={avatarMaxSize}
+							>
 								<Button.Base type="primary" onClick={resetFile} ghost>
-									Reset
+									Remove image
 								</Button.Base>
 							</ImageCrop>
 						</CropperContainer>
@@ -168,7 +192,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 						<>
 							other file icon ... {file?.ext}
 							<Button.Base type="primary" onClick={resetFile} ghost>
-								Reset
+								Remove file
 							</Button.Base>
 						</>
 					)}

@@ -15,6 +15,7 @@ const CropperSource = styled.div`
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	background-color: rgba(25, 25, 25, 0.9);
 
 	.ReactCrop {
 		max-width: 75%;
@@ -33,13 +34,18 @@ const CropperOutput = styled.div`
 	height: 50vh;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 `;
 const CropperMeta = styled.div`
 	width: 100%;
-	height: 50px;
+	min-height: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(250, 250, 250, 0.75);
 `;
 const CropperThumbnail = styled.div`
 	width: 100%;
@@ -66,6 +72,10 @@ const CropperAction = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(250, 250, 250, 0.75);
 `;
 
 interface ImageCropProps {
@@ -78,6 +88,8 @@ interface ImageCropProps {
 	minHeight?: number;
 	maxWidth?: number;
 	maxHeight?: number;
+	aspect?: number;
+	avatarMaxSize?: number;
 }
 
 const ImageCrop: React.FC<ImageCropProps> = ({
@@ -85,33 +97,34 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 	onChange,
 	src,
 	locked,
-	minWidth,
-	minHeight,
+	minWidth = 150,
+	minHeight = 150,
 	maxWidth,
 	maxHeight,
+	aspect,
+	avatarMaxSize,
 }) => {
 	const [imageRef, setImageRef] = useState(null);
 	const [fileBlob, setFileBlob] = useState(null);
-	const [crop, setCrop] = useState({
+	const [crop, setCrop] = useState<{
+		unit: 'px' | '%';
+		x: number;
+		y: number;
+		width?: number;
+		height?: number;
+		aspect?: string | number | null;
+	}>({
 		unit: 'px', // default, can be 'px' or '%'
 		x: 0,
 		y: 0,
-		width: 200,
-		height: 200,
-		// aspect: 16 / 9,
+		aspect: aspect,
 	});
 
-	const onImageLoaded = (image) => {
-		setImageRef(image);
-	};
+	const onImageLoaded = (image) => setImageRef(image);
 
-	const onCropComplete = (crop) => {
-		makeClientCrop(crop);
-	};
+	const onCropComplete = (crop) => makeClientCrop(crop);
 
-	const onCropChange = (crop, percentCrop) => {
-		setCrop(crop);
-	};
+	const onCropChange = (crop) => setCrop(crop);
 
 	const makeClientCrop = async (crop) => {
 		if (imageRef && crop.width && crop.height) {
@@ -128,9 +141,12 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 		const canvas = document.createElement('canvas');
 		const scaleX = image.naturalWidth / image.width;
 		const scaleY = image.naturalHeight / image.height;
-		canvas.width = crop.width;
-		canvas.height = crop.height;
 		const ctx = canvas.getContext('2d');
+		const w = avatarMaxSize ? avatarMaxSize : crop.width;
+		const h = avatarMaxSize ? avatarMaxSize : crop.height;
+
+		canvas.width = w;
+		canvas.height = h;
 
 		ctx.drawImage(
 			image,
@@ -140,8 +156,8 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 			crop.height * scaleY,
 			0,
 			0,
-			crop.width,
-			crop.height,
+			w,
+			h,
 		);
 
 		return new Promise((resolve, reject) => {
@@ -154,16 +170,21 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 		});
 	};
 
+	const setThumbnail = (asp?: number) => {
+		const w = imageRef?.width;
+		const h = asp ? imageRef?.width / asp : imageRef?.height;
+
+		setCrop({ ...crop, width: w, height: h });
+		makeClientCrop({
+			...crop,
+			width: w,
+			height: h,
+		});
+	};
+
 	useEffect(() => {
-		if (imageRef) {
-			setCrop({ ...crop, width: imageRef?.width, height: imageRef?.height });
-			makeClientCrop({
-				...crop,
-				width: imageRef?.width,
-				height: imageRef?.height,
-			});
-		}
-	}, [src, imageRef]);
+		if (imageRef) setThumbnail(aspect);
+	}, [imageRef]);
 
 	return (
 		<Wrapper>
@@ -185,14 +206,18 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 				)}
 			</CropperSource>
 			<CropperOutput>
-				<CropperMeta>
-					Width: {crop.width}| Height: {crop.height}
-				</CropperMeta>
 				<CropperThumbnail>
-					{fileBlob && (
+					{fileBlob ? (
 						<img src={fileBlob} style={{ maxWidth: '100%' }} alt="tmp_image" />
+					) : (
+						<div>create crop</div>
 					)}
 				</CropperThumbnail>
+				<CropperMeta>
+					<small>
+						Width: {crop.width} &nbsp; Height: {crop.height}
+					</small>
+				</CropperMeta>
 				<CropperAction>{children}</CropperAction>
 			</CropperOutput>
 		</Wrapper>

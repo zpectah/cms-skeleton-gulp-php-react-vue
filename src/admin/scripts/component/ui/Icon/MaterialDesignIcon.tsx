@@ -15,6 +15,11 @@ import {
 	IconMaterial_Remove,
 	IconMaterial_PushPin,
 	IconMaterial_Create,
+	IconMaterial_CloudUpload,
+	IconMaterial_CloudDownload,
+	IconMaterial_Download,
+	IconMaterial_CloudQueue,
+	IconMaterial_Upload,
 } from '../../../../../libs/svg/material-icons';
 import Icon from './Icon';
 
@@ -33,7 +38,12 @@ interface MaterialDesignIconProps {
 		| 'Add'
 		| 'Remove'
 		| 'PushPin'
-		| 'Create';
+		| 'Create'
+		| 'CloudUpload'
+		| 'CloudDownload'
+		| 'Download'
+		| 'CloudQueue'
+		| 'Upload';
 	size?: number;
 }
 
@@ -53,6 +63,11 @@ const MaterialDesignIcon = ({ type, size = 50 }: MaterialDesignIconProps) => {
 		Remove: IconMaterial_Remove,
 		PushPin: IconMaterial_PushPin,
 		Create: IconMaterial_Create,
+		CloudUpload: IconMaterial_CloudUpload,
+		CloudDownload: IconMaterial_CloudDownload,
+		Download: IconMaterial_Download,
+		CloudQueue: IconMaterial_CloudQueue,
+		Upload: IconMaterial_Upload,
 	};
 
 	return <Icon source={iconKey[type]} size={size} />;

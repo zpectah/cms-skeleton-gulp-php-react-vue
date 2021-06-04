@@ -90,7 +90,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
-	const uploaderHandler = (blob, name, ext, mime, size, type) => {
+	const onChangeHandler = (blob) => {
 		setTmpBlob(blob);
 	};
 
@@ -114,11 +114,13 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size="xl">
 				<DialogContent>
 					<FileUpload
-						onChange={uploaderHandler}
+						onChange={onChangeHandler}
 						accept="image/*"
 						onReset={() => {
 							setTmpBlob(null);
 						}}
+						cropAspect={1 / 1}
+						avatarMaxSize={250}
 					/>
 				</DialogContent>
 				<Modal.Footer>
@@ -130,9 +132,9 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 					>
 						Confirm
 					</Button.Base>
-					{src && (
+					{src && !tmpBlob && (
 						<Button.Base onClick={resetHandler} type="primary" danger ghost>
-							Reset
+							Reset avatar
 						</Button.Base>
 					)}
 				</Modal.Footer>

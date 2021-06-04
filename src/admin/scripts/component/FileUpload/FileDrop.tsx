@@ -3,10 +3,15 @@ import styled from 'styled-components';
 
 import getFileType from '../../utils/getFileType';
 import { file as fileUtils } from '../../../../libs/js/utils';
+import { Icon } from '../ui';
 
 const Wrapper = styled.div`
 	width: 100%;
 	height: auto;
+	position: relative;
+	overflow: hidden;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 `;
 const Label = styled.label<{ isDragOver: boolean; height: number }>`
 	width: 100%;
@@ -17,6 +22,7 @@ const Label = styled.label<{ isDragOver: boolean; height: number }>`
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	color: ${(props) => (props.isDragOver ? 'white' : 'inherit')};
 	background-color: ${(props) =>
 		props.isDragOver ? 'green' : 'rgb(200, 200, 200)'};
 `;
@@ -29,7 +35,12 @@ const Input = styled.input`
 	right: 0;
 	opacity: 0;
 `;
-const DropArea = styled.div``;
+const DropArea = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+`;
 
 interface FileDropProps {
 	onChange: (
@@ -126,7 +137,10 @@ const FileDrop: React.FC<FileDropProps> = ({
 					ref={input}
 					onChange={onChangeHandler}
 				/>
-				<DropArea>...DropArea...</DropArea>
+				<DropArea>
+					<Icon.Material type="CloudUpload" />
+					Drop or select file
+				</DropArea>
 			</Label>
 		</Wrapper>
 	);
