@@ -40,7 +40,7 @@ const RowLink = styled.a`
 const RowLinkImage = styled.img`
 	max-width: 40px;
 	height: auto;
-	margin-right: 0.5rem;
+	margin-right: 1rem;
 `;
 const RowLinkAvatar = styled(RowLinkImage)`
 	border-radius: 50px;
@@ -204,6 +204,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
+						{record.img_thumbnail && (
+							<RowLinkImage
+								src={config.UPLOADS_PATH.image.thumbnail + record.img_thumbnail}
+								alt={record.name}
+							/>
+						)}
 						{text}
 					</RowLink>
 				),
@@ -252,8 +258,8 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
-						{record.user_avatar && (
-							<RowLinkAvatar src={record.user_avatar} alt={record.email} />
+						{record.img_avatar && (
+							<RowLinkAvatar src={record.img_avatar} alt={record.email} />
 						)}
 						{text}
 					</RowLink>
@@ -269,6 +275,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
+						{record.img_thumbnail && (
+							<RowLinkImage
+								src={config.UPLOADS_PATH.image.thumbnail + record.img_thumbnail}
+								alt={record.title}
+							/>
+						)}
 						{text}
 					</RowLink>
 				),
@@ -283,6 +295,12 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
+						{record.img_thumbnail && (
+							<RowLinkImage
+								src={config.UPLOADS_PATH.image.thumbnail + record.img_thumbnail}
+								alt={record.lang[lang].title}
+							/>
+						)}
 						{record.lang[lang].title}
 					</RowLink>
 				),

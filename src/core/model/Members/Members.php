@@ -64,7 +64,7 @@ class Members {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('INSERT INTO members (email, password, nickname, first_name, middle_name, last_name, member_level, member_group, member_avatar, member_country, member_city, member_address, member_zip, member_phone, member_email, description, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$query = ('INSERT INTO members (email, password, nickname, first_name, middle_name, last_name, member_level, member_group, img_avatar, member_country, member_city, member_address, member_zip, member_phone, member_email, description, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
 		$types = 'ssssssisssssssssii';
 		$args = [
 			$requestData['email'],
@@ -75,7 +75,7 @@ class Members {
 			$requestData['last_name'],
 			$requestData['member_level'],
 			$requestData['member_group'],
-			$requestData['member_avatar'],
+			$requestData['img_avatar'],
 			$requestData['member_country'],
 			$requestData['member_city'],
 			$requestData['member_address'],
@@ -108,8 +108,8 @@ class Members {
 
 		// prepare
 		$password = $requestData['password'];
-		$query = $password ? ('UPDATE members SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, member_level = ?, member_group = ?, member_avatar = ?, member_country = ?, member_city = ?, member_address = ?, member_zip = ?, member_phone = ?, member_email = ?, description = ?, active = ? WHERE id = ?')
-			: ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, member_level = ?, member_group = ?, member_avatar = ?, member_country = ?, member_city = ?, member_address = ?, member_zip = ?, member_phone = ?, member_email = ?, description = ?, active = ? WHERE id = ?');
+		$query = $password ? ('UPDATE members SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, member_level = ?, member_group = ?, img_avatar = ?, member_country = ?, member_city = ?, member_address = ?, member_zip = ?, member_phone = ?, member_email = ?, description = ?, active = ? WHERE id = ?')
+			: ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, member_level = ?, member_group = ?, img_avatar = ?, member_country = ?, member_city = ?, member_address = ?, member_zip = ?, member_phone = ?, member_email = ?, description = ?, active = ? WHERE id = ?');
 		$types = $password ? 'ssssssisssssssssii' : 'sssssisssssssssii';
 		$args = $password ? [
 			$requestData['email'],
@@ -120,7 +120,7 @@ class Members {
 			$requestData['last_name'],
 			$requestData['member_level'],
 			$requestData['member_group'],
-			$requestData['member_avatar'],
+			$requestData['img_avatar'],
 			$requestData['member_country'],
 			$requestData['member_city'],
 			$requestData['member_address'],
@@ -138,7 +138,7 @@ class Members {
 			$requestData['last_name'],
 			$requestData['member_level'],
 			$requestData['member_group'],
-			$requestData['member_avatar'],
+			$requestData['img_avatar'],
 			$requestData['member_country'],
 			$requestData['member_city'],
 			$requestData['member_address'],

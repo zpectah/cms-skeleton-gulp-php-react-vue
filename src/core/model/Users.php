@@ -61,7 +61,7 @@ class Users {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, user_avatar, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?)');
+		$query = ('INSERT INTO users (email, password, nickname, first_name, middle_name, last_name, user_level, user_group, img_avatar, active, deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?)');
 		$types = 'ssssssissii';
 		$args = [
 			$requestData['email'],
@@ -72,7 +72,7 @@ class Users {
 			$requestData['last_name'],
 			$requestData['user_level'],
 			$requestData['user_group'],
-			$requestData['user_avatar'],
+			$requestData['img_avatar'],
 			$requestData['active'],
 			0
 		];
@@ -98,8 +98,8 @@ class Users {
 
 		// prepare
 		$password = $requestData['password'];
-		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?')
-			: ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, user_avatar = ?, active = ? WHERE id = ?');
+		$query = $password ? ('UPDATE users SET email = ?, password = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, img_avatar = ?, active = ? WHERE id = ?')
+			: ('UPDATE users SET email = ?, nickname = ?, first_name = ?, middle_name = ?, last_name = ?, user_level = ?, user_group = ?, img_avatar = ?, active = ? WHERE id = ?');
 		$types = $password ? 'ssssssissii' : 'sssssissii';
 		$args = $password ? [
 			$requestData['email'],
@@ -110,7 +110,7 @@ class Users {
 			$requestData['last_name'],
 			$requestData['user_level'],
 			$requestData['user_group'],
-			$requestData['user_avatar'],
+			$requestData['img_avatar'],
 			$requestData['active'],
 			$requestData['id']
 		] : [
@@ -121,7 +121,7 @@ class Users {
 			$requestData['last_name'],
 			$requestData['user_level'],
 			$requestData['user_group'],
-			$requestData['user_avatar'],
+			$requestData['img_avatar'],
 			$requestData['active'],
 			$requestData['id']
 		];

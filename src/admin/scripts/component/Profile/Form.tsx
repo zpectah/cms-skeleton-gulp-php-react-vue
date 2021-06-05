@@ -58,13 +58,13 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	});
 	const { updateProfile, reloadProfile } = useProfile();
 	const [formOpen, setFormOpen] = useState(false);
-	const [tmpAvatar, setTmpAvatar] = useState(model.user_avatar);
+	const [tmpAvatar, setTmpAvatar] = useState(model.img_avatar);
 	const [formDirty, setFormDirty] = useState<boolean>(false);
 
 	const submitHandler = (data) => {
 		const master = {
 			...data,
-			user_avatar: tmpAvatar || '',
+			img_avatar: tmpAvatar || '',
 		};
 
 		return updateProfile(master).then((res) => {
@@ -79,7 +79,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 		setTmpAvatar(value);
 		setFormDirty(true);
 		setFormOpen(true);
-		setValue('user_avatar', value);
+		setValue('img_avatar', value);
 	};
 
 	return (
@@ -179,9 +179,9 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 								/>
 								<input
 									type="hidden"
-									name="user_avatar"
+									name="img_avatar"
 									ref={register({})}
-									defaultValue={model.user_avatar}
+									defaultValue={model.img_avatar}
 								/>
 							</div>
 							<Section.Base>

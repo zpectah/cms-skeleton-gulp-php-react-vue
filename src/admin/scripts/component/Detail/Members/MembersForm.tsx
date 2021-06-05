@@ -66,9 +66,9 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 				/>
 				<input
 					type="hidden"
-					name="member_avatar"
+					name="img_avatar"
 					ref={register({})}
-					defaultValue={detailData.member_avatar}
+					defaultValue={detailData.img_avatar}
 				/>
 			</div>
 			<Modal.Header>
