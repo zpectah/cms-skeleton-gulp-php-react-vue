@@ -182,6 +182,10 @@ const DialogForm: React.FC<DialogFormProps> = ({
 						rules={{ required: true }}
 						required
 						defaultValue={data.link || '/'}
+						helpText={
+							watchType == 'default' &&
+							`Link must include slash on beginnings, like '/home'.`
+						}
 					>
 						{(row) => (
 							<Input
@@ -205,7 +209,16 @@ const DialogForm: React.FC<DialogFormProps> = ({
 								id={row.id}
 								value={row.value}
 								onChange={row.onChange}
-								ignoredId={[data?.id]}
+								ignoredId={[data.id]}
+								menuId={menuId}
+								customOptions={[
+									{
+										key: 'null',
+										value: '',
+										label: 'No parent',
+										disabled: false,
+									},
+								]}
 								single
 							/>
 						)}

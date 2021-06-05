@@ -40,9 +40,13 @@ const MenuItemsList = styled.div`
 interface MenuItemsManagerProps {
 	menuId: number | string;
 	onUpdate?: () => void;
+	showOrphans?: boolean;
 }
 
-const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
+const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
+	menuId,
+	showOrphans,
+}) => {
 	const { t } = useTranslation(['common', 'message', 'component', 'types']);
 	const {
 		MenuItems,
@@ -106,19 +110,50 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 		});
 	};
 
+	const getItemChildren = (id: number | string) => {
+		let a = [];
+		MenuItems.map((item) => {
+			if (item.parent == id) a.push(item);
+		});
+		return a;
+	};
+
+	const setItemsList = () => {
+		let a = [];
+		let b = [];
+
+		MenuItems.map((menuItem) => {
+			if (
+				menuItem.menu == menuId &&
+				(!menuItem.parent || menuItem.parent == '')
+			)
+				a.push(menuItem);
+			if (showOrphans && menuItem.menu == '') b.push(menuItem);
+		});
+
+		setList(a);
+		if (showOrphans) setListOrphans(b);
+	};
+
+	const renderMenuItem = (item, children) => (
+		<MenuItem
+			key={item.id}
+			item={item}
+			onSelect={itemSelectHandler}
+			onToggle={itemToggleHandler}
+			onDelete={itemDeleteHandler}
+			children={children}
+		/>
+	);
+
+	const renderMenuList = (itemsList: any[]) => {
+		return itemsList.map((item) =>
+			renderMenuItem(item, renderMenuList(getItemChildren(item.id))),
+		);
+	};
+
 	useEffect(() => {
-		if (MenuItems) {
-			let a = [];
-			let b = [];
-
-			MenuItems.map((menuItem) => {
-				if (menuItem.menu == menuId) a.push(menuItem);
-				if (menuItem.menu == '') b.push(menuItem);
-			});
-
-			setList(a);
-			setListOrphans(b);
-		}
+		if (MenuItems) setItemsList();
 	}, [MenuItems]);
 
 	return (
@@ -131,41 +166,23 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 				</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
-						<MenuItemsList>
-							{list.map((item) => (
-								<MenuItem
-									key={item.id}
-									item={item}
-									onSelect={itemSelectHandler}
-									onToggle={itemToggleHandler}
-									onDelete={itemDeleteHandler}
-								/>
-							))}
-						</MenuItemsList>
+						<MenuItemsList>{renderMenuList(list)}</MenuItemsList>
 					</DialogStructureWrapper>
-					<DialogStructureWrapper>
-						<MenuItemsList>
-							{listOrphans.map((item) => (
-								<MenuItem
-									key={item.id}
-									item={item}
-									onSelect={itemSelectHandler}
-									onToggle={itemToggleHandler}
-									onDelete={itemDeleteHandler}
-									context="orphan"
-								/>
-							))}
-						</MenuItemsList>
-					</DialogStructureWrapper>
-					<Button.Base
-						type="primary"
-						onClick={() => openSubDialog({ is_new: true })}
-					>
-						{t('component:MenuItemsManager.btn.createNew_item')}
-					</Button.Base>
+					{showOrphans && (
+						<DialogStructureWrapper>
+							<MenuItemsList>{renderMenuList(listOrphans)}</MenuItemsList>
+						</DialogStructureWrapper>
+					)}
 				</Modal.Content>
 				<Modal.Footer>
-					<div></div>
+					<div>
+						<Button.Base
+							type="primary"
+							onClick={() => openSubDialog({ is_new: true })}
+						>
+							{t('component:MenuItemsManager.btn.createNew_item')}
+						</Button.Base>
+					</div>
 					<div>
 						<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
 					</div>

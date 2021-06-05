@@ -9,6 +9,8 @@ interface MenuItemsPickerProps {
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
+	menuId?: number | string;
+	customOptions?: any[];
 }
 
 const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
@@ -17,6 +19,8 @@ const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 	onChange,
 	single = false,
 	ignoredId = [],
+	menuId,
+	customOptions = [],
 }) => {
 	const { MenuItems } = useMenuItems();
 
@@ -25,18 +29,36 @@ const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 			{
 				key: 0,
 				value: '',
-				label: 'Select MenuItems',
+				label: 'Select Menu Item',
 				disabled: true,
 			},
 		];
 
-		MenuItems?.map((option) => {
-			o.push({
-				key: option.id,
-				value: option.id,
-				label: option.name,
-				disabled: false,
+		if (!single) o[0].label = 'Select Menu Items';
+
+		if (customOptions.length > 0) {
+			customOptions.map((item) => {
+				o.push(item);
 			});
+		}
+
+		MenuItems?.map((option) => {
+			if (menuId) {
+				if (option.menu == menuId)
+					o.push({
+						key: option.id,
+						value: option.id,
+						label: option.name,
+						disabled: false,
+					});
+			} else {
+				o.push({
+					key: option.id,
+					value: option.id,
+					label: option.name,
+					disabled: false,
+				});
+			}
 		});
 
 		if (ignoredId.length > 0) {
@@ -56,12 +78,13 @@ const MenuItemsPicker: React.FC<MenuItemsPickerProps> = ({
 
 	const getVariableProps = () => {
 		let p: any = {
-			placeholder: 'Select MenuItems',
+			placeholder: 'Select Menu Item',
 		};
 
 		if (!single) {
 			p = {
 				...p,
+				placeholder: 'Select Menu Items',
 				mode: 'multiple',
 			};
 		}
