@@ -20,15 +20,15 @@ const Wrapper = styled.div`
 	}
 `;
 const ButtonText = styled.span<{ isDisabled: boolean }>`
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-weight: 500;
 
 	${(props) =>
 		props.isDisabled &&
 		`
 		opacity: .5;
-		color: red;
 	`}
 `;
 
@@ -37,7 +37,6 @@ interface MenuItemProps {
 	onSelect: (item) => void;
 	onToggle: (id) => void;
 	onDelete: (id) => void;
-	onUpdateOrder: (item, method) => void;
 	context?: 'select' | 'orphan';
 }
 
@@ -47,7 +46,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
 	onSelect,
 	onToggle,
 	onDelete,
-	onUpdateOrder,
 	context = 'select',
 }) => {
 	const menu = (
@@ -57,12 +55,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
 			</Menu.Item>
 			<Menu.Item key="2" onClick={() => onDelete(item.id)}>
 				Delete
-			</Menu.Item>
-			<Menu.Item key="4" onClick={() => onUpdateOrder(item, '+')}>
-				Order + 1
-			</Menu.Item>
-			<Menu.Item key="5" onClick={() => onUpdateOrder(item, '-')}>
-				Order - 1
 			</Menu.Item>
 		</Menu>
 	);
@@ -75,11 +67,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 					onClick={() => onSelect(item)}
 					size="large"
 				>
-					<ButtonText isDisabled={!(item.active == 1)}>
-						{item.name}
-						&nbsp;
-						<Tag>{item.item_order}</Tag>
-					</ButtonText>
+					<ButtonText isDisabled={!(item.active == 1)}>{item.name}</ButtonText>
 				</Dropdown.Button>
 			) : (
 				<div>{item.name}</div>

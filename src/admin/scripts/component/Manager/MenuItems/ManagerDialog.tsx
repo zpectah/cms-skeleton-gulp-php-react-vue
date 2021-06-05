@@ -10,6 +10,7 @@ interface ManagerDialogProps {
 	onClose?: () => void;
 	afterSubmit: (master, response) => void;
 	menuId: number | string;
+	onDelete: (id) => void;
 }
 
 const ManagerDialog: React.FC<ManagerDialogProps> = ({
@@ -18,6 +19,7 @@ const ManagerDialog: React.FC<ManagerDialogProps> = ({
 	onClose,
 	afterSubmit,
 	menuId,
+	onDelete,
 }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -50,6 +52,7 @@ const ManagerDialog: React.FC<ManagerDialogProps> = ({
 						toggleDialog={toggleDialog}
 						afterSubmit={afterSubmitHandler}
 						menuId={menuId}
+						onDelete={onDelete}
 					/>
 				)}
 			</Modal.Base>

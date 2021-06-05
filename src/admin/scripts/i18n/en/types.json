@@ -18,7 +18,7 @@
 	"reference": "Reference",
 	"attachment": "Attachment",
 	"primary": "Primary",
-	"secondary": "secondary",
+	"secondary": "Secondary",
 	"tertiary": "Tertiary",
 	"external": "External",
 	"gallery": "Gallery",
@@ -38,7 +38,7 @@
 	"noindex,nofollow": "No Index, No Follow",
 	"index,nofollow": "Index, No Follow",
 	"noindex,follow": "No Index, Follow",
-	"custom": "Custom",
+	"custom": "Custom {{id}}",
 	"error_404": "Error 404",
 	"error_500": "Error 500"
 }

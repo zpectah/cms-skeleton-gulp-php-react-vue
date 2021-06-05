@@ -23,6 +23,7 @@ interface DialogFormProps {
 	toggleDialog: () => void;
 	afterSubmit: (master, response) => void;
 	menuId: number | string;
+	onDelete: (id) => void;
 }
 
 const DialogForm: React.FC<DialogFormProps> = ({
@@ -30,6 +31,7 @@ const DialogForm: React.FC<DialogFormProps> = ({
 	toggleDialog,
 	afterSubmit,
 	menuId,
+	onDelete,
 }) => {
 	const { Settings } = useSettings();
 	const { updateMenuItems, createMenuItems } = useMenuItems();
@@ -245,7 +247,7 @@ const DialogForm: React.FC<DialogFormProps> = ({
 					{isNew ? t('btn.create') : t('btn.save')}
 				</Button.Base>
 				{!isNew && (
-					<Button.Base type="primary" danger>
+					<Button.Base type="primary" danger onClick={() => onDelete(data.id)}>
 						Delete
 					</Button.Base>
 				)}

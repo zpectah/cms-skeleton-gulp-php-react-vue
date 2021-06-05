@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Tag } from 'antd';
+import { Tag, message } from 'antd';
 
 import { useMenuItems } from '../../App/hooks';
 import { Button, Modal } from '../ui';
 import ManagerDialog from './MenuItems/ManagerDialog';
-import { string } from '../../../../libs/js/utils';
 import { SUBMIT_TIMEOUT } from '../../constants';
-import { MenuItemsItemProps } from '../../App/types';
 import MenuItem from './MenuItems/MenuItem';
+import Confirm from '../Confirm';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -38,21 +38,27 @@ const MenuItemsList = styled.div`
 `;
 
 interface MenuItemsManagerProps {
-	selected?: string[];
 	menuId: number | string;
 	onUpdate?: () => void;
 }
 
-const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
-	selected = [],
-	menuId,
-}) => {
-	const { MenuItems, toggleMenuItems, reloadMenuItems } = useMenuItems();
+const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
+	const { t } = useTranslation(['common', 'message', 'component', 'types']);
+	const {
+		MenuItems,
+		toggleMenuItems,
+		deleteMenuItems,
+		reloadMenuItems,
+	} = useMenuItems();
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [dialogSubOpen, setDialogSubOpen] = useState(false);
 	const [dialogSubData, setDialogSubData] = useState({
 		is_new: true,
 	});
+
+	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
+	const toggleConfirm = () => setConfirmOpen(!confirmOpen);
+	const [confirmData, setConfirmData] = useState<any>(null);
 
 	// TODO
 	const [list, setList] = useState([]);
@@ -81,24 +87,33 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 
 	const itemToggleHandler = (id) => {
 		toggleMenuItems([id]).then((resp) => {
-			console.log('item updated ...', resp);
+			message.success('Item was updated', 2.5);
 
 			reloadMenuItems();
 		});
 	};
 
 	const itemDeleteHandler = (id) => {
-		toggleMenuItems([id]).then((resp) => {
-			console.log('item updated ...', resp);
+		// Confirm first !!!
+		// TODO
+		// itemDeleteConfirmHandler(id);
+		//
+		setConfirmData([id]);
+		setConfirmOpen(true);
+	};
+
+	const itemDeleteConfirmHandler = (id) => {
+		deleteMenuItems([id]).then((resp) => {
+			message.success(t('message:success.items.delete'), 2.5);
+
+			setConfirmOpen(false);
+			setDialogSubOpen(false);
+			setDialogSubData({
+				is_new: true,
+			});
 
 			reloadMenuItems();
 		});
-	};
-
-	const itemUpdateOrder = (item) => {
-		console.log('itemUpdateOrder ...', item);
-		// TODO
-		// reloadMenuItems()
 	};
 
 	useEffect(() => {
@@ -129,7 +144,6 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 									item={item}
 									onSelect={itemSelectHandler}
 									onToggle={itemToggleHandler}
-									onUpdateOrder={itemUpdateOrder}
 									onDelete={itemDeleteHandler}
 								/>
 							))}
@@ -143,7 +157,6 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 									item={item}
 									onSelect={itemSelectHandler}
 									onToggle={itemToggleHandler}
-									onUpdateOrder={itemUpdateOrder}
 									onDelete={itemDeleteHandler}
 									context="orphan"
 								/>
@@ -178,6 +191,13 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 				data={dialogSubData}
 				afterSubmit={afterSubmitHandler}
 				menuId={menuId}
+				onDelete={itemDeleteHandler}
+			/>
+			<Confirm.Dialog
+				isOpen={confirmOpen}
+				onCancel={toggleConfirm}
+				confirmData={confirmData}
+				onConfirm={itemDeleteConfirmHandler}
 			/>
 		</>
 	);
