@@ -99,7 +99,6 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 								onChange={row.onChange}
 								placeholder={'E-mail'}
 								disabled={!detailData.is_new}
-								// maybe set undisabled for superadmin?
 							/>
 						)}
 					</Form.Row>
@@ -107,8 +106,6 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 						label={'Password'}
 						name={'password'}
 						control={control}
-						rules={{ required: userModel }}
-						required={userModel}
 						defaultValue={detailData.password || ''}
 					>
 						{(row) => (
@@ -125,8 +122,6 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 						label={'Nickname'}
 						name={'nickname'}
 						control={control}
-						rules={{ required: userModel }}
-						required={userModel}
 						defaultValue={detailData.nickname || ''}
 					>
 						{(row) => (
@@ -310,29 +305,6 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 								placeholder={'Description'}
 								rows={5}
 							/>
-						)}
-					</Form.Row>
-					{''}
-					<Form.Row
-						label={'Level'}
-						name={'member_level'}
-						control={control}
-						defaultValue={detailData.member_level || 0}
-					>
-						{(row) => (
-							<Select
-								id={row.id}
-								style={{ width: '100%' }}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Select level'}
-							>
-								{config.OPTIONS.model.Members.level.map((item) => (
-									<Select.Option value={item.value} key={item.value}>
-										{t(`types:${item.label}`)}
-									</Select.Option>
-								))}
-							</Select>
 						)}
 					</Form.Row>
 					<Form.Row

@@ -106,16 +106,6 @@
 			"type_list": ["image","audio","video","document","archive"]
 		},
 		"Members": {
-			"level": [
-				{
-					"label": "demo",
-					"value": 0
-				},
-				{
-					"label": "default",
-					"value": 2
-				}
-			],
 			"group_list": ["none","members","subscribers","customers"]
 		}
 	}

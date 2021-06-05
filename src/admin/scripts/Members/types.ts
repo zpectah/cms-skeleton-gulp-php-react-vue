@@ -7,7 +7,6 @@ export interface MembersItemProps extends commonModelProps {
 	first_name: string;
 	middle_name?: string;
 	last_name: string;
-	member_level: number;
 	member_group: string;
 	img_avatar?: string;
 	member_country?: string;
