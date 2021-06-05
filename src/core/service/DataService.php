@@ -8,7 +8,6 @@ use core\handler\Handyman;
 use core\handler\Installer;
 use core\handler\SqlDumper;
 use core\model\Categories;
-use core\model\Crm\Campaigns;
 use core\model\Market\Deliveries;
 use core\model\Market\Distributors;
 use core\model\Market\Payments;
@@ -57,9 +56,6 @@ class DataService {
 
 		// module: Members
 		$Members = new Members;
-
-		// module: Crm
-		$Campaigns = new Campaigns;
 
 		// module: Market
 		$Deliveries = new Deliveries;
@@ -131,15 +127,6 @@ class DataService {
 			case 'Members':
 				if ($modules['module_members_installed'] == 'true') {
 					$response = $Members -> get($conn, $data);
-				} else {
-					$response = [];
-				}
-				break;
-
-			// module: Crm
-			case 'Campaigns':
-				if ($modules['module_crm_installed'] == 'true') {
-					$response = $Campaigns -> get($conn, $data);
 				} else {
 					$response = [];
 				}
@@ -222,9 +209,6 @@ class DataService {
 		// module: Members
 		$Members = new Members;
 
-		// module: Crm
-		$Campaigns = new Campaigns;
-
 		// module: Market
 		$Deliveries = new Deliveries;
 		$Distributors = new Distributors;
@@ -287,15 +271,6 @@ class DataService {
 			case 'Members':
 				if ($modules['module_members_installed'] == 'true') {
 					$response = $Members -> create($conn, $data);
-				} else {
-					$response = [];
-				}
-				break;
-
-			// module: Crm
-			case 'Campaigns':
-				if ($modules['module_crm_installed'] == 'true') {
-					$response = $Campaigns -> create($conn, $data);
 				} else {
 					$response = [];
 				}
@@ -379,9 +354,6 @@ class DataService {
 		// module: Members
 		$Members = new Members;
 
-		// module: Crm
-		$Campaigns = new Campaigns;
-
 		// module: Market
 		$Deliveries = new Deliveries;
 		$Distributors = new Distributors;
@@ -448,15 +420,6 @@ class DataService {
 			case 'Members':
 				if ($modules['module_members_installed'] == 'true') {
 					$response = $Members -> update($conn, $data);
-				} else {
-					$response = [];
-				}
-				break;
-
-			// module: Crm
-			case 'Campaigns':
-				if ($modules['module_crm_installed'] == 'true') {
-					$response = $Campaigns -> update($conn, $data);
 				} else {
 					$response = [];
 				}
@@ -537,9 +500,6 @@ class DataService {
 		// module: Members
 		$Members = new Members;
 
-		// module: Crm
-		$Campaigns = new Campaigns;
-
 		// module: Market
 		$Deliveries = new Deliveries;
 		$Distributors = new Distributors;
@@ -593,15 +553,6 @@ class DataService {
 			case 'Members':
 				if ($modules['module_members_installed'] == 'true') {
 					$response = $Members -> toggle($conn, $data);
-				} else {
-					$response = [];
-				}
-				break;
-
-			// module: Crm
-			case 'Campaigns':
-				if ($modules['module_crm_installed'] == 'true') {
-					$response = $Campaigns -> toggle($conn, $data);
 				} else {
 					$response = [];
 				}
@@ -684,9 +635,6 @@ class DataService {
 		// module: Members
 		$Members = new Members;
 
-		// module: Crm
-		$Campaigns = new Campaigns;
-
 		// module: Market
 		$Deliveries = new Deliveries;
 		$Distributors = new Distributors;
@@ -748,15 +696,6 @@ class DataService {
 			case 'Members':
 				if ($modules['module_members_installed'] == 'true') {
 					$response = $Members -> delete($conn, $data);
-				} else {
-					$response = [];
-				}
-				break;
-
-			// module: Crm
-			case 'Campaigns':
-				if ($modules['module_crm_installed'] == 'true') {
-					$response = $Campaigns -> delete($conn, $data);
 				} else {
 					$response = [];
 				}

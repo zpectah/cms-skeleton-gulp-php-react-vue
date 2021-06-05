@@ -157,26 +157,6 @@
 		"label": "Members"
 	},
 
-	"CrmDashboard": {
-		"meta": {
-			"title": "Crm"
-		},
-		"page": {
-			"title": "Crm page"
-		},
-		"label": "Crm"
-	},
-
-	"Campaigns": {
-		"meta": {
-			"title": "Campaigns"
-		},
-		"page": {
-			"title": "Campaigns page"
-		},
-		"label": "Campaigns"
-	},
-
 	"MarketDashboard": {
 		"meta": {
 			"title": "Market"

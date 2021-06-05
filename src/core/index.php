@@ -50,11 +50,6 @@ require PATH_PFX . 'core/model/MenuItems.php';
 require PATH_PFX . 'core/model/Members/Members.php';
 
 /*
- * Model: Crm
- */
-require PATH_PFX . 'core/model/Crm/Campaigns.php';
-
-/*
  * Model: Market
  */
 require PATH_PFX . 'core/model/Market/Products.php';

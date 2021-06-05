@@ -8,7 +8,7 @@ export interface storeProps {
 }
 
 export interface appProps {
-	app: 'App' | 'Members' | 'Crm' | 'Market';
+	app: 'App' | 'Members' | 'Market';
 	modelApp:
 		| 'Posts'
 		| 'Users'
@@ -22,7 +22,6 @@ export interface appProps {
 		| 'Menu'
 		| 'MenuItems';
 	modelMembers: 'Members';
-	modelCrm: 'Campaigns';
 	modelMarket:
 		| 'Products'
 		| 'Producers'

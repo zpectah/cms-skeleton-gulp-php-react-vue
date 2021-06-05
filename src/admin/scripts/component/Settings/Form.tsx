@@ -61,8 +61,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 		language_installed: string[];
 		language_active: any;
 		language_default: string;
-		module_crm_installed: boolean;
-		module_crm_active: boolean;
 		module_market_installed: boolean;
 		module_market_active: boolean;
 		module_members_active: boolean;
@@ -71,8 +69,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 		language_installed: [],
 		language_active: [],
 		language_default: null,
-		module_crm_installed: false,
-		module_crm_active: false,
 		module_market_installed: false,
 		module_market_active: false,
 		module_members_active: false,
@@ -89,8 +85,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				language_installed: model.language_installed,
 				language_active: model.language_active,
 				language_default: model.language_default,
-				module_crm_installed: model.module_crm_installed,
-				module_crm_active: model.module_crm_active,
 				module_market_installed: model.module_market_installed,
 				module_market_active: model.module_market_active,
 				module_members_active: model.module_members_active,
@@ -693,56 +687,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								/>
 							)}
 						</Section.Base>
-						<Section.Base title={'Crm'} titleAnchor={'crm'} withBorder>
-							{tmpState.module_crm_installed ? (
-								<>
-									<UiForm.Row
-										label={'CRM active'}
-										name={'module_crm_active'}
-										control={control}
-									>
-										{(row) => (
-											<Switch
-												checked={row.value}
-												onChange={(checked) => {
-													row.onChange(checked);
-													setTmpState({
-														...tmpState,
-														module_crm_active: checked,
-													});
-												}}
-											/>
-										)}
-									</UiForm.Row>
-									{tmpState.module_crm_active && (
-										<>
-											<Hr.Base />
-											... form part available only when module is active ...
-										</>
-									)}
-								</>
-							) : (
-								<>
-									<ModuleInstaller
-										module={'Crm'}
-										afterInstall={() => {
-											console.log('Module is CRM installed');
-											setTmpState({
-												...tmpState,
-												module_crm_installed: true, // TODO
-											});
-										}}
-										disabled={!tmpState.module_members_installed}
-									/>
-									{!tmpState.module_members_installed && (
-										<Alert
-											message="You need to have the Members module installed"
-											type="warning"
-										/>
-									)}
-								</>
-							)}
-						</Section.Base>
 						<Section.Base title={'Market'} titleAnchor={'market'}>
 							{tmpState.module_market_installed ? (
 								<>
@@ -776,7 +720,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									<ModuleInstaller
 										module={'Market'}
 										afterInstall={() => {
-											console.log('Module CRM installed');
+											console.log('Module Market installed');
 											setTmpState({
 												...tmpState,
 												module_market_installed: true, // TODO

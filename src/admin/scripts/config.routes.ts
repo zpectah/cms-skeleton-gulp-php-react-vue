@@ -99,23 +99,6 @@ const app = {
 	},
 };
 
-const crm = {
-	dashboard: {
-		path: '/admin/crm',
-		pathDetail: null,
-		name: 'dashboard',
-		label: 'CrmDashboard.label',
-		auth: 2,
-	},
-	campaigns: {
-		path: '/admin/crm/campaigns',
-		pathDetail: '/admin/crm/campaigns/detail',
-		name: 'campaigns',
-		label: 'Campaigns.label',
-		auth: 2,
-	},
-};
-
 const members = {
 	dashboard: {
 		path: '/admin/members',
@@ -152,7 +135,6 @@ const market = {
 
 export default {
 	app: app,
-	crm: crm,
 	members: members,
 	market: market,
 };

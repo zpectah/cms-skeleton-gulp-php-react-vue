@@ -74,7 +74,6 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 			!(
 				path == routes.app.dashboard.path ||
 				path == routes.members.dashboard.path ||
-				path == routes.crm.dashboard.path ||
 				path == routes.market.dashboard.path
 			) &&
 			location.pathname.includes(path)

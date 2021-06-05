@@ -12,14 +12,12 @@ import UploadsDetailForm from './App/UploadsForm';
 import MenuDetailForm from './App/MenuForm';
 import MessagesDetailForm from './App/MessagesForm';
 import MembersDetailForm from './Members/MembersForm';
-import CampaignsDetailForm from './Crm/CampaignsForm';
 import ProductsDetailForm from './Market/ProductsForm';
 
 interface DetailItemDialogProps {
 	model:
 		| appProps['modelApp']
 		| appProps['modelMembers']
-		| appProps['modelCrm']
 		| appProps['modelMarket'];
 	isOpen: boolean;
 	onCancel: (event) => void;
@@ -57,7 +55,6 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		Menu: MenuDetailForm,
 		Messages: MessagesDetailForm,
 		Members: MembersDetailForm,
-		Campaigns: CampaignsDetailForm,
 		Products: ProductsDetailForm,
 	};
 

@@ -88,23 +88,6 @@ const app: NavItemProps[] = [
 	},
 ];
 
-const crm: NavItemProps[] = [
-	{
-		key: 1,
-		label: routes.crm.dashboard.label,
-		path: routes.crm.dashboard.path,
-		active: false,
-		auth: 2, // TODO
-	},
-	{
-		key: 2,
-		label: routes.crm.campaigns.label,
-		path: routes.crm.campaigns.path,
-		active: true,
-		auth: 2, // TODO
-	},
-];
-
 const members: NavItemProps[] = [
 	{
 		key: 1,
@@ -211,13 +194,6 @@ const add: NavItemProps[] = [
 		auth: 2, // TODO
 	},
 	{
-		key: 10,
-		label: 'model_newItem.Campaigns',
-		path: routes.crm.campaigns.pathDetail,
-		active: true,
-		auth: 2, // TODO
-	},
-	{
 		key: 11,
 		label: 'model_newItem.Products',
 		path: routes.market.products.pathDetail,
@@ -269,7 +245,6 @@ const add: NavItemProps[] = [
 
 export default {
 	app: app,
-	crm: crm,
 	members: members,
 	market: market,
 	add: add,

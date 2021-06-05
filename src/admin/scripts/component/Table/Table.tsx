@@ -70,7 +70,6 @@ interface ListItemsProps {
 	model:
 		| appProps['modelApp']
 		| appProps['modelMembers']
-		| appProps['modelCrm']
 		| appProps['modelMarket'];
 	items: ListItemProps[];
 	route: routeProps;

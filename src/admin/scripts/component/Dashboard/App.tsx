@@ -34,7 +34,7 @@ const AppDashboard: React.FC<AppDashboardProps> = ({}) => {
 					</Card>
 				</Col>
 				<Col span={8}>
-					<Card title="CRM Card" extra={<a href="#">More</a>}>
+					<Card title="??? Card" extra={<a href="#">More</a>}>
 						<p>Card content</p>
 						<p>Card content</p>
 						<p>Card content</p>

@@ -24,15 +24,6 @@ class Installer {
 				// proceed table installation ...
 				break;
 
-			case 'Crm':
-				$args = [
-					'true',
-					'module_crm_installed'
-				];
-				// TODO
-				// proceed table installation ...
-				break;
-
 			case 'Market':
 				$args = [
 					'true',

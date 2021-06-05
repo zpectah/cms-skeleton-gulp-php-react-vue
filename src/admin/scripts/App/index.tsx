@@ -25,7 +25,6 @@ import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
 import Members from '../Members';
-import Crm from '../Crm';
 import Market from '../Market';
 
 const App = () => {
@@ -55,12 +54,6 @@ const App = () => {
 					<AuthRoute
 						path={['/admin/members']}
 						component={Members}
-						auth={routes.app.dashboard.auth}
-					/>
-
-					<AuthRoute
-						path={['/admin/crm']}
-						component={Crm}
 						auth={routes.app.dashboard.auth}
 					/>
 

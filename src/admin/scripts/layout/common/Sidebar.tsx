@@ -156,7 +156,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 	const projectName = Settings ? Settings['project_name'] : '...';
 	const modules = {
 		Members: Settings ? Settings['module_members_active'] : false,
-		Crm: Settings ? Settings['module_crm_active'] : false,
 		Market: Settings ? Settings['module_market_active'] : false,
 	};
 	const store = useSelector((store: any) => store);
@@ -223,7 +222,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 									{modules.Members && (
 										<Menu.Members sidebarToggle={toggleSidebar} />
 									)}
-									{modules.Crm && <Menu.Crm sidebarToggle={toggleSidebar} />}
 									{modules.Market && (
 										<Menu.Market sidebarToggle={toggleSidebar} />
 									)}

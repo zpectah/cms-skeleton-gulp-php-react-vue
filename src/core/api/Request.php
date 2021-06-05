@@ -367,33 +367,6 @@ class Request {
 				return $response;
 
 
-			// Campaigns
-			case 'get_campaigns':
-				$response['data'] = $DataService -> get('Campaigns', $requestData);
-				$response['status'] = 'ok';
-				return $response;
-
-			case 'create_campaigns':
-				$response['data'] = $DataService -> create('Campaigns', $requestData);
-				$response['status'] = 'ok';
-				return $response;
-
-			case 'toggle_campaigns':
-				$response['data'] = $DataService -> toggle('Campaigns', $requestData);
-				$response['status'] = 'ok';
-				return $response;
-
-			case 'update_campaigns':
-				$response['data'] = $DataService -> update('Campaigns', $requestData);
-				$response['status'] = 'ok';
-				return $response;
-
-			case 'delete_campaigns':
-				$response['data'] = $DataService -> delete('Campaigns', $requestData);
-				$response['status'] = 'ok';
-				return $response;
-
-
 			// Deliveries
 			case 'get_deliveries':
 				$response['data'] = $DataService -> get('Deliveries', $requestData);
