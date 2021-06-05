@@ -55,15 +55,12 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 	const [dialogSubData, setDialogSubData] = useState({
 		is_new: true,
 	});
-
 	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
-	const toggleConfirm = () => setConfirmOpen(!confirmOpen);
 	const [confirmData, setConfirmData] = useState<any>(null);
-
-	// TODO
 	const [list, setList] = useState([]);
 	const [listOrphans, setListOrphans] = useState([]);
 
+	const toggleConfirm = () => setConfirmOpen(!confirmOpen);
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
 	const openSubDialog = (data?: any) => {
@@ -80,10 +77,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 		setTimeout(() => reloadMenuItems(), SUBMIT_TIMEOUT);
 	};
 
-	const itemSelectHandler = (item) => {
-		console.log('itemSelectHandler ...', item);
-		openSubDialog(item);
-	};
+	const itemSelectHandler = (item) => openSubDialog(item);
 
 	const itemToggleHandler = (id) => {
 		toggleMenuItems([id]).then((resp) => {
@@ -94,10 +88,6 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 	};
 
 	const itemDeleteHandler = (id) => {
-		// Confirm first !!!
-		// TODO
-		// itemDeleteConfirmHandler(id);
-		//
 		setConfirmData([id]);
 		setConfirmOpen(true);
 	};

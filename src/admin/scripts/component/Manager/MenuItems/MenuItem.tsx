@@ -34,9 +34,9 @@ const ButtonText = styled.span<{ isDisabled: boolean }>`
 
 interface MenuItemProps {
 	item: MenuItemsItemProps;
-	onSelect: (item) => void;
-	onToggle: (id) => void;
-	onDelete: (id) => void;
+	onSelect: (item: MenuItemsItemProps) => void;
+	onToggle: (id: number | string) => void;
+	onDelete: (id: number | string) => void;
 	context?: 'select' | 'orphan';
 }
 

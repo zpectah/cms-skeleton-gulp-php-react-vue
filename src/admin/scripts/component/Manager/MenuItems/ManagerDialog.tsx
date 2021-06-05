@@ -8,9 +8,9 @@ interface ManagerDialogProps {
 	isOpen: boolean;
 	data: MenuItemsItemProps | any; // TODO
 	onClose?: () => void;
-	afterSubmit: (master, response) => void;
+	afterSubmit: (master: any, response: any) => void;
 	menuId: number | string;
-	onDelete: (id) => void;
+	onDelete: (id: number | string) => void;
 }
 
 const ManagerDialog: React.FC<ManagerDialogProps> = ({

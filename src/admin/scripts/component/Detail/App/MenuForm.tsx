@@ -16,7 +16,7 @@ import DetailFooter from '../DetailFooter';
 interface MenuDetailFormProps {
 	detailData: MenuItemProps;
 	onCancel: Function;
-	onSave: (data, response) => void;
+	onSave: (data: MenuItemProps, response: any) => void;
 	onDelete: Function;
 	allowSave: boolean;
 	allowDelete: boolean;

@@ -19,11 +19,11 @@ const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 `;
 
 interface DialogFormProps {
-	data: MenuItemsItemProps | any; // TODO
+	data: MenuItemsItemProps;
 	toggleDialog: () => void;
-	afterSubmit: (master, response) => void;
+	afterSubmit: (master: any, response: any) => void;
 	menuId: number | string;
-	onDelete: (id) => void;
+	onDelete: (id: number | string) => void;
 }
 
 const DialogForm: React.FC<DialogFormProps> = ({
@@ -62,21 +62,14 @@ const DialogForm: React.FC<DialogFormProps> = ({
 			menu: menuId,
 		};
 
-		//
 		if (isNew) {
 			createMenuItems(master).then((response) => {
-				// onSave(master, response);
-				// onCancel();
-
 				message.success('Create success', 2.5);
 
 				afterSubmit(master, response);
 			});
 		} else {
 			updateMenuItems(master).then((response) => {
-				// onSave(master, response);
-				// onCancel();
-
 				message.success('Update success', 2.5);
 
 				afterSubmit(master, response);
