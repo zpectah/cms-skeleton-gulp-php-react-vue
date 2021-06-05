@@ -59,7 +59,7 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -95,6 +95,8 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<div>... content ...</div>
 				</Section.Base>
 			</Modal.Content>

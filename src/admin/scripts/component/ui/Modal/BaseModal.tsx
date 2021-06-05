@@ -25,6 +25,16 @@ const ModalWrapper = styled.div`
 		font-size: 1.35rem;
 		font-weight: 500;
 	}
+
+	& .modal-footer-block {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.modal-footer-column {
+			margin-left: 0.5rem;
+		}
+	}
 `;
 const ModalCloseIcon = styled(MdClose)``;
 

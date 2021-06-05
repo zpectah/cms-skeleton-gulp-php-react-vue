@@ -76,7 +76,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -152,6 +152,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'First name'}
 						name={'first_name'}
@@ -203,6 +205,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Level'}
 						name={'user_level'}
@@ -253,6 +257,8 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 							</Select>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

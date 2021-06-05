@@ -124,7 +124,11 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 	return (
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'xl'}>
-				<Modal.Header>{t('component:MenuItemsManager.title')}</Modal.Header>
+				<Modal.Header>
+					<div className="modal-heading-title">
+						{t('component:MenuItemsManager.title')}
+					</div>
+				</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
 						<MenuItemsList>
@@ -161,7 +165,10 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 					</Button.Base>
 				</Modal.Content>
 				<Modal.Footer>
-					<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
+					<div></div>
+					<div>
+						<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
+					</div>
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>

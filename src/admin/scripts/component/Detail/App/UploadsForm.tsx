@@ -185,7 +185,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						defaultValue={detailData.id}
 					/>
 				</div>
-				<Section.Base>
+				<Section.Base withBorder>
 					<>
 						{detailData.is_new ? (
 							<>
@@ -215,7 +215,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						)}
 					</>
 				</Section.Base>
-				<Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Name'}
 						name={'name'}
@@ -258,7 +258,8 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -285,6 +286,8 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

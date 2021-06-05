@@ -98,7 +98,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -166,6 +166,8 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -226,6 +228,8 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Main image'}
 						name={'img_main'}
@@ -260,6 +264,8 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 							</>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

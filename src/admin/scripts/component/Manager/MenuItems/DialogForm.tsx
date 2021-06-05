@@ -274,20 +274,29 @@ const DialogForm: React.FC<DialogFormProps> = ({
 				</Section.Base>
 			</Modal.Content>
 			<Modal.Footer>
-				<Button.Base onClick={toggleDialog}>Cancel</Button.Base>
-				<Button.Base
-					// htmlType="submit"
-					onClick={handleSubmit(submitHandler)}
-					type="primary"
-					disabled={!formState.isValid}
-				>
-					{isNew ? t('btn.create') : t('btn.save')}
-				</Button.Base>
-				{!isNew && (
-					<Button.Base type="primary" danger onClick={() => onDelete(data.id)}>
-						Delete
+				<div className="modal-footer-block">
+					<Button.Base
+						onClick={handleSubmit(submitHandler)}
+						type="primary"
+						disabled={!formState.isValid}
+					>
+						{isNew ? t('btn.create') : t('btn.save')}
 					</Button.Base>
-				)}
+					{!isNew && (
+						<div className="modal-footer-column">
+							<Button.Base
+								type="primary"
+								danger
+								onClick={() => onDelete(data.id)}
+							>
+								{t('btn.delete')}
+							</Button.Base>
+						</div>
+					)}
+				</div>
+				<div className="modal-footer-block">
+					<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
+				</div>
 			</Modal.Footer>
 		</form>
 	);

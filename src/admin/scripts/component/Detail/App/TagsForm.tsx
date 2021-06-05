@@ -80,7 +80,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -112,6 +112,8 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

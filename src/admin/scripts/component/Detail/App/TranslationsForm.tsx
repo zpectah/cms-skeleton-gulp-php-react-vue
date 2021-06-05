@@ -96,7 +96,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -124,7 +124,8 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 							/>
 						)}
 					</Form.Row>
-
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -153,6 +154,8 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

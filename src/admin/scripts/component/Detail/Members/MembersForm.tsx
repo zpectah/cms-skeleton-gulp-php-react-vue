@@ -79,7 +79,7 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -151,6 +151,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'First name'}
 						name={'first_name'}
@@ -202,7 +204,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
-					{''}
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Country'}
 						name={'member_country'}
@@ -305,6 +308,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Description'}
 						name={'description'}
@@ -323,6 +328,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Group'}
 						name={'member_group'}
@@ -345,6 +352,8 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 							</Select>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

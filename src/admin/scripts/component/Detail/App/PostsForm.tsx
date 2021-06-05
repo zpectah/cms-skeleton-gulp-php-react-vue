@@ -114,7 +114,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"
@@ -244,201 +244,202 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							</Select>
 						)}
 					</Form.Row>
+				</Section.Base>
+				{
 					{
-						{
-							event: (
-								<>
-									<Form.Row
-										label={'event address'}
-										name={'event_address'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={detailData.event_address || ''}
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
+						event: (
+							<>
+								<Form.Row
+									label={'event address'}
+									name={'event_address'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={detailData.event_address || ''}
+								>
+									{(row) => (
+										<Input
+											id={row.id}
+											type={'text'}
+											name={row.name}
+											value={row.value}
+											onChange={row.onChange}
+											placeholder={'event address'}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'event country'}
+									name={'event_country'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={detailData.event_country || ''}
+								>
+									{(row) => (
+										<Input
+											id={row.id}
+											type={'text'}
+											name={row.name}
+											value={row.value}
+											onChange={row.onChange}
+											placeholder={'event country'}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'event city'}
+									name={'event_city'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={detailData.event_city || ''}
+								>
+									{(row) => (
+										<Input
+											id={row.id}
+											type={'text'}
+											name={row.name}
+											value={row.value}
+											onChange={row.onChange}
+											placeholder={'event city'}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'event zip'}
+									name={'event_zip'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={detailData.event_zip || ''}
+								>
+									{(row) => (
+										<Input
+											id={row.id}
+											type={'text'}
+											name={row.name}
+											value={row.value}
+											onChange={row.onChange}
+											placeholder={'event zip'}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'Event start'}
+									name={'event_start'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={
+										detailData.event_start || moment().format(DatePickerFormat)
+									}
+								>
+									{(row) => (
+										<DatePicker
+											id={row.id}
+											name={row.name}
+											value={moment(row.value, DatePickerFormat)}
+											onChange={(value) => {
+												row.onChange(value);
+												setTmp_event_start(value.format());
+											}}
+											placeholder={'Event start'}
+											ref={row.ref}
+											style={{ width: '100%' }}
+											showTime
+											defaultValue={moment()}
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'Event end'}
+									name={'event_end'}
+									control={control}
+									rules={{ required: watchType == 'event' }}
+									required={watchType == 'event'}
+									defaultValue={
+										detailData.event_end || moment().format(DatePickerFormat)
+									}
+								>
+									{(row) => (
+										<DatePicker
+											id={row.id}
+											name={row.name}
+											value={moment(row.value, DatePickerFormat)}
+											onChange={(value) => {
+												row.onChange(value);
+												setTmp_event_end(value.format());
+											}}
+											placeholder={'Event end'}
+											ref={row.ref}
+											style={{ width: '100%' }}
+											showTime
+										/>
+									)}
+								</Form.Row>
+								<Form.Row
+									label={'Event location'}
+									name={'event_location'}
+									control={control}
+									// rules={{ required: watchType == 'event' }}
+									// required={watchType == 'event'}
+									defaultValue={detailData.event_location || [0, 0]}
+								>
+									{(row) => (
+										<>
+											<Manager.Location
 												value={row.value}
 												onChange={row.onChange}
-												placeholder={'event address'}
 											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'event country'}
-										name={'event_country'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={detailData.event_country || ''}
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event country'}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'event city'}
-										name={'event_city'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={detailData.event_city || ''}
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event city'}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'event zip'}
-										name={'event_zip'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={detailData.event_zip || ''}
-									>
-										{(row) => (
-											<Input
-												id={row.id}
-												type={'text'}
-												name={row.name}
-												value={row.value}
-												onChange={row.onChange}
-												placeholder={'event zip'}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'Event start'}
-										name={'event_start'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={
-											detailData.event_start ||
-											moment().format(DatePickerFormat)
-										}
-									>
-										{(row) => (
-											<DatePicker
-												id={row.id}
-												name={row.name}
-												value={moment(row.value, DatePickerFormat)}
-												onChange={(value) => {
-													row.onChange(value);
-													setTmp_event_start(value.format());
-												}}
-												placeholder={'Event start'}
-												ref={row.ref}
-												style={{ width: '100%' }}
-												showTime
-												defaultValue={moment()}
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'Event end'}
-										name={'event_end'}
-										control={control}
-										rules={{ required: watchType == 'event' }}
-										required={watchType == 'event'}
-										defaultValue={
-											detailData.event_end || moment().format(DatePickerFormat)
-										}
-									>
-										{(row) => (
-											<DatePicker
-												id={row.id}
-												name={row.name}
-												value={moment(row.value, DatePickerFormat)}
-												onChange={(value) => {
-													row.onChange(value);
-													setTmp_event_end(value.format());
-												}}
-												placeholder={'Event end'}
-												ref={row.ref}
-												style={{ width: '100%' }}
-												showTime
-											/>
-										)}
-									</Form.Row>
-									<Form.Row
-										label={'Event location'}
-										name={'event_location'}
-										control={control}
-										// rules={{ required: watchType == 'event' }}
-										// required={watchType == 'event'}
-										defaultValue={detailData.event_location || [0, 0]}
-									>
-										{(row) => (
-											<>
-												<Manager.Location
-													value={row.value}
-													onChange={row.onChange}
-												/>
-											</>
-										)}
-									</Form.Row>
-								</>
-							),
-							media: (
-								<>
-									<Form.Row
-										label={'media'}
-										name={'media'}
-										control={control}
-										rules={{ required: watchType == 'media' }}
-										required={watchType == 'media'}
-										defaultValue={detailData.media || ''}
-									>
-										{(row) => (
-											<Manager.Uploads
-												type="image"
-												selected={row.value}
-												onChange={row.onChange}
-											/>
-										)}
-									</Form.Row>
-								</>
-							),
-							attachment: (
-								<>
-									<Form.Row
-										label={'Attachments'}
-										name={'attachments'}
-										control={control}
-										rules={{ required: watchType == 'attachment' }}
-										required={watchType == 'attachment'}
-										defaultValue={detailData.attachments || ''}
-									>
-										{(row) => (
-											<Manager.Uploads
-												type="all"
-												selected={row.value}
-												onChange={row.onChange}
-											/>
-										)}
-									</Form.Row>
-								</>
-							),
-						}[watchType]
-					}
+										</>
+									)}
+								</Form.Row>
+							</>
+						),
+						media: (
+							<>
+								<Form.Row
+									label={'media'}
+									name={'media'}
+									control={control}
+									rules={{ required: watchType == 'media' }}
+									required={watchType == 'media'}
+									defaultValue={detailData.media || ''}
+								>
+									{(row) => (
+										<Manager.Uploads
+											type="image"
+											selected={row.value}
+											onChange={row.onChange}
+										/>
+									)}
+								</Form.Row>
+							</>
+						),
+						attachment: (
+							<>
+								<Form.Row
+									label={'Attachments'}
+									name={'attachments'}
+									control={control}
+									rules={{ required: watchType == 'attachment' }}
+									required={watchType == 'attachment'}
+									defaultValue={detailData.attachments || ''}
+								>
+									{(row) => (
+										<Manager.Uploads
+											type="all"
+											selected={row.value}
+											onChange={row.onChange}
+										/>
+									)}
+								</Form.Row>
+							</>
+						),
+					}[watchType]
+				}
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Category'}
 						name={'category'}
@@ -467,6 +468,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -527,6 +530,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Published'}
 						name={'published'}
@@ -595,6 +600,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 							</>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}
