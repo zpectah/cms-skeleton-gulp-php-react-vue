@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Menu, Dropdown, Tag } from 'antd';
 
 import { MenuItemsItemProps } from '../../../App/types';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
 	width: auto;
@@ -48,13 +49,15 @@ const MenuItem: React.FC<MenuItemProps> = ({
 	onDelete,
 	context = 'select',
 }) => {
+	const { t } = useTranslation(['common']);
+
 	const menu = (
 		<Menu>
 			<Menu.Item key="1" onClick={() => onToggle(item.id)}>
-				{item.active == 1 ? 'Disable' : 'Active'}
+				{item.active == 1 ? t('btn.disable') : t('btn.active')}
 			</Menu.Item>
 			<Menu.Item key="2" onClick={() => onDelete(item.id)}>
-				Delete
+				{t('btn.delete')}
 			</Menu.Item>
 		</Menu>
 	);

@@ -81,7 +81,7 @@ const DialogForm: React.FC<DialogFormProps> = ({
 		<form>
 			<Modal.Header>{isNew ? 'Create new menu item' : data.name}</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<div>
 						<input
 							type="hidden"

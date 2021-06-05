@@ -75,5 +75,11 @@
 			"removeFile": "Remove file",
 			"removeImage": "Remove image"
 		}
+	},
+	"MenuItemsManager": {
+		"title": "Menu items manager",
+		"btn": {
+			"createNew_item": "Create new item"
+		}
 	}
 }

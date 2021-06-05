@@ -79,7 +79,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 				</Typography.Title>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Name'}
 						name={'name'}
@@ -139,6 +139,8 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 							/>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Active'}
 						name={'active'}
@@ -149,6 +151,8 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.RowNoController label={'Menu items'} long>
 						{() => (
 							<>

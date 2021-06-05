@@ -26,7 +26,7 @@ const SelectedStructureContainer = styled.div`
 	width: 100%;
 	height: auto;
 	margin: 0;
-	padding: 1rem 0;
+	padding: 0 0 1rem 0;
 `;
 const MenuItemsList = styled.div`
 	width: 100%;
@@ -81,7 +81,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 
 	const itemToggleHandler = (id) => {
 		toggleMenuItems([id]).then((resp) => {
-			message.success('Item was updated', 2.5);
+			message.success(t('message:success.items.update'), 2.5);
 
 			reloadMenuItems();
 		});
@@ -124,7 +124,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 	return (
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'xl'}>
-				<Modal.Header>Menu items manager</Modal.Header>
+				<Modal.Header>{t('component:MenuItemsManager.title')}</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
 						<MenuItemsList>
@@ -157,23 +157,22 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({ menuId }) => {
 						type="primary"
 						onClick={() => openSubDialog({ is_new: true })}
 					>
-						Add new item
+						{t('component:MenuItemsManager.btn.createNew_item')}
 					</Button.Base>
 				</Modal.Content>
 				<Modal.Footer>
-					<Button.Base onClick={toggleDialog}>Cancel</Button.Base>
-					<Button.Base type="primary">Confirm</Button.Base>
+					<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>
-				<Button.Base onClick={toggleDialog} type="primary" ghost>
-					Menu items
-				</Button.Base>
 				<SelectedStructureContainer>
 					{list.map((item) => (
 						<Tag key={item.id}>{item.name}</Tag>
 					))}
 				</SelectedStructureContainer>
+				<Button.Base onClick={toggleDialog} type="primary" ghost>
+					{t('model.MenuItems')}
+				</Button.Base>
 			</Wrapper>
 			<ManagerDialog
 				isOpen={dialogSubOpen}
