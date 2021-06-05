@@ -167,22 +167,24 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<input
-				type="hidden"
-				name="id"
-				ref={register({ required: true })}
-				defaultValue={detailData.id}
-			/>
 			<Modal.Header>
-				<Typography.Title level={'h3'} noMargin>
+				<div className="modal-heading-title">
 					{detailData.is_new
 						? t('title.create_new') +
 						  ' ' +
 						  t('model_item.Uploads').toLowerCase()
 						: detailData.name}
-				</Typography.Title>
+				</div>
 			</Modal.Header>
 			<Modal.Content>
+				<div>
+					<input
+						type="hidden"
+						name="id"
+						ref={register({ required: true })}
+						defaultValue={detailData.id}
+					/>
+				</div>
 				<Section.Base>
 					<>
 						{detailData.is_new ? (

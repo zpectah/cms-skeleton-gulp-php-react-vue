@@ -69,31 +69,31 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<div>
-				<input
-					type="hidden"
-					name="id"
-					ref={register({ required: true })}
-					defaultValue={detailData.id}
-				/>
-				<input
-					type="hidden"
-					name="img_avatar"
-					ref={register({})}
-					defaultValue={detailData.img_avatar}
-				/>
-			</div>
 			<Modal.Header>
-				<Typography.Title level={'h3'} noMargin>
+				<div className="modal-heading-title">
 					{detailData.is_new
 						? t('title.create_new') +
 						  ' ' +
 						  t('model_item.Members').toLowerCase()
 						: detailData.email}
-				</Typography.Title>
+				</div>
 			</Modal.Header>
 			<Modal.Content>
 				<Section.Base>
+					<div>
+						<input
+							type="hidden"
+							name="id"
+							ref={register({ required: true })}
+							defaultValue={detailData.id}
+						/>
+						<input
+							type="hidden"
+							name="img_avatar"
+							ref={register({})}
+							defaultValue={detailData.img_avatar}
+						/>
+					</div>
 					<Form.Row
 						label={'E-mail'}
 						name={'email'}

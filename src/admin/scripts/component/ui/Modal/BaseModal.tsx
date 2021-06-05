@@ -15,6 +15,16 @@ const ModalWrapper = styled.div`
 	flex-direction: column;
 	background-color: white;
 	border-radius: 4px;
+
+	& .modal-heading-title {
+		width: auto;
+		height: auto;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		font-size: 1.35rem;
+		font-weight: 500;
+	}
 `;
 const ModalCloseIcon = styled(MdClose)``;
 

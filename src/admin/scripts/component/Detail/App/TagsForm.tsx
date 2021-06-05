@@ -72,23 +72,23 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<div>
-				<input
-					type="hidden"
-					name="id"
-					ref={register({ required: true })}
-					defaultValue={detailData.id}
-				/>
-			</div>
 			<Modal.Header>
-				<Typography.Title level={'h3'} noMargin>
+				<div className="modal-heading-title">
 					{detailData.is_new
 						? t('title.create_new') + ' ' + t('model_item.Tags').toLowerCase()
 						: detailData.name}
-				</Typography.Title>
+				</div>
 			</Modal.Header>
 			<Modal.Content>
 				<Section.Base>
+					<div>
+						<input
+							type="hidden"
+							name="id"
+							ref={register({ required: true })}
+							defaultValue={detailData.id}
+						/>
+					</div>
 					<Form.Row
 						label={'Name'}
 						name={'name'}

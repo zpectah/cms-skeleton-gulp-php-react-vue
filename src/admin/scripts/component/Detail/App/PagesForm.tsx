@@ -123,14 +123,14 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 				)}
 			</div>
 			<Modal.Header>
-				<Typography.Title level={'h3'} noMargin>
+				<div className="modal-heading-title">
 					{detailData.is_new
 						? t('title.create_new') + ' ' + t('model_item.Pages').toLowerCase()
 						: detailData.name}
-				</Typography.Title>
+				</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Name'}
 						name={'name'}
@@ -139,6 +139,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 						required
 						defaultValue={detailData.name || ''}
 						errors={duplicates ? ['This name is already in use'] : []}
+						helpText={'This name is used as part of url address.'}
 					>
 						{(row) => (
 							<Input
@@ -242,6 +243,8 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 							)}
 						</Form.Row>
 					)}
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -287,6 +290,8 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

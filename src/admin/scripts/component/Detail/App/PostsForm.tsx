@@ -106,101 +106,101 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<div>
-				<input
-					type="hidden"
-					name="id"
-					ref={register({ required: true })}
-					defaultValue={detailData.id}
-				/>
-				<input
-					type="hidden"
-					name="author"
-					ref={register({})}
-					defaultValue={detailData.author || Profile.id}
-				/>
-				<input
-					type="hidden"
-					name="post_options"
-					ref={register({})}
-					defaultValue={detailData.post_options || null}
-				/>
-				{watchType !== 'event' && (
-					<>
-						<input
-							type="hidden"
-							name="event_start"
-							ref={register({})}
-							defaultValue={detailData.event_start || ''}
-						/>
-						<input
-							type="hidden"
-							name="event_end"
-							ref={register({})}
-							defaultValue={detailData.event_end || ''}
-						/>
-						<input
-							type="hidden"
-							name="event_location"
-							ref={register({})}
-							defaultValue={detailData.event_location || []}
-						/>
-						<input
-							type="hidden"
-							name="event_address"
-							ref={register({})}
-							defaultValue={detailData.event_address || ''}
-						/>
-						<input
-							type="hidden"
-							name="event_country"
-							ref={register({})}
-							defaultValue={detailData.event_country || ''}
-						/>
-						<input
-							type="hidden"
-							name="event_city"
-							ref={register({})}
-							defaultValue={detailData.event_city || ''}
-						/>
-						<input
-							type="hidden"
-							name="event_zip"
-							ref={register({})}
-							defaultValue={detailData.event_zip || ''}
-						/>
-					</>
-				)}
-				{watchType !== 'media' && (
-					<>
-						<input
-							type="hidden"
-							name="media"
-							ref={register({})}
-							defaultValue={detailData.media || ''}
-						/>
-					</>
-				)}
-				{watchType !== 'attachment' && (
-					<>
-						<input
-							type="hidden"
-							name="attachments"
-							ref={register({})}
-							defaultValue={detailData.attachments || ''}
-						/>
-					</>
-				)}
-			</div>
 			<Modal.Header>
-				<Typography.Title level={'h3'} noMargin>
+				<div className="modal-heading-title">
 					{detailData.is_new
 						? t('title.create_new') + ' ' + t('model_item.Posts').toLowerCase()
 						: detailData.name}
-				</Typography.Title>
+				</div>
 			</Modal.Header>
 			<Modal.Content>
 				<Section.Base>
+					<div>
+						<input
+							type="hidden"
+							name="id"
+							ref={register({ required: true })}
+							defaultValue={detailData.id}
+						/>
+						<input
+							type="hidden"
+							name="author"
+							ref={register({})}
+							defaultValue={detailData.author || Profile.id}
+						/>
+						<input
+							type="hidden"
+							name="post_options"
+							ref={register({})}
+							defaultValue={detailData.post_options || null}
+						/>
+						{watchType !== 'event' && (
+							<>
+								<input
+									type="hidden"
+									name="event_start"
+									ref={register({})}
+									defaultValue={detailData.event_start || ''}
+								/>
+								<input
+									type="hidden"
+									name="event_end"
+									ref={register({})}
+									defaultValue={detailData.event_end || ''}
+								/>
+								<input
+									type="hidden"
+									name="event_location"
+									ref={register({})}
+									defaultValue={detailData.event_location || []}
+								/>
+								<input
+									type="hidden"
+									name="event_address"
+									ref={register({})}
+									defaultValue={detailData.event_address || ''}
+								/>
+								<input
+									type="hidden"
+									name="event_country"
+									ref={register({})}
+									defaultValue={detailData.event_country || ''}
+								/>
+								<input
+									type="hidden"
+									name="event_city"
+									ref={register({})}
+									defaultValue={detailData.event_city || ''}
+								/>
+								<input
+									type="hidden"
+									name="event_zip"
+									ref={register({})}
+									defaultValue={detailData.event_zip || ''}
+								/>
+							</>
+						)}
+						{watchType !== 'media' && (
+							<>
+								<input
+									type="hidden"
+									name="media"
+									ref={register({})}
+									defaultValue={detailData.media || ''}
+								/>
+							</>
+						)}
+						{watchType !== 'attachment' && (
+							<>
+								<input
+									type="hidden"
+									name="attachments"
+									ref={register({})}
+									defaultValue={detailData.attachments || ''}
+								/>
+							</>
+						)}
+					</div>
 					<Form.Row
 						label={'Name'}
 						name={'name'}

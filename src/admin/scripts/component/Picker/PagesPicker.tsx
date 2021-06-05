@@ -1,39 +1,52 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { useTags } from '../../App/hooks';
+import { usePages } from '../../App/hooks';
 
-interface TagsPickerProps {
+interface PagesPickerProps {
 	id?: string;
 	value: string[];
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
+	customOptions?: any[];
+	pathPrefix?: string;
 }
 
-const TagsPicker: React.FC<TagsPickerProps> = ({
+const PagesPicker: React.FC<PagesPickerProps> = ({
 	id,
 	value,
 	onChange,
 	single = false,
 	ignoredId = [],
+	customOptions = [],
+	pathPrefix,
 }) => {
-	const { Tags } = useTags();
+	const { Pages } = usePages();
 
 	const getOptions = () => {
 		let o = [
 			{
 				key: 0,
 				value: '',
-				label: single ? 'Select tag' : 'Select tags',
+				label: 'Select page',
 				disabled: true,
 			},
 		];
 
-		Tags?.map((option) => {
+		if (!single) o[0].label = 'Select pages';
+
+		if (customOptions.length > 0) {
+			customOptions.map((item) => {
+				o.push(item);
+			});
+		}
+
+		Pages?.map((option) => {
+			let value = pathPrefix ? `${pathPrefix}${option.name}` : option.name;
 			o.push({
 				key: option.id,
-				value: option.id,
+				value: value,
 				label: option.name,
 				disabled: false,
 			});
@@ -56,14 +69,14 @@ const TagsPicker: React.FC<TagsPickerProps> = ({
 
 	const getVariableProps = () => {
 		let p: any = {
-			placeholder: 'Select tag',
+			placeholder: 'Select page',
 		};
 
 		if (!single) {
 			p = {
 				...p,
 				mode: 'multiple',
-				placeholder: 'Select tags',
+				placeholder: 'Select pages',
 			};
 		}
 
@@ -83,4 +96,4 @@ const TagsPicker: React.FC<TagsPickerProps> = ({
 	);
 };
 
-export default TagsPicker;
+export default PagesPicker;

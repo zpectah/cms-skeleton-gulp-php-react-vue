@@ -39,7 +39,14 @@ const DialogForm: React.FC<DialogFormProps> = ({
 	const [isNew, setNew] = useState(data.is_new);
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const { control, handleSubmit, formState, register } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState,
+		register,
+		setValue,
+		watch,
+	} = useForm({
 		mode: 'all',
 		defaultValues: {
 			lang: setLanguageModel(langList, {
@@ -48,6 +55,7 @@ const DialogForm: React.FC<DialogFormProps> = ({
 			...data,
 		},
 	});
+	const [tmpPage, setTmpPage] = useState([data.link]);
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -77,9 +85,19 @@ const DialogForm: React.FC<DialogFormProps> = ({
 		}
 	};
 
+	const watchType = watch('type');
+
 	return (
 		<form>
-			<Modal.Header>{isNew ? 'Create new menu item' : data.name}</Modal.Header>
+			<Modal.Header>
+				<div className="modal-heading-title">
+					{isNew
+						? t('title.create_new') +
+						  ' ' +
+						  t('model_item.MenuItems').toLowerCase()
+						: data.name}
+				</div>
+			</Modal.Header>
 			<Modal.Content>
 				<Section.Base withBorder>
 					<div>
@@ -133,13 +151,37 @@ const DialogForm: React.FC<DialogFormProps> = ({
 							</Select>
 						)}
 					</Form.Row>
+					{watchType == 'default' && (
+						<Form.RowNoController label={'Page'}>
+							{() => (
+								<Picker.Pages
+									value={tmpPage}
+									onChange={(page) => {
+										console.log('...', page);
+										setTmpPage(page);
+										setValue('link', page);
+									}}
+									customOptions={[
+										{
+											key: 'home',
+											value: '/',
+											label: 'Default home',
+											disabled: false,
+										},
+									]}
+									pathPrefix={'/'}
+									single
+								/>
+							)}
+						</Form.RowNoController>
+					)}
 					<Form.Row
 						label={'Link'}
 						name={'link'}
 						control={control}
 						rules={{ required: true }}
 						required
-						defaultValue={data.link || ''}
+						defaultValue={data.link || '/'}
 					>
 						{(row) => (
 							<Input
@@ -168,6 +210,27 @@ const DialogForm: React.FC<DialogFormProps> = ({
 							/>
 						)}
 					</Form.Row>
+					<Form.Row
+						label={'Order'}
+						name={'item_order'}
+						control={control}
+						defaultValue={data.item_order || 0}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'number'}
+								name={row.name}
+								value={row.value}
+								onChange={(e) => {
+									row.onChange(Number(e.target.value));
+								}}
+								placeholder={'Order'}
+							/>
+						)}
+					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>
@@ -196,25 +259,6 @@ const DialogForm: React.FC<DialogFormProps> = ({
 							</LanguageWrapperPanel>
 						))}
 					</LanguageWrapper>
-					<Form.Row
-						label={'Order'}
-						name={'item_order'}
-						control={control}
-						defaultValue={data.item_order || 0}
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'number'}
-								name={row.name}
-								value={row.value}
-								onChange={(e) => {
-									row.onChange(Number(e.target.value));
-								}}
-								placeholder={'Order'}
-							/>
-						)}
-					</Form.Row>
 				</Section.Base>
 				<Section.Base>
 					<Form.Row
