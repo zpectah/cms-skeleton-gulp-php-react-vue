@@ -37,5 +37,8 @@
 	"index,follow": "Index, Follow",
 	"noindex,nofollow": "No Index, No Follow",
 	"index,nofollow": "Index, No Follow",
-	"noindex,follow": "No Index, Follow"
+	"noindex,follow": "No Index, Follow",
+	"custom": "Custom",
+	"error_404": "Error 404",
+	"error_500": "Error 500"
 }

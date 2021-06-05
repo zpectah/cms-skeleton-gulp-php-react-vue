@@ -100,7 +100,8 @@
 			"type_list": ["default","gallery"]
 		},
 		"Pages": {
-			"type_list": ["default","system","category","tags"]
+			"type_list": ["default","system","category","tags"],
+			"system_types": ["custom","error_404","error_500"]
 		},
 		"Uploads": {
 			"type_list": ["image","audio","video","document","archive"]

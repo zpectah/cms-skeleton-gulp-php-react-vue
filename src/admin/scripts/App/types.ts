@@ -74,6 +74,7 @@ export interface CategoriesItemProps extends commonModelProps {
 
 export interface PagesItemProps extends commonModelProps {
 	type: 'default' | 'system' | 'category' | 'tags';
+	type_id: string;
 	name: string;
 	lang?: {
 		title: string;

@@ -8,6 +8,7 @@ import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PagesItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section, Wysiwyg } from '../../ui';
+import Picker from '../../Picker';
 import LanguageToggle from '../../Language';
 import { usePages, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
@@ -42,7 +43,14 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const { control, handleSubmit, formState, register, watch } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState,
+		register,
+		watch,
+		setValue,
+	} = useForm({
 		mode: 'onChange',
 		defaultValues: {
 			lang: setLanguageModel(langList, {
@@ -79,6 +87,8 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 		setTimeout(() => reloadPages(), SUBMIT_TIMEOUT);
 	};
 
+	const watchType = watch('type');
+
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
 			<div>
@@ -88,6 +98,18 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 					ref={register({ required: true })}
 					defaultValue={detailData.id}
 				/>
+				{!(
+					watchType == 'category' ||
+					watchType == 'tags' ||
+					watchType == 'system'
+				) && (
+					<input
+						type="hidden"
+						name="type_id"
+						ref={register({})}
+						defaultValue={detailData.type_id}
+					/>
+				)}
 			</div>
 			<Modal.Header>
 				<Typography.Title level={'h3'} noMargin>
@@ -130,7 +152,10 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 								style={{ width: '100%' }}
 								id={row.id}
 								value={row.value}
-								onChange={row.onChange}
+								onChange={(value) => {
+									setValue('type_id', '');
+									row.onChange(value);
+								}}
 								placeholder={'Select type'}
 							>
 								{config.OPTIONS.model.Pages.type_list.map((item) => (
@@ -141,7 +166,67 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 							</Select>
 						)}
 					</Form.Row>
-
+					{watchType == 'category' && (
+						<Form.Row
+							label={'Category'}
+							name={'type_id'}
+							control={control}
+							rules={{ required: true }}
+							required
+							defaultValue={detailData.type_id || ''}
+						>
+							{(row) => (
+								<Picker.Categories
+									value={row.value}
+									onChange={row.onChange}
+									single
+								/>
+							)}
+						</Form.Row>
+					)}
+					{watchType == 'tags' && (
+						<Form.Row
+							label={'Tags'}
+							name={'type_id'}
+							control={control}
+							rules={{ required: true }}
+							required
+							defaultValue={detailData.type_id || ''}
+						>
+							{(row) => (
+								<Picker.Tags value={row.value} onChange={row.onChange} single />
+							)}
+						</Form.Row>
+					)}
+					{watchType == 'system' && (
+						<Form.Row
+							label={'System'}
+							name={'type_id'}
+							control={control}
+							rules={{ required: true }}
+							required
+							defaultValue={detailData.type_id || ''}
+						>
+							{(row) => (
+								<Select
+									style={{ width: '100%' }}
+									id={row.id}
+									value={row.value}
+									onChange={row.onChange}
+									placeholder={'Select type'}
+								>
+									<Select.Option value={''} key={0} disabled>
+										{'Select type'}
+									</Select.Option>
+									{config.OPTIONS.model.Pages.system_types.map((item) => (
+										<Select.Option value={item} key={item}>
+											{t(`types:${item}`)}
+										</Select.Option>
+									))}
+								</Select>
+							)}
+						</Form.Row>
+					)}
 					<Form.RowNoController label={'Language'}>
 						{() => <LanguageToggle onChange={(lang) => setLang(lang)} />}
 					</Form.RowNoController>

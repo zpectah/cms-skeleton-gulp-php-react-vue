@@ -130,13 +130,15 @@ class Pages {
 		// prepare
 		$query = ('INSERT INTO pages (
                    type,
+                   type_id,
                    name,
                    active,
                    deleted
-                   ) VALUES (?,?,?,?)');
-		$types = 'ssii';
+                   ) VALUES (?,?,?,?,?)');
+		$types = 'sssii';
 		$args = [
 			$requestData['type'],
+			$requestData['type_id'],
 			$requestData['name'],
 			$requestData['active'],
 			0
@@ -163,15 +165,19 @@ class Pages {
 	public function update ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
+		$typeId = ($requestData['type'] == 'system' || $requestData['type'] == 'category' || $requestData['type'] == 'tags') ? $requestData['type_id'] : '';
+
 		// prepare
 		$query = ('UPDATE pages SET
                  type = ?,
+                 type_id = ?,
                  name = ?,
                  active = ?
 		WHERE id = ?');
-		$types = 'ssii';
+		$types = 'sssii';
 		$args = [
 			$requestData['type'],
+			$typeId,
 			$requestData['name'],
 			$requestData['active'],
 			$requestData['id']
