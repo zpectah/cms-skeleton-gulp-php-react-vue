@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Tag } from 'antd';
 
 import { useMenuItems } from '../../App/hooks';
 import { Button, Modal } from '../ui';
@@ -7,6 +8,7 @@ import ManagerDialog from './MenuItems/ManagerDialog';
 import { string } from '../../../../libs/js/utils';
 import { SUBMIT_TIMEOUT } from '../../constants';
 import { MenuItemsItemProps } from '../../App/types';
+import MenuItem from './MenuItems/MenuItem';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -26,6 +28,14 @@ const SelectedStructureContainer = styled.div`
 	margin: 0;
 	padding: 1rem 0;
 `;
+const MenuItemsList = styled.div`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0 0 1rem 0;
+	display: flex;
+	flex-wrap: wrap;
+`;
 
 interface MenuItemsManagerProps {
 	selected?: string[];
@@ -37,12 +47,7 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 	selected = [],
 	menuId,
 }) => {
-	const {
-		MenuItems,
-		updateMenuItems,
-		createMenuItems,
-		reloadMenuItems,
-	} = useMenuItems();
+	const { MenuItems, toggleMenuItems, reloadMenuItems } = useMenuItems();
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [dialogSubOpen, setDialogSubOpen] = useState(false);
 	const [dialogSubData, setDialogSubData] = useState({
@@ -65,39 +70,39 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 		setDialogSubData(null);
 	};
 
-	// const submitHandler = (data: MenuItemsItemProps) => {
-	// 	const master = {
-	// 		...data,
-	// 		name: string.replaceSpaces(data.name),
-	// 	};
-	//
-	// 	if (data.is_new) {
-	// 		createMenuItems(master).then((response) => {
-	// 			// onSave(master, response);
-	// 			// onCancel();
-	// 		});
-	// 	} else {
-	// 		updateMenuItems(master).then((response) => {
-	// 			// onSave(master, response);
-	// 			// onCancel();
-	// 		});
-	// 	}
-	//
-	// 	console.log('.... submitted ....');
-	//
-	// 	// setTimeout(() => reloadMenuItems(), SUBMIT_TIMEOUT);
-	// };
-
-	const submitHandler = () => {
+	const afterSubmitHandler = () => {
 		setTimeout(() => reloadMenuItems(), SUBMIT_TIMEOUT);
+	};
+
+	const itemSelectHandler = (item) => {
+		console.log('itemSelectHandler ...', item);
+		openSubDialog(item);
+	};
+
+	const itemToggleHandler = (id) => {
+		toggleMenuItems([id]).then((resp) => {
+			console.log('item updated ...', resp);
+
+			reloadMenuItems();
+		});
+	};
+
+	const itemDeleteHandler = (id) => {
+		toggleMenuItems([id]).then((resp) => {
+			console.log('item updated ...', resp);
+
+			reloadMenuItems();
+		});
+	};
+
+	const itemUpdateOrder = (item) => {
+		console.log('itemUpdateOrder ...', item);
+		// TODO
+		// reloadMenuItems()
 	};
 
 	useEffect(() => {
 		if (MenuItems) {
-			// TODO
-			// set list by current menuId !!!
-			// set listOrphans for menu items with no menuId
-
 			let a = [];
 			let b = [];
 
@@ -117,11 +122,33 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 				<Modal.Header>Menu items manager</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
-						List of menu items for current menu ... {JSON.stringify(list)}
+						<MenuItemsList>
+							{list.map((item) => (
+								<MenuItem
+									key={item.id}
+									item={item}
+									onSelect={itemSelectHandler}
+									onToggle={itemToggleHandler}
+									onUpdateOrder={itemUpdateOrder}
+									onDelete={itemDeleteHandler}
+								/>
+							))}
+						</MenuItemsList>
 					</DialogStructureWrapper>
 					<DialogStructureWrapper>
-						List of orphans (menu items without menu) ...{' '}
-						{JSON.stringify(listOrphans)}
+						<MenuItemsList>
+							{listOrphans.map((item) => (
+								<MenuItem
+									key={item.id}
+									item={item}
+									onSelect={itemSelectHandler}
+									onToggle={itemToggleHandler}
+									onUpdateOrder={itemUpdateOrder}
+									onDelete={itemDeleteHandler}
+									context="orphan"
+								/>
+							))}
+						</MenuItemsList>
 					</DialogStructureWrapper>
 					<Button.Base
 						type="primary"
@@ -140,14 +167,16 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 					Menu items
 				</Button.Base>
 				<SelectedStructureContainer>
-					... selected items structure ...
+					{list.map((item) => (
+						<Tag key={item.id}>{item.name}</Tag>
+					))}
 				</SelectedStructureContainer>
 			</Wrapper>
 			<ManagerDialog
 				isOpen={dialogSubOpen}
 				onClose={subDialogCloseHandler}
 				data={dialogSubData}
-				afterSubmit={submitHandler}
+				afterSubmit={afterSubmitHandler}
 				menuId={menuId}
 			/>
 		</>

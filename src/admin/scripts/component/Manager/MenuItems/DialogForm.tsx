@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Select, Switch } from 'antd';
+import { Input, Select, Switch, message } from 'antd';
 import styled from 'styled-components';
 
 import config from '../../../config';
@@ -12,7 +12,6 @@ import setLanguageModel from '../../Detail/setLanguageModel';
 import { useMenuItems, useSettings } from '../../../App/hooks';
 import LanguageToggle from '../../Language';
 import { string } from '../../../../../libs/js/utils';
-import { SUBMIT_TIMEOUT } from '../../../constants';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -22,7 +21,7 @@ const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
 interface DialogFormProps {
 	data: MenuItemsItemProps | any; // TODO
 	toggleDialog: () => void;
-	afterSubmit: Function;
+	afterSubmit: (master, response) => void;
 	menuId: number | string;
 }
 
@@ -52,22 +51,6 @@ const DialogForm: React.FC<DialogFormProps> = ({
 		if (Settings) setLangList(Settings.language_active);
 	}, [Settings]);
 
-	// const submitHandler = (data) => {
-	// 	console.log('??? ', data);
-	//
-	// 	const master = {
-	// 		...data,
-	// 		menu: menuId,
-	// 	};
-	//
-	// 	if (isNew) {
-	// 		master['id'] = 'new';
-	// 		master['is_new'] = true;
-	// 	}
-	//
-	// 	onSubmit(master);
-	// };
-
 	const submitHandler = (data: MenuItemsItemProps, e) => {
 		e.preventDefault();
 
@@ -83,22 +66,24 @@ const DialogForm: React.FC<DialogFormProps> = ({
 				// onSave(master, response);
 				// onCancel();
 
-				afterSubmit(master);
+				message.success('Create success', 2.5);
+
+				afterSubmit(master, response);
 			});
 		} else {
 			updateMenuItems(master).then((response) => {
 				// onSave(master, response);
 				// onCancel();
 
-				afterSubmit(master);
+				message.success('Update success', 2.5);
+
+				afterSubmit(master, response);
 			});
 		}
 	};
 
 	return (
-		<form
-		// onSubmit={handleSubmit(submitHandler)}
-		>
+		<form>
 			<Modal.Header>{isNew ? 'Create new menu item' : data.name}</Modal.Header>
 			<Modal.Content>
 				<Section.Base>

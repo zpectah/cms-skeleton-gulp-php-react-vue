@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Modal } from '../../ui';
+import { Modal } from '../../ui';
 import DialogForm from './DialogForm';
 import { MenuItemsItemProps } from '../../../App/types';
 
@@ -8,7 +8,7 @@ interface ManagerDialogProps {
 	isOpen: boolean;
 	data: MenuItemsItemProps | any; // TODO
 	onClose?: () => void;
-	afterSubmit: Function;
+	afterSubmit: (master, response) => void;
 	menuId: number | string;
 }
 
@@ -23,6 +23,15 @@ const ManagerDialog: React.FC<ManagerDialogProps> = ({
 
 	const toggleDialog = () => setDialogOpen(!dialogOpen);
 
+	const afterSubmitHandler = (master, response) => {
+		setDialogOpen(false);
+		afterSubmit(master, response);
+	};
+
+	const afterCloseHandler = () => {
+		if (onClose) onClose();
+	};
+
 	useEffect(() => {
 		setDialogOpen(isOpen);
 	}, [isOpen]);
@@ -33,19 +42,13 @@ const ManagerDialog: React.FC<ManagerDialogProps> = ({
 				visible={dialogOpen}
 				onCancel={toggleDialog}
 				size={'lg'}
-				afterClose={() => {
-					if (onClose) onClose();
-				}}
+				afterClose={afterCloseHandler}
 			>
 				{data && (
 					<DialogForm
 						data={data}
 						toggleDialog={toggleDialog}
-						afterSubmit={() => {
-							console.log('... after submit');
-							setDialogOpen(false);
-							afterSubmit();
-						}}
+						afterSubmit={afterSubmitHandler}
 						menuId={menuId}
 					/>
 				)}
