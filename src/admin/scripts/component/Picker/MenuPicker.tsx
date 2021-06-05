@@ -76,6 +76,7 @@ const MenuPicker: React.FC<MenuPickerProps> = ({
 			value={value}
 			onChange={(value, option) => onChange(value, option)}
 			options={getOptions()}
+			allowClear
 			{...getVariableProps()}
 		/>
 	);

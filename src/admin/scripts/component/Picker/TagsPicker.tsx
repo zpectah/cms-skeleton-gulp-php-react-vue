@@ -63,6 +63,7 @@ const TagsPicker: React.FC<TagsPickerProps> = ({
 			value={value}
 			onChange={(value, option) => onChange(value, option)}
 			options={getOptions()}
+			allowClear
 			{...getVariableProps()}
 		/>
 	);

@@ -112,7 +112,7 @@ interface ListItemsProps {
 }
 
 const Table: React.FC<ListItemsProps> = (props) => {
-	const { t } = useTranslation(['common', 'message', 'component']);
+	const { t } = useTranslation(['common', 'message', 'component', 'types']);
 	const history = useHistory();
 	const location = useLocation();
 	const {
@@ -324,7 +324,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: 'Type',
 				dataIndex: 'type',
 				key: 'type',
-				render: (text) => <span>{text}</span>,
+				render: (text) => <span>{t(`types:${text}`)}</span>,
 			});
 		if (columnsLayout.tags)
 			d.push({

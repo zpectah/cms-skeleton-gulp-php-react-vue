@@ -126,14 +126,15 @@ class MenuItems {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('INSERT INTO menuItems (type, name, link, parent, menu, active, deleted) VALUES (?,?,?,?,?,?,?)');
-		$types = 'sssssii';
+		$query = ('INSERT INTO menuItems (type, name, link, parent, menu, item_order, active, deleted) VALUES (?,?,?,?,?,?,?,?)');
+		$types = 'sssssiii';
 		$args = [
 			$requestData['type'],
 			$requestData['name'],
 			$requestData['link'],
 			$requestData['parent'],
 			$requestData['menu'],
+			$requestData['item_order'],
 			$requestData['active'],
 			0
 		];
@@ -160,14 +161,15 @@ class MenuItems {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('UPDATE menuItems SET type = ?, name = ?, link = ?, parent = ?, menu = ?, active = ? WHERE id = ?');
-		$types = 'sssssii';
+		$query = ('UPDATE menuItems SET type = ?, name = ?, link = ?, parent = ?, menu = ?, item_order = ?, active = ? WHERE id = ?');
+		$types = 'sssssiii';
 		$args = [
 			$requestData['type'],
 			$requestData['name'],
 			$requestData['link'],
 			$requestData['parent'],
 			$requestData['menu'],
+			$requestData['item_order'],
 			$requestData['active'],
 			$requestData['id']
 		];

@@ -94,6 +94,7 @@ const CategoriesPicker: React.FC<CategoriesPickerProps> = ({
 			value={value}
 			onChange={(value, option) => onChange(value, option)}
 			options={getOptions()}
+			allowClear
 			{...getVariableProps()}
 		/>
 	);

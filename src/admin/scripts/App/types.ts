@@ -107,6 +107,7 @@ export interface MenuItemsItemProps extends commonModelProps {
 	link: string;
 	parent?: string;
 	menu?: string;
+	item_order?: number;
 	lang?: {
 		title: string;
 	};
