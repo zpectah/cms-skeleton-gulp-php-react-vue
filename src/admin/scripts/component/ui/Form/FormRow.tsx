@@ -27,6 +27,13 @@ const HelpText = styled.div`
 	font-size: 0.85rem;
 	color: rgba(90, 90, 90, 0.5);
 `;
+const ErrorMessage = styled.div`
+	width: 100%;
+	height: auto;
+	margin-top: 0.75rem;
+	font-size: 0.85rem;
+	color: ${(props) => props.theme.color.red};
+`;
 
 interface ContextProps {
 	id: string | null;
@@ -63,6 +70,7 @@ interface FormRowProps {
 	helpText?: string;
 	long?: boolean;
 	required?: boolean;
+	errors?: string[];
 }
 
 const FormRow: React.FC<FormRowProps> = (props) => {
@@ -78,6 +86,7 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 		helpText,
 		long = false,
 		required = false,
+		errors = [],
 	} = props;
 
 	const grid = {
@@ -125,6 +134,9 @@ const FormRow: React.FC<FormRowProps> = (props) => {
 									{/* @ts-ignore */}
 									<Context.Consumer children={children} />
 									{helpText && <HelpText>{helpText}</HelpText>}
+									{errors.map((err, index) => (
+										<ErrorMessage key={index}>{err}</ErrorMessage>
+									))}
 								</InputWrapper>
 							</Col>
 						</Row>

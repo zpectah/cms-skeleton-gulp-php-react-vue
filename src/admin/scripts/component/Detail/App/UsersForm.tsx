@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
@@ -35,9 +35,9 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-
-	const { updateUsers, createUsers, reloadUsers } = useUsers();
+	const { Users, updateUsers, createUsers, reloadUsers } = useUsers();
 	const { Profile } = useProfile();
+	const [duplicates, setDuplicates] = useState(false);
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -53,6 +53,17 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 		}
 
 		setTimeout(() => reloadUsers(), SUBMIT_TIMEOUT);
+	};
+
+	const isDuplicate = (email) => {
+		let duplicate = false;
+		Users?.map((item) => {
+			if (item.email == email) duplicate = true;
+		});
+
+		setDuplicates(duplicate);
+
+		return duplicate;
 	};
 
 	return (
@@ -87,6 +98,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						rules={{ required: true }}
 						required
 						defaultValue={detailData.email || ''}
+						errors={duplicates ? ['This name is already in use'] : []}
 					>
 						{(row) => (
 							<Input
@@ -94,10 +106,12 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 								type={'email'}
 								name={row.name}
 								value={row.value}
-								onChange={row.onChange}
+								onChange={(e) => {
+									row.onChange(e.target.value);
+									if (e.target.value.length > 2) isDuplicate(e.target.value);
+								}}
 								placeholder={'E-mail'}
 								disabled={!detailData.is_new}
-								// maybe set undisabled for superadmin?
 							/>
 						)}
 					</Form.Row>
@@ -255,7 +269,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!formState.isValid}
+				invalid={!formState.isValid && !duplicates}
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}

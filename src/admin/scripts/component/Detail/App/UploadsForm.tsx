@@ -60,7 +60,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		allowSave,
 		allowDelete,
 	} = props;
-	const { updateUploads, createUploads, reloadUploads } = useUploads();
+	const { Uploads, updateUploads, createUploads, reloadUploads } = useUploads();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
@@ -82,6 +82,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		size: 0,
 		type: 'undefined',
 	});
+	const [duplicates, setDuplicates] = useState(false);
 	const watchName = watch('name');
 
 	useEffect(() => {
@@ -153,6 +154,17 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		});
 	};
 
+	const isDuplicate = (fileName) => {
+		let duplicate = false;
+		Uploads?.map((item) => {
+			if (item.name == fileName) duplicate = true;
+		});
+
+		setDuplicates(duplicate);
+
+		return duplicate;
+	};
+
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
 			<input
@@ -209,18 +221,24 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						rules={{ required: true }}
 						required
 						defaultValue={detailData.name || ''}
+						errors={duplicates ? ['This name is already in use'] : []}
 					>
 						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Name'}
-								readOnly={!detailData.is_new}
-								disabled={!detailData.is_new}
-							/>
+							<>
+								<Input
+									id={row.id}
+									type={'text'}
+									name={row.name}
+									value={row.value}
+									onChange={(e) => {
+										row.onChange(e.target.value);
+										if (e.target.value.length > 2) isDuplicate(e.target.value);
+									}}
+									placeholder={'Name'}
+									readOnly={!detailData.is_new}
+									disabled={!detailData.is_new}
+								/>
+							</>
 						)}
 					</Form.Row>
 					<Form.Row
@@ -281,7 +299,9 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={detailData.is_new ? !(watchName && tmp_blob) : false}
+				invalid={
+					detailData.is_new ? !(watchName && tmp_blob && !duplicates) : false
+				}
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}

@@ -39,7 +39,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 		allowSave,
 		allowDelete,
 	} = props;
-	const { updatePages, createPages, reloadPages } = usePages();
+	const { Pages, updatePages, createPages, reloadPages } = usePages();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
@@ -60,7 +60,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const { TextArea } = Input;
+	const [duplicates, setDuplicates] = useState(false);
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -88,6 +88,17 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	};
 
 	const watchType = watch('type');
+
+	const isDuplicate = (name) => {
+		let duplicate = false;
+		Pages?.map((item) => {
+			if (item.name == name) duplicate = true;
+		});
+
+		setDuplicates(duplicate);
+
+		return duplicate;
+	};
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
@@ -127,6 +138,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 						rules={{ required: true }}
 						required
 						defaultValue={detailData.name || ''}
+						errors={duplicates ? ['This name is already in use'] : []}
 					>
 						{(row) => (
 							<Input
@@ -134,7 +146,10 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 								type={'text'}
 								name={row.name}
 								value={row.value}
-								onChange={row.onChange}
+								onChange={(e) => {
+									row.onChange(e.target.value);
+									if (e.target.value.length > 2) isDuplicate(e.target.value);
+								}}
 								placeholder={'Name'}
 							/>
 						)}
@@ -288,7 +303,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!formState.isValid}
+				invalid={!formState.isValid && !duplicates}
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}

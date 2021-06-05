@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
@@ -35,7 +35,8 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const { updateTags, createTags, reloadTags } = useTags();
+	const { Tags, updateTags, createTags, reloadTags } = useTags();
+	const [duplicates, setDuplicates] = useState(false);
 
 	const submitHandler = (data) => {
 		const master = {
@@ -56,6 +57,17 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 		}
 
 		setTimeout(() => reloadTags(), SUBMIT_TIMEOUT);
+	};
+
+	const isDuplicate = (name) => {
+		let duplicate = false;
+		Tags?.map((item) => {
+			if (item.name == name) duplicate = true;
+		});
+
+		setDuplicates(duplicate);
+
+		return duplicate;
 	};
 
 	return (
@@ -84,6 +96,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 						rules={{ required: true }}
 						required
 						defaultValue={detailData.name || ''}
+						errors={duplicates ? ['This name is already in use'] : []}
 					>
 						{(row) => (
 							<Input
@@ -91,7 +104,10 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 								type={'text'}
 								name={row.name}
 								value={row.value}
-								onChange={row.onChange}
+								onChange={(e) => {
+									row.onChange(e.target.value);
+									if (e.target.value.length > 2) isDuplicate(e.target.value);
+								}}
 								placeholder={'Name'}
 							/>
 						)}
@@ -112,7 +128,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 				onCancel={onCancel}
 				onDelete={onDelete}
 				isNew={detailData.is_new}
-				invalid={!formState.isValid}
+				invalid={!formState.isValid && !duplicates}
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
