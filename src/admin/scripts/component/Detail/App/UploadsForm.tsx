@@ -77,7 +77,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	});
 	const [tmp_blob, setTmp_Blob] = useState<any>(null);
 	const [tmp_meta, setTmp_meta] = useState({
-		extension: '',
+		ext: '',
 		name: '',
 		mime: '',
 		size: 0,
@@ -97,7 +97,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				name: string.replaceSpaces(data.name),
 				fileBase64: tmp_blob,
 				fileBase64Cropped: null, // TODO
-				extension: tmp_meta.extension,
+				extension: tmp_meta.ext,
 				file_name: string.replaceSpaces(tmp_meta.name),
 				file_mime: tmp_meta.mime,
 				file_size: tmp_meta.size,
@@ -127,14 +127,10 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		setTimeout(() => reloadUploads(), SUBMIT_TIMEOUT);
 	};
 
-	const uploaderHandler = (blob, name, ext, mime, size, type, cropped) => {
-		if (cropped) {
-			setTmp_Blob(cropped);
-		} else {
-			setTmp_Blob(blob);
-		}
+	const uploaderHandler = (blob, name, ext, mime, size, type) => {
+		setTmp_Blob(blob);
 		setTmp_meta({
-			extension: ext,
+			ext: ext,
 			name: name,
 			mime: mime,
 			size: size,
@@ -147,7 +143,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	const onUploadReset = () => {
 		setTmp_Blob(null);
 		setTmp_meta({
-			extension: '',
+			ext: '',
 			name: '',
 			mime: '',
 			size: 0,
@@ -193,7 +189,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 								{uploading && (
 									<PreloaderLayer> ... uploading ... </PreloaderLayer>
 								)}
-								<FileUpload.Uploader
+								<Uploader.Wrapper
 									onChange={uploaderHandler}
 									onReset={onUploadReset}
 								/>
@@ -216,16 +212,6 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						)}
 					</>
 				</Section.Base>
-				<div>
-					<Uploader.Wrapper
-						onChange={() => {
-							console.log('onChange');
-						}}
-						onReset={() => {
-							console.log('onReset');
-						}}
-					/>
-				</div>
 				<Section.Base withBorder>
 					<Form.Row
 						label={'Name'}
