@@ -137,24 +137,24 @@ interface SidebarProps {
 	logoutHandler: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = (props) => {
-	const {
-		sidebarOpen,
-		toggleSidebar,
-		toggleAddDialog,
-		toggleHelpDialog,
-		toggleProfileDialog,
-		toggleSpotlight,
-		logoutHandler,
-	} = props;
+const Sidebar: React.FC<SidebarProps> = ({
+	sidebarOpen,
+	toggleSidebar,
+	toggleAddDialog,
+	toggleHelpDialog,
+	toggleProfileDialog,
+	toggleSpotlight,
+	logoutHandler,
+}) => {
 	const { Settings } = useSettings();
+	const store = useSelector((store: any) => store);
+	const [showHelp, setSHowHelp] = useState<string>(store.ui.help);
 	const projectName = Settings ? Settings['project_name'] : '...';
 	const modules = {
 		Members: Settings ? Settings['module_members_active'] : false,
 		Market: Settings ? Settings['module_market_active'] : false,
 	};
-	const store = useSelector((store: any) => store);
-	const [showHelp, setSHowHelp] = useState<string>(store.ui.help);
+	const iconSize = 25;
 
 	useEffect(() => {
 		setSHowHelp(store.ui.help);
@@ -174,37 +174,37 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 								>
 									{(matches) =>
 										matches.md ? (
-											<Icon.Material type="Close" size={30} />
+											<Icon.Material type="Close" size={iconSize} />
 										) : (
-											<Icon.Material type="MenuOpen" size={30} />
+											<Icon.Material type="MenuOpen" size={iconSize} />
 										)
 									}
 								</Media>
 							) : (
-								<Icon.Material type="Menu" size={30} />
+								<Icon.Material type="Menu" size={iconSize} />
 							)}
 						</Trigger>
 						{config.GLOBAL.CMS.UI.SPOTLIGHT && (
 							<Trigger onClick={toggleSpotlight}>
-								<Icon.Material type="Search" size={30} />
+								<Icon.Material type="Search" size={iconSize} />
 							</Trigger>
 						)}
 						<Trigger onClick={toggleAddDialog}>
-							<Icon.Material type="Add" size={30} />
+							<Icon.Material type="Add" size={iconSize} />
 						</Trigger>
 					</div>
 					<div>&nbsp;</div>
 					<div>
 						{showHelp == 'true' && (
 							<Trigger onClick={toggleHelpDialog}>
-								<Icon.Material type="HelpOutline" size={30} />
+								<Icon.Material type="HelpOutline" size={iconSize} />
 							</Trigger>
 						)}
 						<Trigger onClick={toggleProfileDialog}>
-							<Profile.Avatar size={30} />
+							<Profile.Avatar size={iconSize} />
 						</Trigger>
 						<Trigger onClick={logoutHandler}>
-							<Icon.Material type="PowerSettings" size={30} />
+							<Icon.Material type="PowerSettings" size={iconSize} />
 						</Trigger>
 					</div>
 				</BarWrapper>
