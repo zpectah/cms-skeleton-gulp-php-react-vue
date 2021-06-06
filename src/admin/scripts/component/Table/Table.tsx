@@ -86,6 +86,8 @@ interface ListItemsProps {
 		sender?: boolean;
 		file_name?: boolean;
 		type?: boolean;
+		user_group?: boolean;
+		member_group?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
@@ -324,6 +326,20 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				title: 'Type',
 				dataIndex: 'type',
 				key: 'type',
+				render: (text) => <span>{t(`types:${text}`)}</span>,
+			});
+		if (columnsLayout.user_group)
+			d.push({
+				title: 'Group',
+				dataIndex: 'user_group',
+				key: 'user_group',
+				render: (text) => <span>{t(`types:${text}`)}</span>,
+			});
+		if (columnsLayout.member_group)
+			d.push({
+				title: 'Group',
+				dataIndex: 'member_group',
+				key: 'member_group',
 				render: (text) => <span>{t(`types:${text}`)}</span>,
 			});
 		if (columnsLayout.tags)

@@ -59,6 +59,7 @@ const UsersPage = () => {
 					email: true,
 					nickname: true,
 					level: true,
+					user_group: true,
 					active: true,
 				}}
 				orderByColumns={{

@@ -58,7 +58,7 @@ const MembersPage = () => {
 				columnsLayout={{
 					email: true,
 					nickname: true,
-					level: true,
+					member_group: true,
 					active: true,
 				}}
 				orderByColumns={{
