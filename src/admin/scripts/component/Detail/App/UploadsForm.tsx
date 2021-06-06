@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section } from '../../ui';
+import { Modal, Form, Section } from '../../ui';
 import Picker from '../../Picker';
 import FileUpload from '../../FileUpload';
 import LanguageToggle from '../../Language';
@@ -15,6 +15,7 @@ import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
 import setLanguageModel from '../setLanguageModel';
 import { string } from '../../../../../libs/js/utils';
+import Uploader from '../../Uploader';
 
 const LanguageWrapper = styled.div``;
 const LanguageWrapperPanel = styled.div<{ isActive: boolean }>`
@@ -215,6 +216,16 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 						)}
 					</>
 				</Section.Base>
+				<div>
+					<Uploader.Wrapper
+						onChange={() => {
+							console.log('onChange');
+						}}
+						onReset={() => {
+							console.log('onReset');
+						}}
+					/>
+				</div>
 				<Section.Base withBorder>
 					<Form.Row
 						label={'Name'}
