@@ -9,7 +9,6 @@ import { SUBMIT_TIMEOUT } from '../../../constants';
 import { UploadsItemProps } from '../../../App/types';
 import { Modal, Form, Section } from '../../ui';
 import Picker from '../../Picker';
-import FileUpload from '../../FileUpload';
 import LanguageToggle from '../../Language';
 import { useUploads, useSettings } from '../../../App/hooks';
 import DetailFooter from '../DetailFooter';
