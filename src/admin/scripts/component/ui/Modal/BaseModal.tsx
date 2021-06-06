@@ -15,6 +15,7 @@ const ModalWrapper = styled.div`
 	flex-direction: column;
 	background-color: white;
 	border-radius: 4px;
+	overflow: hidden; // TODO: Test
 
 	& .modal-heading-title {
 		width: auto;
@@ -80,7 +81,7 @@ const BaseModal: React.FC<BaseModalProps> = (props) => {
 
 	return (
 		<AntdModal
-			closeIcon={<Icon.Material type="Close" />}
+			closeIcon={<Icon.Material type="Close" size={30} />}
 			bodyStyle={{
 				padding: 0,
 			}}
