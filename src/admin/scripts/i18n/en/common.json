@@ -15,7 +15,8 @@
 		"edit": "Edit",
 		"detail": "Detail",
 		"active": "Active",
-		"disable": "Disable"
+		"disable": "Disable",
+		"saveChanges": "Save changes"
 	},
 	"title": {
 		"create_new": "Create new"
@@ -33,7 +34,6 @@
 		"Uploads": "Uploads",
 		"Messages": "Messages",
 		"Members": "Members",
-		"Campaigns": "Campaigns",
 		"Deliveries": "Deliveries",
 		"Distributors": "Distributors",
 		"Payments": "Payments",
@@ -53,7 +53,6 @@
 		"Uploads": "Upload",
 		"Messages": "Message",
 		"Members": "Member",
-		"Campaigns": "Campaign",
 		"Deliveries": "Delivery",
 		"Distributors": "Distributor",
 		"Payments": "Payment",
@@ -73,7 +72,6 @@
 		"Uploads": "New upload",
 		"Messages": "New message",
 		"Members": "New members",
-		"Campaigns": "New campaign",
 		"Deliveries": "New delivery",
 		"Distributors": "New distributor",
 		"Payments": "New payments",

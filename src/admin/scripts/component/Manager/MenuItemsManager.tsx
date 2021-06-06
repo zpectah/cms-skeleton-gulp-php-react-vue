@@ -9,6 +9,7 @@ import { SUBMIT_TIMEOUT } from '../../constants';
 import MenuItem from './MenuItems/MenuItem';
 import Confirm from '../Confirm';
 import { useTranslation } from 'react-i18next';
+import BaseButton from '../ui/Button/BaseButton';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -26,7 +27,7 @@ const SelectedStructureContainer = styled.div`
 	width: 100%;
 	height: auto;
 	margin: 0;
-	padding: 0 0 1rem 0;
+	padding: 1rem 0;
 `;
 const MenuItemsList = styled.div`
 	width: 100%;
@@ -176,6 +177,9 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 				</Modal.Content>
 				<Modal.Footer>
 					<div>
+						<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
+					</div>
+					<div>
 						<Button.Base
 							type="primary"
 							onClick={() => openSubDialog({ is_new: true })}
@@ -183,20 +187,17 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 							{t('component:MenuItemsManager.btn.createNew_item')}
 						</Button.Base>
 					</div>
-					<div>
-						<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
-					</div>
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>
+				<Button.Base onClick={toggleDialog} type="primary" ghost size="small">
+					{t('model.MenuItems')}
+				</Button.Base>
 				<SelectedStructureContainer>
 					{list.map((item) => (
 						<Tag key={item.id}>{item.name}</Tag>
 					))}
 				</SelectedStructureContainer>
-				<Button.Base onClick={toggleDialog} type="primary" ghost>
-					{t('model.MenuItems')}
-				</Button.Base>
 			</Wrapper>
 			<ManagerDialog
 				isOpen={dialogSubOpen}

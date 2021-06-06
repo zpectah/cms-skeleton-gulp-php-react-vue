@@ -27,13 +27,11 @@ const DetailFooter: React.FC<DetailFooterProps> = ({
 	return (
 		<Modal.Footer>
 			<div className="modal-footer-block">
-				{allowSave && (
-					<Button.Base type="primary" htmlType="submit" disabled={invalid}>
-						{isNew ? t('btn.create') : t('btn.save')}
-					</Button.Base>
-				)}
+				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
+			</div>
+			<div className="modal-footer-block">
 				{allowDelete && allowSave && (
-					<div className="modal-footer-column">
+					<>
 						{!isNew && (
 							<Button.Base
 								type="primary"
@@ -43,11 +41,15 @@ const DetailFooter: React.FC<DetailFooterProps> = ({
 								{t('btn.delete')}
 							</Button.Base>
 						)}
+					</>
+				)}
+				{allowSave && (
+					<div className="modal-footer-column">
+						<Button.Base type="primary" htmlType="submit" disabled={invalid}>
+							{isNew ? t('btn.create') : t('btn.saveChanges')}
+						</Button.Base>
 					</div>
 				)}
-			</div>
-			<div className="modal-footer-block">
-				<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
 			</div>
 		</Modal.Footer>
 	);

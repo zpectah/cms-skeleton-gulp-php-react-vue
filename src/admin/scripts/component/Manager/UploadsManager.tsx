@@ -7,6 +7,7 @@ import { Modal } from '../ui';
 import BaseButton from '../ui/Button/BaseButton';
 import { UploadsItemProps } from '../../App/types';
 import config from '../../config';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -85,6 +86,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 	single = false,
 	type = 'all',
 }) => {
+	const { t } = useTranslation(['common']);
 	const { Uploads } = useUploads();
 	const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 	const [items, setItems] = useState<any[]>([]);
@@ -183,7 +185,9 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 	return (
 		<>
 			<Modal.Base visible={dialogOpen} onCancel={toggleDialog} size={'xxl'}>
-				<Modal.Header>Menu items manager</Modal.Header>
+				<Modal.Header>
+					<div className="modal-heading-title">Menu items manager</div>
+				</Modal.Header>
 				<Modal.Content>
 					<DialogStructureWrapper>
 						<DialogList>
@@ -217,16 +221,48 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 					</DialogStructureWrapper>
 				</Modal.Content>
 				<Modal.Footer>
-					<BaseButton onClick={toggleDialog}>Close</BaseButton>
-					<BaseButton type="primary" onClick={onConfirmHandler}>
-						Confirm
-					</BaseButton>
+					<div className="modal-footer-block">
+						<BaseButton onClick={toggleDialog}>{t('btn.close')}</BaseButton>
+					</div>
+					<div className="modal-footer-block">
+						<BaseButton
+							onClick={() => setTmpItemsSelected([])}
+							disabled={
+								itemsSelected.length == 0 && tmpItemsSelected.length == 0
+							}
+							ghost
+							danger
+						>
+							{t('btn.reset')}
+						</BaseButton>
+						<div className="modal-footer-column">
+							<BaseButton
+								type="primary"
+								onClick={onConfirmHandler}
+								disabled={tmpItemsSelected.length == 0}
+							>
+								{t('btn.confirm')}
+							</BaseButton>
+						</div>
+					</div>
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>
-				<BaseButton onClick={toggleDialog} type="primary" ghost>
-					Manager
-				</BaseButton>
+				<div>
+					<BaseButton onClick={toggleDialog} type="primary" ghost size="small">
+						{t('model.Uploads')}
+					</BaseButton>
+					<BaseButton
+						onClick={() => setItemsSelected([])}
+						disabled={itemsSelected.length == 0 && tmpItemsSelected.length == 0}
+						ghost
+						danger
+						style={{ marginLeft: '.5rem' }}
+						size="small"
+					>
+						{t('btn.reset')}
+					</BaseButton>
+				</div>
 				{itemsSelected.length > 0 ? (
 					<>
 						<SelectedStructureContainer>

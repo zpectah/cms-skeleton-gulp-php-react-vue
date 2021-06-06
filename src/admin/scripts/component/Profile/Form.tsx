@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { message, Descriptions } from 'antd';
+import { message, Descriptions, Tag } from 'antd';
 
 import { Form as UiForm, Section, Button, Modal, Icon } from '../ui';
 import FileUpload from '../FileUpload';
@@ -10,6 +10,7 @@ import ThemeToggle from './ThemeToggle';
 import HelpToggle from './HelpToggle';
 import { Input } from 'antd';
 import { useProfile } from '../../App/hooks';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div``;
 const AvatarContainer = styled.div`
@@ -38,17 +39,15 @@ const AvatarContainer = styled.div`
 		color: ${(props) => props.theme.color.white};
 	}
 `;
-const FormContainer = styled.div`
-	padding-top: 1rem;
-	border-top: 1rem solid rgba(25, 25, 25, 0.25);
-`;
 
 interface FormProps {
 	model: any;
 	afterUpdate?: Function;
+	onClose?: (event) => void;
 }
 
-const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
+const Form: React.FC<FormProps> = ({ model, afterUpdate, onClose }) => {
+	const { t } = useTranslation(['common']);
 	const { control, handleSubmit, formState, register, setValue } = useForm({
 		mode: 'onChange',
 		defaultValues: {
@@ -59,7 +58,6 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 	const { updateProfile, reloadProfile } = useProfile();
 	const [formOpen, setFormOpen] = useState(false);
 	const [tmpAvatar, setTmpAvatar] = useState(model.img_avatar);
-	const [formDirty, setFormDirty] = useState<boolean>(false);
 
 	const submitHandler = (data) => {
 		const master = {
@@ -70,14 +68,12 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 		return updateProfile(master).then((res) => {
 			message.success('Profile has been updated', 2.5);
 			afterUpdate();
-			setFormDirty(false);
 			reloadProfile();
 		});
 	};
 
 	const avatarChangeHandler = (value) => {
 		setTmpAvatar(value);
-		setFormDirty(true);
 		setFormOpen(true);
 		setValue('img_avatar', value);
 	};
@@ -100,32 +96,29 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 				<div className="avatar-email">{model.email}</div>
 			</AvatarContainer>
 			<Modal.Content>
-				<Section.Base>
-					{JSON.stringify(formDirty)}
-					{!formOpen && (
-						<div>
-							<Descriptions>
-								<Descriptions.Item label="Nick">
-									{model.nickname}
-								</Descriptions.Item>
-								<Descriptions.Item label="Full Name" span={2}>
+				{!formOpen && (
+					<Section.Base withBorder>
+						<Descriptions>
+							<Descriptions.Item label="Nick">
+								<b>{model.nickname}</b>
+							</Descriptions.Item>
+							<Descriptions.Item label="Full Name" span={2}>
+								<b>
 									{model.first_name}{' '}
 									{model.middle_name && model.middle_name + ' '}
 									{model.last_name}
-								</Descriptions.Item>
-								<Descriptions.Item label="Level">
-									<Icon.UserLevel
-										level={model.user_level}
-										size={20}
-										withLabel
-									/>
-								</Descriptions.Item>
-								<Descriptions.Item label="Group">
-									{model.user_group}
-								</Descriptions.Item>
-							</Descriptions>
-						</div>
-					)}
+								</b>
+							</Descriptions.Item>
+							<Descriptions.Item label="Level">
+								<Icon.UserLevel level={model.user_level} size={20} withLabel />
+							</Descriptions.Item>
+							<Descriptions.Item label="Group">
+								<Tag>{model.user_group}</Tag>
+							</Descriptions.Item>
+						</Descriptions>
+					</Section.Base>
+				)}
+				<Section.Base withBorder={formOpen}>
 					<UiForm.RowNoController label={'Language'}>
 						{() => <LocaleToggle />}
 					</UiForm.RowNoController>
@@ -135,17 +128,10 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 					<UiForm.RowNoController label={'Show Help'}>
 						{() => <HelpToggle />}
 					</UiForm.RowNoController>
-					{!formOpen && (
-						<div>
-							<Button.Base onClick={() => setFormOpen(!formOpen)}>
-								Edit profile
-							</Button.Base>
-						</div>
-					)}
 				</Section.Base>
 				{formOpen && (
-					<FormContainer>
-						<form onSubmit={handleSubmit(submitHandler)}>
+					<Section.Base>
+						<form>
 							<div>
 								<input
 									type="hidden"
@@ -267,22 +253,35 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate }) => {
 									)}
 								</UiForm.Row>
 							</Section.Base>
-							<Section.Base>
-								<Button.Base onClick={() => setFormOpen(false)}>
-									Cancel
-								</Button.Base>
-								<Button.Base
-									htmlType="submit"
-									disabled={!(formState.isValid || formState.isDirty)}
-									type="primary"
-								>
-									Update
-								</Button.Base>
-							</Section.Base>
 						</form>
-					</FormContainer>
+					</Section.Base>
 				)}
 			</Modal.Content>
+			<Modal.Footer>
+				<div className="modal-footer-block">
+					<Button.Base onClick={onClose}>{t('btn.close')}</Button.Base>
+				</div>
+				<div className="modal-footer-block">
+					<Button.Base
+						onClick={() => setFormOpen(!formOpen)}
+						type="primary"
+						ghost
+					>
+						{!formOpen ? 'Edit profile' : 'Hide form'}
+					</Button.Base>
+					{formOpen && (
+						<div className="modal-footer-column">
+							<Button.Base
+								onClick={handleSubmit(submitHandler)}
+								disabled={!(formState.isValid || formState.isDirty)}
+								type="primary"
+							>
+								{t('btn.saveChanges')}
+							</Button.Base>
+						</div>
+					)}
+				</div>
+			</Modal.Footer>
 		</Wrapper>
 	);
 };

@@ -15,7 +15,7 @@ const Dialog: React.FC<ProfileDialogProps> = (props) => {
 
 	return (
 		<Modal.Base visible={isOpen} onCancel={onCancel}>
-			<Form model={Profile} afterUpdate={onCancel} />
+			<Form model={Profile} afterUpdate={onCancel} onClose={onCancel} />
 		</Modal.Base>
 	);
 };
