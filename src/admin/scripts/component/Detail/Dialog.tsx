@@ -13,6 +13,11 @@ import MenuDetailForm from './App/MenuForm';
 import MessagesDetailForm from './App/MessagesForm';
 import MembersDetailForm from './Members/MembersForm';
 import ProductsDetailForm from './Market/ProductsForm';
+import DeliveriesDetailForm from './Market/DeliveriesForm';
+import DistributorsDetailForm from './Market/DistributorsForm';
+import PaymentsDetailForm from './Market/PaymentsForm';
+import ProducersDetailForm from './Market/ProducersForm';
+import StoresDetailForm from './Market/StoresForm';
 
 interface DetailItemDialogProps {
 	model:
@@ -56,6 +61,11 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		Messages: MessagesDetailForm,
 		Members: MembersDetailForm,
 		Products: ProductsDetailForm,
+		Deliveries: DeliveriesDetailForm,
+		Distributors: DistributorsDetailForm,
+		Payments: PaymentsDetailForm,
+		Producers: ProducersDetailForm,
+		Stores: StoresDetailForm,
 	};
 
 	const ComponentName = component[model];

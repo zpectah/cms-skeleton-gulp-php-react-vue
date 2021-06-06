@@ -26,6 +26,11 @@ import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
 import Members from '../Members';
 import Market from '../Market';
+import {
+	ROUTE_PATH_ATTR_ID,
+	ROUTE_PATH_ATTR_PANEL,
+	ROUTE_PATH_ATTR_TOKEN,
+} from '../constants';
 
 const App = () => {
 	const store = useSelector((store: any) => store);
@@ -66,7 +71,7 @@ const App = () => {
 					<Route
 						path={[
 							routes.app['lost-password'].path,
-							routes.app['lost-password'].path + '/token/:token',
+							routes.app['lost-password'].path + ROUTE_PATH_ATTR_TOKEN,
 						]}
 						component={LostPasswordPage}
 						exact
@@ -77,7 +82,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.settings.path,
-							routes.app.settings.path + '/:panel',
+							routes.app.settings.path + ROUTE_PATH_ATTR_PANEL,
 						]}
 						component={SettingsPage}
 						auth={routes.app.settings.auth}
@@ -85,7 +90,10 @@ const App = () => {
 					/>
 
 					<AuthRoute
-						path={[routes.app.posts.path, routes.app.posts.pathDetail + '/:id']}
+						path={[
+							routes.app.posts.path,
+							routes.app.posts.pathDetail + ROUTE_PATH_ATTR_ID,
+						]}
 						component={PostsPage}
 						auth={routes.app.posts.auth}
 						exact
@@ -94,7 +102,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.categories.path,
-							routes.app.categories.pathDetail + '/:id',
+							routes.app.categories.pathDetail + ROUTE_PATH_ATTR_ID,
 						]}
 						component={CategoriesPage}
 						auth={routes.app.categories.auth}
@@ -104,7 +112,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.translations.path,
-							routes.app.translations.pathDetail + '/:id',
+							routes.app.translations.pathDetail + ROUTE_PATH_ATTR_ID,
 						]}
 						component={TranslationsPage}
 						auth={routes.app.translations.auth}
@@ -112,14 +120,20 @@ const App = () => {
 					/>
 
 					<AuthRoute
-						path={[routes.app.users.path, routes.app.users.pathDetail + '/:id']}
+						path={[
+							routes.app.users.path,
+							routes.app.users.pathDetail + ROUTE_PATH_ATTR_ID,
+						]}
 						component={UsersPage}
 						auth={routes.app.users.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.app.tags.path, routes.app.tags.pathDetail + '/:id']}
+						path={[
+							routes.app.tags.path,
+							routes.app.tags.pathDetail + ROUTE_PATH_ATTR_ID,
+						]}
 						component={TagsPage}
 						auth={routes.app.tags.auth}
 						exact
@@ -128,7 +142,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.uploads.path,
-							routes.app.uploads.pathDetail + '/:id',
+							routes.app.uploads.pathDetail + ROUTE_PATH_ATTR_ID,
 						]}
 						component={UploadsPage}
 						auth={routes.app.uploads.auth}
@@ -136,14 +150,20 @@ const App = () => {
 					/>
 
 					<AuthRoute
-						path={[routes.app.pages.path, routes.app.pages.pathDetail + '/:id']}
+						path={[
+							routes.app.pages.path,
+							routes.app.pages.pathDetail + ROUTE_PATH_ATTR_ID,
+						]}
 						component={PagesPage}
 						auth={routes.app.pages.auth}
 						exact
 					/>
 
 					<AuthRoute
-						path={[routes.app.menu.path, routes.app.menu.pathDetail + '/:id']}
+						path={[
+							routes.app.menu.path,
+							routes.app.menu.pathDetail + ROUTE_PATH_ATTR_ID,
+						]}
 						component={MenuPage}
 						auth={routes.app.menu.auth}
 						exact
@@ -152,7 +172,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.messages.path,
-							routes.app.messages.pathDetail + '/:id',
+							routes.app.messages.pathDetail + ROUTE_PATH_ATTR_ID,
 						]}
 						component={MessagesPage}
 						auth={routes.app.messages.auth}

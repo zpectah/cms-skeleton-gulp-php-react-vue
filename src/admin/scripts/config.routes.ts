@@ -131,6 +131,41 @@ const market = {
 		label: 'Products.label',
 		auth: 2,
 	},
+	stores: {
+		path: '/admin/market/stores',
+		pathDetail: '/admin/market/stores/detail',
+		name: 'stores',
+		label: 'Stores.label',
+		auth: 2,
+	},
+	deliveries: {
+		path: '/admin/market/deliveries',
+		pathDetail: '/admin/market/deliveries/detail',
+		name: 'deliveries',
+		label: 'Deliveries.label',
+		auth: 2,
+	},
+	distributors: {
+		path: '/admin/market/distributors',
+		pathDetail: '/admin/market/distributors/detail',
+		name: 'distributors',
+		label: 'Distributors.label',
+		auth: 2,
+	},
+	payments: {
+		path: '/admin/market/payments',
+		pathDetail: '/admin/market/payments/detail',
+		name: 'payments',
+		label: 'Payments.label',
+		auth: 2,
+	},
+	producers: {
+		path: '/admin/market/producers',
+		pathDetail: '/admin/market/producers/detail',
+		name: 'producers',
+		label: 'Producers.label',
+		auth: 2,
+	},
 };
 
 export default {

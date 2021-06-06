@@ -120,6 +120,41 @@ const market: NavItemProps[] = [
 		active: true,
 		auth: 2, // TODO
 	},
+	{
+		key: 3,
+		label: routes.market.deliveries.label,
+		path: routes.market.deliveries.path,
+		active: true,
+		auth: 2, // TODO
+	},
+	{
+		key: 4,
+		label: routes.market.distributors.label,
+		path: routes.market.distributors.path,
+		active: true,
+		auth: 2, // TODO
+	},
+	{
+		key: 5,
+		label: routes.market.payments.label,
+		path: routes.market.payments.path,
+		active: true,
+		auth: 2, // TODO
+	},
+	{
+		key: 6,
+		label: routes.market.producers.label,
+		path: routes.market.producers.path,
+		active: true,
+		auth: 2, // TODO
+	},
+	{
+		key: 7,
+		label: routes.market.stores.label,
+		path: routes.market.stores.path,
+		active: true,
+		auth: 2, // TODO
+	},
 ];
 
 const add: NavItemProps[] = [
@@ -204,41 +239,36 @@ const add: NavItemProps[] = [
 	{
 		key: 12,
 		label: 'model_newItem.Deliveries',
-		// path: routes.market.deliveries.pathDetail, // TODO
-		path: null,
-		active: false,
+		path: routes.market.deliveries.pathDetail,
+		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 13,
 		label: 'model_newItem.Distributors',
-		// path: routes.market.distributors.pathDetail, // TODO
-		path: null,
-		active: false,
+		path: routes.market.distributors.pathDetail,
+		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 14,
 		label: 'model_newItem.Payments',
-		// path: routes.market.payments.pathDetail, // TODO
-		path: null,
-		active: false,
+		path: routes.market.payments.pathDetail,
+		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 15,
 		label: 'model_newItem.Producers',
-		// path: routes.market.producers.pathDetail, // TODO
-		path: null,
-		active: false,
+		path: routes.market.producers.pathDetail,
+		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 16,
 		label: 'model_newItem.Stores',
-		// path: routes.market.stores.pathDetail, // TODO
-		path: null,
-		active: false,
+		path: routes.market.stores.pathDetail,
+		active: true,
 		auth: 2, // TODO
 	},
 ];

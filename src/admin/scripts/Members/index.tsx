@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import routes from '../config.routes';
 
+import { ROUTE_PATH_ATTR_ID } from '../constants';
 import AuthRoute from '../utils/AuthRoute';
 import DashboardPage from './page/Dashboard';
 import MembersPage from './page/Members';
@@ -14,7 +15,7 @@ const Members: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.members.members.path,
-						routes.members.members.pathDetail + '/:id',
+						routes.members.members.pathDetail + ROUTE_PATH_ATTR_ID,
 					]}
 					component={MembersPage}
 					auth={routes.members.members.auth}

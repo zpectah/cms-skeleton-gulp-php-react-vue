@@ -44,3 +44,7 @@ export const USER_LEVEL = {
 		key: 'super_admin',
 	},
 };
+export const ROUTE_PATH_ATTR_ID = '/:id';
+// export const ROUTE_PATH_ATTR_DETAIL_ID = '/detail/:id'; // TODO
+export const ROUTE_PATH_ATTR_PANEL = '/:panel';
+export const ROUTE_PATH_ATTR_TOKEN = '/token/:token';
