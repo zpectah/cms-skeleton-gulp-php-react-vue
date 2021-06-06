@@ -38,10 +38,7 @@ const MenuPage = () => {
 			metaTitle={t('page:Menu.meta.title')}
 			headerTitle={t('page:Menu.page.title')}
 			headerChildren={[
-				<Button.CreateNew
-					key={1}
-					routePathPrefix={routes.app.menu.pathDetail}
-				/>,
+				<Button.CreateNew key={1} routePathPrefix={routes.app.menu.path} />,
 			]}
 		>
 			<Table

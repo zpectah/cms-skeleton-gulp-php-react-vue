@@ -40,10 +40,7 @@ const MessagesPage = () => {
 			metaTitle={t('page:Messages.meta.title')}
 			headerTitle={t('page:Messages.page.title')}
 			headerChildren={[
-				<Button.CreateNew
-					key={1}
-					routePathPrefix={routes.app.messages.pathDetail}
-				/>,
+				<Button.CreateNew key={1} routePathPrefix={routes.app.messages.path} />,
 			]}
 		>
 			<Table

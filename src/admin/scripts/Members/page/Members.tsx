@@ -46,7 +46,7 @@ const MembersPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.members.members.pathDetail}
+					routePathPrefix={routes.members.members.path}
 				/>,
 			]}
 		>

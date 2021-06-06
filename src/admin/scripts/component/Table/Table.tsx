@@ -13,6 +13,7 @@ import {
 	MESSAGE_SUCCESS_DURATION,
 	TABLE_ITEMS_PER_PAGE,
 	BREAKPOINTS,
+	ROUTE_PATH_SUFFIX_DETAIL,
 } from '../../constants';
 import { Button, Viewer, Icon } from '../ui';
 import LanguageToggle from '../Language';
@@ -403,7 +404,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		setConfirmOpen(true);
 	};
 	const editOpen = (record: any) => {
-		history.push(`${route.pathDetail}/${record.id}`);
+		history.push(`${route.path}${ROUTE_PATH_SUFFIX_DETAIL}/${record.id}`);
 		setDetailData(record);
 		setDetailOpen(true);
 	};

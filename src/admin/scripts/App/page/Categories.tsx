@@ -46,7 +46,7 @@ const CategoriesPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.app.categories.pathDetail}
+					routePathPrefix={routes.app.categories.path}
 				/>,
 			]}
 		>

@@ -9,6 +9,11 @@ import HelpService from '../service/HelpService';
 import themes from '../styles/theme';
 import routes from '../config.routes';
 
+import {
+	ROUTE_PATH_ATTR_DETAIL_ID,
+	ROUTE_PATH_ATTR_PANEL,
+	ROUTE_PATH_ATTR_TOKEN,
+} from '../constants';
 import AuthRoute from '../utils/AuthRoute';
 import Error404Page from './page/Error404';
 import DashboardPage from './page/Dashboard';
@@ -26,11 +31,6 @@ import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
 import Members from '../Members';
 import Market from '../Market';
-import {
-	ROUTE_PATH_ATTR_ID,
-	ROUTE_PATH_ATTR_PANEL,
-	ROUTE_PATH_ATTR_TOKEN,
-} from '../constants';
 
 const App = () => {
 	const store = useSelector((store: any) => store);
@@ -92,7 +92,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.posts.path,
-							routes.app.posts.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.posts.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={PostsPage}
 						auth={routes.app.posts.auth}
@@ -102,7 +102,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.categories.path,
-							routes.app.categories.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.categories.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={CategoriesPage}
 						auth={routes.app.categories.auth}
@@ -112,7 +112,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.translations.path,
-							routes.app.translations.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.translations.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={TranslationsPage}
 						auth={routes.app.translations.auth}
@@ -122,7 +122,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.users.path,
-							routes.app.users.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.users.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={UsersPage}
 						auth={routes.app.users.auth}
@@ -132,7 +132,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.tags.path,
-							routes.app.tags.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.tags.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={TagsPage}
 						auth={routes.app.tags.auth}
@@ -142,7 +142,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.uploads.path,
-							routes.app.uploads.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.uploads.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={UploadsPage}
 						auth={routes.app.uploads.auth}
@@ -152,7 +152,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.pages.path,
-							routes.app.pages.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.pages.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={PagesPage}
 						auth={routes.app.pages.auth}
@@ -162,7 +162,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.menu.path,
-							routes.app.menu.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.menu.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={MenuPage}
 						auth={routes.app.menu.auth}
@@ -172,7 +172,7 @@ const App = () => {
 					<AuthRoute
 						path={[
 							routes.app.messages.path,
-							routes.app.messages.pathDetail + ROUTE_PATH_ATTR_ID,
+							routes.app.messages.path + ROUTE_PATH_ATTR_DETAIL_ID,
 						]}
 						component={MessagesPage}
 						auth={routes.app.messages.auth}

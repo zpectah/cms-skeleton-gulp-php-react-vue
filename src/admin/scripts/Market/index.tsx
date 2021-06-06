@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import routes from '../config.routes';
 
-import { ROUTE_PATH_ATTR_ID } from '../constants';
+import { ROUTE_PATH_ATTR_DETAIL_ID } from '../constants';
 import AuthRoute from '../utils/AuthRoute';
 import DashboardPage from './page/Dashboard';
 import ProductsPage from './page/Products';
@@ -20,7 +20,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.products.path,
-						routes.market.products.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.products.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={ProductsPage}
 					auth={routes.market.products.auth}
@@ -30,7 +30,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.deliveries.path,
-						routes.market.deliveries.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.deliveries.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={DeliveriesPage}
 					auth={routes.market.deliveries.auth}
@@ -40,7 +40,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.distributors.path,
-						routes.market.distributors.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.distributors.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={DistributorsPage}
 					auth={routes.market.distributors.auth}
@@ -50,7 +50,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.payments.path,
-						routes.market.payments.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.payments.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={PaymentsPage}
 					auth={routes.market.payments.auth}
@@ -60,7 +60,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.producers.path,
-						routes.market.producers.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.producers.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={ProducersPage}
 					auth={routes.market.producers.auth}
@@ -70,7 +70,7 @@ const Market: React.FC<{}> = () => {
 				<AuthRoute
 					path={[
 						routes.market.stores.path,
-						routes.market.stores.pathDetail + ROUTE_PATH_ATTR_ID,
+						routes.market.stores.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={StoresPage}
 					auth={routes.market.stores.auth}

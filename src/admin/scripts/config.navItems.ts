@@ -161,77 +161,77 @@ const add: NavItemProps[] = [
 	{
 		key: 0,
 		label: 'model_newItem.Posts',
-		path: routes.app.posts.pathDetail,
+		path: routes.app.posts.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 1,
 		label: 'model_newItem.Users',
-		path: routes.app.users.pathDetail,
+		path: routes.app.users.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 2,
 		label: 'model_newItem.Tags',
-		path: routes.app.tags.pathDetail,
+		path: routes.app.tags.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 3,
 		label: 'model_newItem.Translations',
-		path: routes.app.translations.pathDetail,
+		path: routes.app.translations.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 4,
 		label: 'model_newItem.Categories',
-		path: routes.app.categories.pathDetail,
+		path: routes.app.categories.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 5,
 		label: 'model_newItem.Pages',
-		path: routes.app.pages.pathDetail,
+		path: routes.app.pages.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 6,
 		label: 'model_newItem.Uploads',
-		path: routes.app.uploads.pathDetail,
+		path: routes.app.uploads.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 7,
 		label: 'model_newItem.Menu',
-		path: routes.app.menu.pathDetail,
+		path: routes.app.menu.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 8,
 		label: 'model_newItem.Messages',
-		path: routes.app.messages.pathDetail,
+		path: routes.app.messages.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 9,
 		label: 'model_newItem.Members',
-		path: routes.members.members.pathDetail,
+		path: routes.members.members.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 11,
 		label: 'model_newItem.Products',
-		path: routes.market.products.pathDetail,
+		path: routes.market.products.path,
 		active: true,
 		auth: 2, // TODO
 	},
@@ -239,35 +239,35 @@ const add: NavItemProps[] = [
 	{
 		key: 12,
 		label: 'model_newItem.Deliveries',
-		path: routes.market.deliveries.pathDetail,
+		path: routes.market.deliveries.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 13,
 		label: 'model_newItem.Distributors',
-		path: routes.market.distributors.pathDetail,
+		path: routes.market.distributors.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 14,
 		label: 'model_newItem.Payments',
-		path: routes.market.payments.pathDetail,
+		path: routes.market.payments.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 15,
 		label: 'model_newItem.Producers',
-		path: routes.market.producers.pathDetail,
+		path: routes.market.producers.path,
 		active: true,
 		auth: 2, // TODO
 	},
 	{
 		key: 16,
 		label: 'model_newItem.Stores',
-		path: routes.market.stores.pathDetail,
+		path: routes.market.stores.path,
 		active: true,
 		auth: 2, // TODO
 	},

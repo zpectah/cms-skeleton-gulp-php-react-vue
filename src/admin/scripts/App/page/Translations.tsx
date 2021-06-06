@@ -46,7 +46,7 @@ const TranslationsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.app.translations.pathDetail}
+					routePathPrefix={routes.app.translations.path}
 				/>,
 			]}
 		>

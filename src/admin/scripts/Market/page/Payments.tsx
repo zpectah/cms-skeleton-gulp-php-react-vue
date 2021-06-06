@@ -46,7 +46,7 @@ const PaymentsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.payments.pathDetail}
+					routePathPrefix={routes.market.payments.path}
 				/>,
 			]}
 		>

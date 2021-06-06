@@ -46,7 +46,7 @@ const DeliveriesPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.deliveries.pathDetail}
+					routePathPrefix={routes.market.deliveries.path}
 				/>,
 			]}
 		>

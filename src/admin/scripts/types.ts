@@ -34,7 +34,6 @@ export interface appProps {
 
 export interface routeProps {
 	path: string | null;
-	pathDetail: string | null;
 	name: string;
 	label: string | null;
 	auth: number;

@@ -38,10 +38,7 @@ const TagsPage = () => {
 			metaTitle={t('page:Tags.meta.title')}
 			headerTitle={t('page:Tags.page.title')}
 			headerChildren={[
-				<Button.CreateNew
-					key={1}
-					routePathPrefix={routes.app.tags.pathDetail}
-				/>,
+				<Button.CreateNew key={1} routePathPrefix={routes.app.tags.path} />,
 			]}
 		>
 			<Table

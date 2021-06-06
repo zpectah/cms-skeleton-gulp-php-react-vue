@@ -44,10 +44,7 @@ const UsersPage = () => {
 			metaTitle={t('page:Users.meta.title')}
 			headerTitle={t('page:Users.page.title')}
 			headerChildren={[
-				<Button.CreateNew
-					key={1}
-					routePathPrefix={routes.app.users.pathDetail}
-				/>,
+				<Button.CreateNew key={1} routePathPrefix={routes.app.users.path} />,
 			]}
 		>
 			<Table

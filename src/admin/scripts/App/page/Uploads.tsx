@@ -44,10 +44,7 @@ const UploadsPage = () => {
 			metaTitle={t('page:Uploads.meta.title')}
 			headerTitle={t('page:Uploads.page.title')}
 			headerChildren={[
-				<Button.CreateNew
-					key={1}
-					routePathPrefix={routes.app.uploads.pathDetail}
-				/>,
+				<Button.CreateNew key={1} routePathPrefix={routes.app.uploads.path} />,
 			]}
 		>
 			<Table

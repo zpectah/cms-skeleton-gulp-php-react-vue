@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 
+import { ROUTE_PATH_SUFFIX_DETAIL } from '../../constants';
 import navItems from '../../config.navItems';
 import { Modal } from '../../component/ui';
 
@@ -23,7 +24,7 @@ const Dialog: React.FC<AddDialogProps> = (props) => {
 	};
 
 	const onClickHandler = (path) => {
-		h.push(path + '/new');
+		h.push(path + ROUTE_PATH_SUFFIX_DETAIL + '/new');
 		afterClick();
 	};
 

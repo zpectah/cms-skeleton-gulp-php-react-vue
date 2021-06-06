@@ -46,7 +46,7 @@ const ProductsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.products.pathDetail}
+					routePathPrefix={routes.market.products.path}
 				/>,
 			]}
 		>
