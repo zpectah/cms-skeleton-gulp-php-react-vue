@@ -16,7 +16,7 @@ const Content = styled.div<{ height: number }>`
 	min-height: ${(props) => props.height}px;
 	position: relative;
 `;
-const FileThumb = styled.div<{ isDragOver: boolean }>`
+const FileThumb = styled.div`
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -36,7 +36,7 @@ const FileThumb = styled.div<{ isDragOver: boolean }>`
 	}
 `;
 
-const Label = styled.label<{ isDragOver: boolean }>`
+const Label = styled.label`
 	width: 100%;
 	height: 100%;
 	padding: 2rem 2rem;
@@ -47,9 +47,8 @@ const Label = styled.label<{ isDragOver: boolean }>`
 	position: absolute;
 	top: 0;
 	left: 0;
-	color: ${(props) => (props.isDragOver ? 'white' : 'inherit')};
-	background-color: ${(props) =>
-		props.isDragOver ? 'green' : 'rgb(200, 200, 200)'};
+	color: inherit;
+	background-color: rgb(200, 200, 200);
 `;
 const Input = styled.input`
 	width: 1px;
@@ -61,6 +60,8 @@ const Input = styled.input`
 	opacity: 0;
 `;
 const DropArea = styled.div`
+	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -68,14 +69,16 @@ const DropArea = styled.div`
 `;
 const DraggableLayer = styled.div`
 	width: 100%;
-	height: auto;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: relative;
+	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(25, 25, 25, 0.5);
+	z-index: 99;
+	color: white;
+	background-color: rgba(25, 25, 25, 0.75);
 `;
 
 interface UploaderProps {
@@ -113,11 +116,11 @@ const Uploader: React.FC<UploaderProps> = ({
 	cropMaxHeight,
 	avatarMaxSize,
 }) => {
+	const { t } = useTranslation(['component']);
 	const [dragOver, setDragOver] = useState(false);
 	const [file, setFile] = useState(null);
 	const [src, setSrc] = useState(null);
 	const [fileType, setFileType] = useState('unknown');
-	const { t } = useTranslation(['component']);
 
 	const setBlobSource = async (file) => {
 		const blob = await fileUtils.toBase64(file);
@@ -156,7 +159,9 @@ const Uploader: React.FC<UploaderProps> = ({
 
 	const dragEvents = {
 		onDrop: (e) => {
+			e.stopPropagation();
 			e.preventDefault();
+
 			let file;
 
 			if (e.dataTransfer.items) {
@@ -172,15 +177,26 @@ const Uploader: React.FC<UploaderProps> = ({
 			if (file) return setBlobSource(file);
 		},
 		onDragOver: (e) => {
+			e.stopPropagation();
 			e.preventDefault();
+
+			return false;
 		},
 		onDragEnter: (e) => {
+			e.stopPropagation();
 			e.preventDefault();
+
 			setDragOver(true);
+
+			return false;
 		},
 		onDragLeave: (e) => {
+			e.stopPropagation();
 			e.preventDefault();
+
 			setDragOver(false);
+
+			return false;
 		},
 	};
 
@@ -205,91 +221,84 @@ const Uploader: React.FC<UploaderProps> = ({
 		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
 	};
 
-	// const windowEventsInit = () => {
-	// 	window.addEventListener('drop', () => {
-	// 		console.log('window drop');
-	// 	});
-	// 	window.addEventListener('dragover', () => {
-	// 		console.log('window dragover');
-	// 	});
-	// 	window.addEventListener('dragenter', () => {
-	// 		console.log('window dragenter');
-	// 	});
-	// 	window.addEventListener('dragleave', () => {
-	// 		console.log('window dragleave');
-	// 	});
-	// };
+	const windowEventsInit = () => {
+		window.addEventListener('mouseup', dragEvents.onDragLeave);
+		window.addEventListener('dragover', dragEvents.onDragOver);
+		window.addEventListener('dragenter', dragEvents.onDragEnter);
+		window.addEventListener('drop', dragEvents.onDrop);
+	};
 
-	// const windowEventsDestroy = () => {
-	// 	window.removeEventListener('drop', () => {
-	// 		console.log('window drop');
-	// 	});
-	// 	window.removeEventListener('dragover', () => {
-	// 		console.log('window dragover');
-	// 	});
-	// 	window.removeEventListener('dragenter', () => {
-	// 		console.log('window dragenter');
-	// 	});
-	// 	window.removeEventListener('dragleave', () => {
-	// 		console.log('window dragleave');
-	// 	});
-	// };
+	const windowEventsDestroy = () => {
+		window.removeEventListener('mouseup', dragEvents.onDragLeave);
+		window.removeEventListener('dragover', dragEvents.onDragOver);
+		window.removeEventListener('dragenter', dragEvents.onDragEnter);
+		window.removeEventListener('drop', dragEvents.onDrop);
+	};
 
-	// useEffect(() => {
-	// 	windowEventsInit();
-	//
-	// 	return () => windowEventsDestroy();
-	// }, []);
+	useEffect(() => {
+		windowEventsInit();
+
+		return () => windowEventsDestroy();
+	}, []);
 
 	return (
-		<Wrapper {...dragEvents} height={height}>
-			<Content height={height}>
-				{/* <DraggableLayer>DraggableLayer</DraggableLayer> */}
-				{file ? (
-					<>
-						{fileType == 'image' && src ? (
-							<ImageCrop
-								src={src}
-								onChange={cropChangeHandler}
-								aspect={cropAspect}
-								locked={cropAspectLocked}
-								minWidth={cropMinWidth}
-								minHeight={cropMinHeight}
-								maxWidth={cropMaxWidth}
-								maxHeight={cropMaxHeight}
-								avatarMaxSize={avatarMaxSize}
+		<>
+			{dragOver && (
+				<DraggableLayer onDragLeave={dragEvents.onDragLeave}>
+					<DropArea>
+						<Icon.Material type="Upload" />
+						{t('component:FileUpload.title.fileDrop')}
+					</DropArea>
+				</DraggableLayer>
+			)}
+			<Wrapper height={height}>
+				<Content height={height}>
+					{file ? (
+						<>
+							{fileType == 'image' && src ? (
+								<ImageCrop
+									src={src}
+									onChange={cropChangeHandler}
+									aspect={cropAspect}
+									locked={cropAspectLocked}
+									minWidth={cropMinWidth}
+									minHeight={cropMinHeight}
+									maxWidth={cropMaxWidth}
+									maxHeight={cropMaxHeight}
+									avatarMaxSize={avatarMaxSize}
+								/>
+							) : (
+								<FileThumb>
+									<p>
+										<Icon.FileType type={file.type} />
+										<small>{file.name}</small>
+									</p>
+								</FileThumb>
+							)}
+						</>
+					) : (
+						<Label>
+							<Input
+								type="file"
+								name="FileUploader"
+								accept={accept}
+								{...inputEvents}
 							/>
-						) : (
-							<FileThumb isDragOver={dragOver}>
-								<p>
-									<Icon.FileType type={file.type} />
-									<small>{file.name}</small>
-								</p>
-							</FileThumb>
-						)}
-					</>
-				) : (
-					<Label isDragOver={dragOver}>
-						<Input
-							type="file"
-							name="FileUploader"
-							accept={accept}
-							{...inputEvents}
-						/>
-						<DropArea>
-							<Icon.Material type="CloudUpload" />
-							{t('component:FileUpload.title.fileDrop')}
-						</DropArea>
-					</Label>
-				)}
-			</Content>
-			<div>
-				<Button.Base onClick={resetHandler} disabled={!file}>
-					Reset
-				</Button.Base>
-				{file?.type == 'image' && <div>... options for image crop</div>}
-			</div>
-		</Wrapper>
+							<DropArea>
+								<Icon.Material type="CloudUpload" />
+								{t('component:FileUpload.title.fileUpload')}
+							</DropArea>
+						</Label>
+					)}
+				</Content>
+				<div>
+					<Button.Base onClick={resetHandler} disabled={!file}>
+						Reset
+					</Button.Base>
+					{file?.type == 'image' && <div>... options for image crop</div>}
+				</div>
+			</Wrapper>
+		</>
 	);
 };
 

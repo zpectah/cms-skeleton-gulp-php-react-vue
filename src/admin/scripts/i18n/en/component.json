@@ -67,7 +67,8 @@
 	},
 	"FileUpload": {
 		"title": {
-			"fileDrop": "Drop or select file",
+			"fileUpload": "Drop or select file",
+			"fileDrop": "Drop file",
 			"fileCrop": "Select area on image to crop"
 		},
 		"btn": {
