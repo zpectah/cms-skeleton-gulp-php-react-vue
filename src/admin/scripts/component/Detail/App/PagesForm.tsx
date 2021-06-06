@@ -29,20 +29,20 @@ interface PagesDetailFormProps {
 	allowDelete: boolean;
 }
 
-const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
+const PagesDetailForm: React.FC<PagesDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common', 'types']);
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
 	const { Pages, updatePages, createPages, reloadPages } = usePages();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
+	const [duplicates, setDuplicates] = useState(false);
 	const {
 		control,
 		handleSubmit,
@@ -51,7 +51,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 		watch,
 		setValue,
 	} = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			lang: setLanguageModel(langList, {
 				title: '',
@@ -60,7 +60,6 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const [duplicates, setDuplicates] = useState(false);
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -101,7 +100,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<div>
 				<input
 					type="hidden"
@@ -312,6 +311,7 @@ const PagesDetailForm: React.FC<PagesDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

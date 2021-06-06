@@ -125,7 +125,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 	};
 
 	return (
-		<AntdForm onFinish={handleSubmit(submitHandler)}>
+		<AntdForm>
 			<Tabs
 				defaultActiveKey={panelKey ? panelKey : 'global'}
 				onChange={(activeKey) => history.push(`${route.path}/${activeKey}`)}
@@ -766,7 +766,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 			<ActionRow>
 				<Button.Base
 					type={'primary'}
-					htmlType={'submit'}
+					onClick={handleSubmit(submitHandler)}
 					loading={loading}
 					disabled={!formState.isValid}
 				>

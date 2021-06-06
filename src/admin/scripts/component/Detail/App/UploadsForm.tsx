@@ -50,30 +50,20 @@ interface UploadsDetailFormProps {
 	allowDelete: boolean;
 }
 
-const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
+const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common']);
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
 	const { Uploads, updateUploads, createUploads, reloadUploads } = useUploads();
 	const { Settings } = useSettings();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const [uploading, setUploading] = useState(false);
-	const { control, handleSubmit, register, watch, setValue } = useForm({
-		mode: 'onChange',
-		defaultValues: {
-			lang: setLanguageModel(langList, {
-				title: '',
-			}),
-			...detailData,
-		},
-	});
 	const [tmp_blob, setTmp_Blob] = useState<any>(null);
 	const [tmp_meta, setTmp_meta] = useState({
 		ext: '',
@@ -83,6 +73,16 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 		type: 'undefined',
 	});
 	const [duplicates, setDuplicates] = useState(false);
+	const { control, handleSubmit, register, watch, setValue } = useForm({
+		mode: 'all',
+		defaultValues: {
+			lang: setLanguageModel(langList, {
+				title: '',
+			}),
+			...detailData,
+		},
+	});
+
 	const watchName = watch('name');
 
 	useEffect(() => {
@@ -162,7 +162,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -306,6 +306,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

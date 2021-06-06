@@ -31,34 +31,20 @@ interface PostsDetailFormProps {
 	allowDelete: boolean;
 }
 
-const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
+const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common', 'types']);
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
 	const { Settings } = useSettings();
 	const { Profile } = useProfile();
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
-	const DatePickerFormat = config.LOCALES.dateTimeFormat;
-	const { control, handleSubmit, formState, register, watch } = useForm({
-		mode: 'onChange',
-		defaultValues: {
-			lang: setLanguageModel(langList, {
-				title: '',
-				perex: '',
-				content: '',
-			}),
-			...detailData,
-		},
-	});
-	const { TextArea } = Input;
 	const [tmp_published, setTmp_published] = useState<string>(
 		moment(detailData.published).format(),
 	);
@@ -68,6 +54,19 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const [tmp_event_end, setTmp_event_end] = useState<string>(
 		detailData.event_end || moment().format(),
 	);
+	const { control, handleSubmit, formState, register, watch } = useForm({
+		mode: 'all',
+		defaultValues: {
+			lang: setLanguageModel(langList, {
+				title: '',
+				perex: '',
+				content: '',
+			}),
+			...detailData,
+		},
+	});
+
+	const DatePickerFormat = config.LOCALES.dateTimeFormat;
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -105,7 +104,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 	const watchType = watch('type');
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -503,7 +502,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 									long
 								>
 									{(row) => (
-										<TextArea
+										<Input.TextArea
 											id={row.id}
 											name={row.name}
 											value={row.value}
@@ -623,6 +622,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

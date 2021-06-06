@@ -29,13 +29,13 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 		allowDelete,
 	} = props;
 	const { t } = useTranslation(['common']);
+	const { updateProducts, createProducts, reloadProducts } = useProducts();
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	const { updateProducts, createProducts, reloadProducts } = useProducts();
 
 	const submitHandler = (data) => {
 		const master = {
@@ -59,7 +59,7 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -120,6 +120,7 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

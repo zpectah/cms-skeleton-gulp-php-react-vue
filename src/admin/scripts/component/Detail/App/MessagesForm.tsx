@@ -18,23 +18,22 @@ interface MessagesDetailFormProps {
 	allowDelete: boolean;
 }
 
-const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
+const MessagesDetailForm: React.FC<MessagesDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common']);
+	const { createMessages, reloadMessages } = useMessages();
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	const { createMessages, reloadMessages } = useMessages();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -48,7 +47,7 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -108,6 +107,7 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

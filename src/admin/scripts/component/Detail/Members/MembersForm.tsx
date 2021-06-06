@@ -29,16 +29,14 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 		allowDelete,
 	} = props;
 	const { t } = useTranslation(['common', 'types']);
+	const { Members, updateMembers, createMembers, reloadMembers } = useMembers();
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	// const userModel = !detailData.is_new || false;
 	const [duplicates, setDuplicates] = useState(false);
-
-	const { Members, updateMembers, createMembers, reloadMembers } = useMembers();
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -68,7 +66,7 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -374,6 +372,7 @@ const MembersDetailForm: React.FC<MembersDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

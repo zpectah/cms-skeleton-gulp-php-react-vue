@@ -19,24 +19,23 @@ interface TagsDetailFormProps {
 	allowDelete: boolean;
 }
 
-const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
+const TagsDetailForm: React.FC<TagsDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common']);
+	const { Tags, updateTags, createTags, reloadTags } = useTags();
+	const [duplicates, setDuplicates] = useState(false);
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	const { Tags, updateTags, createTags, reloadTags } = useTags();
-	const [duplicates, setDuplicates] = useState(false);
 
 	const submitHandler = (data) => {
 		const master = {
@@ -71,7 +70,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -134,6 +133,7 @@ const TagsDetailForm: React.FC<TagsDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

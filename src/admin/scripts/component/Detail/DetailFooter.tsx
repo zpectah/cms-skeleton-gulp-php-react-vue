@@ -11,6 +11,7 @@ interface DetailFooterProps {
 	detailData: any;
 	allowSave: boolean;
 	allowDelete: boolean;
+	onSubmit: () => void;
 }
 
 const DetailFooter: React.FC<DetailFooterProps> = ({
@@ -21,6 +22,7 @@ const DetailFooter: React.FC<DetailFooterProps> = ({
 	detailData,
 	allowSave,
 	allowDelete,
+	onSubmit,
 }) => {
 	const { t } = useTranslation(['common']);
 
@@ -45,7 +47,7 @@ const DetailFooter: React.FC<DetailFooterProps> = ({
 				)}
 				{allowSave && (
 					<div className="modal-footer-column">
-						<Button.Base type="primary" htmlType="submit" disabled={invalid}>
+						<Button.Base type="primary" disabled={invalid} onClick={onSubmit}>
 							{isNew ? t('btn.create') : t('btn.saveChanges')}
 						</Button.Base>
 					</div>

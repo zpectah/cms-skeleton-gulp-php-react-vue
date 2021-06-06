@@ -22,23 +22,22 @@ interface MenuDetailFormProps {
 	allowDelete: boolean;
 }
 
-const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
+const MenuDetailForm: React.FC<MenuDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common', 'types']);
+	const { updateMenu, createMenu, reloadMenu } = useMenu();
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	const { updateMenu, createMenu, reloadMenu } = useMenu();
 
 	const submitHandler = (data) => {
 		const master = {
@@ -62,7 +61,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -179,6 +178,7 @@ const MenuDetailForm: React.FC<MenuDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

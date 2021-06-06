@@ -30,16 +30,15 @@ interface CategoriesDetailFormProps {
 	allowDelete: boolean;
 }
 
-const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
+const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common', 'types']);
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
 	const {
 		updateCategories,
 		createCategories,
@@ -49,7 +48,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			lang: setLanguageModel(langList, {
 				title: '',
@@ -59,7 +58,6 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 			...detailData,
 		},
 	});
-	const { TextArea } = Input;
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -87,7 +85,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -201,7 +199,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 									long
 								>
 									{(row) => (
-										<TextArea
+										<Input.TextArea
 											id={row.id}
 											name={row.name}
 											value={row.value}
@@ -286,6 +284,7 @@ const CategoriesDetailForm: React.FC<CategoriesDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

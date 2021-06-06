@@ -246,7 +246,7 @@ const Uploader: React.FC<UploaderProps> = ({
 			{dragOver && (
 				<DraggableLayer onDragLeave={dragEvents.onDragLeave}>
 					<DropArea>
-						<Icon.Material type="Upload" />
+						<Icon.Material type="Add" />
 						{t('component:FileUpload.title.fileDrop')}
 					</DropArea>
 				</DraggableLayer>

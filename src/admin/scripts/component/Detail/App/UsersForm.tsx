@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Input, Select, Switch } from 'antd';
 
 import config from '../../../config';
-import { SUBMIT_TIMEOUT, USER_LEVEL } from '../../../constants';
+import { SUBMIT_TIMEOUT, USER_LEVEL, EMAIL_REGEX } from '../../../constants';
 import { UsersItemProps } from '../../../App/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import { useUsers, useProfile } from '../../../App/hooks';
@@ -29,15 +29,15 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 		allowDelete,
 	} = props;
 	const { t } = useTranslation(['common', 'types']);
+	const { Users, updateUsers, createUsers, reloadUsers } = useUsers();
+	const { Profile } = useProfile();
+	const [duplicates, setDuplicates] = useState(false);
 	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			...detailData,
 		},
 	});
-	const { Users, updateUsers, createUsers, reloadUsers } = useUsers();
-	const { Profile } = useProfile();
-	const [duplicates, setDuplicates] = useState(false);
 
 	const submitHandler = (data) => {
 		if (detailData.is_new) {
@@ -67,7 +67,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -95,7 +95,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 						label={'E-mail'}
 						name={'email'}
 						control={control}
-						rules={{ required: true }}
+						rules={{ required: true, pattern: EMAIL_REGEX }}
 						required
 						defaultValue={detailData.email || ''}
 						errors={duplicates ? ['This name is already in use'] : []}
@@ -279,6 +279,7 @@ const UsersDetailForm: React.FC<UsersDetailFormProps> = (props) => {
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);

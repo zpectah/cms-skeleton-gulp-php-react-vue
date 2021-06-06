@@ -28,18 +28,15 @@ interface TranslationsDetailFormProps {
 	allowDelete: boolean;
 }
 
-const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
-	props,
-) => {
+const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = ({
+	detailData,
+	onCancel,
+	onSave,
+	onDelete,
+	allowSave,
+	allowDelete,
+}) => {
 	const { t } = useTranslation(['common']);
-	const {
-		detailData,
-		onCancel,
-		onSave,
-		onDelete,
-		allowSave,
-		allowDelete,
-	} = props;
 	const {
 		updateTranslations,
 		createTranslations,
@@ -49,7 +46,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 	const [lang, setLang] = useState(config.GLOBAL.PROJECT.LANG_DEFAULT);
 	const [langList, setLangList] = useState<string[]>([]);
 	const { control, handleSubmit, formState, register, watch } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			lang: setLanguageModel(langList, {
 				t_value: '',
@@ -57,7 +54,6 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 			...detailData,
 		},
 	});
-	const { TextArea } = Input;
 
 	useEffect(() => {
 		if (Settings) setLangList(Settings.language_active);
@@ -85,7 +81,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
+		<form>
 			<Modal.Header>
 				<div className="modal-heading-title">
 					{detailData.is_new
@@ -141,7 +137,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 									required
 								>
 									{(row) => (
-										<TextArea
+										<Input.TextArea
 											id={row.id}
 											name={row.name}
 											value={row.value}
@@ -176,6 +172,7 @@ const TranslationsDetailForm: React.FC<TranslationsDetailFormProps> = (
 				detailData={detailData}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				onSubmit={handleSubmit(submitHandler)}
 			/>
 		</form>
 	);
