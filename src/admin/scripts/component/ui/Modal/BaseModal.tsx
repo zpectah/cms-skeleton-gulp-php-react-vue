@@ -1,11 +1,11 @@
 import React from 'react';
 import { Modal as AntdModal, ModalProps } from 'antd'; // https://ant.design/components/modal/
-import { MdClose } from 'react-icons/md';
 import styled from 'styled-components';
 
 import { BREAKPOINTS } from '../../../constants';
 import Typography from '../Typography';
 import Header from './Header';
+import Icon from '../Icon';
 
 const ModalWrapper = styled.div`
 	width: 100%;
@@ -36,7 +36,6 @@ const ModalWrapper = styled.div`
 		}
 	}
 `;
-const ModalCloseIcon = styled(MdClose)``;
 
 interface BaseModalProps {
 	visible: boolean;
@@ -81,7 +80,7 @@ const BaseModal: React.FC<BaseModalProps> = (props) => {
 
 	return (
 		<AntdModal
-			closeIcon={<ModalCloseIcon />}
+			closeIcon={<Icon.Material type="Close" />}
 			bodyStyle={{
 				padding: 0,
 			}}

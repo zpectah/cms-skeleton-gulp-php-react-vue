@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {
-	MdMenu,
-	MdKeyboardArrowLeft,
-	MdPowerSettingsNew,
-	MdClose,
-	MdSearch,
-	MdAdd,
-	MdHelpOutline,
-	MdAccountCircle,
-} from 'react-icons/md';
 import Media from 'react-media';
+import { useSelector } from 'react-redux';
 
 import config from '../../config';
 import { PIXEL_COEFFICIENT, BREAKPOINTS } from '../../constants';
 import media from '../../styles/responsive';
-import { Scrollable } from '../../component/ui';
+import { Scrollable, Icon } from '../../component/ui';
 import Menu from '../../component/Menu';
 import { appProps } from '../../types';
 import { useSettings } from '../../App/hooks';
-import { useSelector } from 'react-redux';
+import Profile from '../../component/Profile';
 
 const Wrapper = styled.aside`
 	width: 50px;
@@ -114,6 +105,10 @@ const Trigger = styled.button`
 	&:hover {
 		color: ${(props) => props.theme.sidebar.triggerHover};
 	}
+
+	& svg {
+		max-width: 40px;
+	}
 `;
 const NavList = styled.ul`
 	width: 100%;
@@ -178,34 +173,38 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 									}}
 								>
 									{(matches) =>
-										matches.md ? <MdClose /> : <MdKeyboardArrowLeft />
+										matches.md ? (
+											<Icon.Material type="Close" size={30} />
+										) : (
+											<Icon.Material type="MenuOpen" size={30} />
+										)
 									}
 								</Media>
 							) : (
-								<MdMenu />
+								<Icon.Material type="Menu" size={30} />
 							)}
 						</Trigger>
 						{config.GLOBAL.CMS.UI.SPOTLIGHT && (
 							<Trigger onClick={toggleSpotlight}>
-								<MdSearch />
+								<Icon.Material type="Search" size={30} />
 							</Trigger>
 						)}
 						<Trigger onClick={toggleAddDialog}>
-							<MdAdd />
+							<Icon.Material type="Add" size={30} />
 						</Trigger>
 					</div>
 					<div>&nbsp;</div>
 					<div>
 						{showHelp == 'true' && (
 							<Trigger onClick={toggleHelpDialog}>
-								<MdHelpOutline />
+								<Icon.Material type="HelpOutline" size={30} />
 							</Trigger>
 						)}
 						<Trigger onClick={toggleProfileDialog}>
-							<MdAccountCircle />
+							<Profile.Avatar size={30} />
 						</Trigger>
 						<Trigger onClick={logoutHandler}>
-							<MdPowerSettingsNew />
+							<Icon.Material type="PowerSettings" size={30} />
 						</Trigger>
 					</div>
 				</BarWrapper>

@@ -11,6 +11,7 @@ import Wysiwyg from './Wysiwyg';
 import Viewer from './Viewer';
 import Map from './Map';
 import Icon from './Icon';
+import Avatar from './Avatar';
 
 export {
 	Button,
@@ -26,4 +27,5 @@ export {
 	Viewer,
 	Map,
 	Icon,
+	Avatar,
 };

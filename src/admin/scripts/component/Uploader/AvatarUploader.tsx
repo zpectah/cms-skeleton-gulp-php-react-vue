@@ -2,33 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { Modal, Icon, Button } from '../ui';
+import { Modal, Icon, Button, Avatar } from '../ui';
 import Uploader from './Uploader';
 
 const DialogContent = styled.div`
 	width: 100%;
 	height: auto;
-`;
-const AvatarWrapper = styled.div<{ size: number }>`
-	width: ${(props) => props.size}px;
-	height: ${(props) => props.size}px;
-	border-radius: ${(props) => props.size}px;
-	position: relative;
-	overflow: hidden;
-	flex: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.25rem;
-	font-weight: 500;
-	background-color: rgba(200, 200, 200, 0.5);
-
-	& img {
-		max-width: 100%;
-		height: auto;
-		margin: 0;
-		flex: none;
-	}
 `;
 const AvatarTrigger = styled.button<{ size: number }>`
 	width: ${(props) => props.size}px;
@@ -77,6 +56,7 @@ interface AvatarUploaderProps {
 	size?: number;
 	onChange?: (blob: any) => void;
 	onReset?: () => void;
+	avatarFontSize?: string;
 }
 
 const AvatarUploader: React.FC<AvatarUploaderProps> = ({
@@ -85,6 +65,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 	size = 50,
 	onChange,
 	onReset,
+	avatarFontSize = '1.25rem',
 }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [tmpBlob, setTmpBlob] = useState<any | null>(null);
@@ -147,9 +128,9 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 				</Modal.Footer>
 			</Modal.Base>
 			<AvatarTrigger type="button" size={size} onClick={toggleDialog}>
-				<AvatarWrapper size={size}>
+				<Avatar.Base size={size} fontSize={avatarFontSize}>
 					{src ? <img src={src} alt="Temporary image" /> : <>{label}</>}
-				</AvatarWrapper>
+				</Avatar.Base>
 				<div className="avatar-change-popup">
 					<Icon.Material type="Create" size={20} />
 				</div>

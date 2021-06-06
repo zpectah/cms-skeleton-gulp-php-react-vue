@@ -88,16 +88,6 @@ const CropperThumbnail = styled.div`
 		object-fit: contain;
 	}
 `;
-const CropperAction = styled.div`
-	width: 100%;
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-`;
 
 interface ImageCropProps {
 	onChange: (

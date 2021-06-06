@@ -198,7 +198,7 @@ const Uploader: React.FC<UploaderProps> = ({
 				setFile({
 					blob: blob,
 					name: file.name,
-					ext: file.ext,
+					extension: ext,
 					mime: file.type,
 					size: file.size,
 					type: type,
@@ -211,7 +211,7 @@ const Uploader: React.FC<UploaderProps> = ({
 			setFile({
 				blob: blob,
 				name: file.name,
-				ext: file.ext,
+				extension: ext,
 				mime: file.type,
 				size: file.size,
 				type: type,
@@ -219,7 +219,7 @@ const Uploader: React.FC<UploaderProps> = ({
 			if (type == 'image') setSrc(blob);
 		}
 
-		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
+		onChange(blob, file.name, ext, file.mime, file.size, type);
 	};
 	const resetHandler = () => {
 		setFile(null);
@@ -228,7 +228,7 @@ const Uploader: React.FC<UploaderProps> = ({
 	};
 	const cropChangeHandler = (blob) => {
 		console.log('...cropChangeHandler');
-		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
+		onChange(blob, file.name, file.extension, file.mime, file.size, file.type);
 	};
 	const onInit = () => {
 		window.addEventListener('mouseup', dragEvents.onDragLeave);

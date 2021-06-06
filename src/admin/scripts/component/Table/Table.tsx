@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { useForm, Controller } from 'react-hook-form';
 import { Table as AntdTable, Input, Radio, Form, message, Tag } from 'antd';
 import styled from 'styled-components';
-import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
@@ -36,6 +35,9 @@ const StyledSearch = styled(Input)`
 	width: 250px;
 `;
 const RowLink = styled.a`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
 `;
 const RowLinkImage = styled.img`
@@ -45,6 +47,12 @@ const RowLinkImage = styled.img`
 `;
 const RowLinkAvatar = styled(RowLinkImage)`
 	border-radius: 50px;
+`;
+const RowFileIconWrapper = styled.div`
+	margin-right: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 const StyledTable = styled.table`
 	width: 100%;
@@ -258,11 +266,15 @@ const Table: React.FC<ListItemsProps> = (props) => {
 						onClick={() => editOpen(record)}
 						notActive={record.active !== 1}
 					>
-						{record.type == 'image' && (
+						{record.type == 'image' ? (
 							<RowLinkImage
 								src={config.UPLOADS_PATH.image.thumbnail + text}
 								alt={record.name}
 							/>
+						) : (
+							<RowFileIconWrapper>
+								<Icon.FileType type={record.type} size={20} />
+							</RowFileIconWrapper>
 						)}
 						{text}
 					</RowLink>
@@ -554,7 +566,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 												name={name}
 												placeholder={t('component:Table.search_placeholder')}
 												onChange={onChange}
-												prefix={<MdSearch />}
+												prefix={<Icon.Material type="Search" size={20} />}
 												value={value}
 												allowClear
 											/>

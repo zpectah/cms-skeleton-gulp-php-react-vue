@@ -25,6 +25,17 @@ import {
 	Image,
 	Mic,
 	Movie,
+	Menu,
+	MenuOpen,
+	PowerSettings,
+	LogOut,
+	LogIn,
+	ManageAccounts,
+	Search,
+	Settings,
+	Home,
+	Cancel,
+	HelpOutline,
 } from '../../../../../libs/svg/material-icons';
 import Icon from './Icon';
 
@@ -53,7 +64,18 @@ interface MaterialDesignIconProps {
 		| 'Save'
 		| 'Image'
 		| 'Mic'
-		| 'Movie';
+		| 'Movie'
+		| 'Menu'
+		| 'MenuOpen'
+		| 'PowerSettings'
+		| 'LogOut'
+		| 'LogIn'
+		| 'ManageAccounts'
+		| 'Search'
+		| 'Settings'
+		| 'Home'
+		| 'Cancel'
+		| 'HelpOutline';
 	size?: number;
 }
 
@@ -83,6 +105,17 @@ const MaterialDesignIcon = ({ type, size = 50 }: MaterialDesignIconProps) => {
 		Image: Image,
 		Mic: Mic,
 		Movie: Movie,
+		Menu: Menu,
+		MenuOpen: MenuOpen,
+		PowerSettings: PowerSettings,
+		LogOut: LogOut,
+		LogIn: LogIn,
+		ManageAccounts: ManageAccounts,
+		Search: Search,
+		Settings: Settings,
+		Home: Home,
+		Cancel: Cancel,
+		HelpOutline: HelpOutline,
 	};
 
 	return <Icon source={iconKey[type]} size={size} />;
