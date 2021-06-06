@@ -16,7 +16,8 @@
 		"detail": "Detail",
 		"active": "Active",
 		"disable": "Disable",
-		"saveChanges": "Save changes"
+		"saveChanges": "Save changes",
+		"clear": "Clear"
 	},
 	"title": {
 		"create_new": "Create new"

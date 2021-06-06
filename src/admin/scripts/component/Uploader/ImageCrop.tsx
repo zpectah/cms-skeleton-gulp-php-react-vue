@@ -4,21 +4,32 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { IMAGE_CROP_MIN_SIZE } from '../../constants';
+import media from '../../styles/responsive';
 
 const Wrapper = styled.div`
 	width: 100%;
 	height: auto;
 	display: flex;
+	flex-direction: column;
+
+	${media.min.md} {
+		flex-direction: row;
+	}
 `;
 const CropperSource = styled.div`
-	width: 50%;
-	min-height: 50vh;
+	width: 100%;
+	min-height: 250px;
 	padding: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	background-color: rgba(25, 25, 25, 0.9);
+
+	${media.min.md} {
+		width: 50%;
+		min-height: 50vh;
+	}
 
 	.ReactCrop {
 		max-width: 75%;
@@ -33,11 +44,16 @@ const CropperSource = styled.div`
 	}
 `;
 const CropperOutput = styled.div`
-	width: 50%;
-	height: 50vh;
+	width: 100%;
+	height: 250px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+
+	${media.min.md} {
+		width: 50%;
+		height: 50vh;
+	}
 `;
 const CropperMeta = styled.div`
 	width: 100%;
