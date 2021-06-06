@@ -57,6 +57,7 @@ const UploadsPage = () => {
 					category: true,
 					active: true,
 					type: true,
+					file_size: true,
 				}}
 				orderByColumns={{
 					name: true,

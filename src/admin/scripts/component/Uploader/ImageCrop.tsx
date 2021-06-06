@@ -142,11 +142,8 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 	const { t } = useTranslation(['component']);
 
 	const onImageLoaded = (image) => setImageRef(image);
-
 	const onCropComplete = (crop) => makeClientCrop(crop);
-
 	const onCropChange = (crop) => setCrop(crop);
-
 	const makeClientCrop = async (crop) => {
 		if (imageRef && crop.width && crop.height) {
 			const tmp_croppedImageUrl = await getCroppedImage(
@@ -157,7 +154,6 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 			onChange(tmp_croppedImageUrl);
 		}
 	};
-
 	const getCroppedImage = (image, crop, fileName) => {
 		const canvas = document.createElement('canvas');
 		const scaleX = image.naturalWidth / image.width;
@@ -190,10 +186,9 @@ const ImageCrop: React.FC<ImageCropProps> = ({
 			return blob;
 		});
 	};
-
-	const setThumbnail = (asp?: number) => {
+	const setThumbnail = (aspect?: number) => {
 		const w = imageRef?.width;
-		const h = asp ? imageRef?.width / asp : imageRef?.height;
+		const h = aspect ? imageRef?.width / aspect : imageRef?.height;
 
 		setCrop({ ...crop, width: w, height: h });
 		makeClientCrop({

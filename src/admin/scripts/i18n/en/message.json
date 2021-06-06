@@ -10,6 +10,10 @@
 			"delete_plural": "{{count}} items was deleted"
 		}
 	},
+	"error": {
+		"fileNotAccepted": "This file type is not accepted!",
+		"fileNotSupported": "This file type is not supported!"
+	},
 	"userLogin": {
 		"user_not_found": "User was not found",
 		"user_not_active": "User is disabled",

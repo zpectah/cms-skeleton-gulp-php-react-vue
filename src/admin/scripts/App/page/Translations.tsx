@@ -57,6 +57,7 @@ const TranslationsPage = () => {
 				loading={isTranslationsLoading}
 				columnsLayout={{
 					name: true,
+					t_value: true,
 					active: true,
 				}}
 				orderByColumns={{

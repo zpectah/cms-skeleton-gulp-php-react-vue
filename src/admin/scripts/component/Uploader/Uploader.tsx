@@ -35,7 +35,6 @@ const FileThumb = styled.div`
 		flex-direction: column;
 	}
 `;
-
 const Label = styled.label`
 	width: 100%;
 	height: 100%;
@@ -80,6 +79,19 @@ const DraggableLayer = styled.div`
 	color: white;
 	background-color: rgba(25, 25, 25, 0.75);
 `;
+const ContentOptions = styled.div`
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 1rem 0 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+
+	& .block {
+	}
+`;
 
 interface UploaderProps {
 	onChange: (
@@ -107,7 +119,7 @@ const Uploader: React.FC<UploaderProps> = ({
 	onChange,
 	accept,
 	onReset,
-	height = 400,
+	height = 250,
 	cropAspect,
 	cropAspectLocked,
 	cropMinWidth,
@@ -116,46 +128,11 @@ const Uploader: React.FC<UploaderProps> = ({
 	cropMaxHeight,
 	avatarMaxSize,
 }) => {
-	const { t } = useTranslation(['component']);
+	const { t } = useTranslation(['common', 'component', 'message']);
 	const [dragOver, setDragOver] = useState(false);
 	const [file, setFile] = useState(null);
 	const [src, setSrc] = useState(null);
 	const [fileType, setFileType] = useState('unknown');
-
-	const setBlobSource = async (file) => {
-		const blob = await fileUtils.toBase64(file);
-		const ext = file.name.split('.').pop().toLowerCase();
-		const type = getFileType(ext);
-		setFileType(type);
-
-		if (accept) {
-			if (file.type.includes(accept.replace('*', ''))) {
-				setFile({
-					blob: blob,
-					name: file.name,
-					ext: file.ext,
-					mime: file.type,
-					size: file.size,
-					type: type,
-				});
-				if (type == 'image') setSrc(blob);
-			} else {
-				message.warn('This file type is not accepted!', 5);
-			}
-		} else {
-			setFile({
-				blob: blob,
-				name: file.name,
-				ext: file.ext,
-				mime: file.type,
-				size: file.size,
-				type: type,
-			});
-			if (type == 'image') setSrc(blob);
-		}
-
-		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
-	};
 
 	const dragEvents = {
 		onDrop: (e) => {
@@ -199,7 +176,6 @@ const Uploader: React.FC<UploaderProps> = ({
 			return false;
 		},
 	};
-
 	const inputEvents = {
 		onChange: (e) => {
 			let file = e.target?.files[0];
@@ -211,24 +187,56 @@ const Uploader: React.FC<UploaderProps> = ({
 		},
 	};
 
+	const setBlobSource = async (file) => {
+		const blob = await fileUtils.toBase64(file);
+		const ext = file.name.split('.').pop().toLowerCase();
+		const type = getFileType(ext);
+		setFileType(type);
+
+		if (accept) {
+			if (file.type.includes(accept.replace('*', ''))) {
+				setFile({
+					blob: blob,
+					name: file.name,
+					ext: file.ext,
+					mime: file.type,
+					size: file.size,
+					type: type,
+				});
+				if (type == 'image') setSrc(blob);
+			} else {
+				message.warn(t('message:fileNotAccepted'), 5);
+			}
+		} else {
+			setFile({
+				blob: blob,
+				name: file.name,
+				ext: file.ext,
+				mime: file.type,
+				size: file.size,
+				type: type,
+			});
+			if (type == 'image') setSrc(blob);
+		}
+
+		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
+	};
 	const resetHandler = () => {
 		setFile(null);
 		setFileType('unknown');
 		if (onReset) onReset();
 	};
-
 	const cropChangeHandler = (blob) => {
+		console.log('...cropChangeHandler');
 		onChange(blob, file.name, file.ext, file.mime, file.size, file.type);
 	};
-
-	const windowEventsInit = () => {
+	const onInit = () => {
 		window.addEventListener('mouseup', dragEvents.onDragLeave);
 		window.addEventListener('dragover', dragEvents.onDragOver);
 		window.addEventListener('dragenter', dragEvents.onDragEnter);
 		window.addEventListener('drop', dragEvents.onDrop);
 	};
-
-	const windowEventsDestroy = () => {
+	const onDestroy = () => {
 		window.removeEventListener('mouseup', dragEvents.onDragLeave);
 		window.removeEventListener('dragover', dragEvents.onDragOver);
 		window.removeEventListener('dragenter', dragEvents.onDragEnter);
@@ -236,9 +244,9 @@ const Uploader: React.FC<UploaderProps> = ({
 	};
 
 	useEffect(() => {
-		windowEventsInit();
+		onInit();
 
-		return () => windowEventsDestroy();
+		return () => onDestroy();
 	}, []);
 
 	return (
@@ -291,12 +299,16 @@ const Uploader: React.FC<UploaderProps> = ({
 						</Label>
 					)}
 				</Content>
-				<div>
-					<Button.Base onClick={resetHandler} disabled={!file}>
-						Reset
-					</Button.Base>
-					{file?.type == 'image' && <div>... options for image crop</div>}
-				</div>
+				{file && (
+					<ContentOptions>
+						<div>
+							<Button.Base onClick={resetHandler} disabled={!file} ghost danger>
+								{t('btn.clear')}
+							</Button.Base>
+						</div>
+						<div></div>
+					</ContentOptions>
+				)}
 			</Wrapper>
 		</>
 	);

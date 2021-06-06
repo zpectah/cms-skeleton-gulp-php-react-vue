@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import _ from 'lodash';
 import { useForm, Controller } from 'react-hook-form';
-import { Table as AntdTable, Input, Radio, Form, message } from 'antd';
+import { Table as AntdTable, Input, Radio, Form, message, Tag } from 'antd';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
-import { array } from '../../../../libs/js/utils';
+import { array, file } from '../../../../libs/js/utils';
 import {
 	MESSAGE_SUCCESS_DURATION,
 	TABLE_ITEMS_PER_PAGE,
@@ -89,6 +89,9 @@ interface ListItemsProps {
 		type?: boolean;
 		user_group?: boolean;
 		member_group?: boolean;
+		file_size?: boolean;
+		t_value?: boolean;
+		category_parent?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
@@ -141,7 +144,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 	} = props;
 	const { Profile } = useProfile();
 	const { control, handleSubmit } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: {
 			search: '',
 			orderBy: 'id',
@@ -217,9 +220,23 @@ const Table: React.FC<ListItemsProps> = (props) => {
 					</RowLink>
 				),
 			});
+		if (columnsLayout.t_value)
+			d.push({
+				title: t('component:Table.column_label.value'),
+				dataIndex: 't_value',
+				key: 't_value',
+				render: (text, record) => (
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.active !== 1}
+					>
+						{record.lang[lang].t_value}
+					</RowLink>
+				),
+			});
 		if (columnsLayout.sender)
 			d.push({
-				title: 'Sender',
+				title: t('component:Table.column_label.sender'),
 				dataIndex: 'sender',
 				key: 'sender',
 				render: (text, record) => (
@@ -233,7 +250,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 			});
 		if (columnsLayout.file_name)
 			d.push({
-				title: 'Filename',
+				title: t('component:Table.column_label.fileName'),
 				dataIndex: 'file_name',
 				key: 'file_name',
 				render: (text, record) => (
@@ -324,24 +341,40 @@ const Table: React.FC<ListItemsProps> = (props) => {
 			});
 		if (columnsLayout.type)
 			d.push({
-				title: 'Type',
+				title: t('component:Table.column_label.type'),
 				dataIndex: 'type',
 				key: 'type',
-				render: (text) => <span>{t(`types:${text}`)}</span>,
+				render: (text) => <Tag>{t(`types:${text}`)}</Tag>,
+			});
+		if (columnsLayout.file_size)
+			d.push({
+				title: t('component:Table.column_label.size'),
+				dataIndex: 'file_size',
+				key: 'file_size',
+				render: (text) => <span>{file.formatBytes(text)}</span>,
+			});
+		if (columnsLayout.category_parent)
+			d.push({
+				title: t('component:Table.column_label.parent'),
+				dataIndex: 'parent',
+				key: 'parent',
+				render: (text) => (
+					<Viewer model="Categories" items={[text]} language={lang} />
+				),
 			});
 		if (columnsLayout.user_group)
 			d.push({
-				title: 'Group',
+				title: t('component:Table.column_label.group'),
 				dataIndex: 'user_group',
 				key: 'user_group',
-				render: (text) => <span>{t(`types:${text}`)}</span>,
+				render: (text) => <Tag>{t(`types:${text}`)}</Tag>,
 			});
 		if (columnsLayout.member_group)
 			d.push({
-				title: 'Group',
+				title: t('component:Table.column_label.group'),
 				dataIndex: 'member_group',
 				key: 'member_group',
-				render: (text) => <span>{t(`types:${text}`)}</span>,
+				render: (text) => <Tag>{t(`types:${text}`)}</Tag>,
 			});
 		if (columnsLayout.tags)
 			d.push({

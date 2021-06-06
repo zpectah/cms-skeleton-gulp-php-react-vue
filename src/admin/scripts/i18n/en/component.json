@@ -22,7 +22,14 @@
 			"tags": "Tags",
 			"category": "Category",
 			"active": "Active",
-			"action": "Action"
+			"action": "Action",
+			"value": "Value",
+			"sender": "Sender",
+			"fileName": "File name",
+			"type": "Type",
+			"size": "Size",
+			"group": "Group",
+			"parent": "Parent"
 		}
 	},
 	"Confirm": {
