@@ -44,7 +44,14 @@ const Header: React.FC<HeaderProps> = (props) => {
 			<PrimaryBlock>
 				<Breadcrumb>
 					<Breadcrumb.Item>{i18n.language}</Breadcrumb.Item>
-					<Breadcrumb.Item>{app}</Breadcrumb.Item>
+					{app !== 'App' ? (
+						<>
+							<Breadcrumb.Item>App</Breadcrumb.Item>
+							<Breadcrumb.Item>{app}</Breadcrumb.Item>
+						</>
+					) : (
+						<Breadcrumb.Item>{app}</Breadcrumb.Item>
+					)}
 					<Breadcrumb.Item>{t(`page:${route.label}`)}</Breadcrumb.Item>
 					{(params.id || params.panel) && (
 						<Breadcrumb.Item>{params.id || params.panel}</Breadcrumb.Item>

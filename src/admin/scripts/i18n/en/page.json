@@ -139,12 +139,12 @@
 
 	"MembersDashboard": {
 		"meta": {
-			"title": "Members dashboard"
+			"title": ""
 		},
 		"page": {
-			"title": "Members dashboard page"
+			"title": ""
 		},
-		"label": "Members dashboard"
+		"label": ""
 	},
 
 	"Members": {
@@ -159,10 +159,10 @@
 
 	"MarketDashboard": {
 		"meta": {
-			"title": "Market"
+			"title": "Market Dashboard"
 		},
 		"page": {
-			"title": "Market page"
+			"title": "Market Dashboard"
 		},
 		"label": "Market"
 	},
