@@ -5,6 +5,7 @@ import { Marker } from 'react-map-gl';
 
 import { Map, Button, Modal, Icon } from '../ui';
 import { MAPBOX_DEFAULTS } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -38,6 +39,7 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 	onChange,
 	zoom,
 }) => {
+	const { t } = useTranslation(['common']);
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [locationChanged, setLocationChanged] = useState(false);
 	const [tmpLocation, setTmpLocation] = useState<
@@ -63,6 +65,12 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 		setTmpLocation([...value]);
 		setLocationChanged(false);
 		setDialogOpen(false);
+	};
+
+	const resetLocationHandler = () => {
+		setLocationChanged(true);
+		setMarkerVisible(false);
+		setTmpLocation([0, 0]);
 	};
 
 	useEffect(() => {
@@ -109,14 +117,25 @@ const LocationManager: React.FC<LocationManagerProps> = ({
 					</Map>
 				</ModalContent>
 				<Modal.Footer>
-					<Button.Base onClick={onCancelHandler}>Cancel</Button.Base>
-					<Button.Base
-						type="primary"
-						onClick={onConfirmLocation}
-						disabled={!locationChanged}
-					>
-						Confirm location
-					</Button.Base>
+					<div className="modal-footer-block">
+						<Button.Base onClick={onCancelHandler}>
+							{t('btn.cancel')}
+						</Button.Base>
+					</div>
+					<div className="modal-footer-block">
+						<Button.Base onClick={resetLocationHandler} ghost danger>
+							{t('btn.reset')}
+						</Button.Base>
+						<div className="modal-footer-column">
+							<Button.Base
+								type="primary"
+								onClick={onConfirmLocation}
+								disabled={!locationChanged}
+							>
+								{t('btn.confirm')}
+							</Button.Base>
+						</div>
+					</div>
 				</Modal.Footer>
 			</Modal.Base>
 			<Wrapper>

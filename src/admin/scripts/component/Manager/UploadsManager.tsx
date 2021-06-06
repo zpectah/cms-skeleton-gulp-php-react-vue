@@ -222,7 +222,7 @@ const UploadsManager: React.FC<UploadsManagerProps> = ({
 				</Modal.Content>
 				<Modal.Footer>
 					<div className="modal-footer-block">
-						<BaseButton onClick={toggleDialog}>{t('btn.close')}</BaseButton>
+						<BaseButton onClick={toggleDialog}>{t('btn.cancel')}</BaseButton>
 					</div>
 					<div className="modal-footer-block">
 						<BaseButton

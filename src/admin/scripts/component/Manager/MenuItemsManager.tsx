@@ -176,10 +176,10 @@ const MenuItemsManager: React.FC<MenuItemsManagerProps> = ({
 					)}
 				</Modal.Content>
 				<Modal.Footer>
-					<div>
-						<Button.Base onClick={toggleDialog}>{t('btn.close')}</Button.Base>
+					<div className="modal-footer-block">
+						<Button.Base onClick={toggleDialog}>{t('btn.cancel')}</Button.Base>
 					</div>
-					<div>
+					<div className="modal-footer-block">
 						<Button.Base
 							type="primary"
 							onClick={() => openSubDialog({ is_new: true })}
