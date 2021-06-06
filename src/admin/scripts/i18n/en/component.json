@@ -71,7 +71,6 @@
 			"fileCrop": "Select area on image to crop"
 		},
 		"btn": {
-			"resetAvatar": "Reset avatar",
 			"removeFile": "Remove file",
 			"removeImage": "Remove image"
 		}

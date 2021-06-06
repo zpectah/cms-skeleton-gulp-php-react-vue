@@ -105,6 +105,13 @@ const Uploader: React.FC<UploaderProps> = ({
 	accept,
 	onReset,
 	height = 400,
+	cropAspect,
+	cropAspectLocked,
+	cropMinWidth,
+	cropMinHeight,
+	cropMaxWidth,
+	cropMaxHeight,
+	avatarMaxSize,
 }) => {
 	const [dragOver, setDragOver] = useState(false);
 	const [file, setFile] = useState(null);
@@ -241,7 +248,17 @@ const Uploader: React.FC<UploaderProps> = ({
 				{file ? (
 					<>
 						{fileType == 'image' && src ? (
-							<ImageCrop src={src} onChange={cropChangeHandler} />
+							<ImageCrop
+								src={src}
+								onChange={cropChangeHandler}
+								aspect={cropAspect}
+								locked={cropAspectLocked}
+								minWidth={cropMinWidth}
+								minHeight={cropMinHeight}
+								maxWidth={cropMaxWidth}
+								maxHeight={cropMaxHeight}
+								avatarMaxSize={avatarMaxSize}
+							/>
 						) : (
 							<FileThumb isDragOver={dragOver}>
 								<p>

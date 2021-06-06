@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { message, Descriptions, Tag } from 'antd';
 
 import { Form as UiForm, Section, Button, Modal, Icon } from '../ui';
-import FileUpload from '../FileUpload';
+import Uploader from '../Uploader';
 import LocaleToggle from './LocaleToggle';
 import ThemeToggle from './ThemeToggle';
 import HelpToggle from './HelpToggle';
@@ -82,7 +82,7 @@ const Form: React.FC<FormProps> = ({ model, afterUpdate, onClose }) => {
 		<Wrapper>
 			<AvatarContainer>
 				<div>
-					<FileUpload.Avatar
+					<Uploader.Avatar
 						label={
 							model.first_name && model.last_name
 								? model.first_name.charAt(0) + model.last_name.charAt(0)
