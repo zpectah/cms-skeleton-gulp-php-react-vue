@@ -9,7 +9,6 @@ interface ProductsPickerProps {
 	onChange: (value, option) => void;
 	single?: boolean;
 	ignoredId?: any[];
-	mode?: 'all' | 'category' | 'gallery';
 }
 
 const ProductsPicker: React.FC<ProductsPickerProps> = ({
@@ -18,7 +17,6 @@ const ProductsPicker: React.FC<ProductsPickerProps> = ({
 	onChange,
 	single = false,
 	ignoredId = [],
-	mode = 'all',
 }) => {
 	const { Products } = useProducts();
 
@@ -33,27 +31,12 @@ const ProductsPicker: React.FC<ProductsPickerProps> = ({
 		];
 
 		Products?.map((option) => {
-			switch (option.type) {
-				case 'default':
-					if (mode == 'category' || mode == 'all')
-						o.push({
-							key: option.id,
-							value: option.id,
-							label: option.name,
-							disabled: false,
-						});
-					break;
-
-				case 'gallery':
-					if (mode == 'gallery' || mode == 'all')
-						o.push({
-							key: option.id,
-							value: option.id,
-							label: option.name,
-							disabled: false,
-						});
-					break;
-			}
+			o.push({
+				key: option.id,
+				value: option.id,
+				label: option.name,
+				disabled: false,
+			});
 		});
 
 		if (ignoredId.length > 0) {

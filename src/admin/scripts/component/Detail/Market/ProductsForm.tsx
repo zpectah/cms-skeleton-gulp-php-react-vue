@@ -390,7 +390,7 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 								id={row.id}
 								value={row.value}
 								onChange={row.onChange}
-								ignoredId={[detailData.id]}
+								ignoredId={detailData.id !== 'new' && [detailData.id]}
 							/>
 						)}
 					</Form.Row>
