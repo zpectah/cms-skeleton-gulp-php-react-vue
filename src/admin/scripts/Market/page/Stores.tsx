@@ -55,7 +55,8 @@ const StoresPage = () => {
 				items={Stores}
 				loading={isStoresLoading}
 				columnsLayout={{
-					name: true,
+					title_lang: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{
@@ -67,6 +68,7 @@ const StoresPage = () => {
 				onDelete={deleteHandler}
 				selectable
 				allowDelete
+				withLanguageToggle
 			/>
 		</AppLayout>
 	);

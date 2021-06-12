@@ -16,6 +16,12 @@ function useSystemApi() {
 function useProfile() {
 	const { data, error } = useSWR(`/api/get_profile`);
 
+	const shouldShow = (level: number) => {
+		const userLevel = data?.data?.user_level;
+
+		return Number(level) >= Number(userLevel);
+	};
+
 	return {
 		Profile: data?.data,
 		isProfileLoading: !data && !error,
@@ -27,6 +33,7 @@ function useProfile() {
 		userLostPassword: (data: any) => api.post('/api/user_lost_password', data),
 		userLostPasswordReset: (data: any) =>
 			api.post('/api/user_lost_password_reset', data),
+		userShouldShow: shouldShow,
 	};
 }
 

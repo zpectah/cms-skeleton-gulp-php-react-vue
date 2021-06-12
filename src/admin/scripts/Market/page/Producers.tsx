@@ -56,13 +56,14 @@ const ProducersPage = () => {
 				loading={isProducersLoading}
 				columnsLayout={{
 					name: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.[lang].title']}
+				searchAttrs={['name']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable

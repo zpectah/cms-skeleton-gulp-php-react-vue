@@ -55,7 +55,8 @@ const PaymentsPage = () => {
 				items={Payments}
 				loading={isPaymentsLoading}
 				columnsLayout={{
-					name: true,
+					title_lang: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{
@@ -67,6 +68,7 @@ const PaymentsPage = () => {
 				onDelete={deleteHandler}
 				selectable
 				allowDelete
+				withLanguageToggle
 			/>
 		</AppLayout>
 	);

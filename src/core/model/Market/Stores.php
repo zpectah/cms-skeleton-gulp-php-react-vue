@@ -120,6 +120,10 @@ class Stores {
 					$row['lang'][$lang] = self::get_language_row($conn, $lang, $row['id']);
 				}
 
+				$row['store_location'] = $row['store_location'] ? explode(",", $row['store_location']) : [0,0];
+				$row['store_email'] = $row['store_email'] ? explode(",", $row['store_email']) : [];
+				$row['store_phone'] = $row['store_phone'] ? explode(",", $row['store_phone']) : [];
+
 				$response[] = $row;
 			}
 		}
@@ -155,9 +159,9 @@ class Stores {
 			$requestData['store_city'],
 			$requestData['store_country'],
 			$requestData['store_zip'],
-			$requestData['store_location'],
-			$requestData['store_email'],
-			$requestData['store_phone'],
+			$requestData['store_location'] ? implode(",", $requestData['store_location']) : '',
+			$requestData['store_email'] ? implode(",", $requestData['store_email']) : '',
+			$requestData['store_phone'] ? implode(",", $requestData['store_phone']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['rating'],
@@ -210,9 +214,9 @@ class Stores {
 			$requestData['store_city'],
 			$requestData['store_country'],
 			$requestData['store_zip'],
-			$requestData['store_location'],
-			$requestData['store_email'],
-			$requestData['store_phone'],
+			$requestData['store_location'] ? implode(",", $requestData['store_location']) : '',
+			$requestData['store_email'] ? implode(",", $requestData['store_email']) : '',
+			$requestData['store_phone'] ? implode(",", $requestData['store_phone']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['rating'],

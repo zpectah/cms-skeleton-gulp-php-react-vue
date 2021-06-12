@@ -55,7 +55,8 @@ const DeliveriesPage = () => {
 				items={Deliveries}
 				loading={isDeliveriesLoading}
 				columnsLayout={{
-					name: true,
+					title_lang: true,
+					type: true,
 					active: true,
 				}}
 				orderByColumns={{
@@ -67,6 +68,7 @@ const DeliveriesPage = () => {
 				onDelete={deleteHandler}
 				selectable
 				allowDelete
+				withLanguageToggle
 			/>
 		</AppLayout>
 	);
