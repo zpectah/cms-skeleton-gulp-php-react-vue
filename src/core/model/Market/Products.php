@@ -124,6 +124,7 @@ class Products {
 				}
 				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
 				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
+				$row['items_related'] = $row['items_related'] ? explode(",", $row['items_related']) : [];
 				$row['attachments'] = $row['attachments'] ? explode(",", $row['attachments']) : [];
 
 				$response[] = $row;
@@ -147,16 +148,22 @@ class Products {
                    item_price,
                    item_discount,
                    item_amount,
+                   item_weight,
+                      item_length,
+                      item_width,
+                      item_height,
                    items_related,
                    attachments,
                    img_main,
                    img_thumbnail,
                    item_new,
+                   item_used,
+                   item_unboxed,
                    rating,
                    active,
                    deleted
-                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'ssssiiissssiiii';
+                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+		$types = 'ssssiiiiiiissssiiiiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -165,11 +172,17 @@ class Products {
 			$requestData['item_price'],
 			$requestData['item_discount'],
 			$requestData['item_amount'],
-			$requestData['items_related'],
+			$requestData['item_weight'],
+			$requestData['item_length'],
+			$requestData['item_width'],
+			$requestData['item_height'],
+			$requestData['items_related'] ? implode(",", $requestData['items_related']) : '',
 			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['item_new'],
+			$requestData['item_used'],
+			$requestData['item_unboxed'],
 			$requestData['rating'],
 			$requestData['active'],
 			0
@@ -207,15 +220,21 @@ class Products {
                    item_price = ?,
                    item_discount = ?,
                    item_amount = ?,
+									item_weight = ?,
+									item_length = ?,
+									item_width = ?,
+									item_height = ?,
                    items_related = ?,
                    attachments = ?,
                    img_main = ?,
                    img_thumbnail = ?,
                    item_new = ?,
+                   item_used = ?,
+                   item_unboxed = ?,
                    rating = ?,
                    active = ?
 		WHERE id = ?');
-		$types = 'ssssiiissssiiii';
+		$types = 'ssssiiiiiiissssiiiiii';
 		$args = [
 			$type,
 			$requestData['name'],
@@ -224,11 +243,17 @@ class Products {
 			$requestData['item_price'],
 			$requestData['item_discount'],
 			$requestData['item_amount'],
-			$requestData['items_related'],
+			$requestData['item_weight'],
+			$requestData['item_length'],
+			$requestData['item_width'],
+			$requestData['item_height'],
+			$requestData['items_related'] ? implode(",", $requestData['items_related']) : '',
 			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
 			$requestData['img_main'],
 			$requestData['img_thumbnail'],
 			$requestData['item_new'],
+			$requestData['item_used'],
+			$requestData['item_unboxed'],
 			$requestData['rating'],
 			$requestData['active'],
 			$requestData['id']

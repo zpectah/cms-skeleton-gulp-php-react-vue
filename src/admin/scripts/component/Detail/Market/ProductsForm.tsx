@@ -128,7 +128,7 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 						control={control}
 						rules={{ required: true }}
 						required
-						defaultValue={detailData.type || 'default'}
+						defaultValue={detailData.type || 'package'}
 					>
 						{(row) => (
 							<Select
@@ -213,6 +213,84 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 								value={row.value}
 								onChange={row.onChange}
 								placeholder={'Discount'}
+							/>
+						)}
+					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
+					<Form.Row
+						label={'Weight'}
+						name={'item_weight'}
+						control={control}
+						rules={{ required: true }}
+						required
+						defaultValue={detailData.item_weight || 0}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'number'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Weight'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Length'}
+						name={'item_length'}
+						control={control}
+						rules={{ required: true }}
+						required
+						defaultValue={detailData.item_length || 0}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'number'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Length'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Width'}
+						name={'item_width'}
+						control={control}
+						rules={{ required: true }}
+						required
+						defaultValue={detailData.item_width || 0}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'number'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Width'}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Height'}
+						name={'item_height'}
+						control={control}
+						rules={{ required: true }}
+						required
+						defaultValue={detailData.item_height || 0}
+					>
+						{(row) => (
+							<Input
+								id={row.id}
+								type={'number'}
+								name={row.name}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Height'}
 							/>
 						)}
 					</Form.Row>
@@ -377,17 +455,39 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 						)}
 					</Form.Row>
 				</Section.Base>
-				<Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Is new'}
 						name={'item_new'}
 						control={control}
-						defaultValue={detailData.item_new || true}
+						defaultValue={detailData.item_new || false}
 					>
 						{(row) => (
 							<Switch checked={row.value == 1} onChange={row.onChange} />
 						)}
 					</Form.Row>
+					<Form.Row
+						label={'Is used'}
+						name={'item_used'}
+						control={control}
+						defaultValue={detailData.item_used || false}
+					>
+						{(row) => (
+							<Switch checked={row.value == 1} onChange={row.onChange} />
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Is unboxed'}
+						name={'item_unboxed'}
+						control={control}
+						defaultValue={detailData.item_unboxed || false}
+					>
+						{(row) => (
+							<Switch checked={row.value == 1} onChange={row.onChange} />
+						)}
+					</Form.Row>
+				</Section.Base>
+				<Section.Base>
 					<Form.Row
 						label={'Active'}
 						name={'active'}

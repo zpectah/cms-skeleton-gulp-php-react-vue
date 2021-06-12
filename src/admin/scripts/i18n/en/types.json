@@ -31,6 +31,7 @@
 	"document": "Document",
 	"archive": "Archive",
 	"none": "None",
+	"package": "Package",
 	"licence": "Licence",
 	"members": "Members",
 	"subscribers": "Subscribers",

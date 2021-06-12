@@ -39,6 +39,11 @@ const RowLink = styled.a`
 	align-items: center;
 	justify-content: flex-start;
 	opacity: ${(props) => (props.notActive ? '.55' : '1')};
+
+	& > div {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 const RowLinkImage = styled.img`
 	max-width: 40px;
@@ -349,7 +354,10 @@ const Table: React.FC<ListItemsProps> = (props) => {
 								alt={record.lang[lang].title}
 							/>
 						)}
-						{record.lang[lang].title}
+						<div>
+							{record.lang[lang].title}
+							{record.name && <small>{record.name}</small>}
+						</div>
 					</RowLink>
 				),
 			});

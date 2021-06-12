@@ -2,13 +2,19 @@ import { commonModelProps } from '../types';
 
 export interface ProductsItemProps extends commonModelProps {
 	name: string;
-	type: 'default' | 'licence';
+	type: 'package' | 'licence';
 	category?: string[];
 	tags?: string[];
 	item_price: number;
 	item_discount: number;
 	item_amount: number;
+	item_weight: number;
+	item_length: number;
+	item_width: number;
+	item_height: number;
 	item_new: number;
+	item_used: number;
+	item_unboxed: number;
 	items_related: string[];
 	attachments?: string[];
 	img_main?: string;

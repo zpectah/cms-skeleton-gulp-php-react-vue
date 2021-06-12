@@ -55,14 +55,17 @@ const ProductsPage = () => {
 				items={Products}
 				loading={isProductsLoading}
 				columnsLayout={{
-					name: true,
+					title_lang: true,
+					type: true,
+					tags: true,
+					category: true,
 					active: true,
 				}}
 				orderByColumns={{
 					name: true,
 				}}
 				detailId={params.id}
-				searchAttrs={['name', 'lang.[lang].title']}
+				searchAttrs={['name', 'lang.[lang].title', 'lang.[lang].description']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable
