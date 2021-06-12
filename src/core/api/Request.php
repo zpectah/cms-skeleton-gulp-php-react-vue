@@ -502,6 +502,33 @@ class Request {
 				return $response;
 
 
+			// ProductsOptions
+			case 'get_productsOptions':
+				$response['data'] = $DataService -> get('ProductsOptions', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
+			case 'create_productsOptions':
+				$response['data'] = $DataService -> create('ProductsOptions', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
+			case 'toggle_productsOptions':
+				$response['data'] = $DataService -> toggle('ProductsOptions', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
+			case 'update_productsOptions':
+				$response['data'] = $DataService -> update('ProductsOptions', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
+			case 'delete_productsOptions':
+				$response['data'] = $DataService -> delete('ProductsOptions', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
+
 			// Stores
 			case 'get_stores':
 				$response['data'] = $DataService -> get('Stores', $requestData);

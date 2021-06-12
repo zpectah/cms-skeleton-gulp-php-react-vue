@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Switch } from 'antd';
+import { Input, Select, Switch } from 'antd';
 
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { useProducers } from '../../../Market/hooks';
@@ -9,6 +9,8 @@ import { ProducersItemProps } from '../../../Market/types';
 import { Modal, Typography, Form, Section } from '../../ui';
 import DetailFooter from '../DetailFooter';
 import { string } from '../../../../../libs/js/utils';
+import config from '../../../config';
+import Manager from '../../Manager';
 
 interface ProducersDetailFormProps {
 	detailData: ProducersItemProps;
@@ -96,6 +98,51 @@ const ProducersDetailForm: React.FC<ProducersDetailFormProps> = (props) => {
 								onChange={row.onChange}
 								placeholder={'Name'}
 							/>
+						)}
+					</Form.Row>
+					<Form.Row
+						label={'Type'}
+						name={'type'}
+						control={control}
+						rules={{ required: true }}
+						required
+						defaultValue={
+							detailData.type || config.OPTIONS.model.Producers.type_default
+						}
+					>
+						{(row) => (
+							<Select
+								style={{ width: '100%' }}
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+								placeholder={'Select type'}
+							>
+								{config.OPTIONS.model.Producers.type_list.map((item) => (
+									<Select.Option value={item} key={item}>
+										{t(`types:${item}`)}
+									</Select.Option>
+								))}
+							</Select>
+						)}
+					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
+					<Form.Row
+						label={'Main image'}
+						name={'img_main'}
+						control={control}
+						defaultValue={detailData.img_main || ''}
+					>
+						{(row) => (
+							<>
+								<Manager.Uploads
+									type="image"
+									selected={row.value}
+									onChange={(value) => row.onChange(value)}
+									single
+								/>
+							</>
 						)}
 					</Form.Row>
 				</Section.Base>

@@ -41,6 +41,7 @@
 		"Payments": "Payments",
 		"Producers": "Producers",
 		"Products": "Products",
+		"ProductsOptions": "Products options",
 		"Stores": "Stores"
 	},
 	"model_item": {
@@ -61,6 +62,7 @@
 		"Payments": "Payment",
 		"Producers": "Producer",
 		"Products": "Product",
+		"ProductsOptions": "Products option",
 		"Stores": "Store"
 	},
 	"model_newItem": {
@@ -80,6 +82,7 @@
 		"Payments": "New payments",
 		"Producers": "New producer",
 		"Products": "New product",
+		"ProductsOptions": "New product option",
 		"Stores": "New store"
 	}
 }

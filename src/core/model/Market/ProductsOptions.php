@@ -4,11 +4,11 @@
 namespace core\model\Market;
 
 
-class Products {
+class ProductsOptions {
 
 	private function get_language_row($conn, $lang, $id) {
 		$response = null;
-		$table_name = 'products__' . $lang;
+		$table_name = 'productsOptions__' . $lang;
 
 		// prepare
 		$query = ('SELECT * FROM ' . $table_name . ' WHERE id = ?');
@@ -36,20 +36,18 @@ class Products {
 		$response = [];
 
 		foreach ($activeLanguages as $lang) {
-			$table_name = 'products__' . $lang;
+			$table_name = 'productsOptions__' . $lang;
 
 			// For prevent error while column is blank
 			$tmp_description = $requestData[$lang]['description'] ? $requestData[$lang]['description'] : '';
-			$tmp_content = $requestData[$lang]['content'] ? $requestData[$lang]['content'] : '';
 
 			// prepare
-			$query = ('INSERT INTO ' . $table_name . ' (id, title, description, content) VALUES (?,?,?,?)');
-			$types = 'isss';
+			$query = ('INSERT INTO ' . $table_name . ' (id, title, description) VALUES (?,?,?)');
+			$types = 'iss';
 			$args = [
 				$lastId,
 				$requestData[$lang]['title'],
-				$tmp_description,
-				$tmp_content
+				$tmp_description
 			];
 
 			// execute
@@ -72,15 +70,14 @@ class Products {
 		$response = null;
 
 		foreach ($activeLanguages as $lang) {
-			$table_name = 'products__' . $lang;
+			$table_name = 'productsOptions__' . $lang;
 
 			// prepare
-			$query = ('UPDATE ' . $table_name . ' SET title = ?, description = ?, content = ? WHERE id = ?');
-			$types = 'sssi';
+			$query = ('UPDATE ' . $table_name . ' SET title = ?, description = ? WHERE id = ?');
+			$types = 'ssi';
 			$args = [
 				$requestData[$lang]['title'],
 				$requestData[$lang]['description'],
-				$requestData[$lang]['content'],
 				$id
 			];
 
@@ -106,7 +103,7 @@ class Products {
 		$active_languages = $languages['active'];
 
 		// prepare
-		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM products WHERE deleted = ?');
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM productsOptions WHERE deleted = ?');
 		$types = 'i';
 		$args = [ 0 ];
 
@@ -122,11 +119,6 @@ class Products {
 				foreach ($active_languages as $lang) {
 					$row['lang'][$lang] = self::get_language_row($conn, $lang, $row['id']);
 				}
-				$row['category'] = $row['category'] ? explode(",", $row['category']) : [];
-				$row['tags'] = $row['tags'] ? explode(",", $row['tags']) : [];
-				$row['items_related'] = $row['items_related'] ? explode(",", $row['items_related']) : [];
-				$row['products_options'] = $row['products_options'] ? explode(",", $row['products_options']) : [];
-				$row['attachments'] = $row['attachments'] ? explode(",", $row['attachments']) : [];
 
 				$response[] = $row;
 			}
@@ -138,55 +130,13 @@ class Products {
 	public function create ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
-		$type = $requestData['type'];
-
 		// prepare
-		$query = ('INSERT INTO products (
-                   type,
-                   name,
-                   category,
-                   tags,
-                   item_price,
-                   item_discount,
-                   item_amount,
-                   item_weight,
-                   item_length,
-                   item_width,
-                   item_height,
-                   items_related,
-                   products_options,
-                   attachments,
-                   img_main,
-                   img_thumbnail,
-                   item_new,
-                   item_used,
-                   item_unboxed,
-                   rating,
-                   active,
-                   deleted
-                   ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		$types = 'ssssiiiiiiisssssiiiiii';
+		$query = ('INSERT INTO productsOptions (name, type, option_value, active, deleted) VALUES (?,?,?,?,?)');
+		$types = 'sssii';
 		$args = [
-			$type,
 			$requestData['name'],
-			$requestData['category'] ? implode(",", $requestData['category']) : '',
-			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
-			$requestData['item_price'],
-			$requestData['item_discount'],
-			$requestData['item_amount'],
-			$requestData['item_weight'],
-			$requestData['item_length'],
-			$requestData['item_width'],
-			$requestData['item_height'],
-			$requestData['items_related'] ? implode(",", $requestData['items_related']) : '',
-			$requestData['products_options'] ? implode(",", $requestData['products_options']) : '',
-			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
-			$requestData['img_main'],
-			$requestData['img_thumbnail'],
-			$requestData['item_new'],
-			$requestData['item_used'],
-			$requestData['item_unboxed'],
-			$requestData['rating'],
+			$requestData['type'],
+			$requestData['option_value'],
 			$requestData['active'],
 			0
 		];
@@ -212,54 +162,13 @@ class Products {
 	public function update ($conn, $requestData, $languages) {
 		$requestData = json_decode(json_encode($requestData), true);
 
-		$type = $requestData['type'];
-
 		// prepare
-		$query = ('UPDATE products SET
-                   type = ?,
-                   name = ?,
-                   category = ?,
-                   tags = ?,
-                   item_price = ?,
-                   item_discount = ?,
-                   item_amount = ?,
-                   item_weight = ?,
-                   item_length = ?,
-                   item_width = ?,
-                   item_height = ?,
-                   items_related = ?,
-                   products_options = ?,
-                   attachments = ?,
-                   img_main = ?,
-                   img_thumbnail = ?,
-                   item_new = ?,
-                   item_used = ?,
-                   item_unboxed = ?,
-                   rating = ?,
-                   active = ?
-		WHERE id = ?');
-		$types = 'ssssiiiiiiisssssiiiiii';
+		$query = ('UPDATE productsOptions SET name = ?, type = ?, option_value = ?, active = ? WHERE id = ?');
+		$types = 'sssii';
 		$args = [
-			$type,
 			$requestData['name'],
-			$requestData['category'] ? implode(",", $requestData['category']) : '',
-			$requestData['tags'] ? implode(",", $requestData['tags']) : '',
-			$requestData['item_price'],
-			$requestData['item_discount'],
-			$requestData['item_amount'],
-			$requestData['item_weight'],
-			$requestData['item_length'],
-			$requestData['item_width'],
-			$requestData['item_height'],
-			$requestData['items_related'] ? implode(",", $requestData['items_related']) : '',
-			$requestData['products_options'] ? implode(",", $requestData['products_options']) : '',
-			$requestData['attachments'] ? implode(",", $requestData['attachments']) : '',
-			$requestData['img_main'],
-			$requestData['img_thumbnail'],
-			$requestData['item_new'],
-			$requestData['item_used'],
-			$requestData['item_unboxed'],
-			$requestData['rating'],
+			$requestData['type'],
+			$requestData['option_value'],
 			$requestData['active'],
 			$requestData['id']
 		];
@@ -289,7 +198,7 @@ class Products {
 
 		function toggleRow ($conn, $id) {
 			// prepare
-			$query = ('UPDATE products SET active = IF(active=1, 0, 1) WHERE id = ?');
+			$query = ('UPDATE productsOptions SET active = IF(active=1, 0, 1) WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 
@@ -324,7 +233,7 @@ class Products {
 
 		function deleteRow ($conn, $id) {
 			// prepare
-			$query = ('UPDATE products SET deleted = 1 WHERE id = ?');
+			$query = ('UPDATE productsOptions SET deleted = 1 WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 

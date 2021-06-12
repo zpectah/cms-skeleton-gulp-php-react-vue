@@ -33,6 +33,8 @@
 	"none": "None",
 	"package": "Package",
 	"licence": "Licence",
+	"dispensing": "Dispensing",
+	"undefined": "Undefined",
 	"members": "Members",
 	"subscribers": "Subscribers",
 	"customers": "Customers",

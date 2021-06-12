@@ -76,7 +76,7 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 				path == ROUTES.members.dashboard.path ||
 				path == ROUTES.market.dashboard.path
 			) &&
-			location.pathname.includes(path)
+			location.pathname.includes(path + '/')
 		)
 			name = 'is-active';
 

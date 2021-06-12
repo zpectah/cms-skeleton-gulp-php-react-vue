@@ -16,6 +16,25 @@ function useProducts() {
 	};
 }
 
+function useProductsOptions() {
+	const { data, error } = useSWR(`/api/get_productsOptions`);
+
+	return {
+		ProductsOptions: data?.data,
+		isProductsOptionsLoading: !data && !error,
+		isProductsOptionsError: error,
+		reloadProductsOptions: () => mutate(`/api/get_productsOptions`),
+		updateProductsOptions: (data: any) =>
+			api.post('/api/update_productsOptions', data),
+		createProductsOptions: (data: any) =>
+			api.post('/api/create_productsOptions', data),
+		deleteProductsOptions: (data: any) =>
+			api.post('/api/delete_productsOptions', data),
+		toggleProductsOptions: (data: any) =>
+			api.post('/api/toggle_productsOptions', data),
+	};
+}
+
 function useStores() {
 	const { data, error } = useSWR(`/api/get_stores`);
 
@@ -97,6 +116,7 @@ function useDeliveries() {
 
 export {
 	useProducts,
+	useProductsOptions,
 	useStores,
 	useProducers,
 	usePayments,

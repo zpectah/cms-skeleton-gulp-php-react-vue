@@ -380,6 +380,20 @@ const ProductsDetailForm: React.FC<ProductsDetailFormProps> = (props) => {
 				</Section.Base>
 				<Section.Base withBorder>
 					<Form.Row
+						label={'Options'}
+						name={'products_options'}
+						control={control}
+						defaultValue={detailData.products_options || []}
+					>
+						{(row) => (
+							<Picker.ProductsOptions
+								id={row.id}
+								value={row.value}
+								onChange={row.onChange}
+							/>
+						)}
+					</Form.Row>
+					<Form.Row
 						label={'Related products'}
 						name={'items_related'}
 						control={control}

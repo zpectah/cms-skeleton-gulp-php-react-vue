@@ -227,6 +227,16 @@
 		"label": "Products"
 	},
 
+	"ProductsOptions": {
+		"meta": {
+			"title": "Products Options"
+		},
+		"page": {
+			"title": "Products Options page"
+		},
+		"label": "Products Options"
+	},
+
 	"Stores": {
 		"meta": {
 			"title": "Stores"

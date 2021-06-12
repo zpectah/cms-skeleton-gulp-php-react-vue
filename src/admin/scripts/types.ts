@@ -24,6 +24,7 @@ export interface appProps {
 	modelMembers: 'Members';
 	modelMarket:
 		| 'Products'
+		| 'ProductsOptions'
 		| 'Producers'
 		| 'Distributors'
 		| 'Stores'

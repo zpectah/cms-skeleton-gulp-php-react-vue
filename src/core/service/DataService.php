@@ -13,6 +13,7 @@ use core\model\Market\Distributors;
 use core\model\Market\Payments;
 use core\model\Market\Producers;
 use core\model\Market\Products;
+use core\model\Market\ProductsOptions;
 use core\model\Market\Stores;
 use core\model\Members\Members;
 use core\model\Menu;
@@ -63,6 +64,7 @@ class DataService {
 		$Payments = new Payments;
 		$Producers = new Producers;
 		$Products = new Products;
+		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
 
@@ -135,7 +137,7 @@ class DataService {
 			// module: Market
 			case 'Deliveries':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Deliveries -> get($conn, $data);
+					$response = $Deliveries -> get($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -151,7 +153,7 @@ class DataService {
 
 			case 'Payments':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Payments -> get($conn, $data);
+					$response = $Payments -> get($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -173,9 +175,17 @@ class DataService {
 				}
 				break;
 
+			case 'ProductsOptions':
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $ProductsOptions -> get($conn, $data, $languages);
+				} else {
+					$response = [];
+				}
+				break;
+
 			case 'Stores':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Stores -> get($conn, $data);
+					$response = $Stores -> get($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -215,6 +225,7 @@ class DataService {
 		$Payments = new Payments;
 		$Producers = new Producers;
 		$Products = new Products;
+		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
 
@@ -279,7 +290,7 @@ class DataService {
 			// module: Market
 			case 'Deliveries':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Deliveries -> create($conn, $data);
+					$response = $Deliveries -> create($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -295,7 +306,7 @@ class DataService {
 
 			case 'Payments':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Payments -> create($conn, $data);
+					$response = $Payments -> create($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -317,9 +328,17 @@ class DataService {
 				}
 				break;
 
+			case 'ProductsOptions':
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $ProductsOptions -> create($conn, $data, $languages);
+				} else {
+					$response = [];
+				}
+				break;
+
 			case 'Stores':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Stores -> create($conn, $data);
+					$response = $Stores -> create($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -360,6 +379,7 @@ class DataService {
 		$Payments = new Payments;
 		$Producers = new Producers;
 		$Products = new Products;
+		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
 
@@ -428,7 +448,7 @@ class DataService {
 			// module: Market
 			case 'Deliveries':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Deliveries -> update($conn, $data);
+					$response = $Deliveries -> update($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -444,7 +464,7 @@ class DataService {
 
 			case 'Payments':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Payments -> update($conn, $data);
+					$response = $Payments -> update($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -466,9 +486,17 @@ class DataService {
 				}
 				break;
 
+			case 'ProductsOptions':
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $ProductsOptions -> update($conn, $data, $languages);
+				} else {
+					$response = [];
+				}
+				break;
+
 			case 'Stores':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Stores -> update($conn, $data);
+					$response = $Stores -> update($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -506,6 +534,7 @@ class DataService {
 		$Payments = new Payments;
 		$Producers = new Producers;
 		$Products = new Products;
+		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
 
@@ -599,6 +628,14 @@ class DataService {
 				}
 				break;
 
+			case 'ProductsOptions':
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $ProductsOptions -> toggle($conn, $data);
+				} else {
+					$response = [];
+				}
+				break;
+
 			case 'Stores':
 				if ($modules['module_market_installed'] == 'true') {
 					$response = $Stores -> toggle($conn, $data);
@@ -641,6 +678,7 @@ class DataService {
 		$Payments = new Payments;
 		$Producers = new Producers;
 		$Products = new Products;
+		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
 
@@ -737,6 +775,14 @@ class DataService {
 			case 'Products':
 				if ($modules['module_market_installed'] == 'true') {
 					$response = $Products -> delete($conn, $data);
+				} else {
+					$response = [];
+				}
+				break;
+
+			case 'ProductsOptions':
+				if ($modules['module_market_installed'] == 'true') {
+					$response = $ProductsOptions -> delete($conn, $data);
 				} else {
 					$response = [];
 				}

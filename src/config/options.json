@@ -84,22 +84,29 @@
 	},
 	"model": {
 		"Users": {
+			"level_default": "redactor",
+			"group_default": "redactors",
 			"level_list": ["demo","redactor","chief_redactor","admin","super_admin"],
 			"group_list": ["default","redactors","managers"]
 		},
 		"Posts": {
+			"type_default": "article",
 			"type_list": ["article","blog","event","media","reference","attachment","custom_1"]
 		},
 		"Menu": {
+			"type_default": "default",
 			"type_list": ["default","primary","secondary","tertiary"]
 		},
 		"MenuItems": {
+			"type_default": "default",
 			"type_list": ["default","external"]
 		},
 		"Categories": {
+			"type_default": "default",
 			"type_list": ["default","gallery"]
 		},
 		"Pages": {
+			"type_default": "default",
 			"type_list": ["default","system","category","tags"],
 			"system_types": ["custom","error_404","error_500"]
 		},
@@ -107,10 +114,36 @@
 			"type_list": ["image","audio","video","document","archive"]
 		},
 		"Members": {
+			"group_default": "none",
 			"group_list": ["none","members","subscribers","customers"]
 		},
 		"Products": {
+			"type_default": "package",
 			"type_list": ["package", "licence"]
+		},
+		"Stores": {
+			"type_default": "default",
+			"type_list": ["default", "dispensing"]
+		},
+		"Payments": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"Deliveries": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"ProductsOptions": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"Producers": {
+			"type_default": "undefined",
+			"type_list": ["undefined"]
+		},
+		"Distributors": {
+			"type_default": "undefined",
+			"type_list": ["undefined"]
 		}
 	}
 }

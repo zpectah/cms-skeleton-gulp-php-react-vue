@@ -10,6 +10,7 @@ import DistributorsPage from './page/Distributors';
 import PaymentsPage from './page/Payments';
 import ProducersPage from './page/Producers';
 import StoresPage from './page/Stores';
+import ProductsOptionsPage from './page/ProductsOptions';
 
 const Market: React.FC<{}> = () => {
 	return (
@@ -22,6 +23,16 @@ const Market: React.FC<{}> = () => {
 					]}
 					component={ProductsPage}
 					auth={ROUTES.market.products.auth}
+					exact
+				/>
+
+				<AuthRoute
+					path={[
+						ROUTES.market['products-options'].path,
+						ROUTES.market['products-options'].path + ROUTE_PATH_ATTR_DETAIL_ID,
+					]}
+					component={ProductsOptionsPage}
+					auth={ROUTES.market['products-options'].auth}
 					exact
 				/>
 

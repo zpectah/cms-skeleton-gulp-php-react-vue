@@ -199,6 +199,12 @@ export const ROUTES = {
 			label: 'Products.label',
 			auth: 2,
 		},
+		'products-options': {
+			path: '/admin/market/products-options',
+			name: 'products-options',
+			label: 'ProductsOptions.label',
+			auth: 2,
+		},
 		stores: {
 			path: '/admin/market/stores',
 			name: 'stores',
@@ -352,34 +358,41 @@ export const NAV_ITEMS = {
 		},
 		{
 			key: 3,
+			label: ROUTES.market['products-options'].label,
+			path: ROUTES.market['products-options'].path,
+			active: true,
+			auth: 2, // TODO
+		},
+		{
+			key: 4,
 			label: ROUTES.market.deliveries.label,
 			path: ROUTES.market.deliveries.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 4,
+			key: 5,
 			label: ROUTES.market.distributors.label,
 			path: ROUTES.market.distributors.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 5,
+			key: 6,
 			label: ROUTES.market.payments.label,
 			path: ROUTES.market.payments.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 6,
+			key: 7,
 			label: ROUTES.market.producers.label,
 			path: ROUTES.market.producers.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 7,
+			key: 8,
 			label: ROUTES.market.stores.label,
 			path: ROUTES.market.stores.path,
 			active: true,
@@ -457,37 +470,43 @@ export const NAV_ITEMS = {
 			active: true,
 			auth: 2, // TODO
 		},
-
 		{
 			key: 12,
+			label: 'model_newItem.ProductsOptions',
+			path: ROUTES.market['products-options'].path,
+			active: true,
+			auth: 2, // TODO
+		},
+		{
+			key: 13,
 			label: 'model_newItem.Deliveries',
 			path: ROUTES.market.deliveries.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 13,
+			key: 14,
 			label: 'model_newItem.Distributors',
 			path: ROUTES.market.distributors.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 14,
+			key: 15,
 			label: 'model_newItem.Payments',
 			path: ROUTES.market.payments.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 15,
+			key: 16,
 			label: 'model_newItem.Producers',
 			path: ROUTES.market.producers.path,
 			active: true,
 			auth: 2, // TODO
 		},
 		{
-			key: 16,
+			key: 17,
 			label: 'model_newItem.Stores',
 			path: ROUTES.market.stores.path,
 			active: true,
