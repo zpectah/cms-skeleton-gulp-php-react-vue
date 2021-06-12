@@ -61,12 +61,12 @@ Content Managing System based on Apache server, PHP core and React components.
 
 ## Environment directories
 
-Location | Created | Description
---- | --- | ---
-``src/`` | no | Source directory
-``dev/`` | yes | Development directory
-``test/`` | yes | Test directory - prepared for test
-``prod/`` | yes | Production directory - prepared for deploy
+Location | Description
+--- | ---
+``src/`` | Source directory
+``dev/`` | Development directory
+``test/`` | Test directory - prepared for test
+``prod/`` | Production directory - prepared for deploy
 
 ## File structure
 
@@ -83,22 +83,22 @@ Location | Description
 ``$/uploads/`` | Uploaded files from system
 ``$/logs/`` | Log files, if any
 
-## Configuration and Options
+## Configuration and Options files
 
-Name | Type | Location | Description
---- | --- | --- | ---
-Config | Admin | src/admin/scripts/config.js | Config file imports
-Constants | Admin | src/admin/scripts/constants.ts | JavaScript Constants
-Constants | Backend | src/config/constants.php | PHP Constants
-Database | Backend | src/config/database.php | Configuration for Backend databases
-Global | All | src/config/global.json | Global configuration file
-Environment | All | src/config/environmental.json | Configuration by environment
-Options | All | src/config/options.json | Project options object
-Locales | All | src/config/locales.json | Locale options object
-Numbers | All | src/config/nums.json | ...
+Name | Type | Location | Rebuild | Description
+--- | --- | --- | --- | ---
+Config | Admin | ``src/admin/scripts/config.js`` | true | Config file imports
+Constants | Admin | ``src/admin/scripts/constants.ts`` | true | JavaScript Constants
+Constants | Backend | ``src/config/constants.php`` | true | PHP Constants
+Database | Backend | ``src/config/database.php`` | true | Configuration for Backend databases
+Global | All | ``src/config/global.json`` | true | Global configuration file
+Environment | All | ``src/config/environmental.json`` | true | Configuration by environment
+Options | All | ``src/config/options.json`` | true | Project options object
+Locales | All | ``src/config/locales.json`` | true | Locale options object
+Numbers | All | ``src/config/nums.json`` | true | ...
 
 
-## Api
+## Api paths
 
 Path | Request | Response | Description
 --- | --- | --- | ---
