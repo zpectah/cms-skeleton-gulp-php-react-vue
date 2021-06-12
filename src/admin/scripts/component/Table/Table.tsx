@@ -99,6 +99,8 @@ interface ListItemsProps {
 		member_group?: boolean;
 		file_size?: boolean;
 		t_value?: boolean;
+		context?: boolean;
+		r_value?: boolean;
 		category_parent?: boolean;
 		// TODO: new columns
 	};
@@ -242,6 +244,20 @@ const Table: React.FC<ListItemsProps> = (props) => {
 					</RowLink>
 				),
 			});
+		if (columnsLayout.r_value)
+			d.push({
+				title: t('component:Table.column_label.value'),
+				dataIndex: 'value',
+				key: 'value',
+				render: (text, record) => (
+					<RowLink
+						onClick={() => editOpen(record)}
+						notActive={record.status !== 0}
+					>
+						{record.value}
+					</RowLink>
+				),
+			});
 		if (columnsLayout.sender)
 			d.push({
 				title: t('component:Table.column_label.sender'),
@@ -373,6 +389,13 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				render: (text) => (
 					<Viewer model="Categories" items={[text]} language={lang} />
 				),
+			});
+		if (columnsLayout.context)
+			d.push({
+				title: t('component:Table.column_label.context'),
+				dataIndex: 'context',
+				key: 'context',
+				render: (text) => <Tag>{text}</Tag>,
 			});
 		if (columnsLayout.user_group)
 			d.push({

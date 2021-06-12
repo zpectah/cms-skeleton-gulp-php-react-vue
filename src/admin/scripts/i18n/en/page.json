@@ -137,6 +137,16 @@
 		"label": "Messages"
 	},
 
+	"Requests": {
+		"meta": {
+			"title": "Requests"
+		},
+		"page": {
+			"title": "Requests page"
+		},
+		"label": "Requests"
+	},
+
 	"MembersDashboard": {
 		"meta": {
 			"title": ""

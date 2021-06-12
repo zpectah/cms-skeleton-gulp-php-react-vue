@@ -29,6 +29,7 @@ import PagesPage from './page/Pages';
 import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
 import MessagesPage from './page/Messages';
+import RequestsPage from './page/Requests';
 import Members from '../Members';
 import Market from '../Market';
 
@@ -176,6 +177,16 @@ const App = () => {
 						]}
 						component={MessagesPage}
 						auth={ROUTES.app.messages.auth}
+						exact
+					/>
+
+					<AuthRoute
+						path={[
+							ROUTES.app.requests.path,
+							ROUTES.app.requests.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						]}
+						component={RequestsPage}
+						auth={ROUTES.app.requests.auth}
 						exact
 					/>
 

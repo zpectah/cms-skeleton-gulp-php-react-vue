@@ -29,7 +29,8 @@
 			"type": "Type",
 			"size": "Size",
 			"group": "Group",
-			"parent": "Parent"
+			"parent": "Parent",
+			"context": "Context"
 		}
 	},
 	"Confirm": {

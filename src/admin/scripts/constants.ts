@@ -159,6 +159,12 @@ export const ROUTES = {
 			label: 'Messages.label',
 			auth: 2,
 		},
+		requests: {
+			path: '/admin/requests',
+			name: 'requests',
+			label: 'Requests.label',
+			auth: 7,
+		},
 		menu: {
 			path: '/admin/menu',
 			name: 'menu',
@@ -304,6 +310,13 @@ export const NAV_ITEMS = {
 			path: ROUTES.app.messages.path,
 			active: true,
 			auth: 2, // TODO
+		},
+		{
+			key: 12,
+			label: ROUTES.app.requests.label,
+			path: ROUTES.app.requests.path,
+			active: true,
+			auth: 7, // TODO
 		},
 	],
 	members: [
