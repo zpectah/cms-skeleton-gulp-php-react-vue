@@ -10,11 +10,11 @@ import {
 	EMAIL_REGEX,
 	MESSAGE_ERROR_DURATION,
 	MESSAGE_SUCCESS_DURATION,
+	ROUTES,
 } from '../../constants';
 import media from '../../styles/responsive';
 import { Button } from '../ui';
 import { Link } from 'react-router-dom';
-import routes from '../../config.routes';
 import LocaleDropdown from '../Profile/LocaleDropdown';
 import { useProfile } from '../../App/hooks';
 import { useTranslation } from 'react-i18next';
@@ -247,7 +247,7 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = (props) => {
 									</Button.Base>
 								</Form.Item>
 								<Form.Item style={{ textAlign: 'center', marginBottom: 0 }}>
-									<Link to={routes.app['login'].path}>
+									<Link to={ROUTES.app['login'].path}>
 										{t('component:LostPasswordForm.btn_logIn')}
 									</Link>
 								</Form.Item>

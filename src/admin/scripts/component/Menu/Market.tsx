@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { NAV_ITEMS } from '../../constants';
 import Navigation from './Navigation';
-import navItems from '../../config.navItems';
 
 interface NavigationMarketProps {
 	sidebarToggle: Function;
@@ -10,7 +10,7 @@ interface NavigationMarketProps {
 const NavigationMarket: React.FC<NavigationMarketProps> = (props) => {
 	const { sidebarToggle } = props;
 
-	return <Navigation links={navItems.market} sidebarToggle={sidebarToggle} />;
+	return <Navigation links={NAV_ITEMS.market} sidebarToggle={sidebarToggle} />;
 };
 
 export default NavigationMarket;

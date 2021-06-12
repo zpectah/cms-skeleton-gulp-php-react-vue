@@ -11,8 +11,8 @@ import {
 	EMAIL_REGEX,
 	MESSAGE_SUCCESS_DURATION,
 	MESSAGE_ERROR_DURATION,
+	ROUTES,
 } from '../../constants';
-import routes from '../../config.routes';
 import media from '../../styles/responsive';
 import { Button } from '../ui';
 import LocaleDropdown from '../Profile/LocaleDropdown';
@@ -135,7 +135,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 								t('message:userLogin.user_login_success'),
 								MESSAGE_SUCCESS_DURATION,
 							);
-							history.push(routes.app.dashboard.path);
+							history.push(ROUTES.app.dashboard.path);
 						});
 				}
 			}
@@ -156,7 +156,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 							<TemporaryBlock>
 								<p>{t('component:LoginForm.alreadyLogIn')}</p>
 								<p>
-									<Link to={routes.app.dashboard.path}>
+									<Link to={ROUTES.app.dashboard.path}>
 										{t('component:LoginForm.btn_returnToDashboard')}
 									</Link>
 									<br />
@@ -227,7 +227,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 									</Button.Base>
 								</AntdForm.Item>
 								<AntdForm.Item style={{ textAlign: 'center', marginBottom: 0 }}>
-									<Link to={routes.app['lost-password'].path}>
+									<Link to={ROUTES.app['lost-password'].path}>
 										{t('component:LoginForm.btn_lostPassword')}
 									</Link>
 								</AntdForm.Item>

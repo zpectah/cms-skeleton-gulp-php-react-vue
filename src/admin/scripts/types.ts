@@ -45,3 +45,11 @@ export interface commonModelProps {
 	active: number | boolean;
 	deleted?: number | boolean;
 }
+
+export interface navItemProps {
+	key: number;
+	label: string;
+	path: string | null; // TODO
+	active: boolean;
+	auth: number;
+}

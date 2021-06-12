@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { useProducts } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +35,7 @@ const ProductsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.market.products}
+			route={ROUTES.market.products}
 			app={'Market'}
 			withSidebar
 			widthHeader
@@ -46,12 +45,12 @@ const ProductsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.products.path}
+					routePathPrefix={ROUTES.market.products.path}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.market.products}
+				route={ROUTES.market.products}
 				model={'Products'}
 				items={Products}
 				loading={isProductsLoading}

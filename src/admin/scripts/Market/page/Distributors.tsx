@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { useDistributors } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +35,7 @@ const DistributorsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.market.distributors}
+			route={ROUTES.market.distributors}
 			app={'Market'}
 			withSidebar
 			widthHeader
@@ -46,12 +45,12 @@ const DistributorsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.distributors.path}
+					routePathPrefix={ROUTES.market.distributors.path}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.market.distributors}
+				route={ROUTES.market.distributors}
 				model={'Distributors'}
 				items={Distributors}
 				loading={isDistributorsLoading}

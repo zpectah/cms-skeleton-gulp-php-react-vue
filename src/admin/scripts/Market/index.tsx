@@ -1,9 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import routes from '../config.routes';
-
-import { ROUTE_PATH_ATTR_DETAIL_ID } from '../constants';
+import { ROUTE_PATH_ATTR_DETAIL_ID, ROUTES } from '../constants';
 import AuthRoute from '../utils/AuthRoute';
 import DashboardPage from './page/Dashboard';
 import ProductsPage from './page/Products';
@@ -19,68 +17,68 @@ const Market: React.FC<{}> = () => {
 			<Switch>
 				<AuthRoute
 					path={[
-						routes.market.products.path,
-						routes.market.products.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.products.path,
+						ROUTES.market.products.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={ProductsPage}
-					auth={routes.market.products.auth}
+					auth={ROUTES.market.products.auth}
 					exact
 				/>
 
 				<AuthRoute
 					path={[
-						routes.market.deliveries.path,
-						routes.market.deliveries.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.deliveries.path,
+						ROUTES.market.deliveries.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={DeliveriesPage}
-					auth={routes.market.deliveries.auth}
+					auth={ROUTES.market.deliveries.auth}
 					exact
 				/>
 
 				<AuthRoute
 					path={[
-						routes.market.distributors.path,
-						routes.market.distributors.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.distributors.path,
+						ROUTES.market.distributors.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={DistributorsPage}
-					auth={routes.market.distributors.auth}
+					auth={ROUTES.market.distributors.auth}
 					exact
 				/>
 
 				<AuthRoute
 					path={[
-						routes.market.payments.path,
-						routes.market.payments.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.payments.path,
+						ROUTES.market.payments.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={PaymentsPage}
-					auth={routes.market.payments.auth}
+					auth={ROUTES.market.payments.auth}
 					exact
 				/>
 
 				<AuthRoute
 					path={[
-						routes.market.producers.path,
-						routes.market.producers.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.producers.path,
+						ROUTES.market.producers.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={ProducersPage}
-					auth={routes.market.producers.auth}
+					auth={ROUTES.market.producers.auth}
 					exact
 				/>
 
 				<AuthRoute
 					path={[
-						routes.market.stores.path,
-						routes.market.stores.path + ROUTE_PATH_ATTR_DETAIL_ID,
+						ROUTES.market.stores.path,
+						ROUTES.market.stores.path + ROUTE_PATH_ATTR_DETAIL_ID,
 					]}
 					component={StoresPage}
-					auth={routes.market.stores.auth}
+					auth={ROUTES.market.stores.auth}
 					exact
 				/>
 
 				<AuthRoute
-					path={routes.market.dashboard.path}
+					path={ROUTES.market.dashboard.path}
 					component={DashboardPage}
-					auth={routes.market.dashboard.auth}
+					auth={ROUTES.market.dashboard.auth}
 					exact
 				/>
 			</Switch>

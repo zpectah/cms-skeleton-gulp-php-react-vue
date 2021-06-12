@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { useMenu } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -30,7 +29,7 @@ const MenuPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.app.menu}
+			route={ROUTES.app.menu}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -38,11 +37,11 @@ const MenuPage = () => {
 			metaTitle={t('page:Menu.meta.title')}
 			headerTitle={t('page:Menu.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.app.menu.path} />,
+				<Button.CreateNew key={1} routePathPrefix={ROUTES.app.menu.path} />,
 			]}
 		>
 			<Table
-				route={routes.app.menu}
+				route={ROUTES.app.menu}
 				model={'Menu'}
 				items={Menu}
 				loading={isMenuLoading}

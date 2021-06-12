@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { NAV_ITEMS } from '../../constants';
 import Navigation from './Navigation';
-import navItems from '../../config.navItems';
 
 interface NavigationMembersProps {
 	sidebarToggle: Function;
@@ -10,7 +10,7 @@ interface NavigationMembersProps {
 const NavigationMembers: React.FC<NavigationMembersProps> = (props) => {
 	const { sidebarToggle } = props;
 
-	return <Navigation links={navItems.members} sidebarToggle={sidebarToggle} />;
+	return <Navigation links={NAV_ITEMS.members} sidebarToggle={sidebarToggle} />;
 };
 
 export default NavigationMembers;

@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { ROUTE_PATH_SUFFIX_DETAIL } from '../../constants';
-import navItems from '../../config.navItems';
+import { ROUTE_PATH_SUFFIX_DETAIL, NAV_ITEMS } from '../../constants';
 import { Modal } from '../../component/ui';
 
 interface AddDialogProps {
@@ -33,7 +32,7 @@ const Dialog: React.FC<AddDialogProps> = (props) => {
 			<Modal.Header>... create new ...</Modal.Header>
 			<Modal.Content>
 				<Card>
-					{navItems.add.map((item) => {
+					{NAV_ITEMS.add.map((item) => {
 						if (item.active)
 							return (
 								<Card.Grid style={gridStyle} key={item.key}>

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isMobileOnly } from 'react-device-detect';
 import styled from 'styled-components';
 
-import routes from '../../config.routes';
+import { ROUTES } from '../../constants';
 import media from '../../styles/responsive';
 
 const Item = styled.li`
@@ -72,9 +72,9 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 
 		if (
 			!(
-				path == routes.app.dashboard.path ||
-				path == routes.members.dashboard.path ||
-				path == routes.market.dashboard.path
+				path == ROUTES.app.dashboard.path ||
+				path == ROUTES.members.dashboard.path ||
+				path == ROUTES.market.dashboard.path
 			) &&
 			location.pathname.includes(path)
 		)

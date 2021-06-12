@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { usePosts } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +35,7 @@ const PostsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.app.posts}
+			route={ROUTES.app.posts}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -44,11 +43,11 @@ const PostsPage = () => {
 			metaTitle={t('page:Posts.meta.title')}
 			headerTitle={t('page:Posts.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.app.posts.path} />,
+				<Button.CreateNew key={1} routePathPrefix={ROUTES.app.posts.path} />,
 			]}
 		>
 			<Table
-				route={routes.app.posts}
+				route={ROUTES.app.posts}
 				model={'Posts'}
 				items={Posts}
 				loading={isPostsLoading}

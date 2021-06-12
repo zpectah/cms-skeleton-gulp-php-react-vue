@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
 
+import { ROUTES } from '../../constants';
 import { useSettings } from '../hooks';
-import routes from '../../config.routes';
 import AppLayout from '../../layout/AppLayout';
 import { Form } from '../../component/Settings';
 import { Preloader } from '../../component/ui';
@@ -31,7 +31,7 @@ const SettingsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.app.settings}
+			route={ROUTES.app.settings}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -41,7 +41,7 @@ const SettingsPage = () => {
 		>
 			{Settings ? (
 				<Form
-					route={routes.app.settings}
+					route={ROUTES.app.settings}
 					panelKey={params.panel}
 					model={Settings}
 					loading={isSettingsLoading || updating}

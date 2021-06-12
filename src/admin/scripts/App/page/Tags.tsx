@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { useTags } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -30,7 +29,7 @@ const TagsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.app.tags}
+			route={ROUTES.app.tags}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -38,11 +37,11 @@ const TagsPage = () => {
 			metaTitle={t('page:Tags.meta.title')}
 			headerTitle={t('page:Tags.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.app.tags.path} />,
+				<Button.CreateNew key={1} routePathPrefix={ROUTES.app.tags.path} />,
 			]}
 		>
 			<Table
-				route={routes.app.tags}
+				route={ROUTES.app.tags}
 				model={'Tags'}
 				items={Tags}
 				loading={isTagsLoading}

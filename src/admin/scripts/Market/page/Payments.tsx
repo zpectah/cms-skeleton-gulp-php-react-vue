@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { usePayments } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -36,7 +35,7 @@ const PaymentsPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.market.payments}
+			route={ROUTES.market.payments}
 			app={'Market'}
 			withSidebar
 			widthHeader
@@ -46,12 +45,12 @@ const PaymentsPage = () => {
 			headerChildren={[
 				<Button.CreateNew
 					key={1}
-					routePathPrefix={routes.market.payments.path}
+					routePathPrefix={ROUTES.market.payments.path}
 				/>,
 			]}
 		>
 			<Table
-				route={routes.market.payments}
+				route={ROUTES.market.payments}
 				model={'Payments'}
 				items={Payments}
 				loading={isPaymentsLoading}

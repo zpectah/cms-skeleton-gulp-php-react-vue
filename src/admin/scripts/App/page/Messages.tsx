@@ -2,8 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT } from '../../constants';
-import routes from '../../config.routes';
+import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
 import { useMessages } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
@@ -32,7 +31,7 @@ const MessagesPage = () => {
 
 	return (
 		<AppLayout
-			route={routes.app.messages}
+			route={ROUTES.app.messages}
 			app={'App'}
 			withSidebar
 			widthHeader
@@ -40,11 +39,11 @@ const MessagesPage = () => {
 			metaTitle={t('page:Messages.meta.title')}
 			headerTitle={t('page:Messages.page.title')}
 			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={routes.app.messages.path} />,
+				<Button.CreateNew key={1} routePathPrefix={ROUTES.app.messages.path} />,
 			]}
 		>
 			<Table
-				route={routes.app.messages}
+				route={ROUTES.app.messages}
 				model={'Messages'}
 				items={Messages}
 				loading={isMessagesLoading}
