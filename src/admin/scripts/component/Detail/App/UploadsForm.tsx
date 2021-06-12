@@ -239,6 +239,9 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 									row.onChange(e.target.value);
 									if (e.target.value.length > 2) isDuplicate(e.target.value);
 								}}
+								onBlur={(e) => {
+									if (e.target.value.length > 2) isDuplicate(e.target.value);
+								}}
 								placeholder={'Name'}
 								readOnly={!detailData.is_new}
 								disabled={!detailData.is_new}
