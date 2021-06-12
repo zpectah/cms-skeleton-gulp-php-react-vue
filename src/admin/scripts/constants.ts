@@ -431,13 +431,6 @@ export const NAV_ITEMS = {
 			auth: 2, // TODO
 		},
 		{
-			key: 8,
-			label: 'model_newItem.Messages',
-			path: ROUTES.app.messages.path,
-			active: true,
-			auth: 2, // TODO
-		},
-		{
 			key: 9,
 			label: 'model_newItem.Members',
 			path: ROUTES.members.members.path,

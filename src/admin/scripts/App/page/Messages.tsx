@@ -18,10 +18,6 @@ const MessagesPage = () => {
 		reloadMessages,
 	} = useMessages();
 
-	const toggleHandler = (data) => {
-		return () => {};
-	};
-
 	const deleteHandler = (data) => {
 		return [
 			deleteMessages(data),
@@ -38,9 +34,6 @@ const MessagesPage = () => {
 			withFooter
 			metaTitle={t('page:Messages.meta.title')}
 			headerTitle={t('page:Messages.page.title')}
-			headerChildren={[
-				<Button.CreateNew key={1} routePathPrefix={ROUTES.app.messages.path} />,
-			]}
 		>
 			<Table
 				route={ROUTES.app.messages}
@@ -59,7 +52,6 @@ const MessagesPage = () => {
 				}}
 				detailId={params.id}
 				searchAttrs={['sender', 'recipients', 'subject', 'content']}
-				onToggle={toggleHandler}
 				onDelete={deleteHandler}
 				selectable
 				allowDelete

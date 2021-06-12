@@ -11,9 +11,9 @@ class Messages {
 		$response = [];
 
 		// prepare
-		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM messages');
-		$types = '';
-		$args = [];
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM messages WHERE status <= ?');
+		$types = 'i';
+		$args = [2];
 
 		// execute
 		$stmt = $conn -> prepare($query);

@@ -1,13 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { Input, Switch } from 'antd';
 
-import { SUBMIT_TIMEOUT } from '../../../constants';
-import { useMessages } from '../../../App/hooks';
+// import { useMessages } from '../../../App/hooks';
 import { MessagesItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section } from '../../ui';
-import DetailFooter from '../DetailFooter';
+import { Modal, Form, Section, Button } from '../../ui';
 
 interface MessagesDetailFormProps {
 	detailData: MessagesItemProps;
@@ -21,94 +17,46 @@ interface MessagesDetailFormProps {
 const MessagesDetailForm: React.FC<MessagesDetailFormProps> = ({
 	detailData,
 	onCancel,
-	onSave,
 	onDelete,
-	allowSave,
-	allowDelete,
 }) => {
 	const { t } = useTranslation(['common']);
-	const { createMessages, reloadMessages } = useMessages();
-	const { control, handleSubmit, formState, register } = useForm({
-		mode: 'all',
-		defaultValues: {
-			...detailData,
-		},
-	});
-
-	const submitHandler = (data) => {
-		if (detailData.is_new) {
-			createMessages(data).then((response) => {
-				onSave(data, response);
-				onCancel();
-			});
-		}
-
-		setTimeout(() => reloadMessages(), SUBMIT_TIMEOUT);
-	};
+	// const { reloadMessages } = useMessages();
 
 	return (
 		<form>
 			<Modal.Header>
-				<div className="modal-heading-title">
-					{detailData.is_new
-						? t('title.create_new') +
-						  ' ' +
-						  t('model_item.Messages').toLowerCase()
-						: detailData.subject}
-				</div>
+				<div className="modal-heading-title">{detailData.subject}</div>
 			</Modal.Header>
 			<Modal.Content>
-				<Section.Base withBorder>
-					<div>
-						<input
-							type="hidden"
-							name="id"
-							ref={register({ required: true })}
-							defaultValue={detailData.id}
-						/>
-						<input
-							type="hidden"
-							name="status"
-							ref={register({ required: true })}
-							defaultValue={detailData.status || 0}
-						/>
-					</div>
-					<div>... from ...</div>
-					<div>... to ...</div>
-					<Form.Row
-						label={'Name'}
-						name={'subject'}
-						control={control}
-						rules={{ required: true }}
-						required
-						defaultValue={''}
-					>
-						{(row) => (
-							<Input
-								id={row.id}
-								type={'text'}
-								name={row.name}
-								value={row.value}
-								onChange={row.onChange}
-								placeholder={'Subject'}
-							/>
-						)}
-					</Form.Row>
-				</Section.Base>
 				<Section.Base>
-					<div>... content ...</div>
+					<Form.RowNoController label={'From'}>
+						{() => <>{detailData.sender}</>}
+					</Form.RowNoController>
+					<Form.RowNoController label={'To'}>
+						{() => <>{detailData.recipients}</>}
+					</Form.RowNoController>
+					<Form.RowNoController label={'Subject'}>
+						{() => <>{detailData.subject}</>}
+					</Form.RowNoController>
+					<Form.RowNoController label={'Message'}>
+						{() => <>{detailData.content}</>}
+					</Form.RowNoController>
 				</Section.Base>
 			</Modal.Content>
-			<DetailFooter
-				onCancel={onCancel}
-				onDelete={onDelete}
-				isNew={detailData.is_new}
-				invalid={!formState.isValid}
-				detailData={detailData}
-				allowSave={allowSave}
-				allowDelete={allowDelete}
-				onSubmit={handleSubmit(submitHandler)}
-			/>
+			<Modal.Footer>
+				<div className="modal-footer-block">
+					<Button.Base onClick={() => onCancel()}>{t('btn.close')}</Button.Base>
+				</div>
+				<div className="modal-footer-block">
+					<Button.Base
+						type="primary"
+						onClick={() => onDelete(detailData)}
+						danger
+					>
+						{t('btn.delete')}
+					</Button.Base>
+				</div>
+			</Modal.Footer>
 		</form>
 	);
 };

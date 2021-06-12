@@ -119,7 +119,7 @@ interface ListItemsProps {
 	allowDelete?: boolean;
 	loading?: boolean;
 	detailId?: string;
-	onToggle: (data: any) => void;
+	onToggle?: (data: any) => void;
 	onDelete: (data: any) => void;
 	withLanguageToggle?: boolean;
 	itemsPerPage?: number;
@@ -454,7 +454,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		setDetailOpen(true);
 	};
 	const toggleSelected = (keys: any) => {
-		onToggle(keys);
+		if (onToggle) onToggle(keys);
 		setSelectedRowKeys([]);
 
 		message.success(
@@ -463,7 +463,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		);
 	};
 	const toggleHandler = (data: any) => {
-		onToggle(data);
+		if (onToggle) onToggle(data);
 
 		message.success(
 			t('message:success.items.update'),
