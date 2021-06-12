@@ -53,22 +53,22 @@
 			"format": [
 				{
 					"key": "thumbnail",
-					"width": 96,
-					"height": 96,
-					"quality": 40,
+					"width": 100,
+					"height": 100,
+					"quality": 50,
 					"crop": true
 				},
 				{
 					"key": "medium",
-					"width": 960,
-					"height": 960,
-					"quality": 75,
+					"width": 1280,
+					"height": 720,
+					"quality": 80,
 					"crop": true
 				},
 				{
 					"key": "large",
-					"width": 1680,
-					"height": 1680,
+					"width": 1920,
+					"height": 1080,
 					"quality": 100,
 					"crop": false
 				},

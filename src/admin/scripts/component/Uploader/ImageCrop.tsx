@@ -3,8 +3,8 @@ import Cropper from 'react-easy-crop';
 import styled from 'styled-components';
 import { message, Radio, Slider } from 'antd';
 
+import { IMAGE_CROP_OPTIONS } from '../../constants';
 import getCroppedImg from './cropImage';
-
 import media from '../../styles/responsive';
 
 const Wrapper = styled.div`
@@ -30,11 +30,6 @@ const CropperSource = styled.div`
 	${media.min.md} {
 		width: 50%;
 		min-height: 50vh;
-	}
-
-	.ReactCrop {
-	}
-	.ReactCrop__image {
 	}
 `;
 const CropperOutput = styled.div`
@@ -96,8 +91,10 @@ const CropperThumbnail = styled.div<{ process: boolean }>`
 	opacity: ${(props) => (props.process ? '0.25' : '1')};
 
 	img {
-		max-width: 90%;
+		width: auto;
+		max-width: 80%;
 		height: auto;
+		max-height: 80%;
 		display: block;
 	}
 `;
@@ -172,28 +169,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({ onChange, src, aspect }) => {
 	const getRatioOptions = () => {
 		let original = mediaDimensions.w / mediaDimensions.h;
 
-		let options = [
-			{
-				label: '1:1',
-				value: 1 / 1,
-			},
-			{
-				label: '4:3',
-				value: 4 / 3,
-			},
-			{
-				label: '16:9',
-				value: 16 / 9,
-			},
-			{
-				label: '3:4',
-				value: 3 / 4,
-			},
-			{
-				label: '9:16',
-				value: 9 / 16,
-			},
-		];
+		let options = [...IMAGE_CROP_OPTIONS];
 
 		if (original)
 			options.push({

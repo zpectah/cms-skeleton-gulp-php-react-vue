@@ -21,7 +21,6 @@ export const MAPBOX_DEFAULTS = {
 	latitude: 50.08322927731517,
 	zoom: 10,
 };
-export const IMAGE_CROP_MIN_SIZE = 150;
 export const USER_LEVEL = {
 	demo: {
 		id: 0,
@@ -48,3 +47,34 @@ export const ROUTE_PATH_SUFFIX_DETAIL = '/detail';
 export const ROUTE_PATH_ATTR_DETAIL_ID = ROUTE_PATH_SUFFIX_DETAIL + '/:id';
 export const ROUTE_PATH_ATTR_PANEL = '/:panel';
 export const ROUTE_PATH_ATTR_TOKEN = '/token/:token';
+export const IMAGE_CROP_OPTIONS = [
+	{
+		label: '1:1',
+		value: 1 / 1,
+	},
+	{
+		label: '3:2',
+		value: 3 / 2,
+	},
+	{
+		label: '4:3',
+		value: 4 / 3,
+	},
+	{
+		label: '16:9',
+		value: 16 / 9,
+	},
+	//
+	{
+		label: '2:3',
+		value: 2 / 3,
+	},
+	{
+		label: '3:4',
+		value: 3 / 4,
+	},
+	{
+		label: '9:16',
+		value: 9 / 16,
+	},
+];
