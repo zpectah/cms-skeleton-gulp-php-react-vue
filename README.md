@@ -39,6 +39,7 @@ Content Managing System based on Apache server, PHP core and React components.
     ServerAlias cms-skeleton
 </VirtualHost>
 ```
+### Hosts
 ```
 127.0.0.1		cms-skeleton
 ```
@@ -56,7 +57,7 @@ Content Managing System based on Apache server, PHP core and React components.
 - ``% yarn dev`` - Create development bundle
 - ``% yarn build`` - Create production bundle
 
-## File structure
+## Environment directories
 
 Location | Created | Description
 --- | --- | ---
@@ -65,43 +66,41 @@ Location | Created | Description
 ``test/`` | yes | Test directory - prepared for test
 ``prod/`` | yes | Production directory - prepared for deploy
 
+## File structure
+
 Location | Description
 --- | ---
-``./admin/`` | Root Admin directory
-``./api/`` | Root Api directory
-``./web/`` | Root Web directory
-``./config/`` | Config files
-``./core/`` | PHP Core files
-``./libs/`` | Extended libraries (Only for imports)
-``./static/`` | Static files (images or whatever)
-``./uploads/`` | Uploaded files from system
-``./logs/`` | Log files
-``./vendor/`` | Vendor directory (Composer)
+``src/admin/`` | Root Admin directory
+``src/api/`` | Root Api directory
+``src/web/`` | Root Web directory
+``src/config/`` | Config files
+``src/core/`` | PHP Core files
+``src/libs/`` | Extended libraries (Only for imports)
+``src/static/`` | Static files (images or whatever)
+``src/vendor/`` | Vendor directory (Composer)
+``$/uploads/`` | Uploaded files from system
+``$/logs/`` | Log files, if any
 
 ## Configuration and Options
-...
 
-Type | Location | Description
---- | --- | ---
-Config | src/admin/scripts/config.js | Config file imports for Admin
-Config | src/admin/scripts/config.routes.ts | Config for routes and paths in Admin
-Config | src/admin/scripts/config.navItems.ts | Config for navigation in Admin
-Constants | src/admin/scripts/constants.ts | Constants for Admin
-Constants | src/config/constants.php | Constants for Backend
-Database | src/config/database.php | Configuration for Backend databases
-Global * | src/config/global.json | Global configuration file
-Environment | src/config/environmental.json | Configuration by environment
-Options | src/config/options.json | Project options object
-Options | src/config/locales.json | Locale options object
-Options | src/config/nums.json |
+Name | Type | Location | Description
+--- | --- | --- | ---
+Config | Admin | src/admin/scripts/config.js | Config file imports
+Constants | Admin | src/admin/scripts/constants.ts | JavaScript Constants
+Constants | Backend | src/config/constants.php | PHP Constants
+Database | Backend | src/config/database.php | Configuration for Backend databases
+Global | All | src/config/global.json | Global configuration file
+Environment | All | src/config/environmental.json | Configuration by environment
+Options | All | src/config/options.json | Project options object
+Locales | All | src/config/locales.json | Locale options object
+Numbers | All | src/config/nums.json | ...
 
 
 ## Api
-...
 
-Type | Path | Request | Response | Description
---- | --- | --- | --- | ---
-Settings get | api/get_settings | null | {} |
-Settings post | api/update_settings | {} | {} |
+Path | Request | Response | Description
+--- | --- | --- | ---
+``/api/get_settings`` | null | {} |
+``/api/update_settings`` | {} | {} |
 
 ... TODO
