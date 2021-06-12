@@ -30,7 +30,7 @@ Content Managing System based on Apache server, PHP core and React components.
 * Styles:
 	- Sass/SCSS
 
-## Development
+## Development configuration
 ### Virtual Host
 ```
 <VirtualHost *:80>
@@ -44,6 +44,7 @@ Content Managing System based on Apache server, PHP core and React components.
 127.0.0.1		cms-skeleton
 ```
 
+## Development tasks
 ### Install
 - ``% yarn install`` - Install node packages
 - ``% yarn initial`` - Prepare vendors
@@ -55,6 +56,7 @@ Content Managing System based on Apache server, PHP core and React components.
 
 ### Build
 - ``% yarn dev`` - Create development bundle
+- ``% yarn test`` - Create test bundle
 - ``% yarn build`` - Create production bundle
 
 ## Environment directories
