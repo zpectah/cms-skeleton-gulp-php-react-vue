@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ReactCrop from 'react-image-crop';
+import React, { useState, useCallback, useEffect } from 'react';
+import Cropper from 'react-easy-crop';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
-import { IMAGE_CROP_MIN_SIZE } from '../../constants';
+import getCroppedImg from './cropImage';
+
 import media from '../../styles/responsive';
 
 const Wrapper = styled.div`
@@ -32,15 +32,8 @@ const CropperSource = styled.div`
 	}
 
 	.ReactCrop {
-		max-width: 75%;
-		height: auto;
-		flex: none;
 	}
 	.ReactCrop__image {
-		display: block;
-		flex: none;
-		align-self: stretch;
-		object-fit: contain;
 	}
 `;
 const CropperOutput = styled.div`
@@ -70,6 +63,16 @@ const CropperMeta = styled.div`
 		background-color: rgb(250, 250, 250);
 	}
 `;
+const CropperControls = styled.div`
+	width: 100%;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+`;
 const CropperThumbnail = styled.div`
 	width: 100%;
 	height: auto;
@@ -82,10 +85,9 @@ const CropperThumbnail = styled.div`
 	overflow: hidden;
 
 	img {
+		max-width: 90%;
+		height: auto;
 		display: block;
-		flex: none;
-		align-self: stretch;
-		object-fit: contain;
 	}
 `;
 
@@ -94,136 +96,88 @@ interface ImageCropProps {
 		blob: any, // TODO
 	) => void;
 	src: any; // TODO
-	locked?: boolean;
-	minWidth?: number;
-	minHeight?: number;
-	maxWidth?: number;
-	maxHeight?: number;
 	aspect?: number;
-	avatarMaxSize?: number;
 }
 
-const ImageCrop: React.FC<ImageCropProps> = ({
-	onChange,
-	src,
-	locked,
-	minWidth = IMAGE_CROP_MIN_SIZE,
-	minHeight = IMAGE_CROP_MIN_SIZE,
-	maxWidth,
-	maxHeight,
-	aspect,
-	avatarMaxSize,
-}) => {
-	const [imageRef, setImageRef] = useState(null);
-	const [fileBlob, setFileBlob] = useState(null);
+const ImageCrop: React.FC<ImageCropProps> = ({ onChange, src, aspect }) => {
 	const [crop, setCrop] = useState<{
-		unit: 'px' | '%';
 		x: number;
 		y: number;
-		width?: number;
-		height?: number;
-		aspect?: string | number | null;
-	}>({
-		unit: 'px', // default, can be 'px' or '%'
-		x: 0,
-		y: 0,
-		aspect: aspect,
-	});
-	const { t } = useTranslation(['component']);
+	}>({ x: 0, y: 0 });
+	const [zoom, setZoom] = useState<number>(1);
+	const [rotation, setRotation] = useState(0);
+	const [croppedImage, setCroppedImage] = useState(null);
+	const [area, setArea] = useState({ width: 0, height: 0 });
+	const [tmpSrc, setTmpSrc] = useState(null);
+	const [tmpAspect, setTmpAspect] = useState(4 / 3);
 
-	const onImageLoaded = (image) => setImageRef(image);
-	const onCropComplete = (crop) => makeClientCrop(crop);
-	const onCropChange = (crop) => setCrop(crop);
-	const makeClientCrop = async (crop) => {
-		if (imageRef && crop.width && crop.height) {
-			const tmp_croppedImageUrl = await getCroppedImage(
-				imageRef,
-				crop,
-				'tmp.jpeg',
+	const onCropComplete = useCallback(async (croppedArea, croppedAreaPixels) => {
+		setArea({
+			width: croppedAreaPixels.width,
+			height: croppedAreaPixels.height,
+		});
+		try {
+			const croppedImage = await getCroppedImg(
+				src,
+				croppedAreaPixels,
+				rotation,
 			);
-			onChange(tmp_croppedImageUrl);
+
+			setCroppedImage(croppedImage);
+			onChange(croppedImage);
+		} catch (e) {
+			console.error(e);
 		}
-	};
-	const getCroppedImage = (image, crop, fileName) => {
-		const canvas = document.createElement('canvas');
-		const scaleX = image.naturalWidth / image.width;
-		const scaleY = image.naturalHeight / image.height;
-		const ctx = canvas.getContext('2d');
-		const w = avatarMaxSize ? avatarMaxSize : crop.width;
-		const h = avatarMaxSize ? avatarMaxSize : crop.height;
+	}, []);
 
-		canvas.width = w;
-		canvas.height = h;
+	const onImageLoad = useCallback((mediaSize) => {
+		if (aspect) {
+			setTmpAspect(aspect);
+		} else {
+			setTmpAspect(mediaSize.width / mediaSize.height);
+		}
+	}, []);
 
-		ctx.drawImage(
-			image,
-			crop.x * scaleX,
-			crop.y * scaleY,
-			crop.width * scaleX,
-			crop.height * scaleY,
-			0,
-			0,
-			w,
-			h,
-		);
-
-		return new Promise((resolve, reject) => {
-			let blob = canvas.toDataURL();
-
-			setFileBlob(blob);
-			resolve(blob);
-
-			return blob;
-		});
-	};
-	const setThumbnail = (aspect?: number) => {
-		const w = imageRef?.width;
-		const h = aspect ? imageRef?.width / aspect : imageRef?.height;
-
-		setCrop({ ...crop, width: w, height: h });
-		makeClientCrop({
-			...crop,
-			width: w,
-			height: h,
-		});
-	};
-
-	useEffect(() => {
-		if (imageRef) setThumbnail(aspect);
-	}, [imageRef]);
+	useEffect(() => setTmpSrc(src), [src]);
 
 	return (
 		<Wrapper>
 			<CropperSource>
-				{src && (
-					<ReactCrop
-						src={src}
-						crop={crop}
-						ruleOfThirds
-						onImageLoaded={onImageLoaded}
-						onComplete={onCropComplete}
-						onChange={onCropChange}
-						locked={locked}
-						minWidth={minWidth}
-						minHeight={minHeight}
-						maxWidth={maxWidth}
-						maxHeight={maxHeight}
-					/>
-				)}
+				<Cropper
+					image={tmpSrc}
+					crop={crop}
+					zoom={zoom}
+					rotation={rotation}
+					aspect={tmpAspect}
+					onCropChange={setCrop}
+					onCropComplete={onCropComplete}
+					onZoomChange={setZoom}
+					zoomWithScroll={false}
+					onMediaLoaded={onImageLoad}
+				/>
 			</CropperSource>
 			<CropperOutput>
 				<CropperThumbnail>
-					{fileBlob ? (
-						<img src={fileBlob} style={{ maxWidth: '100%' }} alt="tmp_image" />
-					) : (
-						<div>{t('component:FileUpload.title.fileCrop')}</div>
-					)}
+					{croppedImage && <img src={croppedImage} alt={'cropped image'} />}
 				</CropperThumbnail>
 				<CropperMeta>
 					<small>
-						{crop.width} x {crop.height}
+						{area.width} x {area.height}
 					</small>
 				</CropperMeta>
+				<CropperControls>
+					<div>
+						<input
+							type="range"
+							value={zoom}
+							onChange={(e) => setZoom(Number(e.target.value))}
+							min={1}
+							max={3}
+							step={0.1}
+						/>
+					</div>
+					<div>...</div>
+				</CropperControls>
 			</CropperOutput>
 		</Wrapper>
 	);

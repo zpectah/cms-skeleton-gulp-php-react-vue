@@ -39,7 +39,18 @@ const MediaTemporary = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
-const PreloaderLayer = styled.div``;
+const PreloaderLayer = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: inherit;
+	background-color: rgba(255, 255, 255, 0.5);
+`;
 
 interface UploadsDetailFormProps {
 	detailData: UploadsItemProps;
@@ -154,6 +165,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 		let duplicate = false;
 		Uploads?.map((item) => {
 			if (item.name == fileName) duplicate = true;
+			if (item.name == string.replaceSpaces(fileName)) duplicate = true;
 		});
 
 		setDuplicates(duplicate);
@@ -173,6 +185,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 				</div>
 			</Modal.Header>
 			<Modal.Content>
+				{uploading && <PreloaderLayer> ... uploading ... </PreloaderLayer>}
 				<div>
 					<input
 						type="hidden"
@@ -184,15 +197,10 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 				<Section.Base withBorder>
 					<>
 						{detailData.is_new ? (
-							<>
-								{uploading && (
-									<PreloaderLayer> ... uploading ... </PreloaderLayer>
-								)}
-								<Uploader.Wrapper
-									onChange={uploaderHandler}
-									onReset={onUploadReset}
-								/>
-							</>
+							<Uploader.Wrapper
+								onChange={uploaderHandler}
+								onReset={onUploadReset}
+							/>
 						) : (
 							<MediaContainer>
 								{detailData.type == 'image' ? (
@@ -222,21 +230,19 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 						errors={duplicates ? ['This name is already in use'] : []}
 					>
 						{(row) => (
-							<>
-								<Input
-									id={row.id}
-									type={'text'}
-									name={row.name}
-									value={row.value}
-									onChange={(e) => {
-										row.onChange(e.target.value);
-										if (e.target.value.length > 2) isDuplicate(e.target.value);
-									}}
-									placeholder={'Name'}
-									readOnly={!detailData.is_new}
-									disabled={!detailData.is_new}
-								/>
-							</>
+							<Input
+								id={row.id}
+								type={'text'}
+								name={row.name}
+								value={row.value}
+								onChange={(e) => {
+									row.onChange(e.target.value);
+									if (e.target.value.length > 2) isDuplicate(e.target.value);
+								}}
+								placeholder={'Name'}
+								readOnly={!detailData.is_new}
+								disabled={!detailData.is_new}
+							/>
 						)}
 					</Form.Row>
 					<Form.Row
@@ -301,7 +307,9 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 				onDelete={onDelete}
 				isNew={detailData.is_new}
 				invalid={
-					detailData.is_new ? !(watchName && tmp_blob && !duplicates) : false
+					detailData.is_new
+						? !(watchName && tmp_blob && !duplicates) || uploading
+						: false
 				}
 				detailData={detailData}
 				allowSave={allowSave}

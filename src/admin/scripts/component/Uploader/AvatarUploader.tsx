@@ -101,8 +101,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 						onReset={() => {
 							setTmpBlob(null);
 						}}
-						cropAspect={1 / 1}
-						avatarMaxSize={250}
+						aspect={1 / 1}
 					/>
 				</DialogContent>
 				<Modal.Footer>

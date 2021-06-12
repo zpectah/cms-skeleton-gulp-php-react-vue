@@ -106,13 +106,7 @@ interface UploaderProps {
 	height?: number;
 	onReset?: () => void;
 	accept?: string;
-	cropAspect?: number;
-	cropAspectLocked?: boolean;
-	cropMinWidth?: number;
-	cropMinHeight?: number;
-	cropMaxWidth?: number;
-	cropMaxHeight?: number;
-	avatarMaxSize?: number;
+	aspect?: number;
 }
 
 const Uploader: React.FC<UploaderProps> = ({
@@ -120,13 +114,7 @@ const Uploader: React.FC<UploaderProps> = ({
 	accept,
 	onReset,
 	height = 250,
-	cropAspect,
-	cropAspectLocked,
-	cropMinWidth,
-	cropMinHeight,
-	cropMaxWidth,
-	cropMaxHeight,
-	avatarMaxSize,
+	aspect,
 }) => {
 	const { t } = useTranslation(['common', 'component', 'message']);
 	const [dragOver, setDragOver] = useState(false);
@@ -150,6 +138,7 @@ const Uploader: React.FC<UploaderProps> = ({
 			setDragOver(false);
 			setFile(null);
 			setFileType('unknown');
+			setSrc(null);
 
 			if (file) return setBlobSource(file);
 		},
@@ -182,6 +171,7 @@ const Uploader: React.FC<UploaderProps> = ({
 
 			setFile(null);
 			setFileType('unknown');
+			setSrc(null);
 
 			if (file) return setBlobSource(file);
 		},
@@ -203,7 +193,9 @@ const Uploader: React.FC<UploaderProps> = ({
 					size: file.size,
 					type: type,
 				});
-				if (type == 'image') setSrc(blob);
+				if (type == 'image') {
+					setSrc(blob);
+				}
 			} else {
 				message.warn(t('message:fileNotAccepted'), 5);
 			}
@@ -216,7 +208,9 @@ const Uploader: React.FC<UploaderProps> = ({
 				size: file.size,
 				type: type,
 			});
-			if (type == 'image') setSrc(blob);
+			if (type == 'image') {
+				setSrc(blob);
+			}
 		}
 
 		onChange(blob, file.name, ext, file.mime, file.size, type);
@@ -227,7 +221,7 @@ const Uploader: React.FC<UploaderProps> = ({
 		if (onReset) onReset();
 	};
 	const cropChangeHandler = (blob) => {
-		console.log('...cropChangeHandler');
+		console.log('...cropChangeHandler', blob);
 		onChange(blob, file.name, file.extension, file.mime, file.size, file.type);
 	};
 	const onInit = () => {
@@ -267,13 +261,7 @@ const Uploader: React.FC<UploaderProps> = ({
 								<ImageCrop
 									src={src}
 									onChange={cropChangeHandler}
-									aspect={cropAspect}
-									locked={cropAspectLocked}
-									minWidth={cropMinWidth}
-									minHeight={cropMinHeight}
-									maxWidth={cropMaxWidth}
-									maxHeight={cropMaxHeight}
-									avatarMaxSize={avatarMaxSize}
+									aspect={aspect}
 								/>
 							) : (
 								<FileThumb>
