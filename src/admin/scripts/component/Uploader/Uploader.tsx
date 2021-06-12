@@ -213,17 +213,15 @@ const Uploader: React.FC<UploaderProps> = ({
 			}
 		}
 
-		onChange(blob, file.name, ext, file.mime, file.size, type);
+		onChange(blob, file.name, ext, file.type, file.size, type);
 	};
 	const resetHandler = () => {
 		setFile(null);
 		setFileType('unknown');
 		if (onReset) onReset();
 	};
-	const cropChangeHandler = (blob) => {
-		console.log('...cropChangeHandler', blob);
+	const cropChangeHandler = (blob) =>
 		onChange(blob, file.name, file.extension, file.mime, file.size, file.type);
-	};
 	const onInit = () => {
 		window.addEventListener('mouseup', dragEvents.onDragLeave);
 		window.addEventListener('dragover', dragEvents.onDragOver);
