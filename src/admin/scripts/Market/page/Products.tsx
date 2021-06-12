@@ -67,6 +67,7 @@ const ProductsPage = () => {
 				onDelete={deleteHandler}
 				selectable
 				allowDelete
+				withLanguageToggle
 			/>
 		</AppLayout>
 	);

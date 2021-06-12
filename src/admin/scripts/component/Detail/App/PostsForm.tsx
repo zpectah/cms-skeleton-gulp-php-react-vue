@@ -587,6 +587,8 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
 							</>
 						)}
 					</Form.Row>
+				</Section.Base>
+				<Section.Base withBorder>
 					<Form.Row
 						label={'Rating'}
 						name={'rating'}

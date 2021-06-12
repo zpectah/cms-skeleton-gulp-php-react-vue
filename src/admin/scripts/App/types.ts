@@ -1,7 +1,5 @@
 import { commonModelProps } from '../types';
 
-import config from '../config'; // TODO
-
 export interface UsersItemProps extends commonModelProps {
 	email: string;
 	password: string;

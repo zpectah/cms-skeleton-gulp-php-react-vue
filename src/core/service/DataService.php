@@ -167,7 +167,7 @@ class DataService {
 
 			case 'Products':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Products -> get($conn, $data);
+					$response = $Products -> get($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -311,7 +311,7 @@ class DataService {
 
 			case 'Products':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Products -> create($conn, $data);
+					$response = $Products -> create($conn, $data, $languages);
 				} else {
 					$response = [];
 				}
@@ -460,7 +460,7 @@ class DataService {
 
 			case 'Products':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Products -> update($conn, $data);
+					$response = $Products -> update($conn, $data, $languages);
 				} else {
 					$response = [];
 				}

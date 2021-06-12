@@ -108,6 +108,9 @@
 		},
 		"Members": {
 			"group_list": ["none","members","subscribers","customers"]
+		},
+		"Products": {
+			"type_list": ["default", "licence"]
 		}
 	}
 }
