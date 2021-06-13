@@ -132,6 +132,7 @@ function useMessages() {
 		reloadMessages: () => mutate(`/api/get_messages`),
 		createMessages: (data: any) => api.post('/api/create_messages', data),
 		deleteMessages: (data: any) => api.post('/api/delete_messages', data),
+		toggleMessages: (data: any) => api.post('/api/toggle_messages', data),
 	};
 }
 

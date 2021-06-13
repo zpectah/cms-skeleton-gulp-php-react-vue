@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-// import { useMessages } from '../../../App/hooks';
+import { SUBMIT_TIMEOUT } from '../../../constants';
+import { useMessages } from '../../../App/hooks';
 import { MessagesItemProps } from '../../../App/types';
 import { Modal, Form, Section, Button } from '../../ui';
 
@@ -20,7 +21,14 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = ({
 	onDelete,
 }) => {
 	const { t } = useTranslation(['common']);
-	// const { reloadMessages } = useMessages();
+	const { toggleMessages, reloadMessages } = useMessages();
+
+	const toggleItem = (detail) => {
+		toggleMessages(detail);
+		onCancel();
+
+		setTimeout(() => reloadMessages(), SUBMIT_TIMEOUT);
+	};
 
 	return (
 		<form>
@@ -55,6 +63,15 @@ const MessagesDetailForm: React.FC<MessagesDetailFormProps> = ({
 					>
 						{t('btn.delete')}
 					</Button.Base>
+					<div className="modal-footer-column">
+						<Button.Base
+							type="primary"
+							onClick={() => toggleItem(detailData)}
+							ghost
+						>
+							{detailData.status == 2 ? 'Mark unread' : 'Mark read'}
+						</Button.Base>
+					</div>
 				</div>
 			</Modal.Footer>
 		</form>

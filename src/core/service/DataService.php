@@ -524,6 +524,7 @@ class DataService {
 		$Uploads = new Uploads;
 		$Menu = new Menu;
 		$MenuItems = new MenuItems;
+		$Messages = new Messages;
 
 		// module: Members
 		$Members = new Members;
@@ -576,6 +577,10 @@ class DataService {
 
 			case 'MenuItems':
 				$response = $MenuItems -> toggle($conn, $data);
+				break;
+
+			case 'Messages':
+				$response = $Messages -> toggle($conn, $data);
 				break;
 
 			// module: Members

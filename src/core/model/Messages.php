@@ -97,4 +97,39 @@ class Messages {
 		return $response;
 	}
 
+	public function toggle ($conn, $requestData) {
+		$requestData = json_decode(json_encode($requestData), true);
+		$response = null;
+
+		if ($conn -> connect_error) return $conn -> connect_error;
+
+		function toggleRow ($conn, $id) {
+			// prepare
+			$query = ('UPDATE messages SET status = IF(status=2, 1, 2) WHERE id = ?');
+			$types = 'i';
+			$args = [ $id ];
+
+			// execute
+			$stmt = $conn -> prepare($query);
+			$stmt -> bind_param($types, ...$args);
+			$stmt -> execute();
+			$r = $stmt -> affected_rows;
+			$stmt -> close();
+
+			return $r;
+		}
+
+		$id = $requestData['id'];
+
+		if ($id) {
+			$response = toggleRow($conn, $id);
+		} else if (is_array($requestData)) {
+			foreach ($requestData as $item) {
+				$response[] = toggleRow($conn, $item);
+			}
+		}
+
+		return $response;
+	}
+
 }

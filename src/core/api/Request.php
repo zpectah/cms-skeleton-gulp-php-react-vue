@@ -231,6 +231,11 @@ class Request {
 				$response['status'] = 'ok';
 				return $response;
 
+			case 'toggle_messages':
+				$response['data'] = $DataService -> toggle('Messages', $requestData);
+				$response['status'] = 'ok';
+				return $response;
+
 
 			// Categories
 			case 'get_categories':
