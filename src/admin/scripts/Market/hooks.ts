@@ -1,8 +1,9 @@
 import useSWR, { mutate } from 'swr';
+
 import api from '../utils/api';
 
 function useProducts() {
-	const { data, error } = useSWR(`/api/get_products`);
+	const { data, error } = useSWR(`/api/get_products`, api.get);
 
 	return {
 		Products: data?.data,
@@ -17,7 +18,7 @@ function useProducts() {
 }
 
 function useProductsOptions() {
-	const { data, error } = useSWR(`/api/get_productsOptions`);
+	const { data, error } = useSWR(`/api/get_productsOptions`, api.get);
 
 	return {
 		ProductsOptions: data?.data,
@@ -36,7 +37,7 @@ function useProductsOptions() {
 }
 
 function useStores() {
-	const { data, error } = useSWR(`/api/get_stores`);
+	const { data, error } = useSWR(`/api/get_stores`, api.get);
 
 	return {
 		Stores: data?.data,
@@ -51,7 +52,7 @@ function useStores() {
 }
 
 function useProducers() {
-	const { data, error } = useSWR(`/api/get_producers`);
+	const { data, error } = useSWR(`/api/get_producers`, api.get);
 
 	return {
 		Producers: data?.data,
@@ -66,7 +67,7 @@ function useProducers() {
 }
 
 function usePayments() {
-	const { data, error } = useSWR(`/api/get_payments`);
+	const { data, error } = useSWR(`/api/get_payments`, api.get);
 
 	return {
 		Payments: data?.data,
@@ -81,7 +82,7 @@ function usePayments() {
 }
 
 function useDistributors() {
-	const { data, error } = useSWR(`/api/get_distributors`);
+	const { data, error } = useSWR(`/api/get_distributors`, api.get);
 
 	return {
 		Distributors: data?.data,
@@ -100,7 +101,7 @@ function useDistributors() {
 }
 
 function useDeliveries() {
-	const { data, error } = useSWR(`/api/get_deliveries`);
+	const { data, error } = useSWR(`/api/get_deliveries`, api.get);
 
 	return {
 		Deliveries: data?.data,

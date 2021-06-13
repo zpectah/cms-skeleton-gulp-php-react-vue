@@ -1,8 +1,9 @@
 import useSWR, { mutate } from 'swr';
+
 import api from '../utils/api';
 
 function useMembers() {
-	const { data, error } = useSWR(`/api/get_members`);
+	const { data, error } = useSWR(`/api/get_members`, api.get);
 
 	return {
 		Members: data?.data,

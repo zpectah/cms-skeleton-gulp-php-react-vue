@@ -11,8 +11,7 @@ use core\utils\Helpers;
 
 class Profile {
 
-	public function get ($conn, $requestData) {
-		$requestData = json_decode(json_encode($requestData), true);
+	public function get ($conn) {
 		$response = null;
 		$session = new SessionService;
 

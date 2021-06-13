@@ -10,41 +10,68 @@ use core\service\SessionService;
 
 class Request {
 
+	private function isAuthorized () {
+		$SessionService = new SessionService;
+
+		$token = $SessionService -> get_token();
+		$request_token = $_SERVER['HTTP_X_APP_TOKEN'];
+
+		return $token == $request_token;
+	}
+
 	public function getResponse () {
 		$DataService = new DataService;
-		$SessionService = new SessionService;
-		
-		$token = $SessionService -> get_token();
 
+		$authorized = self::isAuthorized();
+		$unauthorizedResponse = [
+			'message' => 'No request token',
+			'status' => 'error',
+			'data' => null,
+		];
 		$urlTrimmed = ltrim( $_SERVER['REDIRECT_URL'], "/" );
 		$url = explode( "/", $urlTrimmed );
-
 		$requestData = json_decode(file_get_contents('php://input'));
 
 		if ( $url[1] ) switch ($url[1]) {
 
 			// Settings
 			case 'get_settings':
-				$response['data'] = $DataService -> get('Settings', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Settings');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_settings':
-				$response['data'] = $DataService -> update('Settings', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Settings', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Profile
 			case 'get_profile':
-				$response['data'] = $DataService -> get('Profile', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Profile');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_profile':
-				$response['data'] = $DataService -> update('Profile', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Profile', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'user_login':
 				$response['data'] = $DataService -> user_login($requestData);
@@ -69,529 +96,917 @@ class Request {
 
 			// Users
 			case 'get_users':
-				$response['data'] = $DataService -> get('Users', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Users', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_users':
-				$response['data'] = $DataService -> create('Users', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Users', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_users':
-				$response['data'] = $DataService -> toggle('Users', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Users', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_users':
-				$response['data'] = $DataService -> update('Users', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Users', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_users':
-				$response['data'] = $DataService -> delete('Users', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Users', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Posts
 			case 'get_posts':
-				$response['data'] = $DataService -> get('Posts', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Posts');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_posts':
-				$response['data'] = $DataService -> create('Posts', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Posts', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_posts':
-				$response['data'] = $DataService -> toggle('Posts', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Posts', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_posts':
-				$response['data'] = $DataService -> update('Posts', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Posts', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_posts':
-				$response['data'] = $DataService -> delete('Posts', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Posts', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Pages
 			case 'get_pages':
-				$response['data'] = $DataService -> get('Pages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Pages');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_pages':
-				$response['data'] = $DataService -> create('Pages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Pages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_pages':
-				$response['data'] = $DataService -> toggle('Pages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Pages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_pages':
-				$response['data'] = $DataService -> update('Pages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Pages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_pages':
-				$response['data'] = $DataService -> delete('Pages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Pages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Tags
 			case 'get_tags':
-				$response['data'] = $DataService -> get('Tags', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Tags');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_tags':
-				$response['data'] = $DataService -> create('Tags', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Tags', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_tags':
-				$response['data'] = $DataService -> toggle('Tags', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Tags', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_tags':
-				$response['data'] = $DataService -> update('Tags', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Tags', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_tags':
-				$response['data'] = $DataService -> delete('Tags', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Tags', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Translations
 			case 'get_translations':
-				$response['data'] = $DataService -> get('Translations', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Translations');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_translations':
-				$response['data'] = $DataService -> create('Translations', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Translations', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_translations':
-				$response['data'] = $DataService -> toggle('Translations', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Translations', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_translations':
-				$response['data'] = $DataService -> update('Translations', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Translations', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_translations':
-				$response['data'] = $DataService -> delete('Translations', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Translations', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Requests
 			case 'get_requests':
-				$response['data'] = $DataService -> get('Requests', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Requests', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_requests':
-				$response['data'] = $DataService -> create('Requests', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Requests', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_requests':
-				$response['data'] = $DataService -> delete('Requests', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Requests', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Messages
 			case 'get_messages':
-				$response['data'] = $DataService -> get('Messages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Messages');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_messages':
-				$response['data'] = $DataService -> create('Messages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Messages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_messages':
-				$response['data'] = $DataService -> delete('Messages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Messages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_messages':
-				$response['data'] = $DataService -> toggle('Messages', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Messages', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Categories
 			case 'get_categories':
-				$response['data'] = $DataService -> get('Categories', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Categories');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_categories':
-				$response['data'] = $DataService -> create('Categories', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Categories', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_categories':
-				$response['data'] = $DataService -> toggle('Categories', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Categories', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_categories':
-				$response['data'] = $DataService -> update('Categories', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Categories', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_categories':
-				$response['data'] = $DataService -> delete('Categories', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Categories', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Uploads
 			case 'get_uploads':
-				$response['data'] = $DataService -> get('Uploads', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Uploads');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_uploads':
-				$response['data'] = $DataService -> create('Uploads', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Uploads', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_uploads':
-				$response['data'] = $DataService -> toggle('Uploads', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Uploads', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_uploads':
-				$response['data'] = $DataService -> update('Uploads', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Uploads', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_uploads':
-				$response['data'] = $DataService -> delete('Uploads', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Uploads', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Menu
 			case 'get_menu':
-				$response['data'] = $DataService -> get('Menu', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Menu');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_menu':
-				$response['data'] = $DataService -> create('Menu', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Menu', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_menu':
-				$response['data'] = $DataService -> toggle('Menu', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Menu', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_menu':
-				$response['data'] = $DataService -> update('Menu', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Menu', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_menu':
-				$response['data'] = $DataService -> delete('Menu', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Menu', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// MenuItems
 			case 'get_menuItems':
-				$response['data'] = $DataService -> get('MenuItems', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('MenuItems');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_menuItems':
-				$response['data'] = $DataService -> create('MenuItems', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('MenuItems', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_menuItems':
-				$response['data'] = $DataService -> toggle('MenuItems', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('MenuItems', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_menuItems':
-				$response['data'] = $DataService -> update('MenuItems', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('MenuItems', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_menuItems':
-				$response['data'] = $DataService -> delete('MenuItems', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('MenuItems', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Members
 			case 'get_members':
-				$response['data'] = $DataService -> get('Members', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Members', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_members':
-				$response['data'] = $DataService -> create('Members', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Members', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_members':
-				$response['data'] = $DataService -> toggle('Members', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Members', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_members':
-				$response['data'] = $DataService -> update('Members', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Members', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_members':
-				$response['data'] = $DataService -> delete('Members', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Members', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Deliveries
 			case 'get_deliveries':
-				$response['data'] = $DataService -> get('Deliveries', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Deliveries');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_deliveries':
-				$response['data'] = $DataService -> create('Deliveries', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Deliveries', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_deliveries':
-				$response['data'] = $DataService -> toggle('Deliveries', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Deliveries', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_deliveries':
-				$response['data'] = $DataService -> update('Deliveries', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Deliveries', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_deliveries':
-				$response['data'] = $DataService -> delete('Deliveries', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Deliveries', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Distributors
 			case 'get_distributors':
-				$response['data'] = $DataService -> get('Distributors', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Distributors');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_distributors':
-				$response['data'] = $DataService -> create('Distributors', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Distributors', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_distributors':
-				$response['data'] = $DataService -> toggle('Distributors', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Distributors', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_distributors':
-				$response['data'] = $DataService -> update('Distributors', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Distributors', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_distributors':
-				$response['data'] = $DataService -> delete('Distributors', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Distributors', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Payments
 			case 'get_payments':
-				$response['data'] = $DataService -> get('Payments', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Payments');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_payments':
-				$response['data'] = $DataService -> create('Payments', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Payments', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_payments':
-				$response['data'] = $DataService -> toggle('Payments', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Payments', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_payments':
-				$response['data'] = $DataService -> update('Payments', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Payments', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_payments':
-				$response['data'] = $DataService -> delete('Payments', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Payments', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Producers
 			case 'get_producers':
-				$response['data'] = $DataService -> get('Producers', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Producers');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_producers':
-				$response['data'] = $DataService -> create('Producers', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Producers', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_producers':
-				$response['data'] = $DataService -> toggle('Producers', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Producers', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_producers':
-				$response['data'] = $DataService -> update('Producers', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Producers', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_producers':
-				$response['data'] = $DataService -> delete('Producers', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Producers', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Products
 			case 'get_products':
-				$response['data'] = $DataService -> get('Products', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Products');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_products':
-				$response['data'] = $DataService -> create('Products', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Products', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_products':
-				$response['data'] = $DataService -> toggle('Products', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Products', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_products':
-				$response['data'] = $DataService -> update('Products', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Products', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_products':
-				$response['data'] = $DataService -> delete('Products', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Products', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// ProductsOptions
 			case 'get_productsOptions':
-				$response['data'] = $DataService -> get('ProductsOptions', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('ProductsOptions');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_productsOptions':
-				$response['data'] = $DataService -> create('ProductsOptions', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('ProductsOptions', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_productsOptions':
-				$response['data'] = $DataService -> toggle('ProductsOptions', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('ProductsOptions', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_productsOptions':
-				$response['data'] = $DataService -> update('ProductsOptions', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('ProductsOptions', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_productsOptions':
-				$response['data'] = $DataService -> delete('ProductsOptions', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('ProductsOptions', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Stores
 			case 'get_stores':
-				$response['data'] = $DataService -> get('Stores', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> get('Stores');
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'create_stores':
-				$response['data'] = $DataService -> create('Stores', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> create('Stores', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'toggle_stores':
-				$response['data'] = $DataService -> toggle('Stores', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> toggle('Stores', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'update_stores':
-				$response['data'] = $DataService -> update('Stores', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> update('Stores', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'delete_stores':
-				$response['data'] = $DataService -> delete('Stores', $requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> delete('Stores', $requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Installer
 			case 'install_language':
-				$response['data'] = $DataService -> install_language($requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> install_language($requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'install_module':
-				$response['data'] = $DataService -> install_module($requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> install_module($requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// Handyman
 			case 'repair_language_tables':
-				$response['data'] = $DataService -> repair_language_tables($requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> repair_language_tables($requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// SqlDumper
 			case 'export_table_dump':
-				return $DataService -> export_table_dump($requestData);
+				if ($authorized) {
+					return $DataService -> export_table_dump($requestData);
+				} else {
+					return $unauthorizedResponse;
+				}
 
 			case 'import_table_data':
-				$response['data'] = $DataService -> import_table_data($requestData);
-				$response['status'] = 'ok';
-				return $response;
+				if ($authorized) {
+					$response['data'] = $DataService -> import_table_data($requestData);
+					$response['status'] = 'ok';
+					return $response;
+				} else {
+					return $unauthorizedResponse;
+				}
 
 
 			// ...
@@ -604,7 +1019,6 @@ class Request {
 
 		}
 
-		// return $response;
 	}
 
 }

@@ -6,8 +6,7 @@ namespace core\model;
 
 class Tags {
 
-	public function get ($conn, $requestData) {
-		$requestData = json_decode(json_encode($requestData), true);
+	public function get ($conn) {
 		$response = [];
 
 		// prepare

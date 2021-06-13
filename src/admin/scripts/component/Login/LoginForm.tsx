@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { message } from 'antd';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
@@ -93,8 +93,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 			password: '',
 		},
 	});
-	const history = useHistory();
-
 	const logoutHandler = () => {
 		userLogout({}).then(() => reloadProfile());
 	};
@@ -135,7 +133,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 								t('message:userLogin.user_login_success'),
 								MESSAGE_SUCCESS_DURATION,
 							);
-							history.push(ROUTES.app.dashboard.path);
+							window.location.href = ROUTES.app.dashboard.path;
 						});
 				}
 			}

@@ -1,15 +1,14 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-// https://swr.vercel.app/
+import config from '../config';
 
 const init: any = {
 	headers: {
+		'X-App-Token': config.CMS_TOKEN,
 		'Content-Type': 'application/json',
-		// 'Content-Type': 'multipart/form-data',
-		// 'Content-Type': 'application/x-www-form-urlencoded',
 	},
 };
 
 const get = async (url: string) => {
+	// console.log(config.CMS_TOKEN);
 	const response = await fetch(url, {
 		method: 'GET',
 		...init,
@@ -18,7 +17,7 @@ const get = async (url: string) => {
 };
 
 const post = async (url: string, data: any) => {
-	console.log('data', data);
+	// console.log('data', data);
 	const response = await fetch(url, {
 		method: 'POST',
 		...init,
@@ -28,7 +27,7 @@ const post = async (url: string, data: any) => {
 };
 
 const postRaw = async (url: string, data: any) => {
-	console.log('data', data);
+	// console.log('data', data);
 	const response = await fetch(url, {
 		method: 'POST',
 		...init,

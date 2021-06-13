@@ -14,7 +14,7 @@ function useSystemApi() {
 }
 
 function useProfile() {
-	const { data, error } = useSWR(`/api/get_profile`);
+	const { data, error } = useSWR(`/api/get_profile`, api.get);
 
 	const shouldShow = (level: number) => {
 		const userLevel = data?.data?.user_level;
@@ -38,7 +38,7 @@ function useProfile() {
 }
 
 function useSettings() {
-	const { data, error } = useSWR(`/api/get_settings`);
+	const { data, error } = useSWR(`/api/get_settings`, api.get);
 
 	return {
 		Settings: data?.data,
@@ -50,7 +50,7 @@ function useSettings() {
 }
 
 function useUsers() {
-	const { data, error } = useSWR(`/api/get_users`);
+	const { data, error } = useSWR(`/api/get_users`, api.get);
 
 	return {
 		Users: data?.data,
@@ -65,7 +65,7 @@ function useUsers() {
 }
 
 function usePosts() {
-	const { data, error } = useSWR(`/api/get_posts`);
+	const { data, error } = useSWR(`/api/get_posts`, api.get);
 
 	return {
 		Posts: data?.data,
@@ -80,7 +80,7 @@ function usePosts() {
 }
 
 function usePages() {
-	const { data, error } = useSWR(`/api/get_pages`);
+	const { data, error } = useSWR(`/api/get_pages`, api.get);
 
 	return {
 		Pages: data?.data,
@@ -95,7 +95,7 @@ function usePages() {
 }
 
 function useTags() {
-	const { data, error } = useSWR(`/api/get_tags`);
+	const { data, error } = useSWR(`/api/get_tags`, api.get);
 
 	return {
 		Tags: data?.data,
@@ -110,7 +110,7 @@ function useTags() {
 }
 
 function useRequests() {
-	const { data, error } = useSWR(`/api/get_requests`);
+	const { data, error } = useSWR(`/api/get_requests`, api.get);
 
 	return {
 		Requests: data?.data,
@@ -123,7 +123,7 @@ function useRequests() {
 }
 
 function useMessages() {
-	const { data, error } = useSWR(`/api/get_messages`);
+	const { data, error } = useSWR(`/api/get_messages`, api.get);
 
 	return {
 		Messages: data?.data,
@@ -137,7 +137,7 @@ function useMessages() {
 }
 
 function useTranslations() {
-	const { data, error } = useSWR(`/api/get_translations`);
+	const { data, error } = useSWR(`/api/get_translations`, api.get);
 
 	return {
 		Translations: data?.data,
@@ -156,7 +156,7 @@ function useTranslations() {
 }
 
 function useCategories() {
-	const { data, error } = useSWR(`/api/get_categories`);
+	const { data, error } = useSWR(`/api/get_categories`, api.get);
 
 	return {
 		Categories: data?.data,
@@ -171,7 +171,7 @@ function useCategories() {
 }
 
 function useUploads() {
-	const { data, error } = useSWR(`/api/get_uploads`);
+	const { data, error } = useSWR(`/api/get_uploads`, api.get);
 
 	return {
 		Uploads: data?.data,
@@ -186,7 +186,7 @@ function useUploads() {
 }
 
 function useMenu() {
-	const { data, error } = useSWR(`/api/get_menu`);
+	const { data, error } = useSWR(`/api/get_menu`, api.get);
 
 	return {
 		Menu: data?.data,
@@ -201,7 +201,7 @@ function useMenu() {
 }
 
 function useMenuItems() {
-	const { data, error } = useSWR(`/api/get_menuItems`);
+	const { data, error } = useSWR(`/api/get_menuItems`, api.get);
 
 	return {
 		MenuItems: data?.data,

@@ -96,8 +96,7 @@ class Categories {
 	}
 
 
-	public function get ($conn, $requestData, $languages) {
-		$requestData = json_decode(json_encode($requestData), true);
+	public function get ($conn, $languages) {
 		$response = [];
 		$active_languages = $languages['active'];
 

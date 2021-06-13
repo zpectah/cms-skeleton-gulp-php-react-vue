@@ -35,7 +35,7 @@ class DataService {
 
 	// model
 
-	public function get ($model, $data) {
+	public function get ($model, $data = null) {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
@@ -78,7 +78,7 @@ class DataService {
 				break;
 
 			case 'Profile':
-				$response = $Profile -> get($conn, $data);
+				$response = $Profile -> get($conn);
 				break;
 
 			case 'Users':
@@ -86,19 +86,19 @@ class DataService {
 				break;
 
 			case 'Posts':
-				$response = $Posts -> get($conn, $data, $languages);
+				$response = $Posts -> get($conn, $languages);
 				break;
 
 			case 'Pages':
-				$response = $Pages -> get($conn, $data, $languages);
+				$response = $Pages -> get($conn, $languages);
 				break;
 
 			case 'Tags':
-				$response = $Tags -> get($conn, $data);
+				$response = $Tags -> get($conn);
 				break;
 
 			case 'Translations':
-				$response = $Translations -> get($conn, $data, $languages);
+				$response = $Translations -> get($conn, $languages);
 				break;
 
 			case 'Requests':
@@ -106,23 +106,23 @@ class DataService {
 				break;
 
 			case 'Messages':
-				$response = $Messages -> get($conn, $data);
+				$response = $Messages -> get($conn);
 				break;
 
 			case 'Categories':
-				$response = $Categories -> get($conn, $data, $languages);
+				$response = $Categories -> get($conn, $languages);
 				break;
 
 			case 'Uploads':
-				$response = $Uploads -> get($conn, $data, $languages);
+				$response = $Uploads -> get($conn, $languages);
 				break;
 
 			case 'Menu':
-				$response = $Menu -> get($conn, $data);
+				$response = $Menu -> get($conn);
 				break;
 
 			case 'MenuItems':
-				$response = $MenuItems -> get($conn, $data, $languages);
+				$response = $MenuItems -> get($conn, $languages);
 				break;
 
 			// module: Members
@@ -137,7 +137,7 @@ class DataService {
 			// module: Market
 			case 'Deliveries':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Deliveries -> get($conn, $data, $languages);
+					$response = $Deliveries -> get($conn, $languages);
 				} else {
 					$response = [];
 				}
@@ -145,7 +145,7 @@ class DataService {
 
 			case 'Distributors':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Distributors -> get($conn, $data);
+					$response = $Distributors -> get($conn);
 				} else {
 					$response = [];
 				}
@@ -153,7 +153,7 @@ class DataService {
 
 			case 'Payments':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Payments -> get($conn, $data, $languages);
+					$response = $Payments -> get($conn, $languages);
 				} else {
 					$response = [];
 				}
@@ -161,7 +161,7 @@ class DataService {
 
 			case 'Producers':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Producers -> get($conn, $data);
+					$response = $Producers -> get($conn);
 				} else {
 					$response = [];
 				}
@@ -169,7 +169,7 @@ class DataService {
 
 			case 'Products':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Products -> get($conn, $data, $languages);
+					$response = $Products -> get($conn, $languages);
 				} else {
 					$response = [];
 				}
@@ -177,7 +177,7 @@ class DataService {
 
 			case 'ProductsOptions':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $ProductsOptions -> get($conn, $data, $languages);
+					$response = $ProductsOptions -> get($conn, $languages);
 				} else {
 					$response = [];
 				}
@@ -185,7 +185,7 @@ class DataService {
 
 			case 'Stores':
 				if ($modules['module_market_installed'] == 'true') {
-					$response = $Stores -> get($conn, $data, $languages);
+					$response = $Stores -> get($conn, $languages);
 				} else {
 					$response = [];
 				}
