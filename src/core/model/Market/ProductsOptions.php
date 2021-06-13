@@ -8,7 +8,7 @@ class ProductsOptions {
 
 	private function get_language_row($conn, $lang, $id) {
 		$response = null;
-		$table_name = 'productsOptions__' . $lang;
+		$table_name = 'productsoptions__' . $lang;
 
 		// prepare
 		$query = ('SELECT * FROM ' . $table_name . ' WHERE id = ?');
@@ -36,7 +36,7 @@ class ProductsOptions {
 		$response = [];
 
 		foreach ($activeLanguages as $lang) {
-			$table_name = 'productsOptions__' . $lang;
+			$table_name = 'productsoptions__' . $lang;
 
 			// For prevent error while column is blank
 			$tmp_description = $requestData[$lang]['description'] ? $requestData[$lang]['description'] : '';
@@ -70,7 +70,7 @@ class ProductsOptions {
 		$response = null;
 
 		foreach ($activeLanguages as $lang) {
-			$table_name = 'productsOptions__' . $lang;
+			$table_name = 'productsoptions__' . $lang;
 
 			// prepare
 			$query = ('UPDATE ' . $table_name . ' SET title = ?, description = ? WHERE id = ?');
@@ -102,7 +102,7 @@ class ProductsOptions {
 		$active_languages = $languages['active'];
 
 		// prepare
-		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM productsOptions WHERE deleted = ?');
+		$query = ('/*' . MYSQLND_QC_ENABLE_SWITCH . '*/' . 'SELECT * FROM productsoptions WHERE deleted = ?');
 		$types = 'i';
 		$args = [ 0 ];
 
@@ -130,7 +130,7 @@ class ProductsOptions {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('INSERT INTO productsOptions (name, type, option_value, active, deleted) VALUES (?,?,?,?,?)');
+		$query = ('INSERT INTO productsoptions (name, type, option_value, active, deleted) VALUES (?,?,?,?,?)');
 		$types = 'sssii';
 		$args = [
 			$requestData['name'],
@@ -162,7 +162,7 @@ class ProductsOptions {
 		$requestData = json_decode(json_encode($requestData), true);
 
 		// prepare
-		$query = ('UPDATE productsOptions SET name = ?, type = ?, option_value = ?, active = ? WHERE id = ?');
+		$query = ('UPDATE productsoptions SET name = ?, type = ?, option_value = ?, active = ? WHERE id = ?');
 		$types = 'sssii';
 		$args = [
 			$requestData['name'],
@@ -197,7 +197,7 @@ class ProductsOptions {
 
 		function toggleRow ($conn, $id) {
 			// prepare
-			$query = ('UPDATE productsOptions SET active = IF(active=1, 0, 1) WHERE id = ?');
+			$query = ('UPDATE productsoptions SET active = IF(active=1, 0, 1) WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 
@@ -232,7 +232,7 @@ class ProductsOptions {
 
 		function deleteRow ($conn, $id) {
 			// prepare
-			$query = ('UPDATE productsOptions SET deleted = 1 WHERE id = ?');
+			$query = ('UPDATE productsoptions SET deleted = 1 WHERE id = ?');
 			$types = 'i';
 			$args = [ $id ];
 

@@ -870,10 +870,12 @@ class DataService {
 
 	public function install_module ($data) {
 		$conn = new mysqli(...CFG_DB_CONN);
-
+		$Settings = new Settings;
 		$Installer = new Installer;
 
-		$response = $Installer -> install_module($conn, $data);
+		$languages = $Settings -> get_languages($conn);
+
+		$response = $Installer -> install_module($conn, $data, $languages);
 
 		$conn -> close();
 
