@@ -11,6 +11,7 @@ const env_root_path = environmental[build_env].ROOT_PATH;
 const uploads_path = env_root_path + global.PATH.uploads;
 
 export default {
+	CMS_TOKEN: window.CMS_TOKEN,
 	TIMESTAMP: build_timestamp,
 	LOCALES: locales[LanguageService.get()],
 	LOCALES_LIST: locales,

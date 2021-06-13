@@ -16,9 +16,17 @@ class SessionService {
 		return $response;
 	}
 
+	public function get_token () {
+		session_start();
+
+		return $_SESSION['cms_token'];
+	}
+
 	public function start ($type, $email) {
 		session_start();
 		$response = null;
+
+		$_SESSION['cms_token'] = bin2hex(random_bytes(32));
 
 		if ($type == 'user') $response = $_SESSION["userCMS"] = $email;
 		if ($type == 'member') $response = null;

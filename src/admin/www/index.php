@@ -1,6 +1,7 @@
 <?php
 const PATH_PFX = '../../';
 require '../../core/index.php';
+$ss = new \core\service\SessionService;
 ?>
 <!doctype html>
 <html lang="<?=(VIEW['ADMIN']['meta']['lang']) ?>">
@@ -18,6 +19,7 @@ require '../../core/index.php';
 	<script>
 		window.WARP_ENVIRONMENT = window.WARP_ENVIRONMENT || '<?=(ENV)?>';
 		window.WARP_TIMESTAMP = window.WARP_TIMESTAMP || '<?=(TIMESTAMP)?>';
+		window.CMS_TOKEN = window.CMS_TOKEN || '<?=($ss -> get_token())?>';
 	</script>
 
 </head>

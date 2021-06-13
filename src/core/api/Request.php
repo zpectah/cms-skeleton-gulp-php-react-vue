@@ -5,12 +5,16 @@ namespace core\api;
 
 
 use core\service\DataService;
+use core\service\SessionService;
 
 
 class Request {
 
 	public function getResponse () {
 		$DataService = new DataService;
+		$SessionService = new SessionService;
+		
+		$token = $SessionService -> get_token();
 
 		$urlTrimmed = ltrim( $_SERVER['REDIRECT_URL'], "/" );
 		$url = explode( "/", $urlTrimmed );
