@@ -6,8 +6,6 @@ namespace core\handler;
 
 class Installer {
 
-	private function create_language_tables () {}
-
 	private function create_table ($conn, $query, $key) {
 		$response = null;
 
@@ -250,22 +248,79 @@ class Installer {
 		return $response;
 	}
 
-	public function install_language ($conn, $requestData) {
+	public function install_language ($conn, $requestData, $modules, $languages) {
 		$response = null;
 		$installed = [];
 
-		/*
-		1. iterate all languages and install tables
-		2. save new languages to settings table
-		*/
+		$marketInstalled = $modules['module_market_installed'];
+		$languageDefault = $languages['default'];
+
+		$response['a'] = $languageDefault;
 
 		foreach ($requestData -> toInstall as $lang) {
 
-			// TODO
-			// proceed table installation ...
+			$response['b'][] = $lang;
+
+			$categories_tableName_d = 'categories__' . $languageDefault;
+			$categories_tableName = 'categories__' . $lang;
+			$categories_query = ('INSERT INTO ' . $categories_tableName .' SELECT * FROM ' . $categories_tableName_d);
+
+			$menuItems_tableName_d = 'menuitems__' . $languageDefault;
+			$menuItems_tableName = 'menuitems__' . $lang;
+			$menuItems_query = ('INSERT INTO ' . $menuItems_tableName . ' SELECT * FROM ' . $menuItems_tableName_d);
+
+			$pages_tableName_d = 'pages__' . $languageDefault;
+			$pages_tableName = 'pages__' . $lang;
+			$pages_query = ('INSERT INTO ' . $pages_tableName . ' SELECT * FROM ' . $pages_tableName_d);
+
+			$posts_tableName_d = 'posts__' . $languageDefault;
+			$posts_tableName = 'posts__' . $lang;
+			$posts_query = ('INSERT INTO ' . $posts_tableName . ' SELECT * FROM ' . $posts_tableName_d);
+
+			$translations_tableName_d = 'translations__' . $languageDefault;
+			$translations_tableName = 'translations__' . $lang;
+			$translations_query = ('INSERT INTO ' . $translations_tableName . ' SELECT * FROM ' . $translations_tableName_d);
+
+			$uploads_tableName_d = 'uploads__' . $languageDefault;
+			$uploads_tableName = 'uploads__' . $lang;
+			$uploads_query = ('INSERT INTO ' . $uploads_tableName . ' SELECT * FROM ' . $uploads_tableName_d);
+
+			$deliveries_tableName_d = 'deliveries__' . $languageDefault;
+			$deliveries_tableName = 'deliveries__' . $lang;
+			$deliveries_query = ('INSERT INTO ' . $deliveries_tableName . ' SELECT * FROM ' . $deliveries_tableName_d);
+
+			$payments_tableName_d = 'payments__' . $languageDefault;
+			$payments_tableName = 'payments__' . $lang;
+			$payments_query = ('INSERT INTO ' . $payments_tableName . ' SELECT * FROM ' . $payments_tableName_d);
+
+			$products_tableName_d = 'products__' . $languageDefault;
+			$products_tableName = 'products__' . $lang;
+			$products_query = ('INSERT INTO ' . $products_tableName . ' SELECT * FROM ' . $products_tableName_d);
+
+			$productsOptions_tableName_d = 'productsoptions__' . $languageDefault;
+			$productsOptions_tableName = 'productsoptions__' . $lang;
+			$productsOptions_query = ('INSERT INTO ' . $productsOptions_tableName . ' SELECT * FROM ' . $productsOptions_tableName_d);
+
+			$stores_tableName_d = 'stores__' . $languageDefault;
+			$stores_tableName = 'stores__' . $lang;
+			$stores_query = ('INSERT INTO ' . $stores_tableName . ' SELECT * FROM ' . $stores_tableName_d);
+
+//			$response['categories__' . $lang] = self::create_table($conn, $categories_query, 'categories__' . $lang);
+//			$response['menuitems__' . $lang] = self::create_table($conn, $menuItems_query, 'menuitems__' . $lang);
+//			$response['pages__' . $lang] = self::create_table($conn, $pages_query, 'pages__' . $lang);
+//			$response['posts__' . $lang] = self::create_table($conn, $posts_query, 'posts__' . $lang);
+//			$response['translations__' . $lang] = self::create_table($conn, $translations_query, 'translations__' . $lang);
+//			$response['uploads__' . $lang] = self::create_table($conn, $uploads_query, 'uploads__' . $lang);
+//
+//			if ($marketInstalled) {
+//				$response['deliveries__' . $lang] = self::create_table($conn, $deliveries_query, 'deliveries__' . $lang);
+//				$response['payments__' . $lang] = self::create_table($conn, $payments_query, 'payments__' . $lang);
+//				$response['products__' . $lang] = self::create_table($conn, $products_query, 'products__' . $lang);
+//				$response['productsoptions__' . $lang] = self::create_table($conn, $productsOptions_query, 'productsoptions__' . $lang);
+//				$response['stores__' . $lang] = self::create_table($conn, $stores_query, 'stores__' . $lang);
+//			}
 
 			$installed[] = $lang;
-
 		}
 
 		// prepare
