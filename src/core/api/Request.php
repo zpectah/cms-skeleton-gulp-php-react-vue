@@ -993,11 +993,7 @@ class Request {
 
 			// SqlDumper
 			case 'export_table_dump':
-				if ($authorized) {
-					return $DataService -> export_table_dump($requestData);
-				} else {
-					return $unauthorizedResponse;
-				}
+				return $DataService -> export_table_dump($requestData, $authorized);
 
 			case 'import_table_data':
 				if ($authorized) {

@@ -9,9 +9,11 @@ use Ifsnop\Mysqldump as IMysqldump;
 
 class SqlDumper {
 
-	public function export_table_dump($requestData) {
+	public function export_table_dump($requestData, $authorized) {
 		$date = date_create();
 		$filePrefix = CMS_NAME . '_dump_' . date_timestamp_get($date);
+
+		// TODO: handle $authorized !!!
 
 		try {
 			$dump = new IMysqldump\Mysqldump('mysql:host=' . CFG_DB['server'] .';dbname=' . CFG_DB['name'], CFG_DB['user'], CFG_DB['password']);

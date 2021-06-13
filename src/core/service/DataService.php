@@ -903,10 +903,10 @@ class DataService {
 	//
 	//
 
-	public function export_table_dump ($data) {
+	public function export_table_dump ($data, $authorized) {
 		$SqlDumper = new SqlDumper;
 
-		return $SqlDumper -> export_table_dump($data);
+		return $SqlDumper -> export_table_dump($data, $authorized);
 	}
 
 	public function import_table_data ($data) {
