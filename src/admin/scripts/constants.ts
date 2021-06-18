@@ -103,73 +103,73 @@ export const ROUTES = {
 			path: '/admin',
 			name: 'dashboard',
 			label: 'Dashboard.label',
-			auth: 2,
+			auth: USER_LEVEL.redactor.id,
 		},
 		settings: {
 			path: '/admin/settings',
 			name: 'settings',
 			label: 'Settings.label',
-			auth: 7,
+			auth: USER_LEVEL.admin.id,
 		},
 		posts: {
 			path: '/admin/posts',
 			name: 'posts',
 			label: 'Posts.label',
-			auth: 2,
+			auth: USER_LEVEL.redactor.id,
 		},
 		users: {
 			path: '/admin/users',
 			name: 'users',
 			label: 'Users.label',
-			auth: 7,
+			auth: USER_LEVEL.admin.id,
 		},
 		tags: {
 			path: '/admin/tags',
 			name: 'tags',
 			label: 'Tags.label',
-			auth: 2,
+			auth: USER_LEVEL.redactor.id,
 		},
 		translations: {
 			path: '/admin/translations',
 			name: 'translations',
 			label: 'Translations.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		categories: {
 			path: '/admin/categories',
 			name: 'categories',
 			label: 'Categories.label',
-			auth: 2,
+			auth: USER_LEVEL.redactor.id,
 		},
 		pages: {
 			path: '/admin/pages',
 			name: 'pages',
 			label: 'Pages.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		uploads: {
 			path: '/admin/uploads',
 			name: 'uploads',
 			label: 'Uploads.label',
-			auth: 2,
+			auth: USER_LEVEL.redactor.id,
 		},
 		messages: {
 			path: '/admin/messages',
 			name: 'messages',
 			label: 'Messages.label',
-			auth: 2,
+			auth: USER_LEVEL.admin.id,
 		},
 		requests: {
 			path: '/admin/requests',
 			name: 'requests',
 			label: 'Requests.label',
-			auth: 7,
+			auth: USER_LEVEL.admin.id,
 		},
 		menu: {
 			path: '/admin/menu',
 			name: 'menu',
 			label: 'Menu.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	},
 	members: {
@@ -177,13 +177,13 @@ export const ROUTES = {
 			path: '/admin/members',
 			name: 'dashboard',
 			label: 'MembersDashboard.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		members: {
 			path: '/admin/members/items',
 			name: 'members',
 			label: 'Members.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	},
 	market: {
@@ -191,49 +191,49 @@ export const ROUTES = {
 			path: '/admin/market',
 			name: 'dashboard',
 			label: 'MarketDashboard.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		products: {
 			path: '/admin/market/products',
 			name: 'products',
 			label: 'Products.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		'products-options': {
 			path: '/admin/market/products-options',
 			name: 'products-options',
 			label: 'ProductsOptions.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		stores: {
 			path: '/admin/market/stores',
 			name: 'stores',
 			label: 'Stores.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		deliveries: {
 			path: '/admin/market/deliveries',
 			name: 'deliveries',
 			label: 'Deliveries.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		distributors: {
 			path: '/admin/market/distributors',
 			name: 'distributors',
 			label: 'Distributors.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		payments: {
 			path: '/admin/market/payments',
 			name: 'payments',
 			label: 'Payments.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		producers: {
 			path: '/admin/market/producers',
 			name: 'producers',
 			label: 'Producers.label',
-			auth: 2,
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	},
 };
@@ -245,84 +245,84 @@ export const NAV_ITEMS = {
 			label: ROUTES.app.dashboard.label,
 			path: ROUTES.app.dashboard.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 2,
 			label: ROUTES.app.settings.label,
 			path: ROUTES.app.settings.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.admin.id,
 		},
 		{
 			key: 3,
 			label: ROUTES.app.users.label,
 			path: ROUTES.app.users.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.admin.id,
 		},
 		{
 			key: 4,
 			label: ROUTES.app.posts.label,
 			path: ROUTES.app.posts.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 5,
 			label: ROUTES.app.tags.label,
 			path: ROUTES.app.tags.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 6,
 			label: ROUTES.app.categories.label,
 			path: ROUTES.app.categories.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 7,
 			label: ROUTES.app.translations.label,
 			path: ROUTES.app.translations.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 8,
 			label: ROUTES.app.pages.label,
 			path: ROUTES.app.pages.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 9,
 			label: ROUTES.app.uploads.label,
 			path: ROUTES.app.uploads.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 10,
 			label: ROUTES.app.menu.label,
 			path: ROUTES.app.menu.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 11,
 			label: ROUTES.app.messages.label,
 			path: ROUTES.app.messages.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.admin.id,
 		},
 		{
 			key: 12,
 			label: ROUTES.app.requests.label,
 			path: ROUTES.app.requests.path,
 			active: true,
-			auth: 7, // TODO
+			auth: USER_LEVEL.admin.id,
 		},
 	],
 	members: [
@@ -331,14 +331,14 @@ export const NAV_ITEMS = {
 			label: ROUTES.members.dashboard.label,
 			path: ROUTES.members.dashboard.path,
 			active: false,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 2,
 			label: ROUTES.members.members.label,
 			path: ROUTES.members.members.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	],
 	market: [
@@ -347,56 +347,56 @@ export const NAV_ITEMS = {
 			label: ROUTES.market.dashboard.label,
 			path: ROUTES.market.dashboard.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 2,
 			label: ROUTES.market.products.label,
 			path: ROUTES.market.products.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 3,
 			label: ROUTES.market['products-options'].label,
 			path: ROUTES.market['products-options'].path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 4,
 			label: ROUTES.market.deliveries.label,
 			path: ROUTES.market.deliveries.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 5,
 			label: ROUTES.market.distributors.label,
 			path: ROUTES.market.distributors.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 6,
 			label: ROUTES.market.payments.label,
 			path: ROUTES.market.payments.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 7,
 			label: ROUTES.market.producers.label,
 			path: ROUTES.market.producers.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 8,
 			label: ROUTES.market.stores.label,
 			path: ROUTES.market.stores.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	],
 	add: [
@@ -405,112 +405,112 @@ export const NAV_ITEMS = {
 			label: 'model_newItem.Posts',
 			path: ROUTES.app.posts.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 1,
 			label: 'model_newItem.Users',
 			path: ROUTES.app.users.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.admin.id,
 		},
 		{
 			key: 2,
 			label: 'model_newItem.Tags',
 			path: ROUTES.app.tags.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 3,
 			label: 'model_newItem.Translations',
 			path: ROUTES.app.translations.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 4,
 			label: 'model_newItem.Categories',
 			path: ROUTES.app.categories.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 5,
 			label: 'model_newItem.Pages',
 			path: ROUTES.app.pages.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 6,
 			label: 'model_newItem.Uploads',
 			path: ROUTES.app.uploads.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.redactor.id,
 		},
 		{
 			key: 7,
 			label: 'model_newItem.Menu',
 			path: ROUTES.app.menu.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 9,
 			label: 'model_newItem.Members',
 			path: ROUTES.members.members.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 11,
 			label: 'model_newItem.Products',
 			path: ROUTES.market.products.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 12,
 			label: 'model_newItem.ProductsOptions',
 			path: ROUTES.market['products-options'].path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 13,
 			label: 'model_newItem.Deliveries',
 			path: ROUTES.market.deliveries.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 14,
 			label: 'model_newItem.Distributors',
 			path: ROUTES.market.distributors.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 15,
 			label: 'model_newItem.Payments',
 			path: ROUTES.market.payments.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 16,
 			label: 'model_newItem.Producers',
 			path: ROUTES.market.producers.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 		{
 			key: 17,
 			label: 'model_newItem.Stores',
 			path: ROUTES.market.stores.path,
 			active: true,
-			auth: 2, // TODO
+			auth: USER_LEVEL.chief_redactor.id,
 		},
 	],
 };

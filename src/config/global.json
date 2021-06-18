@@ -11,7 +11,7 @@
 		"LANG_DEFAULT": "en",
 		"LANG_LIST": ["en", "cs"],
 		"UNAUTHORIZED_REDIRECT_TARGET": "/admin/login",
-		"RESTRICTED_REDIRECT_TARGET": "/admin/",
+		"RESTRICTED_REDIRECT_TARGET": "/admin",
 		"STORAGE_KEY_LANG": "app-lang",
 		"STORAGE_KEY_THEME": "app-theme",
 		"STORAGE_KEY_HELP": "app-help",

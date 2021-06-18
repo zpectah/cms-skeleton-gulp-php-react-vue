@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { ROUTES } from '../../constants';
 import media from '../../styles/responsive';
+import { useProfile } from '../../App/hooks';
 
 const Item = styled.li`
 	width: 100%;
@@ -55,6 +56,7 @@ type NavItemProps = {
 	label: string;
 	path: string;
 	active: boolean;
+	auth: number;
 };
 
 interface PrimaryNavigationProps {
@@ -62,10 +64,13 @@ interface PrimaryNavigationProps {
 	links: NavItemProps[];
 }
 
-const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
+const NavigationApp: React.FC<PrimaryNavigationProps> = ({
+	sidebarToggle,
+	links,
+}) => {
 	const { t } = useTranslation();
 	const location = useLocation();
-	const { sidebarToggle, links } = props;
+	const { userShouldShow } = useProfile();
 
 	const getActiveClass = (path) => {
 		let name;
@@ -89,7 +94,7 @@ const NavigationApp: React.FC<PrimaryNavigationProps> = (props) => {
 	return (
 		<>
 			{links.map((item) => {
-				if (item.active)
+				if (item.active && userShouldShow(item.auth))
 					return (
 						<Item key={item.key} title={t(`page:${item.label}`)}>
 							<Link

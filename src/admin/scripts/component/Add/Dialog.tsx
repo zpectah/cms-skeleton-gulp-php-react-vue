@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ROUTE_PATH_SUFFIX_DETAIL, NAV_ITEMS } from '../../constants';
 import { Modal } from '../../component/ui';
+import { useProfile } from '../../App/hooks';
 
 interface AddDialogProps {
 	isOpen: boolean;
@@ -12,10 +13,10 @@ interface AddDialogProps {
 	afterClick: () => void;
 }
 
-const Dialog: React.FC<AddDialogProps> = (props) => {
+const Dialog: React.FC<AddDialogProps> = ({ isOpen, onCancel, afterClick }) => {
 	const { t } = useTranslation('common');
 	const h = useHistory();
-	const { isOpen, onCancel, afterClick } = props;
+	const { userShouldShow } = useProfile();
 
 	const gridStyle: any = {
 		width: '25%',
@@ -33,7 +34,7 @@ const Dialog: React.FC<AddDialogProps> = (props) => {
 			<Modal.Content>
 				<Card>
 					{NAV_ITEMS.add.map((item) => {
-						if (item.active)
+						if (item.active && userShouldShow(item.auth))
 							return (
 								<Card.Grid style={gridStyle} key={item.key}>
 									<a onClick={() => onClickHandler(item.path)}>

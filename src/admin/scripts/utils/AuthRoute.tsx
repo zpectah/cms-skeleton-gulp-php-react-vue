@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { message } from 'antd';
 
 import config from '../config';
 import { useProfile } from '../App/hooks';
@@ -26,16 +27,10 @@ const AuthRoute: React.FC<AuthRouteProps> = (props) => {
 
 			return;
 		} else if (currentUser && !isProfileLoading) {
-			if (auth > currentUser.auth) {
-				console.log('Unauthorized access ...');
-				// store.dispatch(
-				// 	addToast({
-				// 		title: t('messages:error.unauthorized-access'),
-				// 		autoClose: 7,
-				// 	}),
-				// );
-				// TODO
-				// setRedirect(CFG.CMS.RESTRICTED_REDIRECT_TARGET);
+			if (auth > currentUser.user_level) {
+				message.error('Unauthorized access', 3.5);
+
+				setRedirect(config.GLOBAL.CMS.RESTRICTED_REDIRECT_TARGET);
 			}
 		}
 
