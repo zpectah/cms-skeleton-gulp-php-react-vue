@@ -35,6 +35,7 @@ interface DetailItemDialogProps {
 	allowSave: boolean;
 	allowDelete: boolean;
 	size?: 'lg' | 'xl' | 'xxl';
+	redactorId?: number;
 }
 
 const Dialog: React.FC<DetailItemDialogProps> = (props) => {
@@ -49,6 +50,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 		allowSave,
 		allowDelete,
 		size = 'xl',
+		redactorId,
 	} = props;
 
 	const component = {
@@ -89,6 +91,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 				onDelete={onDelete}
 				allowSave={allowSave}
 				allowDelete={allowDelete}
+				redactorId={redactorId}
 			/>
 		</Modal.Base>
 	);

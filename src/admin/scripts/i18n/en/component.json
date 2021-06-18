@@ -30,7 +30,8 @@
 			"size": "Size",
 			"group": "Group",
 			"parent": "Parent",
-			"context": "Context"
+			"context": "Context",
+			"authorized": "Authorized"
 		}
 	},
 	"Confirm": {

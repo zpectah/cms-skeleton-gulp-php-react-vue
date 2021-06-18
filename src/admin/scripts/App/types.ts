@@ -44,6 +44,7 @@ export interface PostsItemProps extends commonModelProps {
 		perex?: string;
 		content: string;
 	};
+	authorized: number;
 }
 
 export interface TagsItemProps extends commonModelProps {

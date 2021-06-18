@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
-import { useCategories } from '../hooks';
+import { RELOAD_HOOK_TIMEOUT, ROUTES, USER_LEVEL } from '../../constants';
+import { useCategories, useProfile } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
@@ -18,6 +18,7 @@ const CategoriesPage = () => {
 		deleteCategories,
 		reloadCategories,
 	} = useCategories();
+	const { Profile } = useProfile();
 
 	const toggleHandler = (data) => {
 		return [
@@ -66,8 +67,8 @@ const CategoriesPage = () => {
 				searchAttrs={['name', 'lang.[lang].title', 'lang.[lang].perex']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
-				selectable
-				allowDelete
+				selectable={Profile.user_level > USER_LEVEL.redactor.id}
+				allowDelete={Profile.user_level > USER_LEVEL.redactor.id}
 				withLanguageToggle
 			/>
 		</AppLayout>

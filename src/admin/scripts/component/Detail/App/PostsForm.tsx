@@ -8,7 +8,7 @@ import moment from 'moment';
 import config from '../../../config';
 import { SUBMIT_TIMEOUT } from '../../../constants';
 import { PostsItemProps } from '../../../App/types';
-import { Modal, Typography, Form, Section, Wysiwyg } from '../../ui';
+import { Modal, Form, Section, Wysiwyg } from '../../ui';
 import Picker from '../../Picker';
 import Manager from '../../Manager';
 import { usePosts, useSettings, useProfile } from '../../../App/hooks';
@@ -29,6 +29,7 @@ interface PostsDetailFormProps {
 	onDelete: Function;
 	allowSave: boolean;
 	allowDelete: boolean;
+	redactorId?: number;
 }
 
 const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
@@ -38,6 +39,7 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
 	onDelete,
 	allowSave,
 	allowDelete,
+	redactorId,
 }) => {
 	const { t } = useTranslation(['common', 'types']);
 	const { updatePosts, createPosts, reloadPosts } = usePosts();
@@ -72,10 +74,19 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
 		if (Settings) setLangList(Settings.language_active);
 	}, [Settings]);
 
+	const getAuthorized = (authorized) => {
+		if (Settings.redactor_content_approval && redactorId) {
+			return 0;
+		} else {
+			return authorized ? 1 : 0;
+		}
+	};
+
 	const submitHandler = (data) => {
 		const master = {
 			...data,
 			name: string.replaceSpaces(data.name),
+			authorized: getAuthorized(data.authorized),
 			// Reduce and repair date data before submit
 			published: tmp_published
 				? tmp_published
@@ -133,6 +144,16 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
 							ref={register({})}
 							defaultValue={detailData.post_options || null}
 						/>
+						{redactorId && (
+							<input
+								type="hidden"
+								name="authorized"
+								ref={register({})}
+								defaultValue={
+									detailData.authorized || getAuthorized(detailData.authorized)
+								}
+							/>
+						)}
 						{watchType !== 'event' && (
 							<>
 								<input
@@ -603,6 +624,18 @@ const PostsDetailForm: React.FC<PostsDetailFormProps> = ({
 					</Form.Row>
 				</Section.Base>
 				<Section.Base>
+					{!redactorId && (
+						<Form.Row
+							label={'Authorized'}
+							name={'authorized'}
+							control={control}
+							defaultValue={detailData.authorized || true}
+						>
+							{(row) => (
+								<Switch checked={row.value == 1} onChange={row.onChange} />
+							)}
+						</Form.Row>
+					)}
 					<Form.Row
 						label={'Active'}
 						name={'active'}

@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
-import { useTags } from '../hooks';
+import { RELOAD_HOOK_TIMEOUT, ROUTES, USER_LEVEL } from '../../constants';
+import { useTags, useProfile } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
@@ -12,6 +12,7 @@ const TagsPage = () => {
 	const { t } = useTranslation('page');
 	const params: any = useParams();
 	const { Tags, isTagsLoading, toggleTags, deleteTags, reloadTags } = useTags();
+	const { Profile } = useProfile();
 
 	const toggleHandler = (data) => {
 		return [
@@ -56,8 +57,8 @@ const TagsPage = () => {
 				searchAttrs={['name']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
-				selectable
-				allowDelete
+				selectable={Profile.user_level > USER_LEVEL.redactor.id}
+				allowDelete={Profile.user_level > USER_LEVEL.redactor.id}
 			/>
 		</AppLayout>
 	);

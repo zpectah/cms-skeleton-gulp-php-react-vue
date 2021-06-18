@@ -106,6 +106,7 @@ interface ListItemsProps {
 		t_value?: boolean;
 		context?: boolean;
 		r_value?: boolean;
+		authorized?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
@@ -129,6 +130,7 @@ interface ListItemsProps {
 	onDelete: (data: any) => void;
 	withLanguageToggle?: boolean;
 	itemsPerPage?: number;
+	redactorId?: number;
 }
 
 const Table: React.FC<ListItemsProps> = (props) => {
@@ -155,6 +157,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 		loading,
 		withLanguageToggle,
 		itemsPerPage = TABLE_ITEMS_PER_PAGE,
+		redactorId,
 	} = props;
 	const { Profile } = useProfile();
 	const { control, handleSubmit } = useForm({
@@ -394,6 +397,15 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'context',
 				key: 'context',
 				render: (text) => <Tag>{text}</Tag>,
+			});
+		if (columnsLayout.authorized)
+			d.push({
+				title: t('component:Table.column_label.authorized'),
+				dataIndex: 'authorized',
+				key: 'authorized',
+				render: (text) => (
+					<>{text == 1 && <Icon.Material type="Check" size={15} />}</>
+				),
 			});
 		if (columnsLayout.user_group)
 			d.push({
@@ -662,6 +674,7 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				afterClose={closeDetail}
 				allowSave={actions.edit}
 				allowDelete={actions.delete && allowDelete}
+				redactorId={redactorId}
 			/>
 			<Confirm.Dialog
 				isOpen={confirmOpen}

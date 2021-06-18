@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { RELOAD_HOOK_TIMEOUT, ROUTES } from '../../constants';
-import { useUploads } from '../hooks';
+import { RELOAD_HOOK_TIMEOUT, ROUTES, USER_LEVEL } from '../../constants';
+import { useUploads, useProfile } from '../hooks';
 import AppLayout from '../../layout/AppLayout';
 import { Table } from '../../component/Table';
 import { Button } from '../../component/ui';
@@ -18,6 +18,7 @@ const UploadsPage = () => {
 		deleteUploads,
 		reloadUploads,
 	} = useUploads();
+	const { Profile } = useProfile();
 
 	const toggleHandler = (data) => {
 		return [
@@ -65,8 +66,8 @@ const UploadsPage = () => {
 				searchAttrs={['name', 'file_name', 'lang.[lang].title']}
 				onToggle={toggleHandler}
 				onDelete={deleteHandler}
-				selectable
-				allowDelete
+				selectable={Profile.user_level > USER_LEVEL.redactor.id}
+				allowDelete={Profile.user_level > USER_LEVEL.redactor.id}
 				withLanguageToggle
 			/>
 		</AppLayout>
