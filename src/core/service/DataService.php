@@ -39,9 +39,8 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
-		$Profile = new Profile;
-
 		// module: App
+		$Profile = new Profile;
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -202,7 +201,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		$logs = new LogService;
+
 		// module: App
+		$Profile = new Profile;
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -231,6 +233,12 @@ class DataService {
 
 		$languages = $Settings -> get_languages($conn);
 		$modules = $Settings -> get_modules($conn);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'create',
+			$model
+		);
 
 		switch ($model) {
 
@@ -355,9 +363,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
-		$Profile = new Profile;
+		$logs = new LogService;
 
 		// module: App
+		$Profile = new Profile;
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -382,9 +391,14 @@ class DataService {
 		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
-
 		$languages = $Settings -> get_languages($conn);
 		$modules = $Settings -> get_modules($conn);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'update',
+			$model . ' ' . $data -> id
+		);
 
 		switch ($model) {
 
@@ -513,7 +527,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		$logs = new LogService;
+
 		// module: App
+		$Profile = new Profile;
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -538,8 +555,13 @@ class DataService {
 		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
-
 		$modules = $Settings -> get_modules($conn);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'toggle',
+			$model . ' ' . $data -> id || $data
+		);
 
 		switch ($model) {
 
@@ -660,7 +682,10 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$response = null;
 
+		$logs = new LogService;
+
 		// module: App
+		$Profile = new Profile;
 		$Settings = new Settings;
 		$Users = new Users;
 		$Posts = new Posts;
@@ -686,8 +711,13 @@ class DataService {
 		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
-
 		$modules = $Settings -> get_modules($conn);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'delete',
+			$model . ' ' . $data -> id || $data
+		);
 
 		switch ($model) {
 
@@ -833,8 +863,15 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 
 		$Profile = new Profile;
+		$logs = new LogService;
 
 		$response = $Profile -> lost_password($conn, $data);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'lost-password',
+			$response
+		);
 
 		$conn -> close();
 
@@ -860,11 +897,19 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$Settings = new Settings;
 		$Installer = new Installer;
+		$Profile = new Profile;
+		$logs = new LogService;
 
 		$modules = $Settings -> get_modules($conn);
 		$languages = $Settings -> get_languages($conn);
 
 		$response = $Installer -> install_language($conn, $data, $modules, $languages);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'language-install',
+			$response
+		);
 
 		$conn -> close();
 
@@ -875,10 +920,18 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 		$Settings = new Settings;
 		$Installer = new Installer;
+		$Profile = new Profile;
+		$logs = new LogService;
 
 		$languages = $Settings -> get_languages($conn);
 
 		$response = $Installer -> install_module($conn, $data, $languages);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'module-install',
+			$response
+		);
 
 		$conn -> close();
 
@@ -892,8 +945,16 @@ class DataService {
 		$conn = new mysqli(...CFG_DB_CONN);
 
 		$Handyman = new Handyman;
+		$Profile = new Profile;
+		$logs = new LogService;
 
 		$response = $Handyman -> repair_language_tables($conn, $data);
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'table-repair',
+			$response
+		);
 
 		$conn -> close();
 
@@ -904,7 +965,17 @@ class DataService {
 	//
 
 	public function export_table_dump ($data, $authorized) {
+		$conn = new mysqli(...CFG_DB_CONN);
+
 		$SqlDumper = new SqlDumper;
+		$Profile = new Profile;
+		$logs = new LogService;
+
+		$logs -> create(
+			$Profile -> get($conn)['email'],
+			'sql-export',
+			'done'
+		);
 
 		return $SqlDumper -> export_table_dump($data, $authorized);
 	}

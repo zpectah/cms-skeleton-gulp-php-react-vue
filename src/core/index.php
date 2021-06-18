@@ -4,7 +4,6 @@
  * Composer
  */
 require PATH_PFX . 'vendor/autoload.php';
-// https://github.com/ifsnop/mysqldump-php
 
 
 /*
@@ -25,6 +24,7 @@ require PATH_PFX . 'core/utils/Helpers.php';
 require PATH_PFX . 'core/service/DataService.php';
 require PATH_PFX . 'core/service/SessionService.php';
 require PATH_PFX . 'core/service/EmailService.php';
+require PATH_PFX . 'core/service/LogService.php';
 
 
 /*

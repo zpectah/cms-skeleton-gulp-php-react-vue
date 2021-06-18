@@ -26,7 +26,7 @@ Content Managing System based on Apache server, PHP core and React components.
 * PHP 7+:
 	- bladeone
 	- php-image-resize
-	- mysqldump-php
+	- mysqldump-php (https://github.com/ifsnop/mysqldump-php)
 * Styles:
 	- Sass/SCSS
 
