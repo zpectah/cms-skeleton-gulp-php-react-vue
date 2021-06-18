@@ -106,7 +106,6 @@ interface ListItemsProps {
 		t_value?: boolean;
 		context?: boolean;
 		r_value?: boolean;
-		category_parent?: boolean;
 		// TODO: new columns
 	};
 	orderByColumns?: {
@@ -388,15 +387,6 @@ const Table: React.FC<ListItemsProps> = (props) => {
 				dataIndex: 'file_size',
 				key: 'file_size',
 				render: (text) => <span>{file.formatBytes(text)}</span>,
-			});
-		if (columnsLayout.category_parent)
-			d.push({
-				title: t('component:Table.column_label.parent'),
-				dataIndex: 'parent',
-				key: 'parent',
-				render: (text) => (
-					<Viewer model="Categories" items={[text]} language={lang} />
-				),
 			});
 		if (columnsLayout.context)
 			d.push({

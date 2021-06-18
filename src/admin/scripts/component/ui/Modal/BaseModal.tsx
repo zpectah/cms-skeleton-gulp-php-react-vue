@@ -46,6 +46,7 @@ interface BaseModalProps {
 	size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 	title?: string;
 	context?: 'default' | 'error' | 'success' | 'info';
+	mask?: boolean;
 }
 
 const BaseModal: React.FC<BaseModalProps> = (props) => {
@@ -58,6 +59,7 @@ const BaseModal: React.FC<BaseModalProps> = (props) => {
 		size = 'md',
 		title,
 		context = 'default',
+		mask,
 	} = props;
 
 	const width = () => {
@@ -94,6 +96,7 @@ const BaseModal: React.FC<BaseModalProps> = (props) => {
 			centered={true}
 			destroyOnClose={true}
 			footer={null}
+			mask={mask}
 			{...modal}
 		>
 			<ModalWrapper>

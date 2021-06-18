@@ -14,7 +14,7 @@ const CategoriesList: React.FC<CategoriesListProps> = ({ items, language }) => {
 
 	useEffect(() => {
 		let na = [];
-		if (items && Categories && language) {
+		if (Categories && language) {
 			Categories.map((item) => {
 				items.map((id) => {
 					if (item.id == id) na.push(item.lang[language].title);

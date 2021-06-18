@@ -80,6 +80,7 @@ const Dialog: React.FC<DetailItemDialogProps> = (props) => {
 			onCancel={onCancel}
 			afterClose={afterClose}
 			size={size}
+			mask
 		>
 			<ComponentName
 				detailData={detailData}

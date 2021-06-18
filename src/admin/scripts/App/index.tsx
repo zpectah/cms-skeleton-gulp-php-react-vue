@@ -25,6 +25,7 @@ import SettingsPage from './page/Settings';
 import TagsPage from './page/Tags';
 import TranslationsPage from './page/Translations';
 import CategoriesPage from './page/Categories';
+// import CategoriesPage from './page/Categories2';
 import PagesPage from './page/Pages';
 import UploadsPage from './page/Uploads';
 import MenuPage from './page/MenuPage';
