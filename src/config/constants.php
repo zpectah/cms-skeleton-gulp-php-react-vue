@@ -43,7 +43,6 @@ const CFG_DB_CONN =                                       [CFG_DB['server'], CFG
 /*
  * Path
  */
-const PATH_BASE =                                         PATH_PFX;
 define( "PATH_UPLOADS",                                   PATH_PFX . $JSON_GLOBAL['PATH']['uploads'] );
 define( "PATH_LOGS",                                      PATH_PFX . $JSON_GLOBAL['PATH']['logs'] );
 define( "PATH_TMP",                                       PATH_PFX . $JSON_GLOBAL['PATH']['tmp'] );
