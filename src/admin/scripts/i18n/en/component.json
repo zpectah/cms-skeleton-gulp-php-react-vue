@@ -1,9 +1,4 @@
 {
-	"form": {
-		"btn": {
-			"update_changes": "Update changes"
-		}
-	},
 	"Table": {
 		"search_placeholder": "Search in table",
 		"orderBy_label": "Order by",
@@ -47,6 +42,54 @@
 		}
 	},
 	"Detail": {},
+	"Settings": {
+		"global": {
+			"title": "Global",
+			"section": {
+				"project": "Project",
+				"company": "Company (Owner)"
+			},
+			"nameHelp": "This is for internal purpose only",
+			"bankHelp": "This information is optional"
+		},
+		"web": {
+			"title": "Web",
+			"section": {
+				"meta": "Page meta",
+				"mode": "Page mode",
+				"language": "Language",
+				"languageDescription": "This is for showing content with more language mutations. Installing new language is irreversible step and wont be uninstalled, only disabled.",
+				"forms": "Forms",
+				"approval": "Approval",
+				"comments": "Comments"
+			},
+			"inMaintenanceHelp": "If page is in maintenance mode and some features should be disabled",
+			"inDebugHelp": "If page is in debug mode and some features should be disabled",
+			"inDevelopmentHelp": "If page is in development mode",
+			"senderEmailHelp": "This email will be displayed in the header of the email message as the sender",
+			"recipientsHelp": "Forms messages will be sent to these emails",
+			"redactorApprovalHelp": "This allows chief-redactors approving content created by redactors, otherwise redactors can publish any content.",
+			"commentsActiveHelp": "If comments are active in global",
+			"commentsAnonymousHelp": "Anonymous members should comment content"
+		},
+		"modules": {
+			"title": "Modules",
+			"section": {
+				"members": "Members",
+				"market": "Market"
+			},
+			"memberRegisterHelp": "Page and form with registration for members",
+			"memberLoginHelp": "Page and form with member login",
+			"memberLostPasswordHelp": "Page and form with lost password",
+			"membersAlert": "You need to have the Members module installed"
+		},
+		"maintenance": {
+			"title": "Maintenance",
+			"section": {
+				"export": "Export"
+			}
+		}
+	},
 	"ModuleInstaller": {
 		"message": {
 			"success_installed": "Module was successfully installed"

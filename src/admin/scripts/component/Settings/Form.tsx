@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Tabs } from 'antd';
 import { useForm } from 'react-hook-form';
-import { Form as AntdForm, Input, Select, Switch, Checkbox, Alert } from 'antd';
+import {
+	Form as AntdForm,
+	Input,
+	Select,
+	Switch,
+	Checkbox,
+	Alert,
+	Tabs,
+} from 'antd';
 import styled from 'styled-components';
 
 import config from '../../config';
 import { routeProps } from '../../types';
-// import { EMAIL_REGEX } from '../../constants'; // TODO
+import { EMAIL_REGEX } from '../../constants';
 import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
 import Manager from '../Manager';
 import LanguageInstaller from './LanguageInstaller';
@@ -129,15 +136,18 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				defaultActiveKey={panelKey ? panelKey : 'global'}
 				onChange={(activeKey) => history.push(`${route.path}/${activeKey}`)}
 			>
-				<TabPane tab="Global" key="global">
+				<TabPane tab={t('component:Settings.global.title')} key="global">
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Project'} withBorder>
+						<Section.Base
+							title={t('component:Settings.global.section.project')}
+							withBorder
+						>
 							<UiForm.Row
 								label={'Name'}
 								name={'project_name'}
 								control={control}
 								rules={{ required: true }}
-								helpText={'This is for internal purpose only'}
+								helpText={t('component:Settings.global.nameHelp')}
 								required
 							>
 								{(row) => (
@@ -152,7 +162,10 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 						</Section.Base>
-						<Section.Base title={'Company (owner)'} titleAnchor={'company'}>
+						<Section.Base
+							title={t('component:Settings.global.section.company')}
+							titleAnchor={'company'}
+						>
 							<UiForm.Row label={'ID'} name={'company_id'} control={control}>
 								{(row) => (
 									<Input
@@ -301,7 +314,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								label={'Bank'}
 								name={'company_bank'}
 								control={control}
-								helpText={'This information are optional'}
+								helpText={t('component:Settings.global.bankHelp')}
 							>
 								{(row) => (
 									<TextArea
@@ -327,9 +340,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						</Section.Base>
 					</Card.Base>
 				</TabPane>
-				<TabPane tab="Web" key="web">
+				<TabPane tab={t('component:Settings.web.title')} key="web">
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Page meta'} titleAnchor={'meta'} withBorder>
+						<Section.Base
+							title={t('component:Settings.web.section.meta')}
+							titleAnchor={'meta'}
+							withBorder
+						>
 							<UiForm.Row
 								label={'Title'}
 								name={'meta_title'}
@@ -406,14 +423,16 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 						</Section.Base>
-						<Section.Base title={'Page mode'} titleAnchor={'mode'} withBorder>
+						<Section.Base
+							title={t('component:Settings.web.section.mode')}
+							titleAnchor={'mode'}
+							withBorder
+						>
 							<UiForm.Row
 								label={'In maintenance'}
 								name={'mode_maintenance'}
 								control={control}
-								helpText={
-									'If page is in maintenance mode and some features should be disabled'
-								}
+								helpText={t('component:Settings.web.inMaintenanceHelp')}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -423,9 +442,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								label={'In debug'}
 								name={'mode_debug'}
 								control={control}
-								helpText={
-									'If page is in debug mode and some features should be disabled'
-								}
+								helpText={t('component:Settings.web.inDebugHelp')}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -435,7 +452,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								label={'In development'}
 								name={'mode_development'}
 								control={control}
-								helpText={'If page is in development mode'}
+								helpText={t('component:Settings.web.inDevelopmentHelp')}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -443,11 +460,11 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							</UiForm.Row>
 						</Section.Base>
 						<Section.Base
-							title={'Language'}
+							title={t('component:Settings.web.section.language')}
 							titleAnchor={'language'}
-							description={
-								'This is for showing content with more language mutations. Installing new language is irreversible step and wont be uninstalled, only disabled.'
-							}
+							description={t(
+								'component:Settings.web.section.languageDescription',
+							)}
 							withBorder
 						>
 							<UiForm.Row
@@ -508,15 +525,16 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 						</Section.Base>
-						<Section.Base title={'Forms'} withBorder>
+						<Section.Base
+							title={t('component:Settings.web.section.forms')}
+							withBorder
+						>
 							<UiForm.Row
 								label={'Sender email'}
 								name={'form_sender_email'}
 								control={control}
-								rules={{ required: true }}
-								helpText={
-									'This email will be displayed in the header of the email message as the sender'
-								}
+								rules={{ required: true, pattern: EMAIL_REGEX }}
+								helpText={t('component:Settings.web.senderEmailHelp')}
 								required
 							>
 								{(row) => (
@@ -535,7 +553,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								name={'form_recipients_email'}
 								control={control}
 								rules={{ required: true }}
-								helpText={'Forms messages will be sent to these emails'}
+								helpText={t('component:Settings.web.recipientsHelp')}
 								required
 							>
 								{(row) => (
@@ -551,7 +569,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							</UiForm.Row>
 						</Section.Base>
 						<Section.Base
-							title={'Approval'}
+							title={t('component:Settings.web.section.approval')}
 							titleAnchor={'approval'}
 							withBorder={tmpState.module_members_installed}
 						>
@@ -559,9 +577,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								label={'Redactor approval'}
 								name={'redactor_content_approval'}
 								control={control}
-								helpText={
-									'This allows chief-redactors approving content created by redactors, otherwise redactors can publish any content.'
-								}
+								helpText={t('component:Settings.web.redactorApprovalHelp')}
 							>
 								{(row) => (
 									<Switch checked={row.value} onChange={row.onChange} />
@@ -569,12 +585,15 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							</UiForm.Row>
 						</Section.Base>
 						{tmpState.module_members_installed && (
-							<Section.Base title={'Comments'} titleAnchor={'comments'}>
+							<Section.Base
+								title={t('component:Settings.web.section.comments')}
+								titleAnchor={'comments'}
+							>
 								<UiForm.Row
 									label={'Active'}
 									name={'comments_global_active'}
 									control={control}
-									helpText={'If comments are active in global'}
+									helpText={t('component:Settings.web.commentsActiveHelp')}
 								>
 									{(row) => (
 										<Switch
@@ -588,7 +607,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									label={'Anonymous'}
 									name={'comments_anonymous_active'}
 									control={control}
-									helpText={'Anonymous members should comment content'}
+									helpText={t('component:Settings.web.commentsAnonymousHelp')}
 								>
 									{(row) => (
 										<Switch
@@ -602,9 +621,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						)}
 					</Card.Base>
 				</TabPane>
-				<TabPane tab="Modules" key="modules">
+				<TabPane tab={t('component:Settings.modules.title')} key="modules">
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Members'} titleAnchor={'members'} withBorder>
+						<Section.Base
+							title={t('component:Settings.modules.section.members')}
+							titleAnchor={'members'}
+							withBorder
+						>
 							{tmpState.module_members_installed ? (
 								<>
 									<UiForm.Row
@@ -632,7 +655,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												label={'Register active'}
 												name={'members_register_active'}
 												control={control}
-												helpText={'Page and form with registration for members'}
+												helpText={t(
+													'component:Settings.modules.memberRegisterHelp',
+												)}
 											>
 												{(row) => (
 													<Switch
@@ -646,7 +671,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												label={'Login active'}
 												name={'members_login_active'}
 												control={control}
-												helpText={'Page and form with member login'}
+												helpText={t(
+													'component:Settings.modules.memberLoginHelp',
+												)}
 											>
 												{(row) => (
 													<Switch
@@ -660,7 +687,9 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												label={'Lost password active'}
 												name={'members_lostPassword_active'}
 												control={control}
-												helpText={'Page and form with lost password'}
+												helpText={t(
+													'component:Settings.modules.memberLostPasswordHelp',
+												)}
 											>
 												{(row) => (
 													<Switch
@@ -677,16 +706,18 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								<ModuleInstaller
 									module={'Members'}
 									afterInstall={() => {
-										console.log('Members is Members installed');
 										setTmpState({
 											...tmpState,
-											module_members_installed: true, // TODO
+											module_members_installed: true,
 										});
 									}}
 								/>
 							)}
 						</Section.Base>
-						<Section.Base title={'Market'} titleAnchor={'market'}>
+						<Section.Base
+							title={t('component:Settings.modules.section.market')}
+							titleAnchor={'market'}
+						>
 							{tmpState.module_market_installed ? (
 								<>
 									<UiForm.Row
@@ -707,29 +738,23 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 											/>
 										)}
 									</UiForm.Row>
-									{tmpState.module_market_active && (
-										<>
-											<Hr.Base />
-											... form part available only when module is active ...
-										</>
-									)}
+									{tmpState.module_market_active && <></>}
 								</>
 							) : (
 								<>
 									<ModuleInstaller
 										module={'Market'}
 										afterInstall={() => {
-											console.log('Module Market installed');
 											setTmpState({
 												...tmpState,
-												module_market_installed: true, // TODO
+												module_market_installed: true,
 											});
 										}}
 										disabled={!tmpState.module_members_installed}
 									/>
 									{!tmpState.module_members_installed && (
 										<Alert
-											message="You need to have the Members module installed"
+											message={t('component:Settings.modules.membersAlert')}
 											type="warning"
 										/>
 									)}
@@ -738,9 +763,15 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 						</Section.Base>
 					</Card.Base>
 				</TabPane>
-				<TabPane tab="Maintenance" key="maintenance">
+				<TabPane
+					tab={t('component:Settings.maintenance.title')}
+					key="maintenance"
+				>
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Export'} titleAnchor={'export'}>
+						<Section.Base
+							title={t('component:Settings.maintenance.section.export')}
+							titleAnchor={'export'}
+						>
 							<TableWrapper>
 								<StyledTable>
 									<tbody>
@@ -760,7 +791,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 					loading={loading}
 					disabled={!formState.isValid}
 				>
-					{t('component:form.btn.update_changes')}
+					{t('btn.updateChanges')}
 				</Button.Base>
 			</ActionRow>
 		</AntdForm>

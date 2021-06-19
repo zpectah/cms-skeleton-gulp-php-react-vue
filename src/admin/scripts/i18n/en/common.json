@@ -17,6 +17,7 @@
 		"active": "Active",
 		"disable": "Disable",
 		"saveChanges": "Save changes",
+		"updateChanges": "Update changes",
 		"clear": "Clear"
 	},
 	"title": {
@@ -84,5 +85,107 @@
 		"Products": "New product",
 		"ProductsOptions": "New product option",
 		"Stores": "New store"
+	},
+	"input": {
+		"name": {
+			"label": "Name",
+			"placeholder": "Type name"
+		},
+		"id": {
+			"label": "ID",
+			"placeholder": "Type id"
+		},
+		"description": {
+			"label": "Description",
+			"placeholder": "Type description"
+		},
+		"address": {
+			"label": "Address",
+			"placeholder": "Type address"
+		},
+		"city": {
+			"label": "City",
+			"placeholder": "Type city"
+		},
+		"country": {
+			"label": "Country",
+			"placeholder": "Type country"
+		},
+		"zip": {
+			"label": "ZIP",
+			"placeholder": "Type ZIP code"
+		},
+		"email": {
+			"label": "E-mail",
+			"placeholder": "Type e-mail"
+		},
+		"phone": {
+			"label": "Phone",
+			"placeholder": "Type phone"
+		},
+		"bank": {
+			"label": "Bank",
+			"placeholder": "Type bank"
+		},
+		"location": {
+			"label": "Location",
+			"placeholder": "Set location"
+		},
+		"title": {
+			"label": "Title",
+			"placeholder": "Type title"
+		},
+		"robots": {
+			"label": "Robots",
+			"placeholder": "Select robots"
+		},
+		"keywords": {
+			"label": "Keywords",
+			"placeholder": "Select keywords"
+		},
+		"inMaintenance": {
+			"label": "In Maintenance"
+		},
+		"inDebug": {
+			"label": "In Debug"
+		},
+		"inDevelopment": {
+			"label": "In Development"
+		},
+		"senderEmail": {
+			"label": "Sender E-mail",
+			"placeholder": "Type E-mail"
+		},
+		"recipientsEmail": {
+			"label": "Recipients E-mail",
+			"placeholder": "Type E-mail"
+		},
+		"redactorApproval": {
+			"label": "Redactor Approval"
+		},
+		"active": {
+			"label": "Active"
+		},
+		"anonymous": {
+			"label": "Anonymous"
+		},
+		"membersActive": {
+			"label": "Members active"
+		},
+		"registerActive": {
+			"label": "Register active"
+		},
+		"loginActive": {
+			"label": "Login active"
+		},
+		"lostPasswordActive": {
+			"label": "Lost password active"
+		},
+		"marketActive": {
+			"label": "Market active"
+		},
+		"exportDataTables": {
+			"label": "Export data tables"
+		}
 	}
 }
