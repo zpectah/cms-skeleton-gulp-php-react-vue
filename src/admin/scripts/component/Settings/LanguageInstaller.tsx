@@ -22,7 +22,7 @@ interface LanguageInstallerProps {
 }
 
 const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
-	const { t } = useTranslation(['component']);
+	const { t } = useTranslation(['common', 'component']);
 	const { installed, afterInstall } = props;
 	const { Option } = Select;
 	const [progress, setProgress] = useState<boolean>(false);
@@ -52,12 +52,11 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 		let na = [...installed, ...langToInstall];
 
 		installLanguage({ installed: na, toInstall: langToInstall }).then((res) => {
-			console.log(res);
+			// console.log(res);
 
 			if (afterInstall) afterInstall(na);
 			setProgress(false);
 			setLangToInstall([]);
-			// set to array returned from installation process (res.data.installed)
 			langToInstall.map((lng) =>
 				message.success(
 					t('component:LanguageInstaller.message.success_installed', {
@@ -75,7 +74,7 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 				<StyledSelect
 					mode="multiple"
 					allowClear
-					placeholder="Select new languages to install"
+					placeholder={t('component:LanguageInstaller.placeholder')}
 					value={langToInstall}
 					onChange={(value) => setLangToInstall(value)}
 				>
@@ -87,7 +86,7 @@ const LanguageInstaller: React.FC<LanguageInstallerProps> = (props) => {
 					disabled={langToInstall.length === 0}
 					loading={progress}
 				>
-					Install
+					{t('btn.install')}
 				</Button.Base>
 			</Wrapper>
 		</>

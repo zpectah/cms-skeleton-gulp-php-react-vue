@@ -60,10 +60,7 @@ const ModuleInstaller: React.FC<ModuleInstallerProps> = (props) => {
 				Install {module} module
 			</Button.Base>
 			<Spacer />
-			<Alert
-				message="This is an irreversible step, continue only if you know what you are doing."
-				type="info"
-			/>
+			<Alert message={t('component:ModuleInstaller.help')} type="info" />
 		</Wrapper>
 	);
 };

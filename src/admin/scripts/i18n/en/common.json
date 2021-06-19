@@ -18,7 +18,8 @@
 		"disable": "Disable",
 		"saveChanges": "Save changes",
 		"updateChanges": "Update changes",
-		"clear": "Clear"
+		"clear": "Clear",
+		"install": "Install"
 	},
 	"title": {
 		"create_new": "Create new"
@@ -195,9 +196,6 @@
 		},
 		"marketActive": {
 			"label": "Market active"
-		},
-		"exportDataTables": {
-			"label": "Export data tables"
 		},
 		"languageToInstall": {
 			"label": "Language to install"

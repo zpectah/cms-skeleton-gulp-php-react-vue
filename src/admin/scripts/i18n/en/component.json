@@ -91,11 +91,13 @@
 		}
 	},
 	"ModuleInstaller": {
+		"help": "This is an irreversible step, continue only if you know what you are doing.",
 		"message": {
 			"success_installed": "Module was successfully installed"
 		}
 	},
 	"LanguageInstaller": {
+		"placeholder": "Select new languages to install",
 		"message": {
 			"success_installed": "Language {{lang}} was successfully installed"
 		}
@@ -133,5 +135,10 @@
 		"btn": {
 			"createNew_item": "Create new item"
 		}
+	},
+	"ExportSqlDump": {
+		"btn": "Export SQL file",
+		"label": "Export data tables",
+		"help": "Export all data and save as file .sql format"
 	}
 }

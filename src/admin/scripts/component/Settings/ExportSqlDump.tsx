@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSystemApi, useProfile } from '../../App/hooks';
 import { Button } from '../ui';
@@ -7,6 +8,7 @@ interface ExportSqlDumpProps {}
 
 const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 	const [progress, setProgress] = useState<boolean>(false);
+	const { t } = useTranslation(['component']);
 	const { exportSqlDump } = useSystemApi();
 	const { Profile } = useProfile();
 
@@ -23,7 +25,7 @@ const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 
 	return (
 		<tr>
-			<th>Export data tables</th>
+			<th>{t('component:ExportSqlDump.label')}</th>
 			<td>
 				<Button.Base
 					type="primary"
@@ -31,11 +33,11 @@ const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 					loading={progress}
 					ghost
 				>
-					Export SQL
+					{t('component:ExportSqlDump.btn')}
 				</Button.Base>
 			</td>
 			<td>
-				<small>Export all data and save as file .sql format</small>
+				<small>{t('component:ExportSqlDump.help')}</small>
 			</td>
 		</tr>
 	);
