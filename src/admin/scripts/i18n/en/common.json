@@ -91,9 +91,17 @@
 			"label": "Name",
 			"placeholder": "Type name"
 		},
+		"projectName": {
+			"label": "Project name",
+			"placeholder": "Type Project name"
+		},
 		"id": {
 			"label": "ID",
 			"placeholder": "Type id"
+		},
+		"companyId": {
+			"label": "Company ID",
+			"placeholder": "Type Company ID"
 		},
 		"description": {
 			"label": "Description",
@@ -134,6 +142,10 @@
 		"title": {
 			"label": "Title",
 			"placeholder": "Type title"
+		},
+		"pageTitle": {
+			"label": "Page title",
+			"placeholder": "Type Page title"
 		},
 		"robots": {
 			"label": "Robots",
@@ -186,6 +198,16 @@
 		},
 		"exportDataTables": {
 			"label": "Export data tables"
+		},
+		"languageToInstall": {
+			"label": "Language to install"
+		},
+		"activeLanguages": {
+			"label": "Active languages"
+		},
+		"defaultLanguage": {
+			"label": "Default language",
+			"placeholder": "Select default language"
 		}
 	}
 }

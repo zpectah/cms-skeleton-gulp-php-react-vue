@@ -143,7 +143,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder
 						>
 							<UiForm.Row
-								label={'Name'}
+								label={t('input.projectName.label')}
 								name={'project_name'}
 								control={control}
 								rules={{ required: true }}
@@ -157,7 +157,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Project name'}
+										placeholder={t('input.projectName.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
@@ -166,7 +166,11 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							title={t('component:Settings.global.section.company')}
 							titleAnchor={'company'}
 						>
-							<UiForm.Row label={'ID'} name={'company_id'} control={control}>
+							<UiForm.Row
+								label={t('input.companyId.label')}
+								name={'company_id'}
+								control={control}
+							>
 								{(row) => (
 									<Input
 										id={row.id}
@@ -174,13 +178,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company ID'}
+										placeholder={t('input.companyId.label')}
 									/>
 								)}
 							</UiForm.Row>
 							<Hr.Base />
 							<UiForm.Row
-								label={'Name'}
+								label={t('input.name.label')}
 								name={'company_name'}
 								control={control}
 							>
@@ -191,12 +195,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company name'}
+										placeholder={t('input.name.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Description'}
+								label={t('input.description.label')}
 								name={'company_description'}
 								control={control}
 							>
@@ -207,13 +211,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company description'}
+										placeholder={t('input.description.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<Hr.Base />
 							<UiForm.Row
-								label={'Address'}
+								label={t('input.address.label')}
 								name={'company_address'}
 								control={control}
 							>
@@ -224,12 +228,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company address'}
+										placeholder={t('input.address.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'City'}
+								label={t('input.city.label')}
 								name={'company_city'}
 								control={control}
 							>
@@ -240,12 +244,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company city'}
+										placeholder={t('input.city.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Country'}
+								label={t('input.country.label')}
 								name={'company_country'}
 								control={control}
 							>
@@ -256,12 +260,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company country'}
+										placeholder={t('input.country.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Zip code'}
+								label={t('input.zip.label')}
 								name={'company_zip'}
 								control={control}
 							>
@@ -272,13 +276,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company zip'}
+										placeholder={t('input.zip.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<Hr.Base />
 							<UiForm.Row
-								label={'E-mail'}
+								label={t('input.email.label')}
 								name={'company_email'}
 								control={control}
 							>
@@ -289,12 +293,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										id={row.id}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company emails'}
+										placeholder={t('input.email.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Phone'}
+								label={t('input.phone.label')}
 								name={'company_phone'}
 								control={control}
 							>
@@ -305,13 +309,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										id={row.id}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company phone'}
+										placeholder={t('input.phone.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<Hr.Base />
 							<UiForm.Row
-								label={'Bank'}
+								label={t('input.bank.label')}
 								name={'company_bank'}
 								control={control}
 								helpText={t('component:Settings.global.bankHelp')}
@@ -323,13 +327,13 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Company bank object'}
+										placeholder={t('input.bank.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<Hr.Base />
 							<UiForm.Row
-								label={'Location'}
+								label={t('input.location.label')}
 								name={'company_location'}
 								control={control}
 							>
@@ -348,7 +352,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder
 						>
 							<UiForm.Row
-								label={'Title'}
+								label={t('input.pageTitle.label')}
 								name={'meta_title'}
 								control={control}
 								rules={{ required: true }}
@@ -361,12 +365,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Page meta title'}
+										placeholder={t('input.pageTitle.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Description'}
+								label={t('input.description.label')}
 								name={'meta_description'}
 								control={control}
 								rules={{ required: true }}
@@ -379,12 +383,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Page meta description'}
+										placeholder={t('input.description.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Robots'}
+								label={t('input.robots.label')}
 								name={'meta_robots'}
 								control={control}
 								rules={{ required: true }}
@@ -396,7 +400,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										style={{ width: '100%' }}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Page meta robots'}
+										placeholder={t('input.robots.placeholder')}
 									>
 										{config.OPTIONS.meta.robots.map((item) => (
 											<Select.Option value={item} key={item}>
@@ -407,7 +411,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Keywords'}
+								label={t('input.keywords.label')}
 								name={'meta_keywords'}
 								control={control}
 							>
@@ -416,7 +420,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										mode="tags"
 										id={row.id}
 										style={{ width: '100%' }}
-										placeholder={'Page meta keywords'}
+										placeholder={t('input.keywords.placeholder')}
 										value={row.value}
 										onChange={row.onChange}
 									/>
@@ -429,7 +433,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder
 						>
 							<UiForm.Row
-								label={'In maintenance'}
+								label={t('input.inMaintenance.label')}
 								name={'mode_maintenance'}
 								control={control}
 								helpText={t('component:Settings.web.inMaintenanceHelp')}
@@ -439,7 +443,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'In debug'}
+								label={t('input.inDebug.label')}
 								name={'mode_debug'}
 								control={control}
 								helpText={t('component:Settings.web.inDebugHelp')}
@@ -449,7 +453,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'In development'}
+								label={t('input.inDevelopment.label')}
 								name={'mode_development'}
 								control={control}
 								helpText={t('component:Settings.web.inDevelopmentHelp')}
@@ -468,7 +472,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder
 						>
 							<UiForm.Row
-								label={'Language to install'}
+								label={t('input.languageToInstall.label')}
 								name={'language_installed'}
 								control={control}
 							>
@@ -483,7 +487,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Active languages'}
+								label={t('input.activeLanguages.label')}
 								name={'language_active'}
 								control={control}
 								rules={{ required: true }}
@@ -501,7 +505,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Default language'}
+								label={t('input.defaultLanguage.label')}
 								name={'language_default'}
 								control={control}
 								rules={{ required: true }}
@@ -520,7 +524,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 											});
 										}}
 										options={getLanguageDefaultOptions()}
-										placeholder={'Select default language'}
+										placeholder={t('input.defaultLanguage.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
@@ -530,7 +534,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder
 						>
 							<UiForm.Row
-								label={'Sender email'}
+								label={t('input.senderEmail.label')}
 								name={'form_sender_email'}
 								control={control}
 								rules={{ required: true, pattern: EMAIL_REGEX }}
@@ -544,12 +548,12 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										name={row.name}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Form sender email'}
+										placeholder={t('input.senderEmail.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
 							<UiForm.Row
-								label={'Recipients email'}
+								label={t('input.recipientsEmail.label')}
 								name={'form_recipients_email'}
 								control={control}
 								rules={{ required: true }}
@@ -563,7 +567,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										id={row.id}
 										value={row.value}
 										onChange={row.onChange}
-										placeholder={'Form recipients emails'}
+										placeholder={t('input.recipientsEmail.placeholder')}
 									/>
 								)}
 							</UiForm.Row>
@@ -574,7 +578,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							withBorder={tmpState.module_members_installed}
 						>
 							<UiForm.Row
-								label={'Redactor approval'}
+								label={t('input.redactorApproval.label')}
 								name={'redactor_content_approval'}
 								control={control}
 								helpText={t('component:Settings.web.redactorApprovalHelp')}
@@ -590,7 +594,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 								titleAnchor={'comments'}
 							>
 								<UiForm.Row
-									label={'Active'}
+									label={t('input.active.label')}
 									name={'comments_global_active'}
 									control={control}
 									helpText={t('component:Settings.web.commentsActiveHelp')}
@@ -604,7 +608,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 									)}
 								</UiForm.Row>
 								<UiForm.Row
-									label={'Anonymous'}
+									label={t('input.anonymous.label')}
 									name={'comments_anonymous_active'}
 									control={control}
 									helpText={t('component:Settings.web.commentsAnonymousHelp')}
@@ -631,7 +635,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							{tmpState.module_members_installed ? (
 								<>
 									<UiForm.Row
-										label={'Members active'}
+										label={t('input.membersActive.label')}
 										name={'module_members_active'}
 										control={control}
 									>
@@ -652,7 +656,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 										<>
 											<Hr.Base />
 											<UiForm.Row
-												label={'Register active'}
+												label={t('input.registerActive.label')}
 												name={'members_register_active'}
 												control={control}
 												helpText={t(
@@ -668,7 +672,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												)}
 											</UiForm.Row>
 											<UiForm.Row
-												label={'Login active'}
+												label={t('input.loginActive.label')}
 												name={'members_login_active'}
 												control={control}
 												helpText={t(
@@ -684,7 +688,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 												)}
 											</UiForm.Row>
 											<UiForm.Row
-												label={'Lost password active'}
+												label={t('input.lostPasswordActive.label')}
 												name={'members_lostPassword_active'}
 												control={control}
 												helpText={t(
@@ -721,7 +725,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 							{tmpState.module_market_installed ? (
 								<>
 									<UiForm.Row
-										label={'Market active'}
+										label={t('input.marketActive.label')}
 										name={'module_market_active'}
 										control={control}
 									>
