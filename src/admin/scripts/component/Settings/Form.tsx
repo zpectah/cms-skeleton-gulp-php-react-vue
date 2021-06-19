@@ -13,7 +13,6 @@ import { Button, Form as UiForm, Card, Section, Hr } from '../ui';
 import Manager from '../Manager';
 import LanguageInstaller from './LanguageInstaller';
 import ModuleInstaller from './ModuleInstaller';
-import RepairSqlTables from './RepairSqlTables';
 import ExportSqlDump from './ExportSqlDump';
 import ImportSqlDump from './ImportSqlDump';
 
@@ -52,7 +51,7 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 	const { t } = useTranslation(['common', 'component', 'types']);
 	const { route, panelKey, model, loading, onUpdate } = props;
 	const { control, handleSubmit, setValue, formState, reset } = useForm({
-		mode: 'onChange',
+		mode: 'all',
 		defaultValues: model,
 	});
 	const { TabPane } = Tabs;
@@ -741,15 +740,6 @@ const Form: React.FC<SettingsFormProps> = (props) => {
 				</TabPane>
 				<TabPane tab="Maintenance" key="maintenance">
 					<Card.Base withNegativeOffsetTop>
-						<Section.Base title={'Repairs'} titleAnchor={'repairs'} withBorder>
-							<TableWrapper>
-								<StyledTable>
-									<tbody>
-										<RepairSqlTables />
-									</tbody>
-								</StyledTable>
-							</TableWrapper>
-						</Section.Base>
 						<Section.Base title={'Export'} titleAnchor={'export'}>
 							<TableWrapper>
 								<StyledTable>

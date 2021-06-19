@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useSystemApi } from '../../App/hooks';
+import { useSystemApi, useProfile } from '../../App/hooks';
 import { Button } from '../ui';
 
 interface ExportSqlDumpProps {}
@@ -8,11 +8,14 @@ interface ExportSqlDumpProps {}
 const ExportSqlDump: React.FC<ExportSqlDumpProps> = ({}) => {
 	const [progress, setProgress] = useState<boolean>(false);
 	const { exportSqlDump } = useSystemApi();
+	const { Profile } = useProfile();
 
 	const processHandler = () => {
+		const email = Profile.email;
+
 		setProgress(true);
 
-		exportSqlDump({}).then((res) => {
+		exportSqlDump({ email }).then((res) => {
 			if (res && res.url) window.open(res.url);
 			setProgress(false);
 		});

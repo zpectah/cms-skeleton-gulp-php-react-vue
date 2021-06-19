@@ -30,6 +30,7 @@ class Request {
 		];
 		$urlTrimmed = ltrim( $_SERVER['REDIRECT_URL'], "/" );
 		$url = explode( "/", $urlTrimmed );
+
 		$requestData = json_decode(file_get_contents('php://input'));
 
 		if ( $url[1] ) switch ($url[1]) {
@@ -980,20 +981,9 @@ class Request {
 				}
 
 
-			// Handyman
-			case 'repair_language_tables':
-				if ($authorized) {
-					$response['data'] = $DataService -> repair_language_tables($requestData);
-					$response['status'] = 'ok';
-					return $response;
-				} else {
-					return $unauthorizedResponse;
-				}
-
-
 			// SqlDumper
 			case 'export_table_dump':
-				return $DataService -> export_table_dump($requestData, $authorized);
+				return $DataService -> export_table_dump();
 
 			case 'import_table_data':
 				if ($authorized) {

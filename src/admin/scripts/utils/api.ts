@@ -8,7 +8,7 @@ const init: any = {
 };
 
 const get = async (url: string) => {
-	// console.log(config.CMS_TOKEN);
+	// console.log(url);
 	const response = await fetch(url, {
 		method: 'GET',
 		...init,
@@ -17,7 +17,7 @@ const get = async (url: string) => {
 };
 
 const post = async (url: string, data: any) => {
-	// console.log('data', data);
+	// console.log(url, data);
 	const response = await fetch(url, {
 		method: 'POST',
 		...init,
@@ -27,17 +27,15 @@ const post = async (url: string, data: any) => {
 };
 
 const postRaw = async (url: string, data: any) => {
-	// console.log('data', data);
-	const response = await fetch(url, {
+	// console.log(url, data);
+	return await fetch(url, {
 		method: 'POST',
 		...init,
 		body: JSON.stringify(data),
 	});
-	return response;
 };
 
-const fetcher = (url) =>
-	fetch(url, { cache: 'reload' }).then((res) => res.json());
+const fetcher = (url) => fetch(url, init).then((res) => res.json());
 
 export default {
 	get,

@@ -9,11 +9,13 @@ use Ifsnop\Mysqldump as IMysqldump;
 
 class SqlDumper {
 
-	public function export_table_dump($requestData, $authorized) {
+	public function export_table_dump() {
+		// $requestData = json_decode(json_encode($requestData), true);
+
+		// if (!$requestData['email']) exit;
+
 		$date = date_create();
 		$filePrefix = CMS_NAME . '_dump_' . date_timestamp_get($date);
-
-		// TODO: handle $authorized !!!
 
 		try {
 			$dump = new IMysqldump\Mysqldump('mysql:host=' . CFG_DB['server'] .';dbname=' . CFG_DB['name'], CFG_DB['user'], CFG_DB['password']);
@@ -32,6 +34,7 @@ class SqlDumper {
 		} catch (\Exception $e) {
 			return $e -> getMessage();
 		}
+
 	}
 
 	public function import_table_data($requestData) {

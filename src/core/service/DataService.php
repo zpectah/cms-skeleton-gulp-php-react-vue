@@ -4,7 +4,7 @@
 namespace core\service;
 
 
-use core\handler\Handyman;
+// use core\handler\Handyman;
 use core\handler\Installer;
 use core\handler\SqlDumper;
 use core\model\Categories;
@@ -941,43 +941,27 @@ class DataService {
 	//
 	//
 
-	public function repair_language_tables ($data) {
-		$conn = new mysqli(...CFG_DB_CONN);
-
-		$Handyman = new Handyman;
-		$Profile = new Profile;
-		$logs = new LogService;
-
-		$response = $Handyman -> repair_language_tables($conn, $data);
-
-		$logs -> create(
-			$Profile -> get($conn)['email'],
-			'table-repair',
-			'ok'
-		);
-
-		$conn -> close();
-
-		return $response;
-	}
-
-	//
-	//
-
-	public function export_table_dump ($data, $authorized) {
+	public function export_table_dump () {
 		$conn = new mysqli(...CFG_DB_CONN);
 
 		$SqlDumper = new SqlDumper;
 		$Profile = new Profile;
 		$logs = new LogService;
 
+		$email = $Profile -> get($conn)['email'];
+
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$email,
 			'sql-export',
 			'ok'
 		);
 
-		return $SqlDumper -> export_table_dump($data, $authorized);
+		if ($email) {
+			return $SqlDumper -> export_table_dump();
+		} else {
+			return null;
+		}
+
 	}
 
 	public function import_table_data ($data) {
