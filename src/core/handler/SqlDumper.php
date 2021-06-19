@@ -10,10 +10,6 @@ use Ifsnop\Mysqldump as IMysqldump;
 class SqlDumper {
 
 	public function export_table_dump() {
-		// $requestData = json_decode(json_encode($requestData), true);
-
-		// if (!$requestData['email']) exit;
-
 		$date = date_create();
 		$filePrefix = CMS_NAME . '_dump_' . date_timestamp_get($date);
 

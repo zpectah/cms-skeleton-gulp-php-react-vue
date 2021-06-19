@@ -66,7 +66,6 @@ class DataService {
 		$ProductsOptions = new ProductsOptions;
 		$Stores = new Stores;
 
-
 		$languages = $Settings -> get_languages($conn);
 		$modules = $Settings -> get_modules($conn);
 
@@ -235,7 +234,7 @@ class DataService {
 		$modules = $Settings -> get_modules($conn);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'create',
 			$model
 		);
@@ -395,7 +394,7 @@ class DataService {
 		$modules = $Settings -> get_modules($conn);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'update',
 			$model . ' ' . $data -> id
 		);
@@ -558,7 +557,7 @@ class DataService {
 		$modules = $Settings -> get_modules($conn);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'toggle',
 			$model
 		);
@@ -714,7 +713,7 @@ class DataService {
 		$modules = $Settings -> get_modules($conn);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'delete',
 			$model
 		);
@@ -868,7 +867,7 @@ class DataService {
 		$response = $Profile -> lost_password($conn, $data);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'lost-password',
 			'ok'
 		);
@@ -906,7 +905,7 @@ class DataService {
 		$response = $Installer -> install_language($conn, $data, $modules, $languages);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'language-install',
 			'ok'
 		);
@@ -928,7 +927,7 @@ class DataService {
 		$response = $Installer -> install_module($conn, $data, $languages);
 
 		$logs -> create(
-			$Profile -> get($conn)['email'],
+			$Profile -> get($conn)['id'],
 			'module-install',
 			'ok'
 		);
@@ -948,15 +947,15 @@ class DataService {
 		$Profile = new Profile;
 		$logs = new LogService;
 
-		$email = $Profile -> get($conn)['email'];
+		$id = $Profile -> get($conn)['id'];
 
 		$logs -> create(
-			$email,
+			$id,
 			'sql-export',
 			'ok'
 		);
 
-		if ($email) {
+		if ($id) {
 			return $SqlDumper -> export_table_dump();
 		} else {
 			return null;

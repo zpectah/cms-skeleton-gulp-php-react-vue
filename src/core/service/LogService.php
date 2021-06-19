@@ -11,7 +11,7 @@ class LogService {
 	}
 
 	public function create ($uid, $method, $status) {
-		$log = date("G:i:s e") . ': ' . $uid . ' (' . $_SERVER['REMOTE_ADDR'] . ') - ' . $method . ': ' . $status . PHP_EOL;
+		$log = date("G:i:s e") . ' [#' . $uid . '][' . $_SERVER['REMOTE_ADDR'] . '][' . $method . ':' . $status . '];' . PHP_EOL;
 
 		if (!file_exists(PATH_LOGS)) mkdir(PATH_LOGS, 0777, true);
 
