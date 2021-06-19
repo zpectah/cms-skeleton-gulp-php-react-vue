@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Switch } from 'antd';
@@ -94,6 +94,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 		},
 	});
 
+	const inputName = useRef(null);
 	const watchName = watch('name');
 
 	useEffect(() => {
@@ -138,6 +139,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 	};
 
 	const uploaderHandler = (blob, name, ext, mime, size, type) => {
+		setDuplicates(false);
 		setTmp_Blob(blob);
 		setTmp_meta({
 			ext: ext,
@@ -146,6 +148,8 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 			size: size,
 			type: type,
 		});
+
+		inputName.current.focus();
 
 		return setValue('name', name.split('.').slice(0, -1).join('.'));
 	};
@@ -161,7 +165,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 		});
 	};
 
-	const isDuplicate = (fileName) => {
+	const isDuplicate = useCallback((fileName) => {
 		let duplicate = false;
 		Uploads?.map((item) => {
 			if (item.name == fileName) duplicate = true;
@@ -171,7 +175,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 		setDuplicates(duplicate);
 
 		return duplicate;
-	};
+	}, []);
 
 	return (
 		<form>
@@ -245,6 +249,7 @@ const UploadsDetailForm: React.FC<UploadsDetailFormProps> = ({
 								placeholder={'Name'}
 								readOnly={!detailData.is_new}
 								disabled={!detailData.is_new}
+								ref={inputName}
 							/>
 						)}
 					</Form.Row>
