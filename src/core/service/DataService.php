@@ -560,7 +560,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'toggle',
-			$model . ' ' . $data -> id || $data
+			$model
 		);
 
 		switch ($model) {
@@ -716,7 +716,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'delete',
-			$model . ' ' . $data -> id || $data
+			$model
 		);
 
 		switch ($model) {
@@ -870,7 +870,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'lost-password',
-			$response
+			'ok'
 		);
 
 		$conn -> close();
@@ -908,7 +908,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'language-install',
-			$response
+			'ok'
 		);
 
 		$conn -> close();
@@ -930,7 +930,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'module-install',
-			$response
+			'ok'
 		);
 
 		$conn -> close();
@@ -953,7 +953,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'table-repair',
-			$response
+			'ok'
 		);
 
 		$conn -> close();
@@ -974,7 +974,7 @@ class DataService {
 		$logs -> create(
 			$Profile -> get($conn)['email'],
 			'sql-export',
-			'done'
+			'ok'
 		);
 
 		return $SqlDumper -> export_table_dump($data, $authorized);

@@ -11,10 +11,7 @@ class LogService {
 	}
 
 	public function create ($uid, $method, $status) {
-		$log  = "User: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").PHP_EOL.
-			"Attempt: " . $method . ': ' . $status .
-			"User: " . $uid .
-			"-------------------------".PHP_EOL;
+		$log = date("G:i:s e") . ': ' . $uid . ' (' . $_SERVER['REMOTE_ADDR'] . ') - ' . $method . ': ' . $status . PHP_EOL;
 
 		if (!file_exists('../logs')) mkdir('../logs', 0777, true);
 
