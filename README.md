@@ -2,6 +2,8 @@
 
 **!! Warning: System is still in development !!**
 
+**!! Project development was stopped and continue in (https://github.com/zpectah/warp5) !!**
+
 ## Description
 Content Managing System based on Apache server, PHP core and React components.
 
